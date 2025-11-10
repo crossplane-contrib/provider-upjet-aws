@@ -16,7 +16,7 @@ import (
 type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
@@ -33,7 +33,7 @@ type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.HostedTransitVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.HostedTransitVirtualInterface
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
 	// Reference to a HostedTransitVirtualInterface in directconnect to populate virtualInterfaceId.
@@ -75,7 +75,7 @@ type HostedTransitVirtualInterfaceAccepterObservation struct {
 type HostedTransitVirtualInterfaceAccepterParameters struct {
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
@@ -99,7 +99,7 @@ type HostedTransitVirtualInterfaceAccepterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.HostedTransitVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.HostedTransitVirtualInterface
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 

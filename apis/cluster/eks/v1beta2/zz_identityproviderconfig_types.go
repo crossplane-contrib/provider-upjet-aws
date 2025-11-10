@@ -16,7 +16,7 @@ import (
 type IdentityProviderConfigInitParameters struct {
 
 	// Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -150,7 +150,7 @@ type IdentityProviderConfigOidcParameters struct {
 type IdentityProviderConfigParameters struct {
 
 	// Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

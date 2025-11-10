@@ -60,8 +60,8 @@ type ResourcePolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy will be attached. The resources you can specify include tables and streams. You can control index permissions using the base table's policy. To specify the same permission level for your table and its indexes, you can provide both the table and index Amazon Resource Name (ARN)s in the Resource field of a given Statement in your policy document. Alternatively, to specify different permissions for your table, indexes, or both, you can define multiple Statement fields in your policy document.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/dynamodb/v1beta1.Table
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dynamodb/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

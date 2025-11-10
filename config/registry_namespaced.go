@@ -15,8 +15,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/config/namespaced"
-	"github.com/upbound/provider-aws/hack"
+	"github.com/upbound/provider-aws/v2/config/namespaced"
+	"github.com/upbound/provider-aws/v2/hack"
 )
 
 // GetProviderNamespaced returns the provider configuration.
@@ -56,7 +56,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 		defaultResourceOptions = append(defaultResourceOptions, AddExternalTagsField())
 	}
 
-	modulePath := "github.com/upbound/provider-aws"
+	modulePath := "github.com/upbound/provider-aws/v2"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),

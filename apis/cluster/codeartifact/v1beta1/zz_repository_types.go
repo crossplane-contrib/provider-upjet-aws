@@ -107,7 +107,7 @@ type RepositoryParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The domain that contains the created repository.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/codeartifact/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain",true)
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
@@ -150,7 +150,7 @@ type RepositoryParameters struct {
 type UpstreamInitParameters struct {
 
 	// The name of an upstream repository.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/codeartifact/v1beta1.Repository
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("repository",false)
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -172,7 +172,7 @@ type UpstreamObservation struct {
 type UpstreamParameters struct {
 
 	// The name of an upstream repository.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/codeartifact/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/codeartifact/v1beta1.Repository
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("repository",false)
 	// +kubebuilder:validation:Optional
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`

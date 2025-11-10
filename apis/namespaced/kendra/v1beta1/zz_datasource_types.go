@@ -55,7 +55,7 @@ type AuthenticationConfigurationParameters struct {
 type BasicAuthenticationInitParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -89,7 +89,7 @@ type BasicAuthenticationObservation struct {
 type BasicAuthenticationParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
@@ -299,7 +299,7 @@ type DataSourceInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The identifier of the index for your Amazon Kendra data source.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kendra/v1beta1.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -318,8 +318,8 @@ type DataSourceInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -419,7 +419,7 @@ type DataSourceParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The identifier of the index for your Amazon Kendra data source.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kendra/v1beta1.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
@@ -446,8 +446,8 @@ type DataSourceParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -788,7 +788,7 @@ type PreExtractionHookConfigurationParameters struct {
 type ProxyConfigurationInitParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -822,7 +822,7 @@ type ProxyConfigurationObservation struct {
 type ProxyConfigurationParameters struct {
 
 	// Your secret ARN, which you can create in AWS Secrets Manager. The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
@@ -850,7 +850,7 @@ type S3ConfigurationInitParameters struct {
 	AccessControlListConfiguration *AccessControlListConfigurationInitParameters `json:"accessControlListConfiguration,omitempty" tf:"access_control_list_configuration,omitempty"`
 
 	// The name of the bucket that contains the documents.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -909,7 +909,7 @@ type S3ConfigurationParameters struct {
 	AccessControlListConfiguration *AccessControlListConfigurationParameters `json:"accessControlListConfiguration,omitempty" tf:"access_control_list_configuration,omitempty"`
 
 	// The name of the bucket that contains the documents.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`

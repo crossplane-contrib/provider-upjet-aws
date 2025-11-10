@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	certificate "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/certificate"
-	certificateauthority "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/certificateauthority"
-	certificateauthoritycertificate "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/certificateauthoritycertificate"
-	permission "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/permission"
-	policy "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/policy"
+	certificate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acmpca/certificate"
+	certificateauthority "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acmpca/certificateauthority"
+	certificateauthoritycertificate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acmpca/certificateauthoritycertificate"
+	permission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acmpca/permission"
+	policy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acmpca/policy"
 )
 
 // Setup_acmpca creates all controllers with the supplied logger and adds them to

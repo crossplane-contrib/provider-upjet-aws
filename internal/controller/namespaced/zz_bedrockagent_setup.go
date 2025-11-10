@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	agent "github.com/upbound/provider-aws/internal/controller/namespaced/bedrockagent/agent"
+	agent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agent"
 )
 
 // Setup_bedrockagent creates all controllers with the supplied logger and adds them to

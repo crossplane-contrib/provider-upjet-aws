@@ -76,7 +76,7 @@ type ScheduleObservation struct {
 type ScheduleParameters struct {
 
 	// The name of the Auto Scaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 

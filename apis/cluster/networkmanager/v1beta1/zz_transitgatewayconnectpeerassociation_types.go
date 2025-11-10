@@ -16,7 +16,7 @@ import (
 type TransitGatewayConnectPeerAssociationInitParameters struct {
 
 	// ID of the device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
@@ -52,7 +52,7 @@ type TransitGatewayConnectPeerAssociationObservation struct {
 type TransitGatewayConnectPeerAssociationParameters struct {
 
 	// ID of the device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -66,7 +66,7 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -84,7 +84,7 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 
 	// ARN of the Connect peer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayConnectPeer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayConnectPeer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TransitGatewayConnectPeerArn *string `json:"transitGatewayConnectPeerArn,omitempty" tf:"transit_gateway_connect_peer_arn,omitempty"`

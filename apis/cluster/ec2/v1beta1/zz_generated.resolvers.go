@@ -12,8 +12,8 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	common "github.com/upbound/provider-aws/config/cluster/common"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	common "github.com/upbound/provider-aws/v2/config/cluster/common"
+	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -6339,6 +6339,58 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCEndpointIDRef,
+			Selector:     mg.Spec.ForProvider.VPCEndpointIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointID")
+	}
+	mg.Spec.ForProvider.VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCEndpointIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointServiceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCEndpointServiceIDRef,
+			Selector:     mg.Spec.ForProvider.VPCEndpointServiceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointServiceID")
+	}
+	mg.Spec.ForProvider.VPCEndpointServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCEndpointServiceIDRef = rsp.ResolvedReference
 
 	return nil
 }

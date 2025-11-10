@@ -75,10 +75,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_mq_broker",
 		}
 		r.Version = "v1alpha1"
-		r.MetaResource = &registry.Resource{
-			ArgumentDocs: make(map[string]string),
-		}
-		r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.`
+		r.MetaResource = &registry.Resource{}
+		r.RemoveSingletonListConversion("pending")
+		// set the path pending as an embedded object to honor
+		// its single nested block schema. We need to have it converted
+		// into an embedded object but there's no need for
+		// the Terraform conversion (it already needs to be treated
+		// as an object at the Terraform layer and in the current MR API,
+		// it's already an embedded object).
+		r.SchemaElementOptions.SetEmbeddedObject("pending")
 	})
 
 	p.AddResourceConfigurator("aws_mq_configuration", func(r *config.Resource) {

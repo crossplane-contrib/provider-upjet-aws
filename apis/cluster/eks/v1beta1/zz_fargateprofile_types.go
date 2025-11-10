@@ -16,7 +16,7 @@ import (
 type FargateProfileInitParameters struct {
 
 	// Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -28,8 +28,8 @@ type FargateProfileInitParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate podExecutionRoleArn.
@@ -52,7 +52,7 @@ type FargateProfileInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -103,7 +103,7 @@ type FargateProfileObservation struct {
 type FargateProfileParameters struct {
 
 	// Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -116,8 +116,8 @@ type FargateProfileParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
@@ -147,7 +147,7 @@ type FargateProfileParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

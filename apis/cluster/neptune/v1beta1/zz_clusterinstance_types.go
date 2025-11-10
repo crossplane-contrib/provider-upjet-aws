@@ -26,7 +26,7 @@ type ClusterInstanceInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta2.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
@@ -47,7 +47,7 @@ type ClusterInstanceInitParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The name of the neptune parameter group to associate with this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.ParameterGroup
 	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
 
 	// Reference to a ParameterGroup in neptune to populate neptuneParameterGroupName.
@@ -59,7 +59,7 @@ type ClusterInstanceInitParameters struct {
 	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.SubnetGroup
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
@@ -199,7 +199,7 @@ type ClusterInstanceParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -224,7 +224,7 @@ type ClusterInstanceParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The name of the neptune parameter group to associate with this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
 
@@ -237,7 +237,7 @@ type ClusterInstanceParameters struct {
 	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 

@@ -16,7 +16,7 @@ import (
 type BucketReplicationConfigurationInitParameters struct {
 
 	// Name of the source S3 bucket you want Amazon S3 to monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -29,7 +29,7 @@ type BucketReplicationConfigurationInitParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -71,7 +71,7 @@ type BucketReplicationConfigurationObservation struct {
 type BucketReplicationConfigurationParameters struct {
 
 	// Name of the source S3 bucket you want Amazon S3 to monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -90,7 +90,7 @@ type BucketReplicationConfigurationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -350,7 +350,7 @@ type DestinationReplicationTimeParameters struct {
 type EncryptionConfigurationInitParameters struct {
 
 	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate replicaKmsKeyId.
@@ -371,7 +371,7 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
 
@@ -511,7 +511,7 @@ type RuleDestinationInitParameters struct {
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
 
 	// ARN of the bucket where you want Amazon S3 to store the results.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -571,7 +571,7 @@ type RuleDestinationParameters struct {
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
 
 	// ARN of the bucket where you want Amazon S3 to store the results.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

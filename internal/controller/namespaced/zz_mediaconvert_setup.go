@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	queue "github.com/upbound/provider-aws/internal/controller/namespaced/mediaconvert/queue"
+	queue "github.com/upbound/provider-aws/v2/internal/controller/namespaced/mediaconvert/queue"
 )
 
 // Setup_mediaconvert creates all controllers with the supplied logger and adds them to

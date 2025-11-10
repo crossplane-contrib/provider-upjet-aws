@@ -31,7 +31,7 @@ type SecurityGroupIngressRuleInitParameters struct {
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
 	// The ID of the source prefix list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.ManagedPrefixList
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
@@ -43,7 +43,7 @@ type SecurityGroupIngressRuleInitParameters struct {
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// The source security group that is referenced in the rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate referencedSecurityGroupId.
@@ -55,7 +55,7 @@ type SecurityGroupIngressRuleInitParameters struct {
 	ReferencedSecurityGroupIDSelector *v1.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
@@ -148,7 +148,7 @@ type SecurityGroupIngressRuleParameters struct {
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
 	// The ID of the source prefix list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.ManagedPrefixList
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
@@ -161,7 +161,7 @@ type SecurityGroupIngressRuleParameters struct {
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// The source security group that is referenced in the rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
@@ -179,7 +179,7 @@ type SecurityGroupIngressRuleParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 

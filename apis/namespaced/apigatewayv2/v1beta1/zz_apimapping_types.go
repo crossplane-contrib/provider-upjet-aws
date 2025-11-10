@@ -17,7 +17,7 @@ import (
 type APIMappingInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -32,7 +32,7 @@ type APIMappingInitParameters struct {
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
 	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.DomainName
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.DomainName
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Reference to a DomainName in apigatewayv2 to populate domainName.
@@ -44,8 +44,8 @@ type APIMappingInitParameters struct {
 	DomainNameSelector *v1.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Stage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Stage
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// Reference to a Stage in apigatewayv2 to populate stage.
@@ -82,7 +82,7 @@ type APIMappingObservation struct {
 type APIMappingParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -99,7 +99,7 @@ type APIMappingParameters struct {
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
 
 	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.DomainName
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.DomainName
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -117,8 +117,8 @@ type APIMappingParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Stage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Stage
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 

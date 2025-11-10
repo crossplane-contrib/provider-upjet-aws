@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // TerraformPluginFrameworkExternalNameConfigs contains all external
@@ -120,6 +120,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
+
+	// amp
+	//
+	// Prometheus Scraper can be imported using the ARN: arn:aws:aps:us-west-2:123456789012:scraper/s-12345678-1234-1234-1234-123456789012
+	// Terraform returns the full ARN as ID, but AWS API expects just the UUID portion (s-UUID).
+	// terraform-plugin-framework
+	"aws_prometheus_scraper": identifierFromProviderWithDefaultStub("scraper12345"),
 
 	// rds
 	//
@@ -1082,6 +1089,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
 	// VPC Endpoint connection notifications can be imported using the VPC endpoint connection notification id
 	"aws_vpc_endpoint_connection_notification": config.IdentifierFromProvider,
+	// VPC Endpoint connection notifications can be imported using the VPC endpoint service ID and VPC endpoint ID separated by underscore (_)
+	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
 	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
 	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
@@ -2181,6 +2190,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53_resolver_rule": config.IdentifierFromProvider,
 	// rslvr-rrassoc-97242eaf88example
 	"aws_route53_resolver_rule_association": config.IdentifierFromProvider,
+	// rqlc-92edc3b1838248bf
+	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
+	// rqlca-b320624fef3c4d70
+	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 
 	// rum
 	//

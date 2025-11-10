@@ -20,7 +20,7 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Portfolio
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
@@ -32,8 +32,8 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Principal ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
 	// Reference to a User in iam to populate principalArn.
@@ -77,7 +77,7 @@ type PrincipalPortfolioAssociationParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Portfolio
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
@@ -90,8 +90,8 @@ type PrincipalPortfolioAssociationParameters struct {
 	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Principal ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 

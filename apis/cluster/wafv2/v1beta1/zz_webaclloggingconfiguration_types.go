@@ -247,7 +247,7 @@ type WebACLLoggingConfigurationInitParameters struct {
 
 	// Configuration block that allows you to associate Amazon Kinesis Data Firehose, Cloudwatch Log log group, or S3 bucket Amazon Resource Names (ARNs) with the web ACL. Note: data firehose, log group, or bucket name must be prefixed with aws-waf-logs-, e.g. aws-waf-logs-example-firehose, aws-waf-logs-example-log-group, or aws-waf-logs-example-bucket.
 	// AWS Kinesis Firehose Delivery Stream ARNs
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +listType=set
 	LogDestinationConfigs []*string `json:"logDestinationConfigs,omitempty" tf:"log_destination_configs,omitempty"`
@@ -298,7 +298,7 @@ type WebACLLoggingConfigurationParameters struct {
 
 	// Configuration block that allows you to associate Amazon Kinesis Data Firehose, Cloudwatch Log log group, or S3 bucket Amazon Resource Names (ARNs) with the web ACL. Note: data firehose, log group, or bucket name must be prefixed with aws-waf-logs-, e.g. aws-waf-logs-example-firehose, aws-waf-logs-example-log-group, or aws-waf-logs-example-bucket.
 	// AWS Kinesis Firehose Delivery Stream ARNs
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -328,7 +328,7 @@ type WebACLLoggingConfigurationParameters struct {
 
 	// Amazon Resource Name (ARN) of the web ACL that you want to associate with log_destination_configs.
 	// AWS WebACL ARN
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafv2/v1beta1.WebACL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/wafv2/v1beta1.WebACL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

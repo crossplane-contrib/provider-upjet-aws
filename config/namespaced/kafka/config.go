@@ -7,7 +7,7 @@ package kafka
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/namespaced/common"
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the kafka group.
@@ -57,14 +57,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName:     "aws_subnet",
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
-		}
-		r.OverrideFieldNames = map[string]string{
-			"ClientAuthenticationParameters":     "ServerlessClusterClientAuthenticationParameters",
-			"ClientAuthenticationInitParameters": "ServerlessClusterClientAuthenticationInitParameters",
-			"ClientAuthenticationObservation":    "ServerlessClusterClientAuthenticationObservation",
-			"SaslParameters":                     "ClientAuthenticationSaslParameters",
-			"SaslInitParameters":                 "ClientAuthenticationSaslInitParameters",
-			"SaslObservation":                    "ClientAuthenticationSaslObservation",
 		}
 	})
 	p.AddResourceConfigurator("aws_msk_replicator", func(r *config.Resource) {

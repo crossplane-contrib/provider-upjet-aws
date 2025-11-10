@@ -16,7 +16,7 @@ import (
 type CertificateValidationInitParameters struct {
 
 	// ARN of the certificate that is being validated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Reference to a Certificate in acm to populate certificateArn.
@@ -52,7 +52,7 @@ type CertificateValidationObservation struct {
 type CertificateValidationParameters struct {
 
 	// ARN of the certificate that is being validated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 

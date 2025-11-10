@@ -13,8 +13,8 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
-	"github.com/upbound/provider-aws/config/cluster/rds/utils"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/rds/utils"
 )
 
 // Configure adds configurations for the rds group.
@@ -57,17 +57,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				conn["port"] = []byte(fmt.Sprintf("%v", a))
 			}
 			return conn, nil
-		}
-		r.OverrideFieldNames = map[string]string{
-			"S3ImportParameters":                 "ClusterS3ImportParameters",
-			"S3ImportInitParameters":             "ClusterS3ImportInitParameters",
-			"S3ImportObservation":                "ClusterS3ImportObservation",
-			"RestoreToPointInTimeParameters":     "ClusterRestoreToPointInTimeParameters",
-			"RestoreToPointInTimeInitParameters": "ClusterRestoreToPointInTimeInitParameters",
-			"RestoreToPointInTimeObservation":    "ClusterRestoreToPointInTimeObservation",
-			"MasterUserSecretParameters":         "ClusterMasterUserSecretParameters",
-			"MasterUserSecretInitParameters":     "ClusterMasterUserSecretInitParameters",
-			"MasterUserSecretObservation":        "ClusterMasterUserSecretObservation",
 		}
 		desc, _ := comments.New("If true, the password will be auto-generated and"+
 			" stored in the Secret referenced by the masterPasswordSecretRef field.",

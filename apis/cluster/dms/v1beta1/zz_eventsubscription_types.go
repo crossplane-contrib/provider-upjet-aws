@@ -23,7 +23,7 @@ type EventSubscriptionInitParameters struct {
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	// SNS topic arn to send events on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
@@ -36,7 +36,7 @@ type EventSubscriptionInitParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationTask
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
@@ -110,7 +110,7 @@ type EventSubscriptionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// SNS topic arn to send events on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -124,7 +124,7 @@ type EventSubscriptionParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationTask
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationTask
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`

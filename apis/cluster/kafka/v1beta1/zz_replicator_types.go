@@ -16,7 +16,7 @@ import (
 type AmazonMskClusterInitParameters struct {
 
 	// The ARN of an Amazon MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
 
@@ -38,7 +38,7 @@ type AmazonMskClusterObservation struct {
 type AmazonMskClusterParameters struct {
 
 	// The ARN of an Amazon MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	MskClusterArn *string `json:"mskClusterArn,omitempty" tf:"msk_cluster_arn,omitempty"`
@@ -142,7 +142,7 @@ type ReplicationInfoListInitParameters struct {
 	ConsumerGroupReplication []ConsumerGroupReplicationInitParameters `json:"consumerGroupReplication,omitempty" tf:"consumer_group_replication,omitempty"`
 
 	// The ARN of the source Kafka cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
 
@@ -158,7 +158,7 @@ type ReplicationInfoListInitParameters struct {
 	TargetCompressionType *string `json:"targetCompressionType,omitempty" tf:"target_compression_type,omitempty"`
 
 	// The ARN of the target Kafka cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
 
@@ -203,7 +203,7 @@ type ReplicationInfoListParameters struct {
 	ConsumerGroupReplication []ConsumerGroupReplicationParameters `json:"consumerGroupReplication" tf:"consumer_group_replication,omitempty"`
 
 	// The ARN of the source Kafka cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceKafkaClusterArn *string `json:"sourceKafkaClusterArn,omitempty" tf:"source_kafka_cluster_arn,omitempty"`
@@ -221,7 +221,7 @@ type ReplicationInfoListParameters struct {
 	TargetCompressionType *string `json:"targetCompressionType" tf:"target_compression_type,omitempty"`
 
 	// The ARN of the target Kafka cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetKafkaClusterArn *string `json:"targetKafkaClusterArn,omitempty" tf:"target_kafka_cluster_arn,omitempty"`
@@ -254,8 +254,8 @@ type ReplicatorInitParameters struct {
 	ReplicatorName *string `json:"replicatorName,omitempty" tf:"replicator_name,omitempty"`
 
 	// The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
@@ -332,8 +332,8 @@ type ReplicatorParameters struct {
 	ReplicatorName *string `json:"replicatorName,omitempty" tf:"replicator_name,omitempty"`
 
 	// The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
@@ -477,7 +477,7 @@ type TopicReplicationParameters struct {
 type VPCConfigInitParameters struct {
 
 	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecurityGroupsIds []*string `json:"securityGroupsIds,omitempty" tf:"security_groups_ids,omitempty"`
@@ -491,7 +491,7 @@ type VPCConfigInitParameters struct {
 	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -518,7 +518,7 @@ type VPCConfigObservation struct {
 type VPCConfigParameters struct {
 
 	// The AWS security groups to associate with the ENIs used by the replicator. If a security group is not specified, the default security group associated with the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -533,7 +533,7 @@ type VPCConfigParameters struct {
 	SecurityGroupsIdsSelector *v1.Selector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`

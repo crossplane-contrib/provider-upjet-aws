@@ -17,7 +17,7 @@ import (
 type AccessLogsInitParameters struct {
 
 	// S3 bucket name to store the logs in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -50,7 +50,7 @@ type AccessLogsObservation struct {
 type AccessLogsParameters struct {
 
 	// S3 bucket name to store the logs in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -212,7 +212,7 @@ type LBInitParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
@@ -230,7 +230,7 @@ type LBInitParameters struct {
 	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +listType=set
@@ -473,7 +473,7 @@ type LBParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
@@ -493,7 +493,7 @@ type LBParameters struct {
 	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +kubebuilder:validation:Optional
@@ -541,7 +541,7 @@ type SubnetMappingInitParameters struct {
 	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
 
 	// ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -586,7 +586,7 @@ type SubnetMappingParameters struct {
 	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
 
 	// ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

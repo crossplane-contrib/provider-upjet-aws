@@ -20,7 +20,7 @@ type ResourcePolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -59,7 +59,7 @@ type ResourcePolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

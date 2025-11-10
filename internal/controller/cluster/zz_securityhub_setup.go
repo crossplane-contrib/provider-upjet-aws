@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/account"
-	actiontarget "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/actiontarget"
-	findingaggregator "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/findingaggregator"
-	insight "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/insight"
-	inviteaccepter "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/inviteaccepter"
-	member "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/member"
-	productsubscription "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/productsubscription"
-	standardssubscription "github.com/upbound/provider-aws/internal/controller/cluster/securityhub/standardssubscription"
+	account "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/account"
+	actiontarget "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/actiontarget"
+	findingaggregator "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/findingaggregator"
+	insight "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/insight"
+	inviteaccepter "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/inviteaccepter"
+	member "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/member"
+	productsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/productsubscription"
+	standardssubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/securityhub/standardssubscription"
 )
 
 // Setup_securityhub creates all controllers with the supplied logger and adds them to

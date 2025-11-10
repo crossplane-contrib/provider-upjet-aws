@@ -66,7 +66,7 @@ type SubnetConfigurationInitParameters struct {
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
 	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -102,7 +102,7 @@ type SubnetConfigurationParameters struct {
 	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
 	// The ID of the subnet. Must have a corresponding subnet in the subnet_ids argument.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -135,7 +135,7 @@ type VPCEndpointInitParameters struct {
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
 
@@ -148,7 +148,7 @@ type VPCEndpointInitParameters struct {
 	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
@@ -161,7 +161,7 @@ type VPCEndpointInitParameters struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
 
@@ -187,7 +187,7 @@ type VPCEndpointInitParameters struct {
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
 	// The ID of the VPC in which the endpoint will be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -321,7 +321,7 @@ type VPCEndpointParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
@@ -335,7 +335,7 @@ type VPCEndpointParameters struct {
 	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("service_name",true)
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -349,7 +349,7 @@ type VPCEndpointParameters struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
@@ -380,7 +380,7 @@ type VPCEndpointParameters struct {
 	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 
 	// The ID of the VPC in which the endpoint will be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

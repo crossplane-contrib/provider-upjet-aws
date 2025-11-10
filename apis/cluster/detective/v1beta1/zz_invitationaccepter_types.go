@@ -16,7 +16,7 @@ import (
 type InvitationAccepterInitParameters struct {
 
 	// ARN of the behavior graph that the member account is accepting the invitation for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/detective/v1beta1.Graph
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("graph_arn",true)
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
 
@@ -45,7 +45,7 @@ type InvitationAccepterObservation struct {
 type InvitationAccepterParameters struct {
 
 	// ARN of the behavior graph that the member account is accepting the invitation for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/detective/v1beta1.Graph
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/detective/v1beta1.Graph
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("graph_arn",true)
 	// +kubebuilder:validation:Optional
 	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`

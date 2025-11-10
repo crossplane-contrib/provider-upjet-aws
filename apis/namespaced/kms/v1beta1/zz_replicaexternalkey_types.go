@@ -39,8 +39,8 @@ type ReplicaExternalKeyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.ExternalKey
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.ExternalKey
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
 	// Reference to a ExternalKey in kms to populate primaryKeyArn.
@@ -147,8 +147,8 @@ type ReplicaExternalKeyParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.ExternalKey
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.ExternalKey
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 

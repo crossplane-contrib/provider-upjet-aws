@@ -148,7 +148,7 @@ type BranchObservation struct {
 type BranchParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/amplify/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amplify/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`

@@ -17,7 +17,7 @@ import (
 type ZoneAssociationInitParameters struct {
 
 	// The VPC to associate with the private hosted zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -32,7 +32,7 @@ type ZoneAssociationInitParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The private hosted zone to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
@@ -66,7 +66,7 @@ type ZoneAssociationObservation struct {
 type ZoneAssociationParameters struct {
 
 	// The VPC to associate with the private hosted zone.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -83,7 +83,7 @@ type ZoneAssociationParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The private hosted zone to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`

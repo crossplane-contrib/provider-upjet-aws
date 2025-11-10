@@ -22,7 +22,7 @@ type SecretPolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Secret ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
@@ -70,7 +70,7 @@ type SecretPolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Secret ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`

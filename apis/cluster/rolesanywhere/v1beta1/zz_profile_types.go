@@ -32,8 +32,8 @@ type ProfileInitParameters struct {
 	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
 
 	// A list of IAM roles that this profile can assume
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
 
@@ -117,8 +117,8 @@ type ProfileParameters struct {
 	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
 
 	// A list of IAM roles that this profile can assume
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`

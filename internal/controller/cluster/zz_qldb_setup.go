@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	ledger "github.com/upbound/provider-aws/internal/controller/cluster/qldb/ledger"
-	stream "github.com/upbound/provider-aws/internal/controller/cluster/qldb/stream"
+	ledger "github.com/upbound/provider-aws/v2/internal/controller/cluster/qldb/ledger"
+	stream "github.com/upbound/provider-aws/v2/internal/controller/cluster/qldb/stream"
 )
 
 // Setup_qldb creates all controllers with the supplied logger and adds them to

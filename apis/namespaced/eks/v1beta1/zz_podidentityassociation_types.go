@@ -17,7 +17,7 @@ import (
 type PodIdentityAssociationInitParameters_2 struct {
 
 	// The name of the cluster to create the association in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/eks/v1beta1.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -35,8 +35,8 @@ type PodIdentityAssociationInitParameters_2 struct {
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -55,8 +55,8 @@ type PodIdentityAssociationInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to be chained to the the IAM role specified as role_arn.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate targetRoleArn.
@@ -115,7 +115,7 @@ type PodIdentityAssociationObservation_2 struct {
 type PodIdentityAssociationParameters_2 struct {
 
 	// The name of the cluster to create the association in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/eks/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -141,8 +141,8 @@ type PodIdentityAssociationParameters_2 struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -164,8 +164,8 @@ type PodIdentityAssociationParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to be chained to the the IAM role specified as role_arn.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
 

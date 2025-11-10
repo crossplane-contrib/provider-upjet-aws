@@ -23,14 +23,14 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	namespacedv1beta1 "github.com/upbound/provider-aws/apis/namespaced/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 )
 
 const (
 	keyAccountID        = "account_id"
 	keyRegion           = "region"
 	keyPartition        = "partition"
-	localstackAccountID = "000000000"
+	localstackAccountID = "000000000000"
 )
 
 type SetupConfig struct {

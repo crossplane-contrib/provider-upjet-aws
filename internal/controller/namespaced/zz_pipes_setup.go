@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	pipe "github.com/upbound/provider-aws/internal/controller/namespaced/pipes/pipe"
+	pipe "github.com/upbound/provider-aws/v2/internal/controller/namespaced/pipes/pipe"
 )
 
 // Setup_pipes creates all controllers with the supplied logger and adds them to

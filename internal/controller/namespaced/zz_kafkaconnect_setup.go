@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	connector "github.com/upbound/provider-aws/internal/controller/namespaced/kafkaconnect/connector"
-	customplugin "github.com/upbound/provider-aws/internal/controller/namespaced/kafkaconnect/customplugin"
-	workerconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/kafkaconnect/workerconfiguration"
+	connector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/connector"
+	customplugin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/customplugin"
+	workerconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/workerconfiguration"
 )
 
 // Setup_kafkaconnect creates all controllers with the supplied logger and adds them to

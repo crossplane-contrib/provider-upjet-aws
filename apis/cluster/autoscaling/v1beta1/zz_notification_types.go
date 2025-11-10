@@ -16,7 +16,7 @@ import (
 type NotificationInitParameters struct {
 
 	// List of AutoScaling Group Names
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
@@ -34,7 +34,7 @@ type NotificationInitParameters struct {
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
 	// Topic ARN for notifications to be sent through
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
@@ -71,7 +71,7 @@ type NotificationObservation struct {
 type NotificationParameters struct {
 
 	// List of AutoScaling Group Names
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
@@ -96,7 +96,7 @@ type NotificationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Topic ARN for notifications to be sent through
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`

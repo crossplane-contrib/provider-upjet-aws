@@ -88,7 +88,7 @@ type ActionParameters struct {
 type CloudwatchDashboardInitParameters struct {
 
 	// The ARN of the CloudWatch dashboard.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta1.Dashboard
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatch/v1beta1.Dashboard
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dashboard_arn",true)
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 
@@ -110,7 +110,7 @@ type CloudwatchDashboardObservation struct {
 type CloudwatchDashboardParameters struct {
 
 	// The ARN of the CloudWatch dashboard.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatch/v1beta1.Dashboard
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatch/v1beta1.Dashboard
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dashboard_arn",true)
 	// +kubebuilder:validation:Optional
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
@@ -258,8 +258,8 @@ type ExperimentTemplateInitParameters struct {
 	LogConfiguration []LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// ARN of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -350,8 +350,8 @@ type ExperimentTemplateParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -642,7 +642,7 @@ type ResourceTagParameters struct {
 type S3ConfigurationInitParameters struct {
 
 	// The name of the destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -669,7 +669,7 @@ type S3ConfigurationObservation struct {
 type S3ConfigurationParameters struct {
 
 	// The name of the destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

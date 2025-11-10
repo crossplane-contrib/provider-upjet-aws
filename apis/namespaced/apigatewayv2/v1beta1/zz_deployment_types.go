@@ -17,7 +17,7 @@ import (
 type DeploymentInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -54,7 +54,7 @@ type DeploymentObservation struct {
 type DeploymentParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 

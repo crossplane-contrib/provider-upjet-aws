@@ -383,12 +383,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// rslvr-frgassoc-0123456789abcdef
 	// disabled until it's successfully tested
 	"aws_route53_resolver_firewall_rule_group_association": config.IdentifierFromProvider,
-	// rqlc-92edc3b1838248bf
-	// disabled until it's successfully tested
-	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
-	// rqlca-b320624fef3c4d70
-	// disabled until it's successfully tested
-	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 
 	// s3outposts
 	//

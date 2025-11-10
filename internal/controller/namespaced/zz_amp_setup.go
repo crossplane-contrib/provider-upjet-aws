@@ -9,9 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/namespaced/amp/alertmanagerdefinition"
-	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/rulegroupnamespace"
-	workspace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/workspace"
+	alertmanagerdefinition "github.com/upbound/provider-aws/v2/internal/controller/namespaced/amp/alertmanagerdefinition"
+	rulegroupnamespace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/amp/rulegroupnamespace"
+	scraper "github.com/upbound/provider-aws/v2/internal/controller/namespaced/amp/scraper"
+	workspace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/amp/workspace"
 )
 
 // Setup_amp creates all controllers with the supplied logger and adds them to
@@ -20,6 +21,7 @@ func Setup_amp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
+		scraper.Setup,
 		workspace.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -35,6 +37,7 @@ func SetupGated_amp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
+		scraper.SetupGated,
 		workspace.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

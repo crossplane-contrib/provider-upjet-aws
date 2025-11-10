@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	eventdatastore "github.com/upbound/provider-aws/internal/controller/namespaced/cloudtrail/eventdatastore"
-	trail "github.com/upbound/provider-aws/internal/controller/namespaced/cloudtrail/trail"
+	eventdatastore "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudtrail/eventdatastore"
+	trail "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudtrail/trail"
 )
 
 // Setup_cloudtrail creates all controllers with the supplied logger and adds them to

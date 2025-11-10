@@ -20,7 +20,7 @@ type GameSessionQueueInitParameters struct {
 	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/gamelift/v1beta1.Fleet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/gamelift/v1beta1.Fleet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
@@ -33,8 +33,8 @@ type GameSessionQueueInitParameters struct {
 	DestinationsSelector *v1.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
 
 	// Reference to a Topic in sns to populate notificationTarget.
@@ -98,7 +98,7 @@ type GameSessionQueueParameters struct {
 	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/gamelift/v1beta1.Fleet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/gamelift/v1beta1.Fleet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
@@ -112,8 +112,8 @@ type GameSessionQueueParameters struct {
 	DestinationsSelector *v1.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
 

@@ -17,7 +17,7 @@ import (
 type PolicyAttachmentInitParameters struct {
 
 	// The name of the policy to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iot/v1beta1.Policy
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Reference to a Policy in iot to populate policy.
@@ -29,7 +29,7 @@ type PolicyAttachmentInitParameters struct {
 	PolicySelector *v1.NamespacedSelector `json:"policySelector,omitempty" tf:"-"`
 
 	// The identity to which the policy is attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -59,7 +59,7 @@ type PolicyAttachmentObservation struct {
 type PolicyAttachmentParameters struct {
 
 	// The name of the policy to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iot/v1beta1.Policy
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -77,7 +77,7 @@ type PolicyAttachmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The identity to which the policy is attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`

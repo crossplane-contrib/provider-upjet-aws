@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-aws/internal/controller/cluster/organizations/account"
-	delegatedadministrator "github.com/upbound/provider-aws/internal/controller/cluster/organizations/delegatedadministrator"
-	organization "github.com/upbound/provider-aws/internal/controller/cluster/organizations/organization"
-	organizationalunit "github.com/upbound/provider-aws/internal/controller/cluster/organizations/organizationalunit"
-	policy "github.com/upbound/provider-aws/internal/controller/cluster/organizations/policy"
-	policyattachment "github.com/upbound/provider-aws/internal/controller/cluster/organizations/policyattachment"
+	account "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/account"
+	delegatedadministrator "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/delegatedadministrator"
+	organization "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/organization"
+	organizationalunit "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/organizationalunit"
+	policy "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/policy"
+	policyattachment "github.com/upbound/provider-aws/v2/internal/controller/cluster/organizations/policyattachment"
 )
 
 // Setup_organizations creates all controllers with the supplied logger and adds them to

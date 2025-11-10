@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accesspoint "github.com/upbound/provider-aws/internal/controller/cluster/s3control/accesspoint"
-	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/cluster/s3control/accesspointpolicy"
-	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/cluster/s3control/accountpublicaccessblock"
-	multiregionaccesspoint "github.com/upbound/provider-aws/internal/controller/cluster/s3control/multiregionaccesspoint"
-	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/cluster/s3control/multiregionaccesspointpolicy"
-	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/cluster/s3control/objectlambdaaccesspoint"
-	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/cluster/s3control/objectlambdaaccesspointpolicy"
-	storagelensconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/s3control/storagelensconfiguration"
+	accesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/accesspoint"
+	accesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/accesspointpolicy"
+	accountpublicaccessblock "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/accountpublicaccessblock"
+	multiregionaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/multiregionaccesspoint"
+	multiregionaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/multiregionaccesspointpolicy"
+	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspoint"
+	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspointpolicy"
+	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/storagelensconfiguration"
 )
 
 // Setup_s3control creates all controllers with the supplied logger and adds them to

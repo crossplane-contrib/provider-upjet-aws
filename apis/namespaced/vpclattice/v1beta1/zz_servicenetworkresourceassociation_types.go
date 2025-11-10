@@ -32,7 +32,7 @@ type ServiceNetworkResourceAssociationDNSEntryParameters struct {
 type ServiceNetworkResourceAssociationInitParameters struct {
 
 	// Identifier of Resource Configuration to associate to the Service Network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
 
@@ -45,7 +45,7 @@ type ServiceNetworkResourceAssociationInitParameters struct {
 	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 
 	// Identifier of the Service Network to associate the Resource to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`
 
@@ -100,7 +100,7 @@ type ServiceNetworkResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of Resource Configuration to associate to the Service Network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
@@ -114,7 +114,7 @@ type ServiceNetworkResourceAssociationParameters struct {
 	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 
 	// Identifier of the Service Network to associate the Resource to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`

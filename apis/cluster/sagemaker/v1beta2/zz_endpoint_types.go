@@ -164,7 +164,7 @@ type EndpointInitParameters struct {
 	DeploymentConfig *DeploymentConfigInitParameters `json:"deploymentConfig,omitempty" tf:"deployment_config,omitempty"`
 
 	// The name of the endpoint configuration to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.EndpointConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2.EndpointConfiguration
 	EndpointConfigName *string `json:"endpointConfigName,omitempty" tf:"endpoint_config_name,omitempty"`
 
 	// Reference to a EndpointConfiguration in sagemaker to populate endpointConfigName.
@@ -213,7 +213,7 @@ type EndpointParameters struct {
 	DeploymentConfig *DeploymentConfigParameters `json:"deploymentConfig,omitempty" tf:"deployment_config,omitempty"`
 
 	// The name of the endpoint configuration to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.EndpointConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2.EndpointConfiguration
 	// +kubebuilder:validation:Optional
 	EndpointConfigName *string `json:"endpointConfigName,omitempty" tf:"endpoint_config_name,omitempty"`
 

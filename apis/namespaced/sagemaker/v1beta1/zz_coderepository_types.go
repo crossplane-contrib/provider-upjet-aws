@@ -74,7 +74,7 @@ type GitConfigInitParameters struct {
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of AWSCURRENT and must be in the following format: {"username": UserName, "password": Password}
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
@@ -110,7 +110,7 @@ type GitConfigParameters struct {
 	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of AWSCURRENT and must be in the following format: {"username": UserName, "password": Password}
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`

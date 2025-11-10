@@ -153,8 +153,8 @@ type EBSInitParameters struct {
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
 	// encrypted must be set to true when this is set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -236,8 +236,8 @@ type EBSParameters struct {
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
 	// encrypted must be set to true when this is set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -341,8 +341,8 @@ type HibernationOptionsParameters struct {
 type IAMInstanceProfileInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate arn.
@@ -354,7 +354,7 @@ type IAMInstanceProfileInitParameters struct {
 	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The name of the instance profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate name.
@@ -378,8 +378,8 @@ type IAMInstanceProfileObservation struct {
 type IAMInstanceProfileParameters struct {
 
 	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -392,7 +392,7 @@ type IAMInstanceProfileParameters struct {
 	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The name of the instance profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -890,7 +890,7 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +listType=set
@@ -918,7 +918,7 @@ type LaunchTemplateInitParameters_2 struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -1636,7 +1636,7 @@ type LaunchTemplateParameters_2 struct {
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +kubebuilder:validation:Optional
@@ -1669,7 +1669,7 @@ type LaunchTemplateParameters_2 struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -1812,7 +1812,7 @@ type NetworkInterfacesInitParameters struct {
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The ID of the network interface to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkInterface
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
@@ -1838,14 +1838,14 @@ type NetworkInterfacesInitParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -2006,7 +2006,7 @@ type NetworkInterfacesParameters struct {
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The ID of the network interface to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
@@ -2035,7 +2035,7 @@ type NetworkInterfacesParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
@@ -2043,7 +2043,7 @@ type NetworkInterfacesParameters struct {
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

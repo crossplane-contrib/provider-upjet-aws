@@ -33,7 +33,7 @@ type TransitGatewayConnectPeerInitParameters struct {
 	TransitGatewayAddress *string `json:"transitGatewayAddress,omitempty" tf:"transit_gateway_address,omitempty"`
 
 	// The Transit Gateway Connect
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayConnect
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayConnect
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -120,7 +120,7 @@ type TransitGatewayConnectPeerParameters struct {
 	TransitGatewayAddress *string `json:"transitGatewayAddress,omitempty" tf:"transit_gateway_address,omitempty"`
 
 	// The Transit Gateway Connect
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayConnect
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayConnect
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`

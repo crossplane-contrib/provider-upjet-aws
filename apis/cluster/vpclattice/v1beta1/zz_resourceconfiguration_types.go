@@ -16,7 +16,7 @@ import (
 type ArnResourceInitParameters struct {
 
 	// The ARN of the Resource for this configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -38,7 +38,7 @@ type ArnResourceObservation struct {
 type ArnResourceParameters struct {
 
 	// The ARN of the Resource for this configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ClusterInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -161,7 +161,7 @@ type ResourceConfigurationInitParameters struct {
 	ResourceConfigurationGroupID *string `json:"resourceConfigurationGroupId,omitempty" tf:"resource_configuration_group_id,omitempty"`
 
 	// ID of the Resource Gateway used to access the resource. MUST be specified if resource_configuration_group_id is not.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ResourceGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceGatewayIdentifier *string `json:"resourceGatewayIdentifier,omitempty" tf:"resource_gateway_identifier,omitempty"`
 
@@ -260,7 +260,7 @@ type ResourceConfigurationParameters struct {
 	ResourceConfigurationGroupID *string `json:"resourceConfigurationGroupId,omitempty" tf:"resource_configuration_group_id,omitempty"`
 
 	// ID of the Resource Gateway used to access the resource. MUST be specified if resource_configuration_group_id is not.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.ResourceGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGatewayIdentifier *string `json:"resourceGatewayIdentifier,omitempty" tf:"resource_gateway_identifier,omitempty"`

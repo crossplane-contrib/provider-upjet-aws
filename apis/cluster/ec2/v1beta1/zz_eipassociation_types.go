@@ -17,7 +17,7 @@ type EIPAssociationInitParameters struct {
 
 	// ID of the associated Elastic IP.
 	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
@@ -36,7 +36,7 @@ type EIPAssociationInitParameters struct {
 	// ID of the instance.
 	// The instance must have exactly one attached network interface.
 	// You can specify either the instance ID or the network interface ID, but not both.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -100,7 +100,7 @@ type EIPAssociationParameters struct {
 
 	// ID of the associated Elastic IP.
 	// This argument is required despite being optional at the resource level due to legacy support for EC2-Classic networking.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
@@ -121,7 +121,7 @@ type EIPAssociationParameters struct {
 	// ID of the instance.
 	// The instance must have exactly one attached network interface.
 	// You can specify either the instance ID or the network interface ID, but not both.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`

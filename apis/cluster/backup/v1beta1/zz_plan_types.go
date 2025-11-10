@@ -218,7 +218,7 @@ type RuleInitParameters struct {
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
 	// The name of a logical container where backups are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 
 	// Reference to a Vault in backup to populate targetVaultName.
@@ -343,7 +343,7 @@ type RuleParameters struct {
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
 	// The name of a logical container where backups are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 

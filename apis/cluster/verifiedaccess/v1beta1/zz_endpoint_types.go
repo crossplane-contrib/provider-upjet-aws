@@ -15,7 +15,7 @@ import (
 
 type CidrOptionsInitParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
@@ -31,7 +31,7 @@ type CidrOptionsInitParameters struct {
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -57,7 +57,7 @@ type CidrOptionsObservation struct {
 
 type CidrOptionsParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
@@ -76,7 +76,7 @@ type CidrOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -105,7 +105,7 @@ type EndpointInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// - The ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DomainCertificateArn *string `json:"domainCertificateArn,omitempty" tf:"domain_certificate_arn,omitempty"`
 
@@ -143,7 +143,7 @@ type EndpointInitParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of the the security groups IDs to associate with the Verified Access endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -157,7 +157,7 @@ type EndpointInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Verified Access group to associate the endpoint with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/verifiedaccess/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedAccessGroupID *string `json:"verifiedAccessGroupId,omitempty" tf:"verified_access_group_id,omitempty"`
 
@@ -257,7 +257,7 @@ type EndpointParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// - The ARN of the public TLS/SSL certificate in AWS Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application. This parameter is required if the endpoint type is load-balancer or network-interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DomainCertificateArn *string `json:"domainCertificateArn,omitempty" tf:"domain_certificate_arn,omitempty"`
@@ -307,7 +307,7 @@ type EndpointParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of the the security groups IDs to associate with the Verified Access endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -324,7 +324,7 @@ type EndpointParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Verified Access group to associate the endpoint with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/verifiedaccess/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/verifiedaccess/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VerifiedAccessGroupID *string `json:"verifiedAccessGroupId,omitempty" tf:"verified_access_group_id,omitempty"`
@@ -340,7 +340,7 @@ type EndpointParameters struct {
 
 type LoadBalancerOptionsInitParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
@@ -358,7 +358,7 @@ type LoadBalancerOptionsInitParameters struct {
 
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -386,7 +386,7 @@ type LoadBalancerOptionsObservation struct {
 
 type LoadBalancerOptionsParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
@@ -408,7 +408,7 @@ type LoadBalancerOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -446,7 +446,7 @@ type LoadBalancerOptionsPortRangeParameters struct {
 type NetworkInterfaceOptionsInitParameters struct {
 
 	// The ID of the AWS Verified Access endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
@@ -480,7 +480,7 @@ type NetworkInterfaceOptionsObservation struct {
 type NetworkInterfaceOptionsParameters struct {
 
 	// The ID of the AWS Verified Access endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`

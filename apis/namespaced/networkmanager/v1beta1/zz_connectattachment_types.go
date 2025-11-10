@@ -17,7 +17,7 @@ import (
 type ConnectAttachmentInitParameters struct {
 
 	// ID of a core network where you want to create the attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.CoreNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.CoreNetwork
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
@@ -29,7 +29,7 @@ type ConnectAttachmentInitParameters struct {
 	CoreNetworkIDSelector *v1.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Region where the edge is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("edge_location",true)
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
 
@@ -49,7 +49,7 @@ type ConnectAttachmentInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the attachment between the two connections.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 
@@ -117,7 +117,7 @@ type ConnectAttachmentObservation struct {
 type ConnectAttachmentParameters struct {
 
 	// ID of a core network where you want to create the attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.CoreNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.CoreNetwork
 	// +kubebuilder:validation:Optional
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
@@ -130,7 +130,7 @@ type ConnectAttachmentParameters struct {
 	CoreNetworkIDSelector *v1.NamespacedSelector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
 	// Region where the edge is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("edge_location",true)
 	// +kubebuilder:validation:Optional
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
@@ -153,7 +153,7 @@ type ConnectAttachmentParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the attachment between the two connections.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`

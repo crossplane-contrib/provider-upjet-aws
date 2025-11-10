@@ -17,7 +17,7 @@ import (
 type EndpointAccessInitParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshift/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
@@ -32,7 +32,7 @@ type EndpointAccessInitParameters struct {
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
 	// The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshift/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshift/v1beta1.SubnetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -53,7 +53,7 @@ type EndpointAccessInitParameters struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -95,7 +95,7 @@ type EndpointAccessObservation struct {
 type EndpointAccessParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshift/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -117,7 +117,7 @@ type EndpointAccessParameters struct {
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
 	// The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshift/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshift/v1beta1.SubnetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
@@ -139,7 +139,7 @@ type EndpointAccessParameters struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional

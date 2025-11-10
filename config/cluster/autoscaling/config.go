@@ -11,9 +11,9 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 
-	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta1"
-	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta2"
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta1"
+	"github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta2"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // Configure adds configurations for the autoscaling group.
@@ -52,11 +52,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_autoscaling_group_tag", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
 			TerraformName: "aws_autoscaling_group",
-		}
-		r.OverrideFieldNames = map[string]string{
-			"TagParameters":     "GroupTagTagParameters",
-			"TagObservation":    "GroupTagTagObservation",
-			"TagInitParameters": "GroupTagTagInitParameters",
 		}
 	})
 }

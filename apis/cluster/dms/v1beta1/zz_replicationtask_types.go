@@ -25,7 +25,7 @@ type ReplicationTaskInitParameters struct {
 	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
 
 	// ARN of the replication instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("replication_instance_arn",true)
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
@@ -44,7 +44,7 @@ type ReplicationTaskInitParameters struct {
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// ARN that uniquely identifies the source endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
 
@@ -67,7 +67,7 @@ type ReplicationTaskInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN that uniquely identifies the target endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 
@@ -153,7 +153,7 @@ type ReplicationTaskParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of the replication instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta1.ReplicationInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1.ReplicationInstance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("replication_instance_arn",true)
 	// +kubebuilder:validation:Optional
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
@@ -175,7 +175,7 @@ type ReplicationTaskParameters struct {
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// ARN that uniquely identifies the source endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
@@ -202,7 +202,7 @@ type ReplicationTaskParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN that uniquely identifies the target endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dms/v1beta2.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`

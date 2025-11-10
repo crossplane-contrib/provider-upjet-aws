@@ -35,7 +35,7 @@ type EBSSnapshotInitParameters struct {
 	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 
 	// The Volume ID of which to make a snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSVolume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EBSVolume
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
@@ -138,7 +138,7 @@ type EBSSnapshotParameters struct {
 	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 
 	// The Volume ID of which to make a snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EBSVolume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EBSVolume
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`

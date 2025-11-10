@@ -17,7 +17,7 @@ import (
 type TriggerInitParameters struct {
 
 	// The name for the repository. This needs to be less than 100 characters.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/codecommit/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/codecommit/v1beta1.Repository
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
 	// Reference to a Repository in codecommit to populate repositoryName.
@@ -58,7 +58,7 @@ type TriggerParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name for the repository. This needs to be less than 100 characters.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/codecommit/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/codecommit/v1beta1.Repository
 	// +kubebuilder:validation:Optional
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -84,7 +84,7 @@ type TriggerTriggerInitParameters struct {
 	CustomData *string `json:"customData,omitempty" tf:"custom_data,omitempty"`
 
 	// The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
@@ -132,7 +132,7 @@ type TriggerTriggerParameters struct {
 	CustomData *string `json:"customData,omitempty" tf:"custom_data,omitempty"`
 
 	// The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`

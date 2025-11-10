@@ -63,14 +63,14 @@ type ClusterInitParameters struct {
 	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyArn.
@@ -82,7 +82,7 @@ type ClusterInitParameters struct {
 	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterParameterGroup
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
 	// Reference to a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
@@ -97,7 +97,7 @@ type ClusterInitParameters struct {
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
 	// Neptune subnet group to associate with this Neptune instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.SubnetGroup
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
@@ -118,7 +118,7 @@ type ClusterInitParameters struct {
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.Cluster
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Reference to a Cluster in neptune to populate replicationSourceIdentifier.
@@ -136,7 +136,7 @@ type ClusterInitParameters struct {
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
 	// Whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.ClusterSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterSnapshot
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Reference to a ClusterSnapshot in neptune to populate snapshotIdentifier.
@@ -166,7 +166,7 @@ type ClusterInitParameters struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -356,7 +356,7 @@ type ClusterParameters struct {
 	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// List of ARNs for the IAM roles to associate to the Neptune Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
@@ -364,7 +364,7 @@ type ClusterParameters struct {
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -377,7 +377,7 @@ type ClusterParameters struct {
 	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
@@ -394,7 +394,7 @@ type ClusterParameters struct {
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
 	// Neptune subnet group to associate with this Neptune instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
@@ -424,7 +424,7 @@ type ClusterParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
@@ -445,7 +445,7 @@ type ClusterParameters struct {
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
 	// Whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/neptune/v1beta1.ClusterSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1.ClusterSnapshot
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
@@ -479,7 +479,7 @@ type ClusterParameters struct {
 	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional

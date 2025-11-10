@@ -17,7 +17,7 @@ import (
 type MemberInitParameters struct {
 
 	// AWS account ID for member account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/guardduty/v1beta1.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("account_id",true)
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
@@ -30,7 +30,7 @@ type MemberInitParameters struct {
 	AccountIDSelector *v1.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/guardduty/v1beta1.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 
@@ -88,7 +88,7 @@ type MemberObservation struct {
 type MemberParameters struct {
 
 	// AWS account ID for member account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/guardduty/v1beta1.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("account_id",true)
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
@@ -102,7 +102,7 @@ type MemberParameters struct {
 	AccountIDSelector *v1.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/guardduty/v1beta1.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`

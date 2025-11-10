@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	bytematchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/bytematchset"
-	geomatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/geomatchset"
-	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/ipset"
-	ratebasedrule "github.com/upbound/provider-aws/internal/controller/namespaced/waf/ratebasedrule"
-	regexmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/regexmatchset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/regexpatternset"
-	rule "github.com/upbound/provider-aws/internal/controller/namespaced/waf/rule"
-	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/sizeconstraintset"
-	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/sqlinjectionmatchset"
-	webacl "github.com/upbound/provider-aws/internal/controller/namespaced/waf/webacl"
-	xssmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/xssmatchset"
+	bytematchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/bytematchset"
+	geomatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/geomatchset"
+	ipset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/ipset"
+	ratebasedrule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/ratebasedrule"
+	regexmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/regexmatchset"
+	regexpatternset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/regexpatternset"
+	rule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/rule"
+	sizeconstraintset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/sizeconstraintset"
+	sqlinjectionmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/sqlinjectionmatchset"
+	webacl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/webacl"
+	xssmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/waf/xssmatchset"
 )
 
 // Setup_waf creates all controllers with the supplied logger and adds them to

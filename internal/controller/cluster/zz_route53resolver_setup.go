@@ -9,9 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	endpoint "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/endpoint"
-	rule "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/rule"
-	ruleassociation "github.com/upbound/provider-aws/internal/controller/cluster/route53resolver/ruleassociation"
+	endpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/endpoint"
+	querylogconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfig"
+	querylogconfigassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfigassociation"
+	rule "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/rule"
+	ruleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/ruleassociation"
 )
 
 // Setup_route53resolver creates all controllers with the supplied logger and adds them to
@@ -19,6 +21,8 @@ import (
 func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		endpoint.Setup,
+		querylogconfig.Setup,
+		querylogconfigassociation.Setup,
 		rule.Setup,
 		ruleassociation.Setup,
 	} {
@@ -34,6 +38,8 @@ func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		endpoint.SetupGated,
+		querylogconfig.SetupGated,
+		querylogconfigassociation.SetupGated,
 		rule.SetupGated,
 		ruleassociation.SetupGated,
 	} {

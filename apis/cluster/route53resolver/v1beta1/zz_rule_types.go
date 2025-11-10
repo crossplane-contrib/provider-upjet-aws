@@ -23,7 +23,7 @@ type RuleInitParameters struct {
 
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53resolver/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53resolver/v1beta1.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
 
@@ -109,7 +109,7 @@ type RuleParameters struct {
 
 	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53resolver/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53resolver/v1beta1.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`

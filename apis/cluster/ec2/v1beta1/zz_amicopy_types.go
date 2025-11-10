@@ -75,7 +75,7 @@ type AMICopyInitParameters struct {
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -91,7 +91,7 @@ type AMICopyInitParameters struct {
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.AMI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.AMI
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
 
 	// Reference to a AMI in ec2 to populate sourceAmiId.
@@ -234,7 +234,7 @@ type AMICopyParameters struct {
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -257,7 +257,7 @@ type AMICopyParameters struct {
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.AMI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.AMI
 	// +kubebuilder:validation:Optional
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
 

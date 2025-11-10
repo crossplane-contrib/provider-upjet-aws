@@ -52,7 +52,7 @@ type WorkspaceSAMLConfigurationInitParameters struct {
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in grafana to populate workspaceId.
@@ -171,7 +171,7 @@ type WorkspaceSAMLConfigurationParameters struct {
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/grafana/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/grafana/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

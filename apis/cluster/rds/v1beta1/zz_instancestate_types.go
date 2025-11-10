@@ -16,7 +16,7 @@ import (
 type InstanceStateInitParameters struct {
 
 	// DB Instance Identifier
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
@@ -49,7 +49,7 @@ type InstanceStateObservation struct {
 type InstanceStateParameters struct {
 
 	// DB Instance Identifier
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`

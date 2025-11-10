@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	httpnamespace "github.com/upbound/provider-aws/internal/controller/cluster/servicediscovery/httpnamespace"
-	privatednsnamespace "github.com/upbound/provider-aws/internal/controller/cluster/servicediscovery/privatednsnamespace"
-	publicdnsnamespace "github.com/upbound/provider-aws/internal/controller/cluster/servicediscovery/publicdnsnamespace"
-	service "github.com/upbound/provider-aws/internal/controller/cluster/servicediscovery/service"
+	httpnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/servicediscovery/httpnamespace"
+	privatednsnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/servicediscovery/privatednsnamespace"
+	publicdnsnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/servicediscovery/publicdnsnamespace"
+	service "github.com/upbound/provider-aws/v2/internal/controller/cluster/servicediscovery/service"
 )
 
 // Setup_servicediscovery creates all controllers with the supplied logger and adds them to

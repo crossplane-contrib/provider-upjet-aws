@@ -645,7 +645,7 @@ type StepsCustomStepDetailsInitParameters struct {
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// The ARN for the lambda function that is being called.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
@@ -687,7 +687,7 @@ type StepsCustomStepDetailsParameters struct {
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// The ARN for the lambda function that is being called.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`

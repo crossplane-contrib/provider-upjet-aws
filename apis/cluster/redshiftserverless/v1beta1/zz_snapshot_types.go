@@ -16,7 +16,7 @@ import (
 type SnapshotInitParameters struct {
 
 	// The namespace to create a snapshot for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("namespace_name",false)
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -74,7 +74,7 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The namespace to create a snapshot for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("namespace_name",false)
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`

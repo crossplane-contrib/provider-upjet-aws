@@ -7,7 +7,7 @@ package autoscaling
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/namespaced/common"
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the autoscaling group.
@@ -41,11 +41,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_autoscaling_group_tag", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
 			TerraformName: "aws_autoscaling_group",
-		}
-		r.OverrideFieldNames = map[string]string{
-			"TagParameters":     "GroupTagTagParameters",
-			"TagObservation":    "GroupTagTagObservation",
-			"TagInitParameters": "GroupTagTagInitParameters",
 		}
 	})
 }

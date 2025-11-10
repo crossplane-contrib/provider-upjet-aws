@@ -17,7 +17,7 @@ import (
 type DiskAttachmentInitParameters struct {
 
 	// Name of the Lightsail disk.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Disk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Disk
 	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
 
 	// Reference to a Disk in lightsail to populate diskName.
@@ -32,7 +32,7 @@ type DiskAttachmentInitParameters struct {
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
 	// Name of the Lightsail instance to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
@@ -66,7 +66,7 @@ type DiskAttachmentObservation struct {
 type DiskAttachmentParameters struct {
 
 	// Name of the Lightsail disk.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Disk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Disk
 	// +kubebuilder:validation:Optional
 	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
 
@@ -83,7 +83,7 @@ type DiskAttachmentParameters struct {
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
 	// Name of the Lightsail instance to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 

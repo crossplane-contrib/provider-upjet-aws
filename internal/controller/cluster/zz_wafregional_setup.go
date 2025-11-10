@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	bytematchset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/bytematchset"
-	geomatchset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/geomatchset"
-	ipset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/ipset"
-	ratebasedrule "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/ratebasedrule"
-	regexmatchset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/regexmatchset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/regexpatternset"
-	rule "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/rule"
-	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/sizeconstraintset"
-	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/sqlinjectionmatchset"
-	webacl "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/webacl"
-	xssmatchset "github.com/upbound/provider-aws/internal/controller/cluster/wafregional/xssmatchset"
+	bytematchset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/bytematchset"
+	geomatchset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/geomatchset"
+	ipset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/ipset"
+	ratebasedrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/ratebasedrule"
+	regexmatchset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/regexmatchset"
+	regexpatternset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/regexpatternset"
+	rule "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/rule"
+	sizeconstraintset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/sizeconstraintset"
+	sqlinjectionmatchset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/sqlinjectionmatchset"
+	webacl "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/webacl"
+	xssmatchset "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafregional/xssmatchset"
 )
 
 // Setup_wafregional creates all controllers with the supplied logger and adds them to

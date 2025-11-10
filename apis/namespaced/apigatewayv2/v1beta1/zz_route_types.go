@@ -46,7 +46,7 @@ type RequestParameterParameters struct {
 type RouteInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -71,7 +71,7 @@ type RouteInitParameters struct {
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Authorizer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Authorizer
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
 	// Reference to a Authorizer in apigatewayv2 to populate authorizerId.
@@ -102,8 +102,8 @@ type RouteInitParameters struct {
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common/apis.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common/apis.IntegrationIDPrefixed()
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Reference to a Integration in apigatewayv2 to populate target.
@@ -169,7 +169,7 @@ type RouteObservation struct {
 type RouteParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -198,7 +198,7 @@ type RouteParameters struct {
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Authorizer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Authorizer
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
@@ -241,8 +241,8 @@ type RouteParameters struct {
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common/apis.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common/apis.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 

@@ -16,7 +16,7 @@ import (
 type IntegrationInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -28,7 +28,7 @@ type IntegrationInitParameters struct {
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta1.VPCLink
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta1.VPCLink
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -47,7 +47,7 @@ type IntegrationInitParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Credentials required for the integration, if any.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
 
@@ -74,7 +74,7 @@ type IntegrationInitParameters struct {
 
 	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
 	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
 
@@ -197,7 +197,7 @@ type IntegrationObservation struct {
 type IntegrationParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -210,7 +210,7 @@ type IntegrationParameters struct {
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta1.VPCLink
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta1.VPCLink
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
@@ -232,7 +232,7 @@ type IntegrationParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Credentials required for the integration, if any.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
@@ -264,7 +264,7 @@ type IntegrationParameters struct {
 
 	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
 	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional
 	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`

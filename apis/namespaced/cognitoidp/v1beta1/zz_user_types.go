@@ -143,7 +143,7 @@ type UserParameters struct {
 	TemporaryPasswordSecretRef *v1.LocalSecretKeySelector `json:"temporaryPasswordSecretRef,omitempty" tf:"-"`
 
 	// The user pool ID for the user pool where the user will be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`

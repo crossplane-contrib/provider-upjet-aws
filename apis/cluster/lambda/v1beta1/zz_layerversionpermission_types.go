@@ -19,7 +19,7 @@ type LayerVersionPermissionInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Name or ARN of the Lambda Layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("layer_name",false)
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
@@ -44,7 +44,7 @@ type LayerVersionPermissionInitParameters struct {
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
 	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 
@@ -101,7 +101,7 @@ type LayerVersionPermissionParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Name or ARN of the Lambda Layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("layer_name",false)
 	// +kubebuilder:validation:Optional
 	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
@@ -136,7 +136,7 @@ type LayerVersionPermissionParameters struct {
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
 	// Version of Lambda Layer to grant access to. Note: permissions only apply to a single version of a layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("version",true)
 	// +kubebuilder:validation:Optional
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`

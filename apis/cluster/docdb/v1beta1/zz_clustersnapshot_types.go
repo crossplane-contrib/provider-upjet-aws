@@ -16,7 +16,7 @@ import (
 type ClusterSnapshotInitParameters struct {
 
 	// The DocumentDB Cluster Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/docdb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
@@ -76,7 +76,7 @@ type ClusterSnapshotObservation struct {
 type ClusterSnapshotParameters struct {
 
 	// The DocumentDB Cluster Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/docdb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`

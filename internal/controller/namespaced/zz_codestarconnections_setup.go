@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	connection "github.com/upbound/provider-aws/internal/controller/namespaced/codestarconnections/connection"
-	host "github.com/upbound/provider-aws/internal/controller/namespaced/codestarconnections/host"
+	connection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codestarconnections/connection"
+	host "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codestarconnections/host"
 )
 
 // Setup_codestarconnections creates all controllers with the supplied logger and adds them to

@@ -12,7 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -109,6 +109,98 @@ func (mg *Endpoint) ResolveReferences( // ResolveReferences of this Endpoint.
 	}
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this QueryLogConfigAssociation.
+func (mg *QueryLogConfigAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("route53resolver.aws.upbound.io", "v1beta1", "QueryLogConfig", "QueryLogConfigList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResolverQueryLogConfigID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResolverQueryLogConfigIDRef,
+			Selector:     mg.Spec.ForProvider.ResolverQueryLogConfigIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResolverQueryLogConfigID")
+	}
+	mg.Spec.ForProvider.ResolverQueryLogConfigID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResolverQueryLogConfigIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceIDRef,
+			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceID")
+	}
+	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("route53resolver.aws.upbound.io", "v1beta1", "QueryLogConfig", "QueryLogConfigList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResolverQueryLogConfigID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResolverQueryLogConfigIDRef,
+			Selector:     mg.Spec.InitProvider.ResolverQueryLogConfigIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResolverQueryLogConfigID")
+	}
+	mg.Spec.InitProvider.ResolverQueryLogConfigID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResolverQueryLogConfigIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceIDRef,
+			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }

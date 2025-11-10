@@ -32,7 +32,7 @@ type UserGroupInitParameters struct {
 	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
 	// +listType=set
@@ -92,7 +92,7 @@ type UserGroupParameters struct {
 	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
 	// +kubebuilder:validation:Optional

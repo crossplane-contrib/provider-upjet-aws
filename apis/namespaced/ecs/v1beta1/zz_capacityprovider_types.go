@@ -17,8 +17,8 @@ import (
 type AutoScalingGroupProviderInitParameters struct {
 
 	// - ARN of the associated auto scaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
@@ -57,8 +57,8 @@ type AutoScalingGroupProviderObservation struct {
 type AutoScalingGroupProviderParameters struct {
 
 	// - ARN of the associated auto scaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
 

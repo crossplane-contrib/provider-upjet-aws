@@ -17,7 +17,7 @@ import (
 type PrincipalAssociationInitParameters struct {
 
 	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
@@ -30,7 +30,7 @@ type PrincipalAssociationInitParameters struct {
 	PrincipalSelector *v1.NamespacedSelector `json:"principalSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 
@@ -62,7 +62,7 @@ type PrincipalAssociationObservation struct {
 type PrincipalAssociationParameters struct {
 
 	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/organizations/v1beta1.Organization
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -81,7 +81,7 @@ type PrincipalAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`

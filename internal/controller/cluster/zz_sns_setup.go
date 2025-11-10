@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	platformapplication "github.com/upbound/provider-aws/internal/controller/cluster/sns/platformapplication"
-	smspreferences "github.com/upbound/provider-aws/internal/controller/cluster/sns/smspreferences"
-	topic "github.com/upbound/provider-aws/internal/controller/cluster/sns/topic"
-	topicpolicy "github.com/upbound/provider-aws/internal/controller/cluster/sns/topicpolicy"
-	topicsubscription "github.com/upbound/provider-aws/internal/controller/cluster/sns/topicsubscription"
+	platformapplication "github.com/upbound/provider-aws/v2/internal/controller/cluster/sns/platformapplication"
+	smspreferences "github.com/upbound/provider-aws/v2/internal/controller/cluster/sns/smspreferences"
+	topic "github.com/upbound/provider-aws/v2/internal/controller/cluster/sns/topic"
+	topicpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/sns/topicpolicy"
+	topicsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/sns/topicsubscription"
 )
 
 // Setup_sns creates all controllers with the supplied logger and adds them to

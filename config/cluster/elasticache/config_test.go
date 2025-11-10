@@ -12,8 +12,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1"
-	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2"
+	"github.com/upbound/provider-aws/v2/apis/cluster/elasticache/v1beta1"
+	"github.com/upbound/provider-aws/v2/apis/cluster/elasticache/v1beta2"
 )
 
 // Helper function to create float64 pointer

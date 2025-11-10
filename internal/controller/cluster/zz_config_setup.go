@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	providerconfig "github.com/upbound/provider-aws/internal/controller/cluster/providerconfig"
+	providerconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/providerconfig"
 )
 
 // Setup_config creates all controllers with the supplied logger and adds them to

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	signingjob "github.com/upbound/provider-aws/internal/controller/cluster/signer/signingjob"
-	signingprofile "github.com/upbound/provider-aws/internal/controller/cluster/signer/signingprofile"
-	signingprofilepermission "github.com/upbound/provider-aws/internal/controller/cluster/signer/signingprofilepermission"
+	signingjob "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingjob"
+	signingprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofile"
+	signingprofilepermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/signer/signingprofilepermission"
 )
 
 // Setup_signer creates all controllers with the supplied logger and adds them to

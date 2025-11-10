@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/namespaced/codecommit/approvalruletemplate"
-	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/namespaced/codecommit/approvalruletemplateassociation"
-	repository "github.com/upbound/provider-aws/internal/controller/namespaced/codecommit/repository"
-	trigger "github.com/upbound/provider-aws/internal/controller/namespaced/codecommit/trigger"
+	approvalruletemplate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/approvalruletemplate"
+	approvalruletemplateassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/approvalruletemplateassociation"
+	repository "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/repository"
+	trigger "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/trigger"
 )
 
 // Setup_codecommit creates all controllers with the supplied logger and adds them to

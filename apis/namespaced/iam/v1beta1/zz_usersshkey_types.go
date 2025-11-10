@@ -26,7 +26,7 @@ type UserSSHKeyInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The name of the IAM user to associate the SSH public key with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// Reference to a User in iam to populate username.
@@ -76,7 +76,7 @@ type UserSSHKeyParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The name of the IAM user to associate the SSH public key with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 

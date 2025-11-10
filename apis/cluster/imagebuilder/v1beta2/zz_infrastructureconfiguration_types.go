@@ -22,7 +22,7 @@ type InfrastructureConfigurationInitParameters struct {
 	InstanceMetadataOptions *InstanceMetadataOptionsInitParameters `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
 
 	// Name of IAM Instance Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.InstanceProfile
 	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate instanceProfileName.
@@ -38,7 +38,7 @@ type InfrastructureConfigurationInitParameters struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.KeyPair
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.KeyPair
 	KeyPair *string `json:"keyPair,omitempty" tf:"key_pair,omitempty"`
 
 	// Reference to a KeyPair in ec2 to populate keyPair.
@@ -71,14 +71,14 @@ type InfrastructureConfigurationInitParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group identifiers.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
@@ -91,7 +91,7 @@ type InfrastructureConfigurationInitParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// EC2 Subnet identifier. Also requires security_group_ids argument.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -190,7 +190,7 @@ type InfrastructureConfigurationParameters struct {
 	InstanceMetadataOptions *InstanceMetadataOptionsParameters `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
 
 	// Name of IAM Instance Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.InstanceProfile
 	// +kubebuilder:validation:Optional
 	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
 
@@ -208,7 +208,7 @@ type InfrastructureConfigurationParameters struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.KeyPair
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.KeyPair
 	// +kubebuilder:validation:Optional
 	KeyPair *string `json:"keyPair,omitempty" tf:"key_pair,omitempty"`
 
@@ -251,7 +251,7 @@ type InfrastructureConfigurationParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of EC2 Security Group identifiers.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -259,7 +259,7 @@ type InfrastructureConfigurationParameters struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
@@ -273,7 +273,7 @@ type InfrastructureConfigurationParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// EC2 Subnet identifier. Also requires security_group_ids argument.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -395,7 +395,7 @@ type PlacementParameters struct {
 type S3LogsInitParameters struct {
 
 	// Name of the S3 Bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
@@ -422,7 +422,7 @@ type S3LogsObservation struct {
 type S3LogsParameters struct {
 
 	// Name of the S3 Bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 

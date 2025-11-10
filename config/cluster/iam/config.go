@@ -7,7 +7,7 @@ package iam
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // Configure adds configurations for the iam group.
@@ -121,6 +121,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_iam_policy", func(r *config.Resource) {
 		// Otherwise TF assigns a random string.
-		config.MarkAsRequired(r.TerraformResource, "name")
+		r.MarkAsRequired("name")
 	})
 }

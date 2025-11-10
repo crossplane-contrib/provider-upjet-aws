@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	delegationset "github.com/upbound/provider-aws/internal/controller/cluster/route53/delegationset"
-	healthcheck "github.com/upbound/provider-aws/internal/controller/cluster/route53/healthcheck"
-	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/cluster/route53/hostedzonednssec"
-	querylog "github.com/upbound/provider-aws/internal/controller/cluster/route53/querylog"
-	record "github.com/upbound/provider-aws/internal/controller/cluster/route53/record"
-	resolverconfig "github.com/upbound/provider-aws/internal/controller/cluster/route53/resolverconfig"
-	trafficpolicy "github.com/upbound/provider-aws/internal/controller/cluster/route53/trafficpolicy"
-	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/cluster/route53/trafficpolicyinstance"
-	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/cluster/route53/vpcassociationauthorization"
-	zone "github.com/upbound/provider-aws/internal/controller/cluster/route53/zone"
-	zoneassociation "github.com/upbound/provider-aws/internal/controller/cluster/route53/zoneassociation"
+	delegationset "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/delegationset"
+	healthcheck "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/healthcheck"
+	hostedzonednssec "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/hostedzonednssec"
+	querylog "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/querylog"
+	record "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/record"
+	resolverconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/resolverconfig"
+	trafficpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/trafficpolicy"
+	trafficpolicyinstance "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/trafficpolicyinstance"
+	vpcassociationauthorization "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/vpcassociationauthorization"
+	zone "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/zone"
+	zoneassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/zoneassociation"
 )
 
 // Setup_route53 creates all controllers with the supplied logger and adds them to

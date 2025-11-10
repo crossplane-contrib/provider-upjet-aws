@@ -19,7 +19,7 @@ type TableReplicaInitParameters_2 struct {
 	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// ARN of the main or global table which this resource will replicate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dynamodb/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
 
@@ -32,7 +32,7 @@ type TableReplicaInitParameters_2 struct {
 	GlobalTableArnSelector *v1.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyArn.
@@ -97,7 +97,7 @@ type TableReplicaParameters_2 struct {
 	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// ARN of the main or global table which this resource will replicate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dynamodb/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
@@ -111,7 +111,7 @@ type TableReplicaParameters_2 struct {
 	GlobalTableArnSelector *v1.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 

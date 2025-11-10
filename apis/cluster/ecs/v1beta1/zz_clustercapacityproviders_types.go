@@ -20,7 +20,7 @@ type ClusterCapacityProvidersInitParameters struct {
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Name of the ECS cluster to manage capacity providers for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecs/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in ecs to populate clusterName.
@@ -63,7 +63,7 @@ type ClusterCapacityProvidersParameters struct {
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Name of the ECS cluster to manage capacity providers for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecs/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

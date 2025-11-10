@@ -35,8 +35,8 @@ type PlatformApplicationInitParameters struct {
 	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
 
 	// The IAM role ARN permitted to receive failure feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	FailureFeedbackRoleArn *string `json:"failureFeedbackRoleArn,omitempty" tf:"failure_feedback_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate failureFeedbackRoleArn.
@@ -57,8 +57,8 @@ type PlatformApplicationInitParameters struct {
 	PlatformPrincipalSecretRef *v1.LocalSecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
 
 	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SuccessFeedbackRoleArn *string `json:"successFeedbackRoleArn,omitempty" tf:"success_feedback_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate successFeedbackRoleArn.
@@ -143,8 +143,8 @@ type PlatformApplicationParameters struct {
 	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
 
 	// The IAM role ARN permitted to receive failure feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FailureFeedbackRoleArn *string `json:"failureFeedbackRoleArn,omitempty" tf:"failure_feedback_role_arn,omitempty"`
 
@@ -174,8 +174,8 @@ type PlatformApplicationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SuccessFeedbackRoleArn *string `json:"successFeedbackRoleArn,omitempty" tf:"success_feedback_role_arn,omitempty"`
 

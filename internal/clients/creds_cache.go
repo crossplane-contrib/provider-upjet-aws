@@ -21,7 +21,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/apis/namespaced/v1beta1"
+	"github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 )
 
 const (

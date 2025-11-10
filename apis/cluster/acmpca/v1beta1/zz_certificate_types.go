@@ -19,7 +19,7 @@ type CertificateInitParameters struct {
 	APIPassthrough *string `json:"apiPassthrough,omitempty" tf:"api_passthrough,omitempty"`
 
 	// ARN of the certificate authority.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acmpca/v1beta1.CertificateAuthority
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acmpca/v1beta1.CertificateAuthority
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
@@ -85,7 +85,7 @@ type CertificateParameters struct {
 	APIPassthrough *string `json:"apiPassthrough,omitempty" tf:"api_passthrough,omitempty"`
 
 	// ARN of the certificate authority.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acmpca/v1beta1.CertificateAuthority
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acmpca/v1beta1.CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 

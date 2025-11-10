@@ -21,7 +21,7 @@ type HostedPublicVirtualInterfaceAccepterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.HostedPublicVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.HostedPublicVirtualInterface
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
 	// Reference to a HostedPublicVirtualInterface in directconnect to populate virtualInterfaceId.
@@ -70,7 +70,7 @@ type HostedPublicVirtualInterfaceAccepterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.HostedPublicVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.HostedPublicVirtualInterface
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 

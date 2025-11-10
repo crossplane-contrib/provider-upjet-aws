@@ -20,7 +20,7 @@ type MetricFilterInitParameters struct {
 	ApplyOnTransformedLogs *bool `json:"applyOnTransformedLogs,omitempty" tf:"apply_on_transformed_logs,omitempty"`
 
 	// The name of the log group to associate the metric filter with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
@@ -69,7 +69,7 @@ type MetricFilterParameters struct {
 	ApplyOnTransformedLogs *bool `json:"applyOnTransformedLogs,omitempty" tf:"apply_on_transformed_logs,omitempty"`
 
 	// The name of the log group to associate the metric filter with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 

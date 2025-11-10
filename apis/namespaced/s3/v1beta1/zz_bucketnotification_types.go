@@ -17,7 +17,7 @@ import (
 type BucketNotificationInitParameters struct {
 
 	// Name of the bucket for notification configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -70,7 +70,7 @@ type BucketNotificationObservation struct {
 type BucketNotificationParameters struct {
 
 	// Name of the bucket for notification configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -183,7 +183,7 @@ type QueueInitParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// SQS queue ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 
@@ -235,7 +235,7 @@ type QueueParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// SQS queue ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
@@ -265,7 +265,7 @@ type TopicInitParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// SNS topic ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
@@ -317,7 +317,7 @@ type TopicParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// SNS topic ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`

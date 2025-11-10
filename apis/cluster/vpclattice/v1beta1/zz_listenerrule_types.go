@@ -88,7 +88,7 @@ type ActionParameters struct {
 
 type ForwardTargetGroupsInitParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 
@@ -111,7 +111,7 @@ type ForwardTargetGroupsObservation struct {
 
 type ForwardTargetGroupsParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
@@ -270,7 +270,7 @@ type ListenerRuleInitParameters struct {
 	Action *ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the listener.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Listener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Listener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("listener_id",true)
 	ListenerIdentifier *string `json:"listenerIdentifier,omitempty" tf:"listener_identifier,omitempty"`
 
@@ -293,7 +293,7 @@ type ListenerRuleInitParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
 
@@ -361,7 +361,7 @@ type ListenerRuleParameters struct {
 	Action *ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the listener.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Listener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Listener
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("listener_id",true)
 	// +kubebuilder:validation:Optional
 	ListenerIdentifier *string `json:"listenerIdentifier,omitempty" tf:"listener_identifier,omitempty"`
@@ -393,7 +393,7 @@ type ListenerRuleParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`

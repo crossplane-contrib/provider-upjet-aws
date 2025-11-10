@@ -68,8 +68,8 @@ type SelectionInitParameters struct {
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamRoleArn.
@@ -84,7 +84,7 @@ type SelectionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
@@ -98,7 +98,7 @@ type SelectionInitParameters struct {
 	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/backup/v1beta2.Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta2.Plan
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Reference to a Plan in backup to populate planId.
@@ -110,7 +110,7 @@ type SelectionInitParameters struct {
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
@@ -167,8 +167,8 @@ type SelectionParameters struct {
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
@@ -185,7 +185,7 @@ type SelectionParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -200,7 +200,7 @@ type SelectionParameters struct {
 	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/backup/v1beta2.Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta2.Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
@@ -218,7 +218,7 @@ type SelectionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta3.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
