@@ -364,6 +364,38 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	return nil
 }
 
+// ResolveReferences of this ClusterPolicy.
+func (mg *ClusterPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kafka.aws.m.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ClusterArnRef,
+			Selector:     mg.Spec.ForProvider.ClusterArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterArn")
+	}
+	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Replicator.
 func (mg *Replicator) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

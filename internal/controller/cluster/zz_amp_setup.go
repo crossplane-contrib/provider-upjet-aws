@@ -11,6 +11,7 @@ import (
 
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/cluster/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/cluster/amp/rulegroupnamespace"
+	scraper "github.com/upbound/provider-aws/internal/controller/cluster/amp/scraper"
 	workspace "github.com/upbound/provider-aws/internal/controller/cluster/amp/workspace"
 )
 
@@ -20,6 +21,7 @@ func Setup_amp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
+		scraper.Setup,
 		workspace.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -35,6 +37,7 @@ func SetupGated_amp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
+		scraper.SetupGated,
 		workspace.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

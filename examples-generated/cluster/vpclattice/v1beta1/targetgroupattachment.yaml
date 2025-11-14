@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: TargetGroupAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/targetgroupattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    target:
+      id: ${aws_lb.example.arn}
+      port: 80
+    targetGroupIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

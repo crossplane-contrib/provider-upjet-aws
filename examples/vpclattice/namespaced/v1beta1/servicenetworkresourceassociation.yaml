@@ -1,0 +1,119 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ServiceNetworkResourceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    resourceConfigurationIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rc-snra
+    serviceNetworkIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sn-snra
+    tags:
+      Name: Example
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ServiceNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example-sn-snra
+  name: example-sn-snra
+  namespace: upbound-system
+spec:
+  forProvider:
+    authType: AWS_IAM
+    name: example-sn-snra
+    region: us-west-1
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ResourceConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example-rc-snra
+  name: example-rc-snra
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-rc-snra
+    portRanges:
+    - "80"
+    protocol: TCP
+    region: us-west-1
+    resourceConfigurationDefinition:
+    - dnsResource:
+      - domainName: example.com
+        ipAddressType: IPV4
+    resourceGatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Example
+---
+apiVersion: vpclattice.aws.m.upbound.io/v1beta1
+kind: ResourceGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: uptest
+    region: us-west-1
+    subnetIdRefs:
+    - name: sample-subnet1
+    tags:
+      Environment: Example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-subnet1
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/servicenetworkresourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

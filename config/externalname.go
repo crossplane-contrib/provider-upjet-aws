@@ -57,6 +57,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
+	// dsql
+	//
+	// DSQL Cluster can be imported using the identifier
+	"aws_dsql_cluster": config.FrameworkResourceWithComputedIdentifier("identifier", "artix3b6dqiognkp7732wzhroi"),
+	// DSQL Cluster Peering resource can be imported using the Cluster identifier
+	"aws_dsql_cluster_peering": dsqlClusterPeering(),
+
 	// dynamodb
 	//
 	// DynamoDB table resource policy can be imported using the DynamoDB resource identifier
@@ -114,6 +121,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
+	// amp
+	//
+	// Prometheus Scraper can be imported using the ARN: arn:aws:aps:us-west-2:123456789012:scraper/s-12345678-1234-1234-1234-123456789012
+	// Terraform returns the full ARN as ID, but AWS API expects just the UUID portion (s-UUID).
+	// terraform-plugin-framework
+	"aws_prometheus_scraper": identifierFromProviderWithDefaultStub("scraper12345"),
+
 	// rds
 	//
 	// aws_rds_instance_state import format: rdsInstanceId-12345678
@@ -132,6 +146,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_vpclattice_resource_configuration": identifierFromProviderWithDefaultStub("rcfg-1234567890abcdef1"),
 	// VPC Lattice Resource Gateway can be imported using the id
 	"aws_vpclattice_resource_gateway": identifierFromProviderWithDefaultStub("rgw-055b56956a39439ba"),
+	// VPC Lattice Service Network Resource Association can be imported using the id
+	"aws_vpclattice_service_network_resource_association": identifierFromProviderWithDefaultStub("snra-1234567890abcef12"),
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -1592,6 +1608,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// MSK serverless clusters can be imported using the cluster arn
 	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
+	// Managed Streaming for Kafka Cluster Policy resource can be imported using the cluster_arn
+	"aws_msk_cluster_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }}"),
 
 	// kafkaconnect
 	//
@@ -2664,14 +2682,28 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// vpclattice
 	//
-	// VPC Lattice Service can be imported using the id
-	"aws_vpclattice_service": config.IdentifierFromProvider,
+	// VPC Lattice Access Log Subscription can be imported using the id
+	"aws_vpclattice_access_log_subscription": config.IdentifierFromProvider,
+	// VPC Lattice Auth Policy can be imported using the id
+	"aws_vpclattice_auth_policy": config.IdentifierFromProvider,
 	// VPC Lattice Listener can be imported using the service_id/listener_id
 	"aws_vpclattice_listener": config.IdentifierFromProvider,
+	// VPC Lattice Listener Rule can be imported using the id
+	"aws_vpclattice_listener_rule": config.IdentifierFromProvider,
+	// VPC Lattice Resource Policy can be imported using the id
+	"aws_vpclattice_resource_policy": config.IdentifierFromProvider,
+	// VPC Lattice Service can be imported using the id
+	"aws_vpclattice_service": config.IdentifierFromProvider,
 	// VPC Lattice Service Network can be imported using the id
 	"aws_vpclattice_service_network": config.IdentifierFromProvider,
+	// VPC Lattice Service Network Service Association can be imported using the id
+	"aws_vpclattice_service_network_service_association": config.IdentifierFromProvider,
+	// VPC Lattice ServiceNetworkVPCAssociation can be imported using the id
+	"aws_vpclattice_service_network_vpc_association": config.IdentifierFromProvider,
 	// VPC Lattice Target Group can be imported using the id
 	"aws_vpclattice_target_group": config.IdentifierFromProvider,
+	// No import
+	"aws_vpclattice_target_group_attachment": config.IdentifierFromProvider,
 
 	// waf
 	//
@@ -3330,6 +3362,22 @@ func s3LifecycleConfiguration() config.ExternalName {
 		idStr, ok := id.(string)
 		if !ok {
 			return "", errors.New("bucket field must be a string")
+		}
+		return idStr, nil
+	}
+	return e
+}
+
+func dsqlClusterPeering() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["identifier"]
+		if !ok {
+			return "", errors.New("identifier field missing from tfstate")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("identifier field must be a string")
 		}
 		return idStr, nil
 	}

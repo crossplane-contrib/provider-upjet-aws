@@ -22,6 +22,7 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/policy"
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/namespaced/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/rulegroupnamespace"
+	scraper "github.com/upbound/provider-aws/internal/controller/namespaced/amp/scraper"
 	workspace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/workspace"
 	app "github.com/upbound/provider-aws/internal/controller/namespaced/amplify/app"
 	backendenvironment "github.com/upbound/provider-aws/internal/controller/namespaced/amplify/backendenvironment"
@@ -289,6 +290,8 @@ import (
 	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/namespaced/ds/conditionalforwarder"
 	directory "github.com/upbound/provider-aws/internal/controller/namespaced/ds/directory"
 	shareddirectory "github.com/upbound/provider-aws/internal/controller/namespaced/ds/shareddirectory"
+	clusterdsql "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/cluster"
+	clusterpeering "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/clusterpeering"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/namespaced/dynamodb/kinesisstreamingdestination"
@@ -562,6 +565,7 @@ import (
 	channel "github.com/upbound/provider-aws/internal/controller/namespaced/ivs/channel"
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/cluster"
+	clusterpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/clusterpolicy"
 	configuration "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/configuration"
 	replicator "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/scramsecretassociation"
@@ -936,12 +940,20 @@ import (
 	instancetrustproviderattachment "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/instancetrustproviderattachment"
 	trustprovider "github.com/upbound/provider-aws/internal/controller/namespaced/verifiedaccess/trustprovider"
 	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/vpc/networkperformancemetricsubscription"
+	accesslogsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/accesslogsubscription"
+	authpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/authpolicy"
 	listenervpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/listener"
+	listenerrule "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/listenerrule"
 	resourceconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourceconfiguration"
 	resourcegateway "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourcegateway"
+	resourcepolicyvpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/resourcepolicy"
 	servicevpclattice "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/service"
 	servicenetwork "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/servicenetwork"
+	servicenetworkresourceassociation "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/servicenetworkresourceassociation"
+	servicenetworkserviceassociation "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/servicenetworkserviceassociation"
+	servicenetworkvpcassociation "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/servicenetworkvpcassociation"
 	targetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/targetgroup"
+	targetgroupattachment "github.com/upbound/provider-aws/internal/controller/namespaced/vpclattice/targetgroupattachment"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/waf/ipset"
@@ -994,6 +1006,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
+		scraper.Setup,
 		workspace.Setup,
 		app.Setup,
 		backendenvironment.Setup,
@@ -1261,6 +1274,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		conditionalforwarder.Setup,
 		directory.Setup,
 		shareddirectory.Setup,
+		clusterdsql.Setup,
+		clusterpeering.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
@@ -1534,6 +1549,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		channel.Setup,
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
+		clusterpolicy.Setup,
 		configuration.Setup,
 		replicator.Setup,
 		scramsecretassociation.Setup,
@@ -1908,12 +1924,20 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancetrustproviderattachment.Setup,
 		trustprovider.Setup,
 		networkperformancemetricsubscription.Setup,
+		accesslogsubscription.Setup,
+		authpolicy.Setup,
 		listenervpclattice.Setup,
+		listenerrule.Setup,
 		resourceconfiguration.Setup,
 		resourcegateway.Setup,
+		resourcepolicyvpclattice.Setup,
 		servicevpclattice.Setup,
 		servicenetwork.Setup,
+		servicenetworkresourceassociation.Setup,
+		servicenetworkserviceassociation.Setup,
+		servicenetworkvpcassociation.Setup,
 		targetgroup.Setup,
+		targetgroupattachment.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,
@@ -1972,6 +1996,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policy.SetupGated,
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
+		scraper.SetupGated,
 		workspace.SetupGated,
 		app.SetupGated,
 		backendenvironment.SetupGated,
@@ -2239,6 +2264,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		conditionalforwarder.SetupGated,
 		directory.SetupGated,
 		shareddirectory.SetupGated,
+		clusterdsql.SetupGated,
+		clusterpeering.SetupGated,
 		contributorinsights.SetupGated,
 		globaltable.SetupGated,
 		kinesisstreamingdestination.SetupGated,
@@ -2512,6 +2539,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		channel.SetupGated,
 		recordingconfiguration.SetupGated,
 		clusterkafka.SetupGated,
+		clusterpolicy.SetupGated,
 		configuration.SetupGated,
 		replicator.SetupGated,
 		scramsecretassociation.SetupGated,
@@ -2886,12 +2914,20 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		instancetrustproviderattachment.SetupGated,
 		trustprovider.SetupGated,
 		networkperformancemetricsubscription.SetupGated,
+		accesslogsubscription.SetupGated,
+		authpolicy.SetupGated,
 		listenervpclattice.SetupGated,
+		listenerrule.SetupGated,
 		resourceconfiguration.SetupGated,
 		resourcegateway.SetupGated,
+		resourcepolicyvpclattice.SetupGated,
 		servicevpclattice.SetupGated,
 		servicenetwork.SetupGated,
+		servicenetworkresourceassociation.SetupGated,
+		servicenetworkserviceassociation.SetupGated,
+		servicenetworkvpcassociation.SetupGated,
 		targetgroup.SetupGated,
+		targetgroupattachment.SetupGated,
 		bytematchset.SetupGated,
 		geomatchset.SetupGated,
 		ipset.SetupGated,

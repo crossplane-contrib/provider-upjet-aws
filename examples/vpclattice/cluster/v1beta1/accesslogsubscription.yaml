@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: AccessLogSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destinationArn: "arn:aws:s3:::crossplane-provider-upjet-aws-accesslogsubscription-test-0932"
+    region: us-west-1
+    resourceIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sn
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: crossplane-provider-upjet-aws-accesslogsubscription-test-0932
+spec:
+  forProvider:
+    region: us-west-1
+    forceDestroy: true
+---
+apiVersion: vpclattice.aws.upbound.io/v1beta1
+kind: ServiceNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpclattice/v1beta1/accesslogsubscription
+  labels:
+    testing.upbound.io/example-name: example-sn
+  name: example-sn
+spec:
+  forProvider:
+    authType: AWS_IAM
+    name: example-sn
+    region: us-west-1

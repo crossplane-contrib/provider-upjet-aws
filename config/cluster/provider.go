@@ -7,6 +7,7 @@ package cluster
 import (
 	"github.com/upbound/provider-aws/config/cluster/acm"
 	"github.com/upbound/provider-aws/config/cluster/acmpca"
+	"github.com/upbound/provider-aws/config/cluster/amp"
 	"github.com/upbound/provider-aws/config/cluster/apigateway"
 	"github.com/upbound/provider-aws/config/cluster/apigatewayv2"
 	"github.com/upbound/provider-aws/config/cluster/apprunner"
@@ -34,6 +35,7 @@ import (
 	"github.com/upbound/provider-aws/config/cluster/dms"
 	"github.com/upbound/provider-aws/config/cluster/docdb"
 	"github.com/upbound/provider-aws/config/cluster/ds"
+	"github.com/upbound/provider-aws/config/cluster/dsql"
 	"github.com/upbound/provider-aws/config/cluster/dynamodb"
 	"github.com/upbound/provider-aws/config/cluster/ebs"
 	"github.com/upbound/provider-aws/config/cluster/ec2"
@@ -94,12 +96,14 @@ import (
 	"github.com/upbound/provider-aws/config/cluster/ssoadmin"
 	"github.com/upbound/provider-aws/config/cluster/transfer"
 	"github.com/upbound/provider-aws/config/cluster/verifiedaccess"
+	"github.com/upbound/provider-aws/config/cluster/vpclattice"
 	"github.com/upbound/provider-aws/config/cluster/wafv2"
 )
 
 func init() {
 	ProviderConfiguration.AddConfig(acm.Configure)
 	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(amp.Configure)
 	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
 	ProviderConfiguration.AddConfig(apprunner.Configure)
@@ -175,6 +179,7 @@ func init() {
 	ProviderConfiguration.AddConfig(transfer.Configure)
 	ProviderConfiguration.AddConfig(directconnect.Configure)
 	ProviderConfiguration.AddConfig(ds.Configure)
+	ProviderConfiguration.AddConfig(dsql.Configure)
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
@@ -188,4 +193,5 @@ func init() {
 	ProviderConfiguration.AddConfig(cloudformation.Configure)
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
+	ProviderConfiguration.AddConfig(vpclattice.Configure)
 }

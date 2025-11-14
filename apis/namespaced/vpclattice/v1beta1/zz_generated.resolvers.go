@@ -16,8 +16,112 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Listener) ResolveReferences( // ResolveReferences of this Listener.
+func (mg *AccessLogSubscription) ResolveReferences( // ResolveReferences of this AccessLogSubscription.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ResourceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceIdentifier")
+	}
+	mg.Spec.ForProvider.ResourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ResourceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceIdentifier")
+	}
+	mg.Spec.InitProvider.ResourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AuthPolicy.
+func (mg *AuthPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceIdentifier),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ResourceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceIdentifier")
+	}
+	mg.Spec.ForProvider.ResourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceIdentifier),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ResourceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceIdentifier")
+	}
+	mg.Spec.InitProvider.ResourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Listener.
+func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPINamespacedResolver(c, mg)
@@ -102,6 +206,150 @@ func (mg *Listener) ResolveReferences( // ResolveReferences of this Listener.
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ServiceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceIdentifier")
+	}
+	mg.Spec.InitProvider.ServiceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ListenerRule.
+func (mg *ListenerRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.Action != nil {
+		if mg.Spec.ForProvider.Action.Forward != nil {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Action.Forward.TargetGroups); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierRef,
+						Selector:     mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier")
+				}
+				mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Listener", "ListenerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerIdentifier),
+			Extract:      resource.ExtractParamPath("listener_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ListenerIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ListenerIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ListenerIdentifier")
+	}
+	mg.Spec.ForProvider.ListenerIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ListenerIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ServiceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceIdentifier")
+	}
+	mg.Spec.ForProvider.ServiceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceIdentifierRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Action != nil {
+		if mg.Spec.InitProvider.Action.Forward != nil {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Action.Forward.TargetGroups); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierRef,
+						Selector:     mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier")
+				}
+				mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Action.Forward.TargetGroups[i5].TargetGroupIdentifierRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Listener", "ListenerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerIdentifier),
+			Extract:      resource.ExtractParamPath("listener_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ListenerIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ListenerIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ListenerIdentifier")
+	}
+	mg.Spec.InitProvider.ListenerIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ListenerIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceIdentifier),
 			Extract:      resource.ExtractResourceID(),
@@ -353,6 +601,375 @@ func (mg *ResourceGateway) ResolveReferences(ctx context.Context, c client.Reade
 	return nil
 }
 
+// ResolveReferences of this ResourcePolicy.
+func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceArnRef,
+			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
+	}
+	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceArnRef,
+			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ServiceNetworkResourceAssociation.
+func (mg *ServiceNetworkResourceAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceConfigurationIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceConfigurationIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ResourceConfigurationIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceConfigurationIdentifier")
+	}
+	mg.Spec.ForProvider.ResourceConfigurationIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceConfigurationIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.ForProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceConfigurationIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ResourceConfigurationIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ResourceConfigurationIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceConfigurationIdentifier")
+	}
+	mg.Spec.InitProvider.ResourceConfigurationIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceConfigurationIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.InitProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ServiceNetworkServiceAssociation.
+func (mg *ServiceNetworkServiceAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ServiceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceIdentifier")
+	}
+	mg.Spec.ForProvider.ServiceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.ForProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "Service", "ServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ServiceIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceIdentifier")
+	}
+	mg.Spec.InitProvider.ServiceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.InitProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ServiceNetworkVPCAssociation.
+func (mg *ServiceNetworkVPCAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
+	}
+	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.ForProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.ForProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCIdentifierRef,
+			Selector:     mg.Spec.ForProvider.VPCIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCIdentifier")
+	}
+	mg.Spec.ForProvider.VPCIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.SecurityGroupIDRefs,
+			Selector:      mg.Spec.InitProvider.SecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupIds")
+	}
+	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "ServiceNetwork", "ServiceNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNetworkIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceNetworkIdentifierRef,
+			Selector:     mg.Spec.InitProvider.ServiceNetworkIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceNetworkIdentifier")
+	}
+	mg.Spec.InitProvider.ServiceNetworkIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceNetworkIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.VPCIdentifierRef,
+			Selector:     mg.Spec.InitProvider.VPCIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCIdentifier")
+	}
+	mg.Spec.InitProvider.VPCIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIdentifierRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this TargetGroup.
 func (mg *TargetGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -406,6 +1023,58 @@ func (mg *TargetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.InitProvider.Config.VPCIdentifierRef = rsp.ResolvedReference
 
 	}
+
+	return nil
+}
+
+// ResolveReferences of this TargetGroupAttachment.
+func (mg *TargetGroupAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetGroupIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetGroupIdentifierRef,
+			Selector:     mg.Spec.ForProvider.TargetGroupIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetGroupIdentifier")
+	}
+	mg.Spec.ForProvider.TargetGroupIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetGroupIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vpclattice.aws.m.upbound.io", "v1beta1", "TargetGroup", "TargetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetGroupIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetGroupIdentifierRef,
+			Selector:     mg.Spec.InitProvider.TargetGroupIdentifierSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetGroupIdentifier")
+	}
+	mg.Spec.InitProvider.TargetGroupIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetGroupIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }

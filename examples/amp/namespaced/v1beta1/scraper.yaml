@@ -1,0 +1,109 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# This example demonstrates how to create an Amazon Managed Service for Prometheus (AMP) Scraper
+# using the monolithic API (amp.aws.m.upbound.io).
+#
+# Prerequisites:
+# - An existing EKS cluster
+# - An existing AMP workspace
+# - VPC subnets where the scraper will run
+# - Security groups for the scraper
+# - An IAM role with appropriate permissions
+
+apiVersion: amp.aws.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-monolithic-demo
+spec:
+  forProvider:
+    region: us-east-1
+
+---
+
+apiVersion: amp.aws.m.upbound.io/v1beta1
+kind: Scraper
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-monolithic-demo
+spec:
+  forProvider:
+    region: us-east-1
+    destination:
+    - amp:
+      - workspaceArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: scraper-monolithic-demo
+    source:
+    - eks:
+      - clusterArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: scraper-monolithic-demo
+        subnetIdsRefs:
+        - name: subnet-1
+        - name: subnet-2
+        securityGroupIdsRefs:
+        - name: scraper-sg
+    scrapeConfiguration: |
+      global:
+        scrape_interval: 30s
+      scrape_configs:
+        # Scrape pod metrics
+        - job_name: pod_exporter
+          kubernetes_sd_configs:
+            - role: pod
+        # Scrape container metrics via cAdvisor
+        - job_name: cadvisor
+          scheme: https
+          authorization:
+            credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          kubernetes_sd_configs:
+            - role: node
+          relabel_configs:
+            - action: labelmap
+              regex: __meta_kubernetes_node_label_(.+)
+            - replacement: kubernetes.default.svc:443
+              target_label: __address__
+            - source_labels: [__meta_kubernetes_node_name]
+              regex: (.+)
+              target_label: __metrics_path__
+              replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+        # Scrape Kubernetes API server metrics
+        - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+          job_name: kubernetes-apiservers
+          kubernetes_sd_configs:
+          - role: endpoints
+          relabel_configs:
+          - action: keep
+            regex: default;kubernetes;https
+            source_labels:
+            - __meta_kubernetes_namespace
+            - __meta_kubernetes_service_name
+            - __meta_kubernetes_endpoint_port_name
+          scheme: https
+        # Scrape kube-proxy metrics
+        - job_name: kube-proxy
+          honor_labels: true
+          kubernetes_sd_configs:
+          - role: pod
+          relabel_configs:
+          - action: keep
+            source_labels:
+            - __meta_kubernetes_namespace
+            - __meta_kubernetes_pod_name
+            separator: '/'
+            regex: 'kube-system/kube-proxy.+'
+          - source_labels:
+            - __address__
+            action: replace
+            target_label: __address__
+            regex: (.+?)(\\:\\d+)?
+            replacement: $1:10249
