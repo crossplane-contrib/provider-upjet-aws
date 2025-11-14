@@ -12,10 +12,6 @@ import (
 
 // Configure adds configurations for the amp group.
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("aws_prometheus_workspace", func(r *config.Resource) {
-		// No special configuration needed for workspace
-	})
-
 	p.AddResourceConfigurator("aws_prometheus_alert_manager_definition", func(r *config.Resource) {
 		r.References["workspace_id"] = config.Reference{
 			TerraformName: "aws_prometheus_workspace",
