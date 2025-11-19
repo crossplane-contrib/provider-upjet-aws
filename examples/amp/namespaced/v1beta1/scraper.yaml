@@ -3,34 +3,28 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # This example demonstrates how to create an Amazon Managed Service for Prometheus (AMP) Scraper
+# that collects metrics from an Amazon EKS cluster with all required dependencies
 # using the monolithic API (amp.aws.m.upbound.io).
-#
-# Prerequisites:
-# - An existing EKS cluster
-# - An existing AMP workspace
-# - VPC subnets where the scraper will run
-# - Security groups for the scraper
-# - An IAM role with appropriate permissions
 
 apiVersion: amp.aws.m.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
     meta.upbound.io/example-id: amp/v1beta1/scraper
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
 spec:
   forProvider:
     region: us-east-1
-
 ---
-
 apiVersion: amp.aws.m.upbound.io/v1beta1
 kind: Scraper
 metadata:
   annotations:
     meta.upbound.io/example-id: amp/v1beta1/scraper
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
@@ -107,3 +101,135 @@ spec:
             target_label: __address__
             regex: (.+?)(\\:\\d+)?
             replacement: $1:10249
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo-cluster
+  name: scraper-monolithic-demo-cluster
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo-cluster-policy
+  name: scraper-monolithic-demo-cluster-policy
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scraper-monolithic-demo-cluster
+---
+apiVersion: eks.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-monolithic-demo
+spec:
+  forProvider:
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scraper-monolithic-demo-cluster
+    vpcConfig:
+      - subnetIdRefs:
+        - name: subnet-1
+        - name: subnet-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-monolithic-demo
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    region: us-east-1
+    tags:
+      Name: scraper-monolithic-demo-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: subnet-1
+spec:
+  forProvider:
+    availabilityZone: us-east-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scraper-monolithic-demo
+    tags:
+      Name: scraper-monolithic-demo-subnet-1
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: subnet-2
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 10.0.2.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scraper-monolithic-demo
+    tags:
+      Name: scraper-monolithic-demo-subnet-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-sg
+spec:
+  forProvider:
+    description: Security group for AMP scraper
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: scraper-monolithic-demo
+    tags:
+      Name: scraper-monolithic-demo-sg
