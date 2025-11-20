@@ -7,6 +7,7 @@ package cluster
 import (
 	"github.com/upbound/provider-aws/config/cluster/acm"
 	"github.com/upbound/provider-aws/config/cluster/acmpca"
+	"github.com/upbound/provider-aws/config/cluster/amp"
 	"github.com/upbound/provider-aws/config/cluster/apigateway"
 	"github.com/upbound/provider-aws/config/cluster/apigatewayv2"
 	"github.com/upbound/provider-aws/config/cluster/apprunner"
@@ -102,6 +103,7 @@ import (
 func init() {
 	ProviderConfiguration.AddConfig(acm.Configure)
 	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(amp.Configure)
 	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
 	ProviderConfiguration.AddConfig(apprunner.Configure)

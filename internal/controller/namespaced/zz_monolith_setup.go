@@ -22,6 +22,7 @@ import (
 	policy "github.com/upbound/provider-aws/internal/controller/namespaced/acmpca/policy"
 	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/namespaced/amp/alertmanagerdefinition"
 	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/rulegroupnamespace"
+	scraper "github.com/upbound/provider-aws/internal/controller/namespaced/amp/scraper"
 	workspace "github.com/upbound/provider-aws/internal/controller/namespaced/amp/workspace"
 	app "github.com/upbound/provider-aws/internal/controller/namespaced/amplify/app"
 	backendenvironment "github.com/upbound/provider-aws/internal/controller/namespaced/amplify/backendenvironment"
@@ -1005,6 +1006,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		alertmanagerdefinition.Setup,
 		rulegroupnamespace.Setup,
+		scraper.Setup,
 		workspace.Setup,
 		app.Setup,
 		backendenvironment.Setup,
@@ -1994,6 +1996,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policy.SetupGated,
 		alertmanagerdefinition.SetupGated,
 		rulegroupnamespace.SetupGated,
+		scraper.SetupGated,
 		workspace.SetupGated,
 		app.SetupGated,
 		backendenvironment.SetupGated,

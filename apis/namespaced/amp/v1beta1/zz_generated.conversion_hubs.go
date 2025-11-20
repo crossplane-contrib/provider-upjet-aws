@@ -13,4 +13,7 @@ func (tr *AlertManagerDefinition) Hub() {}
 func (tr *RuleGroupNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Scraper) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Workspace) Hub() {}
