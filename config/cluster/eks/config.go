@@ -5,8 +5,13 @@
 package eks
 
 import (
-	"github.com/crossplane/upjet/v2/pkg/config"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config/conversion"
+
+	"github.com/upbound/provider-aws/apis/cluster/eks/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/eks/v1beta2"
 	"github.com/upbound/provider-aws/config/cluster/common"
 )
 
@@ -30,6 +35,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			},
 		}
 		r.UseAsync = true
+		r.Conversions = append(r.Conversions,
+			conversion.NewCustomConverter("v1beta1", "v1beta2", clusterConverterFromv1beta1Tov1beta2),
+			conversion.NewCustomConverter("v1beta2", "v1beta1", clusterConverterFromv1beta2Tov1beta1),
+		)
 	})
 	p.AddResourceConfigurator("aws_eks_node_group", func(r *config.Resource) {
 		r.References["cluster_name"] = config.Reference{
@@ -137,4 +146,66 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			},
 		}
 	})
+}
+
+func clusterConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error {
+	srcTyped := src.(*v1beta1.Cluster)
+	targetTyped := target.(*v1beta2.Cluster)
+
+	if len(srcTyped.Spec.ForProvider.UpgradePolicy) > 0 {
+		if targetTyped.Spec.ForProvider.UpgradePolicy == nil {
+			targetTyped.Spec.ForProvider.UpgradePolicy = &v1beta2.UpgradePolicyParameters{}
+		}
+		if srcTyped.Spec.ForProvider.UpgradePolicy[0].SupportType != nil {
+			targetTyped.Spec.ForProvider.UpgradePolicy.SupportType = srcTyped.Spec.ForProvider.UpgradePolicy[0].SupportType
+		}
+	}
+	if len(srcTyped.Spec.InitProvider.UpgradePolicy) > 0 {
+		if targetTyped.Spec.InitProvider.UpgradePolicy == nil {
+			targetTyped.Spec.InitProvider.UpgradePolicy = &v1beta2.UpgradePolicyInitParameters{}
+		}
+		if srcTyped.Spec.InitProvider.UpgradePolicy[0].SupportType != nil {
+			targetTyped.Spec.InitProvider.UpgradePolicy.SupportType = srcTyped.Spec.InitProvider.UpgradePolicy[0].SupportType
+		}
+	}
+	if len(srcTyped.Status.AtProvider.UpgradePolicy) > 0 {
+		if targetTyped.Status.AtProvider.UpgradePolicy == nil {
+			targetTyped.Status.AtProvider.UpgradePolicy = &v1beta2.UpgradePolicyObservation{}
+		}
+		if srcTyped.Status.AtProvider.UpgradePolicy[0].SupportType != nil {
+			targetTyped.Status.AtProvider.UpgradePolicy.SupportType = srcTyped.Status.AtProvider.UpgradePolicy[0].SupportType
+		}
+	}
+	return nil
+}
+
+func clusterConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error {
+	srcTyped := src.(*v1beta2.Cluster)
+	targetTyped := target.(*v1beta1.Cluster)
+
+	if srcTyped.Spec.ForProvider.UpgradePolicy != nil {
+		if len(targetTyped.Spec.ForProvider.UpgradePolicy) == 0 {
+			targetTyped.Spec.ForProvider.UpgradePolicy = []v1beta1.UpgradePolicyParameters{{}}
+		}
+		if srcTyped.Spec.ForProvider.UpgradePolicy.SupportType != nil {
+			targetTyped.Spec.ForProvider.UpgradePolicy[0].SupportType = srcTyped.Spec.ForProvider.UpgradePolicy.SupportType
+		}
+	}
+	if srcTyped.Spec.InitProvider.UpgradePolicy != nil {
+		if len(targetTyped.Spec.InitProvider.UpgradePolicy) == 0 {
+			targetTyped.Spec.InitProvider.UpgradePolicy = []v1beta1.UpgradePolicyInitParameters{{}}
+		}
+		if srcTyped.Spec.InitProvider.UpgradePolicy.SupportType != nil {
+			targetTyped.Spec.InitProvider.UpgradePolicy[0].SupportType = srcTyped.Spec.InitProvider.UpgradePolicy.SupportType
+		}
+	}
+	if srcTyped.Status.AtProvider.UpgradePolicy != nil {
+		if len(targetTyped.Status.AtProvider.UpgradePolicy) == 0 {
+			targetTyped.Status.AtProvider.UpgradePolicy = []v1beta1.UpgradePolicyObservation{{}}
+		}
+		if srcTyped.Status.AtProvider.UpgradePolicy.SupportType != nil {
+			targetTyped.Status.AtProvider.UpgradePolicy[0].SupportType = srcTyped.Status.AtProvider.UpgradePolicy.SupportType
+		}
+	}
+	return nil
 }
