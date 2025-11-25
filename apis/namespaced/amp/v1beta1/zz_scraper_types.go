@@ -18,7 +18,7 @@ type AmpInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the prometheus workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/amp/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	WorkspaceArn *string `json:"workspaceArn,omitempty" tf:"workspace_arn,omitempty"`
 
 	// Reference to a Workspace in amp to populate workspaceArn.
@@ -40,7 +40,7 @@ type AmpParameters struct {
 
 	// The Amazon Resource Name (ARN) of the prometheus workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/amp/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	WorkspaceArn *string `json:"workspaceArn,omitempty" tf:"workspace_arn,omitempty"`
 
@@ -75,15 +75,43 @@ type DestinationParameters struct {
 type EksInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the new scraper.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
+	// Reference to a Cluster in eks to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in eks to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
 	// List of subnet IDs. Must be in at least two different availability zones.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type EksObservation struct {
@@ -103,25 +131,53 @@ type EksObservation struct {
 type EksParameters struct {
 
 	// The Amazon Resource Name (ARN) of the new scraper.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	ClusterArn *string `json:"clusterArn" tf:"cluster_arn,omitempty"`
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
+	// Reference to a Cluster in eks to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in eks to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
 	// List of subnet IDs. Must be in at least two different availability zones.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type RoleConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the source role configuration. Must be an IAM role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	SourceRoleArn *string `json:"sourceRoleArn,omitempty" tf:"source_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate sourceRoleArn.
@@ -149,7 +205,7 @@ type RoleConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the source role configuration. Must be an IAM role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SourceRoleArn *string `json:"sourceRoleArn,omitempty" tf:"source_role_arn,omitempty"`
 

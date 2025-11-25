@@ -371,6 +371,16 @@ func (in *EksInitParameters) DeepCopyInto(out *EksInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterArnRef != nil {
+		in, out := &in.ClusterArnRef, &out.ClusterArnRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterArnSelector != nil {
+		in, out := &in.ClusterArnSelector, &out.ClusterArnSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -382,6 +392,18 @@ func (in *EksInitParameters) DeepCopyInto(out *EksInitParameters) {
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -392,6 +414,18 @@ func (in *EksInitParameters) DeepCopyInto(out *EksInitParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -455,6 +489,16 @@ func (in *EksParameters) DeepCopyInto(out *EksParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterArnRef != nil {
+		in, out := &in.ClusterArnRef, &out.ClusterArnRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterArnSelector != nil {
+		in, out := &in.ClusterArnSelector, &out.ClusterArnSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -466,6 +510,18 @@ func (in *EksParameters) DeepCopyInto(out *EksParameters) {
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -476,6 +532,18 @@ func (in *EksParameters) DeepCopyInto(out *EksParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
