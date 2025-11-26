@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/util/sets"
 
-	"github.com/upbound/provider-aws/config/cluster"
-	"github.com/upbound/provider-aws/hack"
+	"github.com/upbound/provider-aws/v2/config/cluster"
+	"github.com/upbound/provider-aws/v2/hack"
 )
 
 var (
@@ -99,7 +99,7 @@ func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvide
 		defaultResourceOptions = append(defaultResourceOptions, AddExternalTagsField())
 	}
 
-	modulePath := "github.com/upbound/provider-aws"
+	modulePath := "github.com/upbound/provider-aws/v2"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),

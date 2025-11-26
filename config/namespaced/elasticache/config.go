@@ -14,7 +14,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/config/namespaced/common"
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the elasticache group.

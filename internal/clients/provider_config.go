@@ -28,8 +28,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/namespaced/v1beta1"
-	"github.com/upbound/provider-aws/internal/version"
+	"github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
+	"github.com/upbound/provider-aws/v2/internal/version"
 )
 
 const (

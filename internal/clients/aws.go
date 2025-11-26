@@ -23,7 +23,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	namespacedv1beta1 "github.com/upbound/provider-aws/apis/namespaced/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 )
 
 const (

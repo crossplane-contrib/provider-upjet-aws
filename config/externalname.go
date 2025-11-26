@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // TerraformPluginFrameworkExternalNameConfigs contains all external

@@ -8,7 +8,7 @@
 
 PROVIDER_NAME := aws
 PROJECT_NAME := provider-$(PROVIDER_NAME)
-PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
+PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v2
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 6.13.0
