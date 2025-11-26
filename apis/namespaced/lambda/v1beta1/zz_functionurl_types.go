@@ -104,7 +104,7 @@ type FunctionURLInitParameters struct {
 	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Name or ARN of the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Reference to a Function in lambda to populate functionName.
@@ -166,7 +166,7 @@ type FunctionURLParameters struct {
 	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Name or ARN of the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 

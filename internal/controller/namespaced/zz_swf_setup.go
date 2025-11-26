@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	domain "github.com/upbound/provider-aws/internal/controller/namespaced/swf/domain"
+	domain "github.com/upbound/provider-aws/v2/internal/controller/namespaced/swf/domain"
 )
 
 // Setup_swf creates all controllers with the supplied logger and adds them to

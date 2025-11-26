@@ -35,7 +35,7 @@ type SingleScramSecretAssociationObservation struct {
 type SingleScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafka/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -54,7 +54,7 @@ type SingleScramSecretAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// AWS Secrets Manager secret ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`

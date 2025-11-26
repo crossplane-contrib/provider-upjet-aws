@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	application "github.com/upbound/provider-aws/internal/controller/namespaced/kinesisanalytics/application"
+	application "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kinesisanalytics/application"
 )
 
 // Setup_kinesisanalytics creates all controllers with the supplied logger and adds them to

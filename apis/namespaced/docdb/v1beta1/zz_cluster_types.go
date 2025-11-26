@@ -33,7 +33,7 @@ type ClusterInitParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/docdb/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/docdb/v1beta1.ClusterParameterGroup
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
 	// Reference to a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
@@ -69,7 +69,7 @@ type ClusterInitParameters struct {
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -140,7 +140,7 @@ type ClusterInitParameters struct {
 
 	// List of VPC security groups to associate
 	// with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -306,7 +306,7 @@ type ClusterParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/docdb/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/docdb/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
@@ -350,7 +350,7 @@ type ClusterParameters struct {
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -442,7 +442,7 @@ type ClusterParameters struct {
 
 	// List of VPC security groups to associate
 	// with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional

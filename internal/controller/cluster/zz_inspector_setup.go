@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	assessmenttarget "github.com/upbound/provider-aws/internal/controller/cluster/inspector/assessmenttarget"
-	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/cluster/inspector/assessmenttemplate"
-	resourcegroup "github.com/upbound/provider-aws/internal/controller/cluster/inspector/resourcegroup"
+	assessmenttarget "github.com/upbound/provider-aws/v2/internal/controller/cluster/inspector/assessmenttarget"
+	assessmenttemplate "github.com/upbound/provider-aws/v2/internal/controller/cluster/inspector/assessmenttemplate"
+	resourcegroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/inspector/resourcegroup"
 )
 
 // Setup_inspector creates all controllers with the supplied logger and adds them to

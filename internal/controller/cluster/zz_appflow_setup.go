@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	flow "github.com/upbound/provider-aws/internal/controller/cluster/appflow/flow"
+	flow "github.com/upbound/provider-aws/v2/internal/controller/cluster/appflow/flow"
 )
 
 // Setup_appflow creates all controllers with the supplied logger and adds them to

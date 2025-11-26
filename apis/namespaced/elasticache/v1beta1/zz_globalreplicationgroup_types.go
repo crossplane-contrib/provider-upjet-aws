@@ -74,7 +74,7 @@ type GlobalReplicationGroupInitParameters struct {
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`
 
@@ -220,7 +220,7 @@ type GlobalReplicationGroupParameters struct {
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The ID of the primary cluster that accepts writes and will replicate updates to the secondary cluster. If primary_replication_group_id is changed, creates a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryReplicationGroupID *string `json:"primaryReplicationGroupId,omitempty" tf:"primary_replication_group_id,omitempty"`

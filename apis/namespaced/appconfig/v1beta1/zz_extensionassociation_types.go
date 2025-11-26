@@ -17,7 +17,7 @@ import (
 type ExtensionAssociationInitParameters struct {
 
 	// The ARN of the extension defined in the association.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appconfig/v1beta1.Extension
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.Extension
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
 
@@ -34,7 +34,7 @@ type ExtensionAssociationInitParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ARN of the application, configuration profile, or environment to associate with the extension.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -76,7 +76,7 @@ type ExtensionAssociationObservation struct {
 type ExtensionAssociationParameters struct {
 
 	// The ARN of the extension defined in the association.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appconfig/v1beta1.Extension
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.Extension
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
@@ -100,7 +100,7 @@ type ExtensionAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the application, configuration profile, or environment to associate with the extension.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

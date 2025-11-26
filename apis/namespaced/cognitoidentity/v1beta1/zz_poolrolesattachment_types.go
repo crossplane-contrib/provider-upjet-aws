@@ -23,7 +23,7 @@ type MappingRuleInitParameters struct {
 	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
 
 	// The role ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -65,7 +65,7 @@ type MappingRuleParameters struct {
 	MatchType *string `json:"matchType" tf:"match_type,omitempty"`
 
 	// The role ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -86,7 +86,7 @@ type MappingRuleParameters struct {
 type PoolRolesAttachmentInitParameters struct {
 
 	// An identity pool ID in the format REGION_GUID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
@@ -129,7 +129,7 @@ type PoolRolesAttachmentObservation struct {
 type PoolRolesAttachmentParameters struct {
 
 	// An identity pool ID in the format REGION_GUID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`

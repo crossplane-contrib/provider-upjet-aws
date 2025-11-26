@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	dataset "github.com/upbound/provider-aws/internal/controller/cluster/dataexchange/dataset"
-	revision "github.com/upbound/provider-aws/internal/controller/cluster/dataexchange/revision"
+	dataset "github.com/upbound/provider-aws/v2/internal/controller/cluster/dataexchange/dataset"
+	revision "github.com/upbound/provider-aws/v2/internal/controller/cluster/dataexchange/revision"
 )
 
 // Setup_dataexchange creates all controllers with the supplied logger and adds them to

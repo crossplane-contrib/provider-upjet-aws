@@ -46,7 +46,7 @@ type ProviderParameters struct {
 type ProviderVirtualNodeInitParameters struct {
 
 	// Name of the virtual node that is acting as a service provider. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualNode
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualNode
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualNodeName *string `json:"virtualNodeName,omitempty" tf:"virtual_node_name,omitempty"`
 
@@ -68,7 +68,7 @@ type ProviderVirtualNodeObservation struct {
 type ProviderVirtualNodeParameters struct {
 
 	// Name of the virtual node that is acting as a service provider. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualNode
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualNode
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualNodeName *string `json:"virtualNodeName,omitempty" tf:"virtual_node_name,omitempty"`
@@ -85,7 +85,7 @@ type ProviderVirtualNodeParameters struct {
 type ProviderVirtualRouterInitParameters struct {
 
 	// Name of the virtual router that is acting as a service provider. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualRouter
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualRouter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
 
@@ -107,7 +107,7 @@ type ProviderVirtualRouterObservation struct {
 type ProviderVirtualRouterParameters struct {
 
 	// Name of the virtual router that is acting as a service provider. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualRouter
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualRouter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
@@ -124,7 +124,7 @@ type ProviderVirtualRouterParameters struct {
 type VirtualServiceInitParameters_2 struct {
 
 	// Name of the service mesh in which to create the virtual service. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
@@ -195,7 +195,7 @@ type VirtualServiceObservation_2 struct {
 type VirtualServiceParameters_2 struct {
 
 	// Name of the service mesh in which to create the virtual service. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`

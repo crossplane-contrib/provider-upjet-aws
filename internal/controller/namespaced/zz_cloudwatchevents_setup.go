@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	apidestination "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/apidestination"
-	archive "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/archive"
-	bus "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/bus"
-	buspolicy "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/buspolicy"
-	connection "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/connection"
-	permission "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/permission"
-	rule "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/rule"
-	target "github.com/upbound/provider-aws/internal/controller/namespaced/cloudwatchevents/target"
+	apidestination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/apidestination"
+	archive "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/archive"
+	bus "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/bus"
+	buspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/buspolicy"
+	connection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/connection"
+	permission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/permission"
+	rule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/rule"
+	target "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchevents/target"
 )
 
 // Setup_cloudwatchevents creates all controllers with the supplied logger and adds them to

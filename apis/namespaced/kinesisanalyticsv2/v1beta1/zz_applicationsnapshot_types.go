@@ -17,7 +17,7 @@ import (
 type ApplicationSnapshotInitParameters struct {
 
 	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesisanalyticsv2/v1beta1.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesisanalyticsv2/v1beta1.Application
 	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
 
 	// Reference to a Application in kinesisanalyticsv2 to populate applicationName.
@@ -51,7 +51,7 @@ type ApplicationSnapshotObservation struct {
 type ApplicationSnapshotParameters struct {
 
 	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesisanalyticsv2/v1beta1.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesisanalyticsv2/v1beta1.Application
 	// +kubebuilder:validation:Optional
 	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
 

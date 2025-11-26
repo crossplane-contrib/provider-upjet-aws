@@ -23,7 +23,7 @@ type ComputeEnvironmentInitParameters struct {
 	EksConfiguration *EksConfigurationInitParameters `json:"eksConfiguration,omitempty" tf:"eks_configuration,omitempty"`
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -112,7 +112,7 @@ type ComputeEnvironmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
@@ -164,7 +164,7 @@ type ComputeResourcesInitParameters struct {
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
 
@@ -190,7 +190,7 @@ type ComputeResourcesInitParameters struct {
 	MinVcpus *float64 `json:"minVcpus,omitempty" tf:"min_vcpus,omitempty"`
 
 	// The Amazon EC2 placement group to associate with your compute resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.PlacementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.PlacementGroup
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
@@ -202,7 +202,7 @@ type ComputeResourcesInitParameters struct {
 	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -218,7 +218,7 @@ type ComputeResourcesInitParameters struct {
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
 	// A list of VPC subnets into which the compute resources are launched.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -323,7 +323,7 @@ type ComputeResourcesParameters struct {
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
@@ -354,7 +354,7 @@ type ComputeResourcesParameters struct {
 	MinVcpus *float64 `json:"minVcpus,omitempty" tf:"min_vcpus,omitempty"`
 
 	// The Amazon EC2 placement group to associate with your compute resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.PlacementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.PlacementGroup
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
@@ -367,7 +367,7 @@ type ComputeResourcesParameters struct {
 	PlacementGroupSelector *v1.NamespacedSelector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -385,7 +385,7 @@ type ComputeResourcesParameters struct {
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
 	// A list of VPC subnets into which the compute resources are launched.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`

@@ -90,7 +90,7 @@ type ELBInitParameters struct {
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// A list of instance ids to place in the ELB pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Instance
 	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
 
@@ -119,7 +119,7 @@ type ELBInitParameters struct {
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
 	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -253,7 +253,7 @@ type ELBParameters struct {
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// A list of instance ids to place in the ELB pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
@@ -292,7 +292,7 @@ type ELBParameters struct {
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
 	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`

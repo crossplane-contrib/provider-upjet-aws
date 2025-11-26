@@ -46,7 +46,7 @@ type ResourceDataSyncParameters struct {
 type S3DestinationInitParameters struct {
 
 	// Name of S3 bucket where the aggregated data is stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -88,7 +88,7 @@ type S3DestinationObservation struct {
 type S3DestinationParameters struct {
 
 	// Name of S3 bucket where the aggregated data is stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -109,7 +109,7 @@ type S3DestinationParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Region with the bucket targeted by the Resource Data Sync.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("region",false)
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

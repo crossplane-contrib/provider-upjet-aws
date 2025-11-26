@@ -231,7 +231,7 @@ type LBTargetGroupInitParameters struct {
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
 	// Identifier of the VPC in which to create the target group. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -437,7 +437,7 @@ type LBTargetGroupParameters struct {
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
 	// Identifier of the VPC in which to create the target group. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

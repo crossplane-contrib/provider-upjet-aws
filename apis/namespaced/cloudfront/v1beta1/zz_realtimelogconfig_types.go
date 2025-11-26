@@ -47,7 +47,7 @@ type KinesisStreamConfigInitParameters struct {
 
 	// The ARN of an IAM role that CloudFront can use to send real-time log data to the Kinesis data stream.
 	// See the AWS documentation for more information.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -60,8 +60,8 @@ type KinesisStreamConfigInitParameters struct {
 	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis data stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesis/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// Reference to a Stream in kinesis to populate streamArn.
@@ -87,7 +87,7 @@ type KinesisStreamConfigParameters struct {
 
 	// The ARN of an IAM role that CloudFront can use to send real-time log data to the Kinesis data stream.
 	// See the AWS documentation for more information.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -101,8 +101,8 @@ type KinesisStreamConfigParameters struct {
 	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The ARN of the Kinesis data stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kinesis/v1beta1.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 

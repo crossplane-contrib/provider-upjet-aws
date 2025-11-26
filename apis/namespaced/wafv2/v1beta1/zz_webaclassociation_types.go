@@ -39,7 +39,7 @@ type WebACLAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the resource to associate with the web ACL. This must be an ARN of an Application Load Balancer, an Amazon API Gateway stage (REST only, HTTP is unsupported), an Amazon Cognito User Pool, an Amazon AppSync GraphQL API, an Amazon App Runner service, or an Amazon Verified Access instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Stage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Stage
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -53,7 +53,7 @@ type WebACLAssociationParameters struct {
 	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with the resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/wafv2/v1beta1.WebACL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/wafv2/v1beta1.WebACL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	WebACLArn *string `json:"webAclArn,omitempty" tf:"web_acl_arn,omitempty"`

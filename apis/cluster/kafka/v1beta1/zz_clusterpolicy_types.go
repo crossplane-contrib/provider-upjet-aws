@@ -40,7 +40,7 @@ type ClusterPolicyObservation struct {
 type ClusterPolicyParameters struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta3.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`

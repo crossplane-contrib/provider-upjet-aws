@@ -19,8 +19,8 @@ type EncryptionConfigurationInitParameters struct {
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
 	// The ARN of the KMS key to use when encryption_type is KMS. If not specified, uses the default AWS managed key for ECR.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKey.
@@ -48,8 +48,8 @@ type EncryptionConfigurationParameters struct {
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
 	// The ARN of the KMS key to use when encryption_type is KMS. If not specified, uses the default AWS managed key for ECR.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 

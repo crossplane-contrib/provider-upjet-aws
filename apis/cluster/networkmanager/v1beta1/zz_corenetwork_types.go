@@ -29,7 +29,7 @@ type CoreNetworkInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network that a core network will be a part of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
@@ -111,7 +111,7 @@ type CoreNetworkParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network that a core network will be a part of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`

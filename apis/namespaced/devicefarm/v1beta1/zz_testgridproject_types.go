@@ -95,7 +95,7 @@ type VPCConfigInitParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC security group IDs in your Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -110,14 +110,14 @@ type VPCConfigInitParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC subnet IDs in your Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -155,7 +155,7 @@ type VPCConfigParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC security group IDs in your Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -171,7 +171,7 @@ type VPCConfigParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of VPC subnet IDs in your Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
@@ -179,7 +179,7 @@ type VPCConfigParameters struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the Amazon VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

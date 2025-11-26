@@ -16,7 +16,7 @@ import (
 type IntegrationResponseInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -31,7 +31,7 @@ type IntegrationResponseInitParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Integration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.Integration
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
 
 	// Reference to a Integration in apigatewayv2 to populate integrationId.
@@ -85,7 +85,7 @@ type IntegrationResponseObservation struct {
 type IntegrationResponseParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -102,7 +102,7 @@ type IntegrationResponseParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/apigatewayv2/v1beta2.Integration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta2.Integration
 	// +kubebuilder:validation:Optional
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
 

@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	licenseassociation "github.com/upbound/provider-aws/internal/controller/namespaced/grafana/licenseassociation"
-	roleassociation "github.com/upbound/provider-aws/internal/controller/namespaced/grafana/roleassociation"
-	workspace "github.com/upbound/provider-aws/internal/controller/namespaced/grafana/workspace"
-	workspaceapikey "github.com/upbound/provider-aws/internal/controller/namespaced/grafana/workspaceapikey"
-	workspacesamlconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/grafana/workspacesamlconfiguration"
+	licenseassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/licenseassociation"
+	roleassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/roleassociation"
+	workspace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspace"
+	workspaceapikey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspaceapikey"
+	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspacesamlconfiguration"
 )
 
 // Setup_grafana creates all controllers with the supplied logger and adds them to

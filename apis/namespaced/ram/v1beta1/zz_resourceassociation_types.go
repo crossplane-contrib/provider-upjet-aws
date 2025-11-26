@@ -20,7 +20,7 @@ type ResourceAssociationInitParameters struct {
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Amazon Resource Name (ARN) of the RAM Resource Share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 
@@ -61,7 +61,7 @@ type ResourceAssociationParameters struct {
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Amazon Resource Name (ARN) of the RAM Resource Share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ram/v1beta1.ResourceShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`

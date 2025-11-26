@@ -112,7 +112,7 @@ type SigningJobInitParameters struct {
 	IgnoreSigningJobFailure *bool `json:"ignoreSigningJobFailure,omitempty" tf:"ignore_signing_job_failure,omitempty"`
 
 	// The name of the profile to initiate the signing operation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1.SigningProfile
 	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
 
 	// Reference to a SigningProfile in signer to populate profileName.
@@ -201,7 +201,7 @@ type SigningJobParameters struct {
 	IgnoreSigningJobFailure *bool `json:"ignoreSigningJobFailure,omitempty" tf:"ignore_signing_job_failure,omitempty"`
 
 	// The name of the profile to initiate the signing operation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1.SigningProfile
 	// +kubebuilder:validation:Optional
 	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
 

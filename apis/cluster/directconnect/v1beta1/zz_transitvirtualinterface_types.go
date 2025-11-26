@@ -28,7 +28,7 @@ type TransitVirtualInterfaceInitParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -44,7 +44,7 @@ type TransitVirtualInterfaceInitParameters struct {
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
@@ -156,7 +156,7 @@ type TransitVirtualInterfaceParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
@@ -174,7 +174,7 @@ type TransitVirtualInterfaceParameters struct {
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 
 	// The ID of the Direct Connect gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`

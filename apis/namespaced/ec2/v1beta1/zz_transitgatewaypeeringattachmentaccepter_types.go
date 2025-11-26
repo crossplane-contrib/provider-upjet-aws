@@ -21,7 +21,7 @@ type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayPeeringAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayPeeringAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -80,7 +80,7 @@ type TransitGatewayPeeringAttachmentAccepterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayPeeringAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayPeeringAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	stream "github.com/upbound/provider-aws/internal/controller/cluster/kinesis/stream"
-	streamconsumer "github.com/upbound/provider-aws/internal/controller/cluster/kinesis/streamconsumer"
+	stream "github.com/upbound/provider-aws/v2/internal/controller/cluster/kinesis/stream"
+	streamconsumer "github.com/upbound/provider-aws/v2/internal/controller/cluster/kinesis/streamconsumer"
 )
 
 // Setup_kinesis creates all controllers with the supplied logger and adds them to

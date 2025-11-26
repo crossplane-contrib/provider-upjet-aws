@@ -17,7 +17,7 @@ import (
 type NATGatewayInitParameters_2 struct {
 
 	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
@@ -36,7 +36,7 @@ type NATGatewayInitParameters_2 struct {
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
@@ -57,7 +57,7 @@ type NATGatewayInitParameters_2 struct {
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
 	// The Subnet ID of the subnet in which to place the NAT Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -126,7 +126,7 @@ type NATGatewayObservation_2 struct {
 type NATGatewayParameters_2 struct {
 
 	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
@@ -153,7 +153,7 @@ type NATGatewayParameters_2 struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -177,7 +177,7 @@ type NATGatewayParameters_2 struct {
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
 	// The Subnet ID of the subnet in which to place the NAT Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

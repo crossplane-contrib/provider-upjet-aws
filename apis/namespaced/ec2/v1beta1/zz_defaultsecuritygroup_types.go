@@ -233,7 +233,7 @@ type DefaultSecurityGroupInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC ID. Note that changing the  It will be left in its current state.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -310,7 +310,7 @@ type DefaultSecurityGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC ID. Note that changing the  It will be left in its current state.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

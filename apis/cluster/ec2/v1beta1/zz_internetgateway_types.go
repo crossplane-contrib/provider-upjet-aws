@@ -20,7 +20,7 @@ type InternetGatewayInitParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC ID to create in.  See the aws_internet_gateway_attachment resource for an alternate way to attach an Internet Gateway to a VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -72,7 +72,7 @@ type InternetGatewayParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC ID to create in.  See the aws_internet_gateway_attachment resource for an alternate way to attach an Internet Gateway to a VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

@@ -104,7 +104,7 @@ type ActionTargetParameters struct {
 type ActionTargetVirtualServiceInitParameters struct {
 
 	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 
@@ -126,7 +126,7 @@ type ActionTargetVirtualServiceObservation struct {
 type ActionTargetVirtualServiceParameters struct {
 
 	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
@@ -188,7 +188,7 @@ type GatewayRouteInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	VirtualGatewayName *string `json:"virtualGatewayName,omitempty" tf:"virtual_gateway_name,omitempty"`
 
@@ -275,7 +275,7 @@ type GatewayRouteParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appmesh/v1beta1.VirtualGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appmesh/v1beta1.VirtualGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	VirtualGatewayName *string `json:"virtualGatewayName,omitempty" tf:"virtual_gateway_name,omitempty"`

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	datalakesettings "github.com/upbound/provider-aws/internal/controller/namespaced/lakeformation/datalakesettings"
-	permissions "github.com/upbound/provider-aws/internal/controller/namespaced/lakeformation/permissions"
-	resource "github.com/upbound/provider-aws/internal/controller/namespaced/lakeformation/resource"
+	datalakesettings "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lakeformation/datalakesettings"
+	permissions "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lakeformation/permissions"
+	resource "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lakeformation/resource"
 )
 
 // Setup_lakeformation creates all controllers with the supplied logger and adds them to

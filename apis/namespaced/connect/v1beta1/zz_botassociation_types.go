@@ -39,7 +39,7 @@ type BotAssociationObservation struct {
 type BotAssociationParameters struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -68,7 +68,7 @@ type LexBotInitParameters struct {
 	LexRegion *string `json:"lexRegion,omitempty" tf:"lex_region,omitempty"`
 
 	// The name of the Amazon Lex (V1) bot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lexmodels/v1beta1.Bot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lexmodels/v1beta1.Bot
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Bot in lexmodels to populate name.
@@ -96,7 +96,7 @@ type LexBotParameters struct {
 	LexRegion *string `json:"lexRegion,omitempty" tf:"lex_region,omitempty"`
 
 	// The name of the Amazon Lex (V1) bot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lexmodels/v1beta1.Bot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lexmodels/v1beta1.Bot
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

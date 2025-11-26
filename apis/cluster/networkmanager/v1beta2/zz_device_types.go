@@ -51,7 +51,7 @@ type DeviceInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
@@ -73,7 +73,7 @@ type DeviceInitParameters struct {
 	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 
 	// ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Site
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
@@ -150,7 +150,7 @@ type DeviceParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -176,7 +176,7 @@ type DeviceParameters struct {
 	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 
 	// ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Site
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`

@@ -91,7 +91,7 @@ type HoursOfOperationInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -164,7 +164,7 @@ type HoursOfOperationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`

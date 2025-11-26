@@ -161,7 +161,7 @@ type EcsTargetInitParameters struct {
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ecs/v1beta1.TaskDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ecs/v1beta1.TaskDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 
@@ -269,7 +269,7 @@ type EcsTargetParameters struct {
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ecs/v1beta1.TaskDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ecs/v1beta1.TaskDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
@@ -714,7 +714,7 @@ type TargetInitParameters struct {
 
 	// The name or ARN of the event bus to associate with the rule.
 	// If you omit this, the default event bus is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
@@ -750,8 +750,8 @@ type TargetInitParameters struct {
 	RetryPolicy *RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. Required if ecs_target is used or target in arn is EC2 instance, Kinesis data stream, Step Functions state machine, or Event Bus in different account or region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -763,7 +763,7 @@ type TargetInitParameters struct {
 	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the rule you want to add targets to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Rule
 	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Reference to a Rule in cloudwatchevents to populate rule.
@@ -881,7 +881,7 @@ type TargetParameters struct {
 
 	// The name or ARN of the event bus to associate with the rule.
 	// If you omit this, the default event bus is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
@@ -931,8 +931,8 @@ type TargetParameters struct {
 	RetryPolicy *RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. Required if ecs_target is used or target in arn is EC2 instance, Kinesis data stream, Step Functions state machine, or Event Bus in different account or region.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -945,7 +945,7 @@ type TargetParameters struct {
 	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the rule you want to add targets to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Rule
 	// +kubebuilder:validation:Optional
 	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
 

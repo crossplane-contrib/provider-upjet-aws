@@ -56,7 +56,7 @@ type AppCookieStickinessPolicyParameters struct {
 
 	// Name of load balancer to which the policy
 	// should be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 

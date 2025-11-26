@@ -93,8 +93,8 @@ type ImageBuilderInitParameters struct {
 	EnableDefaultInternetAccess *bool `json:"enableDefaultInternetAccess,omitempty" tf:"enable_default_internet_access,omitempty"`
 
 	// ARN of the IAM role to apply to the image builder.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamRoleArn.
@@ -206,8 +206,8 @@ type ImageBuilderParameters struct {
 	EnableDefaultInternetAccess *bool `json:"enableDefaultInternetAccess,omitempty" tf:"enable_default_internet_access,omitempty"`
 
 	// ARN of the IAM role to apply to the image builder.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
@@ -257,7 +257,7 @@ type ImageBuilderVPCConfigInitParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the subnet to which a network interface is attached from the image builder instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -291,7 +291,7 @@ type ImageBuilderVPCConfigParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the subnet to which a network interface is attached from the image builder instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

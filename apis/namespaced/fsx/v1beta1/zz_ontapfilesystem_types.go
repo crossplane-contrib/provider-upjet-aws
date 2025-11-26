@@ -114,7 +114,7 @@ type OntapFileSystemInitParameters struct {
 	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest, Defaults to an AWS managed KMS Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -126,7 +126,7 @@ type OntapFileSystemInitParameters struct {
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
@@ -151,7 +151,7 @@ type OntapFileSystemInitParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -172,7 +172,7 @@ type OntapFileSystemInitParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -308,7 +308,7 @@ type OntapFileSystemParameters struct {
 	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest, Defaults to an AWS managed KMS Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -321,7 +321,7 @@ type OntapFileSystemParameters struct {
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
@@ -353,7 +353,7 @@ type OntapFileSystemParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -377,7 +377,7 @@ type OntapFileSystemParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

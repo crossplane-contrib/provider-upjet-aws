@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	bytematchset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/bytematchset"
-	geomatchset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/geomatchset"
-	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/ipset"
-	ratebasedrule "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/ratebasedrule"
-	regexmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/regexmatchset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/regexpatternset"
-	rule "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/rule"
-	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/sizeconstraintset"
-	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/sqlinjectionmatchset"
-	webacl "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/webacl"
-	xssmatchset "github.com/upbound/provider-aws/internal/controller/namespaced/wafregional/xssmatchset"
+	bytematchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/bytematchset"
+	geomatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/geomatchset"
+	ipset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/ipset"
+	ratebasedrule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/ratebasedrule"
+	regexmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/regexmatchset"
+	regexpatternset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/regexpatternset"
+	rule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/rule"
+	sizeconstraintset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/sizeconstraintset"
+	sqlinjectionmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/sqlinjectionmatchset"
+	webacl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/webacl"
+	xssmatchset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafregional/xssmatchset"
 )
 
 // Setup_wafregional creates all controllers with the supplied logger and adds them to

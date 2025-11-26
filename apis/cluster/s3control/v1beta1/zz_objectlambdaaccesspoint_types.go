@@ -16,7 +16,7 @@ import (
 type AwsLambdaInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
@@ -44,7 +44,7 @@ type AwsLambdaObservation struct {
 type AwsLambdaParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
@@ -72,7 +72,7 @@ type ConfigurationInitParameters struct {
 	CloudWatchMetricsEnabled *bool `json:"cloudWatchMetricsEnabled,omitempty" tf:"cloud_watch_metrics_enabled,omitempty"`
 
 	// Standard access point associated with the Object Lambda Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
 
@@ -116,7 +116,7 @@ type ConfigurationParameters struct {
 	CloudWatchMetricsEnabled *bool `json:"cloudWatchMetricsEnabled,omitempty" tf:"cloud_watch_metrics_enabled,omitempty"`
 
 	// Standard access point associated with the Object Lambda Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`

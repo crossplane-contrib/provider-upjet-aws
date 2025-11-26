@@ -15,7 +15,7 @@ import (
 
 type UserInitParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta2.Broker
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mq/v1beta2.Broker
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
 	// Reference to a Broker in mq to populate brokerId.
@@ -58,7 +58,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/mq/v1beta2.Broker
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mq/v1beta2.Broker
 	// +kubebuilder:validation:Optional
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 

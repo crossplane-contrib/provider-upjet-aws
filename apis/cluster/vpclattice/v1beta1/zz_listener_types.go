@@ -94,7 +94,7 @@ type ListenerInitParameters struct {
 
 	// ID of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
 	// -> NOTE: You must specify one of the following arguments: service_arn or service_identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
 
@@ -187,7 +187,7 @@ type ListenerParameters struct {
 
 	// ID of the VPC Lattice service. You must include either the service_arn or service_identifier arguments.
 	// -> NOTE: You must specify one of the following arguments: service_arn or service_identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
@@ -209,7 +209,7 @@ type ListenerParameters struct {
 type TargetGroupsInitParameters struct {
 
 	// ID or Amazon Resource Name (ARN) of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 
@@ -239,7 +239,7 @@ type TargetGroupsObservation struct {
 type TargetGroupsParameters struct {
 
 	// ID or Amazon Resource Name (ARN) of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`

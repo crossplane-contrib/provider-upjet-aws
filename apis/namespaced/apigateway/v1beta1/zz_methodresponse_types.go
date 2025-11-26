@@ -17,7 +17,7 @@ import (
 type MethodResponseInitParameters struct {
 
 	// The HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
@@ -30,7 +30,7 @@ type MethodResponseInitParameters struct {
 	HTTPMethodSelector *v1.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// The Resource identifier for the method resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -51,7 +51,7 @@ type MethodResponseInitParameters struct {
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// The string identifier of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -99,7 +99,7 @@ type MethodResponseObservation struct {
 type MethodResponseParameters struct {
 
 	// The HTTP verb of the method resource (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -118,7 +118,7 @@ type MethodResponseParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Resource identifier for the method resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -142,7 +142,7 @@ type MethodResponseParameters struct {
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// The string identifier of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

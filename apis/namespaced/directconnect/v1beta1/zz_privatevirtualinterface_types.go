@@ -29,7 +29,7 @@ type PrivateVirtualInterfaceInitParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Connection
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in directconnect to populate connectionId.
@@ -61,7 +61,7 @@ type PrivateVirtualInterfaceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
@@ -161,7 +161,7 @@ type PrivateVirtualInterfaceParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -205,7 +205,7 @@ type PrivateVirtualInterfaceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 

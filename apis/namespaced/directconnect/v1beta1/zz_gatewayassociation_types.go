@@ -22,7 +22,7 @@ type GatewayAssociationInitParameters struct {
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// Used for single account Direct Connect gateway associations.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
 
@@ -39,7 +39,7 @@ type GatewayAssociationInitParameters struct {
 	AssociatedGatewayOwnerAccountID *string `json:"associatedGatewayOwnerAccountId,omitempty" tf:"associated_gateway_owner_account_id,omitempty"`
 
 	// The ID of the Direct Connect gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
@@ -105,7 +105,7 @@ type GatewayAssociationParameters struct {
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// Used for single account Direct Connect gateway associations.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
@@ -124,7 +124,7 @@ type GatewayAssociationParameters struct {
 	AssociatedGatewayOwnerAccountID *string `json:"associatedGatewayOwnerAccountId,omitempty" tf:"associated_gateway_owner_account_id,omitempty"`
 
 	// The ID of the Direct Connect gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`

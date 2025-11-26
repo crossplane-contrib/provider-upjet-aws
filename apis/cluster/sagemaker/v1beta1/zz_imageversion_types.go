@@ -26,7 +26,7 @@ type ImageVersionInitParameters struct {
 	Horovod *bool `json:"horovod,omitempty" tf:"horovod,omitempty"`
 
 	// The name of the image. Must be unique to your account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Image
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1.Image
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
@@ -125,7 +125,7 @@ type ImageVersionParameters struct {
 	Horovod *bool `json:"horovod,omitempty" tf:"horovod,omitempty"`
 
 	// The name of the image. Must be unique to your account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Image
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1.Image
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`

@@ -16,7 +16,7 @@ import (
 type EndpointDetailsInitParameters struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
@@ -34,7 +34,7 @@ type EndpointDetailsInitParameters struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -51,7 +51,7 @@ type EndpointDetailsInitParameters struct {
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
 	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
@@ -88,7 +88,7 @@ type EndpointDetailsObservation struct {
 type EndpointDetailsParameters struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -108,7 +108,7 @@ type EndpointDetailsParameters struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -127,7 +127,7 @@ type EndpointDetailsParameters struct {
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
 	// The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -273,7 +273,7 @@ type S3StorageOptionsParameters struct {
 type ServerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
@@ -286,7 +286,7 @@ type ServerInitParameters struct {
 	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
 
@@ -323,7 +323,7 @@ type ServerInitParameters struct {
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
@@ -460,7 +460,7 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
@@ -474,7 +474,7 @@ type ServerParameters struct {
 	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
@@ -520,7 +520,7 @@ type ServerParameters struct {
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`

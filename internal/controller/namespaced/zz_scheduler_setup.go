@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	schedule "github.com/upbound/provider-aws/internal/controller/namespaced/scheduler/schedule"
-	schedulegroup "github.com/upbound/provider-aws/internal/controller/namespaced/scheduler/schedulegroup"
+	schedule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/scheduler/schedule"
+	schedulegroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/scheduler/schedulegroup"
 )
 
 // Setup_scheduler creates all controllers with the supplied logger and adds them to

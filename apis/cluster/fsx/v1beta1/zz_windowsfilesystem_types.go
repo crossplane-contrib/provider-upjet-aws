@@ -153,7 +153,7 @@ type WindowsFileSystemDiskIopsConfigurationParameters struct {
 type WindowsFileSystemInitParameters struct {
 
 	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 
@@ -195,8 +195,8 @@ type WindowsFileSystemInitParameters struct {
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -219,7 +219,7 @@ type WindowsFileSystemInitParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -246,7 +246,7 @@ type WindowsFileSystemInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -368,7 +368,7 @@ type WindowsFileSystemObservation struct {
 type WindowsFileSystemParameters struct {
 
 	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta1.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
@@ -420,8 +420,8 @@ type WindowsFileSystemParameters struct {
 	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -451,7 +451,7 @@ type WindowsFileSystemParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -483,7 +483,7 @@ type WindowsFileSystemParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

@@ -20,7 +20,7 @@ type SecretVersionInitParameters struct {
 	SecretBinarySecretRef *v1.LocalSecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
@@ -87,7 +87,7 @@ type SecretVersionParameters struct {
 	SecretBinarySecretRef *v1.LocalSecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`

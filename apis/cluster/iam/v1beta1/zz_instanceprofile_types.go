@@ -19,7 +19,7 @@ type InstanceProfileInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Name of the role to add to the profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Reference to a Role in iam to populate role.
@@ -71,7 +71,7 @@ type InstanceProfileParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Name of the role to add to the profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 

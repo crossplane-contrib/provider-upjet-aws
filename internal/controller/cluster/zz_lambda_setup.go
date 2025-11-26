@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	alias "github.com/upbound/provider-aws/internal/controller/cluster/lambda/alias"
-	codesigningconfig "github.com/upbound/provider-aws/internal/controller/cluster/lambda/codesigningconfig"
-	eventsourcemapping "github.com/upbound/provider-aws/internal/controller/cluster/lambda/eventsourcemapping"
-	function "github.com/upbound/provider-aws/internal/controller/cluster/lambda/function"
-	functioneventinvokeconfig "github.com/upbound/provider-aws/internal/controller/cluster/lambda/functioneventinvokeconfig"
-	functionurl "github.com/upbound/provider-aws/internal/controller/cluster/lambda/functionurl"
-	invocation "github.com/upbound/provider-aws/internal/controller/cluster/lambda/invocation"
-	layerversion "github.com/upbound/provider-aws/internal/controller/cluster/lambda/layerversion"
-	layerversionpermission "github.com/upbound/provider-aws/internal/controller/cluster/lambda/layerversionpermission"
-	permission "github.com/upbound/provider-aws/internal/controller/cluster/lambda/permission"
-	provisionedconcurrencyconfig "github.com/upbound/provider-aws/internal/controller/cluster/lambda/provisionedconcurrencyconfig"
+	alias "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/alias"
+	codesigningconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/codesigningconfig"
+	eventsourcemapping "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/eventsourcemapping"
+	function "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/function"
+	functioneventinvokeconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/functioneventinvokeconfig"
+	functionurl "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/functionurl"
+	invocation "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/invocation"
+	layerversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/layerversion"
+	layerversionpermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/layerversionpermission"
+	permission "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/permission"
+	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/provisionedconcurrencyconfig"
 )
 
 // Setup_lambda creates all controllers with the supplied logger and adds them to

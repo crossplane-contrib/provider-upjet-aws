@@ -20,7 +20,7 @@ type ProxyTargetInitParameters struct {
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// DB instance identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
@@ -33,7 +33,7 @@ type ProxyTargetInitParameters struct {
 	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the DB proxy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Proxy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
 	// Reference to a Proxy in rds to populate dbProxyName.
@@ -95,7 +95,7 @@ type ProxyTargetParameters struct {
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// DB instance identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
@@ -109,7 +109,7 @@ type ProxyTargetParameters struct {
 	DBInstanceIdentifierSelector *v1.NamespacedSelector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// The name of the DB proxy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Proxy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 

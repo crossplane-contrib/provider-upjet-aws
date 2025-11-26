@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cloudformationstack "github.com/upbound/provider-aws/internal/controller/cluster/serverlessrepo/cloudformationstack"
+	cloudformationstack "github.com/upbound/provider-aws/v2/internal/controller/cluster/serverlessrepo/cloudformationstack"
 )
 
 // Setup_serverlessrepo creates all controllers with the supplied logger and adds them to

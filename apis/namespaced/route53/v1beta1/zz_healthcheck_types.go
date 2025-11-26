@@ -20,7 +20,7 @@ type HealthCheckInitParameters struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.HealthCheck
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
@@ -34,7 +34,7 @@ type HealthCheckInitParameters struct {
 	ChildHealthchecksSelector *v1.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
 	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
 
 	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
@@ -198,7 +198,7 @@ type HealthCheckParameters struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.HealthCheck
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -213,7 +213,7 @@ type HealthCheckParameters struct {
 	ChildHealthchecksSelector *v1.NamespacedSelector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatch/v1beta1.MetricAlarm
 	// +kubebuilder:validation:Optional
 	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
 

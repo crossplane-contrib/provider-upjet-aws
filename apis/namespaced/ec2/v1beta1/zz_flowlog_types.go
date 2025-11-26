@@ -56,7 +56,7 @@ type DestinationOptionsParameters struct {
 type FlowLogInitParameters struct {
 
 	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
 
@@ -75,8 +75,8 @@ type FlowLogInitParameters struct {
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
 	// ARN of the IAM role used to post flow logs. Corresponds to DeliverLogsPermissionArn in the AWS API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamRoleArn.
@@ -88,7 +88,7 @@ type FlowLogInitParameters struct {
 	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the logging destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
@@ -112,7 +112,7 @@ type FlowLogInitParameters struct {
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Subnet ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -137,7 +137,7 @@ type FlowLogInitParameters struct {
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
 	// VPC ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -214,7 +214,7 @@ type FlowLogObservation struct {
 type FlowLogParameters struct {
 
 	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
@@ -236,8 +236,8 @@ type FlowLogParameters struct {
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
 	// ARN of the IAM role used to post flow logs. Corresponds to DeliverLogsPermissionArn in the AWS API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
@@ -250,7 +250,7 @@ type FlowLogParameters struct {
 	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the logging destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
@@ -283,7 +283,7 @@ type FlowLogParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Subnet ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -313,7 +313,7 @@ type FlowLogParameters struct {
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
 	// VPC ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

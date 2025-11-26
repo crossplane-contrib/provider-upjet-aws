@@ -23,8 +23,8 @@ type RoleAliasInitParameters struct {
 	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
 
 	// The identity of the role to which the alias refers.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -85,8 +85,8 @@ type RoleAliasParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The identity of the role to which the alias refers.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

@@ -17,7 +17,7 @@ import (
 type CustomerGatewayAssociationInitParameters struct {
 
 	// ID of the device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
@@ -53,7 +53,7 @@ type CustomerGatewayAssociationObservation struct {
 type CustomerGatewayAssociationParameters struct {
 
 	// ARN of the customer gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.CustomerGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.CustomerGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CustomerGatewayArn *string `json:"customerGatewayArn,omitempty" tf:"customer_gateway_arn,omitempty"`
@@ -67,7 +67,7 @@ type CustomerGatewayAssociationParameters struct {
 	CustomerGatewayArnSelector *v1.NamespacedSelector `json:"customerGatewayArnSelector,omitempty" tf:"-"`
 
 	// ID of the device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
@@ -81,7 +81,7 @@ type CustomerGatewayAssociationParameters struct {
 	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`

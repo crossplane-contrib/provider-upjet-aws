@@ -17,7 +17,7 @@ import (
 type ListenerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of your accelerator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/globalaccelerator/v1beta1.Accelerator
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
 	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
@@ -62,7 +62,7 @@ type ListenerObservation struct {
 type ListenerParameters struct {
 
 	// The Amazon Resource Name (ARN) of your accelerator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/globalaccelerator/v1beta1.Accelerator
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Accelerator
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 

@@ -17,7 +17,7 @@ import (
 type EntryInitParameters struct {
 
 	// CIDR block of this entry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIPv4CidrBlockAssociation
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIPv4CidrBlockAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
@@ -45,7 +45,7 @@ type EntryObservation struct {
 type EntryParameters struct {
 
 	// CIDR block of this entry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIPv4CidrBlockAssociation
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIPv4CidrBlockAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`

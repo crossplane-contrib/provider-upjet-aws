@@ -61,7 +61,7 @@ type CatalogTableOptimizerParameters struct {
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// The name of the database in the catalog in which the table resides.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/glue/v1beta1.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/glue/v1beta1.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 

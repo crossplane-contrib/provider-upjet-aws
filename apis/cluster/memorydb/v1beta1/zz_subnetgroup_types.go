@@ -27,7 +27,7 @@ type SubnetGroupInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -89,7 +89,7 @@ type SubnetGroupParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

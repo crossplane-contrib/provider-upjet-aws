@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	ipset "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/ipset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/regexpatternset"
-	rulegroup "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/rulegroup"
-	webacl "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/webacl"
-	webaclassociation "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/webaclassociation"
-	webaclloggingconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/wafv2/webaclloggingconfiguration"
+	ipset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/ipset"
+	regexpatternset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/regexpatternset"
+	rulegroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/rulegroup"
+	webacl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webacl"
+	webaclassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webaclassociation"
+	webaclloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webaclloggingconfiguration"
 )
 
 // Setup_wafv2 creates all controllers with the supplied logger and adds them to

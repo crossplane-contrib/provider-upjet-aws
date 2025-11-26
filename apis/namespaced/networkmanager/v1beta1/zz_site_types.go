@@ -20,7 +20,7 @@ type SiteInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the Global Network to create the site in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
@@ -111,7 +111,7 @@ type SiteParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the Global Network to create the site in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`

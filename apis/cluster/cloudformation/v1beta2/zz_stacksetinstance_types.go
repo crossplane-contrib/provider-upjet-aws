@@ -111,7 +111,7 @@ type StackSetInstanceInitParameters struct {
 	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudformation/v1beta2.StackSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudformation/v1beta2.StackSet
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 
 	// Reference to a StackSet in cloudformation to populate stackSetName.
@@ -284,7 +284,7 @@ type StackSetInstanceParameters struct {
 	StackSetInstanceRegion *string `json:"stackSetInstanceRegion,omitempty" tf:"stack_set_instance_region,omitempty"`
 
 	// Name of the StackSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudformation/v1beta2.StackSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudformation/v1beta2.StackSet
 	// +kubebuilder:validation:Optional
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 

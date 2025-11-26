@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accessentry "github.com/upbound/provider-aws/internal/controller/cluster/eks/accessentry"
-	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/cluster/eks/accesspolicyassociation"
-	addon "github.com/upbound/provider-aws/internal/controller/cluster/eks/addon"
-	cluster "github.com/upbound/provider-aws/internal/controller/cluster/eks/cluster"
-	clusterauth "github.com/upbound/provider-aws/internal/controller/cluster/eks/clusterauth"
-	fargateprofile "github.com/upbound/provider-aws/internal/controller/cluster/eks/fargateprofile"
-	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/cluster/eks/identityproviderconfig"
-	nodegroup "github.com/upbound/provider-aws/internal/controller/cluster/eks/nodegroup"
-	podidentityassociation "github.com/upbound/provider-aws/internal/controller/cluster/eks/podidentityassociation"
+	accessentry "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/accessentry"
+	accesspolicyassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/accesspolicyassociation"
+	addon "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/addon"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/cluster"
+	clusterauth "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/clusterauth"
+	fargateprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/fargateprofile"
+	identityproviderconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/identityproviderconfig"
+	nodegroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/nodegroup"
+	podidentityassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/eks/podidentityassociation"
 )
 
 // Setup_eks creates all controllers with the supplied logger and adds them to

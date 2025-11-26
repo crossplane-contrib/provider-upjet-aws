@@ -420,7 +420,7 @@ type RiskConfigurationInitParameters struct {
 	RiskExceptionConfiguration *RiskExceptionConfigurationInitParameters `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -482,7 +482,7 @@ type RiskConfigurationParameters struct {
 	RiskExceptionConfiguration *RiskExceptionConfigurationParameters `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta2.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta2.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`

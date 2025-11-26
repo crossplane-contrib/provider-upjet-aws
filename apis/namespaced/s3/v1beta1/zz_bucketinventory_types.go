@@ -55,7 +55,7 @@ type BucketInventoryFilterParameters struct {
 type BucketInventoryInitParameters struct {
 
 	// Name of the source bucket that inventory lists the objects for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -127,7 +127,7 @@ type BucketInventoryObservation struct {
 type BucketInventoryParameters struct {
 
 	// Name of the source bucket that inventory lists the objects for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -181,7 +181,7 @@ type DestinationBucketInitParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Amazon S3 bucket ARN of the destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
@@ -228,7 +228,7 @@ type DestinationBucketParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Amazon S3 bucket ARN of the destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`

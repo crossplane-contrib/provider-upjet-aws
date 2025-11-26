@@ -26,7 +26,7 @@ type ConstraintInitParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Portfolio
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
@@ -39,7 +39,7 @@ type ConstraintInitParameters struct {
 	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
@@ -103,7 +103,7 @@ type ConstraintParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Portfolio
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
@@ -117,7 +117,7 @@ type ConstraintParameters struct {
 	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`

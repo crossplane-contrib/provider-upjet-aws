@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	broker "github.com/upbound/provider-aws/internal/controller/cluster/mq/broker"
-	configuration "github.com/upbound/provider-aws/internal/controller/cluster/mq/configuration"
-	user "github.com/upbound/provider-aws/internal/controller/cluster/mq/user"
+	broker "github.com/upbound/provider-aws/v2/internal/controller/cluster/mq/broker"
+	configuration "github.com/upbound/provider-aws/v2/internal/controller/cluster/mq/configuration"
+	user "github.com/upbound/provider-aws/v2/internal/controller/cluster/mq/user"
 )
 
 // Setup_mq creates all controllers with the supplied logger and adds them to

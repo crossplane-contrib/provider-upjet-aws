@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	activereceiptruleset "github.com/upbound/provider-aws/internal/controller/namespaced/ses/activereceiptruleset"
-	configurationset "github.com/upbound/provider-aws/internal/controller/namespaced/ses/configurationset"
-	domaindkim "github.com/upbound/provider-aws/internal/controller/namespaced/ses/domaindkim"
-	domainidentity "github.com/upbound/provider-aws/internal/controller/namespaced/ses/domainidentity"
-	domainmailfrom "github.com/upbound/provider-aws/internal/controller/namespaced/ses/domainmailfrom"
-	emailidentity "github.com/upbound/provider-aws/internal/controller/namespaced/ses/emailidentity"
-	eventdestination "github.com/upbound/provider-aws/internal/controller/namespaced/ses/eventdestination"
-	identitynotificationtopic "github.com/upbound/provider-aws/internal/controller/namespaced/ses/identitynotificationtopic"
-	identitypolicy "github.com/upbound/provider-aws/internal/controller/namespaced/ses/identitypolicy"
-	receiptfilter "github.com/upbound/provider-aws/internal/controller/namespaced/ses/receiptfilter"
-	receiptrule "github.com/upbound/provider-aws/internal/controller/namespaced/ses/receiptrule"
-	receiptruleset "github.com/upbound/provider-aws/internal/controller/namespaced/ses/receiptruleset"
-	template "github.com/upbound/provider-aws/internal/controller/namespaced/ses/template"
+	activereceiptruleset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/activereceiptruleset"
+	configurationset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/configurationset"
+	domaindkim "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/domaindkim"
+	domainidentity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/domainidentity"
+	domainmailfrom "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/domainmailfrom"
+	emailidentity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/emailidentity"
+	eventdestination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/eventdestination"
+	identitynotificationtopic "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/identitynotificationtopic"
+	identitypolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/identitypolicy"
+	receiptfilter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/receiptfilter"
+	receiptrule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/receiptrule"
+	receiptruleset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/receiptruleset"
+	template "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ses/template"
 )
 
 // Setup_ses creates all controllers with the supplied logger and adds them to

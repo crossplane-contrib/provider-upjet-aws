@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/cluster/ds/conditionalforwarder"
-	directory "github.com/upbound/provider-aws/internal/controller/cluster/ds/directory"
-	shareddirectory "github.com/upbound/provider-aws/internal/controller/cluster/ds/shareddirectory"
+	conditionalforwarder "github.com/upbound/provider-aws/v2/internal/controller/cluster/ds/conditionalforwarder"
+	directory "github.com/upbound/provider-aws/v2/internal/controller/cluster/ds/directory"
+	shareddirectory "github.com/upbound/provider-aws/v2/internal/controller/cluster/ds/shareddirectory"
 )
 
 // Setup_ds creates all controllers with the supplied logger and adds them to

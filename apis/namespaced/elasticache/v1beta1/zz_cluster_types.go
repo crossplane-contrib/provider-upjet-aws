@@ -97,7 +97,7 @@ type ClusterInitParameters struct {
 	OutpostMode *string `json:"outpostMode,omitempty" tf:"outpost_mode,omitempty"`
 
 	// The name of the parameter group to associate with this cache cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ParameterGroup
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
@@ -118,7 +118,7 @@ type ClusterInitParameters struct {
 	PreferredOutpostArn *string `json:"preferredOutpostArn,omitempty" tf:"preferred_outpost_arn,omitempty"`
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 
@@ -139,7 +139,7 @@ type ClusterInitParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -158,7 +158,7 @@ type ClusterInitParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Name of the subnet group to be used for the cache cluster. Changing this value will re-create the resource. Cannot be provided with replication_group_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.SubnetGroup
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
@@ -382,7 +382,7 @@ type ClusterParameters struct {
 	OutpostMode *string `json:"outpostMode,omitempty" tf:"outpost_mode,omitempty"`
 
 	// The name of the parameter group to associate with this cache cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
@@ -412,7 +412,7 @@ type ClusterParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
@@ -434,7 +434,7 @@ type ClusterParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -458,7 +458,7 @@ type ClusterParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Name of the subnet group to be used for the cache cluster. Changing this value will re-create the resource. Cannot be provided with replication_group_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elasticache/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elasticache/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 

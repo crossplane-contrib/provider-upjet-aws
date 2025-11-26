@@ -59,7 +59,7 @@ type StateMachineEncryptionConfigurationInitParameters struct {
 	KMSDataKeyReusePeriodSeconds *float64 `json:"kmsDataKeyReusePeriodSeconds,omitempty" tf:"kms_data_key_reuse_period_seconds,omitempty"`
 
 	// The alias, alias ARN, key ID, or key ARN of the symmetric encryption KMS key that encrypts the data key. To specify a KMS key in a different AWS account, the customer must use the key ARN or alias ARN. For more information regarding kms_key_id, see KeyId in the KMS documentation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -94,7 +94,7 @@ type StateMachineEncryptionConfigurationParameters struct {
 	KMSDataKeyReusePeriodSeconds *float64 `json:"kmsDataKeyReusePeriodSeconds,omitempty" tf:"kms_data_key_reuse_period_seconds,omitempty"`
 
 	// The alias, alias ARN, key ID, or key ARN of the symmetric encryption KMS key that encrypts the data key. To specify a KMS key in a different AWS account, the customer must use the key ARN or alias ARN. For more information regarding kms_key_id, see KeyId in the KMS documentation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -127,8 +127,8 @@ type StateMachineInitParameters struct {
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -232,8 +232,8 @@ type StateMachineParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

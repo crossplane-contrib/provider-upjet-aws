@@ -34,7 +34,7 @@ type IdentityProviderInitParameters struct {
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// The user pool id
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -105,7 +105,7 @@ type IdentityProviderParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The user pool id
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

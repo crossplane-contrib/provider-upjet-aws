@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	attachment "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/attachment"
-	autoscalinggroup "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/autoscalinggroup"
-	grouptag "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/grouptag"
-	launchconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/launchconfiguration"
-	lifecyclehook "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/lifecyclehook"
-	notification "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/notification"
-	policy "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/policy"
-	schedule "github.com/upbound/provider-aws/internal/controller/namespaced/autoscaling/schedule"
+	attachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/attachment"
+	autoscalinggroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/autoscalinggroup"
+	grouptag "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/grouptag"
+	launchconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/launchconfiguration"
+	lifecyclehook "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/lifecyclehook"
+	notification "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/notification"
+	policy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/policy"
+	schedule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/autoscaling/schedule"
 )
 
 // Setup_autoscaling creates all controllers with the supplied logger and adds them to

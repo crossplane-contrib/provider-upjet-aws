@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	autoscalingconfigurationversion "github.com/upbound/provider-aws/internal/controller/namespaced/apprunner/autoscalingconfigurationversion"
-	connection "github.com/upbound/provider-aws/internal/controller/namespaced/apprunner/connection"
-	observabilityconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/apprunner/observabilityconfiguration"
-	service "github.com/upbound/provider-aws/internal/controller/namespaced/apprunner/service"
-	vpcconnector "github.com/upbound/provider-aws/internal/controller/namespaced/apprunner/vpcconnector"
+	autoscalingconfigurationversion "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apprunner/autoscalingconfigurationversion"
+	connection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apprunner/connection"
+	observabilityconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apprunner/observabilityconfiguration"
+	service "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apprunner/service"
+	vpcconnector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apprunner/vpcconnector"
 )
 
 // Setup_apprunner creates all controllers with the supplied logger and adds them to

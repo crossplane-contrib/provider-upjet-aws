@@ -41,16 +41,16 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	clusterapis "github.com/upbound/provider-aws/apis/cluster"
-	namespacedapis "github.com/upbound/provider-aws/apis/namespaced"
-	config "github.com/upbound/provider-aws/config"
-	resolverapis "github.com/upbound/provider-aws/internal/apis"
-	"github.com/upbound/provider-aws/internal/bootcheck"
-	"github.com/upbound/provider-aws/internal/clients"
-	clustercontroller "github.com/upbound/provider-aws/internal/controller/cluster"
-	namespacedcontroller "github.com/upbound/provider-aws/internal/controller/namespaced"
-	"github.com/upbound/provider-aws/internal/features"
-	"github.com/upbound/provider-aws/internal/version"
+	clusterapis "github.com/upbound/provider-aws/v2/apis/cluster"
+	namespacedapis "github.com/upbound/provider-aws/v2/apis/namespaced"
+	config "github.com/upbound/provider-aws/v2/config"
+	resolverapis "github.com/upbound/provider-aws/v2/internal/apis"
+	"github.com/upbound/provider-aws/v2/internal/bootcheck"
+	"github.com/upbound/provider-aws/v2/internal/clients"
+	clustercontroller "github.com/upbound/provider-aws/v2/internal/controller/cluster"
+	namespacedcontroller "github.com/upbound/provider-aws/v2/internal/controller/namespaced"
+	"github.com/upbound/provider-aws/v2/internal/features"
+	"github.com/upbound/provider-aws/v2/internal/version"
 )
 
 const (

@@ -252,7 +252,7 @@ type TableObservation struct {
 type TableParameters struct {
 
 	// The name of the Timestream database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/timestreamwrite/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/timestreamwrite/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 

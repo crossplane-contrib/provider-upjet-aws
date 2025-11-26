@@ -101,7 +101,7 @@ type RegexMatchTupleInitParameters struct {
 	FieldToMatch *RegexMatchTupleFieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
 	// The ID of a Regex Pattern Set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.RegexPatternSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/wafregional/v1beta1.RegexPatternSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`
 
@@ -142,7 +142,7 @@ type RegexMatchTupleParameters struct {
 	FieldToMatch *RegexMatchTupleFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// The ID of a Regex Pattern Set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/wafregional/v1beta1.RegexPatternSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/wafregional/v1beta1.RegexPatternSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`

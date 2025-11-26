@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	gatewayroute "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/gatewayroute"
-	mesh "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/mesh"
-	route "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/route"
-	virtualgateway "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/virtualgateway"
-	virtualnode "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/virtualnode"
-	virtualrouter "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/virtualrouter"
-	virtualservice "github.com/upbound/provider-aws/internal/controller/namespaced/appmesh/virtualservice"
+	gatewayroute "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/gatewayroute"
+	mesh "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/mesh"
+	route "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/route"
+	virtualgateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/virtualgateway"
+	virtualnode "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/virtualnode"
+	virtualrouter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/virtualrouter"
+	virtualservice "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appmesh/virtualservice"
 )
 
 // Setup_appmesh creates all controllers with the supplied logger and adds them to

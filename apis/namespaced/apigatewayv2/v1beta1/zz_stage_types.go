@@ -186,7 +186,7 @@ type RouteSettingsParameters struct {
 type StageInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -212,7 +212,7 @@ type StageInitParameters struct {
 	DefaultRouteSettings *DefaultRouteSettingsInitParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
 	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Deployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Deployment
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
 	// Reference to a Deployment in apigatewayv2 to populate deploymentId.
@@ -301,7 +301,7 @@ type StageObservation struct {
 type StageParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -332,7 +332,7 @@ type StageParameters struct {
 	DefaultRouteSettings *DefaultRouteSettingsParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
 	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigatewayv2/v1beta1.Deployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 

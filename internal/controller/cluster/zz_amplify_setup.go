@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	app "github.com/upbound/provider-aws/internal/controller/cluster/amplify/app"
-	backendenvironment "github.com/upbound/provider-aws/internal/controller/cluster/amplify/backendenvironment"
-	branch "github.com/upbound/provider-aws/internal/controller/cluster/amplify/branch"
-	webhook "github.com/upbound/provider-aws/internal/controller/cluster/amplify/webhook"
+	app "github.com/upbound/provider-aws/v2/internal/controller/cluster/amplify/app"
+	backendenvironment "github.com/upbound/provider-aws/v2/internal/controller/cluster/amplify/backendenvironment"
+	branch "github.com/upbound/provider-aws/v2/internal/controller/cluster/amplify/branch"
+	webhook "github.com/upbound/provider-aws/v2/internal/controller/cluster/amplify/webhook"
 )
 
 // Setup_amplify creates all controllers with the supplied logger and adds them to

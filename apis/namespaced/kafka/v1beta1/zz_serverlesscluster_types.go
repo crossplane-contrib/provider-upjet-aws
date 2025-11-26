@@ -158,7 +158,7 @@ type ServerlessClusterVPCConfigInitParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -173,7 +173,7 @@ type ServerlessClusterVPCConfigInitParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of subnets in at least two different Availability Zones that host your client applications.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -202,7 +202,7 @@ type ServerlessClusterVPCConfigParameters struct {
 	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies up to five security groups that control inbound and outbound traffic for the serverless cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -218,7 +218,7 @@ type ServerlessClusterVPCConfigParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of subnets in at least two different Availability Zones that host your client applications.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

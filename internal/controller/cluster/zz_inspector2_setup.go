@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	enabler "github.com/upbound/provider-aws/internal/controller/cluster/inspector2/enabler"
+	enabler "github.com/upbound/provider-aws/v2/internal/controller/cluster/inspector2/enabler"
 )
 
 // Setup_inspector2 creates all controllers with the supplied logger and adds them to

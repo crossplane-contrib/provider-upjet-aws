@@ -17,8 +17,8 @@ import (
 type AllowedPublishersInitParameters struct {
 
 	// Set of ARNs for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. Maximum of 20 signing profiles.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/signer/v1beta1.SigningProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +listType=set
 	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`
 
@@ -41,8 +41,8 @@ type AllowedPublishersObservation struct {
 type AllowedPublishersParameters struct {
 
 	// Set of ARNs for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. Maximum of 20 signing profiles.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/signer/v1beta1.SigningProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`

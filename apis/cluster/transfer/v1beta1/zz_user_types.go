@@ -102,8 +102,8 @@ type UserInitParameters struct {
 	PosixProfile []PosixProfileInitParameters `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to control your user’s access to your Amazon S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Reference to a Role in iam to populate role.
@@ -115,7 +115,7 @@ type UserInitParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/transfer/v1beta1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// Reference to a Server in transfer to populate serverId.
@@ -200,8 +200,8 @@ type UserParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to control your user’s access to your Amazon S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -214,7 +214,7 @@ type UserParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/transfer/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/transfer/v1beta1.Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

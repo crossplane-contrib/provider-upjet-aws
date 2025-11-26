@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	languagemodel "github.com/upbound/provider-aws/internal/controller/cluster/transcribe/languagemodel"
-	vocabulary "github.com/upbound/provider-aws/internal/controller/cluster/transcribe/vocabulary"
-	vocabularyfilter "github.com/upbound/provider-aws/internal/controller/cluster/transcribe/vocabularyfilter"
+	languagemodel "github.com/upbound/provider-aws/v2/internal/controller/cluster/transcribe/languagemodel"
+	vocabulary "github.com/upbound/provider-aws/v2/internal/controller/cluster/transcribe/vocabulary"
+	vocabularyfilter "github.com/upbound/provider-aws/v2/internal/controller/cluster/transcribe/vocabularyfilter"
 )
 
 // Setup_transcribe creates all controllers with the supplied logger and adds them to

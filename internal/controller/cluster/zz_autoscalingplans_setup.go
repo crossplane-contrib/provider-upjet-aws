@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	scalingplan "github.com/upbound/provider-aws/internal/controller/cluster/autoscalingplans/scalingplan"
+	scalingplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/autoscalingplans/scalingplan"
 )
 
 // Setup_autoscalingplans creates all controllers with the supplied logger and adds them to

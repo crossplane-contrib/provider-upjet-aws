@@ -17,7 +17,7 @@ import (
 type TagOptionResourceAssociationInitParameters struct {
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate resourceId.
@@ -29,7 +29,7 @@ type TagOptionResourceAssociationInitParameters struct {
 	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.TagOption
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.TagOption
 	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 
 	// Reference to a TagOption in servicecatalog to populate tagOptionId.
@@ -77,7 +77,7 @@ type TagOptionResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -90,7 +90,7 @@ type TagOptionResourceAssociationParameters struct {
 	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.TagOption
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.TagOption
 	// +kubebuilder:validation:Optional
 	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 

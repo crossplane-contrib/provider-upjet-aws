@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	application "github.com/upbound/provider-aws/internal/controller/cluster/applicationinsights/application"
+	application "github.com/upbound/provider-aws/v2/internal/controller/cluster/applicationinsights/application"
 )
 
 // Setup_applicationinsights creates all controllers with the supplied logger and adds them to

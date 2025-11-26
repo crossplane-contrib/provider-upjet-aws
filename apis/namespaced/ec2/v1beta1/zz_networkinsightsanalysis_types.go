@@ -745,7 +745,7 @@ type NetworkInsightsAnalysisInitParameters struct {
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
 	// ID of the Network Insights Path to run an analysis on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInsightsPath
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkInsightsPath
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
 
@@ -831,7 +831,7 @@ type NetworkInsightsAnalysisParameters struct {
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
 	// ID of the Network Insights Path to run an analysis on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkInsightsPath
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkInsightsPath
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
