@@ -58,14 +58,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
-		r.OverrideFieldNames = map[string]string{
-			"ClientAuthenticationParameters":     "ServerlessClusterClientAuthenticationParameters",
-			"ClientAuthenticationInitParameters": "ServerlessClusterClientAuthenticationInitParameters",
-			"ClientAuthenticationObservation":    "ServerlessClusterClientAuthenticationObservation",
-			"SaslParameters":                     "ClientAuthenticationSaslParameters",
-			"SaslInitParameters":                 "ClientAuthenticationSaslInitParameters",
-			"SaslObservation":                    "ClientAuthenticationSaslObservation",
-		}
 	})
 	p.AddResourceConfigurator("aws_msk_replicator", func(r *config.Resource) {
 		r.References["kafka_cluster.vpc_config.subnet_ids"] = config.Reference{

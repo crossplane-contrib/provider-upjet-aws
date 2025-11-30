@@ -58,17 +58,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return conn, nil
 		}
-		r.OverrideFieldNames = map[string]string{
-			"S3ImportParameters":                 "ClusterS3ImportParameters",
-			"S3ImportInitParameters":             "ClusterS3ImportInitParameters",
-			"S3ImportObservation":                "ClusterS3ImportObservation",
-			"RestoreToPointInTimeParameters":     "ClusterRestoreToPointInTimeParameters",
-			"RestoreToPointInTimeInitParameters": "ClusterRestoreToPointInTimeInitParameters",
-			"RestoreToPointInTimeObservation":    "ClusterRestoreToPointInTimeObservation",
-			"MasterUserSecretParameters":         "ClusterMasterUserSecretParameters",
-			"MasterUserSecretInitParameters":     "ClusterMasterUserSecretInitParameters",
-			"MasterUserSecretObservation":        "ClusterMasterUserSecretObservation",
-		}
 		desc, _ := comments.New("If true, the password will be auto-generated and"+
 			" stored in the Secret referenced by the masterPasswordSecretRef field.",
 			comments.WithTFTag("-"))
