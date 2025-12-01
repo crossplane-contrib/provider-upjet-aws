@@ -245,6 +245,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_placement_group":                                      ReplaceGroupWords("ec2", 0),
 	"aws_prometheus_alert_manager_definition":                  ReplaceGroupWords("amp", 1),
 	"aws_prometheus_rule_group_namespace":                      ReplaceGroupWords("amp", 1),
+	"aws_prometheus_scraper":                                   ReplaceGroupWords("amp", 1),
 	"aws_prometheus_workspace":                                 ReplaceGroupWords("amp", 1),
 	"aws_proxy_protocol_policy":                                ReplaceGroupWords("elb", 0),
 	"aws_route_table_association":                              ReplaceGroupWords("ec2", 0),

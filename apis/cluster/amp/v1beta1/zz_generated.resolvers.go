@@ -10,8 +10,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	common "github.com/upbound/provider-aws/config/cluster/common"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -32,7 +32,7 @@ func (mg *AlertManagerDefinition) ResolveReferences( // ResolveReferences of thi
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -52,7 +52,7 @@ func (mg *AlertManagerDefinition) ResolveReferences( // ResolveReferences of thi
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
@@ -84,7 +84,7 @@ func (mg *RuleGroupNamespace) ResolveReferences(ctx context.Context, c client.Re
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -96,6 +96,256 @@ func (mg *RuleGroupNamespace) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Scraper.
+func (mg *Scraper) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destination); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destination[i3].Amp); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("amp.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArnRef,
+					Selector:     mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArn")
+			}
+			mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Destination[i3].Amp[i4].WorkspaceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RoleConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArnRef,
+				Selector:     mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArn")
+		}
+		mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RoleConfiguration[i3].SourceRoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArnRef,
+					Selector:     mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArn")
+			}
+			mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Source[i3].Eks[i4].ClusterArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Source[i3].Eks[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Source[i3].Eks[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Destination); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Destination[i3].Amp); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("amp.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArnRef,
+					Selector:     mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArn")
+			}
+			mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Destination[i3].Amp[i4].WorkspaceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RoleConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArnRef,
+				Selector:     mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArn")
+		}
+		mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RoleConfiguration[i3].SourceRoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArnRef,
+					Selector:     mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArn")
+			}
+			mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Source[i3].Eks[i4].ClusterArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Source[i3].Eks[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].Eks); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIds")
+			}
+			mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Source[i3].Eks[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 
 	return nil
 }

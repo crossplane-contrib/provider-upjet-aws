@@ -7,6 +7,7 @@ package namespaced
 import (
 	"github.com/upbound/provider-aws/config/namespaced/acm"
 	"github.com/upbound/provider-aws/config/namespaced/acmpca"
+	"github.com/upbound/provider-aws/config/namespaced/amp"
 	"github.com/upbound/provider-aws/config/namespaced/apigateway"
 	"github.com/upbound/provider-aws/config/namespaced/apigatewayv2"
 	"github.com/upbound/provider-aws/config/namespaced/apprunner"
@@ -102,6 +103,7 @@ import (
 func init() {
 	ProviderConfiguration.AddConfig(acm.Configure)
 	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(amp.Configure)
 	ProviderConfiguration.AddConfig(apigateway.Configure)
 	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
 	ProviderConfiguration.AddConfig(apprunner.Configure)

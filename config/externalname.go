@@ -121,6 +121,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
+	// amp
+	//
+	// Prometheus Scraper can be imported using the ARN: arn:aws:aps:us-west-2:123456789012:scraper/s-12345678-1234-1234-1234-123456789012
+	// Terraform returns the full ARN as ID, but AWS API expects just the UUID portion (s-UUID).
+	// terraform-plugin-framework
+	"aws_prometheus_scraper": identifierFromProviderWithDefaultStub("scraper12345"),
+
 	// rds
 	//
 	// aws_rds_instance_state import format: rdsInstanceId-12345678
