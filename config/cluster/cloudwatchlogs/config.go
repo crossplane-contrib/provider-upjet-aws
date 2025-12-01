@@ -39,7 +39,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_cloudwatch_log_group", func(r *config.Resource) {
-		config.MarkAsRequired(r.TerraformResource, "name")
+		r.MarkAsRequired("name")
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name_prefix"},
 		}

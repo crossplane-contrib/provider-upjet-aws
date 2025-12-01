@@ -121,6 +121,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_iam_policy", func(r *config.Resource) {
 		// Otherwise TF assigns a random string.
-		config.MarkAsRequired(r.TerraformResource, "name")
+		r.MarkAsRequired("name")
 	})
 }

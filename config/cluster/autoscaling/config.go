@@ -53,11 +53,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["autoscaling_group_name"] = config.Reference{
 			TerraformName: "aws_autoscaling_group",
 		}
-		r.OverrideFieldNames = map[string]string{
-			"TagParameters":     "GroupTagTagParameters",
-			"TagObservation":    "GroupTagTagObservation",
-			"TagInitParameters": "GroupTagTagInitParameters",
-		}
 	})
 }
 
