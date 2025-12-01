@@ -25,14 +25,14 @@ type UserGroupMembershipInitParameters struct {
 	GroupSelector *v1.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
 
 	// A list of IAM Groups to add the user to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Group
 	// +crossplane:generate:reference:refFieldName=GroupRefs
 	// +crossplane:generate:reference:selectorFieldName=GroupSelector
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The name of the IAM User to add to groups
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
 	// Reference to a User in iam to populate user.
@@ -67,7 +67,7 @@ type UserGroupMembershipParameters struct {
 	GroupSelector *v1.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
 
 	// A list of IAM Groups to add the user to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Group
 	// +crossplane:generate:reference:refFieldName=GroupRefs
 	// +crossplane:generate:reference:selectorFieldName=GroupSelector
 	// +kubebuilder:validation:Optional
@@ -75,7 +75,7 @@ type UserGroupMembershipParameters struct {
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The name of the IAM User to add to groups
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 

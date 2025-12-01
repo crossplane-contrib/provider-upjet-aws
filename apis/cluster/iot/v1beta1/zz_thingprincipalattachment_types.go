@@ -16,7 +16,7 @@ import (
 type ThingPrincipalAttachmentInitParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
@@ -29,7 +29,7 @@ type ThingPrincipalAttachmentInitParameters struct {
 	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
 
 	// The name of the thing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Thing
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iot/v1beta1.Thing
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 
 	// The type of relationship to specify when attaching a principal to a thing. Valid values are EXCLUSIVE_THING (the thing will be the only one attached to the principal) or NON_EXCLUSIVE_THING (multiple things can be attached to the principal). Defaults to NON_EXCLUSIVE_THING.
@@ -64,7 +64,7 @@ type ThingPrincipalAttachmentObservation struct {
 type ThingPrincipalAttachmentParameters struct {
 
 	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iot/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -83,7 +83,7 @@ type ThingPrincipalAttachmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the thing.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iot/v1beta1.Thing
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iot/v1beta1.Thing
 	// +kubebuilder:validation:Optional
 	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 

@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/cluster"
-	clusterpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/clusterpolicy"
-	configuration "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/configuration"
-	replicator "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/replicator"
-	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/scramsecretassociation"
-	serverlesscluster "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/serverlesscluster"
-	singlescramsecretassociation "github.com/upbound/provider-aws/internal/controller/namespaced/kafka/singlescramsecretassociation"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/cluster"
+	clusterpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/clusterpolicy"
+	configuration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/configuration"
+	replicator "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/replicator"
+	scramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/scramsecretassociation"
+	serverlesscluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/serverlesscluster"
+	singlescramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/singlescramsecretassociation"
 )
 
 // Setup_kafka creates all controllers with the supplied logger and adds them to

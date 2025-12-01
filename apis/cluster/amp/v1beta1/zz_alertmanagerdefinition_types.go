@@ -19,7 +19,7 @@ type AlertManagerDefinitionInitParameters struct {
 	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// ID of the prometheus workspace the alert manager definition should be linked to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amp/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amp/v1beta2.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in amp to populate workspaceId.
@@ -58,7 +58,7 @@ type AlertManagerDefinitionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the prometheus workspace the alert manager definition should be linked to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amp/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amp/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

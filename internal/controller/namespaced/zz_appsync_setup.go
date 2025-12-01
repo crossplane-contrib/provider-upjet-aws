@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	apicache "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/apicache"
-	apikey "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/apikey"
-	datasource "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/datasource"
-	function "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/function"
-	graphqlapi "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/graphqlapi"
-	resolver "github.com/upbound/provider-aws/internal/controller/namespaced/appsync/resolver"
+	apicache "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/apicache"
+	apikey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/apikey"
+	datasource "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/datasource"
+	function "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/function"
+	graphqlapi "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/graphqlapi"
+	resolver "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appsync/resolver"
 )
 
 // Setup_appsync creates all controllers with the supplied logger and adds them to

@@ -17,7 +17,7 @@ import (
 type APIDestinationInitParameters struct {
 
 	// ARN of the EventBridge Connection to use for the API Destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
 
@@ -72,7 +72,7 @@ type APIDestinationObservation struct {
 type APIDestinationParameters struct {
 
 	// ARN of the EventBridge Connection to use for the API Destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`

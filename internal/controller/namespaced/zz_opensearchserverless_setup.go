@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accesspolicy "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/accesspolicy"
-	collection "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/collection"
-	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/lifecyclepolicy"
-	securityconfig "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/securityconfig"
-	securitypolicy "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/securitypolicy"
-	vpcendpoint "github.com/upbound/provider-aws/internal/controller/namespaced/opensearchserverless/vpcendpoint"
+	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/accesspolicy"
+	collection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/collection"
+	lifecyclepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/lifecyclepolicy"
+	securityconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/securityconfig"
+	securitypolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/securitypolicy"
+	vpcendpoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/vpcendpoint"
 )
 
 // Setup_opensearchserverless creates all controllers with the supplied logger and adds them to

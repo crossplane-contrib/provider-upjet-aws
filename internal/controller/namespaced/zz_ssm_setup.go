@@ -9,18 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	activation "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/activation"
-	association "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/association"
-	defaultpatchbaseline "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/defaultpatchbaseline"
-	document "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/document"
-	maintenancewindow "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/maintenancewindow"
-	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/maintenancewindowtarget"
-	maintenancewindowtask "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/maintenancewindowtask"
-	parameter "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/parameter"
-	patchbaseline "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/patchbaseline"
-	patchgroup "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/patchgroup"
-	resourcedatasync "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/resourcedatasync"
-	servicesetting "github.com/upbound/provider-aws/internal/controller/namespaced/ssm/servicesetting"
+	activation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/activation"
+	association "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/association"
+	defaultpatchbaseline "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/defaultpatchbaseline"
+	document "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/document"
+	maintenancewindow "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/maintenancewindow"
+	maintenancewindowtarget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/maintenancewindowtarget"
+	maintenancewindowtask "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/maintenancewindowtask"
+	parameter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/parameter"
+	patchbaseline "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/patchbaseline"
+	patchgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/patchgroup"
+	resourcedatasync "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/resourcedatasync"
+	servicesetting "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssm/servicesetting"
 )
 
 // Setup_ssm creates all controllers with the supplied logger and adds them to

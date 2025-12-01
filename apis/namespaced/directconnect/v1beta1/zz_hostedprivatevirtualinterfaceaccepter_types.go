@@ -24,7 +24,7 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
@@ -37,7 +37,7 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.HostedPrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.HostedPrivateVirtualInterface
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
 	// Reference to a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
@@ -96,7 +96,7 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPNGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
@@ -110,7 +110,7 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/directconnect/v1beta1.HostedPrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.HostedPrivateVirtualInterface
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 

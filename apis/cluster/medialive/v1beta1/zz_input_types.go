@@ -60,7 +60,7 @@ type InputInitParameters struct {
 	InputDevices []InputDevicesInitParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
 	// List of input security groups.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.InputSecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/medialive/v1beta1.InputSecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
 
@@ -79,8 +79,8 @@ type InputInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the role this input assumes during and after creation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -175,7 +175,7 @@ type InputParameters struct {
 	InputDevices []InputDevicesParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
 	// List of input security groups.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.InputSecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/medialive/v1beta1.InputSecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
@@ -202,8 +202,8 @@ type InputParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the role this input assumes during and after creation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

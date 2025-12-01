@@ -26,7 +26,7 @@ type WorkspaceAPIKeyInitParameters struct {
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
 	// The ID of the workspace that the API key is valid for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/grafana/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -79,7 +79,7 @@ type WorkspaceAPIKeyParameters struct {
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
 	// The ID of the workspace that the API key is valid for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/grafana/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

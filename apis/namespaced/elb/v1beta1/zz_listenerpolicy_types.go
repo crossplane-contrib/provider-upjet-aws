@@ -17,7 +17,7 @@ import (
 type ListenerPolicyInitParameters struct {
 
 	// The load balancer to attach the policy to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// Reference to a ELB in elb to populate loadBalancerName.
@@ -32,7 +32,7 @@ type ListenerPolicyInitParameters struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
@@ -77,7 +77,7 @@ type ListenerPolicyObservation struct {
 type ListenerPolicyParameters struct {
 
 	// The load balancer to attach the policy to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
@@ -94,7 +94,7 @@ type ListenerPolicyParameters struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	// +kubebuilder:validation:Optional
 	// +listType=set

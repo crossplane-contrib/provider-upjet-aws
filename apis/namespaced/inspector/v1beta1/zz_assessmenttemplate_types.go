@@ -34,7 +34,7 @@ type AssessmentTemplateInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The assessment target ARN to attach the template to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/inspector/v1beta1.AssessmentTarget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/inspector/v1beta1.AssessmentTarget
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -113,7 +113,7 @@ type AssessmentTemplateParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The assessment target ARN to attach the template to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/inspector/v1beta1.AssessmentTarget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/inspector/v1beta1.AssessmentTarget
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
@@ -133,7 +133,7 @@ type EventSubscriptionInitParameters struct {
 	Event *string `json:"event,omitempty" tf:"event,omitempty"`
 
 	// The ARN of the SNS topic to which notifications are sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
@@ -162,7 +162,7 @@ type EventSubscriptionParameters struct {
 	Event *string `json:"event" tf:"event,omitempty"`
 
 	// The ARN of the SNS topic to which notifications are sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`

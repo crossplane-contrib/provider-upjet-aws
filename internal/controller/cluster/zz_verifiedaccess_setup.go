@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	endpoint "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/endpoint"
-	group "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/group"
-	instance "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/instance"
-	instanceloggingconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/instanceloggingconfiguration"
-	instancetrustproviderattachment "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/instancetrustproviderattachment"
-	trustprovider "github.com/upbound/provider-aws/internal/controller/cluster/verifiedaccess/trustprovider"
+	endpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/endpoint"
+	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/group"
+	instance "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/instance"
+	instanceloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/instanceloggingconfiguration"
+	instancetrustproviderattachment "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/instancetrustproviderattachment"
+	trustprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/verifiedaccess/trustprovider"
 )
 
 // Setup_verifiedaccess creates all controllers with the supplied logger and adds them to

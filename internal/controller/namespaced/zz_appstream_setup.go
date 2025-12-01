@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	directoryconfig "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/directoryconfig"
-	fleet "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/fleet"
-	fleetstackassociation "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/fleetstackassociation"
-	imagebuilder "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/imagebuilder"
-	stack "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/stack"
-	user "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/user"
-	userstackassociation "github.com/upbound/provider-aws/internal/controller/namespaced/appstream/userstackassociation"
+	directoryconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/directoryconfig"
+	fleet "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/fleet"
+	fleetstackassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/fleetstackassociation"
+	imagebuilder "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/imagebuilder"
+	stack "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/stack"
+	user "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/user"
+	userstackassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appstream/userstackassociation"
 )
 
 // Setup_appstream creates all controllers with the supplied logger and adds them to

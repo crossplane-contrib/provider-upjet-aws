@@ -17,7 +17,7 @@ import (
 type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
 
 	// An identity pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
@@ -30,7 +30,7 @@ type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
 	IdentityPoolIDSelector *v1.NamespacedSelector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// The name of the identity provider.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint",true)
 	IdentityProviderName *string `json:"identityProviderName,omitempty" tf:"identity_provider_name,omitempty"`
 
@@ -74,7 +74,7 @@ type CognitoIdentityPoolProviderPrincipalTagObservation struct {
 type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
 	// An identity pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidentity/v1beta1.Pool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
@@ -88,7 +88,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 	IdentityPoolIDSelector *v1.NamespacedSelector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// The name of the identity provider.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("endpoint",true)
 	// +kubebuilder:validation:Optional
 	IdentityProviderName *string `json:"identityProviderName,omitempty" tf:"identity_provider_name,omitempty"`

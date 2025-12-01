@@ -23,7 +23,7 @@ type LBTargetGroupAttachmentInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ARN of the target group with which to register targets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
@@ -76,7 +76,7 @@ type LBTargetGroupAttachmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the target group with which to register targets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 

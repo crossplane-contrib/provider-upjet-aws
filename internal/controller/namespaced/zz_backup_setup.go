@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	framework "github.com/upbound/provider-aws/internal/controller/namespaced/backup/framework"
-	globalsettings "github.com/upbound/provider-aws/internal/controller/namespaced/backup/globalsettings"
-	plan "github.com/upbound/provider-aws/internal/controller/namespaced/backup/plan"
-	regionsettings "github.com/upbound/provider-aws/internal/controller/namespaced/backup/regionsettings"
-	reportplan "github.com/upbound/provider-aws/internal/controller/namespaced/backup/reportplan"
-	selection "github.com/upbound/provider-aws/internal/controller/namespaced/backup/selection"
-	vault "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vault"
-	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultlockconfiguration"
-	vaultnotifications "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultnotifications"
-	vaultpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/backup/vaultpolicy"
+	framework "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/framework"
+	globalsettings "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/globalsettings"
+	plan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/plan"
+	regionsettings "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/regionsettings"
+	reportplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/reportplan"
+	selection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/selection"
+	vault "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/vault"
+	vaultlockconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/vaultlockconfiguration"
+	vaultnotifications "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/vaultnotifications"
+	vaultpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/backup/vaultpolicy"
 )
 
 // Setup_backup creates all controllers with the supplied logger and adds them to

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	stream "github.com/upbound/provider-aws/internal/controller/cluster/kinesisvideo/stream"
+	stream "github.com/upbound/provider-aws/v2/internal/controller/cluster/kinesisvideo/stream"
 )
 
 // Setup_kinesisvideo creates all controllers with the supplied logger and adds them to

@@ -16,7 +16,7 @@ import (
 type ConfigurationTemplateInitParameters struct {
 
 	// name of the application to associate with this configuration template
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticbeanstalk/v1beta2.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticbeanstalk/v1beta2.Application
 	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 
 	// Reference to a Application in elasticbeanstalk to populate application.
@@ -73,7 +73,7 @@ type ConfigurationTemplateObservation struct {
 type ConfigurationTemplateParameters struct {
 
 	// name of the application to associate with this configuration template
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elasticbeanstalk/v1beta2.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticbeanstalk/v1beta2.Application
 	// +kubebuilder:validation:Optional
 	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 

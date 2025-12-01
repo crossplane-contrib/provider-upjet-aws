@@ -137,7 +137,7 @@ type CloudwatchLogsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the CloudWatch log group that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
@@ -165,7 +165,7 @@ type CloudwatchLogsParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// The name of the CloudWatch log group that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -209,8 +209,8 @@ type ConnectorInitParameters struct {
 	Plugin []PluginInitParameters `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
@@ -338,8 +338,8 @@ type ConnectorParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
@@ -364,8 +364,8 @@ type ConnectorParameters struct {
 type CustomPluginInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a CustomPlugin in kafkaconnect to populate arn.
@@ -392,8 +392,8 @@ type CustomPluginObservation struct {
 type CustomPluginParameters struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafkaconnect/v1beta1.CustomPlugin
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -413,7 +413,7 @@ type CustomPluginParameters struct {
 type FirehoseInitParameters struct {
 
 	// The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
@@ -441,7 +441,7 @@ type FirehoseObservation struct {
 type FirehoseParameters struct {
 
 	// The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
@@ -586,7 +586,7 @@ type ProvisionedCapacityParameters struct {
 type S3InitParameters struct {
 
 	// The name of the S3 bucket that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -619,7 +619,7 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// The name of the S3 bucket that is the destination for log delivery.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -689,7 +689,7 @@ type VPCInitParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// The security groups for the connector.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
@@ -704,7 +704,7 @@ type VPCInitParameters struct {
 	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// The subnets for the connector.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +listType=set
@@ -733,7 +733,7 @@ type VPCParameters struct {
 	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// The security groups for the connector.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
@@ -749,7 +749,7 @@ type VPCParameters struct {
 	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// The subnets for the connector.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +kubebuilder:validation:Optional
@@ -760,8 +760,8 @@ type VPCParameters struct {
 type WorkerConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a WorkerConfiguration in kafkaconnect to populate arn.
@@ -788,8 +788,8 @@ type WorkerConfigurationObservation struct {
 type WorkerConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the worker configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafkaconnect/v1beta1.WorkerConfiguration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

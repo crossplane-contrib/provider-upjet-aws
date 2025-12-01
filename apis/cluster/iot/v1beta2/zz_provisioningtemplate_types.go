@@ -54,8 +54,8 @@ type ProvisioningTemplateInitParameters struct {
 	PreProvisioningHook *PreProvisioningHookInitParameters `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
 
 	// The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate provisioningRoleArn.
@@ -133,8 +133,8 @@ type ProvisioningTemplateParameters struct {
 	PreProvisioningHook *PreProvisioningHookParameters `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
 
 	// The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
 

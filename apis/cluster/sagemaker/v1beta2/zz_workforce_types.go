@@ -16,7 +16,7 @@ import (
 type CognitoConfigInitParameters struct {
 
 	// The client ID for your Amazon Cognito user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolClient
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
@@ -29,7 +29,7 @@ type CognitoConfigInitParameters struct {
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// ID for your Amazon Cognito user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("user_pool_id",false)
 	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`
 
@@ -54,7 +54,7 @@ type CognitoConfigObservation struct {
 type CognitoConfigParameters struct {
 
 	// The client ID for your Amazon Cognito user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolClient
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -68,7 +68,7 @@ type CognitoConfigParameters struct {
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// ID for your Amazon Cognito user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("user_pool_id",false)
 	// +kubebuilder:validation:Optional
 	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`

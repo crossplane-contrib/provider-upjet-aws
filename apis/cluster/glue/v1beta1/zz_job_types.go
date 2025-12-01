@@ -87,7 +87,7 @@ type JobInitParameters struct {
 	Command []CommandInitParameters `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The list of connections used for this job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Connection
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
 	// References to Connection in glue to populate connections.
@@ -140,8 +140,8 @@ type JobInitParameters struct {
 	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
 	// The ARN of the IAM role associated with this job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -259,7 +259,7 @@ type JobParameters struct {
 	Command []CommandParameters `json:"command,omitempty" tf:"command,omitempty"`
 
 	// The list of connections used for this job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glue/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
 
@@ -331,8 +331,8 @@ type JobParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the IAM role associated with this job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

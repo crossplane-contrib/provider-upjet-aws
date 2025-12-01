@@ -16,7 +16,7 @@ import (
 type MetricsDestinationInitParameters struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rum/v1beta2.AppMonitor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rum/v1beta2.AppMonitor
 	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
 
 	// Reference to a AppMonitor in rum to populate appMonitorName.
@@ -34,8 +34,8 @@ type MetricsDestinationInitParameters struct {
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamRoleArn.
@@ -72,7 +72,7 @@ type MetricsDestinationObservation struct {
 type MetricsDestinationParameters struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rum/v1beta2.AppMonitor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rum/v1beta2.AppMonitor
 	// +kubebuilder:validation:Optional
 	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
 
@@ -93,8 +93,8 @@ type MetricsDestinationParameters struct {
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 

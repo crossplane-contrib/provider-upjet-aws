@@ -22,7 +22,7 @@ type PermissionInitParameters struct {
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
 	// Name or ARN of the Lambda function
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Reference to a Function in lambda to populate functionName.
@@ -43,7 +43,7 @@ type PermissionInitParameters struct {
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
 	// Lambda function version or alias name
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Alias
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Alias
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// Reference to a Alias in lambda to populate qualifier.
@@ -120,7 +120,7 @@ type PermissionParameters struct {
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
 	// Name or ARN of the Lambda function
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
@@ -145,7 +145,7 @@ type PermissionParameters struct {
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
 	// Lambda function version or alias name
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta2.Alias
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Alias
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 

@@ -20,7 +20,7 @@ type NotificationInitParameters struct {
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// The SNS Topic ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
 
@@ -51,7 +51,7 @@ type NotificationParameters struct {
 	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// The SNS Topic ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`

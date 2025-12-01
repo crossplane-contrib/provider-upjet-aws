@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	firewall "github.com/upbound/provider-aws/internal/controller/cluster/networkfirewall/firewall"
-	firewallpolicy "github.com/upbound/provider-aws/internal/controller/cluster/networkfirewall/firewallpolicy"
-	loggingconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/networkfirewall/loggingconfiguration"
-	rulegroup "github.com/upbound/provider-aws/internal/controller/cluster/networkfirewall/rulegroup"
+	firewall "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/firewall"
+	firewallpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/firewallpolicy"
+	loggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/loggingconfiguration"
+	rulegroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/networkfirewall/rulegroup"
 )
 
 // Setup_networkfirewall creates all controllers with the supplied logger and adds them to

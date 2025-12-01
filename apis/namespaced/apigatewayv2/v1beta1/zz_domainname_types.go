@@ -17,8 +17,8 @@ import (
 type DomainNameConfigurationInitParameters struct {
 
 	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/acm/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Reference to a Certificate in acm to populate certificateArn.
@@ -69,8 +69,8 @@ type DomainNameConfigurationObservation struct {
 type DomainNameConfigurationParameters struct {
 
 	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/acm/v1beta1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 

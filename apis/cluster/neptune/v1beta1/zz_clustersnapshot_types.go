@@ -16,7 +16,7 @@ import (
 type ClusterSnapshotInitParameters struct {
 
 	// The DB Cluster Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta2.Cluster
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in neptune to populate dbClusterIdentifier.
@@ -81,7 +81,7 @@ type ClusterSnapshotObservation struct {
 type ClusterSnapshotParameters struct {
 
 	// The DB Cluster Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/neptune/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/neptune/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 

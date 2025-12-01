@@ -16,7 +16,7 @@ import (
 type PolicyAttributeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
@@ -40,7 +40,7 @@ type PolicyAttributeParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_name",false)
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -57,7 +57,7 @@ type PolicyAttributeParameters struct {
 type PolicyInitParameters struct {
 
 	// The load balancer on which the policy is defined.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta2.ELB
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// Reference to a ELB in elb to populate loadBalancerName.
@@ -103,7 +103,7 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// The load balancer on which the policy is defined.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elb/v1beta2.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta2.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 

@@ -67,7 +67,7 @@ type RuleGroupNamespaceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ID of the prometheus workspace the rule group namespace should be linked to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/amp/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amp/v1beta1.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

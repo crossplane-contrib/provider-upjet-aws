@@ -19,8 +19,8 @@ type KinesisConfigurationInitParameters struct {
 	AggregationEnabled *bool `json:"aggregationEnabled,omitempty" tf:"aggregation_enabled,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
 	// Reference to a Stream in kinesis to populate streamArn.
@@ -48,8 +48,8 @@ type KinesisConfigurationParameters struct {
 	AggregationEnabled *bool `json:"aggregationEnabled,omitempty" tf:"aggregation_enabled,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kinesis/v1beta2.Stream
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
@@ -74,8 +74,8 @@ type StreamInitParameters struct {
 	KinesisConfiguration *KinesisConfigurationInitParameters `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
 
 	// The name of the QLDB ledger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/qldb/v1beta1.Ledger
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/qldb/v1beta1.Ledger
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	LedgerName *string `json:"ledgerName,omitempty" tf:"ledger_name,omitempty"`
 
 	// Reference to a Ledger in qldb to populate ledgerName.
@@ -87,8 +87,8 @@ type StreamInitParameters struct {
 	LedgerNameSelector *v1.Selector `json:"ledgerNameSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -161,8 +161,8 @@ type StreamParameters struct {
 	KinesisConfiguration *KinesisConfigurationParameters `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
 
 	// The name of the QLDB ledger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/qldb/v1beta1.Ledger
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/qldb/v1beta1.Ledger
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	LedgerName *string `json:"ledgerName,omitempty" tf:"ledger_name,omitempty"`
 
@@ -180,8 +180,8 @@ type StreamParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

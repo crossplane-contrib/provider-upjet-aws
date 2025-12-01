@@ -16,7 +16,7 @@ import (
 type DeadLetterConfigInitParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -38,7 +38,7 @@ type DeadLetterConfigObservation struct {
 type DeadLetterConfigParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
@@ -96,7 +96,7 @@ type EphemeralStorageParameters struct {
 type FileSystemConfigInitParameters struct {
 
 	// ARN of the Amazon EFS Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -124,7 +124,7 @@ type FileSystemConfigObservation struct {
 type FileSystemConfigParameters struct {
 
 	// ARN of the Amazon EFS Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -175,7 +175,7 @@ type FunctionInitParameters struct {
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyArn.
@@ -187,7 +187,7 @@ type FunctionInitParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
@@ -223,7 +223,7 @@ type FunctionInitParameters struct {
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
 	// +listType=set
@@ -233,8 +233,8 @@ type FunctionInitParameters struct {
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
 	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Reference to a Role in iam to populate role.
@@ -249,7 +249,7 @@ type FunctionInitParameters struct {
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. One of filename, image_uri, or s3_bucket must be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
@@ -476,7 +476,7 @@ type FunctionParameters struct {
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
 	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -489,7 +489,7 @@ type FunctionParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1.LayerVersion
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
@@ -536,7 +536,7 @@ type FunctionParameters struct {
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -548,8 +548,8 @@ type FunctionParameters struct {
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
 	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -566,7 +566,7 @@ type FunctionParameters struct {
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. One of filename, image_uri, or s3_bucket must be specified.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
@@ -668,7 +668,7 @@ type LoggingConfigInitParameters struct {
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
 	// CloudWatch log group where logs are sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
@@ -709,7 +709,7 @@ type LoggingConfigParameters struct {
 	LogFormat *string `json:"logFormat" tf:"log_format,omitempty"`
 
 	// CloudWatch log group where logs are sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -781,7 +781,7 @@ type VPCConfigInitParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs associated with the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
@@ -796,7 +796,7 @@ type VPCConfigInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs associated with the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -835,7 +835,7 @@ type VPCConfigParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs associated with the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -851,7 +851,7 @@ type VPCConfigParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs associated with the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional

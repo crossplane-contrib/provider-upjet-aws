@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	graph "github.com/upbound/provider-aws/internal/controller/namespaced/detective/graph"
-	invitationaccepter "github.com/upbound/provider-aws/internal/controller/namespaced/detective/invitationaccepter"
-	member "github.com/upbound/provider-aws/internal/controller/namespaced/detective/member"
+	graph "github.com/upbound/provider-aws/v2/internal/controller/namespaced/detective/graph"
+	invitationaccepter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/detective/invitationaccepter"
+	member "github.com/upbound/provider-aws/v2/internal/controller/namespaced/detective/member"
 )
 
 // Setup_detective creates all controllers with the supplied logger and adds them to

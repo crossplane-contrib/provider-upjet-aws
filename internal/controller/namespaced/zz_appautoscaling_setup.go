@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	policy "github.com/upbound/provider-aws/internal/controller/namespaced/appautoscaling/policy"
-	scheduledaction "github.com/upbound/provider-aws/internal/controller/namespaced/appautoscaling/scheduledaction"
-	target "github.com/upbound/provider-aws/internal/controller/namespaced/appautoscaling/target"
+	policy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appautoscaling/policy"
+	scheduledaction "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appautoscaling/scheduledaction"
+	target "github.com/upbound/provider-aws/v2/internal/controller/namespaced/appautoscaling/target"
 )
 
 // Setup_appautoscaling creates all controllers with the supplied logger and adds them to

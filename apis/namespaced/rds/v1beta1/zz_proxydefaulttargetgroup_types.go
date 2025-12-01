@@ -82,7 +82,7 @@ type ProxyDefaultTargetGroupInitParameters struct {
 	ConnectionPoolConfig *ConnectionPoolConfigInitParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
 	// Name of the RDS DB Proxy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Proxy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 
 	// Reference to a Proxy in rds to populate dbProxyName.
@@ -123,7 +123,7 @@ type ProxyDefaultTargetGroupParameters struct {
 	ConnectionPoolConfig *ConnectionPoolConfigParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
 
 	// Name of the RDS DB Proxy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/rds/v1beta1.Proxy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.Proxy
 	// +kubebuilder:validation:Optional
 	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
 

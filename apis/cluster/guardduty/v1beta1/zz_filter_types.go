@@ -157,7 +157,7 @@ type FilterParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of a GuardDuty detector, attached to your account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/guardduty/v1beta1.Detector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`

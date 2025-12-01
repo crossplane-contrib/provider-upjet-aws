@@ -17,7 +17,7 @@ import (
 type AttachmentInitParameters struct {
 
 	// The name of the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
 	// Reference to a ELB in elb to populate elb.
@@ -29,7 +29,7 @@ type AttachmentInitParameters struct {
 	ELBSelector *v1.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
 
 	// Instance ID to place in the ELB pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
 	// Reference to a Instance in ec2 to populate instance.
@@ -59,7 +59,7 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 
 	// The name of the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
@@ -72,7 +72,7 @@ type AttachmentParameters struct {
 	ELBSelector *v1.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
 
 	// Instance ID to place in the ELB pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 

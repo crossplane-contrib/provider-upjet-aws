@@ -17,7 +17,7 @@ import (
 type DelegatedAdministratorInitParameters struct {
 
 	// The account ID number of the member account in the organization to register as a delegated administrator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/organizations/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/organizations/v1beta1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in organizations to populate accountId.
@@ -68,7 +68,7 @@ type DelegatedAdministratorObservation struct {
 type DelegatedAdministratorParameters struct {
 
 	// The account ID number of the member account in the organization to register as a delegated administrator.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/organizations/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/organizations/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 

@@ -49,7 +49,7 @@ type CustomerManagedPolicyAttachmentParameters struct {
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssoadmin/v1beta1.PermissionSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
@@ -71,7 +71,7 @@ type CustomerManagedPolicyAttachmentParameters struct {
 type CustomerManagedPolicyReferenceInitParameters struct {
 
 	// Name of the customer managed IAM Policy to be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	// +crossplane:generate:reference:refFieldName=PolicyNameRef
 	// +crossplane:generate:reference:selectorFieldName=PolicyNameSelector
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -100,7 +100,7 @@ type CustomerManagedPolicyReferenceObservation struct {
 type CustomerManagedPolicyReferenceParameters struct {
 
 	// Name of the customer managed IAM Policy to be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	// +crossplane:generate:reference:refFieldName=PolicyNameRef
 	// +crossplane:generate:reference:selectorFieldName=PolicyNameSelector
 	// +kubebuilder:validation:Optional

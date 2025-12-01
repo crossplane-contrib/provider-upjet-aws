@@ -25,7 +25,7 @@ type VaultLockInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The name of the Glacier Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glacier/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glacier/v1beta2.Vault
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 
 	// Reference to a Vault in glacier to populate vaultName.
@@ -79,7 +79,7 @@ type VaultLockParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the Glacier Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/glacier/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glacier/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 

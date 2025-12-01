@@ -20,7 +20,7 @@ type RuleAssociationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the resolver rule that you want to associate with the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53resolver/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53resolver/v1beta1.Rule
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
 
@@ -33,7 +33,7 @@ type RuleAssociationInitParameters struct {
 	ResolverRuleIDSelector *v1.NamespacedSelector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC that you want to associate the resolver rule with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Reference to a VPC in ec2 to populate vpcId.
@@ -76,7 +76,7 @@ type RuleAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the resolver rule that you want to associate with the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53resolver/v1beta1.Rule
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53resolver/v1beta1.Rule
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
@@ -90,7 +90,7 @@ type RuleAssociationParameters struct {
 	ResolverRuleIDSelector *v1.NamespacedSelector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC that you want to associate the resolver rule with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 

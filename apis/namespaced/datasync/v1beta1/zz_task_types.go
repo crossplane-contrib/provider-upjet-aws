@@ -341,8 +341,8 @@ type ScheduleParameters struct {
 type TaskInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
@@ -354,7 +354,7 @@ type TaskInitParameters struct {
 	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of destination DataSync Location.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/datasync/v1beta1.LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/datasync/v1beta1.LocationS3
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
 	// Reference to a LocationS3 in datasync to populate destinationLocationArn.
@@ -381,7 +381,7 @@ type TaskInitParameters struct {
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Amazon Resource Name (ARN) of source DataSync Location.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/datasync/v1beta1.LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/datasync/v1beta1.LocationS3
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
 	// Reference to a LocationS3 in datasync to populate sourceLocationArn.
@@ -457,8 +457,8 @@ type TaskObservation struct {
 type TaskParameters struct {
 
 	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
@@ -471,7 +471,7 @@ type TaskParameters struct {
 	CloudwatchLogGroupArnSelector *v1.NamespacedSelector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of destination DataSync Location.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/datasync/v1beta1.LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/datasync/v1beta1.LocationS3
 	// +kubebuilder:validation:Optional
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
@@ -509,7 +509,7 @@ type TaskParameters struct {
 	Schedule *ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Amazon Resource Name (ARN) of source DataSync Location.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/datasync/v1beta1.LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/datasync/v1beta1.LocationS3
 	// +kubebuilder:validation:Optional
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 

@@ -20,7 +20,7 @@ type VPCIpamScopeInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the IPAM for which you're creating this scope.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpam
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpam
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 
 	// Reference to a VPCIpam in ec2 to populate ipamId.
@@ -81,7 +81,7 @@ type VPCIpamScopeParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the IPAM for which you're creating this scope.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpam
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpam
 	// +kubebuilder:validation:Optional
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 

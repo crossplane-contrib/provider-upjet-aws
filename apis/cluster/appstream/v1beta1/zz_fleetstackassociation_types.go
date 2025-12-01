@@ -35,7 +35,7 @@ type FleetStackAssociationObservation struct {
 type FleetStackAssociationParameters struct {
 
 	// Name of the fleet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta2.Fleet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appstream/v1beta2.Fleet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	FleetName *string `json:"fleetName,omitempty" tf:"fleet_name,omitempty"`
@@ -54,7 +54,7 @@ type FleetStackAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the stack.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/appstream/v1beta2.Stack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appstream/v1beta2.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`

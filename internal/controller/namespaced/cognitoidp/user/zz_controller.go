@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1"
-	features "github.com/upbound/provider-aws/internal/features"
+	v1beta1 "github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1"
+	features "github.com/upbound/provider-aws/v2/internal/features"
 )
 
 // SetupGated adds a controller that reconciles User managed resources.

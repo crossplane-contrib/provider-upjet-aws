@@ -1327,8 +1327,8 @@ type ChannelInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Concise argument description.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -1474,8 +1474,8 @@ type ChannelParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Concise argument description.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -5170,7 +5170,7 @@ type InputAttachmentsInitParameters struct {
 	InputAttachmentName *string `json:"inputAttachmentName,omitempty" tf:"input_attachment_name,omitempty"`
 
 	// The ID of the input.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.Input
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/medialive/v1beta1.Input
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 
@@ -5212,7 +5212,7 @@ type InputAttachmentsParameters struct {
 	InputAttachmentName *string `json:"inputAttachmentName" tf:"input_attachment_name,omitempty"`
 
 	// The ID of the input.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/medialive/v1beta1.Input
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/medialive/v1beta1.Input
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`

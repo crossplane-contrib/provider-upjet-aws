@@ -16,7 +16,7 @@ import (
 type InstancePublicPortsInitParameters struct {
 
 	// Name of the instance for which to open ports.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lightsail/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
@@ -50,7 +50,7 @@ type InstancePublicPortsObservation struct {
 type InstancePublicPortsParameters struct {
 
 	// Name of the instance for which to open ports.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/lightsail/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 

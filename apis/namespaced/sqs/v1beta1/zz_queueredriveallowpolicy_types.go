@@ -17,8 +17,8 @@ import (
 type QueueRedriveAllowPolicyInitParameters struct {
 
 	// The URL of the SQS Queue to which to attach the policy
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 
 	// Reference to a Queue in sqs to populate queueUrl.
@@ -50,8 +50,8 @@ type QueueRedriveAllowPolicyObservation struct {
 type QueueRedriveAllowPolicyParameters struct {
 
 	// The URL of the SQS Queue to which to attach the policy
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	app "github.com/upbound/provider-aws/internal/controller/cluster/deploy/app"
-	deploymentconfig "github.com/upbound/provider-aws/internal/controller/cluster/deploy/deploymentconfig"
-	deploymentgroup "github.com/upbound/provider-aws/internal/controller/cluster/deploy/deploymentgroup"
+	app "github.com/upbound/provider-aws/v2/internal/controller/cluster/deploy/app"
+	deploymentconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/deploy/deploymentconfig"
+	deploymentgroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/deploy/deploymentgroup"
 )
 
 // Setup_deploy creates all controllers with the supplied logger and adds them to

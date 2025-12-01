@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/cluster"
-	clusterendpoint "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/clusterendpoint"
-	clusterinstance "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/clusterinstance"
-	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/clusterparametergroup"
-	clustersnapshot "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/eventsubscription"
-	globalcluster "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/globalcluster"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/parametergroup"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/neptune/subnetgroup"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/cluster"
+	clusterendpoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/clusterendpoint"
+	clusterinstance "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/clusterinstance"
+	clusterparametergroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/clusterparametergroup"
+	clustersnapshot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/clustersnapshot"
+	eventsubscription "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/eventsubscription"
+	globalcluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/globalcluster"
+	parametergroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/parametergroup"
+	subnetgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/neptune/subnetgroup"
 )
 
 // Setup_neptune creates all controllers with the supplied logger and adds them to

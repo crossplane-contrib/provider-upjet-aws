@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	endpointaccess "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/endpointaccess"
-	redshiftserverlessnamespace "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/redshiftserverlessnamespace"
-	resourcepolicy "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/resourcepolicy"
-	snapshot "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/snapshot"
-	usagelimit "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/usagelimit"
-	workgroup "github.com/upbound/provider-aws/internal/controller/namespaced/redshiftserverless/workgroup"
+	endpointaccess "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/endpointaccess"
+	redshiftserverlessnamespace "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/redshiftserverlessnamespace"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/resourcepolicy"
+	snapshot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/snapshot"
+	usagelimit "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/usagelimit"
+	workgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/redshiftserverless/workgroup"
 )
 
 // Setup_redshiftserverless creates all controllers with the supplied logger and adds them to

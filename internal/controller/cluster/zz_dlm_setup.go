@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	lifecyclepolicy "github.com/upbound/provider-aws/internal/controller/cluster/dlm/lifecyclepolicy"
+	lifecyclepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/dlm/lifecyclepolicy"
 )
 
 // Setup_dlm creates all controllers with the supplied logger and adds them to

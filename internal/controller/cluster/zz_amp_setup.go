@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/cluster/amp/alertmanagerdefinition"
-	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/cluster/amp/rulegroupnamespace"
-	scraper "github.com/upbound/provider-aws/internal/controller/cluster/amp/scraper"
-	workspace "github.com/upbound/provider-aws/internal/controller/cluster/amp/workspace"
+	alertmanagerdefinition "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/alertmanagerdefinition"
+	rulegroupnamespace "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/rulegroupnamespace"
+	scraper "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/scraper"
+	workspace "github.com/upbound/provider-aws/v2/internal/controller/cluster/amp/workspace"
 )
 
 // Setup_amp creates all controllers with the supplied logger and adds them to

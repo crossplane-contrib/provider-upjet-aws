@@ -182,7 +182,7 @@ type QueryArgProfilesInitParameters struct {
 type QueryArgProfilesItemsInitParameters struct {
 
 	// The profile ID for a field-level encryption content type-profile mapping.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta2.FieldLevelEncryptionProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta2.FieldLevelEncryptionProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
 
@@ -210,7 +210,7 @@ type QueryArgProfilesItemsObservation struct {
 type QueryArgProfilesItemsParameters struct {
 
 	// The profile ID for a field-level encryption content type-profile mapping.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudfront/v1beta2.FieldLevelEncryptionProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta2.FieldLevelEncryptionProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`

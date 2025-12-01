@@ -25,7 +25,7 @@ type TableItemInitParameters struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Name of the table to contain the item.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in dynamodb to populate tableName.
@@ -78,7 +78,7 @@ type TableItemParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the table to contain the item.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/dynamodb/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dynamodb/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

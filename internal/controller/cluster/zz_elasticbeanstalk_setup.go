@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	application "github.com/upbound/provider-aws/internal/controller/cluster/elasticbeanstalk/application"
-	applicationversion "github.com/upbound/provider-aws/internal/controller/cluster/elasticbeanstalk/applicationversion"
-	configurationtemplate "github.com/upbound/provider-aws/internal/controller/cluster/elasticbeanstalk/configurationtemplate"
+	application "github.com/upbound/provider-aws/v2/internal/controller/cluster/elasticbeanstalk/application"
+	applicationversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/elasticbeanstalk/applicationversion"
+	configurationtemplate "github.com/upbound/provider-aws/v2/internal/controller/cluster/elasticbeanstalk/configurationtemplate"
 )
 
 // Setup_elasticbeanstalk creates all controllers with the supplied logger and adds them to

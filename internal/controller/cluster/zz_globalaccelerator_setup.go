@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accelerator "github.com/upbound/provider-aws/internal/controller/cluster/globalaccelerator/accelerator"
-	endpointgroup "github.com/upbound/provider-aws/internal/controller/cluster/globalaccelerator/endpointgroup"
-	listener "github.com/upbound/provider-aws/internal/controller/cluster/globalaccelerator/listener"
+	accelerator "github.com/upbound/provider-aws/v2/internal/controller/cluster/globalaccelerator/accelerator"
+	endpointgroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/globalaccelerator/endpointgroup"
+	listener "github.com/upbound/provider-aws/v2/internal/controller/cluster/globalaccelerator/listener"
 )
 
 // Setup_globalaccelerator creates all controllers with the supplied logger and adds them to

@@ -17,7 +17,7 @@ import (
 type AccessPointPolicyInitParameters struct {
 
 	// The ARN of the access point that you want to associate with the specified policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
 
@@ -55,7 +55,7 @@ type AccessPointPolicyObservation struct {
 type AccessPointPolicyParameters struct {
 
 	// The ARN of the access point that you want to associate with the specified policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`

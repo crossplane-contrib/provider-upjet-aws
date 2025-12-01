@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	keyspace "github.com/upbound/provider-aws/internal/controller/cluster/keyspaces/keyspace"
-	table "github.com/upbound/provider-aws/internal/controller/cluster/keyspaces/table"
+	keyspace "github.com/upbound/provider-aws/v2/internal/controller/cluster/keyspaces/keyspace"
+	table "github.com/upbound/provider-aws/v2/internal/controller/cluster/keyspaces/table"
 )
 
 // Setup_keyspaces creates all controllers with the supplied logger and adds them to

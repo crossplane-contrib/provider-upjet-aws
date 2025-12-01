@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	channel "github.com/upbound/provider-aws/internal/controller/namespaced/ivs/channel"
-	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/ivs/recordingconfiguration"
+	channel "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ivs/channel"
+	recordingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ivs/recordingconfiguration"
 )
 
 // Setup_ivs creates all controllers with the supplied logger and adds them to

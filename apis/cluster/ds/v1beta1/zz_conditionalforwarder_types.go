@@ -44,7 +44,7 @@ type ConditionalForwarderParameters struct {
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// ID of directory.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ds/v1beta2.Directory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta2.Directory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	profile "github.com/upbound/provider-aws/internal/controller/cluster/rolesanywhere/profile"
+	profile "github.com/upbound/provider-aws/v2/internal/controller/cluster/rolesanywhere/profile"
 )
 
 // Setup_rolesanywhere creates all controllers with the supplied logger and adds them to

@@ -68,7 +68,7 @@ type ClusterConfigurationParameters struct {
 type SnapshotInitParameters struct {
 
 	// Name of the MemoryDB cluster to take a snapshot of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/memorydb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in memorydb to populate clusterName.
@@ -80,7 +80,7 @@ type SnapshotInitParameters struct {
 	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// ARN of the KMS key used to encrypt the snapshot at rest.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyArn.
@@ -132,7 +132,7 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// Name of the MemoryDB cluster to take a snapshot of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/memorydb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -145,7 +145,7 @@ type SnapshotParameters struct {
 	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// ARN of the KMS key used to encrypt the snapshot at rest.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
