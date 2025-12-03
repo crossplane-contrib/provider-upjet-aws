@@ -59,6 +59,7 @@ spec:
               forProvider:
                 properties:
                   brokerId:
+                    description: The ID of the broker where the user will be created.
                     type: string
                   brokerIdRef:
                     description: Reference to a Broker in mq to populate brokerId.
@@ -144,13 +145,13 @@ spec:
                     description: Whether to enable console access for the user.
                     type: boolean
                   groups:
+                    description: List of groups to which the user belongs.
                     items:
                       type: string
                     type: array
                   passwordSecretRef:
-                    description: |-
-                      A LocalSecretKeySelector is a reference to a secret key
-                      in the same namespace with the referencing object.
+                    description: The password for the user. Must be at least 12 characters
+                      long.
                     properties:
                       key:
                         type: string
@@ -161,13 +162,20 @@ spec:
                     - key
                     - name
                     type: object
+                  pending:
+                    description: Tracks pending modifications returned by the AWS
+                      MQ API. This field allows you to monitor changes that are actively
+                      being processed before they are fully applied.
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   replicationUser:
+                    description: Whether the user is a replication user.
                     type: boolean
                   username:
+                    description: The username for the MQ user.
                     type: string
                 required:
                 - region
@@ -186,6 +194,7 @@ spec:
                   autoscaler.
                 properties:
                   brokerId:
+                    description: The ID of the broker where the user will be created.
                     type: string
                   brokerIdRef:
                     description: Reference to a Broker in mq to populate brokerId.
@@ -271,13 +280,13 @@ spec:
                     description: Whether to enable console access for the user.
                     type: boolean
                   groups:
+                    description: List of groups to which the user belongs.
                     items:
                       type: string
                     type: array
                   passwordSecretRef:
-                    description: |-
-                      A LocalSecretKeySelector is a reference to a secret key
-                      in the same namespace with the referencing object.
+                    description: The password for the user. Must be at least 12 characters
+                      long.
                     properties:
                       key:
                         type: string
@@ -288,9 +297,16 @@ spec:
                     - key
                     - name
                     type: object
+                  pending:
+                    description: Tracks pending modifications returned by the AWS
+                      MQ API. This field allows you to monitor changes that are actively
+                      being processed before they are fully applied.
+                    type: object
                   replicationUser:
+                    description: Whether the user is a replication user.
                     type: boolean
                   username:
+                    description: The username for the MQ user.
                     type: string
                 required:
                 - passwordSecretRef
@@ -367,11 +383,13 @@ spec:
               atProvider:
                 properties:
                   brokerId:
+                    description: The ID of the broker where the user will be created.
                     type: string
                   consoleAccess:
                     description: Whether to enable console access for the user.
                     type: boolean
                   groups:
+                    description: List of groups to which the user belongs.
                     items:
                       type: string
                     type: array
@@ -386,6 +404,12 @@ spec:
                         description: The pending console access value if a change
                           to console access is being processed.
                         type: boolean
+                      groups:
+                        description: The pending groups value if a change to groups
+                          is being processed.
+                        items:
+                          type: string
+                        type: array
                       pendingChange:
                         description: The type of pending change. Valid values are
                           CREATE, UPDATE, or DELETE.
@@ -396,8 +420,10 @@ spec:
                       be created in.
                     type: string
                   replicationUser:
+                    description: Whether the user is a replication user.
                     type: boolean
                   username:
+                    description: The username for the MQ user.
                     type: string
                 type: object
               conditions:

@@ -36,6 +36,17 @@ func (in *PendingObservation) DeepCopyInto(out *PendingObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Groups != nil {
+		in, out := &in.Groups, &out.Groups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.PendingChange != nil {
 		in, out := &in.PendingChange, &out.PendingChange
 		*out = new(string)
@@ -130,6 +141,11 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 		}
 	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.Pending != nil {
+		in, out := &in.Pending, &out.Pending
+		*out = new(PendingInitParameters)
+		**out = **in
+	}
 	if in.ReplicationUser != nil {
 		in, out := &in.ReplicationUser, &out.ReplicationUser
 		*out = new(bool)
@@ -280,6 +296,11 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 		}
 	}
 	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.Pending != nil {
+		in, out := &in.Pending, &out.Pending
+		*out = new(PendingParameters)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
