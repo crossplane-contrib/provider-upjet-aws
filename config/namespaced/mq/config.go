@@ -78,7 +78,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.MetaResource = &registry.Resource{
 			ArgumentDocs: make(map[string]string),
 		}
-		r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.`
+		r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Whether to enable console access for the user.`
+		r.MetaResource.ArgumentDocs["pending"] = `- Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.`
+		r.MetaResource.ArgumentDocs["pending.console_access"] = `- The pending console access value if a change to console access is being processed.`
+		r.MetaResource.ArgumentDocs["pending.pending_change"] = `- The type of pending change. Valid values are CREATE, UPDATE, or DELETE.`
 	})
 
 	p.AddResourceConfigurator("aws_mq_configuration", func(r *config.Resource) {

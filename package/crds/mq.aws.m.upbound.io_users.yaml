@@ -141,8 +141,7 @@ spec:
                         type: object
                     type: object
                   consoleAccess:
-                    description: Setting consoleAccess will result in an update loop
-                      till the MQ Broker to which this user belongs is restarted.
+                    description: Whether to enable console access for the user.
                     type: boolean
                   groups:
                     items:
@@ -269,8 +268,7 @@ spec:
                         type: object
                     type: object
                   consoleAccess:
-                    description: Setting consoleAccess will result in an update loop
-                      till the MQ Broker to which this user belongs is restarted.
+                    description: Whether to enable console access for the user.
                     type: boolean
                   groups:
                     items:
@@ -371,8 +369,7 @@ spec:
                   brokerId:
                     type: string
                   consoleAccess:
-                    description: Setting consoleAccess will result in an update loop
-                      till the MQ Broker to which this user belongs is restarted.
+                    description: Whether to enable console access for the user.
                     type: boolean
                   groups:
                     items:
@@ -380,6 +377,20 @@ spec:
                     type: array
                   id:
                     type: string
+                  pending:
+                    description: Tracks pending modifications returned by the AWS
+                      MQ API. This field allows you to monitor changes that are actively
+                      being processed before they are fully applied.
+                    properties:
+                      consoleAccess:
+                        description: The pending console access value if a change
+                          to console access is being processed.
+                        type: boolean
+                      pendingChange:
+                        description: The type of pending change. Valid values are
+                          CREATE, UPDATE, or DELETE.
+                        type: string
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.

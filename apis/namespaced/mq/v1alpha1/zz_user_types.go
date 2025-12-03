@@ -14,6 +14,21 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type PendingInitParameters struct {
+}
+
+type PendingObservation struct {
+
+	// The pending console access value if a change to console access is being processed.
+	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
+
+	// The type of pending change. Valid values are CREATE, UPDATE, or DELETE.
+	PendingChange *string `json:"pendingChange,omitempty" tf:"pending_change,omitempty"`
+}
+
+type PendingParameters struct {
+}
+
 type UserInitParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/mq/v1beta1.Broker
@@ -27,7 +42,7 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.NamespacedSelector `json:"brokerIdSelector,omitempty" tf:"-"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
@@ -42,12 +57,15 @@ type UserInitParameters struct {
 type UserObservation struct {
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
+	Pending *PendingObservation `json:"pending,omitempty" tf:"pending,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -71,7 +89,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.NamespacedSelector `json:"brokerIdSelector,omitempty" tf:"-"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	// +kubebuilder:validation:Optional
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
