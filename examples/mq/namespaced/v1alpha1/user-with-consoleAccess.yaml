@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: mq.aws.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    brokerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-user
+    consoleAccess: true
+    passwordSecretRef:
+      key: password
+      name: mq-secret
+    username: test-user
+    region: us-west-1
+---
+apiVersion: mq.aws.m.upbound.io/v1beta1
+kind: Broker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: user-example-broker
+  namespace: upbound-system
+spec:
+  forProvider:
+    autoMinorVersionUpgrade: true
+    # Due to an existing Terrajet limitation, we cannot use "metadata.name" for "brokerName"
+    # Details can be found in https://github.com/crossplane/terrajet/issues/280
+    brokerName: user-example-broker
+    region: us-west-1
+    securityGroupRefs:
+      - name: example
+    engineType: ActiveMQ
+    engineVersion: "5.18"
+    hostInstanceType: mq.t3.micro
+  # bootstrap users must be specified under spec.initProvider if the Broker.mq
+  # MR is to be used together with User.mq MRs, as the controllers for these
+  # MRs race on the external ActiveMQ broker users if the bootstrap users are
+  # specified under spec.forProvider, and the AWS CreateBroker/mq
+  # REST operation requires at least one user to be specified while
+  # provisioning a broker. Other techniques, such as pausing reconciliations
+  # for the Broker.mq object using the pause annotation, or preventing updates
+  # using the management policies will also prevent this race between
+  # the controllers but the "XRM way" is to use the spec.initProvider API in
+  # this situation.
+  initProvider:
+    user:
+      - passwordSecretRef:
+          key: password
+          name: mq-secret
+        username: admin
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-broker.sh
+  labels:
+    testing.upbound.io/example-name: mq-secret
+  name: mq-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upboundtest!"
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: mq_broker
+    tags:
+      Name: mq_broker

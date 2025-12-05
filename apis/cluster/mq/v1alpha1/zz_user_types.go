@@ -13,8 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type PendingInitParameters struct {
+}
+
+type PendingObservation struct {
+
+	// The pending console access value if a change to console access is being processed.
+	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
+
+	// The pending groups value if a change to groups is being processed.
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
+	// The type of pending change. Valid values are CREATE, UPDATE, or DELETE.
+	PendingChange *string `json:"pendingChange,omitempty" tf:"pending_change,omitempty"`
+}
+
+type PendingParameters struct {
+}
+
 type UserInitParameters struct {
 
+	// The ID of the broker where the user will be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mq/v1beta2.Broker
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
@@ -26,38 +45,54 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
+	// List of groups to which the user belongs.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// The password for the user. Must be at least 12 characters long.
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
+	Pending *PendingInitParameters `json:"pending,omitempty" tf:"pending,omitempty"`
+
+	// Whether the user is a replication user.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
+	// The username for the MQ user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserObservation struct {
+
+	// The ID of the broker where the user will be created.
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
+	// List of groups to which the user belongs.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
+	Pending *PendingObservation `json:"pending,omitempty" tf:"pending,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Whether the user is a replication user.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
+	// The username for the MQ user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserParameters struct {
 
+	// The ID of the broker where the user will be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/mq/v1beta2.Broker
 	// +kubebuilder:validation:Optional
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
@@ -70,23 +105,31 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
-	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
+	// Whether to enable console access for the user.
 	// +kubebuilder:validation:Optional
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
+	// List of groups to which the user belongs.
 	// +kubebuilder:validation:Optional
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// The password for the user. Must be at least 12 characters long.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Tracks pending modifications returned by the AWS MQ API. This field allows you to monitor changes that are actively being processed before they are fully applied.
+	// +kubebuilder:validation:Optional
+	Pending *PendingParameters `json:"pending,omitempty" tf:"pending,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Whether the user is a replication user.
 	// +kubebuilder:validation:Optional
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
+	// The username for the MQ user.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
