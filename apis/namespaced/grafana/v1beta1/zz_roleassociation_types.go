@@ -28,7 +28,7 @@ type RoleAssociationInitParameters struct {
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/grafana/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in grafana to populate workspaceId.
@@ -85,7 +85,7 @@ type RoleAssociationParameters struct {
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/grafana/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/grafana/v1beta1.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

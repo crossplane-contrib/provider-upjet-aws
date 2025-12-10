@@ -48,7 +48,7 @@ type DomainEntryObservation struct {
 type DomainEntryParameters struct {
 
 	// Name of the Lightsail domain in which to create the entry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("domain_name",false)
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`

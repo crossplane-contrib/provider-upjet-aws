@@ -24,8 +24,8 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	ujresource "github.com/crossplane/upjet/v2/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/cluster/eks/v1beta1"
-	"github.com/upbound/provider-aws/internal/clients"
+	"github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta1"
+	"github.com/upbound/provider-aws/v2/internal/clients"
 )
 
 const (

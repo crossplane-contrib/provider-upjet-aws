@@ -20,7 +20,7 @@ type TagInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Transfer Family resource to tag.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/transfer/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -67,7 +67,7 @@ type TagParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Transfer Family resource to tag.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/transfer/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

@@ -17,7 +17,7 @@ import (
 type AttachmentAccepterInitParameters struct {
 
 	// ID of the attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
@@ -30,7 +30,7 @@ type AttachmentAccepterInitParameters struct {
 	AttachmentIDSelector *v1.NamespacedSelector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
 	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("attachment_type",true)
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
@@ -84,7 +84,7 @@ type AttachmentAccepterObservation struct {
 type AttachmentAccepterParameters struct {
 
 	// ID of the attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
@@ -98,7 +98,7 @@ type AttachmentAccepterParameters struct {
 	AttachmentIDSelector *v1.NamespacedSelector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
 	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.VPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("attachment_type",true)
 	// +kubebuilder:validation:Optional
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`

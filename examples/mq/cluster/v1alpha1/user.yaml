@@ -7,6 +7,7 @@ kind: User
 metadata:
   annotations:
     meta.upbound.io/example-id: mq/v1alpha1/user
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -15,9 +16,6 @@ spec:
     brokerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-user
-    # setting consoleAccess will result in an update loop till the broker is
-    # restarted...
-    # consoleAccess: true
     passwordSecretRef:
       key: password
       name: mq-secret
@@ -37,6 +35,7 @@ metadata:
   name: user-example-broker
 spec:
   forProvider:
+    autoMinorVersionUpgrade: true
     # Due to an existing Terrajet limitation, we cannot use "metadata.name" for "brokerName"
     # Details can be found in https://github.com/crossplane/terrajet/issues/280
     brokerName: user-example-broker

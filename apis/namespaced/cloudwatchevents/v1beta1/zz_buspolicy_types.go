@@ -18,7 +18,7 @@ type BusPolicyInitParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
@@ -54,7 +54,7 @@ type BusPolicyParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 

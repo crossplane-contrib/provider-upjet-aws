@@ -33,7 +33,7 @@ type LinkAssociationObservation struct {
 type LinkAssociationParameters struct {
 
 	// ID of the device.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Device
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
@@ -46,7 +46,7 @@ type LinkAssociationParameters struct {
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -60,7 +60,7 @@ type LinkAssociationParameters struct {
 	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta2.Link
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.Link
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	codepipeline "github.com/upbound/provider-aws/internal/controller/namespaced/codepipeline/codepipeline"
-	customactiontype "github.com/upbound/provider-aws/internal/controller/namespaced/codepipeline/customactiontype"
-	webhook "github.com/upbound/provider-aws/internal/controller/namespaced/codepipeline/webhook"
+	codepipeline "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codepipeline/codepipeline"
+	customactiontype "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codepipeline/customactiontype"
+	webhook "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codepipeline/webhook"
 )
 
 // Setup_codepipeline creates all controllers with the supplied logger and adds them to

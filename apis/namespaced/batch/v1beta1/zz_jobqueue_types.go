@@ -17,7 +17,7 @@ import (
 type ComputeEnvironmentOrderInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/batch/v1beta1.ComputeEnvironment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.ComputeEnvironment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ComputeEnvironment *string `json:"computeEnvironment,omitempty" tf:"compute_environment,omitempty"`
 
@@ -45,7 +45,7 @@ type ComputeEnvironmentOrderObservation struct {
 type ComputeEnvironmentOrderParameters struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/batch/v1beta1.ComputeEnvironment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.ComputeEnvironment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ComputeEnvironment *string `json:"computeEnvironment,omitempty" tf:"compute_environment,omitempty"`
@@ -76,7 +76,7 @@ type JobQueueInitParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/batch/v1beta1.SchedulingPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.SchedulingPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SchedulingPolicyArn *string `json:"schedulingPolicyArn,omitempty" tf:"scheduling_policy_arn,omitempty"`
 
@@ -153,7 +153,7 @@ type JobQueueParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/batch/v1beta1.SchedulingPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1.SchedulingPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SchedulingPolicyArn *string `json:"schedulingPolicyArn,omitempty" tf:"scheduling_policy_arn,omitempty"`

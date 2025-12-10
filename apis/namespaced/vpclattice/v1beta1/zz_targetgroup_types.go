@@ -35,7 +35,7 @@ type ConfigInitParameters struct {
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
 	// The ID of the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
 
@@ -99,7 +99,7 @@ type ConfigParameters struct {
 	ProtocolVersion *string `json:"protocolVersion,omitempty" tf:"protocol_version,omitempty"`
 
 	// The ID of the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`

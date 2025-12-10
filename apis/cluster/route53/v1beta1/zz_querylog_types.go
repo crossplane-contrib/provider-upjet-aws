@@ -16,7 +16,7 @@ import (
 type QueryLogInitParameters struct {
 
 	// CloudWatch log group ARN to send query logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
 
@@ -29,7 +29,7 @@ type QueryLogInitParameters struct {
 	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Route53 hosted zone ID to enable query logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
@@ -60,7 +60,7 @@ type QueryLogObservation struct {
 type QueryLogParameters struct {
 
 	// CloudWatch log group ARN to send query logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
@@ -74,7 +74,7 @@ type QueryLogParameters struct {
 	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Route53 hosted zone ID to enable query logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("zone_id",true)
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`

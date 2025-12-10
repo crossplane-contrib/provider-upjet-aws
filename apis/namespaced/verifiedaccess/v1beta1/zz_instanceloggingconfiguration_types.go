@@ -79,7 +79,7 @@ type CloudwatchLogsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the CloudWatch Logs Log Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -108,7 +108,7 @@ type CloudwatchLogsParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// The name of the CloudWatch Logs Log Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
@@ -128,7 +128,7 @@ type InstanceLoggingConfigurationInitParameters struct {
 	AccessLogs *AccessLogsInitParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
 	// The ID of the Verified Access instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/verifiedaccess/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
 
@@ -168,7 +168,7 @@ type InstanceLoggingConfigurationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the Verified Access instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/verifiedaccess/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/verifiedaccess/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VerifiedaccessInstanceID *string `json:"verifiedaccessInstanceId,omitempty" tf:"verifiedaccess_instance_id,omitempty"`
@@ -185,7 +185,7 @@ type InstanceLoggingConfigurationParameters struct {
 type KinesisDataFirehoseInitParameters struct {
 
 	// The name of the delivery stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
@@ -213,7 +213,7 @@ type KinesisDataFirehoseObservation struct {
 type KinesisDataFirehoseParameters struct {
 
 	// The name of the delivery stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
@@ -234,7 +234,7 @@ type KinesisDataFirehoseParameters struct {
 type S3InitParameters struct {
 
 	// The name of S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -274,7 +274,7 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// The name of S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`

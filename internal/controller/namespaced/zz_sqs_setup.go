@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	queue "github.com/upbound/provider-aws/internal/controller/namespaced/sqs/queue"
-	queuepolicy "github.com/upbound/provider-aws/internal/controller/namespaced/sqs/queuepolicy"
-	queueredriveallowpolicy "github.com/upbound/provider-aws/internal/controller/namespaced/sqs/queueredriveallowpolicy"
-	queueredrivepolicy "github.com/upbound/provider-aws/internal/controller/namespaced/sqs/queueredrivepolicy"
+	queue "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sqs/queue"
+	queuepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sqs/queuepolicy"
+	queueredriveallowpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sqs/queueredriveallowpolicy"
+	queueredrivepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sqs/queueredrivepolicy"
 )
 
 // Setup_sqs creates all controllers with the supplied logger and adds them to

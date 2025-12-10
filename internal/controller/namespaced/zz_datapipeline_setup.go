@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	pipeline "github.com/upbound/provider-aws/internal/controller/namespaced/datapipeline/pipeline"
+	pipeline "github.com/upbound/provider-aws/v2/internal/controller/namespaced/datapipeline/pipeline"
 )
 
 // Setup_datapipeline creates all controllers with the supplied logger and adds them to

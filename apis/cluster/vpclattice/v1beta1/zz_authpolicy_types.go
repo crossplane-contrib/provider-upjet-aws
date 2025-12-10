@@ -19,7 +19,7 @@ type AuthPolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
@@ -66,7 +66,7 @@ type AuthPolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the service network or service for which the policy is created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`

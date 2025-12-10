@@ -118,7 +118,7 @@ type OntapStorageVirtualMachineInitParameters struct {
 	ActiveDirectoryConfiguration *ActiveDirectoryConfigurationInitParameters `json:"activeDirectoryConfiguration,omitempty" tf:"active_directory_configuration,omitempty"`
 
 	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/fsx/v1beta1.OntapFileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/fsx/v1beta1.OntapFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
@@ -193,7 +193,7 @@ type OntapStorageVirtualMachineParameters struct {
 	ActiveDirectoryConfiguration *ActiveDirectoryConfigurationParameters `json:"activeDirectoryConfiguration,omitempty" tf:"active_directory_configuration,omitempty"`
 
 	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/fsx/v1beta1.OntapFileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/fsx/v1beta1.OntapFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`

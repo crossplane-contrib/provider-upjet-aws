@@ -19,8 +19,8 @@ type PullThroughCacheRuleInitParameters struct {
 	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
 	// The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry. See AWS Document - Setting up permissions for cross-account ECR to ECR PTC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CustomRoleArn *string `json:"customRoleArn,omitempty" tf:"custom_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate customRoleArn.
@@ -75,8 +75,8 @@ type PullThroughCacheRuleParameters struct {
 	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
 	// The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry. See AWS Document - Setting up permissions for cross-account ECR to ECR PTC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CustomRoleArn *string `json:"customRoleArn,omitempty" tf:"custom_role_arn,omitempty"`
 

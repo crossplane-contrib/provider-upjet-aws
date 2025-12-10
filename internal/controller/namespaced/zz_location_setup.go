@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	geofencecollection "github.com/upbound/provider-aws/internal/controller/namespaced/location/geofencecollection"
-	placeindex "github.com/upbound/provider-aws/internal/controller/namespaced/location/placeindex"
-	routecalculator "github.com/upbound/provider-aws/internal/controller/namespaced/location/routecalculator"
-	tracker "github.com/upbound/provider-aws/internal/controller/namespaced/location/tracker"
-	trackerassociation "github.com/upbound/provider-aws/internal/controller/namespaced/location/trackerassociation"
+	geofencecollection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/location/geofencecollection"
+	placeindex "github.com/upbound/provider-aws/v2/internal/controller/namespaced/location/placeindex"
+	routecalculator "github.com/upbound/provider-aws/v2/internal/controller/namespaced/location/routecalculator"
+	tracker "github.com/upbound/provider-aws/v2/internal/controller/namespaced/location/tracker"
+	trackerassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/location/trackerassociation"
 )
 
 // Setup_location creates all controllers with the supplied logger and adds them to

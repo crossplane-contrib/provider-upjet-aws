@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/cluster/docdb/cluster"
-	clusterinstance "github.com/upbound/provider-aws/internal/controller/cluster/docdb/clusterinstance"
-	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/cluster/docdb/clusterparametergroup"
-	clustersnapshot "github.com/upbound/provider-aws/internal/controller/cluster/docdb/clustersnapshot"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/cluster/docdb/eventsubscription"
-	globalcluster "github.com/upbound/provider-aws/internal/controller/cluster/docdb/globalcluster"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/cluster/docdb/subnetgroup"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/cluster"
+	clusterinstance "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/clusterinstance"
+	clusterparametergroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/clusterparametergroup"
+	clustersnapshot "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/clustersnapshot"
+	eventsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/eventsubscription"
+	globalcluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/globalcluster"
+	subnetgroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/docdb/subnetgroup"
 )
 
 // Setup_docdb creates all controllers with the supplied logger and adds them to

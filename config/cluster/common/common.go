@@ -26,7 +26,7 @@ import (
 
 const (
 	// SelfPackagePath is the golang path for this package.
-	SelfPackagePath = "github.com/upbound/provider-aws/config/cluster/common"
+	SelfPackagePath = "github.com/upbound/provider-aws/v2/config/cluster/common"
 
 	// PathARNExtractor is the golang path to ARNExtractor function
 	// in this package.

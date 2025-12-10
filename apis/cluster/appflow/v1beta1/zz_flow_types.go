@@ -1187,7 +1187,7 @@ type RedshiftParameters struct {
 type S3InitParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.BucketPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -1347,7 +1347,7 @@ type S3OutputFormatConfigPrefixConfigParameters struct {
 type S3Parameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.BucketPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -2012,7 +2012,7 @@ type SourceConnectorPropertiesParameters struct {
 type SourceConnectorPropertiesS3InitParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.BucketPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
@@ -2046,7 +2046,7 @@ type SourceConnectorPropertiesS3Observation struct {
 type SourceConnectorPropertiesS3Parameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta1.BucketPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	locations3 "github.com/upbound/provider-aws/internal/controller/namespaced/datasync/locations3"
-	task "github.com/upbound/provider-aws/internal/controller/namespaced/datasync/task"
+	locations3 "github.com/upbound/provider-aws/v2/internal/controller/namespaced/datasync/locations3"
+	task "github.com/upbound/provider-aws/v2/internal/controller/namespaced/datasync/task"
 )
 
 // Setup_datasync creates all controllers with the supplied logger and adds them to

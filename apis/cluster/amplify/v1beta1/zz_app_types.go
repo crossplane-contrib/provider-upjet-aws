@@ -35,8 +35,8 @@ type AppInitParameters struct {
 	CacheConfig []CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
 	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate computeRoleArn.
@@ -73,8 +73,8 @@ type AppInitParameters struct {
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamServiceRoleArn.
@@ -216,8 +216,8 @@ type AppParameters struct {
 	CacheConfig []CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
 	// AWS Identity and Access Management (IAM) SSR compute role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ComputeRoleArn *string `json:"computeRoleArn,omitempty" tf:"compute_role_arn,omitempty"`
 
@@ -263,8 +263,8 @@ type AppParameters struct {
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 

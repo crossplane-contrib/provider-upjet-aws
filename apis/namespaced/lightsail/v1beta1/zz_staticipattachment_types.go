@@ -17,7 +17,7 @@ import (
 type StaticIPAttachmentInitParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
@@ -30,7 +30,7 @@ type StaticIPAttachmentInitParameters struct {
 	InstanceNameSelector *v1.NamespacedSelector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Name of the allocated static IP.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.StaticIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.StaticIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 
@@ -63,7 +63,7 @@ type StaticIPAttachmentObservation struct {
 type StaticIPAttachmentParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
@@ -82,7 +82,7 @@ type StaticIPAttachmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the allocated static IP.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lightsail/v1beta1.StaticIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lightsail/v1beta1.StaticIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`

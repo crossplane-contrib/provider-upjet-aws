@@ -40,7 +40,7 @@ type VPCEndpointServiceInitParameters struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
@@ -54,7 +54,7 @@ type VPCEndpointServiceInitParameters struct {
 	GatewayLoadBalancerArnsSelector *v1.Selector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
@@ -160,7 +160,7 @@ type VPCEndpointServiceParameters struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -175,7 +175,7 @@ type VPCEndpointServiceParameters struct {
 	GatewayLoadBalancerArnsSelector *v1.Selector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set

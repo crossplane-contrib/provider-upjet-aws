@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	reportdefinition "github.com/upbound/provider-aws/internal/controller/namespaced/cur/reportdefinition"
+	reportdefinition "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cur/reportdefinition"
 )
 
 // Setup_cur creates all controllers with the supplied logger and adds them to

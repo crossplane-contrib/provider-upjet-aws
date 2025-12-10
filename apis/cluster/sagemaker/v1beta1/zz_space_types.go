@@ -111,7 +111,7 @@ type OwnershipSettingsParameters struct {
 type SpaceInitParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -191,7 +191,7 @@ type SpaceObservation struct {
 type SpaceParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`

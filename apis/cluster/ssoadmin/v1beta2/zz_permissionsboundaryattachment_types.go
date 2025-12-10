@@ -45,7 +45,7 @@ type PermissionsBoundaryAttachmentParameters struct {
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ssoadmin/v1beta1.PermissionSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
@@ -71,7 +71,7 @@ type PermissionsBoundaryAttachmentParameters struct {
 type PermissionsBoundaryCustomerManagedPolicyReferenceInitParameters struct {
 
 	// Name of the customer managed IAM Policy to be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Policy in iam to populate name.
@@ -98,7 +98,7 @@ type PermissionsBoundaryCustomerManagedPolicyReferenceObservation struct {
 type PermissionsBoundaryCustomerManagedPolicyReferenceParameters struct {
 
 	// Name of the customer managed IAM Policy to be attached.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Policy
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

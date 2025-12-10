@@ -382,7 +382,7 @@ type EncryptionParameters struct {
 type ExcludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
@@ -414,7 +414,7 @@ type ExcludeObservation struct {
 type ExcludeParameters struct {
 
 	// List of S3 bucket ARNs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -494,7 +494,7 @@ type S3BucketDestinationInitParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -547,7 +547,7 @@ type S3BucketDestinationParameters struct {
 	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`

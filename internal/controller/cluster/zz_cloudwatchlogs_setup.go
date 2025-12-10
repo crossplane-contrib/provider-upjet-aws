@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	definition "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/definition"
-	destination "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/destination"
-	destinationpolicy "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
-	group "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/group"
-	metricfilter "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/metricfilter"
-	resourcepolicy "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/resourcepolicy"
-	stream "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/stream"
-	subscriptionfilter "github.com/upbound/provider-aws/internal/controller/cluster/cloudwatchlogs/subscriptionfilter"
+	definition "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/definition"
+	destination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destination"
+	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
+	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/group"
+	metricfilter "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/metricfilter"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/resourcepolicy"
+	stream "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/stream"
+	subscriptionfilter "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/subscriptionfilter"
 )
 
 // Setup_cloudwatchlogs creates all controllers with the supplied logger and adds them to

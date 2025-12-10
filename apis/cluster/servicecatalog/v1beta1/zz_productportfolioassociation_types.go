@@ -19,7 +19,7 @@ type ProductPortfolioAssociationInitParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta1.Portfolio
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
@@ -31,7 +31,7 @@ type ProductPortfolioAssociationInitParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta2.Product
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate productId.
@@ -75,7 +75,7 @@ type ProductPortfolioAssociationParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta1.Portfolio
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
@@ -88,7 +88,7 @@ type ProductPortfolioAssociationParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/servicecatalog/v1beta2.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/servicecatalog/v1beta2.Product
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 

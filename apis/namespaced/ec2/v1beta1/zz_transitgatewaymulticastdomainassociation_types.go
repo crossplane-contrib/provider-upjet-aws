@@ -17,7 +17,7 @@ import (
 type TransitGatewayMulticastDomainAssociationInitParameters struct {
 
 	// The ID of the subnet to associate with the transit gateway multicast domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -29,7 +29,7 @@ type TransitGatewayMulticastDomainAssociationInitParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -42,7 +42,7 @@ type TransitGatewayMulticastDomainAssociationInitParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway multicast domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayMulticastDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayMulticastDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId,omitempty" tf:"transit_gateway_multicast_domain_id,omitempty"`
 
@@ -82,7 +82,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the subnet to associate with the transit gateway multicast domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -95,7 +95,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
@@ -109,7 +109,7 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway multicast domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGatewayMulticastDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGatewayMulticastDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId,omitempty" tf:"transit_gateway_multicast_domain_id,omitempty"`

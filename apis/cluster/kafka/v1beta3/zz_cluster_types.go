@@ -58,7 +58,7 @@ type BrokerNodeGroupInfoInitParameters struct {
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
 	// A list of subnets to connect to in client VPC (documentation).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
@@ -77,7 +77,7 @@ type BrokerNodeGroupInfoInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -123,7 +123,7 @@ type BrokerNodeGroupInfoParameters struct {
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
 	// A list of subnets to connect to in client VPC (documentation).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
@@ -145,7 +145,7 @@ type BrokerNodeGroupInfoParameters struct {
 	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -227,7 +227,7 @@ type CloudwatchLogsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Name of the Cloudwatch Log Group to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
@@ -255,7 +255,7 @@ type CloudwatchLogsParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Name of the Cloudwatch Log Group to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
@@ -502,8 +502,8 @@ type ClusterParameters struct {
 type ConfigurationInfoInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta1.Configuration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Reference to a Configuration in kafka to populate arn.
@@ -530,8 +530,8 @@ type ConfigurationInfoObservation struct {
 type ConfigurationInfoParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kafka/v1beta1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafka/v1beta1.Configuration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -638,8 +638,8 @@ type EncryptionInTransitParameters struct {
 type EncryptionInfoInitParameters struct {
 
 	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 
 	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
@@ -666,8 +666,8 @@ type EncryptionInfoObservation struct {
 type EncryptionInfoParameters struct {
 
 	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
 
@@ -687,7 +687,7 @@ type EncryptionInfoParameters struct {
 type FirehoseInitParameters struct {
 
 	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
 
@@ -715,7 +715,7 @@ type FirehoseObservation struct {
 type FirehoseParameters struct {
 
 	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/firehose/v1beta2.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
@@ -889,7 +889,7 @@ type PublicAccessParameters struct {
 type S3InitParameters struct {
 
 	// Name of the S3 bucket to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
@@ -922,7 +922,7 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// Name of the S3 bucket to deliver logs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 

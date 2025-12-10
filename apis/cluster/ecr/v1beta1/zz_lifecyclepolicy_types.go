@@ -19,7 +19,7 @@ type LifecyclePolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Name of the repository to apply the policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecr/v1beta2.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecr/v1beta2.Repository
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
 	// Reference to a Repository in ecr to populate repository.
@@ -60,7 +60,7 @@ type LifecyclePolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Name of the repository to apply the policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ecr/v1beta2.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecr/v1beta2.Repository
 	// +kubebuilder:validation:Optional
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 

@@ -49,7 +49,7 @@ type CachingConfigParameters struct {
 type PipelineConfigInitParameters struct {
 
 	// A list of Function objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appsync/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appsync/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("function_id",true)
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
@@ -71,7 +71,7 @@ type PipelineConfigObservation struct {
 type PipelineConfigParameters struct {
 
 	// A list of Function objects.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appsync/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appsync/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("function_id",true)
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
@@ -94,7 +94,7 @@ type ResolverInitParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appsync/v1beta1.Datasource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appsync/v1beta1.Datasource
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Reference to a Datasource in appsync to populate dataSource.
@@ -181,7 +181,7 @@ type ResolverObservation struct {
 type ResolverParameters struct {
 
 	// API ID for the GraphQL API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appsync/v1beta1.GraphQLAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -203,7 +203,7 @@ type ResolverParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/appsync/v1beta1.Datasource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appsync/v1beta1.Datasource
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 

@@ -53,8 +53,8 @@ type ClusterInitParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate defaultIamRoleArn.
@@ -87,14 +87,14 @@ type ClusterInitParameters struct {
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -189,7 +189,7 @@ type ClusterInitParameters struct {
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -428,8 +428,8 @@ type ClusterParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
@@ -467,7 +467,7 @@ type ClusterParameters struct {
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
@@ -475,7 +475,7 @@ type ClusterParameters struct {
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -596,7 +596,7 @@ type ClusterParameters struct {
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional

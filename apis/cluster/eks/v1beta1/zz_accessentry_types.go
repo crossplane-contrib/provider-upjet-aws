@@ -75,8 +75,8 @@ type AccessEntryObservation struct {
 type AccessEntryParameters struct {
 
 	// Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/eks/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -94,8 +94,8 @@ type AccessEntryParameters struct {
 	KubernetesGroups []*string `json:"kubernetesGroups,omitempty" tf:"kubernetes_groups,omitempty"`
 
 	// The IAM Principal ARN which requires Authentication access to the EKS cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +crossplane:generate:reference:refFieldName=PrincipalArnFromRoleRef
 	// +crossplane:generate:reference:selectorFieldName=PrincipalArnFromRoleSelector
 	// +kubebuilder:validation:Optional

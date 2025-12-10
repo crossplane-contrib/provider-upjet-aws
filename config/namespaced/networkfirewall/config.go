@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-aws/config/namespaced/common"
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the networkfirewall group.

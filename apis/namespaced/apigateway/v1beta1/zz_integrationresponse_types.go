@@ -20,7 +20,7 @@ type IntegrationResponseInitParameters struct {
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
 	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
@@ -33,7 +33,7 @@ type IntegrationResponseInitParameters struct {
 	HTTPMethodSelector *v1.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// API resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -54,7 +54,7 @@ type IntegrationResponseInitParameters struct {
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -70,7 +70,7 @@ type IntegrationResponseInitParameters struct {
 	SelectionPattern *string `json:"selectionPattern,omitempty" tf:"selection_pattern,omitempty"`
 
 	// HTTP status code.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.MethodResponse
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.MethodResponse
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("status_code",false)
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
@@ -125,7 +125,7 @@ type IntegrationResponseParameters struct {
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
 	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -144,7 +144,7 @@ type IntegrationResponseParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// API resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -168,7 +168,7 @@ type IntegrationResponseParameters struct {
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
@@ -186,7 +186,7 @@ type IntegrationResponseParameters struct {
 	SelectionPattern *string `json:"selectionPattern,omitempty" tf:"selection_pattern,omitempty"`
 
 	// HTTP status code.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.MethodResponse
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.MethodResponse
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("status_code",false)
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`

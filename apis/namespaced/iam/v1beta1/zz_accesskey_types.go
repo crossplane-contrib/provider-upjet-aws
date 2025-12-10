@@ -23,7 +23,7 @@ type AccessKeyInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// IAM user to associate with this access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
 	// Reference to a User in iam to populate user.
@@ -73,7 +73,7 @@ type AccessKeyParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// IAM user to associate with this access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 

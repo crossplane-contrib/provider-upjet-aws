@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	inferenceprofile "github.com/upbound/provider-aws/internal/controller/cluster/bedrock/inferenceprofile"
+	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrock/inferenceprofile"
 )
 
 // Setup_bedrock creates all controllers with the supplied logger and adds them to

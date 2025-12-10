@@ -12,9 +12,9 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	common "github.com/upbound/provider-aws/config/cluster/common"
-	lambda "github.com/upbound/provider-aws/config/cluster/common/apis/lambda"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	common "github.com/upbound/provider-aws/v2/config/cluster/common"
+	lambda "github.com/upbound/provider-aws/v2/config/cluster/common/apis/lambda"
+	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

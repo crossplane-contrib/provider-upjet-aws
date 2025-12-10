@@ -32,7 +32,7 @@ type ServiceNetworkServiceAssociationDNSEntryParameters struct {
 type ServiceNetworkServiceAssociationInitParameters struct {
 
 	// The ID or Amazon Resource Identifier (ARN) of the service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
 
@@ -45,7 +45,7 @@ type ServiceNetworkServiceAssociationInitParameters struct {
 	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`
 
@@ -109,7 +109,7 @@ type ServiceNetworkServiceAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceIdentifier *string `json:"serviceIdentifier,omitempty" tf:"service_identifier,omitempty"`
@@ -123,7 +123,7 @@ type ServiceNetworkServiceAssociationParameters struct {
 	ServiceIdentifierSelector *v1.NamespacedSelector `json:"serviceIdentifierSelector,omitempty" tf:"-"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service network. You must use the ARN if the resources specified in the operation are in different accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceNetworkIdentifier *string `json:"serviceNetworkIdentifier,omitempty" tf:"service_network_identifier,omitempty"`

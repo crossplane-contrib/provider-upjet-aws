@@ -46,7 +46,7 @@ type VPCIpamPoolInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the scope in which you would like to create the IPAM pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpamScope
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamScope
 	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
 
 	// Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
@@ -67,7 +67,7 @@ type VPCIpamPoolInitParameters struct {
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
 
@@ -197,7 +197,7 @@ type VPCIpamPoolParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the scope in which you would like to create the IPAM pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpamScope
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamScope
 	// +kubebuilder:validation:Optional
 	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
 
@@ -227,7 +227,7 @@ type VPCIpamPoolParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCIpamPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`

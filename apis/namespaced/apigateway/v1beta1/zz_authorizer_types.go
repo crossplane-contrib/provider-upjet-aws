@@ -17,7 +17,7 @@ import (
 type AuthorizerInitParameters struct {
 
 	// Credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	AuthorizerCredentials *string `json:"authorizerCredentials,omitempty" tf:"authorizer_credentials,omitempty"`
 
@@ -34,7 +34,7 @@ type AuthorizerInitParameters struct {
 
 	// Authorizer's Uniform Resource Identifier (URI). This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
 	// e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
@@ -60,7 +60,7 @@ type AuthorizerInitParameters struct {
 	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -121,7 +121,7 @@ type AuthorizerObservation struct {
 type AuthorizerParameters struct {
 
 	// Credentials required for the authorizer. To specify an IAM Role for API Gateway to assume, use the IAM Role ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentials *string `json:"authorizerCredentials,omitempty" tf:"authorizer_credentials,omitempty"`
@@ -140,7 +140,7 @@ type AuthorizerParameters struct {
 
 	// Authorizer's Uniform Resource Identifier (URI). This must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
 	// e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
@@ -176,7 +176,7 @@ type AuthorizerParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

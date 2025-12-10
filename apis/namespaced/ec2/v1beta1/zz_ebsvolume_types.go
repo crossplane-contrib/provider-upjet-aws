@@ -29,7 +29,7 @@ type EBSVolumeInitParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -145,7 +145,7 @@ type EBSVolumeParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

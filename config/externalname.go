@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // TerraformPluginFrameworkExternalNameConfigs contains all external
@@ -120,6 +120,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
+
+	// amp
+	//
+	// Prometheus Scraper can be imported using the ARN: arn:aws:aps:us-west-2:123456789012:scraper/s-12345678-1234-1234-1234-123456789012
+	// Terraform returns the full ARN as ID, but AWS API expects just the UUID portion (s-UUID).
+	// terraform-plugin-framework
+	"aws_prometheus_scraper": identifierFromProviderWithDefaultStub("scraper12345"),
 
 	// rds
 	//

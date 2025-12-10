@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	secret "github.com/upbound/provider-aws/internal/controller/cluster/secretsmanager/secret"
-	secretpolicy "github.com/upbound/provider-aws/internal/controller/cluster/secretsmanager/secretpolicy"
-	secretrotation "github.com/upbound/provider-aws/internal/controller/cluster/secretsmanager/secretrotation"
-	secretversion "github.com/upbound/provider-aws/internal/controller/cluster/secretsmanager/secretversion"
+	secret "github.com/upbound/provider-aws/v2/internal/controller/cluster/secretsmanager/secret"
+	secretpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/secretsmanager/secretpolicy"
+	secretrotation "github.com/upbound/provider-aws/v2/internal/controller/cluster/secretsmanager/secretrotation"
+	secretversion "github.com/upbound/provider-aws/v2/internal/controller/cluster/secretsmanager/secretversion"
 )
 
 // Setup_secretsmanager creates all controllers with the supplied logger and adds them to

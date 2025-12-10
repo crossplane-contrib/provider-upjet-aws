@@ -17,7 +17,7 @@ import (
 type NetworkInterfaceSgAttachmentInitParameters struct {
 
 	// The ID of the network interface to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_network_interface_id",true)
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
@@ -30,7 +30,7 @@ type NetworkInterfaceSgAttachmentInitParameters struct {
 	NetworkInterfaceIDSelector *v1.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
@@ -59,7 +59,7 @@ type NetworkInterfaceSgAttachmentObservation struct {
 type NetworkInterfaceSgAttachmentParameters struct {
 
 	// The ID of the network interface to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_network_interface_id",true)
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -78,7 +78,7 @@ type NetworkInterfaceSgAttachmentParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID of the security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 

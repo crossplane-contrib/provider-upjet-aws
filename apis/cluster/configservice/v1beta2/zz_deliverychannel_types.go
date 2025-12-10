@@ -16,7 +16,7 @@ import (
 type DeliveryChannelInitParameters struct {
 
 	// The name of the S3 bucket used to store the configuration history.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
@@ -73,7 +73,7 @@ type DeliveryChannelParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The name of the S3 bucket used to store the configuration history.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 

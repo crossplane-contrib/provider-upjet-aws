@@ -248,7 +248,7 @@ type RecordInitParameters struct {
 	GeoproximityRoutingPolicy *GeoproximityRoutingPolicyInitParameters `json:"geoproximityRoutingPolicy,omitempty" tf:"geoproximity_routing_policy,omitempty"`
 
 	// The health check the record should be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.HealthCheck
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
 	// Reference to a HealthCheck in route53 to populate healthCheckId.
@@ -269,7 +269,7 @@ type RecordInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("public_ip",true)
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
@@ -295,7 +295,7 @@ type RecordInitParameters struct {
 	WeightedRoutingPolicy *WeightedRoutingPolicyInitParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in route53 to populate zoneId.
@@ -393,7 +393,7 @@ type RecordParameters struct {
 	GeoproximityRoutingPolicy *GeoproximityRoutingPolicyParameters `json:"geoproximityRoutingPolicy,omitempty" tf:"geoproximity_routing_policy,omitempty"`
 
 	// The health check the record should be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.HealthCheck
 	// +kubebuilder:validation:Optional
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
@@ -418,7 +418,7 @@ type RecordParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("public_ip",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -449,7 +449,7 @@ type RecordParameters struct {
 	WeightedRoutingPolicy *WeightedRoutingPolicyParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/route53/v1beta1.Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

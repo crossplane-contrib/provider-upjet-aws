@@ -20,7 +20,7 @@ type CiphertextInitParameters struct {
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -62,7 +62,7 @@ type CiphertextParameters struct {
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 

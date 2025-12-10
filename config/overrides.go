@@ -19,7 +19,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 	"github.com/crossplane/upjet/v2/pkg/types/name"
 
-	"github.com/upbound/provider-aws/config/cluster/common"
+	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
 
 // RegionRequired makes the region field required for resources that have it in their schema.

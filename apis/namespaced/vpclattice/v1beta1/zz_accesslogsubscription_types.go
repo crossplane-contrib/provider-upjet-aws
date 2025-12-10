@@ -20,7 +20,7 @@ type AccessLogSubscriptionInitParameters struct {
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
@@ -82,7 +82,7 @@ type AccessLogSubscriptionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ID or Amazon Resource Identifier (ARN) of the service network or service. You must use the ARN if the resources specified in the operation are in different accounts.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ServiceNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`

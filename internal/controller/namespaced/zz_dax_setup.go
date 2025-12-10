@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/dax/cluster"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/namespaced/dax/parametergroup"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/namespaced/dax/subnetgroup"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/dax/cluster"
+	parametergroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/dax/parametergroup"
+	subnetgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/dax/subnetgroup"
 )
 
 // Setup_dax creates all controllers with the supplied logger and adds them to

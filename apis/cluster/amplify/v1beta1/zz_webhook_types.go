@@ -16,7 +16,7 @@ import (
 type WebhookInitParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amplify/v1beta2.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amplify/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
@@ -29,7 +29,7 @@ type WebhookInitParameters struct {
 	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// Name for a branch that is part of the Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amplify/v1beta1.Branch
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amplify/v1beta1.Branch
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
 	// Reference to a Branch in amplify to populate branchName.
@@ -71,7 +71,7 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amplify/v1beta2.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amplify/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
@@ -85,7 +85,7 @@ type WebhookParameters struct {
 	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// Name for a branch that is part of the Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/amplify/v1beta1.Branch
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/amplify/v1beta1.Branch
 	// +kubebuilder:validation:Optional
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 

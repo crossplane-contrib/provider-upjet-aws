@@ -19,7 +19,7 @@ type DomainMailFromInitParameters struct {
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
 	// Verified domain name or email identity to generate DKIM tokens for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ses/v1beta1.DomainIdentity
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Reference to a DomainIdentity in ses to populate domain.
@@ -60,7 +60,7 @@ type DomainMailFromParameters struct {
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
 	// Verified domain name or email identity to generate DKIM tokens for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ses/v1beta1.DomainIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ses/v1beta1.DomainIdentity
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 

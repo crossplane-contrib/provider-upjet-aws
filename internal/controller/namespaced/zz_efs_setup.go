@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accesspoint "github.com/upbound/provider-aws/internal/controller/namespaced/efs/accesspoint"
-	backuppolicy "github.com/upbound/provider-aws/internal/controller/namespaced/efs/backuppolicy"
-	filesystem "github.com/upbound/provider-aws/internal/controller/namespaced/efs/filesystem"
-	filesystempolicy "github.com/upbound/provider-aws/internal/controller/namespaced/efs/filesystempolicy"
-	mounttarget "github.com/upbound/provider-aws/internal/controller/namespaced/efs/mounttarget"
-	replicationconfiguration "github.com/upbound/provider-aws/internal/controller/namespaced/efs/replicationconfiguration"
+	accesspoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/accesspoint"
+	backuppolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/backuppolicy"
+	filesystem "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/filesystem"
+	filesystempolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/filesystempolicy"
+	mounttarget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/mounttarget"
+	replicationconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/efs/replicationconfiguration"
 )
 
 // Setup_efs creates all controllers with the supplied logger and adds them to

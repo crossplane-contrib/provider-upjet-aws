@@ -26,7 +26,7 @@ type ModelInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -87,7 +87,7 @@ type ModelParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

@@ -20,7 +20,7 @@ type TargetGroupAttachmentInitParameters struct {
 	Target *TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`
 
@@ -61,7 +61,7 @@ type TargetGroupAttachmentParameters struct {
 	Target *TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The ID or Amazon Resource Name (ARN) of the target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/vpclattice/v1beta1.TargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.TargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetGroupIdentifier *string `json:"targetGroupIdentifier,omitempty" tf:"target_group_identifier,omitempty"`

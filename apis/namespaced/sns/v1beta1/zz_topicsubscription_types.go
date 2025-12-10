@@ -23,8 +23,8 @@ type TopicSubscriptionInitParameters struct {
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
 	// Endpoint to send data to. The contents vary with the protocol. See details below.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Whether the endpoint is capable of auto confirming subscription (e.g., PagerDuty). Default is false.
@@ -57,8 +57,8 @@ type TopicSubscriptionInitParameters struct {
 	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
 
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate subscriptionRoleArn.
@@ -70,8 +70,8 @@ type TopicSubscriptionInitParameters struct {
 	SubscriptionRoleArnSelector *v1.NamespacedSelector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate topicArn.
@@ -152,8 +152,8 @@ type TopicSubscriptionParameters struct {
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
 	// Endpoint to send data to. The contents vary with the protocol. See details below.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sqs/v1beta1.Queue
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -199,8 +199,8 @@ type TopicSubscriptionParameters struct {
 	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
 
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
 
@@ -213,8 +213,8 @@ type TopicSubscriptionParameters struct {
 	SubscriptionRoleArnSelector *v1.NamespacedSelector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/namespaced/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 

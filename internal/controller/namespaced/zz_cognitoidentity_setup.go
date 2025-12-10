@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
-	pool "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidentity/pool"
-	poolrolesattachment "github.com/upbound/provider-aws/internal/controller/namespaced/cognitoidentity/poolrolesattachment"
+	cognitoidentitypoolproviderprincipaltag "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/cognitoidentitypoolproviderprincipaltag"
+	pool "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/pool"
+	poolrolesattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cognitoidentity/poolrolesattachment"
 )
 
 // Setup_cognitoidentity creates all controllers with the supplied logger and adds them to

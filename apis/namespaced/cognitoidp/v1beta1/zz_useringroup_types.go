@@ -17,7 +17,7 @@ import (
 type UserInGroupInitParameters struct {
 
 	// The name of the group to which the user is to be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -30,7 +30,7 @@ type UserInGroupInitParameters struct {
 	GroupNameSelector *v1.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
 
 	// The user pool ID of the user and group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -43,7 +43,7 @@ type UserInGroupInitParameters struct {
 	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// The username of the user to be added to the group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.User
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// Reference to a User in cognitoidp to populate username.
@@ -76,7 +76,7 @@ type UserInGroupObservation struct {
 type UserInGroupParameters struct {
 
 	// The name of the group to which the user is to be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
@@ -95,7 +95,7 @@ type UserInGroupParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The user pool ID of the user and group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -109,7 +109,7 @@ type UserInGroupParameters struct {
 	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// The username of the user to be added to the group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.User
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 

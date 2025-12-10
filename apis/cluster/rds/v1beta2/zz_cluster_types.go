@@ -53,7 +53,7 @@ type ClusterInitParameters struct {
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ClusterParameterGroup
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
 	// Reference to a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
@@ -65,7 +65,7 @@ type ClusterInitParameters struct {
 	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ParameterGroup
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
 
 	// Reference to a ParameterGroup in rds to populate dbInstanceParameterGroupName.
@@ -78,7 +78,7 @@ type ClusterInitParameters struct {
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
@@ -150,8 +150,8 @@ type ClusterInitParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -176,7 +176,7 @@ type ClusterInitParameters struct {
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key_id",true)
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
@@ -195,8 +195,8 @@ type ClusterInitParameters struct {
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
 	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
@@ -271,7 +271,7 @@ type ClusterInitParameters struct {
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
@@ -582,7 +582,7 @@ type ClusterParameters struct {
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
@@ -595,7 +595,7 @@ type ClusterParameters struct {
 	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
 
@@ -609,7 +609,7 @@ type ClusterParameters struct {
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta1.SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
@@ -701,8 +701,8 @@ type ClusterParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -732,7 +732,7 @@ type ClusterParameters struct {
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
 
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("key_id",true)
 	// +kubebuilder:validation:Optional
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
@@ -754,8 +754,8 @@ type ClusterParameters struct {
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
 	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
 
@@ -854,7 +854,7 @@ type ClusterParameters struct {
 	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
@@ -872,7 +872,7 @@ type ClusterRestoreToPointInTimeInitParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
@@ -921,7 +921,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/rds/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
@@ -945,7 +945,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 type ClusterS3ImportInitParameters struct {
 
 	// Bucket name where your backup is stored
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -990,7 +990,7 @@ type ClusterS3ImportObservation struct {
 type ClusterS3ImportParameters struct {
 
 	// Bucket name where your backup is stored
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

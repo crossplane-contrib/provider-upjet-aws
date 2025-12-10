@@ -17,7 +17,7 @@ import (
 type UserPoolDomainInitParameters struct {
 
 	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
@@ -36,7 +36,7 @@ type UserPoolDomainInitParameters struct {
 	ManagedLoginVersion *float64 `json:"managedLoginVersion,omitempty" tf:"managed_login_version,omitempty"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -90,7 +90,7 @@ type UserPoolDomainObservation struct {
 type UserPoolDomainParameters struct {
 
 	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
@@ -117,7 +117,7 @@ type UserPoolDomainParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

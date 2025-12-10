@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	configurationset "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/configurationset"
-	configurationseteventdestination "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/configurationseteventdestination"
-	dedicatedippool "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/dedicatedippool"
-	emailidentity "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/emailidentity"
-	emailidentityfeedbackattributes "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/emailidentityfeedbackattributes"
-	emailidentitymailfromattributes "github.com/upbound/provider-aws/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
+	configurationset "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/configurationset"
+	configurationseteventdestination "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/configurationseteventdestination"
+	dedicatedippool "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/dedicatedippool"
+	emailidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentity"
+	emailidentityfeedbackattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentityfeedbackattributes"
+	emailidentitymailfromattributes "github.com/upbound/provider-aws/v2/internal/controller/cluster/sesv2/emailidentitymailfromattributes"
 )
 
 // Setup_sesv2 creates all controllers with the supplied logger and adds them to

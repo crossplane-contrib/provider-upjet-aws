@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/cluster/route53recoverycontrolconfig/cluster"
-	controlpanel "github.com/upbound/provider-aws/internal/controller/cluster/route53recoverycontrolconfig/controlpanel"
-	routingcontrol "github.com/upbound/provider-aws/internal/controller/cluster/route53recoverycontrolconfig/routingcontrol"
-	safetyrule "github.com/upbound/provider-aws/internal/controller/cluster/route53recoverycontrolconfig/safetyrule"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/cluster"
+	controlpanel "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/controlpanel"
+	routingcontrol "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/routingcontrol"
+	safetyrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/safetyrule"
 )
 
 // Setup_route53recoverycontrolconfig creates all controllers with the supplied logger and adds them to

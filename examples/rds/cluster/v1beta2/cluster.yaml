@@ -42,7 +42,7 @@ metadata:
 spec:
   forProvider:
     description: RDS custom cluster parameter group
-    family: aurora-postgresql16
+    family: aurora-postgresql17
     parameter:
     - applyMethod: immediate
       name: application_name
@@ -62,7 +62,7 @@ metadata:
 spec:
   forProvider:
     description: example
-    family: aurora-postgresql16
+    family: aurora-postgresql17
     parameter:
     - applyMethod: immediate
       name: application_name

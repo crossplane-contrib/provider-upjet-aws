@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/cluster"
-	clusterpeering "github.com/upbound/provider-aws/internal/controller/namespaced/dsql/clusterpeering"
+	cluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/dsql/cluster"
+	clusterpeering "github.com/upbound/provider-aws/v2/internal/controller/namespaced/dsql/clusterpeering"
 )
 
 // Setup_dsql creates all controllers with the supplied logger and adds them to

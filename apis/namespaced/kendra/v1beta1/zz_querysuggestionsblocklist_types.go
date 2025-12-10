@@ -20,7 +20,7 @@ type QuerySuggestionsBlockListInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Identifier of the index for a block list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kendra/v1beta1.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -36,8 +36,8 @@ type QuerySuggestionsBlockListInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// IAM (Identity and Access Management) role used to access the block list text file in S3.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -103,7 +103,7 @@ type QuerySuggestionsBlockListParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Identifier of the index for a block list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/kendra/v1beta1.Index
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
@@ -126,8 +126,8 @@ type QuerySuggestionsBlockListParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// IAM (Identity and Access Management) role used to access the block list text file in S3.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/cluster/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -152,7 +152,7 @@ type QuerySuggestionsBlockListParameters struct {
 type SourceS3PathInitParameters struct {
 
 	// Name of the S3 bucket that contains the file.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -180,7 +180,7 @@ type SourceS3PathObservation struct {
 type SourceS3PathParameters struct {
 
 	// Name of the S3 bucket that contains the file.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

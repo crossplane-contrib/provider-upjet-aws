@@ -16,7 +16,7 @@ import (
 type TransitGatewayRouteTablePropagationInitParameters struct {
 
 	// Identifier of EC2 Transit Gateway Attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
@@ -28,7 +28,7 @@ type TransitGatewayRouteTablePropagationInitParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
 	// Reference to a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
@@ -70,7 +70,7 @@ type TransitGatewayRouteTablePropagationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
@@ -83,7 +83,7 @@ type TransitGatewayRouteTablePropagationParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 

@@ -31,7 +31,7 @@ type TransitGatewayRegistrationObservation struct {
 type TransitGatewayRegistrationParameters struct {
 
 	// ID of the Global Network to register to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -45,7 +45,7 @@ type TransitGatewayRegistrationParameters struct {
 	GlobalNetworkIDSelector *v1.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ARN of the Transit Gateway to register.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.TransitGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TransitGatewayArn *string `json:"transitGatewayArn,omitempty" tf:"transit_gateway_arn,omitempty"`

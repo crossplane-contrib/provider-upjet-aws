@@ -228,7 +228,7 @@ type CanvasAppSettingsWorkspaceSettingsParameters struct {
 type UserProfileInitParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -298,7 +298,7 @@ type UserProfileObservation struct {
 type UserProfileParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/sagemaker/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`

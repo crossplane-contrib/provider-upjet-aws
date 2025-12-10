@@ -51,7 +51,7 @@ type LinkInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
@@ -67,7 +67,7 @@ type LinkInitParameters struct {
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.Site
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
 	// Reference to a Site in networkmanager to populate siteId.
@@ -131,7 +131,7 @@ type LinkParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -149,7 +149,7 @@ type LinkParameters struct {
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/networkmanager/v1beta1.Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1.Site
 	// +kubebuilder:validation:Optional
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 

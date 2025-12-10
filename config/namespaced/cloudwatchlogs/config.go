@@ -7,7 +7,7 @@ package cloudwatchlogs
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-aws/config/namespaced/common"
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the cloudwatchlogs group.
@@ -39,7 +39,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_cloudwatch_log_group", func(r *config.Resource) {
-		config.MarkAsRequired(r.TerraformResource, "name")
+		r.MarkAsRequired("name")
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name_prefix"},
 		}

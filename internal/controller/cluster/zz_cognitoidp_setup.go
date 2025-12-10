@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	identityprovider "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/identityprovider"
-	resourceserver "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/resourceserver"
-	riskconfiguration "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/riskconfiguration"
-	user "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/user"
-	usergroup "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/usergroup"
-	useringroup "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/useringroup"
-	userpool "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/userpool"
-	userpoolclient "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/userpoolclient"
-	userpooldomain "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/userpooldomain"
-	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cluster/cognitoidp/userpooluicustomization"
+	identityprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/identityprovider"
+	resourceserver "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/resourceserver"
+	riskconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/riskconfiguration"
+	user "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/user"
+	usergroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/usergroup"
+	useringroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/useringroup"
+	userpool "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/userpool"
+	userpoolclient "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/userpoolclient"
+	userpooldomain "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/userpooldomain"
+	userpooluicustomization "github.com/upbound/provider-aws/v2/internal/controller/cluster/cognitoidp/userpooluicustomization"
 )
 
 // Setup_cognitoidp creates all controllers with the supplied logger and adds them to

@@ -35,7 +35,7 @@ type NetworkACLRuleInitParameters struct {
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The ID of the network ACL.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkACL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkACL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
 
@@ -130,7 +130,7 @@ type NetworkACLRuleParameters struct {
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The ID of the network ACL.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/ec2/v1beta1.NetworkACL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.NetworkACL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`

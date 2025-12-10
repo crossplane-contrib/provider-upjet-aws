@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	encryptionconfig "github.com/upbound/provider-aws/internal/controller/cluster/xray/encryptionconfig"
-	group "github.com/upbound/provider-aws/internal/controller/cluster/xray/group"
-	samplingrule "github.com/upbound/provider-aws/internal/controller/cluster/xray/samplingrule"
+	encryptionconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/xray/encryptionconfig"
+	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/xray/group"
+	samplingrule "github.com/upbound/provider-aws/v2/internal/controller/cluster/xray/samplingrule"
 )
 
 // Setup_xray creates all controllers with the supplied logger and adds them to

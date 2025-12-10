@@ -26,7 +26,7 @@ type UsageLimitInitParameters struct {
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -90,7 +90,7 @@ type UsageLimitParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshiftserverless/v1beta1.Workgroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

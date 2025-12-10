@@ -20,7 +20,7 @@ type DNSConfigInitParameters struct {
 	DNSRecords []DNSRecordsInitParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicediscovery/v1beta1.PrivateDNSNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicediscovery/v1beta1.PrivateDNSNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -55,7 +55,7 @@ type DNSConfigParameters struct {
 	DNSRecords []DNSRecordsParameters `json:"dnsRecords" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicediscovery/v1beta1.PrivateDNSNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicediscovery/v1beta1.PrivateDNSNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`

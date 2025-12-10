@@ -60,7 +60,7 @@ type AliasParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name or ARN of the Lambda function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 

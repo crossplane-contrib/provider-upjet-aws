@@ -19,7 +19,7 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The name of the Object Lambda Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -64,7 +64,7 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The name of the Object Lambda Access Point.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2.ObjectLambdaAccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

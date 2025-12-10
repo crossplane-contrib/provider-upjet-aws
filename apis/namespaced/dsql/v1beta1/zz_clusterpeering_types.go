@@ -17,7 +17,7 @@ import (
 type ClusterPeeringInitParameters struct {
 
 	// List of DSQL Cluster ARNs to be peered to this cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/dsql/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Clusters []*string `json:"clusters,omitempty" tf:"clusters,omitempty"`
@@ -31,7 +31,7 @@ type ClusterPeeringInitParameters struct {
 	ClustersSelector *v1.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/dsql/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",true)
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
@@ -69,7 +69,7 @@ type ClusterPeeringObservation struct {
 type ClusterPeeringParameters struct {
 
 	// List of DSQL Cluster ARNs to be peered to this cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/dsql/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -84,7 +84,7 @@ type ClusterPeeringParameters struct {
 	ClustersSelector *v1.NamespacedSelector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/dsql/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dsql/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("identifier",true)
 	// +kubebuilder:validation:Optional
 	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`

@@ -17,7 +17,7 @@ import (
 type BudgetResourceAssociationInitParameters struct {
 
 	// Budget name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/budgets/v1beta1.Budget
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 
 	// Reference to a Budget in budgets to populate budgetName.
@@ -29,7 +29,7 @@ type BudgetResourceAssociationInitParameters struct {
 	BudgetNameSelector *v1.NamespacedSelector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate resourceId.
@@ -60,7 +60,7 @@ type BudgetResourceAssociationObservation struct {
 type BudgetResourceAssociationParameters struct {
 
 	// Budget name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/budgets/v1beta1.Budget
 	// +kubebuilder:validation:Optional
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 
@@ -78,7 +78,7 @@ type BudgetResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/namespaced/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicecatalog/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 

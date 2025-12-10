@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cachepolicy "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/cachepolicy"
-	distribution "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/distribution"
-	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/fieldlevelencryptionconfig"
-	fieldlevelencryptionprofile "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/fieldlevelencryptionprofile"
-	function "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/function"
-	keygroup "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/keygroup"
-	monitoringsubscription "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/monitoringsubscription"
-	originaccesscontrol "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/originaccesscontrol"
-	originaccessidentity "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/originaccessidentity"
-	originrequestpolicy "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/originrequestpolicy"
-	publickey "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/publickey"
-	realtimelogconfig "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/realtimelogconfig"
-	responseheaderspolicy "github.com/upbound/provider-aws/internal/controller/cluster/cloudfront/responseheaderspolicy"
+	cachepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/cachepolicy"
+	distribution "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/distribution"
+	fieldlevelencryptionconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/fieldlevelencryptionconfig"
+	fieldlevelencryptionprofile "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/fieldlevelencryptionprofile"
+	function "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/function"
+	keygroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/keygroup"
+	monitoringsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/monitoringsubscription"
+	originaccesscontrol "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccesscontrol"
+	originaccessidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originaccessidentity"
+	originrequestpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/originrequestpolicy"
+	publickey "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/publickey"
+	realtimelogconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/realtimelogconfig"
+	responseheaderspolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudfront/responseheaderspolicy"
 )
 
 // Setup_cloudfront creates all controllers with the supplied logger and adds them to

@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	database "github.com/upbound/provider-aws/internal/controller/namespaced/athena/database"
-	datacatalog "github.com/upbound/provider-aws/internal/controller/namespaced/athena/datacatalog"
-	namedquery "github.com/upbound/provider-aws/internal/controller/namespaced/athena/namedquery"
-	workgroup "github.com/upbound/provider-aws/internal/controller/namespaced/athena/workgroup"
+	database "github.com/upbound/provider-aws/v2/internal/controller/namespaced/athena/database"
+	datacatalog "github.com/upbound/provider-aws/v2/internal/controller/namespaced/athena/datacatalog"
+	namedquery "github.com/upbound/provider-aws/v2/internal/controller/namespaced/athena/namedquery"
+	workgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/athena/workgroup"
 )
 
 // Setup_athena creates all controllers with the supplied logger and adds them to

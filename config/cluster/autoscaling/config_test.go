@@ -14,8 +14,8 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/test"
 
-	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta1"
-	"github.com/upbound/provider-aws/apis/cluster/autoscaling/v1beta2"
+	"github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta1"
+	"github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta2"
 )
 
 var (
