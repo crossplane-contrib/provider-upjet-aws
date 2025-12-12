@@ -2,96 +2,175 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-
+# Service owner side (Provider VPC + NLB)
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCEndpointConnectionAccepter
+kind: VPC
 metadata:
+  name: pl-provider-vpc
+  labels:
+    testing.upbound.io/example-name: pl-provider
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
 spec:
   forProvider:
     region: us-west-1
-    vpcEndpointIdSelector:
+    cidrBlock: 10.10.0.0/16
+    tags:
+      Name: pl-provider-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: pl-provider-subnet-a
+  labels:
+    testing.upbound.io/example-name: pl-provider
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    cidrBlock: 10.10.1.0/24
+    vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    vpcEndpointServiceIdSelector:
+        testing.upbound.io/example-name: pl-provider
+
+---
+
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  name: pl-nlb
+  labels:
+    testing.upbound.io/example-name: pl-provider
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    name: pl-nlb-xp
+    loadBalancerType: network
+    internal: true
+    enableDeletionProtection: false
+    subnetSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: pl-provider
+    tags:
+      Name: pl-nlb
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointService
+metadata:
+  name: pl-endpoint-service
+  labels:
+    testing.upbound.io/example-name: pl-service
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    acceptanceRequired: true
+    networkLoadBalancerArnsRefs:
+      - name: pl-nlb
+
+---
+
+# Consumer side (Consumer VPC + Subnet + SG + Interface Endpoint)
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: pl-consumer-vpc
+  labels:
+    testing.upbound.io/example-name: pl-consumer
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.20.0.0/16
+    tags:
+      Name: pl-consumer-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: pl-consumer-subnet-a
+  labels:
+    testing.upbound.io/example-name: pl-consumer
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    cidrBlock: 10.20.1.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-consumer
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: pl-consumer-endpoint-sg
+  labels:
+    testing.upbound.io/example-name: pl-consumer
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    name: pl-consumer-endpoint-sg
+    description: SG for Interface Endpoint ENIs
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-consumer
 
 ---
 
 apiVersion: ec2.aws.upbound.io/v1beta2
 kind: VPCEndpoint
 metadata:
+  name: pl-consumer-endpoint
+  labels:
+    testing.upbound.io/example-name: pl-consumer-endpoint
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
 spec:
   forProvider:
-    privateDnsEnabled: false
     region: us-west-1
+    vpcEndpointType: Interface
+    privateDnsEnabled: false
     serviceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
-    vpcEndpointType: Interface
+        testing.upbound.io/example-name: pl-service
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test_alternate
-  providerConfigRef:
-    name: peer
+        testing.upbound.io/example-name: pl-consumer
 
 ---
 
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCEndpointService
+kind: VPCEndpointConnectionAccepter
 metadata:
+  name: pl-accept
+  labels:
+    testing.upbound.io/example-name: pl-accept
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    acceptanceRequired: false
-    region: us-west-1
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCEndpointService
-metadata:
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
-  labels:
-    testing.upbound.io/example-name: test
-  name: test
-spec:
-  forProvider:
-    acceptanceRequired: false
-    region: us-west-1
-  providerConfigRef:
-    name: peer
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  name: sample-vpc
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpc
-  labels:
-    testing.upbound.io/example-name: test_alternate
 spec:
   forProvider:
     region: us-west-1
-    cidrBlock: 172.16.0.0/16
-    tags:
-      Name: DemoVpc
-  providerConfigRef:
-    name: peer
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-consumer-endpoint
+    vpcEndpointServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-service
