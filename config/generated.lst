@@ -905,6 +905,7 @@
 "aws_vpc_dhcp_options",
 "aws_vpc_dhcp_options_association",
 "aws_vpc_endpoint",
+"aws_vpc_endpoint_connection_accepter",
 "aws_vpc_endpoint_connection_notification",
 "aws_vpc_endpoint_route_table_association",
 "aws_vpc_endpoint_security_group_association",
