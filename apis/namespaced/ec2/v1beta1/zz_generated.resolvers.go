@@ -6384,6 +6384,58 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCEndpointIDRef,
+			Selector:     mg.Spec.ForProvider.VPCEndpointIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointID")
+	}
+	mg.Spec.ForProvider.VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCEndpointIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCEndpointService", "VPCEndpointServiceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCEndpointServiceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCEndpointServiceIDRef,
+			Selector:     mg.Spec.ForProvider.VPCEndpointServiceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCEndpointServiceID")
+	}
+	mg.Spec.ForProvider.VPCEndpointServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCEndpointServiceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPCEndpointConnectionNotification.
 func (mg *VPCEndpointConnectionNotification) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

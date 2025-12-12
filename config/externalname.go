@@ -1089,6 +1089,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
 	// VPC Endpoint connection notifications can be imported using the VPC endpoint connection notification id
 	"aws_vpc_endpoint_connection_notification": config.IdentifierFromProvider,
+	// VPC Endpoint connection notifications can be imported using the VPC endpoint service ID and VPC endpoint ID separated by underscore (_)
+	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
 	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
 	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
