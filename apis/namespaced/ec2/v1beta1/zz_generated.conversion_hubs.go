@@ -250,6 +250,9 @@ func (tr *VPCDHCPOptionsAssociation) Hub() {}
 func (tr *VPCEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VPCEndpointConnectionAccepter) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VPCEndpointConnectionNotification) Hub() {}
 
 // Hub marks this type as a conversion hub.
