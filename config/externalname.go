@@ -2184,6 +2184,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
 	"aws_route53_resolver_config": config.IdentifierFromProvider,
+	//  Route 53 Resolver DNSSEC configs can be imported using the Route 53 Resolver DNSSEC config ID: rdsc-be1866ecc1683e95
+	"aws_route53_resolver_dnssec_config": config.IdentifierFromProvider,
 	// rslvr-in-abcdef01234567890
 	"aws_route53_resolver_endpoint": config.IdentifierFromProvider,
 	// rslvr-rr-0123456789abcdef0
