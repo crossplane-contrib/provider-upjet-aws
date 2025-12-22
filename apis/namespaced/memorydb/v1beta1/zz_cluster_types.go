@@ -32,7 +32,16 @@ type ClusterEndpointParameters struct {
 type ClusterInitParameters struct {
 
 	// The name of the Access Control List to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.ACL
 	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
+
+	// Reference to a ACL in memorydb to populate aclName.
+	// +kubebuilder:validation:Optional
+	ACLNameRef *v1.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
+
+	// Selector for a ACL in memorydb to populate aclName.
+	// +kubebuilder:validation:Optional
+	ACLNameSelector *v1.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
@@ -80,7 +89,16 @@ type ClusterInitParameters struct {
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// The name of the parameter group associated with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.ParameterGroup
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in memorydb to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in memorydb to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -117,7 +135,6 @@ type ClusterInitParameters struct {
 
 	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Reference to a SubnetGroup in memorydb to populate subnetGroupName.
@@ -238,8 +255,17 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// The name of the Access Control List to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.ACL
 	// +kubebuilder:validation:Optional
 	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
+
+	// Reference to a ACL in memorydb to populate aclName.
+	// +kubebuilder:validation:Optional
+	ACLNameRef *v1.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
+
+	// Selector for a ACL in memorydb to populate aclName.
+	// +kubebuilder:validation:Optional
+	ACLNameSelector *v1.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -299,8 +325,17 @@ type ClusterParameters struct {
 	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// The name of the parameter group associated with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in memorydb to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in memorydb to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
 	// +kubebuilder:validation:Optional
@@ -349,7 +384,6 @@ type ClusterParameters struct {
 
 	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/memorydb/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -463,7 +497,6 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.aclName) || (has(self.initProvider) && has(self.initProvider.aclName))",message="spec.forProvider.aclName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`

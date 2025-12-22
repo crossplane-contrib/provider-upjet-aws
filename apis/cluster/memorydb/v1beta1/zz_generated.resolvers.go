@@ -10,7 +10,6 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	apisresolver "github.com/upbound/provider-aws/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -25,6 +24,26 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("memorydb.aws.upbound.io", "v1beta1", "ACL", "ACLList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ACLName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ACLNameRef,
+			Selector:     mg.Spec.ForProvider.ACLNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ACLName")
+	}
+	mg.Spec.ForProvider.ACLName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ACLNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
@@ -45,6 +64,26 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("memorydb.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ParameterGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ParameterGroupName")
+	}
+	mg.Spec.ForProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ParameterGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
@@ -73,7 +112,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetGroupName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.ForProvider.SubnetGroupNameSelector,
@@ -85,6 +124,26 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	mg.Spec.ForProvider.SubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("memorydb.aws.upbound.io", "v1beta1", "ACL", "ACLList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ACLName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ACLNameRef,
+			Selector:     mg.Spec.InitProvider.ACLNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ACLName")
+	}
+	mg.Spec.InitProvider.ACLName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ACLNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
@@ -105,6 +164,26 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("memorydb.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ParameterGroupNameRef,
+			Selector:     mg.Spec.InitProvider.ParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ParameterGroupName")
+	}
+	mg.Spec.InitProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ParameterGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
@@ -133,7 +212,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetGroupName),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetGroupNameRef,
 			Selector:     mg.Spec.InitProvider.SubnetGroupNameSelector,
