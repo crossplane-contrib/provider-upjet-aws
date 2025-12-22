@@ -564,6 +564,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ACLNameRef != nil {
+		in, out := &in.ACLNameRef, &out.ACLNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ACLNameSelector != nil {
+		in, out := &in.ACLNameSelector, &out.ACLNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(bool)
@@ -638,6 +648,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
@@ -994,6 +1014,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ACLNameRef != nil {
+		in, out := &in.ACLNameRef, &out.ACLNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ACLNameSelector != nil {
+		in, out := &in.ACLNameSelector, &out.ACLNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(bool)
@@ -1068,6 +1098,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port

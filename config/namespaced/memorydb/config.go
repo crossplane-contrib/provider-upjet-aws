@@ -14,6 +14,15 @@ import (
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_memorydb_cluster", func(r *config.Resource) {
 		r.UseAsync = true
+		r.References["parameter_group_name"] = config.Reference{
+			TerraformName: "aws_memorydb_parameter_group",
+		}
+		r.References["acl_name"] = config.Reference{
+			TerraformName: "aws_memorydb_acl",
+		}
+		r.References["subnet_group_name"] = config.Reference{
+			TerraformName: "aws_memorydb_subnet_group",
+		}
 
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
