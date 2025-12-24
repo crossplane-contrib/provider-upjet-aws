@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: QueryLogConfigAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfigassociation
+spec:
+  forProvider:
+    region: us-west-1
+    resolverQueryLogConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-querylogconfig
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-querylogconfigassociation
+---
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: QueryLogConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfig
+  name: example-querylogconfig
+spec:
+  forProvider:
+    destinationArn: arn:aws:s3:::example-querylogconfig-bucket
+    name: example-querylogconfig
+    region: us-west-1
+    tags:
+      Environment: test
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfig
+  name: example-querylogconfig-bucket
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: QueryLogBucket
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfigassociation-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: QueryLogVPC

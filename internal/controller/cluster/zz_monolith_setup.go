@@ -777,6 +777,8 @@ import (
 	recoverygroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoveryreadiness/recoverygroup"
 	resourceset "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoveryreadiness/resourceset"
 	endpointroute53resolver "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/endpoint"
+	querylogconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfig"
+	querylogconfigassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfigassociation"
 	ruleroute53resolver "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/ruleassociation"
 	appmonitor "github.com/upbound/provider-aws/v2/internal/controller/cluster/rum/appmonitor"
@@ -1762,6 +1764,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recoverygroup.Setup,
 		resourceset.Setup,
 		endpointroute53resolver.Setup,
+		querylogconfig.Setup,
+		querylogconfigassociation.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		appmonitor.Setup,
@@ -2753,6 +2757,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recoverygroup.SetupGated,
 		resourceset.SetupGated,
 		endpointroute53resolver.SetupGated,
+		querylogconfig.SetupGated,
+		querylogconfigassociation.SetupGated,
 		ruleroute53resolver.SetupGated,
 		ruleassociation.SetupGated,
 		appmonitor.SetupGated,

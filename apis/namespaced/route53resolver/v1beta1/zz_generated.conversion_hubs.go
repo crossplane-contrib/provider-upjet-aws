@@ -10,6 +10,12 @@ package v1beta1
 func (tr *Endpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *QueryLogConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *QueryLogConfigAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Rule) Hub() {}
 
 // Hub marks this type as a conversion hub.
