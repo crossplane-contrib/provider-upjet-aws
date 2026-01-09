@@ -1944,6 +1944,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// aws_networkmanager_vpc_attachment can be imported using the attachment ID
 	"aws_networkmanager_vpc_attachment": config.IdentifierFromProvider,
 
+	// oam
+	//
+	// aws_oam_sink can be imported using th ARN
+	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
+	"aws_oam_sink": config.IdentifierFromProvider,
+
 	// opensearch
 	//
 	// NOTE(sergen): Parameter as identifier cannot be used, because terraform

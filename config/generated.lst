@@ -645,6 +645,7 @@
 "aws_networkmanager_transit_gateway_connect_peer_association",
 "aws_networkmanager_transit_gateway_registration",
 "aws_networkmanager_vpc_attachment",
+"aws_oam_sink",
 "aws_opensearch_domain",
 "aws_opensearch_domain_policy",
 "aws_opensearch_domain_saml_options",
