@@ -4658,21 +4658,6 @@ func (in *ServiceInitParameters) DeepCopyInto(out *ServiceInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Cluster != nil {
-		in, out := &in.Cluster, &out.Cluster
-		*out = new(string)
-		**out = **in
-	}
-	if in.ClusterRef != nil {
-		in, out := &in.ClusterRef, &out.ClusterRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ClusterSelector != nil {
-		in, out := &in.ClusterSelector, &out.ClusterSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.DeploymentCircuitBreaker != nil {
 		in, out := &in.DeploymentCircuitBreaker, &out.DeploymentCircuitBreaker
 		*out = make([]DeploymentCircuitBreakerInitParameters, len(*in))
