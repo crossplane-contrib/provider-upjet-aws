@@ -196,7 +196,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskDefinition),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TaskDefinitionRef,
 			Selector:     mg.Spec.ForProvider.TaskDefinitionSelector,
@@ -208,26 +208,6 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.TaskDefinition = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TaskDefinitionRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Cluster),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.ClusterRef,
-			Selector:     mg.Spec.InitProvider.ClusterSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Cluster")
-	}
-	mg.Spec.InitProvider.Cluster = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ClusterRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -322,7 +302,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskDefinition),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TaskDefinitionRef,
 			Selector:     mg.Spec.InitProvider.TaskDefinitionSelector,

@@ -1176,8 +1176,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecs_cluster": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "cluster/{{ .external_name }}")),
 	// ECS cluster capacity providers can be imported using the cluster_name attribute
 	"aws_ecs_cluster_capacity_providers": config.IdentifierFromProvider,
-	//
-	"aws_ecs_service": config.NameAsIdentifier,
+	// arn:aws:ecs:us-west-1:153891904029:service/example/sample-service
+	"aws_ecs_service": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "service/{{ .parameters.cluster }}/{{ .external_name }}")),
 	// Imported using ARN that has a random substring, revision at the end:
 	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
 	"aws_ecs_task_definition": config.IdentifierFromProvider,
