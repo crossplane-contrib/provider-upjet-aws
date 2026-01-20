@@ -219,6 +219,7 @@ import (
 	v1beta2networkfirewall "github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2"
 	v1beta1networkmanager "github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1"
 	v1beta2networkmanager "github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2"
+	v1beta1oam "github.com/upbound/provider-aws/v2/apis/cluster/oam/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta1"
 	v1beta2opensearch "github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta2"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1"
@@ -517,6 +518,7 @@ func init() {
 		v1beta2networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
 		v1beta2networkmanager.SchemeBuilder.AddToScheme,
+		v1beta1oam.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta2opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,
