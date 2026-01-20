@@ -5,10 +5,9 @@
 package ecs
 
 import (
-	"context"
-	"path/filepath"
 	"strings"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
@@ -44,27 +43,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_ecs_service", func(r *config.Resource) {
-		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-			// expected id format: arn:aws:ecs:us-east-2:123456789123:service/sample-cluster/sample-service
-			w := strings.Split(tfstate["id"].(string), "/")
-			if len(w) != 3 {
-				return "", errors.New("terraform ID should be the ARN of the service")
-			}
-			return w[len(w)-1], nil
-		}
-		r.ExternalName.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-			cl, ok := parameters["cluster"].(string)
-			if !ok {
-				return "", errors.New("cannot generate id without cluster paramater")
-			}
-			return filepath.Join(cl, externalName), nil
-		}
 		r.References = config.References{
 			"cluster": config.Reference{
 				TerraformName: "aws_ecs_cluster",
 			},
 			"task_definition": config.Reference{
 				TerraformName: "aws_ecs_task_definition",
+				Extractor:     common.PathARNExtractor,
 			},
 			"iam_role": config.Reference{
 				TerraformName: "aws_iam_role",
@@ -86,6 +71,25 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.MetaResource.ArgumentDocs["cluster"] = `Name of an ECS cluster.`
 		r.UseAsync = true
+
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			td, ok := diff.Attributes["task_definition"]
+			if !ok {
+				return diff, nil
+			}
+			if td.Old == td.New {
+				return diff, nil
+			}
+			// example td.New = arn:aws:ecs:us-west-1:<account_id>:task-definition/sampleservice:36
+			tdParts := strings.Split(td.New, "/")
+			if td.Old == tdParts[1] {
+				delete(diff.Attributes, "task_definition")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_ecs_capacity_provider", func(r *config.Resource) {
