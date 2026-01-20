@@ -714,6 +714,7 @@
 "aws_route53_query_log",
 "aws_route53_record",
 "aws_route53_resolver_config",
+"aws_route53_resolver_dnssec_config",
 "aws_route53_resolver_endpoint",
 "aws_route53_resolver_rule",
 "aws_route53_resolver_rule_association",
