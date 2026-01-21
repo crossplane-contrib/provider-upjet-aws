@@ -2198,6 +2198,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53_resolver_rule": config.IdentifierFromProvider,
 	// rslvr-rrassoc-97242eaf88example
 	"aws_route53_resolver_rule_association": config.IdentifierFromProvider,
+	// rqlc-92edc3b1838248bf
+	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
+	// rqlca-b320624fef3c4d70
+	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 
 	// rum
 	//

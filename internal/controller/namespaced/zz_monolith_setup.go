@@ -779,6 +779,8 @@ import (
 	resourceset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53recoveryreadiness/resourceset"
 	dnssecconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/dnssecconfig"
 	endpointroute53resolver "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/endpoint"
+	querylogconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/querylogconfig"
+	querylogconfigassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/querylogconfigassociation"
 	ruleroute53resolver "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/route53resolver/ruleassociation"
 	appmonitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/rum/appmonitor"
@@ -1766,6 +1768,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourceset.Setup,
 		dnssecconfig.Setup,
 		endpointroute53resolver.Setup,
+		querylogconfig.Setup,
+		querylogconfigassociation.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
 		appmonitor.Setup,
@@ -2759,6 +2763,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourceset.SetupGated,
 		dnssecconfig.SetupGated,
 		endpointroute53resolver.SetupGated,
+		querylogconfig.SetupGated,
+		querylogconfigassociation.SetupGated,
 		ruleroute53resolver.SetupGated,
 		ruleassociation.SetupGated,
 		appmonitor.SetupGated,

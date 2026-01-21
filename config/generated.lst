@@ -717,6 +717,8 @@
 "aws_route53_resolver_config",
 "aws_route53_resolver_dnssec_config",
 "aws_route53_resolver_endpoint",
+"aws_route53_resolver_query_log_config",
+"aws_route53_resolver_query_log_config_association",
 "aws_route53_resolver_rule",
 "aws_route53_resolver_rule_association",
 "aws_route53_traffic_policy",
