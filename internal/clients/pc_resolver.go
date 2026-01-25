@@ -41,6 +41,29 @@ func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*names
 		Generation:  pc.GetGeneration(),
 		UID:         pc.GetUID(),
 	}
+
+	// ClusterProviderConfig uses the cluster API's ServiceAccountReference
+	// which has both name and namespace fields. The namespaced API's ServiceAccountReference
+	// only has a name field (namespace is inherited from the ProviderConfig's metadata.namespace).
+	//
+	// To preserve the serviceAccountRef.namespace from configs, we store it in the
+	// ObjectMeta.Namespace of the converted config. This is semantically unusual (storing a
+	// ServiceAccount's namespace in the ProviderConfig's namespace field) but necessary for
+	// compatibility. The ResolveServiceAccountNamespace function checks pc.Namespace != ""
+	// to determine if it should use the ProviderConfig's namespace or require an explicit namespace.
+	//
+	// Note: This creates a pseudo-namespace-scoped representation of a cluster-scoped resource
+	// for internal use only. The original cluster-scoped ProviderConfig in Kubernetes remains
+	// cluster-scoped.
+	//
+	// Security: Even though we're setting ObjectMeta.Namespace, there's no credential leakage risk
+	// because the credential cache uses pc.UID as part of the cache key. Each ProviderConfig object
+	// (cluster-scoped or namespace-scoped) has a unique UID, ensuring credentials are never shared
+	// between different ProviderConfig objects, even if they have the same name and namespace values.
+	if pc.Spec.ServiceAccountRef != nil && pc.Spec.ServiceAccountRef.Namespace != "" {
+		mSpec.ObjectMeta.Namespace = pc.Spec.ServiceAccountRef.Namespace
+	}
+
 	return &mSpec, err
 }
 
@@ -124,6 +147,7 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 			},
 			ObjectMeta: metav1.ObjectMeta{
 				Name:        pc.GetName(),
+				Namespace:   mg.GetNamespace(), // Use managed resource's namespace for namespace-scoped ProviderConfigs
 				Labels:      pc.GetLabels(),
 				Annotations: pc.GetAnnotations(),
 				Generation:  pc.GetGeneration(),

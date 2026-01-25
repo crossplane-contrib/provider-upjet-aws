@@ -152,14 +152,16 @@ func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, 
 // call the given AccountIDFn because in that case, a separate identity cache
 // should be used to retrieve the caller identity.
 func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
-	// Only IRSA credentials are cached currently and
-	// only aws.CredentialsCache is supported as the underlying
-	// credential provider.
+	// Cache credentials for ServiceAccount and IRSA sources (both use AssumeRoleWithWebIdentity).
+	// Only aws.CredentialsCache is supported as the underlying credential provider.
 	awsCredsCache, ok := credsProvider.(*aws.CredentialsCache)
 	if !ok {
 		c.logger.Debug("Configured aws.CredentialsProvider is not an aws.CredentialsCache, cannot utilize the provider credential cache...")
 	}
-	if pc.Spec.Credentials.Source != authKeyIRSA || !ok {
+	// Support both ServiceAccount and IRSA sources
+	isServiceAccountBased := pc.Spec.Credentials.Source == authKeyServiceAccount ||
+		(pc.Spec.Credentials.Source == authKeyIRSA && pc.Spec.ServiceAccountRef != nil)
+	if !isServiceAccountBased || !ok {
 		// if this cache manager is not going to be employed, do not call
 		// the given accountIDFn because there's a separate identity cache
 		// implementation.
@@ -179,17 +181,38 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// credentials and does not appear in the ProviderConfig directly
 	// (i.e. the same provider config content produces a different config),
 	// should be included in the cache key.
+	//
+	// Note: We don't include assumeRoleChain in the cache key because any
+	// change to the ProviderConfig spec (including assumeRoleChain) increments
+	// the Generation field, which is already part of the cache key. This
+	// automatically invalidates the cache when roles change.
 	cacheKeyParams := []string{
 		string(pc.UID),
 		strconv.FormatInt(pc.Generation, 10),
 		region,
 		string(pc.Spec.Credentials.Source),
 	}
-	tokenHash, err := hashTokenFile(os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"))
-	if err != nil {
-		return Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
+
+	// Include ServiceAccount reference in cache key if present
+	if pc.Spec.ServiceAccountRef != nil {
+		// Resolve the namespace using the same logic as token retrieval
+		namespace, err := ResolveServiceAccountNamespace(pc, pc.Spec.ServiceAccountRef)
+		if err != nil {
+			return Credentials{}, errors.Wrap(err, "cannot resolve ServiceAccount namespace for cache key")
+		}
+		cacheKeyParams = append(cacheKeyParams,
+			"sa",
+			pc.Spec.ServiceAccountRef.Name,
+			namespace,
+		)
+	} else {
+		// Legacy IRSA behavior using pod's service account
+		tokenHash, err := hashTokenFile(os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"))
+		if err != nil {
+			return Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
+		}
+		cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
 	}
-	cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
 	cacheKey := strings.Join(cacheKeyParams, ":")
 	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.RLock()

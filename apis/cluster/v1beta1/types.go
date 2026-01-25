@@ -10,9 +10,18 @@ import (
 )
 
 // A ProviderConfigSpec defines the desired state of a ProviderConfig.
+// +kubebuilder:validation:XValidation:rule="!has(self.serviceAccountRef) || self.credentials.source == 'ServiceAccount'",message="serviceAccountRef can only be used when credentials.source is 'ServiceAccount'"
 type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
+
+	// ServiceAccountRef specifies a ServiceAccount to impersonate for obtaining
+	// tokens for ServiceAccount-based authentication.
+	// When specified with credentials.source=ServiceAccount, the provider will create a
+	// TokenRequest for the referenced ServiceAccount and use that token to
+	// perform AssumeRoleWithWebIdentity.
+	// +optional
+	ServiceAccountRef *ServiceAccountReference `json:"serviceAccountRef,omitempty"`
 
 	// AssumeRoleChain defines the options for assuming an IAM role
 	AssumeRoleChain []AssumeRoleOptions `json:"assumeRoleChain,omitempty"`
@@ -223,10 +232,20 @@ type Tag struct {
 	Value *string `json:"value"`
 }
 
+// ServiceAccountReference specifies a Kubernetes ServiceAccount to impersonate
+// for obtaining tokens for IRSA authentication.
+type ServiceAccountReference struct {
+	// Name of the ServiceAccount.
+	Name string `json:"name"`
+
+	// Namespace of the ServiceAccount.
+	Namespace string `json:"namespace"`
+}
+
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity;PodIdentity;Upbound
+	// +kubebuilder:validation:Enum=None;Secret;ServiceAccount;IRSA;WebIdentity;PodIdentity;Upbound
 	Source xpv1.CredentialsSource `json:"source"`
 
 	// WebIdentity defines the options for assuming an IAM role with a Web Identity.

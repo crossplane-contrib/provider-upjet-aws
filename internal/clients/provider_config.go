@@ -37,10 +37,11 @@ const (
 	DefaultSection = ini.DefaultSection
 
 	// authentication types
-	authKeyIRSA        = "IRSA"
-	authKeyWebIdentity = "WebIdentity"
-	authKeyPodIdentity = "PodIdentity"
-	authKeyUpbound     = "Upbound"
+	authKeyServiceAccount = "ServiceAccount"
+	authKeyIRSA           = "IRSA"
+	authKeyWebIdentity    = "WebIdentity"
+	authKeyPodIdentity    = "PodIdentity"
+	authKeyUpbound        = "Upbound"
 	// authKeySAML        = "SAML"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
@@ -98,6 +99,12 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 	}
 	var cfg *aws.Config
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
+	case authKeyServiceAccount:
+		// ServiceAccount-based authentication using Kubernetes ServiceAccount tokens
+		cfg, err = UseServiceAccount(ctx, region, pc, c)
+		if err != nil {
+			return nil, errors.Wrap(err, errAWSConfigIRSA)
+		}
 	case authKeyIRSA:
 		cfg, err = UseDefault(ctx, region)
 		if err != nil {
@@ -129,7 +136,11 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 		}
 	}
 
-	cfg, err = GetRoleChainConfig(ctx, &pc.Spec, cfg)
+	// For ServiceAccount-based auth, the first role in the chain is already assumed
+	// via AssumeRoleWithWebIdentity, so skip it in the role chain
+	skipFirstRole := pc.Spec.Credentials.Source == authKeyServiceAccount ||
+		(pc.Spec.Credentials.Source == authKeyIRSA && pc.Spec.ServiceAccountRef != nil)
+	cfg, err = GetRoleChainConfig(ctx, &pc.Spec, cfg, skipFirstRole)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get credentials")
 	}
@@ -291,9 +302,16 @@ func UseProviderSecret(ctx context.Context, data []byte, profile, region string)
 
 // GetRoleChainConfig returns an aws.Config capable of doing role chaining with
 // AssumeRoleWithWebIdentity & AssumeRoles.
-func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
+// If skipFirst is true, the first role in the chain is skipped (used when the
+// first role is already assumed via AssumeRoleWithWebIdentity).
+func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config, skipFirst bool) (*aws.Config, error) {
 	pCfg := cfg
-	for _, aro := range pcs.AssumeRoleChain {
+	startIndex := 0
+	if skipFirst && len(pcs.AssumeRoleChain) > 0 {
+		startIndex = 1
+	}
+	for i := startIndex; i < len(pcs.AssumeRoleChain); i++ {
+		aro := pcs.AssumeRoleChain[i]
 		stsAssume := stscreds.NewAssumeRoleProvider(
 			sts.NewFromConfig(*pCfg, stsRegionOrDefault(cfg.Region)), //nolint:contextcheck
 			aws.ToString(aro.RoleARN),
@@ -446,6 +464,41 @@ func UseUpbound(ctx context.Context, region string, pcs *v1beta1.ProviderConfigS
 		return nil, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
 	}
 	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.Upbound.WebIdentity, upboundProviderIdentityTokenFile)
+}
+
+// UseServiceAccount configures AWS authentication using a ServiceAccount token
+// with per-namespace isolation.
+func UseServiceAccount(ctx context.Context, region string, pc *v1beta1.ClusterProviderConfig, kube client.Client) (*aws.Config, error) {
+	if len(pc.Spec.AssumeRoleChain) == 0 {
+		return nil, errors.New("assumeRoleChain is required when using ServiceAccount-based IRSA")
+	}
+
+	// Resolve the ServiceAccount namespace
+	namespace, err := ResolveServiceAccountNamespace(pc, pc.Spec.ServiceAccountRef)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to resolve ServiceAccount namespace")
+	}
+
+	// Create a base AWS config
+	cfg, err := UseDefault(ctx, region)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to get default AWS config")
+	}
+
+	// Create ServiceAccount token retriever
+	saTokenRetriever := NewServiceAccountTokenRetriever(kube)
+	tokenRetriever := NewServiceAccountTokenIdentityRetriever(ctx, saTokenRetriever, namespace, pc.Spec.ServiceAccountRef.Name)
+
+	// Use the first role in the chain for AssumeRoleWithWebIdentity
+	if pc.Spec.AssumeRoleChain[0].RoleARN == nil {
+		return nil, errors.New("first role in assumeRoleChain must have a roleARN")
+	}
+
+	webIdOptions := v1beta1.AssumeRoleWithWebIdentityOptions{
+		RoleARN: pc.Spec.AssumeRoleChain[0].RoleARN,
+	}
+
+	return GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, webIdOptions, tokenRetriever)
 }
 
 // SetAssumeRoleOptions sets options when Assuming an IAM Role
