@@ -151,6 +151,7 @@ spec:
                     enum:
                     - None
                     - Secret
+                    - ServiceAccount
                     - IRSA
                     - WebIdentity
                     - PodIdentity
@@ -402,6 +403,26 @@ spec:
                 description: Whether to enable the request to use path-style addressing,
                   i.e., https://s3.amazonaws.com/BUCKET/KEY.
                 type: boolean
+              serviceAccountRef:
+                description: |-
+                  ServiceAccountRef specifies a ServiceAccount to impersonate for obtaining
+                  tokens for ServiceAccount-based authentication.
+                  When specified with credentials.source=ServiceAccount, the provider will create a
+                  TokenRequest for the referenced ServiceAccount and use that token to
+                  perform AssumeRoleWithWebIdentity.
+                properties:
+                  name:
+                    description: Name of the ServiceAccount.
+                    type: string
+                  namespace:
+                    description: |-
+                      Namespace of the ServiceAccount.
+                      Required for ClusterProviderConfig.
+                      IGNORED for namespace-scoped ProviderConfig (always uses ProviderConfig's namespace).
+                    type: string
+                required:
+                - name
+                type: object
               skip_credentials_validation:
                 description: |-
                   Whether to skip credentials validation via the STS API.
@@ -426,6 +447,10 @@ spec:
             required:
             - credentials
             type: object
+            x-kubernetes-validations:
+            - message: serviceAccountRef can only be used when credentials.source
+                is 'ServiceAccount'
+              rule: '!has(self.serviceAccountRef) || self.credentials.source == ''ServiceAccount'''
           status:
             description: A ProviderConfigStatus reflects the observed state of a ProviderConfig.
             properties:
