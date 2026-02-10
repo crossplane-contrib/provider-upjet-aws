@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: VPCOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: alb
+  name: alb
+  namespace: upbound-system
+spec:
+  forProvider:
+    vpcOriginEndpointConfig:
+    - arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: this
+      httpPort: 8080
+      httpsPort: 8443
+      name: example-vpc-origin
+      originProtocolPolicy: https-only
+      originSslProtocols:
+      - items:
+        - TLSv1.2
+        quantity: 1
