@@ -1,0 +1,189 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: emrcontainers.aws.upbound.io/v1beta1
+kind: VirtualCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+    uptest.upbound.io/timeout: "3600"
+  name: example-virtual-cluster
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    name: example-virtual-cluster
+    containerProvider:
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: virtualcluster
+      info:
+        eksInfo:
+          namespace: default
+      type: EKS
+
+---
+
+apiVersion: eks.aws.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+    uptest.upbound.io/timeout: "2400"
+  name: example-eks-cluster
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnRef:
+      name: example-eks-role
+    vpcConfig:
+      subnetIdRefs:
+        - name: example-subnet-1
+        - name: example-subnet-2
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-eks-role
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-eks-policy
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: example-eks-role
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-vpc
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    tags:
+      Name: example-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-subnet-1
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    cidrBlock: 10.0.1.0/24
+    mapPublicIpOnLaunch: true
+    vpcIdRef:
+      name: example-vpc
+    tags:
+      Name: example-subnet-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-subnet-2
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    cidrBlock: 10.0.2.0/24
+    mapPublicIpOnLaunch: true
+    vpcIdRef:
+      name: example-vpc
+    tags:
+      Name: example-subnet-2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-igw
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc
+    tags:
+      Name: example-igw
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: DefaultRouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  name: example-rt
+  labels:
+    testing.upbound.io/example-name: virtualcluster
+spec:
+  forProvider:
+    region: us-west-1
+    defaultRouteTableIdRef:
+      name: example-vpc
+    route:
+      - cidrBlock: 0.0.0.0/0
+        gatewayIdRef:
+          name: example-igw
+    tags:
+      Name: example-rt

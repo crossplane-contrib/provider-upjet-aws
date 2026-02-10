@@ -274,11 +274,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// EMR studio session mappings can be imported using the id, e.g., studio-id:identity-type:identity-id
 	"aws_emr_studio_session_mapping": config.IdentifierFromProvider,
 
-	// emrcontainers
-	//
-	// EKS Clusters can be imported using the id
-	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
-
 	// fms
 	//
 	// Firewall Manager administrator account association can be imported using the account ID
