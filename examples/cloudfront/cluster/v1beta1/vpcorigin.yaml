@@ -118,10 +118,10 @@ spec:
     securityGroupSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sg
-    subnetIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-subnet-a
     subnetMapping:
       - subnetIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example-subnet-b
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-subnet-a
