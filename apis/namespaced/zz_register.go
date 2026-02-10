@@ -84,6 +84,7 @@ import (
 	v1beta1elb "github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1"
 	v1beta1emr "github.com/upbound/provider-aws/v2/apis/namespaced/emr/v1beta1"
+	v1beta1emrcontainers "github.com/upbound/provider-aws/v2/apis/namespaced/emrcontainers/v1beta1"
 	v1beta1emrserverless "github.com/upbound/provider-aws/v2/apis/namespaced/emrserverless/v1beta1"
 	v1beta1evidently "github.com/upbound/provider-aws/v2/apis/namespaced/evidently/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1"
@@ -261,6 +262,7 @@ func init() {
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta1emr.SchemeBuilder.AddToScheme,
+		v1beta1emrcontainers.SchemeBuilder.AddToScheme,
 		v1beta1emrserverless.SchemeBuilder.AddToScheme,
 		v1beta1evidently.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,

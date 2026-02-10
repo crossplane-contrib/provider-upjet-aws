@@ -47,6 +47,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/elasticache"
 	"github.com/upbound/provider-aws/v2/config/cluster/elb"
 	"github.com/upbound/provider-aws/v2/config/cluster/elbv2"
+	"github.com/upbound/provider-aws/v2/config/cluster/emrcontainers"
 	"github.com/upbound/provider-aws/v2/config/cluster/firehose"
 	"github.com/upbound/provider-aws/v2/config/cluster/fsx"
 	"github.com/upbound/provider-aws/v2/config/cluster/gamelift"
@@ -137,6 +138,7 @@ func init() {
 	ProviderConfiguration.AddConfig(elasticache.Configure)
 	ProviderConfiguration.AddConfig(elb.Configure)
 	ProviderConfiguration.AddConfig(elbv2.Configure)
+	ProviderConfiguration.AddConfig(emrcontainers.Configure)
 	ProviderConfiguration.AddConfig(firehose.Configure)
 	ProviderConfiguration.AddConfig(gamelift.Configure)
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
