@@ -150,6 +150,7 @@
 "aws_cloudfront_public_key",
 "aws_cloudfront_realtime_log_config",
 "aws_cloudfront_response_headers_policy",
+"aws_cloudfront_vpc_origin",
 "aws_cloudsearch_domain",
 "aws_cloudsearch_domain_service_access_policy",
 "aws_cloudtrail",

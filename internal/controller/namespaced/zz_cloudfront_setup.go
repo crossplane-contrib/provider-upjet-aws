@@ -22,6 +22,7 @@ import (
 	publickey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/publickey"
 	realtimelogconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/responseheaderspolicy"
+	vpcorigin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/vpcorigin"
 )
 
 // Setup_cloudfront creates all controllers with the supplied logger and adds them to
@@ -41,6 +42,7 @@ func Setup_cloudfront(mgr ctrl.Manager, o controller.Options) error {
 		publickey.Setup,
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
+		vpcorigin.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -66,6 +68,7 @@ func SetupGated_cloudfront(mgr ctrl.Manager, o controller.Options) error {
 		publickey.SetupGated,
 		realtimelogconfig.SetupGated,
 		responseheaderspolicy.SetupGated,
+		vpcorigin.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
