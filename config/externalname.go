@@ -1308,6 +1308,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// EMR Severless applications can be imported using the id
 	"aws_emrserverless_application": config.IdentifierFromProvider,
 
+	// emrcontainers
+	//
+	// EMR Containers Virtual Clusters can be imported using the id
+	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
+
 	// evidently
 	//
 	// CloudWatch Evidently Feature can be imported using the feature name and name or arn of the hosting CloudWatch Evidently Project separated by a :

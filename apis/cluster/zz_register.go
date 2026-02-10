@@ -138,6 +138,7 @@ import (
 	v1beta1elbv2 "github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta1"
 	v1beta2elbv2 "github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2"
 	v1beta1emr "github.com/upbound/provider-aws/v2/apis/cluster/emr/v1beta1"
+	v1beta1emrcontainers "github.com/upbound/provider-aws/v2/apis/cluster/emrcontainers/v1beta1"
 	v1beta1emrserverless "github.com/upbound/provider-aws/v2/apis/cluster/emrserverless/v1beta1"
 	v1beta2emrserverless "github.com/upbound/provider-aws/v2/apis/cluster/emrserverless/v1beta2"
 	v1beta1evidently "github.com/upbound/provider-aws/v2/apis/cluster/evidently/v1beta1"
@@ -437,6 +438,7 @@ func init() {
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta2elbv2.SchemeBuilder.AddToScheme,
 		v1beta1emr.SchemeBuilder.AddToScheme,
+		v1beta1emrcontainers.SchemeBuilder.AddToScheme,
 		v1beta1emrserverless.SchemeBuilder.AddToScheme,
 		v1beta2emrserverless.SchemeBuilder.AddToScheme,
 		v1beta1evidently.SchemeBuilder.AddToScheme,

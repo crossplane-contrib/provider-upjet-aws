@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: emrcontainers.aws.upbound.io/v1beta1
+kind: VirtualCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerProvider:
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      info:
+        eksInfo:
+          namespace: default
+      type: EKS
+    name: example
+    region: us-west-1

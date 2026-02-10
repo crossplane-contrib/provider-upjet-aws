@@ -399,6 +399,7 @@
 "aws_elb",
 "aws_elb_attachment",
 "aws_emr_security_configuration",
+"aws_emrcontainers_virtual_cluster",
 "aws_emrserverless_application",
 "aws_evidently_feature",
 "aws_evidently_project",
