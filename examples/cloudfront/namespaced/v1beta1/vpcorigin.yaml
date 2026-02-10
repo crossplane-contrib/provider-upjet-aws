@@ -1,0 +1,127 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: VPCOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-with-selector
+  name: example-with-selector
+spec:
+  forProvider:
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-alb
+    region: us-west-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-vpc
+  name: example-vpc
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-2
+    tags:
+      Name: example-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-subnet-a
+  name: example-subnet-a
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    cidrBlock: 172.16.0.0/24
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-subnet-b
+  name: example-subnet-b
+spec:
+  forProvider:
+    availabilityZone: us-west-2b
+    cidrBlock: 172.16.1.0/24
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-sg
+  name: example-sg
+spec:
+  forProvider:
+    description: Security group for ALB
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-sg-ingress
+  name: example-sg-ingress
+spec:
+  forProvider:
+    type: ingress
+    fromPort: 80
+    toPort: 80
+    protocol: tcp
+    cidrBlocks:
+      - 0.0.0.0/0
+    region: us-west-2
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sg
+---
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-alb
+  name: example-alb
+spec:
+  forProvider:
+    region: us-west-2
+    loadBalancerType: application
+    securityGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sg
+    subnetMapping:
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-subnet-b
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-subnet-a
