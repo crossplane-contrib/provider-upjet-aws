@@ -973,6 +973,7 @@
 "aws_wafv2_web_acl",
 "aws_wafv2_web_acl_association",
 "aws_wafv2_web_acl_logging_configuration",
+"aws_wafv2_web_acl_rule_group_association",
 "aws_workspaces_directory",
 "aws_workspaces_ip_group",
 "aws_xray_encryption_config",

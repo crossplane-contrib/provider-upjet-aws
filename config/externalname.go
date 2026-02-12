@@ -149,6 +149,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPC Lattice Service Network Resource Association can be imported using the id
 	"aws_vpclattice_service_network_resource_association": identifierFromProviderWithDefaultStub("snra-1234567890abcef12"),
 
+	// wafv2
+	//
+	// WAFv2 Web ACL Rule Group Association import documentation doesn't match the import code
+	"aws_wafv2_web_acl_rule_group_association": identifierFromProviderWithDefaultStub("arn:aws:wafv2:us-east-1:123456789012:regional/webacl/stub/stub,stub-rule,custom,arn:aws:wafv2:us-east-1:123456789012:regional/rulegroup/stub/stub"),
+
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
 
