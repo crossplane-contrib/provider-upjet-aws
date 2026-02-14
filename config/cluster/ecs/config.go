@@ -83,9 +83,20 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			if td.Old == td.New {
 				return diff, nil
 			}
-			// example td.New = arn:aws:ecs:us-west-1:<account_id>:task-definition/sampleservice:36
+			// Suppress spurious diffs when the desired task_definition
+			// (without a revision) matches the family portion of the
+			// current (revision-qualified) value.
+			//
+			// td.New may be:
+			//   - An ARN: "arn:aws:ecs:us-west-1:123456:task-definition/svc:36"
+			//   - A plain family name: "svc"
+			//
+			// Only attempt the comparison when td.New contains "/"
+			// (i.e., is an ARN). A plain family name cannot be
+			// meaningfully compared to the revision-qualified td.Old,
+			// so we let the diff through and let Terraform handle it.
 			tdParts := strings.Split(td.New, "/")
-			if td.Old == tdParts[1] {
+			if len(tdParts) >= 2 && td.Old == tdParts[1] {
 				delete(diff.Attributes, "task_definition")
 			}
 			return diff, nil
