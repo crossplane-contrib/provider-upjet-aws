@@ -306,3 +306,53 @@ func (mg *WebACLLoggingConfiguration) SetProviderConfigReference(r *xpv1.Referen
 func (mg *WebACLLoggingConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

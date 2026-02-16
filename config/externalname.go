@@ -149,6 +149,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPC Lattice Service Network Resource Association can be imported using the id
 	"aws_vpclattice_service_network_resource_association": identifierFromProviderWithDefaultStub("snra-1234567890abcef12"),
 
+	// wafv2
+	//
+	// WAFv2 Web ACL Rule Group Association can be imported using the web_acl_arn,rule_name,custom|managed,identifier
+	"aws_wafv2_web_acl_rule_group_association": wafv2WebACLRuleGroupAssociation(),
+
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
 
@@ -3390,6 +3395,81 @@ func dsqlClusterPeering() config.ExternalName {
 			return "", errors.New("identifier field must be a string")
 		}
 		return idStr, nil
+	}
+	return e
+}
+
+// getFirstBlockAttr extracts the first element of a block-type attribute from
+// Terraform state and returns it as a map. Returns nil if the attribute is
+// missing, empty, or not the expected type.
+func getFirstBlockAttr(tfstate map[string]any, key string) map[string]interface{} {
+	block, ok := tfstate[key]
+	if !ok {
+		return nil
+	}
+	items, ok := block.([]interface{})
+	if !ok || len(items) == 0 {
+		return nil
+	}
+	m, _ := items[0].(map[string]interface{})
+	return m
+}
+
+// customRuleGroupIdentifier returns the ARN from a rule_group_reference block,
+// or an empty string if none is found.
+func customRuleGroupIdentifier(tfstate map[string]any) string {
+	ref := getFirstBlockAttr(tfstate, "rule_group_reference")
+	if ref == nil {
+		return ""
+	}
+	arn, _ := ref["arn"].(string)
+	return arn
+}
+
+// managedRuleGroupIdentifier returns the "vendorName:name[:version]" identifier
+// from a managed_rule_group block, or an empty string if none is found.
+func managedRuleGroupIdentifier(tfstate map[string]any) string {
+	group := getFirstBlockAttr(tfstate, "managed_rule_group")
+	if group == nil {
+		return ""
+	}
+	vendorName, _ := group["vendor_name"].(string)
+	name, _ := group["name"].(string)
+	if vendorName == "" || name == "" {
+		return ""
+	}
+	identifier := vendorName + ":" + name
+	if version, _ := group["version"].(string); version != "" {
+		identifier += ":" + version
+	}
+	return identifier
+}
+
+// wafv2WebACLRuleGroupAssociation
+// The import format is a 4-part composite key:
+// web_acl_arn,rule_name,custom|managed,identifier
+// For custom rule groups, identifier is the rule group ARN.
+// For managed rule groups, identifier is vendorName:name[:version].
+func wafv2WebACLRuleGroupAssociation() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		webACLArn, ok := tfstate["web_acl_arn"].(string)
+		if !ok {
+			return "", errors.New("web_acl_arn attribute missing from state file")
+		}
+		ruleName, ok := tfstate["rule_name"].(string)
+		if !ok {
+			return "", errors.New("rule_name attribute missing from state file")
+		}
+
+		if arn := customRuleGroupIdentifier(tfstate); arn != "" {
+			return strings.Join([]string{webACLArn, ruleName, "custom", arn}, ","), nil
+		}
+		if id := managedRuleGroupIdentifier(tfstate); id != "" {
+			return strings.Join([]string{webACLArn, ruleName, "managed", id}, ","), nil
+		}
+
+		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
 	}
 	return e
 }

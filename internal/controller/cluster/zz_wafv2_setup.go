@@ -15,6 +15,7 @@ import (
 	webacl "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafv2/webacl"
 	webaclassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafv2/webaclassociation"
 	webaclloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafv2/webaclloggingconfiguration"
+	webaclrulegroupassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/wafv2/webaclrulegroupassociation"
 )
 
 // Setup_wafv2 creates all controllers with the supplied logger and adds them to
@@ -27,6 +28,7 @@ func Setup_wafv2(mgr ctrl.Manager, o controller.Options) error {
 		webacl.Setup,
 		webaclassociation.Setup,
 		webaclloggingconfiguration.Setup,
+		webaclrulegroupassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -45,6 +47,7 @@ func SetupGated_wafv2(mgr ctrl.Manager, o controller.Options) error {
 		webacl.SetupGated,
 		webaclassociation.SetupGated,
 		webaclloggingconfiguration.SetupGated,
+		webaclrulegroupassociation.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

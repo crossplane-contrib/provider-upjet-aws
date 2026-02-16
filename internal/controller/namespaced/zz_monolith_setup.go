@@ -985,6 +985,7 @@ import (
 	webaclwafv2 "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webacl"
 	webaclassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webaclassociation"
 	webaclloggingconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webaclloggingconfiguration"
+	webaclrulegroupassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/wafv2/webaclrulegroupassociation"
 	directoryworkspaces "github.com/upbound/provider-aws/v2/internal/controller/namespaced/workspaces/directory"
 	ipgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/workspaces/ipgroup"
 	encryptionconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/xray/encryptionconfig"
@@ -1972,6 +1973,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		webaclwafv2.Setup,
 		webaclassociation.Setup,
 		webaclloggingconfiguration.Setup,
+		webaclrulegroupassociation.Setup,
 		directoryworkspaces.Setup,
 		ipgroup.Setup,
 		encryptionconfig.Setup,
@@ -2965,6 +2967,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		webaclwafv2.SetupGated,
 		webaclassociation.SetupGated,
 		webaclloggingconfiguration.SetupGated,
+		webaclrulegroupassociation.SetupGated,
 		directoryworkspaces.SetupGated,
 		ipgroup.SetupGated,
 		encryptionconfig.SetupGated,

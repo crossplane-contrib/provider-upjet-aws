@@ -140,3 +140,99 @@ func (mg *WebACLLoggingConfiguration) ResolveReferences(ctx context.Context, c c
 
 	return nil
 }
+
+// ResolveReferences of this WebACLRuleGroupAssociation.
+func (mg *WebACLRuleGroupAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RuleGroupReference); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RuleGroupReference[i3].Arn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.RuleGroupReference[i3].ArnRef,
+				Selector:     mg.Spec.ForProvider.RuleGroupReference[i3].ArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.RuleGroupReference[i3].Arn")
+		}
+		mg.Spec.ForProvider.RuleGroupReference[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RuleGroupReference[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "WebACL", "WebACLList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebACLArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WebACLArnRef,
+			Selector:     mg.Spec.ForProvider.WebACLArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WebACLArn")
+	}
+	mg.Spec.ForProvider.WebACLArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebACLArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RuleGroupReference); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroupReference[i3].Arn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.RuleGroupReference[i3].ArnRef,
+				Selector:     mg.Spec.InitProvider.RuleGroupReference[i3].ArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.RuleGroupReference[i3].Arn")
+		}
+		mg.Spec.InitProvider.RuleGroupReference[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RuleGroupReference[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "WebACL", "WebACLList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebACLArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.WebACLArnRef,
+			Selector:     mg.Spec.InitProvider.WebACLArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WebACLArn")
+	}
+	mg.Spec.InitProvider.WebACLArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WebACLArnRef = rsp.ResolvedReference
+
+	return nil
+}
