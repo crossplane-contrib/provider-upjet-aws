@@ -2,66 +2,92 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: WebACLRuleGroupAssociation
 metadata:
   annotations:
     meta.upbound.io/example-id: wafv2/v1beta1/webaclrulegroupassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-custom
+  name: example-custom
 spec:
   forProvider:
     priority: 100
     region: us-west-1
     ruleGroupReference:
-    - arnSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      - arnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-custom
     ruleName: example-rule-group-rule
     webAclArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
 ---
+apiVersion: wafv2.aws.upbound.io/v1beta1
+kind: WebACLRuleGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafv2/v1beta1/webaclrulegroupassociation
+  labels:
+    testing.upbound.io/example-name: example-managed
+  name: example-managed
+spec:
+  forProvider:
+    priority: 50
+    region: us-west-1
+    managedRuleGroup:
+      - name: AWSManagedRulesCommonRuleSet
+        vendorName: AWS
+    ruleName: aws-managed-common-rules
+    webAclArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
+---
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: RuleGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: wafv2/v1beta1/webaclrulegroupassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-custom
+  name: example-custom
 spec:
   forProvider:
     capacity: 10
     name: example-rule-group
     region: us-west-1
-    rule:
-    - action:
-      - block:
-        - {}
-      name: block-suspicious-requests
-      priority: 1
-      statement:
-      - geo_match_statement:
-        - country_codes:
-          - CN
-          - RU
-      visibility_config:
-      - cloudwatch_metrics_enabled: true
-        metric_name: block-suspicious-requests
-        sampled_requests_enabled: true
+    ruleJson: |
+      [
+        {
+          "Name": "rule-1",
+          "Priority": 1,
+          "Statement": {
+            "GeoMatchStatement": {
+              "CountryCodes": [
+                "US",
+                "NL"
+              ]
+            }
+          },
+          "Action": {
+            "Allow": {}
+          },
+          "VisibilityConfig": {
+            "SampledRequestsEnabled": false,
+            "CloudWatchMetricsEnabled": false,
+            "MetricName": "example-rule-group"
+          }
+        }
+      ]
     scope: REGIONAL
     visibilityConfig:
-      cloudwatchMetricsEnabled: true
+      cloudwatchMetricsEnabled: false
       metricName: example-rule-group
-      sampledRequestsEnabled: true
+      sampledRequestsEnabled: false
 
 ---
-
 apiVersion: wafv2.aws.upbound.io/v1beta1
 kind: WebACL
 metadata:
