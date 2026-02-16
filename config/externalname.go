@@ -3399,6 +3399,52 @@ func dsqlClusterPeering() config.ExternalName {
 	return e
 }
 
+// getFirstBlockAttr extracts the first element of a block-type attribute from
+// Terraform state and returns it as a map. Returns nil if the attribute is
+// missing, empty, or not the expected type.
+func getFirstBlockAttr(tfstate map[string]any, key string) map[string]interface{} {
+	block, ok := tfstate[key]
+	if !ok {
+		return nil
+	}
+	items, ok := block.([]interface{})
+	if !ok || len(items) == 0 {
+		return nil
+	}
+	m, _ := items[0].(map[string]interface{})
+	return m
+}
+
+// customRuleGroupIdentifier returns the ARN from a rule_group_reference block,
+// or an empty string if none is found.
+func customRuleGroupIdentifier(tfstate map[string]any) string {
+	ref := getFirstBlockAttr(tfstate, "rule_group_reference")
+	if ref == nil {
+		return ""
+	}
+	arn, _ := ref["arn"].(string)
+	return arn
+}
+
+// managedRuleGroupIdentifier returns the "vendorName:name[:version]" identifier
+// from a managed_rule_group block, or an empty string if none is found.
+func managedRuleGroupIdentifier(tfstate map[string]any) string {
+	group := getFirstBlockAttr(tfstate, "managed_rule_group")
+	if group == nil {
+		return ""
+	}
+	vendorName, _ := group["vendor_name"].(string)
+	name, _ := group["name"].(string)
+	if vendorName == "" || name == "" {
+		return ""
+	}
+	identifier := vendorName + ":" + name
+	if version, _ := group["version"].(string); version != "" {
+		identifier += ":" + version
+	}
+	return identifier
+}
+
 // wafv2WebACLRuleGroupAssociation
 // The import format is a 4-part composite key:
 // web_acl_arn,rule_name,custom|managed,identifier
@@ -3416,32 +3462,11 @@ func wafv2WebACLRuleGroupAssociation() config.ExternalName {
 			return "", errors.New("rule_name attribute missing from state file")
 		}
 
-		// Check for custom rule group reference
-		if rgRef, ok := tfstate["rule_group_reference"]; ok {
-			if refs, ok := rgRef.([]interface{}); ok && len(refs) > 0 {
-				if ref, ok := refs[0].(map[string]interface{}); ok {
-					if arn, _ := ref["arn"].(string); arn != "" {
-						return strings.Join([]string{webACLArn, ruleName, "custom", arn}, ","), nil
-					}
-				}
-			}
+		if arn := customRuleGroupIdentifier(tfstate); arn != "" {
+			return strings.Join([]string{webACLArn, ruleName, "custom", arn}, ","), nil
 		}
-
-		// Check for managed rule group
-		if mrg, ok := tfstate["managed_rule_group"]; ok {
-			if groups, ok := mrg.([]interface{}); ok && len(groups) > 0 {
-				if group, ok := groups[0].(map[string]interface{}); ok {
-					vendorName, _ := group["vendor_name"].(string)
-					name, _ := group["name"].(string)
-					if vendorName != "" && name != "" {
-						identifier := vendorName + ":" + name
-						if version, _ := group["version"].(string); version != "" {
-							identifier += ":" + version
-						}
-						return strings.Join([]string{webACLArn, ruleName, "managed", identifier}, ","), nil
-					}
-				}
-			}
+		if id := managedRuleGroupIdentifier(tfstate); id != "" {
+			return strings.Join([]string{webACLArn, ruleName, "managed", id}, ","), nil
 		}
 
 		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
