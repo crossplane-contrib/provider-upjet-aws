@@ -151,8 +151,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// wafv2
 	//
-	// WAFv2 Web ACL Rule Group Association import documentation doesn't match the import code
-	"aws_wafv2_web_acl_rule_group_association": identifierFromProviderWithDefaultStub("arn:aws:wafv2:us-east-1:123456789012:regional/webacl/stub/stub,stub-rule,custom,arn:aws:wafv2:us-east-1:123456789012:regional/rulegroup/stub/stub"),
+	// WAFv2 Web ACL Rule Group Association can be imported using the web_acl_arn,rule_name,custom|managed,identifier
+	"aws_wafv2_web_acl_rule_group_association": wafv2WebACLRuleGroupAssociation(),
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 }
@@ -3395,6 +3395,56 @@ func dsqlClusterPeering() config.ExternalName {
 			return "", errors.New("identifier field must be a string")
 		}
 		return idStr, nil
+	}
+	return e
+}
+
+// wafv2WebACLRuleGroupAssociation
+// The import format is a 4-part composite key:
+// web_acl_arn,rule_name,custom|managed,identifier
+// For custom rule groups, identifier is the rule group ARN.
+// For managed rule groups, identifier is vendorName:name[:version].
+func wafv2WebACLRuleGroupAssociation() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		webACLArn, ok := tfstate["web_acl_arn"].(string)
+		if !ok {
+			return "", errors.New("web_acl_arn attribute missing from state file")
+		}
+		ruleName, ok := tfstate["rule_name"].(string)
+		if !ok {
+			return "", errors.New("rule_name attribute missing from state file")
+		}
+
+		// Check for custom rule group reference
+		if rgRef, ok := tfstate["rule_group_reference"]; ok {
+			if refs, ok := rgRef.([]interface{}); ok && len(refs) > 0 {
+				if ref, ok := refs[0].(map[string]interface{}); ok {
+					if arn, _ := ref["arn"].(string); arn != "" {
+						return strings.Join([]string{webACLArn, ruleName, "custom", arn}, ","), nil
+					}
+				}
+			}
+		}
+
+		// Check for managed rule group
+		if mrg, ok := tfstate["managed_rule_group"]; ok {
+			if groups, ok := mrg.([]interface{}); ok && len(groups) > 0 {
+				if group, ok := groups[0].(map[string]interface{}); ok {
+					vendorName, _ := group["vendor_name"].(string)
+					name, _ := group["name"].(string)
+					if vendorName != "" && name != "" {
+						identifier := vendorName + ":" + name
+						if version, _ := group["version"].(string); version != "" {
+							identifier += ":" + version
+						}
+						return strings.Join([]string{webACLArn, ruleName, "managed", identifier}, ","), nil
+					}
+				}
+			}
+		}
+
+		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
 	}
 	return e
 }
