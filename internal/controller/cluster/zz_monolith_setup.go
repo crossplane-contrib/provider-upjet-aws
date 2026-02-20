@@ -769,6 +769,9 @@ import (
 	vpcassociationauthorization "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/zone"
 	zoneassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53/zoneassociation"
+	associationroute53profiles "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53profiles/association"
+	profileroute53profiles "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53profiles/profile"
+	resourceassociationroute53profiles "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53profiles/resourceassociation"
 	clusterroute53recoverycontrolconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/cluster"
 	controlpanel "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/controlpanel"
 	routingcontrol "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53recoverycontrolconfig/routingcontrol"
@@ -1756,6 +1759,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcassociationauthorization.Setup,
 		zone.Setup,
 		zoneassociation.Setup,
+		associationroute53profiles.Setup,
+		profileroute53profiles.Setup,
+		resourceassociationroute53profiles.Setup,
 		clusterroute53recoverycontrolconfig.Setup,
 		controlpanel.Setup,
 		routingcontrol.Setup,
@@ -2749,6 +2755,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcassociationauthorization.SetupGated,
 		zone.SetupGated,
 		zoneassociation.SetupGated,
+		associationroute53profiles.SetupGated,
+		profileroute53profiles.SetupGated,
+		resourceassociationroute53profiles.SetupGated,
 		clusterroute53recoverycontrolconfig.SetupGated,
 		controlpanel.SetupGated,
 		routingcontrol.SetupGated,

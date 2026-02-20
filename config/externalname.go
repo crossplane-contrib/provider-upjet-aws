@@ -121,6 +121,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
+	// route53profiles
+	//
+	// route53profiles_association can be imported using the id
+	"aws_route53profiles_association": identifierFromProviderWithDefaultStub("rpa-stub123456"),
+	// route53profiles_profile can be imported using the id
+	"aws_route53profiles_profile": identifierFromProviderWithDefaultStub("rp-stub123456"),
+	// route53profiles_resource_association can be imported using the id
+	"aws_route53profiles_resource_association": identifierFromProviderWithDefaultStub("rpassoc-stub123456"),
+
 	// amp
 	//
 	// Prometheus Scraper can be imported using the ARN: arn:aws:aps:us-west-2:123456789012:scraper/s-12345678-1234-1234-1234-123456789012
