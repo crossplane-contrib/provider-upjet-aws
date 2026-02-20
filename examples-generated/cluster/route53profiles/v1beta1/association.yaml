@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: route53profiles.aws.upbound.io/v1beta1
+kind: Association
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53profiles/v1beta1/association
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    profileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: dev
+
+---
+
+apiVersion: route53profiles.aws.upbound.io/v1beta1
+kind: Profile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53profiles/v1beta1/association
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53profiles/v1beta1/association
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidr: 10.0.0.0/16
+    region: us-west-1

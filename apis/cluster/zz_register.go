@@ -243,6 +243,7 @@ import (
 	v1beta1rolesanywhere "github.com/upbound/provider-aws/v2/apis/cluster/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1"
 	v1beta2route53 "github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta2"
+	v1beta1route53profiles "github.com/upbound/provider-aws/v2/apis/cluster/route53profiles/v1beta1"
 	v1beta1route53recoverycontrolconfig "github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1"
 	v1beta2route53recoverycontrolconfig "github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta2"
 	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/v2/apis/cluster/route53recoveryreadiness/v1beta1"
@@ -542,6 +543,7 @@ func init() {
 		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1beta2route53.SchemeBuilder.AddToScheme,
+		v1beta1route53profiles.SchemeBuilder.AddToScheme,
 		v1beta1route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta2route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
