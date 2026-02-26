@@ -23,7 +23,6 @@ kind: IntegrationResponse
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta2/restapi
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegrationresponse
@@ -57,7 +56,6 @@ kind: Integration
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta2/restapi
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegration
@@ -82,7 +80,6 @@ kind: Method
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta2/restapi
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomethod
@@ -105,7 +102,6 @@ kind: MethodResponse
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta2/restapi
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: response-200
