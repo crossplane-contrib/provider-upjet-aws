@@ -272,17 +272,17 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// API Gateway domain names can be imported using their name
 	"aws_api_gateway_domain_name": config.IdentifierFromProvider,
 	// aws_api_gateway_gateway_response can be imported using REST-API-ID/RESPONSE-TYPE
-	"aws_api_gateway_gateway_response": FormattedIdentifierFromProvider("/", "rest_api_id", "response_type"),
+	"aws_api_gateway_gateway_response": apiGatewayFormattedIdentifier("aggr", "rest_api_id", "response_type"),
 	// aws_api_gateway_integration can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD
-	"aws_api_gateway_integration": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method"),
+	"aws_api_gateway_integration": apiGatewayFormattedIdentifier("agi", "rest_api_id", "resource_id", "http_method"),
 	// aws_api_gateway_integration_response can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD/STATUS-CODE
-	"aws_api_gateway_integration_response": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method", "status_code"),
+	"aws_api_gateway_integration_response": apiGatewayFormattedIdentifier("agir", "rest_api_id", "resource_id", "http_method", "status_code"),
 	// aws_api_gateway_method can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD
-	"aws_api_gateway_method": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method"),
+	"aws_api_gateway_method": apiGatewayFormattedIdentifier("agm", "rest_api_id", "resource_id", "http_method"),
 	// aws_api_gateway_method_response can be imported using REST-API-ID/RESOURCE-ID/HTTP-METHOD/STATUS-CODE
-	"aws_api_gateway_method_response": FormattedIdentifierFromProvider("/", "rest_api_id", "resource_id", "http_method", "status_code"),
+	"aws_api_gateway_method_response": apiGatewayFormattedIdentifier("agmr", "rest_api_id", "resource_id", "http_method", "status_code"),
 	// aws_api_gateway_method_settings can be imported using REST-API-ID/STAGE-NAME/METHOD-PATH
-	"aws_api_gateway_method_settings": FormattedIdentifierFromProvider("/", "rest_api_id", "stage_name", "method_path"),
+	"aws_api_gateway_method_settings": apiGatewayFormattedIdentifier("", "rest_api_id", "stage_name", "method_path"),
 	// aws_api_gateway_model can be imported using REST-API-ID/NAME
 	"aws_api_gateway_model": config.IdentifierFromProvider,
 	// aws_api_gateway_request_validator can be imported using REST-API-ID/REQUEST-VALIDATOR-ID
@@ -294,7 +294,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// aws_api_gateway_rest_api_policy can be imported by using the REST API ID
 	"aws_api_gateway_rest_api_policy": FormattedIdentifierFromProvider("", "rest_api_id"),
 	// aws_api_gateway_stage can be imported using REST-API-ID/STAGE-NAME
-	"aws_api_gateway_stage": FormattedIdentifierFromProvider("/", "rest_api_id", "stage_name"),
+	"aws_api_gateway_stage": apiGatewayFormattedIdentifier("ags", "rest_api_id", "stage_name"),
 	// AWS API Gateway Usage Plan can be imported using the id
 	"aws_api_gateway_usage_plan": config.IdentifierFromProvider,
 	// AWS API Gateway Usage Plan Key can be imported using the USAGE-PLAN-ID/USAGE-PLAN-KEY-ID
@@ -3372,6 +3372,51 @@ func apiGatewayAccount() config.ExternalName {
 			return "api-gateway-account", nil
 		}
 		return externalName, nil
+	}
+	return e
+}
+
+// apiGatewayFormattedIdentifier configures external name for API Gateway
+// v1 resources where the Terraform internal ID format differs from the import
+// format. GetExternalNameFn reads tfstate fields directly (e.g.,
+// tfstate["rest_api_id"]) and joins them with "/" separators. GetIDFn reads
+// parameters and joins them with "-" separators, optionally adding a prefix.
+// This ensures consistent values to prevent external name oscillation.
+func apiGatewayFormattedIdentifier(prefix string, keys ...string) config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := tfstate[key]
+			if !ok {
+				return "", errors.Errorf("parameter %q cannot be empty", key)
+			}
+			s, ok := val.(string)
+			if !ok {
+				return "", errors.Errorf("parameter %q must be a string", key)
+			}
+			vals[i] = s
+		}
+		return strings.Join(vals, "/"), nil
+	}
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := parameters[key]
+			if !ok {
+				return "", errors.Errorf("parameter %q cannot be empty", key)
+			}
+			s, ok := val.(string)
+			if !ok {
+				return "", errors.Errorf("parameter %q must be a string", key)
+			}
+			vals[i] = s
+		}
+		id := strings.Join(vals, "-")
+		if prefix != "" {
+			return prefix + "-" + id, nil
+		}
+		return id, nil
 	}
 	return e
 }
