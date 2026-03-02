@@ -344,7 +344,7 @@ spec:
                     type: string
                   serverSideEncryption:
                     description: Server-side encryption of the object in S3. Valid
-                      values are "AES256" and "aws:kms".
+                      values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
                     type: string
                   source:
                     description: Path to a file that will be read and uploaded as
@@ -649,7 +649,7 @@ spec:
                     type: array
                   serverSideEncryption:
                     description: Server-side encryption of the object in S3. Valid
-                      values are "AES256" and "aws:kms".
+                      values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
                     type: string
                   source:
                     description: Path to a file that will be read and uploaded as
@@ -916,7 +916,7 @@ spec:
                     type: string
                   serverSideEncryption:
                     description: Server-side encryption of the object in S3. Valid
-                      values are "AES256" and "aws:kms".
+                      values are "AES256", "aws:kms", "aws:kms:dsse", and "aws:fsx".
                     type: string
                   source:
                     description: Path to a file that will be read and uploaded as

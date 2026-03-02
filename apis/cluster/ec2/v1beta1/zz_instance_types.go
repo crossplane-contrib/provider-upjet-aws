@@ -21,6 +21,9 @@ type CPUOptionsInitParameters struct {
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
+
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
@@ -32,6 +35,9 @@ type CPUOptionsObservation struct {
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
@@ -46,6 +52,10 @@ type CPUOptionsParameters struct {
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	// +kubebuilder:validation:Optional
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	// +kubebuilder:validation:Optional
@@ -177,7 +187,7 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	// Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -215,7 +225,7 @@ type InstanceEBSBlockDeviceObservation struct {
 	// Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -271,7 +281,7 @@ type InstanceEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -445,6 +455,9 @@ type InstanceInitParameters struct {
 
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	RootBlockDevice []RootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	// One or more secondary network interfaces to attach to the instance at launch time. See Secondary Network Interface below for more details.
+	SecondaryNetworkInterface []SecondaryNetworkInterfaceInitParameters `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
 
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +listType=set
@@ -793,6 +806,9 @@ type InstanceObservation struct {
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
+	// One or more secondary network interfaces to attach to the instance at launch time. See Secondary Network Interface below for more details.
+	SecondaryNetworkInterface []SecondaryNetworkInterfaceObservation `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
+
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +listType=set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
@@ -993,6 +1009,10 @@ type InstanceParameters struct {
 	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
 	// +kubebuilder:validation:Optional
 	RootBlockDevice []RootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	// One or more secondary network interfaces to attach to the instance at launch time. See Secondary Network Interface below for more details.
+	// +kubebuilder:validation:Optional
+	SecondaryNetworkInterface []SecondaryNetworkInterfaceParameters `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
 
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
@@ -1280,7 +1300,7 @@ type RootBlockDeviceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -1315,7 +1335,7 @@ type RootBlockDeviceObservation struct {
 	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -1363,7 +1383,7 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Map of tags to assign to the device.
+	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -1384,6 +1404,91 @@ type RootBlockDeviceParameters struct {
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to the volume type that the AMI uses.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type SecondaryNetworkInterfaceInitParameters struct {
+
+	// Whether the network interface should be destroyed when the instance is terminated. Defaults to true. Forces replacement.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the network interface attachment. Defaults to 0. Forces replacement.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of network interface. Currently only secondary is supported. Defaults to secondary. Forces replacement.
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// Network card index for the interface. Each network card can have one secondary interface. Forces replacement.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// Number of private IP addresses to assign to the network interface. Defaults to 1. Forces replacement.
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// ID of the secondary subnet in which to create the network interface. Forces replacement.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+}
+
+type SecondaryNetworkInterfaceObservation struct {
+
+	// Whether the network interface should be destroyed when the instance is terminated. Defaults to true. Forces replacement.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the network interface attachment. Defaults to 0. Forces replacement.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of network interface. Currently only secondary is supported. Defaults to secondary. Forces replacement.
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+
+	// Network card index for the interface. Each network card can have one secondary interface. Forces replacement.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// Number of private IP addresses to assign to the network interface. Defaults to 1. Forces replacement.
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// List of private IP addresses to assign to the network interface. If not specified, AWS will automatically assign IP addresses based on private_ip_address_count. Forces replacement.
+	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// ID of the instance.
+	SecondaryInterfaceID *string `json:"secondaryInterfaceId,omitempty" tf:"secondary_interface_id,omitempty"`
+
+	// ID of the instance.
+	SecondaryNetworkID *string `json:"secondaryNetworkId,omitempty" tf:"secondary_network_id,omitempty"`
+
+	// ID of the secondary subnet in which to create the network interface. Forces replacement.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+
+	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
+	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
+
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type SecondaryNetworkInterfaceParameters struct {
+
+	// Whether the network interface should be destroyed when the instance is terminated. Defaults to true. Forces replacement.
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the network interface attachment. Defaults to 0. Forces replacement.
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of network interface. Currently only secondary is supported. Defaults to secondary. Forces replacement.
+	// +kubebuilder:validation:Optional
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// Network card index for the interface. Each network card can have one secondary interface. Forces replacement.
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex" tf:"network_card_index,omitempty"`
+
+	// Number of private IP addresses to assign to the network interface. Defaults to 1. Forces replacement.
+	// +kubebuilder:validation:Optional
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// ID of the secondary subnet in which to create the network interface. Forces replacement.
+	// +kubebuilder:validation:Optional
+	SecondarySubnetID *string `json:"secondarySubnetId" tf:"secondary_subnet_id,omitempty"`
 }
 
 // InstanceSpec defines the desired state of Instance

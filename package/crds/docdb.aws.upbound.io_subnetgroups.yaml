@@ -392,6 +392,13 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  supportedNetworkTypes:
+                    description: The network type of the docDB subnet group (IPV4
+                      or DUAL).
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string

@@ -84,9 +84,11 @@ spec:
                     - name
                     type: object
                   authTokenUpdateStrategy:
-                    description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Required if auth_token is
-                      set.
+                    description: Strategy used when modifying auth_token on an existing
+                      replication group. Not used during initial create. Valid values
+                      are SET, ROTATE, and DELETE. If omitted during an auth token
+                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
+                      must be omitted.
                     type: string
                   autoGenerateAuthToken:
                     description: |-
@@ -358,6 +360,48 @@ spec:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
+                  nodeGroupConfiguration:
+                    description: Configuration block for node groups (shards). Can
+                      be specified only if num_node_groups is set. Conflicts with
+                      preferred_cache_cluster_azs. See Node Group Configuration below
+                      for more details.
+                    items:
+                      properties:
+                        nodeGroupId:
+                          description: ID for the node group. Redis (cluster mode
+                            disabled) replication groups don't have node group IDs,
+                            so this value is ignored. For Redis (cluster mode enabled)
+                            replication groups, the node group ID is a 1 to 4 character
+                            alphanumeric string.
+                          type: string
+                        primaryAvailabilityZone:
+                          description: Availability zone for the primary node.
+                          type: string
+                        primaryOutpostArn:
+                          description: ARN of the Outpost for the primary node.
+                          type: string
+                        replicaAvailabilityZones:
+                          description: List of availability zones for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        replicaCount:
+                          description: Number of replica nodes in this node group.
+                          type: number
+                        replicaOutpostArns:
+                          description: List of ARNs of the Outposts for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        slots:
+                          description: Keyspace for this node group. Format is start-end
+                            (e.g., 0-5460). For Redis (cluster mode disabled) replication
+                            groups, this value is ignored.
+                          type: string
+                      type: object
+                    type: array
                   nodeType:
                     description: |-
                       Instance class to be used.
@@ -697,9 +741,11 @@ spec:
                     - name
                     type: object
                   authTokenUpdateStrategy:
-                    description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Required if auth_token is
-                      set.
+                    description: Strategy used when modifying auth_token on an existing
+                      replication group. Not used during initial create. Valid values
+                      are SET, ROTATE, and DELETE. If omitted during an auth token
+                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
+                      must be omitted.
                     type: string
                   autoMinorVersionUpgrade:
                     description: |-
@@ -966,6 +1012,48 @@ spec:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
+                  nodeGroupConfiguration:
+                    description: Configuration block for node groups (shards). Can
+                      be specified only if num_node_groups is set. Conflicts with
+                      preferred_cache_cluster_azs. See Node Group Configuration below
+                      for more details.
+                    items:
+                      properties:
+                        nodeGroupId:
+                          description: ID for the node group. Redis (cluster mode
+                            disabled) replication groups don't have node group IDs,
+                            so this value is ignored. For Redis (cluster mode enabled)
+                            replication groups, the node group ID is a 1 to 4 character
+                            alphanumeric string.
+                          type: string
+                        primaryAvailabilityZone:
+                          description: Availability zone for the primary node.
+                          type: string
+                        primaryOutpostArn:
+                          description: ARN of the Outpost for the primary node.
+                          type: string
+                        replicaAvailabilityZones:
+                          description: List of availability zones for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        replicaCount:
+                          description: Number of replica nodes in this node group.
+                          type: number
+                        replicaOutpostArns:
+                          description: List of ARNs of the Outposts for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        slots:
+                          description: Keyspace for this node group. Format is start-end
+                            (e.g., 0-5460). For Redis (cluster mode disabled) replication
+                            groups, this value is ignored.
+                          type: string
+                      type: object
+                    type: array
                   nodeType:
                     description: |-
                       Instance class to be used.
@@ -1342,9 +1430,11 @@ spec:
                       When engine is valkey, default is true.
                     type: string
                   authTokenUpdateStrategy:
-                    description: Strategy to use when updating the auth_token. Valid
-                      values are SET, ROTATE, and DELETE. Required if auth_token is
-                      set.
+                    description: Strategy used when modifying auth_token on an existing
+                      replication group. Not used during initial create. Valid values
+                      are SET, ROTATE, and DELETE. If omitted during an auth token
+                      change, AWS defaults to ROTATE. If value is DELETE then auth_token
+                      must be omitted.
                     type: string
                   autoMinorVersionUpgrade:
                     description: |-
@@ -1471,6 +1561,48 @@ spec:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
+                  nodeGroupConfiguration:
+                    description: Configuration block for node groups (shards). Can
+                      be specified only if num_node_groups is set. Conflicts with
+                      preferred_cache_cluster_azs. See Node Group Configuration below
+                      for more details.
+                    items:
+                      properties:
+                        nodeGroupId:
+                          description: ID for the node group. Redis (cluster mode
+                            disabled) replication groups don't have node group IDs,
+                            so this value is ignored. For Redis (cluster mode enabled)
+                            replication groups, the node group ID is a 1 to 4 character
+                            alphanumeric string.
+                          type: string
+                        primaryAvailabilityZone:
+                          description: Availability zone for the primary node.
+                          type: string
+                        primaryOutpostArn:
+                          description: ARN of the Outpost for the primary node.
+                          type: string
+                        replicaAvailabilityZones:
+                          description: List of availability zones for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        replicaCount:
+                          description: Number of replica nodes in this node group.
+                          type: number
+                        replicaOutpostArns:
+                          description: List of ARNs of the Outposts for the replica
+                            nodes.
+                          items:
+                            type: string
+                          type: array
+                        slots:
+                          description: Keyspace for this node group. Format is start-end
+                            (e.g., 0-5460). For Redis (cluster mode disabled) replication
+                            groups, this value is ignored.
+                          type: string
+                      type: object
+                    type: array
                   nodeType:
                     description: |-
                       Instance class to be used.

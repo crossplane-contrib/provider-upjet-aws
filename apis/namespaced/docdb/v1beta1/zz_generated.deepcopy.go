@@ -165,6 +165,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -311,6 +316,11 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.CertificateRotationRestart != nil {
+		in, out := &in.CertificateRotationRestart, &out.CertificateRotationRestart
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterIdentifier != nil {
 		in, out := &in.ClusterIdentifier, &out.ClusterIdentifier
 		*out = new(string)
@@ -446,6 +456,11 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 	}
 	if in.CACertIdentifier != nil {
 		in, out := &in.CACertIdentifier, &out.CACertIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.CertificateRotationRestart != nil {
+		in, out := &in.CertificateRotationRestart, &out.CertificateRotationRestart
 		*out = new(string)
 		**out = **in
 	}
@@ -613,6 +628,11 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 	}
 	if in.CACertIdentifier != nil {
 		in, out := &in.CACertIdentifier, &out.CACertIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.CertificateRotationRestart != nil {
+		in, out := &in.CertificateRotationRestart, &out.CertificateRotationRestart
 		*out = new(string)
 		**out = **in
 	}
@@ -906,6 +926,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -1420,6 +1445,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -3021,6 +3051,17 @@ func (in *SubnetGroupObservation) DeepCopyInto(out *SubnetGroupObservation) {
 	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SupportedNetworkTypes != nil {
+		in, out := &in.SupportedNetworkTypes, &out.SupportedNetworkTypes
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {

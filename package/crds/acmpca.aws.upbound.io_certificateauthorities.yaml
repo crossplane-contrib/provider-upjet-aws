@@ -214,6 +214,13 @@ spec:
                                   bucket to be public. Must be less than or equal
                                   to 253 characters in length.
                                 type: string
+                              customPath:
+                                description: Configures a custom path for the CRL
+                                  in S3. If specified, the CRL will be written to
+                                  s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                                  Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                                  and be between 0 and 253 characters in length.
+                                type: string
                               enabled:
                                 description: Boolean value that specifies whether
                                   certificate revocation lists (CRLs) are enabled.
@@ -426,6 +433,13 @@ spec:
                                   this value if you don't want the name of your S3
                                   bucket to be public. Must be less than or equal
                                   to 253 characters in length.
+                                type: string
+                              customPath:
+                                description: Configures a custom path for the CRL
+                                  in S3. If specified, the CRL will be written to
+                                  s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                                  Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                                  and be between 0 and 253 characters in length.
                                 type: string
                               enabled:
                                 description: Boolean value that specifies whether
@@ -760,6 +774,13 @@ spec:
                                   this value if you don't want the name of your S3
                                   bucket to be public. Must be less than or equal
                                   to 253 characters in length.
+                                type: string
+                              customPath:
+                                description: Configures a custom path for the CRL
+                                  in S3. If specified, the CRL will be written to
+                                  s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                                  Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                                  and be between 0 and 253 characters in length.
                                 type: string
                               enabled:
                                 description: Boolean value that specifies whether
@@ -1084,6 +1105,12 @@ spec:
                               want the name of your S3 bucket to be public. Must be
                               less than or equal to 253 characters in length.
                             type: string
+                          customPath:
+                            description: Configures a custom path for the CRL in S3.
+                              If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                              Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                              and be between 0 and 253 characters in length.
+                            type: string
                           enabled:
                             description: Boolean value that specifies whether certificate
                               revocation lists (CRLs) are enabled. Defaults to false.
@@ -1282,6 +1309,12 @@ spec:
                               the CRL distribution point. Use this value if you don't
                               want the name of your S3 bucket to be public. Must be
                               less than or equal to 253 characters in length.
+                            type: string
+                          customPath:
+                            description: Configures a custom path for the CRL in S3.
+                              If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                              Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                              and be between 0 and 253 characters in length.
                             type: string
                           enabled:
                             description: Boolean value that specifies whether certificate
@@ -1602,6 +1635,12 @@ spec:
                               the CRL distribution point. Use this value if you don't
                               want the name of your S3 bucket to be public. Must be
                               less than or equal to 253 characters in length.
+                            type: string
+                          customPath:
+                            description: Configures a custom path for the CRL in S3.
+                              If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>.
+                              Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)*
+                              and be between 0 and 253 characters in length.
                             type: string
                           enabled:
                             description: Boolean value that specifies whether certificate

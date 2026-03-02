@@ -19,6 +19,9 @@ type ResourceGatewayInitParameters struct {
 	// IP address type used by the resource gateway. Valid values are IPV4, IPV6, and DUALSTACK. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
+	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
+
 	// Name of the resource gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -80,6 +83,9 @@ type ResourceGatewayObservation struct {
 	// IP address type used by the resource gateway. Valid values are IPV4, IPV6, and DUALSTACK. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
+	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
+
 	// Name of the resource gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -115,6 +121,10 @@ type ResourceGatewayParameters struct {
 	// IP address type used by the resource gateway. Valid values are IPV4, IPV6, and DUALSTACK. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The number of IPv4 addresses per ENI for your resource. This argument is only applicable to IPV4 and DUALSTACK IP address types. Defaults to 16.
+	// +kubebuilder:validation:Optional
+	IPv4AddressesPerEni *float64 `json:"ipv4AddressesPerEni,omitempty" tf:"ipv4_addresses_per_eni,omitempty"`
 
 	// Name of the resource gateway.
 	// +kubebuilder:validation:Optional

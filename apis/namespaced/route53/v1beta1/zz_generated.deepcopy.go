@@ -3614,6 +3614,11 @@ func (in *ZoneInitParameters) DeepCopyInto(out *ZoneInitParameters) {
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.EnableAcceleratedRecovery != nil {
+		in, out := &in.EnableAcceleratedRecovery, &out.EnableAcceleratedRecovery
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ForceDestroy != nil {
 		in, out := &in.ForceDestroy, &out.ForceDestroy
 		*out = new(bool)
@@ -3707,6 +3712,11 @@ func (in *ZoneObservation) DeepCopyInto(out *ZoneObservation) {
 	if in.DelegationSetID != nil {
 		in, out := &in.DelegationSetID, &out.DelegationSetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.EnableAcceleratedRecovery != nil {
+		in, out := &in.EnableAcceleratedRecovery, &out.EnableAcceleratedRecovery
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ForceDestroy != nil {
@@ -3818,6 +3828,11 @@ func (in *ZoneParameters) DeepCopyInto(out *ZoneParameters) {
 		in, out := &in.DelegationSetIDSelector, &out.DelegationSetIDSelector
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.EnableAcceleratedRecovery != nil {
+		in, out := &in.EnableAcceleratedRecovery, &out.EnableAcceleratedRecovery
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ForceDestroy != nil {
 		in, out := &in.ForceDestroy, &out.ForceDestroy

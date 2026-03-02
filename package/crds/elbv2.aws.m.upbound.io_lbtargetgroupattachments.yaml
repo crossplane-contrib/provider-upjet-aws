@@ -69,6 +69,13 @@ spec:
                   port:
                     description: The port on which targets receive traffic.
                     type: number
+                  quicServerId:
+                    description: Server ID for the targets, consisting of the 0x prefix
+                      followed by 16 hexadecimal characters. The value must be unique
+                      at the listener level. Required if aws_lb_target_group protocol
+                      is QUIC or TCP_QUIC. Not valid with other protocols. Forces
+                      replacement if modified.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -191,6 +198,13 @@ spec:
                   port:
                     description: The port on which targets receive traffic.
                     type: number
+                  quicServerId:
+                    description: Server ID for the targets, consisting of the 0x prefix
+                      followed by 16 hexadecimal characters. The value must be unique
+                      at the listener level. Required if aws_lb_target_group protocol
+                      is QUIC or TCP_QUIC. Not valid with other protocols. Forces
+                      replacement if modified.
+                    type: string
                   targetGroupArn:
                     description: The ARN of the target group with which to register
                       targets.
@@ -365,6 +379,13 @@ spec:
                   port:
                     description: The port on which targets receive traffic.
                     type: number
+                  quicServerId:
+                    description: Server ID for the targets, consisting of the 0x prefix
+                      followed by 16 hexadecimal characters. The value must be unique
+                      at the listener level. Required if aws_lb_target_group protocol
+                      is QUIC or TCP_QUIC. Not valid with other protocols. Forces
+                      replacement if modified.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

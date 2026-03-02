@@ -354,16 +354,16 @@ type TaskDefinitionInitParameters struct {
 	// A unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
+	// IPC resource namespace to be used for the containers in the task. Valid values: host, task, none.
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
 
 	// Amount (in MiB) of memory used by the task. If the requires_compatibilities is FARGATE this field is required.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Docker networking mode to use for the containers in the task. Valid values are none, bridge, awsvpc, and host.
+	// Docker networking mode to use for the containers in the task. Valid values: awsvpc, bridge, host, and none.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// Process namespace to use for the containers in the task. The valid values are host and task.
+	// Process namespace to use for the containers in the task. Valid values: host, task`.
 	PidMode *string `json:"pidMode,omitempty" tf:"pid_mode,omitempty"`
 
 	// Configuration block for rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. Detailed below.
@@ -372,7 +372,7 @@ type TaskDefinitionInitParameters struct {
 	// Configuration block for the App Mesh proxy. Detailed below.
 	ProxyConfiguration []ProxyConfigurationInitParameters `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
-	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
+	// Set of launch types required by the task. Valid values: EC2, EXTERNAL, FARGATE, MANAGED_INSTANCES.
 	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
 
@@ -392,7 +392,7 @@ type TaskDefinitionInitParameters struct {
 	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
-	// Configuration block for volumes that containers in your task may use. Detailed below.
+	// Repeatable configuration block for volumes that containers in your task may use. Detailed below.
 	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
@@ -424,16 +424,16 @@ type TaskDefinitionObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
+	// IPC resource namespace to be used for the containers in the task. Valid values: host, task, none.
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
 
 	// Amount (in MiB) of memory used by the task. If the requires_compatibilities is FARGATE this field is required.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Docker networking mode to use for the containers in the task. Valid values are none, bridge, awsvpc, and host.
+	// Docker networking mode to use for the containers in the task. Valid values: awsvpc, bridge, host, and none.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// Process namespace to use for the containers in the task. The valid values are host and task.
+	// Process namespace to use for the containers in the task. Valid values: host, task`.
 	PidMode *string `json:"pidMode,omitempty" tf:"pid_mode,omitempty"`
 
 	// Configuration block for rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. Detailed below.
@@ -446,7 +446,7 @@ type TaskDefinitionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
+	// Set of launch types required by the task. Valid values: EC2, EXTERNAL, FARGATE, MANAGED_INSTANCES.
 	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
 
@@ -473,7 +473,7 @@ type TaskDefinitionObservation struct {
 	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
-	// Configuration block for volumes that containers in your task may use. Detailed below.
+	// Repeatable configuration block for volumes that containers in your task may use. Detailed below.
 	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
 }
 
@@ -513,7 +513,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// IPC resource namespace to be used for the containers in the task The valid values are host, task, and none.
+	// IPC resource namespace to be used for the containers in the task. Valid values: host, task, none.
 	// +kubebuilder:validation:Optional
 	IpcMode *string `json:"ipcMode,omitempty" tf:"ipc_mode,omitempty"`
 
@@ -521,11 +521,11 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Docker networking mode to use for the containers in the task. Valid values are none, bridge, awsvpc, and host.
+	// Docker networking mode to use for the containers in the task. Valid values: awsvpc, bridge, host, and none.
 	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
-	// Process namespace to use for the containers in the task. The valid values are host and task.
+	// Process namespace to use for the containers in the task. Valid values: host, task`.
 	// +kubebuilder:validation:Optional
 	PidMode *string `json:"pidMode,omitempty" tf:"pid_mode,omitempty"`
 
@@ -542,7 +542,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
+	// Set of launch types required by the task. Valid values: EC2, EXTERNAL, FARGATE, MANAGED_INSTANCES.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
@@ -568,7 +568,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
-	// Configuration block for volumes that containers in your task may use. Detailed below.
+	// Repeatable configuration block for volumes that containers in your task may use. Detailed below.
 	// +kubebuilder:validation:Optional
 	Volume []VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }

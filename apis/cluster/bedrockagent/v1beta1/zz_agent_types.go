@@ -49,7 +49,7 @@ type AgentInitParameters struct {
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. If prepare_agent is true this argument is required. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
 	// Configurations for the agent's ability to retain the conversational context.
@@ -107,7 +107,7 @@ type AgentObservation struct {
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. If prepare_agent is true this argument is required. The valid range is 40 - 20000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
 	// Configurations for the agent's ability to retain the conversational context.
@@ -182,7 +182,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 20000 characters.
+	// Instructions that tell the agent what it should do and how it should interact with users. If prepare_agent is true this argument is required. The valid range is 40 - 20000 characters.
 	// +kubebuilder:validation:Optional
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
@@ -306,6 +306,9 @@ type MemoryConfigurationInitParameters struct {
 	// The type of memory being stored by the agent. See AWS API documentation for possible values.
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
 
+	// Configuration block for SESSION_SUMMARY memory type enabled for the agent. See session_summary_configuration Block for details.
+	SessionSummaryConfiguration []SessionSummaryConfigurationInitParameters `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration"`
+
 	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days"`
 }
@@ -314,6 +317,9 @@ type MemoryConfigurationObservation struct {
 
 	// The type of memory being stored by the agent. See AWS API documentation for possible values.
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types,omitempty"`
+
+	// Configuration block for SESSION_SUMMARY memory type enabled for the agent. See session_summary_configuration Block for details.
+	SessionSummaryConfiguration []SessionSummaryConfigurationObservation `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration,omitempty"`
 
 	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	StorageDays *float64 `json:"storageDays,omitempty" tf:"storage_days,omitempty"`
@@ -324,6 +330,10 @@ type MemoryConfigurationParameters struct {
 	// The type of memory being stored by the agent. See AWS API documentation for possible values.
 	// +kubebuilder:validation:Optional
 	EnabledMemoryTypes []*string `json:"enabledMemoryTypes,omitempty" tf:"enabled_memory_types"`
+
+	// Configuration block for SESSION_SUMMARY memory type enabled for the agent. See session_summary_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	SessionSummaryConfiguration []SessionSummaryConfigurationParameters `json:"sessionSummaryConfiguration,omitempty" tf:"session_summary_configuration"`
 
 	// The number of days the agent is configured to retain the conversational context. Minimum value of 0, maximum value of 30.
 	// +kubebuilder:validation:Optional
@@ -426,6 +436,25 @@ type PromptOverrideConfigurationParameters struct {
 	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
 	// +kubebuilder:validation:Optional
 	PromptConfigurations []PromptConfigurationsParameters `json:"promptConfigurations,omitempty" tf:"prompt_configurations"`
+}
+
+type SessionSummaryConfigurationInitParameters struct {
+
+	// Maximum number of recent session summaries to include in the agent's prompt context.
+	MaxRecentSessions *float64 `json:"maxRecentSessions,omitempty" tf:"max_recent_sessions"`
+}
+
+type SessionSummaryConfigurationObservation struct {
+
+	// Maximum number of recent session summaries to include in the agent's prompt context.
+	MaxRecentSessions *float64 `json:"maxRecentSessions,omitempty" tf:"max_recent_sessions,omitempty"`
+}
+
+type SessionSummaryConfigurationParameters struct {
+
+	// Maximum number of recent session summaries to include in the agent's prompt context.
+	// +kubebuilder:validation:Optional
+	MaxRecentSessions *float64 `json:"maxRecentSessions,omitempty" tf:"max_recent_sessions"`
 }
 
 // AgentSpec defines the desired state of Agent

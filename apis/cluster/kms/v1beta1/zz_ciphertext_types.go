@@ -31,8 +31,14 @@ type CiphertextInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
-	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
+	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	PlaintextSecretRef *v1.SecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
+
+	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
+	PlaintextWoSecretRef *v1.SecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 }
 
 type CiphertextObservation struct {
@@ -48,6 +54,9 @@ type CiphertextObservation struct {
 
 	// Globally unique key ID for the customer master key.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -74,9 +83,17 @@ type CiphertextParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	// (Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
 	// +kubebuilder:validation:Optional
-	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
+	PlaintextSecretRef *v1.SecretKeySelector `json:"plaintextSecretRef,omitempty" tf:"-"`
+
+	// (Write-Only, Exactly one of plaintext or plaintext_wo must be set) Data to be encrypted. Note that this may show up in logs. It will not be stored in the state file.
+	// +kubebuilder:validation:Optional
+	PlaintextWoSecretRef *v1.SecretKeySelector `json:"plaintextWoSecretRef,omitempty" tf:"-"`
+
+	// Used together with plaintext_wo to trigger a replacement. Modify this value when a replacement is required.
+	// +kubebuilder:validation:Optional
+	PlaintextWoVersion *string `json:"plaintextWoVersion,omitempty" tf:"plaintext_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -120,9 +137,8 @@ type CiphertextStatus struct {
 type Ciphertext struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plaintextSecretRef)",message="spec.forProvider.plaintextSecretRef is a required parameter"
-	Spec   CiphertextSpec   `json:"spec"`
-	Status CiphertextStatus `json:"status,omitempty"`
+	Spec              CiphertextSpec   `json:"spec"`
+	Status            CiphertextStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

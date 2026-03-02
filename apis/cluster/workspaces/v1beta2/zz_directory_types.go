@@ -151,6 +151,9 @@ type DirectoryInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Tenancy of the WorkSpaces directory. Valid values are DEDICATED or SHARED.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+
 	// Specifies the user identity type for the WorkSpaces directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER.
 	UserIdentityType *string `json:"userIdentityType,omitempty" tf:"user_identity_type,omitempty"`
 
@@ -231,6 +234,9 @@ type DirectoryObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Tenancy of the WorkSpaces directory. Valid values are DEDICATED or SHARED.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
 	// Specifies the user identity type for the WorkSpaces directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER.
 	UserIdentityType *string `json:"userIdentityType,omitempty" tf:"user_identity_type,omitempty"`
@@ -326,6 +332,10 @@ type DirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Tenancy of the WorkSpaces directory. Valid values are DEDICATED or SHARED.
+	// +kubebuilder:validation:Optional
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
 	// Specifies the user identity type for the WorkSpaces directory. Valid values are CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER.
 	// +kubebuilder:validation:Optional

@@ -1239,14 +1239,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]ClusterRestoreToPointInTimeInitParameters, len(*in))
+		*out = make([]RestoreToPointInTimeInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]ClusterS3ImportInitParameters, len(*in))
+		*out = make([]S3ImportInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -2375,7 +2375,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MasterUserSecret != nil {
 		in, out := &in.MasterUserSecret, &out.MasterUserSecret
-		*out = make([]ClusterMasterUserSecretObservation, len(*in))
+		*out = make([]MasterUserSecretObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -2452,14 +2452,14 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]ClusterRestoreToPointInTimeObservation, len(*in))
+		*out = make([]RestoreToPointInTimeObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]ClusterS3ImportObservation, len(*in))
+		*out = make([]S3ImportObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -2534,6 +2534,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
+		*out = new(string)
+		**out = **in
 	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
@@ -3265,14 +3270,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]ClusterRestoreToPointInTimeParameters, len(*in))
+		*out = make([]RestoreToPointInTimeParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]ClusterS3ImportParameters, len(*in))
+		*out = make([]S3ImportParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -9699,6 +9704,16 @@ func (in *ProxyInitParameters) DeepCopyInto(out *ProxyInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineFamily != nil {
 		in, out := &in.EngineFamily, &out.EngineFamily
 		*out = new(string)
@@ -9744,6 +9759,11 @@ func (in *ProxyInitParameters) DeepCopyInto(out *ProxyInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
@@ -9855,8 +9875,18 @@ func (in *ProxyObservation) DeepCopyInto(out *ProxyObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -9922,6 +9952,11 @@ func (in *ProxyObservation) DeepCopyInto(out *ProxyObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -9969,6 +10004,16 @@ func (in *ProxyParameters) DeepCopyInto(out *ProxyParameters) {
 	if in.DebugLogging != nil {
 		in, out := &in.DebugLogging, &out.DebugLogging
 		*out = new(bool)
+		**out = **in
+	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
+		*out = new(string)
 		**out = **in
 	}
 	if in.EngineFamily != nil {
@@ -10021,6 +10066,11 @@ func (in *ProxyParameters) DeepCopyInto(out *ProxyParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs

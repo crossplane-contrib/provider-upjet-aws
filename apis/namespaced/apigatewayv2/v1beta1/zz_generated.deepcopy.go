@@ -1893,6 +1893,11 @@ func (in *DomainNameInitParameters) DeepCopyInto(out *DomainNameInitParameters) 
 		*out = new(MutualTLSAuthenticationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.RoutingMode != nil {
+		in, out := &in.RoutingMode, &out.RoutingMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1986,6 +1991,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoutingMode != nil {
+		in, out := &in.RoutingMode, &out.RoutingMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2045,6 +2055,11 @@ func (in *DomainNameParameters) DeepCopyInto(out *DomainNameParameters) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingMode != nil {
+		in, out := &in.RoutingMode, &out.RoutingMode
 		*out = new(string)
 		**out = **in
 	}

@@ -15,21 +15,21 @@ spec:
   forProvider:
     policy: |
       {
-          "rules": [
-              {
-                  "rulePriority": 1,
-                  "description": "Expire images older than 14 days",
-                  "selection": {
-                      "tagStatus": "untagged",
-                      "countType": "sinceImagePushed",
-                      "countUnit": "days",
-                      "countNumber": 14
-                  },
-                  "action": {
-                      "type": "expire"
-                  }
-              }
-          ]
+        "rules": [
+          {
+            "rulePriority": 1,
+            "description": "Expire images older than 14 days",
+            "selection": {
+              "tagStatus": "untagged",
+              "countType": "sinceImagePushed",
+              "countUnit": "days",
+              "countNumber": 14
+            },
+            "action": {
+              "type": "expire"
+            }
+          }
+        ]
       }
     region: us-west-1
     repositorySelector:

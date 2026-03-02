@@ -424,15 +424,15 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array
@@ -465,7 +465,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final DB snapshot when this DB cluster
@@ -705,10 +705,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -838,104 +838,32 @@ spec:
                       details below.
                     items:
                       properties:
-                        restoreToTime:
-                          description: Date and time in UTC format to restore the
-                            database cluster to. Conflicts with use_latest_restorable_time.
+                        restoreTime:
+                          description: The date and time to restore from. Value must
+                            be a time in Universal Coordinated Time (UTC) format and
+                            must be before the latest restorable time for the DB instance.
+                            Cannot be specified with use_latest_restorable_time.
                           type: string
-                        restoreType:
-                          description: |-
-                            Type of restore to be performed.
-                            Valid options are full-copy (default) and copy-on-write.
+                        sourceDbInstanceAutomatedBackupsArn:
+                          description: The ARN of the automated backup from which
+                            to restore. Required if source_db_instance_identifier
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterIdentifier:
-                          description: Identifier of the source database cluster from
-                            which to restore. When restoring from a cluster in another
-                            AWS account, the identifier is the ARN of that cluster.
+                        sourceDbInstanceIdentifier:
+                          description: The identifier of the source DB instance from
+                            which to restore. Must match the identifier of an existing
+                            DB instance. Required if source_db_instance_automated_backups_arn
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterIdentifierRef:
-                          description: Reference to a Cluster in rds to populate sourceClusterIdentifier.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        sourceClusterIdentifierSelector:
-                          description: Selector for a Cluster in rds to populate sourceClusterIdentifier.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        sourceClusterResourceId:
-                          description: Cluster resource ID of the source database
-                            cluster from which to restore. To be used for restoring
-                            a deleted cluster in the same account which still has
-                            a retained automatic backup available.
+                        sourceDbiResourceId:
+                          description: The resource ID of the source DB instance from
+                            which to restore. Required if source_db_instance_identifier
+                            or source_db_instance_automated_backups_arn is not specified.
                           type: string
                         useLatestRestorableTime:
-                          description: Set to true to restore the database cluster
-                            to the latest restorable backup time. Defaults to false.
-                            Conflicts with restore_to_time.
+                          description: A boolean value that indicates whether the
+                            DB instance is restored from the latest backup time. Defaults
+                            to false. Cannot be specified with restore_time.
                           type: boolean
                       type: object
                     type: array
@@ -944,82 +872,8 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Bucket name where your backup is stored
+                          description: The bucket name where your backup is stored
                           type: string
-                        bucketNameRef:
-                          description: Reference to a Bucket in s3 to populate bucketName.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        bucketNameSelector:
-                          description: Selector for a Bucket in s3 to populate bucketName.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
                           type: string
@@ -1600,15 +1454,15 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array
@@ -1641,7 +1495,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final DB snapshot when this DB cluster
@@ -1881,10 +1735,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -2009,104 +1863,32 @@ spec:
                       details below.
                     items:
                       properties:
-                        restoreToTime:
-                          description: Date and time in UTC format to restore the
-                            database cluster to. Conflicts with use_latest_restorable_time.
+                        restoreTime:
+                          description: The date and time to restore from. Value must
+                            be a time in Universal Coordinated Time (UTC) format and
+                            must be before the latest restorable time for the DB instance.
+                            Cannot be specified with use_latest_restorable_time.
                           type: string
-                        restoreType:
-                          description: |-
-                            Type of restore to be performed.
-                            Valid options are full-copy (default) and copy-on-write.
+                        sourceDbInstanceAutomatedBackupsArn:
+                          description: The ARN of the automated backup from which
+                            to restore. Required if source_db_instance_identifier
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterIdentifier:
-                          description: Identifier of the source database cluster from
-                            which to restore. When restoring from a cluster in another
-                            AWS account, the identifier is the ARN of that cluster.
+                        sourceDbInstanceIdentifier:
+                          description: The identifier of the source DB instance from
+                            which to restore. Must match the identifier of an existing
+                            DB instance. Required if source_db_instance_automated_backups_arn
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterIdentifierRef:
-                          description: Reference to a Cluster in rds to populate sourceClusterIdentifier.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        sourceClusterIdentifierSelector:
-                          description: Selector for a Cluster in rds to populate sourceClusterIdentifier.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        sourceClusterResourceId:
-                          description: Cluster resource ID of the source database
-                            cluster from which to restore. To be used for restoring
-                            a deleted cluster in the same account which still has
-                            a retained automatic backup available.
+                        sourceDbiResourceId:
+                          description: The resource ID of the source DB instance from
+                            which to restore. Required if source_db_instance_identifier
+                            or source_db_instance_automated_backups_arn is not specified.
                           type: string
                         useLatestRestorableTime:
-                          description: Set to true to restore the database cluster
-                            to the latest restorable backup time. Defaults to false.
-                            Conflicts with restore_to_time.
+                          description: A boolean value that indicates whether the
+                            DB instance is restored from the latest backup time. Defaults
+                            to false. Cannot be specified with restore_time.
                           type: boolean
                       type: object
                     type: array
@@ -2115,82 +1897,8 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Bucket name where your backup is stored
+                          description: The bucket name where your backup is stored
                           type: string
-                        bucketNameRef:
-                          description: Reference to a Bucket in s3 to populate bucketName.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        bucketNameSelector:
-                          description: Selector for a Bucket in s3 to populate bucketName.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
                           type: string
@@ -2635,15 +2343,15 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
                       no logs will be exported. The following log types are supported:
-                      audit, error, general, slowquery, iam-db-auth-error, postgresql
-                      (PostgreSQL).'
+                      audit, error, general, iam-db-auth-error, instance, postgresql
+                      (PostgreSQL), slowquery.'
                     items:
                       type: string
                     type: array
@@ -2679,7 +2387,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   engineVersionActual:
                     description: Running version of the database.
@@ -2739,14 +2447,14 @@ spec:
                     items:
                       properties:
                         kmsKeyId:
-                          description: Amazon Web Services KMS key identifier that
-                            is used to encrypt the secret.
+                          description: The Amazon Web Services KMS key identifier
+                            that is used to encrypt the secret.
                           type: string
                         secretArn:
-                          description: Amazon Resource Name (ARN) of the secret.
+                          description: The Amazon Resource Name (ARN) of the secret.
                           type: string
                         secretStatus:
-                          description: 'Status of the secret. Valid Values: creating
+                          description: 'The status of the secret. Valid Values: creating
                             | active | rotating | impaired.'
                           type: string
                       type: object
@@ -2764,10 +2472,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -2828,30 +2536,32 @@ spec:
                       details below.
                     items:
                       properties:
-                        restoreToTime:
-                          description: Date and time in UTC format to restore the
-                            database cluster to. Conflicts with use_latest_restorable_time.
+                        restoreTime:
+                          description: The date and time to restore from. Value must
+                            be a time in Universal Coordinated Time (UTC) format and
+                            must be before the latest restorable time for the DB instance.
+                            Cannot be specified with use_latest_restorable_time.
                           type: string
-                        restoreType:
-                          description: |-
-                            Type of restore to be performed.
-                            Valid options are full-copy (default) and copy-on-write.
+                        sourceDbInstanceAutomatedBackupsArn:
+                          description: The ARN of the automated backup from which
+                            to restore. Required if source_db_instance_identifier
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterIdentifier:
-                          description: Identifier of the source database cluster from
-                            which to restore. When restoring from a cluster in another
-                            AWS account, the identifier is the ARN of that cluster.
+                        sourceDbInstanceIdentifier:
+                          description: The identifier of the source DB instance from
+                            which to restore. Must match the identifier of an existing
+                            DB instance. Required if source_db_instance_automated_backups_arn
+                            or source_dbi_resource_id is not specified.
                           type: string
-                        sourceClusterResourceId:
-                          description: Cluster resource ID of the source database
-                            cluster from which to restore. To be used for restoring
-                            a deleted cluster in the same account which still has
-                            a retained automatic backup available.
+                        sourceDbiResourceId:
+                          description: The resource ID of the source DB instance from
+                            which to restore. Required if source_db_instance_identifier
+                            or source_db_instance_automated_backups_arn is not specified.
                           type: string
                         useLatestRestorableTime:
-                          description: Set to true to restore the database cluster
-                            to the latest restorable backup time. Defaults to false.
-                            Conflicts with restore_to_time.
+                          description: A boolean value that indicates whether the
+                            DB instance is restored from the latest backup time. Defaults
+                            to false. Cannot be specified with restore_time.
                           type: boolean
                       type: object
                     type: array
@@ -2860,7 +2570,7 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Bucket name where your backup is stored
+                          description: The bucket name where your backup is stored
                           type: string
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
@@ -3002,6 +2712,10 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeRolloutOrder:
+                    description: Order in which the clusters are upgraded (first,
+                      second, last). See the AWS documentation for details.
+                    type: string
                   vpcSecurityGroupIds:
                     description: List of VPC security groups to associate with the
                       Cluster
@@ -3477,9 +3191,9 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
@@ -3518,7 +3232,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final DB snapshot when this DB cluster
@@ -3758,10 +3472,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -4645,9 +4359,9 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
@@ -4686,7 +4400,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final DB snapshot when this DB cluster
@@ -4926,10 +4640,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -5672,9 +5386,9 @@ spec:
                   enableLocalWriteForwarding:
                     description: 'Whether read replicas can forward write operations
                       to the writer DB instance in the DB cluster. By default, write
-                      operations aren''t allowed on reader DB instances.. See the
-                      User Guide for Aurora for more information. NOTE: Local write
-                      forwarding requires Aurora MySQL version 3.04 or higher.'
+                      operations aren''t allowed on reader DB instances. See the User
+                      Guide for Aurora for more information. NOTE: Local write forwarding
+                      requires Aurora MySQL version 3.04 or higher.'
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to export to cloudwatch. If omitted,
@@ -5716,7 +5430,7 @@ spec:
                       MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
                       The value can contain a partial version where supported by the
                       API. The actual engine version used is returned in the attribute
-                      engine_version_actual, , see Attribute Reference below.
+                      engine_version_actual, see Attribute Reference below.
                     type: string
                   engineVersionActual:
                     description: Running version of the database.
@@ -5801,10 +5515,10 @@ spec:
                       updates and cannot be changed during a restore from snapshot.
                     type: string
                   monitoringInterval:
-                    description: 'Interval, in seconds, in seconds, between points
-                      when Enhanced Monitoring metrics are collected for the DB cluster.
-                      To turn off collecting Enhanced Monitoring metrics, specify
-                      0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
+                    description: 'Interval, in seconds, between points when Enhanced
+                      Monitoring metrics are collected for the DB cluster. To turn
+                      off collecting Enhanced Monitoring metrics, specify 0. The default
+                      is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
@@ -6031,6 +5745,10 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeRolloutOrder:
+                    description: Order in which the clusters are upgraded (first,
+                      second, last). See the AWS documentation for details.
+                    type: string
                   vpcSecurityGroupIds:
                     description: List of VPC security groups to associate with the
                       Cluster

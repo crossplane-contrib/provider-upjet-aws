@@ -16,7 +16,12 @@ import (
 type ClusterInitParameters struct {
 
 	// Whether deletion protection is enabled in this cluster.
+	// Default value is false.
 	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
+	// Destroys cluster even if deletion_protection_enabled is set to true.
+	// Default value is false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// The ARN of the AWS KMS key that encrypts data in the DSQL Cluster, or "AWS_OWNED_KMS_KEY".
 	KMSEncryptionKey *string `json:"kmsEncryptionKey,omitempty" tf:"kms_encryption_key,omitempty"`
@@ -35,10 +40,15 @@ type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether deletion protection is enabled in this cluster.
+	// Default value is false.
 	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// Encryption configuration details for the DSQL Cluster.
 	EncryptionDetails []EncryptionDetailsObservation `json:"encryptionDetails,omitempty" tf:"encryption_details,omitempty"`
+
+	// Destroys cluster even if deletion_protection_enabled is set to true.
+	// Default value is false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -70,8 +80,14 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// Whether deletion protection is enabled in this cluster.
+	// Default value is false.
 	// +kubebuilder:validation:Optional
 	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
+	// Destroys cluster even if deletion_protection_enabled is set to true.
+	// Default value is false.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// The ARN of the AWS KMS key that encrypts data in the DSQL Cluster, or "AWS_OWNED_KMS_KEY".
 	// +kubebuilder:validation:Optional

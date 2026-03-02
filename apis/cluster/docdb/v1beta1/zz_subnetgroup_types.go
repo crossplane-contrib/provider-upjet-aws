@@ -55,6 +55,10 @@ type SubnetGroupObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// The network type of the docDB subnet group (IPV4 or DUAL).
+	// +listType=set
+	SupportedNetworkTypes []*string `json:"supportedNetworkTypes,omitempty" tf:"supported_network_types,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -130,11 +130,11 @@ spec:
                           items:
                             properties:
                               fargateEphemeralStorageKmsKeyId:
-                                description: AWS Key Management Service key ID for
+                                description: AWS Key Management Service key ARN for
                                   the Fargate ephemeral storage.
                                 type: string
                               kmsKeyId:
-                                description: AWS Key Management Service key ID to
+                                description: AWS Key Management Service key ARN to
                                   encrypt the managed storage.
                                 type: string
                             type: object
@@ -254,11 +254,11 @@ spec:
                           items:
                             properties:
                               fargateEphemeralStorageKmsKeyId:
-                                description: AWS Key Management Service key ID for
+                                description: AWS Key Management Service key ARN for
                                   the Fargate ephemeral storage.
                                 type: string
                               kmsKeyId:
-                                description: AWS Key Management Service key ID to
+                                description: AWS Key Management Service key ARN to
                                   encrypt the managed storage.
                                 type: string
                             type: object
@@ -452,11 +452,11 @@ spec:
                           items:
                             properties:
                               fargateEphemeralStorageKmsKeyId:
-                                description: AWS Key Management Service key ID for
+                                description: AWS Key Management Service key ARN for
                                   the Fargate ephemeral storage.
                                 type: string
                               kmsKeyId:
-                                description: AWS Key Management Service key ID to
+                                description: AWS Key Management Service key ARN to
                                   encrypt the managed storage.
                                 type: string
                             type: object
@@ -676,11 +676,11 @@ spec:
                           See managed_storage_configuration Block for details.
                         properties:
                           fargateEphemeralStorageKmsKeyId:
-                            description: AWS Key Management Service key ID for the
+                            description: AWS Key Management Service key ARN for the
                               Fargate ephemeral storage.
                             type: string
                           kmsKeyId:
-                            description: AWS Key Management Service key ID to encrypt
+                            description: AWS Key Management Service key ARN to encrypt
                               the managed storage.
                             type: string
                         type: object
@@ -787,11 +787,11 @@ spec:
                           See managed_storage_configuration Block for details.
                         properties:
                           fargateEphemeralStorageKmsKeyId:
-                            description: AWS Key Management Service key ID for the
+                            description: AWS Key Management Service key ARN for the
                               Fargate ephemeral storage.
                             type: string
                           kmsKeyId:
-                            description: AWS Key Management Service key ID to encrypt
+                            description: AWS Key Management Service key ARN to encrypt
                               the managed storage.
                             type: string
                         type: object
@@ -972,11 +972,11 @@ spec:
                           See managed_storage_configuration Block for details.
                         properties:
                           fargateEphemeralStorageKmsKeyId:
-                            description: AWS Key Management Service key ID for the
+                            description: AWS Key Management Service key ARN for the
                               Fargate ephemeral storage.
                             type: string
                           kmsKeyId:
-                            description: AWS Key Management Service key ID to encrypt
+                            description: AWS Key Management Service key ARN to encrypt
                               the managed storage.
                             type: string
                         type: object

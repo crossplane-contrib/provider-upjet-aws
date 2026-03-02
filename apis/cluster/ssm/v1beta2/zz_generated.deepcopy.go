@@ -58,6 +58,17 @@ func (in *AssociationInitParameters) DeepCopyInto(out *AssociationInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.CalendarNames != nil {
+		in, out := &in.CalendarNames, &out.CalendarNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ComplianceSeverity != nil {
 		in, out := &in.ComplianceSeverity, &out.ComplianceSeverity
 		*out = new(string)
@@ -224,6 +235,17 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CalendarNames != nil {
+		in, out := &in.CalendarNames, &out.CalendarNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ComplianceSeverity != nil {
 		in, out := &in.ComplianceSeverity, &out.ComplianceSeverity
 		*out = new(string)
@@ -363,6 +385,17 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 		in, out := &in.AutomationTargetParameterName, &out.AutomationTargetParameterName
 		*out = new(string)
 		**out = **in
+	}
+	if in.CalendarNames != nil {
+		in, out := &in.CalendarNames, &out.CalendarNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ComplianceSeverity != nil {
 		in, out := &in.ComplianceSeverity, &out.ComplianceSeverity

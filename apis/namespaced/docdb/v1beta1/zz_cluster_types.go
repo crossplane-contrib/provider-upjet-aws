@@ -24,8 +24,8 @@ type ClusterInitParameters struct {
 	// false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// A list of EC2 Availability Zones that
-	// instances in the DB cluster can be created in.
+	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+	// We recommend specifying 3 AZs or using the  if necessary.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -98,6 +98,9 @@ type ClusterInitParameters struct {
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// The network type of the DB cluster (IPV4 or DUAL).
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The port on which the DB accepts connections
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -160,8 +163,8 @@ type ClusterObservation struct {
 	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A list of EC2 Availability Zones that
-	// instances in the DB cluster can be created in.
+	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+	// We recommend specifying 3 AZs or using the  if necessary.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -229,6 +232,9 @@ type ClusterObservation struct {
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// The network type of the DB cluster (IPV4 or DUAL).
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The port on which the DB accepts connections
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -295,8 +301,8 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
 
-	// A list of EC2 Availability Zones that
-	// instances in the DB cluster can be created in.
+	// A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+	// We recommend specifying 3 AZs or using the  if necessary.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -384,6 +390,10 @@ type ClusterParameters struct {
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
+
+	// The network type of the DB cluster (IPV4 or DUAL).
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The port on which the DB accepts connections
 	// +kubebuilder:validation:Optional

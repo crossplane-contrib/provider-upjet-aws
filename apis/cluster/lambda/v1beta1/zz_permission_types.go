@@ -36,6 +36,9 @@ type PermissionInitParameters struct {
 	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
+	// Lambda Function URL invoke permission. Only valid with lambda:InvokeFunction action
+	InvokedViaFunctionURL *bool `json:"invokedViaFunctionUrl,omitempty" tf:"invoked_via_function_url,omitempty"`
+
 	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
@@ -82,6 +85,9 @@ type PermissionObservation struct {
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lambda Function URL invoke permission. Only valid with lambda:InvokeFunction action
+	InvokedViaFunctionURL *bool `json:"invokedViaFunctionUrl,omitempty" tf:"invoked_via_function_url,omitempty"`
 
 	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -135,6 +141,10 @@ type PermissionParameters struct {
 	// Lambda Function URL authentication type. Valid values: AWS_IAM or NONE. Only valid with lambda:InvokeFunctionUrl action
 	// +kubebuilder:validation:Optional
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
+
+	// Lambda Function URL invoke permission. Only valid with lambda:InvokeFunction action
+	// +kubebuilder:validation:Optional
+	InvokedViaFunctionURL *bool `json:"invokedViaFunctionUrl,omitempty" tf:"invoked_via_function_url,omitempty"`
 
 	// AWS service or account that invokes the function (e.g., s3.amazonaws.com, sns.amazonaws.com, AWS account ID, or AWS IAM principal)
 	// +kubebuilder:validation:Optional

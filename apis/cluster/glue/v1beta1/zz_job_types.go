@@ -162,10 +162,10 @@ type JobInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited) for gluestreaming jobs. Leave this attribute argumnet unconfigured for glueray jobs.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs). See the AWS documentation for details.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
@@ -245,10 +245,10 @@ type JobObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited) for gluestreaming jobs. Leave this attribute argumnet unconfigured for glueray jobs.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs). See the AWS documentation for details.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
@@ -357,11 +357,11 @@ type JobParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	// The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and 0 (unlimited) for gluestreaming jobs. Leave this attribute argumnet unconfigured for glueray jobs.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Valid values: Standard, G.1X, G.2X, G.025X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X, Z.2X (Ray jobs). See the AWS documentation for details.
 	// +kubebuilder:validation:Optional
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }

@@ -259,6 +259,7 @@ spec:
                 - principalType
                 - region
                 - targetId
+                - targetType
                 type: object
               initProvider:
                 description: |-

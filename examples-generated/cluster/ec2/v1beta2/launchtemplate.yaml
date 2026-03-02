@@ -9,8 +9,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta2/launchtemplate
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     blockDeviceMappings:
@@ -47,9 +47,11 @@ spec:
       instanceMetadataTags: enabled
     monitoring:
       enabled: true
-    name: foo
+    name: example
     networkInterfaces:
     - associatePublicIpAddress: true
+    networkPerformanceOptions:
+      bandwidthWeighting: vpc-1
     placement:
       availabilityZone: us-west-2a
     ramDiskId: test

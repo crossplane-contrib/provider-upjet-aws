@@ -146,56 +146,12 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	mg.Spec.ForProvider.MonitoringRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MonitoringRoleArnRef = rsp.ResolvedReference
-
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.RestoreToPointInTime); i3++ {
-		{
-			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifier),
-				Extract:      reference.ExternalName(),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifierRef,
-				Selector:     mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifierSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifier")
-		}
-		mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifierRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Import); i3++ {
-		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Import[i3].BucketName),
-				Extract:      reference.ExternalName(),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.S3Import[i3].BucketNameRef,
-				Selector:     mg.Spec.ForProvider.S3Import[i3].BucketNameSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.S3Import[i3].BucketName")
-		}
-		mg.Spec.ForProvider.S3Import[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.S3Import[i3].BucketNameRef = rsp.ResolvedReference
-
-	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),
@@ -330,56 +286,12 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	mg.Spec.InitProvider.MonitoringRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MonitoringRoleArnRef = rsp.ResolvedReference
-
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.RestoreToPointInTime); i3++ {
-		{
-			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifier),
-				Extract:      reference.ExternalName(),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifierRef,
-				Selector:     mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifierSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifier")
-		}
-		mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.RestoreToPointInTime[i3].SourceClusterIdentifierRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3Import); i3++ {
-		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-			}
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Import[i3].BucketName),
-				Extract:      reference.ExternalName(),
-				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.S3Import[i3].BucketNameRef,
-				Selector:     mg.Spec.InitProvider.S3Import[i3].BucketNameSelector,
-				To:           reference.To{List: l, Managed: m},
-			})
-		}
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.S3Import[i3].BucketName")
-		}
-		mg.Spec.InitProvider.S3Import[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.S3Import[i3].BucketNameRef = rsp.ResolvedReference
-
-	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
 			Extract:       reference.ExternalName(),

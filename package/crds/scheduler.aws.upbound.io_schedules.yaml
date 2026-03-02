@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   description:
                     description: Brief description of the schedule.
                     type: string
@@ -623,6 +628,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   description:
                     description: Brief description of the schedule.
                     type: string
@@ -1257,6 +1267,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   arn:
                     description: ARN of the SQS queue specified as the destination
                       for the dead-letter queue.
@@ -1693,6 +1708,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   description:
                     description: Brief description of the schedule.
                     type: string
@@ -2218,6 +2238,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   description:
                     description: Brief description of the schedule.
                     type: string
@@ -2827,6 +2852,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  actionAfterCompletion:
+                    description: Action that applies to the schedule after completing
+                      invocation of the target. Valid values are NONE and DELETE.
+                      Defaults to NONE.
+                    type: string
                   arn:
                     description: ARN of the SQS queue specified as the destination
                       for the dead-letter queue.

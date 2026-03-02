@@ -48,6 +48,9 @@ type ApplicationConfigurationInitParameters struct {
 	// The code location and type parameters for the application.
 	ApplicationCodeConfiguration *ApplicationCodeConfigurationInitParameters `json:"applicationCodeConfiguration,omitempty" tf:"application_code_configuration,omitempty"`
 
+	// The encryption configuration for the application. This can be used to encrypt data at rest in the application.
+	ApplicationEncryptionConfiguration *ApplicationEncryptionConfigurationInitParameters `json:"applicationEncryptionConfiguration,omitempty" tf:"application_encryption_configuration,omitempty"`
+
 	// Describes whether snapshots are enabled for a Flink-based application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfigurationInitParameters `json:"applicationSnapshotConfiguration,omitempty" tf:"application_snapshot_configuration,omitempty"`
 
@@ -71,6 +74,9 @@ type ApplicationConfigurationObservation struct {
 
 	// The code location and type parameters for the application.
 	ApplicationCodeConfiguration *ApplicationCodeConfigurationObservation `json:"applicationCodeConfiguration,omitempty" tf:"application_code_configuration,omitempty"`
+
+	// The encryption configuration for the application. This can be used to encrypt data at rest in the application.
+	ApplicationEncryptionConfiguration *ApplicationEncryptionConfigurationObservation `json:"applicationEncryptionConfiguration,omitempty" tf:"application_encryption_configuration,omitempty"`
 
 	// Describes whether snapshots are enabled for a Flink-based application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfigurationObservation `json:"applicationSnapshotConfiguration,omitempty" tf:"application_snapshot_configuration,omitempty"`
@@ -97,6 +103,10 @@ type ApplicationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationCodeConfiguration *ApplicationCodeConfigurationParameters `json:"applicationCodeConfiguration" tf:"application_code_configuration,omitempty"`
 
+	// The encryption configuration for the application. This can be used to encrypt data at rest in the application.
+	// +kubebuilder:validation:Optional
+	ApplicationEncryptionConfiguration *ApplicationEncryptionConfigurationParameters `json:"applicationEncryptionConfiguration,omitempty" tf:"application_encryption_configuration,omitempty"`
+
 	// Describes whether snapshots are enabled for a Flink-based application.
 	// +kubebuilder:validation:Optional
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfigurationParameters `json:"applicationSnapshotConfiguration,omitempty" tf:"application_snapshot_configuration,omitempty"`
@@ -122,6 +132,35 @@ type ApplicationConfigurationParameters struct {
 	VPCConfiguration *VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
+type ApplicationEncryptionConfigurationInitParameters struct {
+
+	// The ARN of the KMS key to use for encryption. Required when key_type is set to CUSTOMER_MANAGED_KEY. The KMS key must be in the same region as the application.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of encryption key to use. Valid values: CUSTOMER_MANAGED_KEY, AWS_OWNED_KEY.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+}
+
+type ApplicationEncryptionConfigurationObservation struct {
+
+	// The ARN of the KMS key to use for encryption. Required when key_type is set to CUSTOMER_MANAGED_KEY. The KMS key must be in the same region as the application.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of encryption key to use. Valid values: CUSTOMER_MANAGED_KEY, AWS_OWNED_KEY.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+}
+
+type ApplicationEncryptionConfigurationParameters struct {
+
+	// The ARN of the KMS key to use for encryption. Required when key_type is set to CUSTOMER_MANAGED_KEY. The KMS key must be in the same region as the application.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of encryption key to use. Valid values: CUSTOMER_MANAGED_KEY, AWS_OWNED_KEY.
+	// +kubebuilder:validation:Optional
+	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
+}
+
 type ApplicationInitParameters struct {
 
 	// The application's configuration
@@ -139,7 +178,7 @@ type ApplicationInitParameters struct {
 	// Whether to force stop an unresponsive Flink-based application.
 	ForceStop *bool `json:"forceStop,omitempty" tf:"force_stop,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -196,7 +235,7 @@ type ApplicationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -247,7 +286,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
