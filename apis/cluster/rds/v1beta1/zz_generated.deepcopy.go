@@ -1239,14 +1239,14 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]RestoreToPointInTimeInitParameters, len(*in))
+		*out = make([]ClusterRestoreToPointInTimeInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]S3ImportInitParameters, len(*in))
+		*out = make([]ClusterS3ImportInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -2375,7 +2375,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MasterUserSecret != nil {
 		in, out := &in.MasterUserSecret, &out.MasterUserSecret
-		*out = make([]MasterUserSecretObservation, len(*in))
+		*out = make([]ClusterMasterUserSecretObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -2452,14 +2452,14 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]RestoreToPointInTimeObservation, len(*in))
+		*out = make([]ClusterRestoreToPointInTimeObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]S3ImportObservation, len(*in))
+		*out = make([]ClusterS3ImportObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -3270,14 +3270,14 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.RestoreToPointInTime != nil {
 		in, out := &in.RestoreToPointInTime, &out.RestoreToPointInTime
-		*out = make([]RestoreToPointInTimeParameters, len(*in))
+		*out = make([]ClusterRestoreToPointInTimeParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.S3Import != nil {
 		in, out := &in.S3Import, &out.S3Import
-		*out = make([]S3ImportParameters, len(*in))
+		*out = make([]ClusterS3ImportParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
