@@ -251,6 +251,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -487,6 +504,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -666,6 +700,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:

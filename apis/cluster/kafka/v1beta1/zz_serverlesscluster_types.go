@@ -13,19 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
-type ClientAuthenticationSaslInitParameters struct {
+type ServerlessClusterClientAuthenticationSaslInitParameters struct {
 
 	// Details for client authentication using IAM. See below.
 	IAM []IAMInitParameters `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ClientAuthenticationSaslObservation struct {
+type ServerlessClusterClientAuthenticationSaslObservation struct {
 
 	// Details for client authentication using IAM. See below.
 	IAM []IAMObservation `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ClientAuthenticationSaslParameters struct {
+type ServerlessClusterClientAuthenticationSaslParameters struct {
 
 	// Details for client authentication using IAM. See below.
 	// +kubebuilder:validation:Optional
@@ -54,20 +54,20 @@ type IAMParameters struct {
 type ServerlessClusterClientAuthenticationInitParameters struct {
 
 	// Details for client authentication using SASL. See below.
-	Sasl []ClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []ServerlessClusterClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationObservation struct {
 
 	// Details for client authentication using SASL. See below.
-	Sasl []ClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []ServerlessClusterClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterClientAuthenticationParameters struct {
 
 	// Details for client authentication using SASL. See below.
 	// +kubebuilder:validation:Optional
-	Sasl []ClientAuthenticationSaslParameters `json:"sasl" tf:"sasl,omitempty"`
+	Sasl []ServerlessClusterClientAuthenticationSaslParameters `json:"sasl" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterInitParameters struct {

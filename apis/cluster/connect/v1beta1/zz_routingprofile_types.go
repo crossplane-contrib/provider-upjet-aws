@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CrossChannelBehaviorInitParameters struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	BehaviorType *string `json:"behaviorType,omitempty" tf:"behavior_type,omitempty"`
+}
+
+type CrossChannelBehaviorObservation struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	BehaviorType *string `json:"behaviorType,omitempty" tf:"behavior_type,omitempty"`
+}
+
+type CrossChannelBehaviorParameters struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	// +kubebuilder:validation:Optional
+	BehaviorType *string `json:"behaviorType" tf:"behavior_type,omitempty"`
+}
+
 type MediaConcurrenciesInitParameters struct {
 
 	// Specifies the channels that agents can handle in the Contact Control Panel (CCP). Valid values are VOICE, CHAT, TASK.
@@ -20,6 +39,9 @@ type MediaConcurrenciesInitParameters struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	CrossChannelBehavior []CrossChannelBehaviorInitParameters `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type MediaConcurrenciesObservation struct {
@@ -29,6 +51,9 @@ type MediaConcurrenciesObservation struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	CrossChannelBehavior []CrossChannelBehaviorObservation `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type MediaConcurrenciesParameters struct {
@@ -40,6 +65,10 @@ type MediaConcurrenciesParameters struct {
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	// +kubebuilder:validation:Optional
+	CrossChannelBehavior []CrossChannelBehaviorParameters `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type QueueConfigsAssociatedInitParameters struct {

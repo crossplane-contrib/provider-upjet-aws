@@ -51,6 +51,85 @@ type ClusterModeParameters struct {
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 }
 
+type NodeGroupConfigurationInitParameters struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
+type NodeGroupConfigurationObservation struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
+type NodeGroupConfigurationParameters struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	// +kubebuilder:validation:Optional
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	// +kubebuilder:validation:Optional
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	// +kubebuilder:validation:Optional
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	// +kubebuilder:validation:Optional
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	// +kubebuilder:validation:Optional
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	// +kubebuilder:validation:Optional
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	// +kubebuilder:validation:Optional
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
 type ReplicationGroupInitParameters struct {
 
 	// Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is false.
@@ -139,6 +218,9 @@ type ReplicationGroupInitParameters struct {
 
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	NodeGroupConfiguration []NodeGroupConfigurationInitParameters `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
 
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -371,6 +453,9 @@ type ReplicationGroupObservation struct {
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	NodeGroupConfiguration []NodeGroupConfigurationObservation `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
+
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -573,6 +658,10 @@ type ReplicationGroupParameters struct {
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	// +kubebuilder:validation:Optional
+	NodeGroupConfiguration []NodeGroupConfigurationParameters `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
 
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	// +kubebuilder:validation:Optional

@@ -178,13 +178,52 @@ spec:
                             properties:
                               publicAccess:
                                 description: Access control settings for brokers.
-                                  See below.
+                                  See connectivity_info public_access Argument Reference
+                                  below.
                                 items:
                                   properties:
                                     type:
                                       description: 'Public access type. Valida values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
+                                  type: object
+                                type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See connectivity_info vpc_connectivity Argument
+                                  Reference below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See client_authentication
+                                        Argument Reference below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See vpc_connectivity
+                                              client_authentication sasl Argument
+                                              Reference below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables IAM client
+                                                    authentication. Defaults to false.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SCRAM client
+                                                    authentication via AWS Secrets
+                                                    Manager. Defaults to false.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             type: object
@@ -335,23 +374,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See vpc_connectivity client_authentication sasl Argument
+                            Reference below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:
@@ -898,13 +937,15 @@ spec:
                     description: Configuration block for intelligent rebalancing.
                       See rebalancing Argument Reference below. Only applicable to
                       MSK Provisioned clusters with Express brokers.
-                    properties:
-                      status:
-                        description: 'The status of intelligent rebalancing. Valid
-                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
-                          clusters.'
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        status:
+                          description: 'The status of intelligent rebalancing. Valid
+                            values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                            clusters.'
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1042,13 +1083,52 @@ spec:
                             properties:
                               publicAccess:
                                 description: Access control settings for brokers.
-                                  See below.
+                                  See connectivity_info public_access Argument Reference
+                                  below.
                                 items:
                                   properties:
                                     type:
                                       description: 'Public access type. Valida values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
+                                  type: object
+                                type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See connectivity_info vpc_connectivity Argument
+                                  Reference below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See client_authentication
+                                        Argument Reference below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See vpc_connectivity
+                                              client_authentication sasl Argument
+                                              Reference below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables IAM client
+                                                    authentication. Defaults to false.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SCRAM client
+                                                    authentication via AWS Secrets
+                                                    Manager. Defaults to false.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             type: object
@@ -1199,23 +1279,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See vpc_connectivity client_authentication sasl Argument
+                            Reference below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:
@@ -1762,13 +1842,15 @@ spec:
                     description: Configuration block for intelligent rebalancing.
                       See rebalancing Argument Reference below. Only applicable to
                       MSK Provisioned clusters with Express brokers.
-                    properties:
-                      status:
-                        description: 'The status of intelligent rebalancing. Valid
-                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
-                          clusters.'
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        status:
+                          description: 'The status of intelligent rebalancing. Valid
+                            values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                            clusters.'
+                          type: string
+                      type: object
+                    type: array
                   storageMode:
                     description: 'Controls storage mode for supported storage tiers.
                       Valid values are: LOCAL or TIERED.'
@@ -1958,9 +2040,27 @@ spec:
                       alphabetically. AWS may not always return all endpoints so the
                       values may not be stable across applies.
                     type: string
+                  bootstrapBrokersVpcConnectivitySaslIam:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and SASL IAM port pairs for VPC connectivity. AWS
+                      may not always return all endpoints so the values may not be
+                      stable across applies.
+                    type: string
+                  bootstrapBrokersVpcConnectivitySaslScram:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and SASL SCRAM port pairs for VPC connectivity. AWS
+                      may not always return all endpoints so the values may not be
+                      stable across applies.
+                    type: string
+                  bootstrapBrokersVpcConnectivityTls:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and TLS port pairs for VPC connectivity. AWS may
+                      not always return all endpoints so the values may not be stable
+                      across applies.
+                    type: string
                   brokerNodeGroupInfo:
                     description: Configuration block for the broker nodes of the Kafka
-                      cluster.
+                      cluster. See broker_node_group_info Argument Reference below.
                     items:
                       properties:
                         azDistribution:
@@ -1986,13 +2086,52 @@ spec:
                             properties:
                               publicAccess:
                                 description: Access control settings for brokers.
-                                  See below.
+                                  See connectivity_info public_access Argument Reference
+                                  below.
                                 items:
                                   properties:
                                     type:
                                       description: 'Public access type. Valida values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
+                                  type: object
+                                type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See connectivity_info vpc_connectivity Argument
+                                  Reference below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See client_authentication
+                                        Argument Reference below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See vpc_connectivity
+                                              client_authentication sasl Argument
+                                              Reference below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables IAM client
+                                                    authentication. Defaults to false.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SCRAM client
+                                                    authentication via AWS Secrets
+                                                    Manager. Defaults to false.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             type: object
@@ -2064,23 +2203,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See vpc_connectivity client_authentication sasl Argument
+                            Reference below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:
@@ -2099,6 +2238,9 @@ spec:
                     type: array
                   clusterName:
                     description: Name of the MSK cluster.
+                    type: string
+                  clusterUuid:
+                    description: UUID of the MSK cluster, for use in IAM policies.
                     type: string
                   configurationInfo:
                     description: Configuration block for specifying a MSK Configuration
@@ -2257,13 +2399,15 @@ spec:
                     description: Configuration block for intelligent rebalancing.
                       See rebalancing Argument Reference below. Only applicable to
                       MSK Provisioned clusters with Express brokers.
-                    properties:
-                      status:
-                        description: 'The status of intelligent rebalancing. Valid
-                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
-                          clusters.'
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        status:
+                          description: 'The status of intelligent rebalancing. Valid
+                            values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                            clusters.'
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

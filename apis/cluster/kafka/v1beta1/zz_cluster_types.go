@@ -164,35 +164,93 @@ type BrokerNodeGroupInfoParameters struct {
 
 type ClientAuthenticationInitParameters struct {
 
-	// Configuration block for specifying SASL client authentication. See below.
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
 	Sasl []SaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Configuration block for specifying TLS client authentication. See below.
+	// Enables TLS authentication for VPC connectivity.
+	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
+}
+
+type ClientAuthenticationObservation struct {
+
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	Sasl []SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+
+	// Enables TLS authentication for VPC connectivity.
+	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
+}
+
+type ClientAuthenticationParameters struct {
+
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	// +kubebuilder:validation:Optional
+	Sasl []SaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+
+	// Enables TLS authentication for VPC connectivity.
+	// +kubebuilder:validation:Optional
+	TLS *bool `json:"tls,omitempty" tf:"tls,omitempty"`
+}
+
+type ClientAuthenticationSaslInitParameters struct {
+
+	// Enables SASL/IAM authentication for VPC connectivity.
+	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
+
+	// Enables SASL/SCRAM authentication for VPC connectivity.
+	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
+}
+
+type ClientAuthenticationSaslObservation struct {
+
+	// Enables SASL/IAM authentication for VPC connectivity.
+	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
+
+	// Enables SASL/SCRAM authentication for VPC connectivity.
+	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
+}
+
+type ClientAuthenticationSaslParameters struct {
+
+	// Enables SASL/IAM authentication for VPC connectivity.
+	// +kubebuilder:validation:Optional
+	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
+
+	// Enables SASL/SCRAM authentication for VPC connectivity.
+	// +kubebuilder:validation:Optional
+	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
+}
+
+type ClusterClientAuthenticationInitParameters struct {
+
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	Sasl []ClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+
+	// Enables TLS authentication for VPC connectivity.
 	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Enables unauthenticated access.
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
-type ClientAuthenticationObservation struct {
+type ClusterClientAuthenticationObservation struct {
 
-	// Configuration block for specifying SASL client authentication. See below.
-	Sasl []SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
+	Sasl []ClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Configuration block for specifying TLS client authentication. See below.
+	// Enables TLS authentication for VPC connectivity.
 	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Enables unauthenticated access.
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
-type ClientAuthenticationParameters struct {
+type ClusterClientAuthenticationParameters struct {
 
-	// Configuration block for specifying SASL client authentication. See below.
+	// SASL authentication type details for VPC connectivity. See vpc_connectivity client_authentication sasl Argument Reference below.
 	// +kubebuilder:validation:Optional
-	Sasl []SaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []ClientAuthenticationSaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
-	// Configuration block for specifying TLS client authentication. See below.
+	// Enables TLS authentication for VPC connectivity.
 	// +kubebuilder:validation:Optional
 	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
@@ -254,7 +312,7 @@ type ClusterInitParameters struct {
 	BrokerNodeGroupInfo []BrokerNodeGroupInfoInitParameters `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
 	// Configuration block for specifying a client authentication. See below.
-	ClientAuthentication []ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -281,7 +339,7 @@ type ClusterInitParameters struct {
 	OpenMonitoring []OpenMonitoringInitParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
 	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
-	Rebalancing *RebalancingInitParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
+	Rebalancing []RebalancingInitParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Controls storage mode for supported storage tiers. Valid values are: LOCAL or TIERED.
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
@@ -317,14 +375,26 @@ type ClusterObservation struct {
 	// One or more DNS names (or IP addresses) and TLS port pairs. For example, b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094. This attribute will have a value if encryption_info.0.encryption_in_transit.0.client_broker is set to TLS_PLAINTEXT or TLS. The resource sorts the list alphabetically. AWS may not always return all endpoints so the values may not be stable across applies.
 	BootstrapBrokersTLS *string `json:"bootstrapBrokersTls,omitempty" tf:"bootstrap_brokers_tls,omitempty"`
 
-	// Configuration block for the broker nodes of the Kafka cluster.
+	// A string containing one or more DNS names (or IP addresses) and SASL IAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	BootstrapBrokersVPCConnectivitySaslIAM *string `json:"bootstrapBrokersVpcConnectivitySaslIam,omitempty" tf:"bootstrap_brokers_vpc_connectivity_sasl_iam,omitempty"`
+
+	// A string containing one or more DNS names (or IP addresses) and SASL SCRAM port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	BootstrapBrokersVPCConnectivitySaslScram *string `json:"bootstrapBrokersVpcConnectivitySaslScram,omitempty" tf:"bootstrap_brokers_vpc_connectivity_sasl_scram,omitempty"`
+
+	// A string containing one or more DNS names (or IP addresses) and TLS port pairs for VPC connectivity. AWS may not always return all endpoints so the values may not be stable across applies.
+	BootstrapBrokersVPCConnectivityTLS *string `json:"bootstrapBrokersVpcConnectivityTls,omitempty" tf:"bootstrap_brokers_vpc_connectivity_tls,omitempty"`
+
+	// Configuration block for the broker nodes of the Kafka cluster. See broker_node_group_info Argument Reference below.
 	BrokerNodeGroupInfo []BrokerNodeGroupInfoObservation `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
 	// Configuration block for specifying a client authentication. See below.
-	ClientAuthentication []ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// UUID of the MSK cluster, for use in IAM policies.
+	ClusterUUID *string `json:"clusterUuid,omitempty" tf:"cluster_uuid,omitempty"`
 
 	// Configuration block for specifying a MSK Configuration to attach to Kafka brokers. See below.
 	ConfigurationInfo []ConfigurationInfoObservation `json:"configurationInfo,omitempty" tf:"configuration_info,omitempty"`
@@ -353,7 +423,7 @@ type ClusterObservation struct {
 	OpenMonitoring []OpenMonitoringObservation `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
 	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
-	Rebalancing *RebalancingObservation `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
+	Rebalancing []RebalancingObservation `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -385,7 +455,7 @@ type ClusterParameters struct {
 
 	// Configuration block for specifying a client authentication. See below.
 	// +kubebuilder:validation:Optional
-	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	// +kubebuilder:validation:Optional
@@ -421,7 +491,7 @@ type ClusterParameters struct {
 
 	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
 	// +kubebuilder:validation:Optional
-	Rebalancing *RebalancingParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
+	Rebalancing []RebalancingParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -489,21 +559,31 @@ type ConfigurationInfoParameters struct {
 
 type ConnectivityInfoInitParameters struct {
 
-	// Access control settings for brokers. See below.
+	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess []PublicAccessInitParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
+
+	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	VPCConnectivity []VPCConnectivityInitParameters `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
 type ConnectivityInfoObservation struct {
 
-	// Access control settings for brokers. See below.
+	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess []PublicAccessObservation `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
+
+	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	VPCConnectivity []VPCConnectivityObservation `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
 type ConnectivityInfoParameters struct {
 
-	// Access control settings for brokers. See below.
+	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	// +kubebuilder:validation:Optional
 	PublicAccess []PublicAccessParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
+
+	// VPC connectivity access control for brokers. See connectivity_info vpc_connectivity Argument Reference below.
+	// +kubebuilder:validation:Optional
+	VPCConnectivity []VPCConnectivityParameters `json:"vpcConnectivity,omitempty" tf:"vpc_connectivity,omitempty"`
 }
 
 type EBSStorageInfoInitParameters struct {
@@ -959,6 +1039,25 @@ type TLSParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
+}
+
+type VPCConnectivityInitParameters struct {
+
+	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	ClientAuthentication []ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+}
+
+type VPCConnectivityObservation struct {
+
+	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	ClientAuthentication []ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+}
+
+type VPCConnectivityParameters struct {
+
+	// Configuration block for specifying a client authentication. See client_authentication Argument Reference below.
+	// +kubebuilder:validation:Optional
+	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster
