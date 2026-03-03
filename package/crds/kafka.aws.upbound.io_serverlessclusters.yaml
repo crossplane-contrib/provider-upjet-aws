@@ -78,37 +78,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: Details for client authentication using SASL.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
-                                type: boolean
-                              scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
-                                type: boolean
-                            type: object
-                          type: array
-                        tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
-                          items:
-                            properties:
-                              certificateAuthorityArns:
-                                description: List of ACM Certificate Authority Amazon
-                                  Resource Names (ARNs).
+                                description: Details for client authentication using
+                                  IAM. See below.
                                 items:
-                                  type: string
+                                  properties:
+                                    enabled:
+                                      description: Whether SASL/IAM authentication
+                                        is enabled or not.
+                                      type: boolean
+                                  type: object
                                 type: array
-                                x-kubernetes-list-type: set
                             type: object
                           type: array
-                        unauthenticated:
-                          description: Enables unauthenticated access.
-                          type: boolean
                       type: object
                     type: array
                   clusterName:
@@ -324,37 +310,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: Details for client authentication using SASL.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
-                                type: boolean
-                              scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
-                                type: boolean
-                            type: object
-                          type: array
-                        tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
-                          items:
-                            properties:
-                              certificateAuthorityArns:
-                                description: List of ACM Certificate Authority Amazon
-                                  Resource Names (ARNs).
+                                description: Details for client authentication using
+                                  IAM. See below.
                                 items:
-                                  type: string
+                                  properties:
+                                    enabled:
+                                      description: Whether SASL/IAM authentication
+                                        is enabled or not.
+                                      type: boolean
+                                  type: object
                                 type: array
-                                x-kubernetes-list-type: set
                             type: object
                           type: array
-                        unauthenticated:
-                          description: Enables unauthenticated access.
-                          type: boolean
                       type: object
                     type: array
                   clusterName:
@@ -664,37 +636,23 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: Details for client authentication using SASL.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
-                                type: boolean
-                              scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
-                                type: boolean
-                            type: object
-                          type: array
-                        tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
-                          items:
-                            properties:
-                              certificateAuthorityArns:
-                                description: List of ACM Certificate Authority Amazon
-                                  Resource Names (ARNs).
+                                description: Details for client authentication using
+                                  IAM. See below.
                                 items:
-                                  type: string
+                                  properties:
+                                    enabled:
+                                      description: Whether SASL/IAM authentication
+                                        is enabled or not.
+                                      type: boolean
+                                  type: object
                                 type: array
-                                x-kubernetes-list-type: set
                             type: object
                           type: array
-                        unauthenticated:
-                          description: Enables unauthenticated access.
-                          type: boolean
                       type: object
                     type: array
                   clusterName:

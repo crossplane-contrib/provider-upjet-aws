@@ -2927,6 +2927,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
+		*out = new(string)
+		**out = **in
+	}
 	if in.UpgradeStorageConfig != nil {
 		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
 		*out = new(bool)

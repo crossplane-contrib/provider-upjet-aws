@@ -894,6 +894,17 @@ spec:
                           type: array
                       type: object
                     type: array
+                  rebalancing:
+                    description: Configuration block for intelligent rebalancing.
+                      See rebalancing Argument Reference below. Only applicable to
+                      MSK Provisioned clusters with Express brokers.
+                    properties:
+                      status:
+                        description: 'The status of intelligent rebalancing. Valid
+                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                          clusters.'
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1747,6 +1758,17 @@ spec:
                           type: array
                       type: object
                     type: array
+                  rebalancing:
+                    description: Configuration block for intelligent rebalancing.
+                      See rebalancing Argument Reference below. Only applicable to
+                      MSK Provisioned clusters with Express brokers.
+                    properties:
+                      status:
+                        description: 'The status of intelligent rebalancing. Valid
+                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                          clusters.'
+                        type: string
+                    type: object
                   storageMode:
                     description: 'Controls storage mode for supported storage tiers.
                       Valid values are: LOCAL or TIERED.'
@@ -2231,6 +2253,17 @@ spec:
                           type: array
                       type: object
                     type: array
+                  rebalancing:
+                    description: Configuration block for intelligent rebalancing.
+                      See rebalancing Argument Reference below. Only applicable to
+                      MSK Provisioned clusters with Express brokers.
+                    properties:
+                      status:
+                        description: 'The status of intelligent rebalancing. Valid
+                          values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based
+                          clusters.'
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

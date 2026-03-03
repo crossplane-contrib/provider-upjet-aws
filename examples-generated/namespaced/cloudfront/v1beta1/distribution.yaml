@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: cloudfront.aws.m.upbound.io/v1beta1
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/distribution
+  labels:
+    testing.upbound.io/example-name: s3_distribution
+  name: s3-distribution
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultCacheBehavior:
+      targetOriginId: groupS3
+    origin:
+    - domainName: ${aws_s3_bucket.primary.bucket_regional_domain_name}
+      originId: primaryS3
+      s3OriginConfig:
+        originAccessIdentitySelector:
+          matchLabels:
+            testing.upbound.io/example-name: default
+    - domainName: ${aws_s3_bucket.failover.bucket_regional_domain_name}
+      originId: failoverS3
+      s3OriginConfig:
+        originAccessIdentitySelector:
+          matchLabels:
+            testing.upbound.io/example-name: default
+    originGroup:
+    - failoverCriteria:
+        statusCodes:
+        - 403
+        - 404
+        - 500
+        - 502
+      member:
+      - originId: primaryS3
+      - originId: failoverS3
+      originId: groupS3

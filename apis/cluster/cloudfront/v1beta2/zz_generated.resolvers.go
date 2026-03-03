@@ -17,8 +17,209 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *FieldLevelEncryptionConfig) ResolveReferences( // ResolveReferences of this FieldLevelEncryptionConfig.
+func (mg *Distribution) ResolveReferences( // ResolveReferences of this Distribution.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef,
+					Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn")
+			}
+			mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
+					Extract:      resource.ExtractParamPath("qualified_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
+					Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "OriginAccessControl", "OriginAccessControlList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].OriginAccessControlID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDRef,
+				Selector:     mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Origin[i3].OriginAccessControlID")
+		}
+		mg.Spec.ForProvider.Origin[i3].OriginAccessControlID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Origin[i3].OriginAccessControlIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Origin); i3++ {
+		if mg.Spec.ForProvider.Origin[i3].S3OriginConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "OriginAccessIdentity", "OriginAccessIdentityList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity),
+					Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef,
+					Selector:     mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentitySelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity")
+			}
+			mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef,
+					Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn")
+			}
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
+					Extract:      resource.ExtractParamPath("qualified_arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
+					Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn")
+			}
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Origin); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "OriginAccessControl", "OriginAccessControlList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].OriginAccessControlID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDRef,
+				Selector:     mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Origin[i3].OriginAccessControlID")
+		}
+		mg.Spec.InitProvider.Origin[i3].OriginAccessControlID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Origin); i3++ {
+		if mg.Spec.InitProvider.Origin[i3].S3OriginConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudfront.aws.upbound.io", "v1beta1", "OriginAccessIdentity", "OriginAccessIdentityList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity),
+					Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef,
+					Selector:     mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentitySelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity")
+			}
+			mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Origin[i3].S3OriginConfig.OriginAccessIdentityRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
+// ResolveReferences of this FieldLevelEncryptionConfig.
+func (mg *FieldLevelEncryptionConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
