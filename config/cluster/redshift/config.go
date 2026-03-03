@@ -10,5 +10,6 @@ import "github.com/crossplane/upjet/v2/pkg/config"
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_redshift_cluster", func(r *config.Resource) {
 		r.UseAsync = true
+		r.Version = "v1beta2"
 	})
 }
