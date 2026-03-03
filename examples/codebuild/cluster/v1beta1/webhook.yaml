@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: example-webhook-role
+  labels:
+    testing.upbound.io/example-name: example-codebuild-webhook
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "codebuild.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: codebuild.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  name: example-webhook-project
+  labels:
+    testing.upbound.io/example-name: example-codebuild-webhook
+spec:
+  forProvider:
+    region: us-west-1
+    name: example-webhook-project
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-codebuild-webhook
+    artifacts:
+      - type: NO_ARTIFACTS
+    environment:
+      - computeType: BUILD_GENERAL1_SMALL
+        image: aws/codebuild/standard:5.0
+        type: LINUX_CONTAINER
+    source:
+      - type: GITHUB
+        location: https://github.com/example/example-repo.git
+---
+apiVersion: codebuild.aws.upbound.io/v1beta1
+kind: Webhook
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: example-codebuild-webhook
+spec:
+  forProvider:
+    region: us-west-1
+    projectNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-codebuild-webhook
+    filterGroup:
+      - filter:
+          - type: EVENT
+            pattern: PUSH
+          - type: HEAD_REF
+            pattern: refs/heads/main
