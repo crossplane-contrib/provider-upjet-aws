@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Agent Runtime with Code Configuration from S3 Example
+# This example creates an agent runtime using Python code stored in S3.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: AgentRuntime
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntime-code
+  labels:
+    testing.upbound.io/example-name: agentruntime-code
+  name: agentruntime-code
+  namespace: upbound-system
+spec:
+  forProvider:
+    agentRuntimeName: example_agent_runtime_code
+    region: us-west-2
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bedrock-agentcore-role-code
+      namespace: upbound-system
+    agentRuntimeArtifact:
+      codeConfiguration:
+        entryPoint:
+        - main.py
+        runtime: PYTHON_3_13
+        code:
+          s3:
+            bucket: bedrock-agentcore-runtime-153891904029-us-west-2-2202juk4oc
+            prefix: 1772724691221-zib6yg-strands_agent.zip
+    networkConfiguration:
+      networkMode: PUBLIC
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntime-code
+  labels:
+    testing.upbound.io/example-name: bedrock-agentcore-role-code
+  name: bedrock-agentcore-runtime-role-code
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---

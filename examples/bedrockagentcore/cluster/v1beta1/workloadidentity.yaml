@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Workload Identity Example
+# Creates a Bedrock AgentCore Workload Identity with a single allowed OAuth2 return URL.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: WorkloadIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/workloadidentity
+  labels:
+    testing.upbound.io/example-name: workloadidentity
+  name: example-workload-identity
+spec:
+  forProvider:
+    region: us-west-2
+    allowedResourceOauth2ReturnUrls:
+    - "https://example.com/callback"
