@@ -66,7 +66,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				targetTyped := target.(*v1beta2.RoutingProfile)
 
 				if srcTyped.Status.AtProvider.QueueConfigsAssociated != nil {
-					var l []v1beta2.QueueConfigsObservation
+					var l []v1beta2.QueueConfigsObservation // nolint:prealloc
 					for _, e := range srcTyped.Status.AtProvider.QueueConfigsAssociated {
 						qc := v1beta2.QueueConfigsObservation{
 							Channel:   e.Channel,
@@ -88,7 +88,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				targetTyped := target.(*v1beta1.RoutingProfile)
 
 				if srcTyped.Status.AtProvider.QueueConfigs != nil {
-					var l []v1beta1.QueueConfigsAssociatedObservation
+					var l []v1beta1.QueueConfigsAssociatedObservation // nolint:prealloc
 					for _, e := range srcTyped.Status.AtProvider.QueueConfigs {
 						qca := v1beta1.QueueConfigsAssociatedObservation{
 							Channel:   e.Channel,

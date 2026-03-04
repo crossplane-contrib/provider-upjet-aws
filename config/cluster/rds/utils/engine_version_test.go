@@ -163,13 +163,13 @@ func TestEngineVersionIsHigherOrEqual(t *testing.T) {
 
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
-			specV := ParseEngineVersion(tc.args.spec)
-			curV := ParseEngineVersion(tc.args.current)
+			specV := ParseEngineVersion(tc.spec)
+			curV := ParseEngineVersion(tc.current)
 
 			res := specV.Compare(curV)
 			resSign := sign(res)
-			if diff := cmp.Diff(tc.want.result, resSign); diff != "" {
-				t.Errorf("r: -want, +got:\n%q\n%q\n%s", tc.args.spec, tc.args.current, diff)
+			if diff := cmp.Diff(tc.result, resSign); diff != "" {
+				t.Errorf("r: -want, +got:\n%q\n%q\n%s", tc.spec, tc.current, diff)
 			}
 		})
 	}
