@@ -11,5 +11,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_redshift_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.Version = "v1beta2"
+		r.SetCRDStorageVersion("v1beta1")
+		r.ControllerReconcileVersion = "v1beta1"
 	})
 }

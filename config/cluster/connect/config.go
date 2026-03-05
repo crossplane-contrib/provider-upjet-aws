@@ -60,6 +60,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 
 		r.Version = "v1beta2"
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
 		r.Conversions = append(r.Conversions,
 			conversion.NewCustomConverter("v1beta1", "v1beta2", func(src, target xpresource.Managed) error {
 				srcTyped := src.(*v1beta1.RoutingProfile)
