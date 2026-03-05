@@ -82,7 +82,7 @@ type ArchiveRuleParameters struct {
 
 type CreateRuleInitParameters struct {
 
-	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times.
+	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times. For details on valid Cron expressions, see here.
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
@@ -103,7 +103,7 @@ type CreateRuleInitParameters struct {
 
 type CreateRuleObservation struct {
 
-	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times.
+	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times. For details on valid Cron expressions, see here.
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values. Conflicts with cron_expression. If set, interval_unit and times must also be set.
@@ -124,7 +124,7 @@ type CreateRuleObservation struct {
 
 type CreateRuleParameters struct {
 
-	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times.
+	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. Conflicts with interval, interval_unit, and times. For details on valid Cron expressions, see here.
 	// +kubebuilder:validation:Optional
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 

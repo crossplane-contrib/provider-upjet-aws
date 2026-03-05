@@ -61,7 +61,10 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      NAT Gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required when connectivity_type is set to public
+                      and availability_mode is set to zonal. When availability_mode
+                      is set to regional, this must not be set; instead, use the availability_zone_address
+                      block to specify EIPs for each AZ.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -143,9 +146,131 @@ spec:
                             type: string
                         type: object
                     type: object
+                  availabilityMode:
+                    description: Specifies whether to create a zonal (single-AZ) or
+                      regional (multi-AZ) NAT gateway. Valid values are zonal and
+                      regional. Defaults to zonal.
+                    type: string
+                  availabilityZoneAddress:
+                    description: Repeatable configuration block for the Elastic IP
+                      addresses (EIPs) and availability zones for the regional NAT
+                      gateway. When not specified, the regional NAT gateway will automatically
+                      expand to new AZs and associate EIPs upon detection of an elastic
+                      network interface (auto mode). When specified, auto-expansion
+                      is disabled (manual mode). See availability_zone_address below
+                      for details.
+                    items:
+                      properties:
+                        allocationIds:
+                          description: List of allocation IDs of the Elastic IP addresses
+                            (EIPs) to be used for handling outbound NAT traffic in
+                            this specific Availability Zone.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        allocationIdsRefs:
+                          description: References to EIP in ec2 to populate allocationIds.
+                          items:
+                            description: A NamespacedReference to a named object.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              namespace:
+                                description: Namespace of the referenced object
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        allocationIdsSelector:
+                          description: Selector for a list of EIP in ec2 to populate
+                            allocationIds.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        availabilityZone:
+                          description: Availability Zone (e.g. us-west-2a) where this
+                            specific NAT gateway configuration will be active. Exactly
+                            one of availability_zone or availability_zone_id must
+                            be specified.
+                          type: string
+                        availabilityZoneId:
+                          description: Availability Zone ID (e.g. usw2-az2) where
+                            this specific NAT gateway configuration will be active.
+                            Exactly one of availability_zone or availability_zone_id
+                            must be specified.
+                          type: string
+                      type: object
+                    type: array
                   connectivityType:
                     description: Connectivity type for the NAT Gateway. Valid values
-                      are private and public. Defaults to public.
+                      are private and public. When availability_mode is set to regional,
+                      this must be set to public. Defaults to public.
                     type: string
                   privateIp:
                     description: The private IPv4 address to assign to the NAT Gateway.
@@ -249,8 +374,8 @@ spec:
                         type: object
                     type: object
                   secondaryPrivateIpAddressCount:
-                    description: '[Private NAT Gateway only] The number of secondary
-                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    description: The number of secondary private IPv4 addresses you
+                      want to assign to the NAT Gateway.
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
@@ -262,7 +387,8 @@ spec:
                     x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      NAT Gateway.
+                      NAT Gateway. Required when availability_mode is set to zonal.
+                      Must not be set when availability_mode is set to regional.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -350,6 +476,90 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  vpcId:
+                    description: VPC ID where this NAT Gateway will be created. Required
+                      when availability_mode is set to regional.
+                    type: string
+                  vpcIdRef:
+                    description: Reference to a VPC in ec2 to populate vpcId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  vpcIdSelector:
+                    description: Selector for a VPC in ec2 to populate vpcId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 required:
                 - region
                 type: object
@@ -368,7 +578,10 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      NAT Gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required when connectivity_type is set to public
+                      and availability_mode is set to zonal. When availability_mode
+                      is set to regional, this must not be set; instead, use the availability_zone_address
+                      block to specify EIPs for each AZ.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -450,9 +663,131 @@ spec:
                             type: string
                         type: object
                     type: object
+                  availabilityMode:
+                    description: Specifies whether to create a zonal (single-AZ) or
+                      regional (multi-AZ) NAT gateway. Valid values are zonal and
+                      regional. Defaults to zonal.
+                    type: string
+                  availabilityZoneAddress:
+                    description: Repeatable configuration block for the Elastic IP
+                      addresses (EIPs) and availability zones for the regional NAT
+                      gateway. When not specified, the regional NAT gateway will automatically
+                      expand to new AZs and associate EIPs upon detection of an elastic
+                      network interface (auto mode). When specified, auto-expansion
+                      is disabled (manual mode). See availability_zone_address below
+                      for details.
+                    items:
+                      properties:
+                        allocationIds:
+                          description: List of allocation IDs of the Elastic IP addresses
+                            (EIPs) to be used for handling outbound NAT traffic in
+                            this specific Availability Zone.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        allocationIdsRefs:
+                          description: References to EIP in ec2 to populate allocationIds.
+                          items:
+                            description: A NamespacedReference to a named object.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              namespace:
+                                description: Namespace of the referenced object
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        allocationIdsSelector:
+                          description: Selector for a list of EIP in ec2 to populate
+                            allocationIds.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        availabilityZone:
+                          description: Availability Zone (e.g. us-west-2a) where this
+                            specific NAT gateway configuration will be active. Exactly
+                            one of availability_zone or availability_zone_id must
+                            be specified.
+                          type: string
+                        availabilityZoneId:
+                          description: Availability Zone ID (e.g. usw2-az2) where
+                            this specific NAT gateway configuration will be active.
+                            Exactly one of availability_zone or availability_zone_id
+                            must be specified.
+                          type: string
+                      type: object
+                    type: array
                   connectivityType:
                     description: Connectivity type for the NAT Gateway. Valid values
-                      are private and public. Defaults to public.
+                      are private and public. When availability_mode is set to regional,
+                      this must be set to public. Defaults to public.
                     type: string
                   privateIp:
                     description: The private IPv4 address to assign to the NAT Gateway.
@@ -551,8 +886,8 @@ spec:
                         type: object
                     type: object
                   secondaryPrivateIpAddressCount:
-                    description: '[Private NAT Gateway only] The number of secondary
-                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    description: The number of secondary private IPv4 addresses you
+                      want to assign to the NAT Gateway.
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
@@ -564,7 +899,8 @@ spec:
                     x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      NAT Gateway.
+                      NAT Gateway. Required when availability_mode is set to zonal.
+                      Must not be set when availability_mode is set to regional.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in ec2 to populate subnetId.
@@ -652,6 +988,90 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  vpcId:
+                    description: VPC ID where this NAT Gateway will be created. Required
+                      when availability_mode is set to regional.
+                    type: string
+                  vpcIdRef:
+                    description: Reference to a VPC in ec2 to populate vpcId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  vpcIdSelector:
+                    description: Selector for a VPC in ec2 to populate vpcId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -718,23 +1138,74 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      NAT Gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required when connectivity_type is set to public
+                      and availability_mode is set to zonal. When availability_mode
+                      is set to regional, this must not be set; instead, use the availability_zone_address
+                      block to specify EIPs for each AZ.
                     type: string
                   associationId:
-                    description: The association ID of the Elastic IP address that's
-                      associated with the NAT Gateway. Only available when connectivity_type
-                      is public.
+                    description: (zonal NAT gateways only) The association ID of the
+                      Elastic IP address that's associated with the NAT Gateway. Only
+                      available when connectivity_type is public.
                     type: string
+                  autoProvisionZones:
+                    description: (regional NAT gateways only) Indicates whether AWS
+                      automatically manages AZ coverage.
+                    type: string
+                  autoScalingIps:
+                    description: (regional NAT gateways only) Indicates whether AWS
+                      automatically allocates additional Elastic IP addresses (EIPs)
+                      in an AZ when the NAT gateway needs more ports due to increased
+                      concurrent connections to a single destination from that AZ.
+                    type: string
+                  availabilityMode:
+                    description: Specifies whether to create a zonal (single-AZ) or
+                      regional (multi-AZ) NAT gateway. Valid values are zonal and
+                      regional. Defaults to zonal.
+                    type: string
+                  availabilityZoneAddress:
+                    description: Repeatable configuration block for the Elastic IP
+                      addresses (EIPs) and availability zones for the regional NAT
+                      gateway. When not specified, the regional NAT gateway will automatically
+                      expand to new AZs and associate EIPs upon detection of an elastic
+                      network interface (auto mode). When specified, auto-expansion
+                      is disabled (manual mode). See availability_zone_address below
+                      for details.
+                    items:
+                      properties:
+                        allocationIds:
+                          description: List of allocation IDs of the Elastic IP addresses
+                            (EIPs) to be used for handling outbound NAT traffic in
+                            this specific Availability Zone.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        availabilityZone:
+                          description: Availability Zone (e.g. us-west-2a) where this
+                            specific NAT gateway configuration will be active. Exactly
+                            one of availability_zone or availability_zone_id must
+                            be specified.
+                          type: string
+                        availabilityZoneId:
+                          description: Availability Zone ID (e.g. usw2-az2) where
+                            this specific NAT gateway configuration will be active.
+                            Exactly one of availability_zone or availability_zone_id
+                            must be specified.
+                          type: string
+                      type: object
+                    type: array
                   connectivityType:
                     description: Connectivity type for the NAT Gateway. Valid values
-                      are private and public. Defaults to public.
+                      are private and public. When availability_mode is set to regional,
+                      this must be set to public. Defaults to public.
                     type: string
                   id:
                     description: The ID of the NAT Gateway.
                     type: string
                   networkInterfaceId:
-                    description: The ID of the network interface associated with the
-                      NAT Gateway.
+                    description: (zonal NAT gateways only) The ID of the network interface
+                      associated with the NAT Gateway.
                     type: string
                   privateIp:
                     description: The private IPv4 address to assign to the NAT Gateway.
@@ -742,12 +1213,61 @@ spec:
                       be automatically assigned.
                     type: string
                   publicIp:
-                    description: The Elastic IP address associated with the NAT Gateway.
+                    description: (zonal NAT gateways only) The Elastic IP address
+                      associated with the NAT Gateway.
                     type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  regionalNatGatewayAddress:
+                    description: (regional NAT gateways only) Repeatable blocks for
+                      information about the IP addresses and network interface associated
+                      with the regional NAT gateway.
+                    items:
+                      properties:
+                        allocationId:
+                          description: The Allocation ID of the Elastic IP address
+                            for the NAT Gateway. Required when connectivity_type is
+                            set to public and availability_mode is set to zonal. When
+                            availability_mode is set to regional, this must not be
+                            set; instead, use the availability_zone_address block
+                            to specify EIPs for each AZ.
+                          type: string
+                        associationId:
+                          description: (zonal NAT gateways only) The association ID
+                            of the Elastic IP address that's associated with the NAT
+                            Gateway. Only available when connectivity_type is public.
+                          type: string
+                        availabilityZone:
+                          description: Availability Zone (e.g. us-west-2a) where this
+                            specific NAT gateway configuration will be active. Exactly
+                            one of availability_zone or availability_zone_id must
+                            be specified.
+                          type: string
+                        availabilityZoneId:
+                          description: Availability Zone ID where this specific NAT
+                            gateway configuration is active
+                          type: string
+                        networkInterfaceId:
+                          description: (zonal NAT gateways only) The ID of the network
+                            interface associated with the NAT Gateway.
+                          type: string
+                        publicIp:
+                          description: (zonal NAT gateways only) The Elastic IP address
+                            associated with the NAT Gateway.
+                          type: string
+                        status:
+                          description: Status of the NAT gateway address.
+                          type: string
+                      type: object
+                    type: array
+                  regionalNatGatewayAutoMode:
+                    type: string
+                  routeTableId:
+                    description: (regional NAT gateways only) ID of the automatically
+                      created route table.
                     type: string
                   secondaryAllocationIds:
                     description: A list of secondary allocation EIP IDs for this NAT
@@ -758,8 +1278,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   secondaryPrivateIpAddressCount:
-                    description: '[Private NAT Gateway only] The number of secondary
-                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    description: The number of secondary private IPv4 addresses you
+                      want to assign to the NAT Gateway.
                     type: number
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
@@ -771,7 +1291,8 @@ spec:
                     x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      NAT Gateway.
+                      NAT Gateway. Required when availability_mode is set to zonal.
+                      Must not be set when availability_mode is set to regional.
                     type: string
                   tags:
                     additionalProperties:
@@ -787,6 +1308,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  vpcId:
+                    description: VPC ID where this NAT Gateway will be created. Required
+                      when availability_mode is set to regional.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

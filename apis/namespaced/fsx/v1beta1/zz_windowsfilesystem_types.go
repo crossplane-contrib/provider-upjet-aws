@@ -59,6 +59,19 @@ type SelfManagedActiveDirectoryInitParameters struct {
 	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
+	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	DomainJoinServiceAccountSecret *string `json:"domainJoinServiceAccountSecret,omitempty" tf:"domain_join_service_account_secret,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
+	// +kubebuilder:validation:Optional
+	DomainJoinServiceAccountSecretRef *v1.NamespacedReference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
+	// +kubebuilder:validation:Optional
+	DomainJoinServiceAccountSecretSelector *v1.NamespacedSelector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
+
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -68,10 +81,10 @@ type SelfManagedActiveDirectoryInitParameters struct {
 	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
+	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -81,6 +94,9 @@ type SelfManagedActiveDirectoryObservation struct {
 	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
+	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	DomainJoinServiceAccountSecret *string `json:"domainJoinServiceAccountSecret,omitempty" tf:"domain_join_service_account_secret,omitempty"`
+
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -90,7 +106,7 @@ type SelfManagedActiveDirectoryObservation struct {
 	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the file system. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -100,6 +116,20 @@ type SelfManagedActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the AWS Secrets Manager secret that contains the credentials for the service account on your self-managed AD domain. Conflicts with username and password.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	DomainJoinServiceAccountSecret *string `json:"domainJoinServiceAccountSecret,omitempty" tf:"domain_join_service_account_secret,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
+	// +kubebuilder:validation:Optional
+	DomainJoinServiceAccountSecretRef *v1.NamespacedReference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
+	// +kubebuilder:validation:Optional
+	DomainJoinServiceAccountSecretSelector *v1.NamespacedSelector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	// +kubebuilder:validation:Optional
@@ -113,13 +143,13 @@ type SelfManagedActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
-	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username" tf:"username,omitempty"`
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type WindowsFileSystemDiskIopsConfigurationInitParameters struct {

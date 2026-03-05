@@ -18,6 +18,8 @@ type SpotInstanceRequestCPUOptionsInitParameters struct {
 
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
+
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
@@ -25,6 +27,8 @@ type SpotInstanceRequestCPUOptionsObservation struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
@@ -36,6 +40,9 @@ type SpotInstanceRequestCPUOptionsParameters struct {
 
 	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
@@ -329,6 +336,8 @@ type SpotInstanceRequestInitParameters struct {
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	SecondaryNetworkInterface []SpotInstanceRequestSecondaryNetworkInterfaceInitParameters `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
 
 	// +listType=set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
@@ -634,6 +643,8 @@ type SpotInstanceRequestObservation struct {
 
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
+	SecondaryNetworkInterface []SpotInstanceRequestSecondaryNetworkInterfaceObservation `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
+
 	// +listType=set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
@@ -821,6 +832,9 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	RootBlockDevice *SpotInstanceRequestRootBlockDeviceParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SecondaryNetworkInterface []SpotInstanceRequestSecondaryNetworkInterfaceParameters `json:"secondaryNetworkInterface,omitempty" tf:"secondary_network_interface,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -1033,6 +1047,72 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type SpotInstanceRequestSecondaryNetworkInterfaceInitParameters struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// The Spot Instance Request ID.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+}
+
+type SpotInstanceRequestSecondaryNetworkInterfaceObservation struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
+
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// The Spot Instance Request ID.
+	SecondaryInterfaceID *string `json:"secondaryInterfaceId,omitempty" tf:"secondary_interface_id,omitempty"`
+
+	// The Spot Instance Request ID.
+	SecondaryNetworkID *string `json:"secondaryNetworkId,omitempty" tf:"secondary_network_id,omitempty"`
+
+	// The Spot Instance Request ID.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+
+	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
+
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type SpotInstanceRequestSecondaryNetworkInterfaceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex" tf:"network_card_index,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// The Spot Instance Request ID.
+	// +kubebuilder:validation:Optional
+	SecondarySubnetID *string `json:"secondarySubnetId" tf:"secondary_subnet_id,omitempty"`
 }
 
 // SpotInstanceRequestSpec defines the desired state of SpotInstanceRequest

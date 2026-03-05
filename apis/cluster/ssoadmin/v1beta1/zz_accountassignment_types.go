@@ -93,8 +93,8 @@ type AccountAssignmentParameters struct {
 	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
 
 	// The entity type for which the assignment will be created. Valid values: AWS_ACCOUNT.
-	// +kubebuilder:validation:Optional
-	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+	// +kubebuilder:validation:Required
+	TargetType *string `json:"targetType" tf:"target_type,omitempty"`
 }
 
 // AccountAssignmentSpec defines the desired state of AccountAssignment

@@ -63,7 +63,7 @@ spec:
                     description: |-
                       The number of partitions to create in the
                       placement group.  Can only be specified when the strategy is set to
-                      partition.  Valid values are 1 - 7 (default is 2).
+                      partition.  Must be at least 1. (default is 2).
                     type: number
                   region:
                     description: |-
@@ -105,7 +105,7 @@ spec:
                     description: |-
                       The number of partitions to create in the
                       placement group.  Can only be specified when the strategy is set to
-                      partition.  Valid values are 1 - 7 (default is 2).
+                      partition.  Must be at least 1. (default is 2).
                     type: number
                   spreadLevel:
                     description: |-
@@ -201,7 +201,7 @@ spec:
                     description: |-
                       The number of partitions to create in the
                       placement group.  Can only be specified when the strategy is set to
-                      partition.  Valid values are 1 - 7 (default is 2).
+                      partition.  Must be at least 1. (default is 2).
                     type: number
                   placementGroupId:
                     description: The ID of the placement group.

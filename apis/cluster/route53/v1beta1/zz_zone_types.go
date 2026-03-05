@@ -79,6 +79,9 @@ type ZoneInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
+	// Boolean to indicate whether to enable accelerated recovery for the hosted zone. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing the argument.
+	EnableAcceleratedRecovery *bool `json:"enableAcceleratedRecovery,omitempty" tf:"enable_accelerated_recovery,omitempty"`
+
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// This is the name of the hosted zone.
@@ -102,6 +105,9 @@ type ZoneObservation struct {
 
 	// The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts with vpc as delegation sets can only be used for public zones.
 	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
+
+	// Boolean to indicate whether to enable accelerated recovery for the hosted zone. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing the argument.
+	EnableAcceleratedRecovery *bool `json:"enableAcceleratedRecovery,omitempty" tf:"enable_accelerated_recovery,omitempty"`
 
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -150,6 +156,10 @@ type ZoneParameters struct {
 	// Selector for a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
+
+	// Boolean to indicate whether to enable accelerated recovery for the hosted zone. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing the argument.
+	// +kubebuilder:validation:Optional
+	EnableAcceleratedRecovery *bool `json:"enableAcceleratedRecovery,omitempty" tf:"enable_accelerated_recovery,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`

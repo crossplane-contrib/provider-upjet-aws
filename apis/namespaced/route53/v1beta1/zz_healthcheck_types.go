@@ -79,7 +79,7 @@ type HealthCheckInitParameters struct {
 	// (helpful for identifying single health_check set amongst others)
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
-	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	// List of AWS Regions from which Amazon Route 53 health checkers check the specified endpoint. Valid values are us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, and sa-east-1. If not specified, all of the regions listed under Valid values are used by default. Once this argument is set, removing it has no effect.
 	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
@@ -159,7 +159,7 @@ type HealthCheckObservation struct {
 	// (helpful for identifying single health_check set amongst others)
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
-	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	// List of AWS Regions from which Amazon Route 53 health checkers check the specified endpoint. Valid values are us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, and sa-east-1. If not specified, all of the regions listed under Valid values are used by default. Once this argument is set, removing it has no effect.
 	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
@@ -270,7 +270,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
-	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	// List of AWS Regions from which Amazon Route 53 health checkers check the specified endpoint. Valid values are us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, and sa-east-1. If not specified, all of the regions listed under Valid values are used by default. Once this argument is set, removing it has no effect.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`

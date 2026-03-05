@@ -75,7 +75,7 @@ type NotebookInstanceInitParameters struct {
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
 
-	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending on which version of Amazon Linux you require.
+	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1(deprecated), notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3, or notebook-al2023-v1, depending on which version of Amazon Linux you require. Defaults to notebook-al2-v3.
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 
 	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker AI to call other services on your behalf.
@@ -152,7 +152,7 @@ type NotebookInstanceObservation struct {
 	// The network interface ID that Amazon SageMaker AI created at the time of creating the instance. Only available when setting subnet_id.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending on which version of Amazon Linux you require.
+	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1(deprecated), notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3, or notebook-al2023-v1, depending on which version of Amazon Linux you require. Defaults to notebook-al2-v3.
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -237,7 +237,7 @@ type NotebookInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
 
-	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending on which version of Amazon Linux you require.
+	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1(deprecated), notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3, or notebook-al2023-v1, depending on which version of Amazon Linux you require. Defaults to notebook-al2-v3.
 	// +kubebuilder:validation:Optional
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
 

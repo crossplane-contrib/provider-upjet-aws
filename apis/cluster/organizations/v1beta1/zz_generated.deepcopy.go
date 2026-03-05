@@ -191,6 +191,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -369,8 +374,23 @@ func (in *AccountsObservation) DeepCopyInto(out *AccountsObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.JoinedMethod != nil {
+		in, out := &in.JoinedMethod, &out.JoinedMethod
+		*out = new(string)
+		**out = **in
+	}
+	if in.JoinedTimestamp != nil {
+		in, out := &in.JoinedTimestamp, &out.JoinedTimestamp
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
 		*out = new(string)
 		**out = **in
 	}
@@ -668,8 +688,23 @@ func (in *NonMasterAccountsObservation) DeepCopyInto(out *NonMasterAccountsObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.JoinedMethod != nil {
+		in, out := &in.JoinedMethod, &out.JoinedMethod
+		*out = new(string)
+		**out = **in
+	}
+	if in.JoinedTimestamp != nil {
+		in, out := &in.JoinedTimestamp, &out.JoinedTimestamp
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
 		*out = new(string)
 		**out = **in
 	}
@@ -760,6 +795,11 @@ func (in *OrganizationInitParameters) DeepCopyInto(out *OrganizationInitParamete
 	if in.FeatureSet != nil {
 		in, out := &in.FeatureSet, &out.FeatureSet
 		*out = new(string)
+		**out = **in
+	}
+	if in.ReturnOrganizationOnly != nil {
+		in, out := &in.ReturnOrganizationOnly, &out.ReturnOrganizationOnly
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -880,6 +920,11 @@ func (in *OrganizationObservation) DeepCopyInto(out *OrganizationObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ReturnOrganizationOnly != nil {
+		in, out := &in.ReturnOrganizationOnly, &out.ReturnOrganizationOnly
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Roots != nil {
 		in, out := &in.Roots, &out.Roots
 		*out = make([]RootsObservation, len(*in))
@@ -927,6 +972,11 @@ func (in *OrganizationParameters) DeepCopyInto(out *OrganizationParameters) {
 	if in.FeatureSet != nil {
 		in, out := &in.FeatureSet, &out.FeatureSet
 		*out = new(string)
+		**out = **in
+	}
+	if in.ReturnOrganizationOnly != nil {
+		in, out := &in.ReturnOrganizationOnly, &out.ReturnOrganizationOnly
+		*out = new(bool)
 		**out = **in
 	}
 }

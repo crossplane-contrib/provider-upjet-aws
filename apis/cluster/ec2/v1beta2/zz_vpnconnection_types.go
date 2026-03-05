@@ -15,6 +15,15 @@ import (
 
 type CloudwatchLogOptionsInitParameters struct {
 
+	// Enable or disable BGP logging feature. The default is false.
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
+
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -27,6 +36,15 @@ type CloudwatchLogOptionsInitParameters struct {
 
 type CloudwatchLogOptionsObservation struct {
 
+	// Enable or disable BGP logging feature. The default is false.
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
+
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -38,6 +56,18 @@ type CloudwatchLogOptionsObservation struct {
 }
 
 type CloudwatchLogOptionsParameters struct {
+
+	// Enable or disable BGP logging feature. The default is false.
+	// +kubebuilder:validation:Optional
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// +kubebuilder:validation:Optional
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// +kubebuilder:validation:Optional
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	// +kubebuilder:validation:Optional
@@ -91,6 +121,15 @@ type Tunnel1LogOptionsParameters struct {
 
 type Tunnel2LogOptionsCloudwatchLogOptionsInitParameters struct {
 
+	// Enable or disable BGP logging feature. The default is false.
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
+
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -103,6 +142,15 @@ type Tunnel2LogOptionsCloudwatchLogOptionsInitParameters struct {
 
 type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
 
+	// Enable or disable BGP logging feature. The default is false.
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
+
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
 
@@ -114,6 +162,18 @@ type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
 }
 
 type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
+
+	// Enable or disable BGP logging feature. The default is false.
+	// +kubebuilder:validation:Optional
+	BGPLogEnabled *bool `json:"bgpLogEnabled,omitempty" tf:"bgp_log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send BGP logs to.
+	// +kubebuilder:validation:Optional
+	BGPLogGroupArn *string `json:"bgpLogGroupArn,omitempty" tf:"bgp_log_group_arn,omitempty"`
+
+	// Set BGP log format. Default format is json. Possible values are: json and text. The default is json.
+	// +kubebuilder:validation:Optional
+	BGPLogOutputFormat *string `json:"bgpLogOutputFormat,omitempty" tf:"bgp_log_output_format,omitempty"`
 
 	// Enable or disable VPN tunnel logging feature. The default is false.
 	// +kubebuilder:validation:Optional
@@ -340,6 +400,9 @@ type VPNConnectionInitParameters struct {
 	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
 
+	// Desired bandwidth specification for the VPN tunnel. Valid values are standard | large. standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps per tunnel. Not supported when vpn_gateway_id is specified, or enable_acceleration is true.
+	TunnelBandwidth *string `json:"tunnelBandwidth,omitempty" tf:"tunnel_bandwidth,omitempty"`
+
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
 
@@ -355,6 +418,9 @@ type VPNConnectionInitParameters struct {
 	// Selector for a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
 	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
+
+	// ID of the VPN concentrator to associate with the VPN connection.
+	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
 	// The ID of the Virtual Private Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPNGateway
@@ -595,11 +661,17 @@ type VPNConnectionObservation struct {
 	// The RFC 6890 link-local address of the second VPN tunnel (VPN Gateway Side).
 	Tunnel2VgwInsideAddress *string `json:"tunnel2VgwInsideAddress,omitempty" tf:"tunnel2_vgw_inside_address,omitempty"`
 
+	// Desired bandwidth specification for the VPN tunnel. Valid values are standard | large. standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps per tunnel. Not supported when vpn_gateway_id is specified, or enable_acceleration is true.
+	TunnelBandwidth *string `json:"tunnelBandwidth,omitempty" tf:"tunnel_bandwidth,omitempty"`
+
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
 
 	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// ID of the VPN concentrator to associate with the VPN connection.
+	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
 	// The ID of the Virtual Private Gateway.
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
@@ -858,6 +930,10 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
 
+	// Desired bandwidth specification for the VPN tunnel. Valid values are standard | large. standard supports up to 1.25 Gbps per tunnel, while large supports up to 5 Gbps per tunnel. Not supported when vpn_gateway_id is specified, or enable_acceleration is true.
+	// +kubebuilder:validation:Optional
+	TunnelBandwidth *string `json:"tunnelBandwidth,omitempty" tf:"tunnel_bandwidth,omitempty"`
+
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	// +kubebuilder:validation:Optional
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
@@ -875,6 +951,10 @@ type VPNConnectionParameters struct {
 	// Selector for a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
 	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
+
+	// ID of the VPN concentrator to associate with the VPN connection.
+	// +kubebuilder:validation:Optional
+	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
 
 	// The ID of the Virtual Private Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPNGateway

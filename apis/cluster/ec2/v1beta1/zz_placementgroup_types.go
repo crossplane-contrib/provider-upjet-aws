@@ -17,7 +17,7 @@ type PlacementGroupInitParameters struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Valid values are 1 - 7 (default is 2).
+	// partition.  Must be at least 1. (default is 2).
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Determines how placement groups spread instances. Can only be used
@@ -42,7 +42,7 @@ type PlacementGroupObservation struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Valid values are 1 - 7 (default is 2).
+	// partition.  Must be at least 1. (default is 2).
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The ID of the placement group.
@@ -72,7 +72,7 @@ type PlacementGroupParameters struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// partition.  Valid values are 1 - 7 (default is 2).
+	// partition.  Must be at least 1. (default is 2).
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 

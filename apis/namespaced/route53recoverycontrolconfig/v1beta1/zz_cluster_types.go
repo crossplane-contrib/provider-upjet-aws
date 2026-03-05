@@ -33,6 +33,13 @@ type ClusterInitParameters struct {
 
 	// Unique name describing the cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Network type of cluster. Valid values are IPV4 and DUALSTACK. Defaults to IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -48,8 +55,19 @@ type ClusterObservation struct {
 	// Unique name describing the cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Network type of cluster. Valid values are IPV4 and DUALSTACK. Defaults to IPV4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Status of cluster. PENDING when it is being created, PENDING_DELETION when it is being deleted and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -57,6 +75,15 @@ type ClusterParameters struct {
 	// Unique name describing the cluster.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Network type of cluster. Valid values are IPV4 and DUALSTACK. Defaults to IPV4.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

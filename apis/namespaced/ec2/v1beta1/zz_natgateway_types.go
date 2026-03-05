@@ -14,9 +14,71 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type AvailabilityZoneAddressInitParameters struct {
+
+	// List of allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +listType=set
+	AllocationIds []*string `json:"allocationIds,omitempty" tf:"allocation_ids,omitempty"`
+
+	// References to EIP in ec2 to populate allocationIds.
+	// +kubebuilder:validation:Optional
+	AllocationIdsRefs []v1.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate allocationIds.
+	// +kubebuilder:validation:Optional
+	AllocationIdsSelector *v1.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
+
+	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Availability Zone ID (e.g. usw2-az2) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+}
+
+type AvailabilityZoneAddressObservation struct {
+
+	// List of allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.
+	// +listType=set
+	AllocationIds []*string `json:"allocationIds,omitempty" tf:"allocation_ids,omitempty"`
+
+	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Availability Zone ID (e.g. usw2-az2) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+}
+
+type AvailabilityZoneAddressParameters struct {
+
+	// List of allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllocationIds []*string `json:"allocationIds,omitempty" tf:"allocation_ids,omitempty"`
+
+	// References to EIP in ec2 to populate allocationIds.
+	// +kubebuilder:validation:Optional
+	AllocationIdsRefs []v1.NamespacedReference `json:"allocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate allocationIds.
+	// +kubebuilder:validation:Optional
+	AllocationIdsSelector *v1.NamespacedSelector `json:"allocationIdsSelector,omitempty" tf:"-"`
+
+	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Availability Zone ID (e.g. usw2-az2) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+}
+
 type NATGatewayInitParameters_2 struct {
 
-	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
+	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required when connectivity_type is set to public and availability_mode is set to zonal. When availability_mode is set to regional, this must not be set; instead, use the availability_zone_address block to specify EIPs for each AZ.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
@@ -29,7 +91,13 @@ type NATGatewayInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Valid values are zonal and regional. Defaults to zonal.
+	AvailabilityMode *string `json:"availabilityMode,omitempty" tf:"availability_mode,omitempty"`
+
+	// Repeatable configuration block for the Elastic IP addresses (EIPs) and availability zones for the regional NAT gateway. When not specified, the regional NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface (auto mode). When specified, auto-expansion is disabled (manual mode). See availability_zone_address below for details.
+	AvailabilityZoneAddress []AvailabilityZoneAddressInitParameters `json:"availabilityZoneAddress,omitempty" tf:"availability_zone_address,omitempty"`
+
+	// Connectivity type for the NAT Gateway. Valid values are private and public. When availability_mode is set to regional, this must be set to public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
 	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
@@ -49,14 +117,14 @@ type NATGatewayInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	SecondaryAllocationIdsSelector *v1.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
+	// The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
 	// A list of secondary private IPv4 addresses to assign to the NAT Gateway. To remove all secondary private addresses an empty list should be specified.
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
-	// The Subnet ID of the subnet in which to place the NAT Gateway.
+	// The Subnet ID of the subnet in which to place the NAT Gateway. Required when availability_mode is set to zonal. Must not be set when availability_mode is set to regional.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -71,47 +139,79 @@ type NATGatewayInitParameters_2 struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// VPC ID where this NAT Gateway will be created. Required when availability_mode is set to regional.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type NATGatewayObservation_2 struct {
 
-	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
+	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required when connectivity_type is set to public and availability_mode is set to zonal. When availability_mode is set to regional, this must not be set; instead, use the availability_zone_address block to specify EIPs for each AZ.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
-	// The association ID of the Elastic IP address that's associated with the NAT Gateway. Only available when connectivity_type is public.
+	// (zonal NAT gateways only) The association ID of the Elastic IP address that's associated with the NAT Gateway. Only available when connectivity_type is public.
 	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// (regional NAT gateways only) Indicates whether AWS automatically manages AZ coverage.
+	AutoProvisionZones *string `json:"autoProvisionZones,omitempty" tf:"auto_provision_zones,omitempty"`
+
+	// (regional NAT gateways only) Indicates whether AWS automatically allocates additional Elastic IP addresses (EIPs) in an AZ when the NAT gateway needs more ports due to increased concurrent connections to a single destination from that AZ.
+	AutoScalingIps *string `json:"autoScalingIps,omitempty" tf:"auto_scaling_ips,omitempty"`
+
+	// Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Valid values are zonal and regional. Defaults to zonal.
+	AvailabilityMode *string `json:"availabilityMode,omitempty" tf:"availability_mode,omitempty"`
+
+	// Repeatable configuration block for the Elastic IP addresses (EIPs) and availability zones for the regional NAT gateway. When not specified, the regional NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface (auto mode). When specified, auto-expansion is disabled (manual mode). See availability_zone_address below for details.
+	AvailabilityZoneAddress []AvailabilityZoneAddressObservation `json:"availabilityZoneAddress,omitempty" tf:"availability_zone_address,omitempty"`
+
+	// Connectivity type for the NAT Gateway. Valid values are private and public. When availability_mode is set to regional, this must be set to public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
 	// The ID of the NAT Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the network interface associated with the NAT Gateway.
+	// (zonal NAT gateways only) The ID of the network interface associated with the NAT Gateway.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
 	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
-	// The Elastic IP address associated with the NAT Gateway.
+	// (zonal NAT gateways only) The Elastic IP address associated with the NAT Gateway.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// (regional NAT gateways only) Repeatable blocks for information about the IP addresses and network interface associated with the regional NAT gateway.
+	RegionalNATGatewayAddress []RegionalNATGatewayAddressObservation `json:"regionalNatGatewayAddress,omitempty" tf:"regional_nat_gateway_address,omitempty"`
+
+	RegionalNATGatewayAutoMode *string `json:"regionalNatGatewayAutoMode,omitempty" tf:"regional_nat_gateway_auto_mode,omitempty"`
+
+	// (regional NAT gateways only) ID of the automatically created route table.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
 	// A list of secondary allocation EIP IDs for this NAT Gateway. To remove all secondary allocations an empty list should be specified.
 	// +listType=set
 	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
 
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
+	// The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
 	// A list of secondary private IPv4 addresses to assign to the NAT Gateway. To remove all secondary private addresses an empty list should be specified.
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
-	// The Subnet ID of the subnet in which to place the NAT Gateway.
+	// The Subnet ID of the subnet in which to place the NAT Gateway. Required when availability_mode is set to zonal. Must not be set when availability_mode is set to regional.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -121,11 +221,14 @@ type NATGatewayObservation_2 struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// VPC ID where this NAT Gateway will be created. Required when availability_mode is set to regional.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type NATGatewayParameters_2 struct {
 
-	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
+	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required when connectivity_type is set to public and availability_mode is set to zonal. When availability_mode is set to regional, this must not be set; instead, use the availability_zone_address block to specify EIPs for each AZ.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -139,7 +242,15 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.NamespacedSelector `json:"allocationIdSelector,omitempty" tf:"-"`
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Valid values are zonal and regional. Defaults to zonal.
+	// +kubebuilder:validation:Optional
+	AvailabilityMode *string `json:"availabilityMode,omitempty" tf:"availability_mode,omitempty"`
+
+	// Repeatable configuration block for the Elastic IP addresses (EIPs) and availability zones for the regional NAT gateway. When not specified, the regional NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface (auto mode). When specified, auto-expansion is disabled (manual mode). See availability_zone_address below for details.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneAddress []AvailabilityZoneAddressParameters `json:"availabilityZoneAddress,omitempty" tf:"availability_zone_address,omitempty"`
+
+	// Connectivity type for the NAT Gateway. Valid values are private and public. When availability_mode is set to regional, this must be set to public. Defaults to public.
 	// +kubebuilder:validation:Optional
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
@@ -167,7 +278,7 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	SecondaryAllocationIdsSelector *v1.NamespacedSelector `json:"secondaryAllocationIdsSelector,omitempty" tf:"-"`
 
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
+	// The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
 	// +kubebuilder:validation:Optional
 	SecondaryPrivateIPAddressCount *float64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
 
@@ -176,7 +287,7 @@ type NATGatewayParameters_2 struct {
 	// +listType=set
 	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
-	// The Subnet ID of the subnet in which to place the NAT Gateway.
+	// The Subnet ID of the subnet in which to place the NAT Gateway. Required when availability_mode is set to zonal. Must not be set when availability_mode is set to regional.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -193,6 +304,49 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// VPC ID where this NAT Gateway will be created. Required when availability_mode is set to regional.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
+	// +kubebuilder:validation:Optional
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+}
+
+type RegionalNATGatewayAddressInitParameters struct {
+}
+
+type RegionalNATGatewayAddressObservation struct {
+
+	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required when connectivity_type is set to public and availability_mode is set to zonal. When availability_mode is set to regional, this must not be set; instead, use the availability_zone_address block to specify EIPs for each AZ.
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// (zonal NAT gateways only) The association ID of the Elastic IP address that's associated with the NAT Gateway. Only available when connectivity_type is public.
+	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
+
+	// Availability Zone (e.g. us-west-2a) where this specific NAT gateway configuration will be active. Exactly one of availability_zone or availability_zone_id must be specified.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Availability Zone ID where this specific NAT gateway configuration is active
+	AvailabilityZoneID *string `json:"availabilityZoneId,omitempty" tf:"availability_zone_id,omitempty"`
+
+	// (zonal NAT gateways only) The ID of the network interface associated with the NAT Gateway.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// (zonal NAT gateways only) The Elastic IP address associated with the NAT Gateway.
+	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
+
+	// Status of the NAT gateway address.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type RegionalNATGatewayAddressParameters struct {
 }
 
 // NATGatewaySpec defines the desired state of NATGateway

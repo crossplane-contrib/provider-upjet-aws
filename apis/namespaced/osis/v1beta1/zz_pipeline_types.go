@@ -120,6 +120,19 @@ type PipelineInitParameters struct {
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
 
+	// ARN of the IAM role that grants the pipeline permission to access AWS resources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	PipelineRoleArn *string `json:"pipelineRoleArn,omitempty" tf:"pipeline_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate pipelineRoleArn.
+	// +kubebuilder:validation:Optional
+	PipelineRoleArnRef *v1.NamespacedReference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate pipelineRoleArn.
+	// +kubebuilder:validation:Optional
+	PipelineRoleArnSelector *v1.NamespacedSelector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -157,6 +170,9 @@ type PipelineObservation struct {
 
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
+
+	// ARN of the IAM role that grants the pipeline permission to access AWS resources.
+	PipelineRoleArn *string `json:"pipelineRoleArn,omitempty" tf:"pipeline_role_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -198,6 +214,20 @@ type PipelineParameters struct {
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	// +kubebuilder:validation:Optional
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
+
+	// ARN of the IAM role that grants the pipeline permission to access AWS resources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	PipelineRoleArn *string `json:"pipelineRoleArn,omitempty" tf:"pipeline_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate pipelineRoleArn.
+	// +kubebuilder:validation:Optional
+	PipelineRoleArnRef *v1.NamespacedReference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate pipelineRoleArn.
+	// +kubebuilder:validation:Optional
+	PipelineRoleArnSelector *v1.NamespacedSelector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

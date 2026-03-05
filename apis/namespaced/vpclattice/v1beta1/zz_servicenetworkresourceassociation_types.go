@@ -31,6 +31,9 @@ type ServiceNetworkResourceAssociationDNSEntryParameters struct {
 
 type ServiceNetworkResourceAssociationInitParameters struct {
 
+	// Boolean indicating whether private DNS is enabled for the service network resource association. Defaults to false. When set to true, the resource configuration identified by resource_configuration_identifier must have a custom domain name or a group domain for private DNS.
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
+
 	// Identifier of Resource Configuration to associate to the Service Network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -73,6 +76,9 @@ type ServiceNetworkResourceAssociationObservation struct {
 	// ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Boolean indicating whether private DNS is enabled for the service network resource association. Defaults to false. When set to true, the resource configuration identified by resource_configuration_identifier must have a custom domain name or a group domain for private DNS.
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -93,6 +99,10 @@ type ServiceNetworkResourceAssociationObservation struct {
 }
 
 type ServiceNetworkResourceAssociationParameters struct {
+
+	// Boolean indicating whether private DNS is enabled for the service network resource association. Defaults to false. When set to true, the resource configuration identified by resource_configuration_identifier must have a custom domain name or a group domain for private DNS.
+	// +kubebuilder:validation:Optional
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

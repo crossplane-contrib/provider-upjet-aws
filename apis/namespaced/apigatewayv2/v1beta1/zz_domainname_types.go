@@ -107,6 +107,9 @@ type DomainNameInitParameters struct {
 	// Mutual TLS authentication configuration for the domain name.
 	MutualTLSAuthentication *MutualTLSAuthenticationInitParameters `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
 
+	// Mode to route traffic for the domain name. Valid values: API_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_API_MAPPING.
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -133,6 +136,9 @@ type DomainNameObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Mode to route traffic for the domain name. Valid values: API_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_API_MAPPING.
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -156,6 +162,10 @@ type DomainNameParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Mode to route traffic for the domain name. Valid values: API_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_API_MAPPING.
+	// +kubebuilder:validation:Optional
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

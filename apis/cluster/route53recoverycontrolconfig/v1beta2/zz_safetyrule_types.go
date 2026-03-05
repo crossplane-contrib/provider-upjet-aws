@@ -99,6 +99,10 @@ type SafetyRuleInitParameters struct {
 	// Configuration block for safety rule criteria. See below.
 	RuleConfig *RuleConfigInitParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
@@ -140,6 +144,14 @@ type SafetyRuleObservation struct {
 
 	// Status of the safety rule. PENDING when it is being created/updated, PENDING_DELETION when it is being deleted, and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
@@ -199,6 +211,11 @@ type SafetyRuleParameters struct {
 	// Configuration block for safety rule criteria. See below.
 	// +kubebuilder:validation:Optional
 	RuleConfig *RuleConfigParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl

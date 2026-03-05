@@ -36,6 +36,9 @@ type EndpointInitParameters struct {
 	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
+	// Boolean indicating whether RNI enhanced metrics are enabled for the Resolver endpoint. Defaults to false. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	RniEnhancedMetricsEnabled *bool `json:"rniEnhancedMetricsEnabled,omitempty" tf:"rni_enhanced_metrics_enabled,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -54,6 +57,9 @@ type EndpointInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Boolean indicating whether target name server metrics are enabled for the outbound Resolver endpoints. Defaults to false. This argument is supported only for outbound endpoints. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	TargetNameServerMetricsEnabled *bool `json:"targetNameServerMetricsEnabled,omitempty" tf:"target_name_server_metrics_enabled,omitempty"`
 }
 
 type EndpointObservation struct {
@@ -91,6 +97,9 @@ type EndpointObservation struct {
 	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
+	// Boolean indicating whether RNI enhanced metrics are enabled for the Resolver endpoint. Defaults to false. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	RniEnhancedMetricsEnabled *bool `json:"rniEnhancedMetricsEnabled,omitempty" tf:"rni_enhanced_metrics_enabled,omitempty"`
+
 	// ID of one or more security groups that you want to use to control access to this VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -102,6 +111,9 @@ type EndpointObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Boolean indicating whether target name server metrics are enabled for the outbound Resolver endpoints. Defaults to false. This argument is supported only for outbound endpoints. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	TargetNameServerMetricsEnabled *bool `json:"targetNameServerMetricsEnabled,omitempty" tf:"target_name_server_metrics_enabled,omitempty"`
 }
 
 type EndpointParameters struct {
@@ -136,6 +148,10 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
+	// Boolean indicating whether RNI enhanced metrics are enabled for the Resolver endpoint. Defaults to false. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	// +kubebuilder:validation:Optional
+	RniEnhancedMetricsEnabled *bool `json:"rniEnhancedMetricsEnabled,omitempty" tf:"rni_enhanced_metrics_enabled,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -156,6 +172,10 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Boolean indicating whether target name server metrics are enabled for the outbound Resolver endpoints. Defaults to false. This argument is supported only for outbound endpoints. Once set, changing the value back to false requires explicitly specifying false rather than removing the argument.
+	// +kubebuilder:validation:Optional
+	TargetNameServerMetricsEnabled *bool `json:"targetNameServerMetricsEnabled,omitempty" tf:"target_name_server_metrics_enabled,omitempty"`
 }
 
 type IPAddressInitParameters struct {

@@ -161,6 +161,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -307,6 +311,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   retentionPeriod:
                     description: Length of time data records are accessible after
                       they are added to the stream. The maximum value of a stream's
@@ -457,6 +465,10 @@ spec:
                       for encryption. You can also use a Kinesis-owned master key
                       by specifying the alias alias/aws/kinesis.
                     type: string
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -712,6 +724,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -856,6 +872,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   retentionPeriod:
                     description: Length of time data records are accessible after
                       they are added to the stream. The maximum value of a stream's
@@ -1004,6 +1024,10 @@ spec:
                       for encryption. You can also use a Kinesis-owned master key
                       by specifying the alias alias/aws/kinesis.
                     type: string
+                  maxRecordSizeInKib:
+                    description: The maximum size for a single data record in KiB.
+                      The minimum value is 1024. The maximum value is 10240.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

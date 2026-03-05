@@ -75,8 +75,8 @@ spec:
                 properties:
                   auth:
                     description: Configuration block(s) with authorization mechanisms
-                      to connect to the associated instances or clusters. Described
-                      below.
+                      to connect to the associated instances or clusters. Required
+                      when default_auth_scheme is NONE or unspecified. Described below.
                     items:
                       properties:
                         authScheme:
@@ -197,6 +197,18 @@ spec:
                       when you have security measures in place to safeguard any sensitive
                       information that appears in the logs.
                     type: boolean
+                  defaultAuthScheme:
+                    description: Default authentication scheme that the proxy uses
+                      for client connections to the proxy and connections from the
+                      proxy to the underlying database. Valid values are NONE and
+                      IAM_AUTH. Defaults to NONE.
+                    type: string
+                  endpointNetworkType:
+                    description: Network type of the DB proxy endpoint. Valid values
+                      are IPV4, IPV6 and DUAL. Defaults to IPV4. If IPV6 is specified,
+                      the subnets associated with the proxy must be IPv6-only, and
+                      target_connection_network_type must be IPV6.
+                    type: string
                   engineFamily:
                     description: The kinds of databases that the proxy can connect
                       to. This value determines which database network protocol the
@@ -308,6 +320,11 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetConnectionNetworkType:
+                    description: Network type that the proxy uses to connect to the
+                      target database. Valid values are IPV4 and IPV6. Defaults to
+                      IPV4.
+                    type: string
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
@@ -496,8 +513,8 @@ spec:
                 properties:
                   auth:
                     description: Configuration block(s) with authorization mechanisms
-                      to connect to the associated instances or clusters. Described
-                      below.
+                      to connect to the associated instances or clusters. Required
+                      when default_auth_scheme is NONE or unspecified. Described below.
                     items:
                       properties:
                         authScheme:
@@ -618,6 +635,18 @@ spec:
                       when you have security measures in place to safeguard any sensitive
                       information that appears in the logs.
                     type: boolean
+                  defaultAuthScheme:
+                    description: Default authentication scheme that the proxy uses
+                      for client connections to the proxy and connections from the
+                      proxy to the underlying database. Valid values are NONE and
+                      IAM_AUTH. Defaults to NONE.
+                    type: string
+                  endpointNetworkType:
+                    description: Network type of the DB proxy endpoint. Valid values
+                      are IPV4, IPV6 and DUAL. Defaults to IPV4. If IPV6 is specified,
+                      the subnets associated with the proxy must be IPv6-only, and
+                      target_connection_network_type must be IPV6.
+                    type: string
                   engineFamily:
                     description: The kinds of databases that the proxy can connect
                       to. This value determines which database network protocol the
@@ -724,6 +753,11 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetConnectionNetworkType:
+                    description: Network type that the proxy uses to connect to the
+                      target database. Valid values are IPV4 and IPV6. Defaults to
+                      IPV4.
+                    type: string
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
@@ -982,10 +1016,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.auth is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.auth)
-                || (has(self.initProvider) && has(self.initProvider.auth))'
             - message: spec.forProvider.engineFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineFamily)
@@ -1000,8 +1030,8 @@ spec:
                     type: string
                   auth:
                     description: Configuration block(s) with authorization mechanisms
-                      to connect to the associated instances or clusters. Described
-                      below.
+                      to connect to the associated instances or clusters. Required
+                      when default_auth_scheme is NONE or unspecified. Described below.
                     items:
                       properties:
                         authScheme:
@@ -1046,10 +1076,22 @@ spec:
                       when you have security measures in place to safeguard any sensitive
                       information that appears in the logs.
                     type: boolean
+                  defaultAuthScheme:
+                    description: Default authentication scheme that the proxy uses
+                      for client connections to the proxy and connections from the
+                      proxy to the underlying database. Valid values are NONE and
+                      IAM_AUTH. Defaults to NONE.
+                    type: string
                   endpoint:
                     description: The endpoint that you can use to connect to the proxy.
                       You include the endpoint value in the connection string for
                       a database client application.
+                    type: string
+                  endpointNetworkType:
+                    description: Network type of the DB proxy endpoint. Valid values
+                      are IPV4, IPV6 and DUAL. Defaults to IPV4. If IPV6 is specified,
+                      the subnets associated with the proxy must be IPv6-only, and
+                      target_connection_network_type must be IPV6.
                     type: string
                   engineFamily:
                     description: The kinds of databases that the proxy can connect
@@ -1099,6 +1141,11 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetConnectionNetworkType:
+                    description: Network type that the proxy uses to connect to the
+                      target database. Valid values are IPV4 and IPV6. Defaults to
+                      IPV4.
+                    type: string
                   vpcSecurityGroupIds:
                     description: One or more VPC security group IDs to associate with
                       the new proxy.

@@ -120,6 +120,9 @@ type ImagePipelineInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
+	// Configuration block with logging configuration. Detailed below.
+	LoggingConfiguration []ImagePipelineLoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
 	// Name of the image pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -135,6 +138,35 @@ type ImagePipelineInitParameters struct {
 
 	// Configuration block with the workflow configuration. Detailed below.
 	Workflow []ImagePipelineWorkflowInitParameters `json:"workflow,omitempty" tf:"workflow,omitempty"`
+}
+
+type ImagePipelineLoggingConfigurationInitParameters struct {
+
+	// Name of the CloudWatch Log Group to send image logs to.
+	ImageLogGroupName *string `json:"imageLogGroupName,omitempty" tf:"image_log_group_name,omitempty"`
+
+	// Name of the CloudWatch Log Group to send pipeline logs to.
+	PipelineLogGroupName *string `json:"pipelineLogGroupName,omitempty" tf:"pipeline_log_group_name,omitempty"`
+}
+
+type ImagePipelineLoggingConfigurationObservation struct {
+
+	// Name of the CloudWatch Log Group to send image logs to.
+	ImageLogGroupName *string `json:"imageLogGroupName,omitempty" tf:"image_log_group_name,omitempty"`
+
+	// Name of the CloudWatch Log Group to send pipeline logs to.
+	PipelineLogGroupName *string `json:"pipelineLogGroupName,omitempty" tf:"pipeline_log_group_name,omitempty"`
+}
+
+type ImagePipelineLoggingConfigurationParameters struct {
+
+	// Name of the CloudWatch Log Group to send image logs to.
+	// +kubebuilder:validation:Optional
+	ImageLogGroupName *string `json:"imageLogGroupName,omitempty" tf:"image_log_group_name,omitempty"`
+
+	// Name of the CloudWatch Log Group to send pipeline logs to.
+	// +kubebuilder:validation:Optional
+	PipelineLogGroupName *string `json:"pipelineLogGroupName,omitempty" tf:"pipeline_log_group_name,omitempty"`
 }
 
 type ImagePipelineObservation struct {
@@ -169,6 +201,7 @@ type ImagePipelineObservation struct {
 	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
+	// Amazon Resource Name (ARN) of the image pipeline.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amazon Resource Name (ARN) of the image recipe.
@@ -182,6 +215,9 @@ type ImagePipelineObservation struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
+
+	// Configuration block with logging configuration. Detailed below.
+	LoggingConfiguration []ImagePipelineLoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Name of the image pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -268,6 +304,10 @@ type ImagePipelineParameters struct {
 	// Selector for a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
+
+	// Configuration block with logging configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	LoggingConfiguration []ImagePipelineLoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Name of the image pipeline.
 	// +kubebuilder:validation:Optional

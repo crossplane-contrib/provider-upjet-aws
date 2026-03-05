@@ -179,7 +179,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// credentials and does not appear in the ProviderConfig directly
 	// (i.e. the same provider config content produces a different config),
 	// should be included in the cache key.
-	cacheKeyParams := []string{
+	cacheKeyParams := []string{ // nolint:prealloc
 		string(pc.UID),
 		strconv.FormatInt(pc.Generation, 10),
 		region,

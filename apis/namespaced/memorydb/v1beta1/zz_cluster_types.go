@@ -52,6 +52,9 @@ type ClusterInitParameters struct {
 	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotName *string `json:"finalSnapshotName,omitempty" tf:"final_snapshot_name,omitempty"`
 
+	// Mechanism that the cluster uses to discover IP addresses. Valid values are ipv4 and ipv6. Defaults to ipv4. To specify ipv6, network_type must be ipv6 or dual_stack.
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// ARN of the KMS key used to encrypt the cluster at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -69,6 +72,9 @@ type ClusterInitParameters struct {
 
 	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
+
+	// IP address type for the cluster. Valid values are ipv4, ipv6 and dual_stack. Defaults to ipv4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -170,6 +176,9 @@ type ClusterObservation struct {
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Mechanism that the cluster uses to discover IP addresses. Valid values are ipv4 and ipv6. Defaults to ipv4. To specify ipv6, network_type must be ipv6 or dual_stack.
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// ARN of the KMS key used to encrypt the cluster at rest.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -178,6 +187,9 @@ type ClusterObservation struct {
 
 	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
+
+	// IP address type for the cluster. Valid values are ipv4, ipv6 and dual_stack. Defaults to ipv4.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -265,6 +277,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FinalSnapshotName *string `json:"finalSnapshotName,omitempty" tf:"final_snapshot_name,omitempty"`
 
+	// Mechanism that the cluster uses to discover IP addresses. Valid values are ipv4 and ipv6. Defaults to ipv4. To specify ipv6, network_type must be ipv6 or dual_stack.
+	// +kubebuilder:validation:Optional
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// ARN of the KMS key used to encrypt the cluster at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
@@ -285,6 +301,10 @@ type ClusterParameters struct {
 	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
 	// +kubebuilder:validation:Optional
 	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
+
+	// IP address type for the cluster. Valid values are ipv4, ipv6 and dual_stack. Defaults to ipv4.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	// +kubebuilder:validation:Optional

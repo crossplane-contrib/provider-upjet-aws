@@ -102,7 +102,7 @@ spec:
                       azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
                       dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
                       opensearch, oracle, postgres, redshift,redshift-serverless,
-                      s3, sqlserver, neptune ,sybase. Please note that some of engine
+                      sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -402,14 +402,268 @@ spec:
                           is none. Valid values are one (table mode) and none (document
                           mode).
                         type: string
+                      useUpdateLookup:
+                        description: If true, DMS retrieves the entire document from
+                          the MongoDB source during migration. Default is false.
+                        type: boolean
+                    type: object
+                  mysqlSettings:
+                    description: Configuration block for MySQL settings. See below.
+                    properties:
+                      afterConnectScript:
+                        description: Script to run immediately after AWS DMS connects
+                          to the endpoint.
+                        type: string
+                      authenticationMethod:
+                        description: 'Authentication method to use. Valid values:
+                          password, iam.'
+                        type: string
+                      cleanSourceMetadataOnMismatch:
+                        description: Whether to clean and recreate table metadata
+                          information on the replication instance when a mismatch
+                          occurs.
+                        type: boolean
+                      eventsPollInterval:
+                        description: Time interval to check the binary log for new
+                          changes/events when the database is idle. Default is 5.
+                        type: number
+                      executeTimeout:
+                        description: Client statement timeout (in seconds) for a MySQL
+                          source endpoint.
+                        type: number
+                      maxFileSize:
+                        description: Maximum size (in KB) of any .csv file used to
+                          transfer data to a MySQL-compatible database.
+                        type: number
+                      parallelLoadThreads:
+                        description: Number of threads to use to load the data into
+                          the MySQL-compatible target database.
+                        type: number
+                      serverTimezone:
+                        description: Time zone for the source MySQL database.
+                        type: string
+                      serviceAccessRoleArn:
+                        description: ARN of the IAM role to authenticate when connecting
+                          to the endpoint.
+                        type: string
+                      targetDbType:
+                        description: Where to migrate source tables on the target.
+                          Valid values are specific-database and multiple-databases.
+                        type: string
                     type: object
                   oracleSettings:
                     description: Configuration block for Oracle settings. See below.
                     properties:
+                      accessAlternateDirectly:
+                        description: Set this attribute to false in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source.
+                        type: boolean
+                      addSupplementalLogging:
+                        description: Set this attribute to set up table-level supplemental
+                          logging for the Oracle database. This attribute enables
+                          PRIMARY KEY supplemental logging on all tables selected
+                          for a migration task.
+                        type: boolean
+                      additionalArchivedLogDestId:
+                        description: Set this attribute with archived_log_dest_id
+                          in a primary/standby setup. This attribute is useful in
+                          the case of a switchover.
+                        type: number
+                      allowSelectedNestedTables:
+                        description: Set this attribute to true to enable replication
+                          of Oracle tables containing columns that are nested tables
+                          or defined types.
+                        type: boolean
+                      archivedLogDestId:
+                        description: Specifies the ID of the destination for the archived
+                          redo logs. This value should be the same as a number in
+                          the dest_id column of the v$archived_log view.
+                        type: number
+                      archivedLogsOnly:
+                        description: When this field is set to true, AWS DMS only
+                          accesses the archived redo logs.
+                        type: boolean
+                      asmPasswordSecretRef:
+                        description: For an Oracle source endpoint, your Oracle Automatic
+                          Storage Management (ASM) password.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      asmServer:
+                        description: For an Oracle source endpoint, your ASM server
+                          address.
+                        type: string
+                      asmUser:
+                        description: For an Oracle source endpoint, your ASM user
+                          name.
+                        type: string
                       authenticationMethod:
                         description: Authentication mechanism to access the Oracle
                           source endpoint. Default is password. Valid values are password
                           and kerberos.
+                        type: string
+                      charLengthSemantics:
+                        description: Specifies whether the length of a character column
+                          is in bytes or in characters. Valid values are default,
+                          char, and byte.
+                        type: string
+                      convertTimestampWithZoneToUtc:
+                        description: When true, converts timestamps with the timezone
+                          datatype to their UTC value.
+                        type: boolean
+                      directPathNoLog:
+                        description: When set to true, this attribute helps to increase
+                          the commit rate on the Oracle target database by writing
+                          directly to tables and not writing a trail to database logs.
+                        type: boolean
+                      directPathParallelLoad:
+                        description: When set to true, this attribute specifies a
+                          parallel load when use_direct_path_full_load is set to true.
+                        type: boolean
+                      enableHomogenousTablespace:
+                        description: Set this attribute to enable homogenous tablespace
+                          replication and create existing tables or indexes under
+                          the same tablespace on the target.
+                        type: boolean
+                      extraArchivedLogDestIds:
+                        description: Specifies the IDs of one more destinations for
+                          one or more archived redo logs. These IDs are the values
+                          of the dest_id column in the v$archived_log view.
+                        items:
+                          type: number
+                        type: array
+                      failTaskOnLobTruncation:
+                        description: When set to true, this attribute causes a task
+                          to fail if the actual size of an LOB column is greater than
+                          the specified lob_max_size.
+                        type: boolean
+                      numberDatatypeScale:
+                        description: Specifies the number scale.
+                        type: number
+                      openTransactionWindow:
+                        description: The timeframe in minutes to check for open transactions
+                          for a CDC-only task. You can specify an integer value between
+                          0 (the default) and 240 (the maximum).
+                        type: number
+                      oraclePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the default Oracle root used to access the redo logs.
+                        type: string
+                      parallelAsmReadThreads:
+                        description: Set this attribute to change the number of threads
+                          that DMS configures to perform a change data capture (CDC)
+                          load using Oracle Automatic Storage Management (ASM). You
+                          can specify an integer value between 2 (the default) and
+                          8 (the maximum).
+                        type: number
+                      readAheadBlocks:
+                        description: Set this attribute to change the number of read-ahead
+                          blocks that DMS configures to perform a change data capture
+                          (CDC) load using Oracle Automatic Storage Management (ASM).
+                          You can specify an integer value between 1000 (the default)
+                          and 200,000 (the maximum).
+                        type: number
+                      readTableSpaceName:
+                        description: When set to true, this attribute supports tablespace
+                          replication.
+                        type: boolean
+                      replacePathPrefix:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This setting tells DMS instance to
+                          replace the default Oracle root with the specified use_path_prefix
+                          setting to access the redo logs.
+                        type: boolean
+                      retryInterval:
+                        description: Specifies the number of seconds that the system
+                          waits before resending a query.
+                        type: number
+                      secretsManagerOracleAsmAccessRoleArn:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN of the IAM role that
+                          specifies AWS DMS as the trusted entity and grants the required
+                          permissions to access the secrets_manager_oracle_asm_secret_id.
+                        type: string
+                      secretsManagerOracleAsmSecretId:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN, partial ARN, or
+                          friendly name of the secret that contains the Oracle ASM
+                          connection details for the Oracle endpoint.
+                        type: string
+                      securityDbEncryptionName:
+                        description: For an Oracle source endpoint, the name of a
+                          key used for the transparent data encryption (TDE) of the
+                          columns and tablespaces in an Oracle source database that
+                          is encrypted using TDE.
+                        type: string
+                      securityDbEncryptionSecretRef:
+                        description: For an Oracle source endpoint, the transparent
+                          data encryption (TDE) password required by AWM DMS to access
+                          Oracle redo logs encrypted by TDE using Binary Reader.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      spatialDataOptionToGeoJsonFunctionName:
+                        description: Use this attribute to convert SDO_GEOMETRY to
+                          GEOJSON format. By default, DMS calls the SDO2GEOJSON custom
+                          function if present and accessible.
+                        type: string
+                      standbyDelayTime:
+                        description: Use this attribute to specify a time in minutes
+                          for the delay in standby sync. If the source is an Oracle
+                          Active Data Guard standby database, use this attribute to
+                          specify the time lag between primary and standby databases.
+                        type: number
+                      trimSpaceInChar:
+                        description: Use this attribute to trim data on CHAR and NCHAR
+                          data types during migration. The default value is true.
+                        type: boolean
+                      useAlternateFolderForOnline:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This tells the DMS instance to use
+                          any specified prefix replacement to access all online redo
+                          logs.
+                        type: boolean
+                      useBfile:
+                        description: Set this attribute to true to capture change
+                          data using the Binary Reader utility. Set use_logminer_reader
+                          to false to set this attribute to true.
+                        type: boolean
+                      useDirectPathFullLoad:
+                        description: Set this attribute to true to have AWS DMS use
+                          a direct path full load. Specify this value to use the direct
+                          path protocol in the Oracle Call Interface (OCI).
+                        type: boolean
+                      useLogminerReader:
+                        description: Set this attribute to true to capture change
+                          data using the Oracle LogMiner utility (the default). Set
+                          this attribute to false if you want to access the redo logs
+                          as a binary file.
+                        type: boolean
+                      usePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the path prefix used to replace the default Oracle root
+                          to access the redo logs.
                         type: string
                     type: object
                   passwordSecretRef:
@@ -503,7 +757,7 @@ spec:
                         type: number
                       pluginName:
                         description: 'Specifies the plugin to use to create a replication
-                          slot. Valid values: pglogical, test_decoding.'
+                          slot. Valid values: pglogical, test-decoding.'
                         type: string
                       serviceAccessRoleArn:
                         description: Specifies the IAM role to use to authenticate
@@ -836,7 +1090,7 @@ spec:
                       azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
                       dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
                       opensearch, oracle, postgres, redshift,redshift-serverless,
-                      s3, sqlserver, neptune ,sybase. Please note that some of engine
+                      sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -1136,14 +1390,268 @@ spec:
                           is none. Valid values are one (table mode) and none (document
                           mode).
                         type: string
+                      useUpdateLookup:
+                        description: If true, DMS retrieves the entire document from
+                          the MongoDB source during migration. Default is false.
+                        type: boolean
+                    type: object
+                  mysqlSettings:
+                    description: Configuration block for MySQL settings. See below.
+                    properties:
+                      afterConnectScript:
+                        description: Script to run immediately after AWS DMS connects
+                          to the endpoint.
+                        type: string
+                      authenticationMethod:
+                        description: 'Authentication method to use. Valid values:
+                          password, iam.'
+                        type: string
+                      cleanSourceMetadataOnMismatch:
+                        description: Whether to clean and recreate table metadata
+                          information on the replication instance when a mismatch
+                          occurs.
+                        type: boolean
+                      eventsPollInterval:
+                        description: Time interval to check the binary log for new
+                          changes/events when the database is idle. Default is 5.
+                        type: number
+                      executeTimeout:
+                        description: Client statement timeout (in seconds) for a MySQL
+                          source endpoint.
+                        type: number
+                      maxFileSize:
+                        description: Maximum size (in KB) of any .csv file used to
+                          transfer data to a MySQL-compatible database.
+                        type: number
+                      parallelLoadThreads:
+                        description: Number of threads to use to load the data into
+                          the MySQL-compatible target database.
+                        type: number
+                      serverTimezone:
+                        description: Time zone for the source MySQL database.
+                        type: string
+                      serviceAccessRoleArn:
+                        description: ARN of the IAM role to authenticate when connecting
+                          to the endpoint.
+                        type: string
+                      targetDbType:
+                        description: Where to migrate source tables on the target.
+                          Valid values are specific-database and multiple-databases.
+                        type: string
                     type: object
                   oracleSettings:
                     description: Configuration block for Oracle settings. See below.
                     properties:
+                      accessAlternateDirectly:
+                        description: Set this attribute to false in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source.
+                        type: boolean
+                      addSupplementalLogging:
+                        description: Set this attribute to set up table-level supplemental
+                          logging for the Oracle database. This attribute enables
+                          PRIMARY KEY supplemental logging on all tables selected
+                          for a migration task.
+                        type: boolean
+                      additionalArchivedLogDestId:
+                        description: Set this attribute with archived_log_dest_id
+                          in a primary/standby setup. This attribute is useful in
+                          the case of a switchover.
+                        type: number
+                      allowSelectedNestedTables:
+                        description: Set this attribute to true to enable replication
+                          of Oracle tables containing columns that are nested tables
+                          or defined types.
+                        type: boolean
+                      archivedLogDestId:
+                        description: Specifies the ID of the destination for the archived
+                          redo logs. This value should be the same as a number in
+                          the dest_id column of the v$archived_log view.
+                        type: number
+                      archivedLogsOnly:
+                        description: When this field is set to true, AWS DMS only
+                          accesses the archived redo logs.
+                        type: boolean
+                      asmPasswordSecretRef:
+                        description: For an Oracle source endpoint, your Oracle Automatic
+                          Storage Management (ASM) password.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      asmServer:
+                        description: For an Oracle source endpoint, your ASM server
+                          address.
+                        type: string
+                      asmUser:
+                        description: For an Oracle source endpoint, your ASM user
+                          name.
+                        type: string
                       authenticationMethod:
                         description: Authentication mechanism to access the Oracle
                           source endpoint. Default is password. Valid values are password
                           and kerberos.
+                        type: string
+                      charLengthSemantics:
+                        description: Specifies whether the length of a character column
+                          is in bytes or in characters. Valid values are default,
+                          char, and byte.
+                        type: string
+                      convertTimestampWithZoneToUtc:
+                        description: When true, converts timestamps with the timezone
+                          datatype to their UTC value.
+                        type: boolean
+                      directPathNoLog:
+                        description: When set to true, this attribute helps to increase
+                          the commit rate on the Oracle target database by writing
+                          directly to tables and not writing a trail to database logs.
+                        type: boolean
+                      directPathParallelLoad:
+                        description: When set to true, this attribute specifies a
+                          parallel load when use_direct_path_full_load is set to true.
+                        type: boolean
+                      enableHomogenousTablespace:
+                        description: Set this attribute to enable homogenous tablespace
+                          replication and create existing tables or indexes under
+                          the same tablespace on the target.
+                        type: boolean
+                      extraArchivedLogDestIds:
+                        description: Specifies the IDs of one more destinations for
+                          one or more archived redo logs. These IDs are the values
+                          of the dest_id column in the v$archived_log view.
+                        items:
+                          type: number
+                        type: array
+                      failTaskOnLobTruncation:
+                        description: When set to true, this attribute causes a task
+                          to fail if the actual size of an LOB column is greater than
+                          the specified lob_max_size.
+                        type: boolean
+                      numberDatatypeScale:
+                        description: Specifies the number scale.
+                        type: number
+                      openTransactionWindow:
+                        description: The timeframe in minutes to check for open transactions
+                          for a CDC-only task. You can specify an integer value between
+                          0 (the default) and 240 (the maximum).
+                        type: number
+                      oraclePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the default Oracle root used to access the redo logs.
+                        type: string
+                      parallelAsmReadThreads:
+                        description: Set this attribute to change the number of threads
+                          that DMS configures to perform a change data capture (CDC)
+                          load using Oracle Automatic Storage Management (ASM). You
+                          can specify an integer value between 2 (the default) and
+                          8 (the maximum).
+                        type: number
+                      readAheadBlocks:
+                        description: Set this attribute to change the number of read-ahead
+                          blocks that DMS configures to perform a change data capture
+                          (CDC) load using Oracle Automatic Storage Management (ASM).
+                          You can specify an integer value between 1000 (the default)
+                          and 200,000 (the maximum).
+                        type: number
+                      readTableSpaceName:
+                        description: When set to true, this attribute supports tablespace
+                          replication.
+                        type: boolean
+                      replacePathPrefix:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This setting tells DMS instance to
+                          replace the default Oracle root with the specified use_path_prefix
+                          setting to access the redo logs.
+                        type: boolean
+                      retryInterval:
+                        description: Specifies the number of seconds that the system
+                          waits before resending a query.
+                        type: number
+                      secretsManagerOracleAsmAccessRoleArn:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN of the IAM role that
+                          specifies AWS DMS as the trusted entity and grants the required
+                          permissions to access the secrets_manager_oracle_asm_secret_id.
+                        type: string
+                      secretsManagerOracleAsmSecretId:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN, partial ARN, or
+                          friendly name of the secret that contains the Oracle ASM
+                          connection details for the Oracle endpoint.
+                        type: string
+                      securityDbEncryptionName:
+                        description: For an Oracle source endpoint, the name of a
+                          key used for the transparent data encryption (TDE) of the
+                          columns and tablespaces in an Oracle source database that
+                          is encrypted using TDE.
+                        type: string
+                      securityDbEncryptionSecretRef:
+                        description: For an Oracle source endpoint, the transparent
+                          data encryption (TDE) password required by AWM DMS to access
+                          Oracle redo logs encrypted by TDE using Binary Reader.
+                        properties:
+                          key:
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        type: object
+                      spatialDataOptionToGeoJsonFunctionName:
+                        description: Use this attribute to convert SDO_GEOMETRY to
+                          GEOJSON format. By default, DMS calls the SDO2GEOJSON custom
+                          function if present and accessible.
+                        type: string
+                      standbyDelayTime:
+                        description: Use this attribute to specify a time in minutes
+                          for the delay in standby sync. If the source is an Oracle
+                          Active Data Guard standby database, use this attribute to
+                          specify the time lag between primary and standby databases.
+                        type: number
+                      trimSpaceInChar:
+                        description: Use this attribute to trim data on CHAR and NCHAR
+                          data types during migration. The default value is true.
+                        type: boolean
+                      useAlternateFolderForOnline:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This tells the DMS instance to use
+                          any specified prefix replacement to access all online redo
+                          logs.
+                        type: boolean
+                      useBfile:
+                        description: Set this attribute to true to capture change
+                          data using the Binary Reader utility. Set use_logminer_reader
+                          to false to set this attribute to true.
+                        type: boolean
+                      useDirectPathFullLoad:
+                        description: Set this attribute to true to have AWS DMS use
+                          a direct path full load. Specify this value to use the direct
+                          path protocol in the Oracle Call Interface (OCI).
+                        type: boolean
+                      useLogminerReader:
+                        description: Set this attribute to true to capture change
+                          data using the Oracle LogMiner utility (the default). Set
+                          this attribute to false if you want to access the redo logs
+                          as a binary file.
+                        type: boolean
+                      usePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the path prefix used to replace the default Oracle root
+                          to access the redo logs.
                         type: string
                     type: object
                   passwordSecretRef:
@@ -1237,7 +1745,7 @@ spec:
                         type: number
                       pluginName:
                         description: 'Specifies the plugin to use to create a replication
-                          slot. Valid values: pglogical, test_decoding.'
+                          slot. Valid values: pglogical, test-decoding.'
                         type: string
                       serviceAccessRoleArn:
                         description: Specifies the IAM role to use to authenticate
@@ -1625,7 +2133,7 @@ spec:
                       azure-sql-managed-instance, babelfish, db2, db2-zos, docdb,
                       dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql,
                       opensearch, oracle, postgres, redshift,redshift-serverless,
-                      s3, sqlserver, neptune ,sybase. Please note that some of engine
+                      sqlserver, neptune ,sybase. Please note that some of engine
                       names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
@@ -1819,14 +2327,241 @@ spec:
                           is none. Valid values are one (table mode) and none (document
                           mode).
                         type: string
+                      useUpdateLookup:
+                        description: If true, DMS retrieves the entire document from
+                          the MongoDB source during migration. Default is false.
+                        type: boolean
+                    type: object
+                  mysqlSettings:
+                    description: Configuration block for MySQL settings. See below.
+                    properties:
+                      afterConnectScript:
+                        description: Script to run immediately after AWS DMS connects
+                          to the endpoint.
+                        type: string
+                      authenticationMethod:
+                        description: 'Authentication method to use. Valid values:
+                          password, iam.'
+                        type: string
+                      cleanSourceMetadataOnMismatch:
+                        description: Whether to clean and recreate table metadata
+                          information on the replication instance when a mismatch
+                          occurs.
+                        type: boolean
+                      eventsPollInterval:
+                        description: Time interval to check the binary log for new
+                          changes/events when the database is idle. Default is 5.
+                        type: number
+                      executeTimeout:
+                        description: Client statement timeout (in seconds) for a MySQL
+                          source endpoint.
+                        type: number
+                      maxFileSize:
+                        description: Maximum size (in KB) of any .csv file used to
+                          transfer data to a MySQL-compatible database.
+                        type: number
+                      parallelLoadThreads:
+                        description: Number of threads to use to load the data into
+                          the MySQL-compatible target database.
+                        type: number
+                      serverTimezone:
+                        description: Time zone for the source MySQL database.
+                        type: string
+                      serviceAccessRoleArn:
+                        description: ARN of the IAM role to authenticate when connecting
+                          to the endpoint.
+                        type: string
+                      targetDbType:
+                        description: Where to migrate source tables on the target.
+                          Valid values are specific-database and multiple-databases.
+                        type: string
                     type: object
                   oracleSettings:
                     description: Configuration block for Oracle settings. See below.
                     properties:
+                      accessAlternateDirectly:
+                        description: Set this attribute to false in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source.
+                        type: boolean
+                      addSupplementalLogging:
+                        description: Set this attribute to set up table-level supplemental
+                          logging for the Oracle database. This attribute enables
+                          PRIMARY KEY supplemental logging on all tables selected
+                          for a migration task.
+                        type: boolean
+                      additionalArchivedLogDestId:
+                        description: Set this attribute with archived_log_dest_id
+                          in a primary/standby setup. This attribute is useful in
+                          the case of a switchover.
+                        type: number
+                      allowSelectedNestedTables:
+                        description: Set this attribute to true to enable replication
+                          of Oracle tables containing columns that are nested tables
+                          or defined types.
+                        type: boolean
+                      archivedLogDestId:
+                        description: Specifies the ID of the destination for the archived
+                          redo logs. This value should be the same as a number in
+                          the dest_id column of the v$archived_log view.
+                        type: number
+                      archivedLogsOnly:
+                        description: When this field is set to true, AWS DMS only
+                          accesses the archived redo logs.
+                        type: boolean
+                      asmServer:
+                        description: For an Oracle source endpoint, your ASM server
+                          address.
+                        type: string
+                      asmUser:
+                        description: For an Oracle source endpoint, your ASM user
+                          name.
+                        type: string
                       authenticationMethod:
                         description: Authentication mechanism to access the Oracle
                           source endpoint. Default is password. Valid values are password
                           and kerberos.
+                        type: string
+                      charLengthSemantics:
+                        description: Specifies whether the length of a character column
+                          is in bytes or in characters. Valid values are default,
+                          char, and byte.
+                        type: string
+                      convertTimestampWithZoneToUtc:
+                        description: When true, converts timestamps with the timezone
+                          datatype to their UTC value.
+                        type: boolean
+                      directPathNoLog:
+                        description: When set to true, this attribute helps to increase
+                          the commit rate on the Oracle target database by writing
+                          directly to tables and not writing a trail to database logs.
+                        type: boolean
+                      directPathParallelLoad:
+                        description: When set to true, this attribute specifies a
+                          parallel load when use_direct_path_full_load is set to true.
+                        type: boolean
+                      enableHomogenousTablespace:
+                        description: Set this attribute to enable homogenous tablespace
+                          replication and create existing tables or indexes under
+                          the same tablespace on the target.
+                        type: boolean
+                      extraArchivedLogDestIds:
+                        description: Specifies the IDs of one more destinations for
+                          one or more archived redo logs. These IDs are the values
+                          of the dest_id column in the v$archived_log view.
+                        items:
+                          type: number
+                        type: array
+                      failTaskOnLobTruncation:
+                        description: When set to true, this attribute causes a task
+                          to fail if the actual size of an LOB column is greater than
+                          the specified lob_max_size.
+                        type: boolean
+                      numberDatatypeScale:
+                        description: Specifies the number scale.
+                        type: number
+                      openTransactionWindow:
+                        description: The timeframe in minutes to check for open transactions
+                          for a CDC-only task. You can specify an integer value between
+                          0 (the default) and 240 (the maximum).
+                        type: number
+                      oraclePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the default Oracle root used to access the redo logs.
+                        type: string
+                      parallelAsmReadThreads:
+                        description: Set this attribute to change the number of threads
+                          that DMS configures to perform a change data capture (CDC)
+                          load using Oracle Automatic Storage Management (ASM). You
+                          can specify an integer value between 2 (the default) and
+                          8 (the maximum).
+                        type: number
+                      readAheadBlocks:
+                        description: Set this attribute to change the number of read-ahead
+                          blocks that DMS configures to perform a change data capture
+                          (CDC) load using Oracle Automatic Storage Management (ASM).
+                          You can specify an integer value between 1000 (the default)
+                          and 200,000 (the maximum).
+                        type: number
+                      readTableSpaceName:
+                        description: When set to true, this attribute supports tablespace
+                          replication.
+                        type: boolean
+                      replacePathPrefix:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This setting tells DMS instance to
+                          replace the default Oracle root with the specified use_path_prefix
+                          setting to access the redo logs.
+                        type: boolean
+                      retryInterval:
+                        description: Specifies the number of seconds that the system
+                          waits before resending a query.
+                        type: number
+                      secretsManagerOracleAsmAccessRoleArn:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN of the IAM role that
+                          specifies AWS DMS as the trusted entity and grants the required
+                          permissions to access the secrets_manager_oracle_asm_secret_id.
+                        type: string
+                      secretsManagerOracleAsmSecretId:
+                        description: Required only if your Oracle endpoint uses Automatic
+                          Storage Management (ASM). The full ARN, partial ARN, or
+                          friendly name of the secret that contains the Oracle ASM
+                          connection details for the Oracle endpoint.
+                        type: string
+                      securityDbEncryptionName:
+                        description: For an Oracle source endpoint, the name of a
+                          key used for the transparent data encryption (TDE) of the
+                          columns and tablespaces in an Oracle source database that
+                          is encrypted using TDE.
+                        type: string
+                      spatialDataOptionToGeoJsonFunctionName:
+                        description: Use this attribute to convert SDO_GEOMETRY to
+                          GEOJSON format. By default, DMS calls the SDO2GEOJSON custom
+                          function if present and accessible.
+                        type: string
+                      standbyDelayTime:
+                        description: Use this attribute to specify a time in minutes
+                          for the delay in standby sync. If the source is an Oracle
+                          Active Data Guard standby database, use this attribute to
+                          specify the time lag between primary and standby databases.
+                        type: number
+                      trimSpaceInChar:
+                        description: Use this attribute to trim data on CHAR and NCHAR
+                          data types during migration. The default value is true.
+                        type: boolean
+                      useAlternateFolderForOnline:
+                        description: Set this attribute to true in order to use the
+                          Binary Reader to capture change data for an Amazon RDS for
+                          Oracle as the source. This tells the DMS instance to use
+                          any specified prefix replacement to access all online redo
+                          logs.
+                        type: boolean
+                      useBfile:
+                        description: Set this attribute to true to capture change
+                          data using the Binary Reader utility. Set use_logminer_reader
+                          to false to set this attribute to true.
+                        type: boolean
+                      useDirectPathFullLoad:
+                        description: Set this attribute to true to have AWS DMS use
+                          a direct path full load. Specify this value to use the direct
+                          path protocol in the Oracle Call Interface (OCI).
+                        type: boolean
+                      useLogminerReader:
+                        description: Set this attribute to true to capture change
+                          data using the Oracle LogMiner utility (the default). Set
+                          this attribute to false if you want to access the redo logs
+                          as a binary file.
+                        type: boolean
+                      usePathPrefix:
+                        description: Set this string attribute to the required value
+                          in order to use the Binary Reader to capture change data
+                          for an Amazon RDS for Oracle as the source. This value specifies
+                          the path prefix used to replace the default Oracle root
+                          to access the redo logs.
                         type: string
                     type: object
                   pauseReplicationTasks:
@@ -1908,7 +2643,7 @@ spec:
                         type: number
                       pluginName:
                         description: 'Specifies the plugin to use to create a replication
-                          slot. Valid values: pglogical, test_decoding.'
+                          slot. Valid values: pglogical, test-decoding.'
                         type: string
                       serviceAccessRoleArn:
                         description: Specifies the IAM role to use to authenticate

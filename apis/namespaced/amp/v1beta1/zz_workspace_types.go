@@ -16,19 +16,19 @@ import (
 
 type LoggingConfigurationInitParameters struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
+	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
+	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
 
-	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
+	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
 }

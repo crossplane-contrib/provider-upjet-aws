@@ -36,6 +36,9 @@ type GroupInitParameters struct {
 
 type GroupObservation struct {
 
+	// ARN of the Group.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// A string containing the description of the group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

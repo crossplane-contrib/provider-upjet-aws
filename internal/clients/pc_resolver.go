@@ -32,8 +32,8 @@ func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*names
 
 	var mSpec namespacedv1beta1.ClusterProviderConfig
 	err = json.Unmarshal(data, &mSpec)
-	mSpec.TypeMeta.Kind = namespacedv1beta1.ClusterProviderConfigKind
-	mSpec.TypeMeta.APIVersion = namespacedv1beta1.SchemeGroupVersion.String()
+	mSpec.Kind = namespacedv1beta1.ClusterProviderConfigKind
+	mSpec.APIVersion = namespacedv1beta1.SchemeGroupVersion.String()
 	mSpec.ObjectMeta = metav1.ObjectMeta{
 		Name:        pc.GetName(),
 		Labels:      pc.GetLabels(),
