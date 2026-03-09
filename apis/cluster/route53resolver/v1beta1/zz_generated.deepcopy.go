@@ -280,6 +280,11 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RniEnhancedMetricsEnabled != nil {
+		in, out := &in.RniEnhancedMetricsEnabled, &out.RniEnhancedMetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
 		*out = make([]v1.Reference, len(*in))
@@ -318,6 +323,11 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetNameServerMetricsEnabled != nil {
+		in, out := &in.TargetNameServerMetricsEnabled, &out.TargetNameServerMetricsEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -419,6 +429,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RniEnhancedMetricsEnabled != nil {
+		in, out := &in.RniEnhancedMetricsEnabled, &out.RniEnhancedMetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -461,6 +476,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetNameServerMetricsEnabled != nil {
+		in, out := &in.TargetNameServerMetricsEnabled, &out.TargetNameServerMetricsEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -515,6 +535,11 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RniEnhancedMetricsEnabled != nil {
+		in, out := &in.RniEnhancedMetricsEnabled, &out.RniEnhancedMetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
 		*out = make([]v1.Reference, len(*in))
@@ -553,6 +578,11 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetNameServerMetricsEnabled != nil {
+		in, out := &in.TargetNameServerMetricsEnabled, &out.TargetNameServerMetricsEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 

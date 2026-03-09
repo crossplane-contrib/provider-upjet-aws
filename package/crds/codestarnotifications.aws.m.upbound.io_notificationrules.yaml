@@ -182,8 +182,8 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The ARN of notification rule target. For example,
-                            a SNS Topic ARN.
+                          description: The ARN of the Amazon Q Developer in chat applications
+                            topic or Amazon Q Developer in chat applications client.
                           type: string
                         addressRef:
                           description: Reference to a Topic in sns to populate address.
@@ -266,8 +266,9 @@ spec:
                               type: object
                           type: object
                         type:
-                          description: The type of the notification target. Default
-                            value is SNS.
+                          description: The type of the notification target. Valid
+                            values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams.
+                            Default value is SNS.
                           type: string
                       type: object
                     type: array
@@ -405,8 +406,8 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The ARN of notification rule target. For example,
-                            a SNS Topic ARN.
+                          description: The ARN of the Amazon Q Developer in chat applications
+                            topic or Amazon Q Developer in chat applications client.
                           type: string
                         addressRef:
                           description: Reference to a Topic in sns to populate address.
@@ -489,8 +490,9 @@ spec:
                               type: object
                           type: object
                         type:
-                          description: The type of the notification target. Default
-                            value is SNS.
+                          description: The type of the notification target. Valid
+                            values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams.
+                            Default value is SNS.
                           type: string
                       type: object
                     type: array
@@ -626,16 +628,17 @@ spec:
                     items:
                       properties:
                         address:
-                          description: The ARN of notification rule target. For example,
-                            a SNS Topic ARN.
+                          description: The ARN of the Amazon Q Developer in chat applications
+                            topic or Amazon Q Developer in chat applications client.
                           type: string
                         status:
                           description: The status of the notification rule. Possible
                             values are ENABLED and DISABLED, default is ENABLED.
                           type: string
                         type:
-                          description: The type of the notification target. Default
-                            value is SNS.
+                          description: The type of the notification target. Valid
+                            values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams.
+                            Default value is SNS.
                           type: string
                       type: object
                     type: array

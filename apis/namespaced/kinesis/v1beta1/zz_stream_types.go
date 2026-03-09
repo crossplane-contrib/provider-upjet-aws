@@ -34,6 +34,9 @@ type StreamInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
+	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
+
 	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
@@ -89,6 +92,9 @@ type StreamObservation struct {
 	// The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias alias/aws/kinesis.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -138,6 +144,10 @@ type StreamParameters struct {
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
+	// The maximum size for a single data record in KiB. The minimum value is 1024. The maximum value is 10240.
+	// +kubebuilder:validation:Optional
+	MaxRecordSizeInKib *float64 `json:"maxRecordSizeInKib,omitempty" tf:"max_record_size_in_kib,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

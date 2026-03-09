@@ -48,13 +48,11 @@ var globalResources = map[string]string{
 	"backup.aws.upbound.io/GlobalSettings":              "backup",
 	"directconnect.aws.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.upbound.io/GatewayAssociation":   "directconnect",
-	"ec2.aws.upbound.io/SerialConsoleAccess":            "ec2",
 	"s3control.aws.upbound.io/AccountPublicAccessBlock": "s3control",
 	// namespaced apis
 	"backup.aws.m.upbound.io/GlobalSettings":              "backup",
 	"directconnect.aws.m.upbound.io/Gateway":              "directconnect",
 	"directconnect.aws.m.upbound.io/GatewayAssociation":   "directconnect",
-	"ec2.aws.m.upbound.io/SerialConsoleAccess":            "ec2",
 	"s3control.aws.m.upbound.io/AccountPublicAccessBlock": "s3control",
 }
 

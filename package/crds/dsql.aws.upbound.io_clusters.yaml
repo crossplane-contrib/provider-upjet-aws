@@ -73,7 +73,14 @@ spec:
               forProvider:
                 properties:
                   deletionProtectionEnabled:
-                    description: Whether deletion protection is enabled in this cluster.
+                    description: |-
+                      Whether deletion protection is enabled in this cluster.
+                      Default value is false.
+                    type: boolean
+                  forceDestroy:
+                    description: |-
+                      Destroys cluster even if deletion_protection_enabled is set to true.
+                      Default value is false.
                     type: boolean
                   kmsEncryptionKey:
                     description: The ARN of the AWS KMS key that encrypts data in
@@ -124,7 +131,14 @@ spec:
                   autoscaler.
                 properties:
                   deletionProtectionEnabled:
-                    description: Whether deletion protection is enabled in this cluster.
+                    description: |-
+                      Whether deletion protection is enabled in this cluster.
+                      Default value is false.
+                    type: boolean
+                  forceDestroy:
+                    description: |-
+                      Destroys cluster even if deletion_protection_enabled is set to true.
+                      Default value is false.
                     type: boolean
                   kmsEncryptionKey:
                     description: The ARN of the AWS KMS key that encrypts data in
@@ -249,7 +263,9 @@ spec:
                     description: ARN of the Cluster.
                     type: string
                   deletionProtectionEnabled:
-                    description: Whether deletion protection is enabled in this cluster.
+                    description: |-
+                      Whether deletion protection is enabled in this cluster.
+                      Default value is false.
                     type: boolean
                   encryptionDetails:
                     description: Encryption configuration details for the DSQL Cluster.
@@ -264,6 +280,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  forceDestroy:
+                    description: |-
+                      Destroys cluster even if deletion_protection_enabled is set to true.
+                      Default value is false.
+                    type: boolean
                   id:
                     type: string
                   identifier:

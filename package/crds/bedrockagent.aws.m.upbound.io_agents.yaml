@@ -180,8 +180,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users. The valid range is 40
-                      - 20000 characters.
+                      and how it should interact with users. If prepare_agent is true
+                      this argument is required. The valid range is 40 - 20000 characters.
                     type: string
                   memoryConfiguration:
                     description: Configurations for the agent's ability to retain
@@ -193,6 +193,18 @@ spec:
                             See AWS API documentation for possible values.
                           items:
                             type: string
+                          type: array
+                        sessionSummaryConfiguration:
+                          description: Configuration block for SESSION_SUMMARY memory
+                            type enabled for the agent. See session_summary_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              maxRecentSessions:
+                                description: Maximum number of recent session summaries
+                                  to include in the agent's prompt context.
+                                type: number
+                            type: object
                           type: array
                         storageDays:
                           description: The number of days the agent is configured
@@ -456,8 +468,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users. The valid range is 40
-                      - 20000 characters.
+                      and how it should interact with users. If prepare_agent is true
+                      this argument is required. The valid range is 40 - 20000 characters.
                     type: string
                   memoryConfiguration:
                     description: Configurations for the agent's ability to retain
@@ -469,6 +481,18 @@ spec:
                             See AWS API documentation for possible values.
                           items:
                             type: string
+                          type: array
+                        sessionSummaryConfiguration:
+                          description: Configuration block for SESSION_SUMMARY memory
+                            type enabled for the agent. See session_summary_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              maxRecentSessions:
+                                description: Maximum number of recent session summaries
+                                  to include in the agent's prompt context.
+                                type: number
+                            type: object
                           type: array
                         storageDays:
                           description: The number of days the agent is configured
@@ -716,8 +740,8 @@ spec:
                     type: number
                   instruction:
                     description: Instructions that tell the agent what it should do
-                      and how it should interact with users. The valid range is 40
-                      - 20000 characters.
+                      and how it should interact with users. If prepare_agent is true
+                      this argument is required. The valid range is 40 - 20000 characters.
                     type: string
                   memoryConfiguration:
                     description: Configurations for the agent's ability to retain
@@ -729,6 +753,18 @@ spec:
                             See AWS API documentation for possible values.
                           items:
                             type: string
+                          type: array
+                        sessionSummaryConfiguration:
+                          description: Configuration block for SESSION_SUMMARY memory
+                            type enabled for the agent. See session_summary_configuration
+                            Block for details.
+                          items:
+                            properties:
+                              maxRecentSessions:
+                                description: Maximum number of recent session summaries
+                                  to include in the agent's prompt context.
+                                type: number
+                            type: object
                           type: array
                         storageDays:
                           description: The number of days the agent is configured

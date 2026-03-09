@@ -181,7 +181,7 @@ type ActionAuthenticateOidcInitParameters struct {
 	// The OAuth 2.0 client secret.
 	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
-	// The OIDC issuer identifier of the IdP.
+	// Issuer of the JWT.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
@@ -215,7 +215,7 @@ type ActionAuthenticateOidcObservation struct {
 	// The OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The OIDC issuer identifier of the IdP.
+	// Issuer of the JWT.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
@@ -256,7 +256,7 @@ type ActionAuthenticateOidcParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
-	// The OIDC issuer identifier of the IdP.
+	// Issuer of the JWT.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
@@ -369,6 +369,9 @@ type ActionInitParameters struct {
 	// Cannot be specified with target_group_arn.
 	Forward *ActionForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// Information for creating a JWT validation action. Required if type is jwt-validation.
+	JwtValidation *ActionJwtValidationInitParameters `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
+
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
 	// Valid values are between 1 and 50000.
@@ -394,8 +397,47 @@ type ActionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
-	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ActionJwtValidationInitParameters struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	AdditionalClaim []JwtValidationAdditionalClaimInitParameters `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	JwksEndpoint *string `json:"jwksEndpoint,omitempty" tf:"jwks_endpoint,omitempty"`
+}
+
+type ActionJwtValidationObservation struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	AdditionalClaim []JwtValidationAdditionalClaimObservation `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	JwksEndpoint *string `json:"jwksEndpoint,omitempty" tf:"jwks_endpoint,omitempty"`
+}
+
+type ActionJwtValidationParameters struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	// +kubebuilder:validation:Optional
+	AdditionalClaim []JwtValidationAdditionalClaimParameters `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	// +kubebuilder:validation:Optional
+	JwksEndpoint *string `json:"jwksEndpoint" tf:"jwks_endpoint,omitempty"`
 }
 
 type ActionObservation struct {
@@ -414,6 +456,9 @@ type ActionObservation struct {
 	// Cannot be specified with target_group_arn.
 	Forward *ActionForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
+	// Information for creating a JWT validation action. Required if type is jwt-validation.
+	JwtValidation *ActionJwtValidationObservation `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
+
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
 	// Valid values are between 1 and 50000.
@@ -429,7 +474,7 @@ type ActionObservation struct {
 	// Cannot be specified with forward.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -452,6 +497,10 @@ type ActionParameters struct {
 	// Cannot be specified with target_group_arn.
 	// +kubebuilder:validation:Optional
 	Forward *ActionForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	// Information for creating a JWT validation action. Required if type is jwt-validation.
+	// +kubebuilder:validation:Optional
+	JwtValidation *ActionJwtValidationParameters `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
 
 	// Order for the action.
 	// The action with the lowest value for order is performed first.
@@ -481,7 +530,7 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
-	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -563,10 +612,10 @@ type ConditionInitParameters struct {
 	// Contains a single values item which is a list of HTTP request methods or verbs to match. Maximum size is 40 characters. Only allowed characters are A-Z, hyphen (-) and underscore (_). Comparison is case sensitive. Wildcards are not supported. Only one needs to match for the condition to be satisfied. AWS recommends that GET and HEAD requests are routed in the same way because the response to a HEAD request may be cached.
 	HTTPRequestMethod *HTTPRequestMethodInitParameters `json:"httpRequestMethod,omitempty" tf:"http_request_method,omitempty"`
 
-	// Contains a single values item which is a list of host header patterns to match. The maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied.
+	// Host header patterns to match. Host Header block fields documented below.
 	HostHeader *HostHeaderInitParameters `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
 
-	// Contains a single values item which is a list of path patterns to match against the request URL. Maximum size of each pattern is 128 characters. Comparison is case sensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use a query_string condition.
+	// Path patterns to match against the request URL. Path Pattern block fields documented below.
 	PathPattern *PathPatternInitParameters `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// Query strings to match. Query String block fields documented below.
@@ -584,10 +633,10 @@ type ConditionObservation struct {
 	// Contains a single values item which is a list of HTTP request methods or verbs to match. Maximum size is 40 characters. Only allowed characters are A-Z, hyphen (-) and underscore (_). Comparison is case sensitive. Wildcards are not supported. Only one needs to match for the condition to be satisfied. AWS recommends that GET and HEAD requests are routed in the same way because the response to a HEAD request may be cached.
 	HTTPRequestMethod *HTTPRequestMethodObservation `json:"httpRequestMethod,omitempty" tf:"http_request_method,omitempty"`
 
-	// Contains a single values item which is a list of host header patterns to match. The maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied.
+	// Host header patterns to match. Host Header block fields documented below.
 	HostHeader *HostHeaderObservation `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
 
-	// Contains a single values item which is a list of path patterns to match against the request URL. Maximum size of each pattern is 128 characters. Comparison is case sensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use a query_string condition.
+	// Path patterns to match against the request URL. Path Pattern block fields documented below.
 	PathPattern *PathPatternObservation `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// Query strings to match. Query String block fields documented below.
@@ -607,11 +656,11 @@ type ConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPRequestMethod *HTTPRequestMethodParameters `json:"httpRequestMethod,omitempty" tf:"http_request_method,omitempty"`
 
-	// Contains a single values item which is a list of host header patterns to match. The maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied.
+	// Host header patterns to match. Host Header block fields documented below.
 	// +kubebuilder:validation:Optional
 	HostHeader *HostHeaderParameters `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
 
-	// Contains a single values item which is a list of path patterns to match against the request URL. Maximum size of each pattern is 128 characters. Comparison is case sensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use a query_string condition.
+	// Path patterns to match against the request URL. Path Pattern block fields documented below.
 	// +kubebuilder:validation:Optional
 	PathPattern *PathPatternParameters `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
@@ -704,34 +753,47 @@ type ForwardTargetGroupParameters struct {
 
 type HTTPHeaderInitParameters struct {
 
-	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
+	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case-insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
 	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
 
-	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPHeaderObservation struct {
 
-	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
+	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case-insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
 	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
 
-	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPHeaderParameters struct {
 
-	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
+	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case-insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
 	// +kubebuilder:validation:Optional
 	HTTPHeaderName *string `json:"httpHeaderName" tf:"http_header_name,omitempty"`
 
-	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Values []*string `json:"values" tf:"values,omitempty"`
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodInitParameters struct {
@@ -758,19 +820,93 @@ type HTTPRequestMethodParameters struct {
 
 type HostHeaderInitParameters struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of regular expressions to compare against the host header. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HostHeaderObservation struct {
 
-	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// List of regular expressions to compare against the host header. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HostHeaderParameters struct {
+
+	// List of regular expressions to compare against the host header. The maximum length of each string is 128 characters. Conflicts with values.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
+	// List of host header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case-insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Conflicts with regex_values.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type HostHeaderRewriteConfigInitParameters struct {
+
+	// Block for host header rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	Rewrite *RewriteInitParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type HostHeaderRewriteConfigObservation struct {
+
+	// Block for host header rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	Rewrite *RewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type HostHeaderRewriteConfigParameters struct {
+
+	// Block for host header rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	// +kubebuilder:validation:Optional
+	Rewrite *RewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type JwtValidationAdditionalClaimInitParameters struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type JwtValidationAdditionalClaimObservation struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type JwtValidationAdditionalClaimParameters struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
@@ -805,6 +941,9 @@ type LBListenerRuleInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block that defines the transform to apply to requests matching this rule. See Transform Blocks below for more details. Once specified, to remove the transform from the rule, remove the transform block from the configuration.
+	Transform []TransformInitParameters `json:"transform,omitempty" tf:"transform,omitempty"`
 }
 
 type LBListenerRuleObservation struct {
@@ -838,6 +977,9 @@ type LBListenerRuleObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block that defines the transform to apply to requests matching this rule. See Transform Blocks below for more details. Once specified, to remove the transform from the rule, remove the transform block from the configuration.
+	Transform []TransformObservation `json:"transform,omitempty" tf:"transform,omitempty"`
 }
 
 type LBListenerRuleParameters struct {
@@ -877,9 +1019,17 @@ type LBListenerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block that defines the transform to apply to requests matching this rule. See Transform Blocks below for more details. Once specified, to remove the transform from the rule, remove the transform block from the configuration.
+	// +kubebuilder:validation:Optional
+	Transform []TransformParameters `json:"transform,omitempty" tf:"transform,omitempty"`
 }
 
 type PathPatternInitParameters struct {
+
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
@@ -888,6 +1038,10 @@ type PathPatternInitParameters struct {
 
 type PathPatternObservation struct {
 
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -895,10 +1049,15 @@ type PathPatternObservation struct {
 
 type PathPatternParameters struct {
 
+	// List of regular expressions to compare against the request URL. The maximum length of each string is 128 characters. Conflicts with values.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	RegexValues []*string `json:"regexValues,omitempty" tf:"regex_values,omitempty"`
+
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type QueryStringInitParameters struct {
@@ -930,6 +1089,35 @@ type QueryStringParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type RewriteInitParameters struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	Replace *string `json:"replace,omitempty" tf:"replace,omitempty"`
+}
+
+type RewriteObservation struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	Replace *string `json:"replace,omitempty" tf:"replace,omitempty"`
+}
+
+type RewriteParameters struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	// +kubebuilder:validation:Optional
+	Regex *string `json:"regex" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	// +kubebuilder:validation:Optional
+	Replace *string `json:"replace" tf:"replace,omitempty"`
+}
+
 type SourceIPInitParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
@@ -950,6 +1138,93 @@ type SourceIPParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type TransformInitParameters struct {
+
+	// Configuration block for host header rewrite. Required if type is host-header-rewrite. See Host Header Rewrite Config Blocks below.
+	HostHeaderRewriteConfig *HostHeaderRewriteConfigInitParameters `json:"hostHeaderRewriteConfig,omitempty" tf:"host_header_rewrite_config,omitempty"`
+
+	// Type of transform. Valid values are host-header-rewrite and url-rewrite.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Configuration block for URL rewrite. Required if type is url-rewrite. See URL Rewrite Config Blocks below.
+	URLRewriteConfig *URLRewriteConfigInitParameters `json:"urlRewriteConfig,omitempty" tf:"url_rewrite_config,omitempty"`
+}
+
+type TransformObservation struct {
+
+	// Configuration block for host header rewrite. Required if type is host-header-rewrite. See Host Header Rewrite Config Blocks below.
+	HostHeaderRewriteConfig *HostHeaderRewriteConfigObservation `json:"hostHeaderRewriteConfig,omitempty" tf:"host_header_rewrite_config,omitempty"`
+
+	// Type of transform. Valid values are host-header-rewrite and url-rewrite.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Configuration block for URL rewrite. Required if type is url-rewrite. See URL Rewrite Config Blocks below.
+	URLRewriteConfig *URLRewriteConfigObservation `json:"urlRewriteConfig,omitempty" tf:"url_rewrite_config,omitempty"`
+}
+
+type TransformParameters struct {
+
+	// Configuration block for host header rewrite. Required if type is host-header-rewrite. See Host Header Rewrite Config Blocks below.
+	// +kubebuilder:validation:Optional
+	HostHeaderRewriteConfig *HostHeaderRewriteConfigParameters `json:"hostHeaderRewriteConfig,omitempty" tf:"host_header_rewrite_config,omitempty"`
+
+	// Type of transform. Valid values are host-header-rewrite and url-rewrite.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// Configuration block for URL rewrite. Required if type is url-rewrite. See URL Rewrite Config Blocks below.
+	// +kubebuilder:validation:Optional
+	URLRewriteConfig *URLRewriteConfigParameters `json:"urlRewriteConfig,omitempty" tf:"url_rewrite_config,omitempty"`
+}
+
+type URLRewriteConfigInitParameters struct {
+
+	// Block for URL rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	Rewrite *URLRewriteConfigRewriteInitParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type URLRewriteConfigObservation struct {
+
+	// Block for URL rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	Rewrite *URLRewriteConfigRewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type URLRewriteConfigParameters struct {
+
+	// Block for URL rewrite configuration. Only one block is accepted. See Rewrite Blocks below.
+	// +kubebuilder:validation:Optional
+	Rewrite *URLRewriteConfigRewriteParameters `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+}
+
+type URLRewriteConfigRewriteInitParameters struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	Replace *string `json:"replace,omitempty" tf:"replace,omitempty"`
+}
+
+type URLRewriteConfigRewriteObservation struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	Replace *string `json:"replace,omitempty" tf:"replace,omitempty"`
+}
+
+type URLRewriteConfigRewriteParameters struct {
+
+	// Regular expression to match in the input string. Length constraints: Between 1 and 1024 characters.
+	// +kubebuilder:validation:Optional
+	Regex *string `json:"regex" tf:"regex,omitempty"`
+
+	// Replacement string to use when rewriting the matched input. Capture groups in the regular expression (for example, $1 and $2) can be specified. Length constraints: Between 0 and 1024 characters.
+	// +kubebuilder:validation:Optional
+	Replace *string `json:"replace" tf:"replace,omitempty"`
 }
 
 // LBListenerRuleSpec defines the desired state of LBListenerRule

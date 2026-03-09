@@ -14,6 +14,231 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type AndAndInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *CostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *DimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *TagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndAndObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *CostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *DimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *TagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndAndParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *CostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *DimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *TagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type AndInitParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []AndAndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *AndCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *AndDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *NotInitParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []OrInitParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *AndTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndObservation struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []AndAndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *AndCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *AndDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *NotObservation `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []OrObservation `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *AndTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	And []AndAndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *AndCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *AndDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Not *NotParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Or []OrParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *AndTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AndTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type AutoAdjustDataInitParameters struct {
 
 	// The string that defines whether your budget auto-adjusts based on historical or forecasted data. Valid values: FORECAST,HISTORICAL
@@ -60,11 +285,14 @@ type BudgetInitParameters struct {
 	// Whether this budget tracks monetary cost or usage.
 	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
 
-	// A list of CostFilter name/values pair to apply to budget.
+	// A list of CostFilter name/values pair to apply to budget. Conflicts with filter_expression.
 	CostFilter []CostFilterInitParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes *CostTypesInitParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
+
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	FilterExpression *FilterExpressionInitParameters `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// The amount of cost or usage being measured for a budget.
 	LimitAmount *string `json:"limitAmount,omitempty" tf:"limit_amount,omitempty"`
@@ -109,11 +337,14 @@ type BudgetObservation struct {
 	// Whether this budget tracks monetary cost or usage.
 	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
 
-	// A list of CostFilter name/values pair to apply to budget.
+	// A list of CostFilter name/values pair to apply to budget. Conflicts with filter_expression.
 	CostFilter []CostFilterObservation `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes *CostTypesObservation `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
+
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	FilterExpression *FilterExpressionObservation `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// id of resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -166,13 +397,17 @@ type BudgetParameters struct {
 	// +kubebuilder:validation:Optional
 	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
 
-	// A list of CostFilter name/values pair to apply to budget.
+	// A list of CostFilter name/values pair to apply to budget. Conflicts with filter_expression.
 	// +kubebuilder:validation:Optional
 	CostFilter []CostFilterParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	// +kubebuilder:validation:Optional
 	CostTypes *CostTypesParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
+
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	// +kubebuilder:validation:Optional
+	FilterExpression *FilterExpressionParameters `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// The amount of cost or usage being measured for a budget.
 	// +kubebuilder:validation:Optional
@@ -208,11 +443,51 @@ type BudgetParameters struct {
 	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
 }
 
+type CostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type CostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type CostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type CostFilterInitParameters struct {
 
 	// The name of a budget. Unique within accounts.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// A list of values to match against the dimension. At least one value is required.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -221,6 +496,7 @@ type CostFilterObservation struct {
 	// The name of a budget. Unique within accounts.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// A list of values to match against the dimension. At least one value is required.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -230,6 +506,7 @@ type CostFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// A list of values to match against the dimension. At least one value is required.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
@@ -353,6 +630,603 @@ type CostTypesParameters struct {
 	UseBlended *bool `json:"useBlended,omitempty" tf:"use_blended,omitempty"`
 }
 
+type DimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type DimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type DimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type FilterExpressionCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type FilterExpressionInitParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *FilterExpressionNotInitParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []FilterExpressionOrInitParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionNotCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotInitParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []NotAndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionNotCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionNotDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *NotNotInitParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []NotOrInitParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionNotTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionNotObservation struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []NotAndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionNotCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionNotDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *NotNotObservation `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []NotOrObservation `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionNotTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionNotParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	And []NotAndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *FilterExpressionNotCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *FilterExpressionNotDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Not *NotNotParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Or []NotOrParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *FilterExpressionNotTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionNotTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionNotTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionObservation struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []AndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *FilterExpressionNotObservation `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []FilterExpressionOrObservation `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionOrCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrInitParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []OrAndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionOrCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionOrDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *OrNotInitParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []OrOrInitParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionOrTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionOrObservation struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	And []OrAndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	CostCategories *FilterExpressionOrCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *FilterExpressionOrDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	Not *OrNotObservation `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	Or []OrOrObservation `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *FilterExpressionOrTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionOrParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	And []OrAndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *FilterExpressionOrCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *FilterExpressionOrDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Not *OrNotParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Or []OrOrParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *FilterExpressionOrTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionOrTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionOrTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionParameters struct {
+
+	// A list of filter expressions to combine with AND logic. Each and block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *FilterExpressionCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *FilterExpressionDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// A single filter expression to negate. Must contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Not *FilterExpressionNotParameters `json:"not,omitempty" tf:"not,omitempty"`
+
+	// A list of filter expressions to combine with OR logic. Each or block is one operand and must itself contain exactly one root.
+	// +kubebuilder:validation:Optional
+	Or []FilterExpressionOrParameters `json:"or,omitempty" tf:"or,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *FilterExpressionTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type FilterExpressionTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type FilterExpressionTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type HistoricalOptionsInitParameters struct {
 
 	// The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount.
@@ -373,6 +1247,630 @@ type HistoricalOptionsParameters struct {
 	// The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount.
 	// +kubebuilder:validation:Optional
 	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
+}
+
+type NotAndCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type NotAndInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotAndCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotAndDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotAndTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotAndObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotAndCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotAndDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotAndTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotAndParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *NotAndCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *NotAndDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *NotAndTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotAndTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotAndTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type NotInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotNotCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type NotNotInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotNotCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotNotDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotNotTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotNotObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotNotCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotNotDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotNotTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotNotParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *NotNotCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *NotNotDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *NotNotTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotNotTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotNotTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotOrCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type NotOrInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotOrCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotOrDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotOrTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotOrObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *NotOrCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *NotOrDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *NotOrTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotOrParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *NotOrCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *NotOrDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *NotOrTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotOrTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotOrTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *NotCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *NotDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *NotTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NotTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type NotificationInitParameters struct {
@@ -450,6 +1948,630 @@ type NotificationParameters struct {
 	ThresholdType *string `json:"thresholdType" tf:"threshold_type,omitempty"`
 }
 
+type OrAndCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type OrAndInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrAndCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrAndDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrAndTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrAndObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrAndCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrAndDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrAndTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrAndParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *OrAndCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *OrAndDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *OrAndTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrAndTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrAndTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type OrInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrNotCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type OrNotInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrNotCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrNotDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrNotTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrNotObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrNotCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrNotDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrNotTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrNotParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *OrNotCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *OrNotDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *OrNotTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrNotTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrNotTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrOrCostCategoriesInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrCostCategoriesObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrCostCategoriesParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrDimensionsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrDimensionsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrDimensionsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type OrOrInitParameters struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrOrCostCategoriesInitParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrOrDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrOrTagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrOrObservation struct {
+
+	// A Cost Category Filter block.
+	CostCategories *OrOrCostCategoriesObservation `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	Dimensions *OrOrDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags *OrOrTagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrOrParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *OrOrCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *OrOrDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *OrOrTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrOrTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrOrTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrParameters struct {
+
+	// A Cost Category Filter block.
+	// +kubebuilder:validation:Optional
+	CostCategories *OrCostCategoriesParameters `json:"costCategories,omitempty" tf:"cost_categories,omitempty"`
+
+	// A Dimension Filter block.
+	// +kubebuilder:validation:Optional
+	Dimensions *OrDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags *OrTagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrTagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrTagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type OrTagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type PlannedLimitInitParameters struct {
 
 	// The amount of cost or usage being measured for a budget.
@@ -487,6 +2609,45 @@ type PlannedLimitParameters struct {
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
+}
+
+type TagsInitParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type TagsObservation struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type TagsParameters struct {
+
+	// The dimension to filter on. Valid values include AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, and AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The match options for the dimension filter. Valid values are EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE. Note: ABSENT is not supported due to AWS API contradictions (it requires values to be absent but also cannot have values set).
+	// +kubebuilder:validation:Optional
+	MatchOptions []*string `json:"matchOptions,omitempty" tf:"match_options,omitempty"`
+
+	// A list of values to match against the dimension. At least one value is required.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 // BudgetSpec defines the desired state of Budget

@@ -204,6 +204,22 @@ func (in *SafetyRuleInitParameters) DeepCopyInto(out *SafetyRuleInitParameters) 
 		*out = new(RuleConfigInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.TargetControls != nil {
 		in, out := &in.TargetControls, &out.TargetControls
 		*out = make([]*string, len(*in))
@@ -331,6 +347,38 @@ func (in *SafetyRuleObservation) DeepCopyInto(out *SafetyRuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.TargetControls != nil {
 		in, out := &in.TargetControls, &out.TargetControls
 		*out = make([]*string, len(*in))
@@ -432,6 +480,22 @@ func (in *SafetyRuleParameters) DeepCopyInto(out *SafetyRuleParameters) {
 		in, out := &in.RuleConfig, &out.RuleConfig
 		*out = new(RuleConfigParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TargetControls != nil {
 		in, out := &in.TargetControls, &out.TargetControls

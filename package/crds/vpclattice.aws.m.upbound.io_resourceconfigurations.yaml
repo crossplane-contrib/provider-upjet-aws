@@ -63,6 +63,16 @@ spec:
                     description: Allow or Deny the association of this resource to
                       a shareable service network.
                     type: boolean
+                  customDomainName:
+                    description: Custom domain name for your resource configuration.
+                      Additionally, provide a domain_verification_id to prove your
+                      ownership of a domain.
+                    type: string
+                  domainVerificationId:
+                    description: The domain verification ID of your verified custom
+                      domain name. If you don't provide an ID, you must configure
+                      the DNS settings yourself.
+                    type: string
                   name:
                     description: Name for the Resource Configuration.
                     type: string
@@ -326,6 +336,16 @@ spec:
                     description: Allow or Deny the association of this resource to
                       a shareable service network.
                     type: boolean
+                  customDomainName:
+                    description: Custom domain name for your resource configuration.
+                      Additionally, provide a domain_verification_id to prove your
+                      ownership of a domain.
+                    type: string
+                  domainVerificationId:
+                    description: The domain verification ID of your verified custom
+                      domain name. If you don't provide an ID, you must configure
+                      the DNS settings yourself.
+                    type: string
                   name:
                     description: Name for the Resource Configuration.
                     type: string
@@ -640,6 +660,22 @@ spec:
                     type: boolean
                   arn:
                     description: The ARN of the Resource for this configuration.
+                    type: string
+                  customDomainName:
+                    description: Custom domain name for your resource configuration.
+                      Additionally, provide a domain_verification_id to prove your
+                      ownership of a domain.
+                    type: string
+                  domainVerificationArn:
+                    description: ARN of the domain verification.
+                    type: string
+                  domainVerificationId:
+                    description: The domain verification ID of your verified custom
+                      domain name. If you don't provide an ID, you must configure
+                      the DNS settings yourself.
+                    type: string
+                  domainVerificationStatus:
+                    description: Domain verification status.
                     type: string
                   id:
                     description: ID of the resource gateway.

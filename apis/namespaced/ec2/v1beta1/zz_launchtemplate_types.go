@@ -103,10 +103,10 @@ type ConnectionTrackingSpecificationInitParameters struct {
 	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
 	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
 	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
 	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
 }
 
@@ -115,10 +115,10 @@ type ConnectionTrackingSpecificationObservation struct {
 	// Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
 	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
 	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
 	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
 }
 
@@ -128,11 +128,11 @@ type ConnectionTrackingSpecificationParameters struct {
 	// +kubebuilder:validation:Optional
 	TCPEstablishedTimeout *float64 `json:"tcpEstablishedTimeout,omitempty" tf:"tcp_established_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
 	// +kubebuilder:validation:Optional
 	UDPStreamTimeout *float64 `json:"udpStreamTimeout,omitempty" tf:"udp_stream_timeout,omitempty"`
 
-	// Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+	// Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
 	// +kubebuilder:validation:Optional
 	UDPTimeout *float64 `json:"udpTimeout,omitempty" tf:"udp_timeout,omitempty"`
 }
@@ -151,7 +151,7 @@ type EBSInitParameters struct {
 	// This must be set with a volume_type of "io1/io2/gp3".
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for EBS encryption.
 	// encrypted must be set to true when this is set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
@@ -196,7 +196,7 @@ type EBSObservation struct {
 	// This must be set with a volume_type of "io1/io2/gp3".
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for EBS encryption.
 	// encrypted must be set to true when this is set.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -234,7 +234,7 @@ type EBSParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for EBS encryption.
 	// encrypted must be set to true when this is set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
@@ -674,6 +674,9 @@ type LaunchTemplateCPUOptionsInitParameters struct {
 	// The number of CPU cores for the instance.
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
+
 	// The number of threads per CPU core.
 	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
 	// Otherwise, specify the default value of 2.
@@ -687,6 +690,9 @@ type LaunchTemplateCPUOptionsObservation struct {
 
 	// The number of CPU cores for the instance.
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	// The number of threads per CPU core.
 	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
@@ -703,6 +709,10 @@ type LaunchTemplateCPUOptionsParameters struct {
 	// The number of CPU cores for the instance.
 	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Indicates whether to enable the instance for nested virtualization. Nested virtualization is supported on 8th generation Intel-based instance types (C8i, M8i, R8i, and their flex variants) only. When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance. Valid values are enabled and disabled.
+	// +kubebuilder:validation:Optional
+	NestedVirtualization *string `json:"nestedVirtualization,omitempty" tf:"nested_virtualization,omitempty"`
 
 	// The number of threads per CPU core.
 	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
@@ -871,6 +881,8 @@ type LaunchTemplateInitParameters_2 struct {
 	// Interfaces below for more details.
 	NetworkInterfaces []NetworkInterfacesInitParameters `json:"networkInterfaces,omitempty" tf:"network_interfaces,omitempty"`
 
+	NetworkPerformanceOptions *NetworkPerformanceOptionsInitParameters `json:"networkPerformanceOptions,omitempty" tf:"network_performance_options,omitempty"`
+
 	// The placement of the instance. See Placement below for more details.
 	Placement *PlacementInitParameters `json:"placement,omitempty" tf:"placement,omitempty"`
 
@@ -879,6 +891,10 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// The ID of the RAM disk.
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
+
+	// Secondary interfaces to associate with instances launched from the template. See Secondary
+	// Interfaces below for more details.
+	SecondaryInterfaces []SecondaryInterfacesInitParameters `json:"secondaryInterfaces,omitempty" tf:"secondary_interfaces,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
@@ -1460,6 +1476,8 @@ type LaunchTemplateObservation_2 struct {
 	// Interfaces below for more details.
 	NetworkInterfaces []NetworkInterfacesObservation `json:"networkInterfaces,omitempty" tf:"network_interfaces,omitempty"`
 
+	NetworkPerformanceOptions *NetworkPerformanceOptionsObservation `json:"networkPerformanceOptions,omitempty" tf:"network_performance_options,omitempty"`
+
 	// The placement of the instance. See Placement below for more details.
 	Placement *PlacementObservation `json:"placement,omitempty" tf:"placement,omitempty"`
 
@@ -1472,6 +1490,10 @@ type LaunchTemplateObservation_2 struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Secondary interfaces to associate with instances launched from the template. See Secondary
+	// Interfaces below for more details.
+	SecondaryInterfaces []SecondaryInterfacesObservation `json:"secondaryInterfaces,omitempty" tf:"secondary_interfaces,omitempty"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
@@ -1609,6 +1631,9 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaces []NetworkInterfacesParameters `json:"networkInterfaces,omitempty" tf:"network_interfaces,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	NetworkPerformanceOptions *NetworkPerformanceOptionsParameters `json:"networkPerformanceOptions,omitempty" tf:"network_performance_options,omitempty"`
+
 	// The placement of the instance. See Placement below for more details.
 	// +kubebuilder:validation:Optional
 	Placement *PlacementParameters `json:"placement,omitempty" tf:"placement,omitempty"`
@@ -1625,6 +1650,11 @@ type LaunchTemplateParameters_2 struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Secondary interfaces to associate with instances launched from the template. See Secondary
+	// Interfaces below for more details.
+	// +kubebuilder:validation:Optional
+	SecondaryInterfaces []SecondaryInterfacesParameters `json:"secondaryInterfaces,omitempty" tf:"secondary_interfaces,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
@@ -2056,6 +2086,25 @@ type NetworkInterfacesParameters struct {
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type NetworkPerformanceOptionsInitParameters struct {
+
+	// Specify the bandwidth weighting option to boost the associated type of baseline bandwidth. Valid values: default, vpc-1, ebs-1. Default value is default. Setting vpc-1 boosts networking baseline bandwidth and reduces EBS baseline bandwidth. Setting ebs-1 boosts EBS baseline bandwidth and reduces networking baseline bandwidth. Only supported on select instance types. See AWS Documentation for more information.
+	BandwidthWeighting *string `json:"bandwidthWeighting,omitempty" tf:"bandwidth_weighting,omitempty"`
+}
+
+type NetworkPerformanceOptionsObservation struct {
+
+	// Specify the bandwidth weighting option to boost the associated type of baseline bandwidth. Valid values: default, vpc-1, ebs-1. Default value is default. Setting vpc-1 boosts networking baseline bandwidth and reduces EBS baseline bandwidth. Setting ebs-1 boosts EBS baseline bandwidth and reduces networking baseline bandwidth. Only supported on select instance types. See AWS Documentation for more information.
+	BandwidthWeighting *string `json:"bandwidthWeighting,omitempty" tf:"bandwidth_weighting,omitempty"`
+}
+
+type NetworkPerformanceOptionsParameters struct {
+
+	// Specify the bandwidth weighting option to boost the associated type of baseline bandwidth. Valid values: default, vpc-1, ebs-1. Default value is default. Setting vpc-1 boosts networking baseline bandwidth and reduces EBS baseline bandwidth. Setting ebs-1 boosts EBS baseline bandwidth and reduces networking baseline bandwidth. Only supported on select instance types. See AWS Documentation for more information.
+	// +kubebuilder:validation:Optional
+	BandwidthWeighting *string `json:"bandwidthWeighting,omitempty" tf:"bandwidth_weighting,omitempty"`
+}
+
 type PlacementInitParameters struct {
 
 	// The affinity setting for an instance on a Dedicated Host.
@@ -2153,6 +2202,88 @@ type PlacementParameters struct {
 	// The tenancy of the instance (if the instance is running in a VPC). Can be default, dedicated, or host.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+}
+
+type SecondaryInterfacesInitParameters struct {
+
+	// Whether the secondary interface is deleted when the instance is terminated. The only supported value is true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the secondary interface attachment.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of secondary interface. The only supported value is: secondary.
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// Index of the network card.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// Number of private IPv4 addresses to assign to the secondary interface.
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// Private IPv4 addresses to assign to the secondary interface.
+	// +listType=set
+	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// ID of the secondary subnet.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+}
+
+type SecondaryInterfacesObservation struct {
+
+	// Whether the secondary interface is deleted when the instance is terminated. The only supported value is true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the secondary interface attachment.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of secondary interface. The only supported value is: secondary.
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// Index of the network card.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// Number of private IPv4 addresses to assign to the secondary interface.
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// Private IPv4 addresses to assign to the secondary interface.
+	// +listType=set
+	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// ID of the secondary subnet.
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
+}
+
+type SecondaryInterfacesParameters struct {
+
+	// Whether the secondary interface is deleted when the instance is terminated. The only supported value is true.
+	// +kubebuilder:validation:Optional
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Device index for the secondary interface attachment.
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Type of secondary interface. The only supported value is: secondary.
+	// +kubebuilder:validation:Optional
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// Index of the network card.
+	// +kubebuilder:validation:Optional
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// Number of private IPv4 addresses to assign to the secondary interface.
+	// +kubebuilder:validation:Optional
+	PrivateIPAddressCount *float64 `json:"privateIpAddressCount,omitempty" tf:"private_ip_address_count,omitempty"`
+
+	// Private IPv4 addresses to assign to the secondary interface.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// ID of the secondary subnet.
+	// +kubebuilder:validation:Optional
+	SecondarySubnetID *string `json:"secondarySubnetId,omitempty" tf:"secondary_subnet_id,omitempty"`
 }
 
 type TagSpecificationsInitParameters struct {

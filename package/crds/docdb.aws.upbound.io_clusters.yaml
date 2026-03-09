@@ -93,8 +93,8 @@ spec:
                     type: boolean
                   availabilityZones:
                     description: |-
-                      A list of EC2 Availability Zones that
-                      instances in the DB cluster can be created in.
+                      A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+                      We recommend specifying 3 AZs or using the  if necessary.
                     items:
                       type: string
                     type: array
@@ -328,6 +328,9 @@ spec:
                     type: number
                   masterUsername:
                     description: Username for the master DB user.
+                    type: string
+                  networkType:
+                    description: The network type of the DB cluster (IPV4 or DUAL).
                     type: string
                   port:
                     description: The port on which the DB accepts connections
@@ -536,8 +539,8 @@ spec:
                     type: boolean
                   availabilityZones:
                     description: |-
-                      A list of EC2 Availability Zones that
-                      instances in the DB cluster can be created in.
+                      A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+                      We recommend specifying 3 AZs or using the  if necessary.
                     items:
                       type: string
                     type: array
@@ -771,6 +774,9 @@ spec:
                     type: number
                   masterUsername:
                     description: Username for the master DB user.
+                    type: string
+                  networkType:
+                    description: The network type of the DB cluster (IPV4 or DUAL).
                     type: string
                   port:
                     description: The port on which the DB accepts connections
@@ -1053,8 +1059,8 @@ spec:
                     type: string
                   availabilityZones:
                     description: |-
-                      A list of EC2 Availability Zones that
-                      instances in the DB cluster can be created in.
+                      A list of EC2 Availability Zones that instances in the DB cluster can be created in.
+                      We recommend specifying 3 AZs or using the  if necessary.
                     items:
                       type: string
                     type: array
@@ -1151,6 +1157,9 @@ spec:
                     type: array
                   masterUsername:
                     description: Username for the master DB user.
+                    type: string
+                  networkType:
+                    description: The network type of the DB cluster (IPV4 or DUAL).
                     type: string
                   port:
                     description: The port on which the DB accepts connections

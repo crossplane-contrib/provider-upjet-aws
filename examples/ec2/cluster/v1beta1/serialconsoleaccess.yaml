@@ -13,3 +13,4 @@ metadata:
 spec:
   forProvider:
     enabled: true
+    region: us-west-1

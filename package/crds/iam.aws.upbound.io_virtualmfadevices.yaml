@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   path:
-                    description: The path for the virtual MFA device.
+                    description: Path for the virtual MFA device.
                     type: string
                   tags:
                     additionalProperties:
@@ -83,8 +83,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   virtualMfaDeviceName:
-                    description: The name of the virtual MFA device. Use with path
-                      to uniquely identify a virtual MFA device.
+                    description: Name of the virtual MFA device. Use with path to
+                      uniquely identify a virtual MFA device.
                     type: string
                 type: object
               initProvider:
@@ -101,7 +101,7 @@ spec:
                   autoscaler.
                 properties:
                   path:
-                    description: The path for the virtual MFA device.
+                    description: Path for the virtual MFA device.
                     type: string
                   tags:
                     additionalProperties:
@@ -110,8 +110,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   virtualMfaDeviceName:
-                    description: The name of the virtual MFA device. Use with path
-                      to uniquely identify a virtual MFA device.
+                    description: Name of the virtual MFA device. Use with path to
+                      uniquely identify a virtual MFA device.
                     type: string
                 type: object
               managementPolicies:
@@ -211,27 +211,30 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the virtual
-                      mfa device.
+                    description: Amazon Resource Name (ARN), which is also the serial
+                      number, of the virtual MFA device.
                     type: string
                   base32StringSeed:
-                    description: The base32 seed defined as specified in RFC3548.
-                      The base_32_string_seed is base64-encoded.
+                    description: Base32 seed defined as specified in RFC3548. The
+                      base_32_string_seed is base64-encoded.
                     type: string
                   enableDate:
-                    description: The date and time when the virtual MFA device was
-                      enabled.
+                    description: Date and time when the virtual MFA device was enabled.
                     type: string
                   id:
+                    description: Serial number associated with the virtual MFA device.
                     type: string
                   path:
-                    description: The path for the virtual MFA device.
+                    description: Path for the virtual MFA device.
                     type: string
                   qrCodePng:
-                    description: A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String
+                    description: QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String
                       where $virtualMFADeviceName is one of the create call arguments.
                       AccountName is the user name if set (otherwise, the account
                       ID), and Base32String is the seed in base32 format.
+                    type: string
+                  serialNumber:
+                    description: Serial number associated with the virtual MFA device.
                     type: string
                   tags:
                     additionalProperties:
@@ -242,18 +245,17 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   userName:
-                    description: The associated IAM User name if the virtual MFA device
-                      is enabled.
+                    description: Name of the IAM user associated with this virtual
+                      MFA device.
                     type: string
                   virtualMfaDeviceName:
-                    description: The name of the virtual MFA device. Use with path
-                      to uniquely identify a virtual MFA device.
+                    description: Name of the virtual MFA device. Use with path to
+                      uniquely identify a virtual MFA device.
                     type: string
                 type: object
               conditions:

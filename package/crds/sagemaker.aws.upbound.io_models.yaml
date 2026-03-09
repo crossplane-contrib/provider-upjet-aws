@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Model is the Schema for the Models API. Provides a SageMaker
-          AI model resource.
+        description: Model is the Schema for the Models API. Manages an Amazon SageMaker
+          AI Model.
         properties:
           apiVersion:
             description: |-
@@ -79,20 +79,69 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -119,8 +168,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -132,22 +181,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -159,25 +209,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -188,12 +237,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -300,36 +350,85 @@ spec:
                     type: object
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     items:
                       properties:
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                       type: object
                     type: array
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -356,8 +455,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -369,22 +468,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -396,25 +496,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -425,12 +524,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -466,15 +566,21 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     items:
                       properties:
                         securityGroupIds:
+                          description: List of security group IDs you want to be applied
+                            to your training job or model. Specify the security groups
+                            for the VPC that is specified in the Subnets field.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         subnets:
+                          description: List of subnet IDs in the VPC to which you
+                            want to connect your training job or model.
                           items:
                             type: string
                           type: array
@@ -503,20 +609,69 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -543,8 +698,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -556,22 +711,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -583,25 +739,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -612,12 +767,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -724,36 +880,85 @@ spec:
                     type: object
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     items:
                       properties:
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                       type: object
                     type: array
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -780,8 +985,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -793,22 +998,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -820,25 +1026,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -849,12 +1054,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -885,15 +1091,21 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     items:
                       properties:
                         securityGroupIds:
+                          description: List of security group IDs you want to be applied
+                            to your training job or model. Specify the security groups
+                            for the VPC that is specified in the Subnets field.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         subnets:
+                          description: List of subnet IDs in the VPC to which you
+                            want to connect your training job or model.
                           items:
                             type: string
                           type: array
@@ -993,8 +1205,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this model.
+                    description: Amazon Resource Name (ARN) assigned by AWS to this
+                      model.
                     type: string
                   container:
                     description: Specifies containers in the inference pipeline. If
@@ -1002,20 +1214,69 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -1042,8 +1303,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -1055,22 +1316,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -1082,25 +1344,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -1111,12 +1372,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -1151,36 +1413,85 @@ spec:
                     type: string
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     items:
                       properties:
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                       type: object
                     type: array
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      items:
+                                        properties:
+                                          acceptEula:
+                                            description: Specifies agreement to the
+                                              model end-user license agreement (EULA).
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -1207,8 +1518,8 @@ spec:
                                 items:
                                   properties:
                                     repositoryCredentialsProviderArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of an AWS Lambda function that provides credentials
+                                      description: Amazon Resource Name (ARN) of an
+                                        AWS Lambda function that provides credentials
                                         to authenticate to the private Docker registry
                                         where your model image is hosted. For information
                                         about how to create an AWS Lambda function,
@@ -1220,22 +1531,23 @@ spec:
                             type: object
                           type: array
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           items:
                             properties:
                               s3DataSource:
-                                description: The S3 location of model data to deploy.
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
                                 items:
                                   properties:
                                     compressionType:
@@ -1247,25 +1559,24 @@ spec:
                                         file for the ML model. You can explicitly
                                         accept the model end-user license agreement
                                         (EULA) within the [model_access_config configuration
-                                        block]. see Model Access Config.
+                                        block]. See Model Access Config.
                                       items:
                                         properties:
                                           acceptEula:
                                             description: Specifies agreement to the
                                               model end-user license agreement (EULA).
-                                              The AcceptEula value must be explicitly
-                                              defined as true in order to accept the
-                                              EULA that this model requires. You are
-                                              responsible for reviewing and complying
-                                              with any applicable license terms and
-                                              making sure they are acceptable for
-                                              your use case before downloading or
-                                              using a model.
+                                              The value must be set to true in order
+                                              to accept the EULA that this model requires.
+                                              You are responsible for reviewing and
+                                              complying with any applicable license
+                                              terms and making sure they are acceptable
+                                              for your use case before downloading
+                                              or using a model.
                                             type: boolean
                                         type: object
                                       type: array
                                     s3DataType:
-                                      description: 'The type of model data to deploy.
+                                      description: 'Type of model data to deploy.
                                         Allowed values are: S3Object and S3Prefix.'
                                       type: string
                                     s3Uri:
@@ -1276,12 +1587,13 @@ spec:
                             type: object
                           type: array
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -1325,15 +1637,21 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     items:
                       properties:
                         securityGroupIds:
+                          description: List of security group IDs you want to be applied
+                            to your training job or model. Specify the security groups
+                            for the VPC that is specified in the Subnets field.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         subnets:
+                          description: List of subnet IDs in the VPC to which you
+                            want to connect your training job or model.
                           items:
                             type: string
                           type: array
@@ -1418,8 +1736,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Model is the Schema for the Models API. Provides a SageMaker
-          AI model resource.
+        description: Model is the Schema for the Models API. Manages an Amazon SageMaker
+          AI Model.
         properties:
           apiVersion:
             description: |-
@@ -1463,20 +1781,67 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      properties:
+                                        acceptEula:
+                                          description: Specifies agreement to the
+                                            model end-user license agreement (EULA).
+                                            The value must be set to true in order
+                                            to accept the EULA that this model requires.
+                                            You are responsible for reviewing and
+                                            complying with any applicable license
+                                            terms and making sure they are acceptable
+                                            for your use case before downloading or
+                                            using a model.
+                                          type: boolean
+                                      type: object
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -1501,32 +1866,33 @@ spec:
                                 Auth Config.
                               properties:
                                 repositoryCredentialsProviderArn:
-                                  description: The Amazon Resource Name (ARN) of an
-                                    AWS Lambda function that provides credentials
-                                    to authenticate to the private Docker registry
-                                    where your model image is hosted. For information
-                                    about how to create an AWS Lambda function, see
-                                    Create a Lambda function with the console in the
-                                    AWS Lambda Developer Guide.
+                                  description: Amazon Resource Name (ARN) of an AWS
+                                    Lambda function that provides credentials to authenticate
+                                    to the private Docker registry where your model
+                                    image is hosted. For information about how to
+                                    create an AWS Lambda function, see Create a Lambda
+                                    function with the console in the AWS Lambda Developer
+                                    Guide.
                                   type: string
                               type: object
                           type: object
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
-                              description: The S3 location of model data to deploy.
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
                               items:
                                 properties:
                                   compressionType:
@@ -1538,23 +1904,22 @@ spec:
                                       file for the ML model. You can explicitly accept
                                       the model end-user license agreement (EULA)
                                       within the [model_access_config configuration
-                                      block]. see Model Access Config.
+                                      block]. See Model Access Config.
                                     properties:
                                       acceptEula:
                                         description: Specifies agreement to the model
-                                          end-user license agreement (EULA). The AcceptEula
-                                          value must be explicitly defined as true
-                                          in order to accept the EULA that this model
-                                          requires. You are responsible for reviewing
-                                          and complying with any applicable license
-                                          terms and making sure they are acceptable
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
                                           for your use case before downloading or
                                           using a model.
                                         type: boolean
                                     type: object
                                   s3DataType:
-                                    description: 'The type of model data to deploy.
-                                      Allowed values are: S3Object and S3Prefix.'
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
                                     type: string
                                   s3Uri:
                                     description: The S3 path of model data to deploy.
@@ -1563,12 +1928,13 @@ spec:
                               type: array
                           type: object
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -1673,32 +2039,78 @@ spec:
                     type: object
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     properties:
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                     type: object
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     properties:
+                      additionalModelDataSource:
+                        description: Additional data sources that are available to
+                          the model in addition to those specified in model_data_source.
+                          See Additional Model Data Source.
+                        items:
+                          properties:
+                            channelName:
+                              description: Custom name for the additional model data
+                                source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                              type: string
+                            s3DataSource:
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
+                              items:
+                                properties:
+                                  compressionType:
+                                    description: 'How the model data is prepared.
+                                      Allowed values are: None and Gzip.'
+                                    type: string
+                                  modelAccessConfig:
+                                    description: Specifies the access configuration
+                                      file for the ML model. You can explicitly accept
+                                      the model end-user license agreement (EULA)
+                                      within the [model_access_config configuration
+                                      block]. See Model Access Config.
+                                    properties:
+                                      acceptEula:
+                                        description: Specifies agreement to the model
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
+                                          for your use case before downloading or
+                                          using a model.
+                                        type: boolean
+                                    type: object
+                                  s3DataType:
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
+                                    type: string
+                                  s3Uri:
+                                    description: The S3 path of model data to deploy.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       containerHostname:
-                        description: The DNS host name for the container.
+                        description: DNS host name for the container.
                         type: string
                       environment:
                         additionalProperties:
                           type: string
-                        description: |-
-                          Environment variables for the Docker container.
-                          A list of key value pairs.
+                        description: Environment variables for the Docker container.
                         type: object
                         x-kubernetes-map-type: granular
                       image:
-                        description: The registry path where the inference code image
+                        description: Registry path where the inference code image
                           is stored in Amazon ECR.
                         type: string
                       imageConfig:
@@ -1724,32 +2136,32 @@ spec:
                               Auth Config.
                             properties:
                               repositoryCredentialsProviderArn:
-                                description: The Amazon Resource Name (ARN) of an
-                                  AWS Lambda function that provides credentials to
-                                  authenticate to the private Docker registry where
-                                  your model image is hosted. For information about
-                                  how to create an AWS Lambda function, see Create
-                                  a Lambda function with the console in the AWS Lambda
-                                  Developer Guide.
+                                description: Amazon Resource Name (ARN) of an AWS
+                                  Lambda function that provides credentials to authenticate
+                                  to the private Docker registry where your model
+                                  image is hosted. For information about how to create
+                                  an AWS Lambda function, see Create a Lambda function
+                                  with the console in the AWS Lambda Developer Guide.
                                 type: string
                             type: object
                         type: object
                       inferenceSpecificationName:
-                        description: The inference specification name in the model
-                          package version.
+                        description: Inference specification name in the model package
+                          version.
                         type: string
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                       modelDataSource:
-                        description: The location of model data to deploy. Use this
-                          for uncompressed model deployment. For information about
-                          how to deploy an uncompressed model, see Deploying uncompressed
+                        description: Location of model data to deploy. Use this for
+                          uncompressed model deployment. For information about how
+                          to deploy an uncompressed model, see Deploying uncompressed
                           models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
-                            description: The S3 location of model data to deploy.
+                            description: S3 location of model data to deploy. See
+                              S3 Data Source.
                             items:
                               properties:
                                 compressionType:
@@ -1761,22 +2173,22 @@ spec:
                                     file for the ML model. You can explicitly accept
                                     the model end-user license agreement (EULA) within
                                     the [model_access_config configuration block].
-                                    see Model Access Config.
+                                    See Model Access Config.
                                   properties:
                                     acceptEula:
                                       description: Specifies agreement to the model
-                                        end-user license agreement (EULA). The AcceptEula
-                                        value must be explicitly defined as true in
-                                        order to accept the EULA that this model requires.
-                                        You are responsible for reviewing and complying
-                                        with any applicable license terms and making
-                                        sure they are acceptable for your use case
-                                        before downloading or using a model.
+                                        end-user license agreement (EULA). The value
+                                        must be set to true in order to accept the
+                                        EULA that this model requires. You are responsible
+                                        for reviewing and complying with any applicable
+                                        license terms and making sure they are acceptable
+                                        for your use case before downloading or using
+                                        a model.
                                       type: boolean
                                   type: object
                                 s3DataType:
-                                  description: 'The type of model data to deploy.
-                                    Allowed values are: S3Object and S3Prefix.'
+                                  description: 'Type of model data to deploy. Allowed
+                                    values are: S3Object and S3Prefix.'
                                   type: string
                                 s3Uri:
                                   description: The S3 path of model data to deploy.
@@ -1785,12 +2197,13 @@ spec:
                             type: array
                         type: object
                       modelDataUrl:
-                        description: The URL for the S3 location where model artifacts
+                        description: URL for the S3 location where model artifacts
                           are stored.
                         type: string
                       modelPackageName:
-                        description: The Amazon Resource Name (ARN) of the model package
-                          to use to create the model.
+                        description: |-
+                          Amazon Resource Name (ARN) of the model package to use to create the model.
+                          A list of key value pairs.
                         type: string
                       multiModelConfig:
                         description: Specifies additional configuration for multi-model
@@ -1823,14 +2236,20 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     properties:
                       securityGroupIds:
+                        description: List of security group IDs you want to be applied
+                          to your training job or model. Specify the security groups
+                          for the VPC that is specified in the Subnets field.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       subnets:
+                        description: List of subnet IDs in the VPC to which you want
+                          to connect your training job or model.
                         items:
                           type: string
                         type: array
@@ -1858,20 +2277,67 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      properties:
+                                        acceptEula:
+                                          description: Specifies agreement to the
+                                            model end-user license agreement (EULA).
+                                            The value must be set to true in order
+                                            to accept the EULA that this model requires.
+                                            You are responsible for reviewing and
+                                            complying with any applicable license
+                                            terms and making sure they are acceptable
+                                            for your use case before downloading or
+                                            using a model.
+                                          type: boolean
+                                      type: object
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -1896,32 +2362,33 @@ spec:
                                 Auth Config.
                               properties:
                                 repositoryCredentialsProviderArn:
-                                  description: The Amazon Resource Name (ARN) of an
-                                    AWS Lambda function that provides credentials
-                                    to authenticate to the private Docker registry
-                                    where your model image is hosted. For information
-                                    about how to create an AWS Lambda function, see
-                                    Create a Lambda function with the console in the
-                                    AWS Lambda Developer Guide.
+                                  description: Amazon Resource Name (ARN) of an AWS
+                                    Lambda function that provides credentials to authenticate
+                                    to the private Docker registry where your model
+                                    image is hosted. For information about how to
+                                    create an AWS Lambda function, see Create a Lambda
+                                    function with the console in the AWS Lambda Developer
+                                    Guide.
                                   type: string
                               type: object
                           type: object
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
-                              description: The S3 location of model data to deploy.
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
                               items:
                                 properties:
                                   compressionType:
@@ -1933,23 +2400,22 @@ spec:
                                       file for the ML model. You can explicitly accept
                                       the model end-user license agreement (EULA)
                                       within the [model_access_config configuration
-                                      block]. see Model Access Config.
+                                      block]. See Model Access Config.
                                     properties:
                                       acceptEula:
                                         description: Specifies agreement to the model
-                                          end-user license agreement (EULA). The AcceptEula
-                                          value must be explicitly defined as true
-                                          in order to accept the EULA that this model
-                                          requires. You are responsible for reviewing
-                                          and complying with any applicable license
-                                          terms and making sure they are acceptable
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
                                           for your use case before downloading or
                                           using a model.
                                         type: boolean
                                     type: object
                                   s3DataType:
-                                    description: 'The type of model data to deploy.
-                                      Allowed values are: S3Object and S3Prefix.'
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
                                     type: string
                                   s3Uri:
                                     description: The S3 path of model data to deploy.
@@ -1958,12 +2424,13 @@ spec:
                               type: array
                           type: object
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -2068,32 +2535,78 @@ spec:
                     type: object
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     properties:
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                     type: object
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     properties:
+                      additionalModelDataSource:
+                        description: Additional data sources that are available to
+                          the model in addition to those specified in model_data_source.
+                          See Additional Model Data Source.
+                        items:
+                          properties:
+                            channelName:
+                              description: Custom name for the additional model data
+                                source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                              type: string
+                            s3DataSource:
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
+                              items:
+                                properties:
+                                  compressionType:
+                                    description: 'How the model data is prepared.
+                                      Allowed values are: None and Gzip.'
+                                    type: string
+                                  modelAccessConfig:
+                                    description: Specifies the access configuration
+                                      file for the ML model. You can explicitly accept
+                                      the model end-user license agreement (EULA)
+                                      within the [model_access_config configuration
+                                      block]. See Model Access Config.
+                                    properties:
+                                      acceptEula:
+                                        description: Specifies agreement to the model
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
+                                          for your use case before downloading or
+                                          using a model.
+                                        type: boolean
+                                    type: object
+                                  s3DataType:
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
+                                    type: string
+                                  s3Uri:
+                                    description: The S3 path of model data to deploy.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       containerHostname:
-                        description: The DNS host name for the container.
+                        description: DNS host name for the container.
                         type: string
                       environment:
                         additionalProperties:
                           type: string
-                        description: |-
-                          Environment variables for the Docker container.
-                          A list of key value pairs.
+                        description: Environment variables for the Docker container.
                         type: object
                         x-kubernetes-map-type: granular
                       image:
-                        description: The registry path where the inference code image
+                        description: Registry path where the inference code image
                           is stored in Amazon ECR.
                         type: string
                       imageConfig:
@@ -2119,32 +2632,32 @@ spec:
                               Auth Config.
                             properties:
                               repositoryCredentialsProviderArn:
-                                description: The Amazon Resource Name (ARN) of an
-                                  AWS Lambda function that provides credentials to
-                                  authenticate to the private Docker registry where
-                                  your model image is hosted. For information about
-                                  how to create an AWS Lambda function, see Create
-                                  a Lambda function with the console in the AWS Lambda
-                                  Developer Guide.
+                                description: Amazon Resource Name (ARN) of an AWS
+                                  Lambda function that provides credentials to authenticate
+                                  to the private Docker registry where your model
+                                  image is hosted. For information about how to create
+                                  an AWS Lambda function, see Create a Lambda function
+                                  with the console in the AWS Lambda Developer Guide.
                                 type: string
                             type: object
                         type: object
                       inferenceSpecificationName:
-                        description: The inference specification name in the model
-                          package version.
+                        description: Inference specification name in the model package
+                          version.
                         type: string
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                       modelDataSource:
-                        description: The location of model data to deploy. Use this
-                          for uncompressed model deployment. For information about
-                          how to deploy an uncompressed model, see Deploying uncompressed
+                        description: Location of model data to deploy. Use this for
+                          uncompressed model deployment. For information about how
+                          to deploy an uncompressed model, see Deploying uncompressed
                           models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
-                            description: The S3 location of model data to deploy.
+                            description: S3 location of model data to deploy. See
+                              S3 Data Source.
                             items:
                               properties:
                                 compressionType:
@@ -2156,22 +2669,22 @@ spec:
                                     file for the ML model. You can explicitly accept
                                     the model end-user license agreement (EULA) within
                                     the [model_access_config configuration block].
-                                    see Model Access Config.
+                                    See Model Access Config.
                                   properties:
                                     acceptEula:
                                       description: Specifies agreement to the model
-                                        end-user license agreement (EULA). The AcceptEula
-                                        value must be explicitly defined as true in
-                                        order to accept the EULA that this model requires.
-                                        You are responsible for reviewing and complying
-                                        with any applicable license terms and making
-                                        sure they are acceptable for your use case
-                                        before downloading or using a model.
+                                        end-user license agreement (EULA). The value
+                                        must be set to true in order to accept the
+                                        EULA that this model requires. You are responsible
+                                        for reviewing and complying with any applicable
+                                        license terms and making sure they are acceptable
+                                        for your use case before downloading or using
+                                        a model.
                                       type: boolean
                                   type: object
                                 s3DataType:
-                                  description: 'The type of model data to deploy.
-                                    Allowed values are: S3Object and S3Prefix.'
+                                  description: 'Type of model data to deploy. Allowed
+                                    values are: S3Object and S3Prefix.'
                                   type: string
                                 s3Uri:
                                   description: The S3 path of model data to deploy.
@@ -2180,12 +2693,13 @@ spec:
                             type: array
                         type: object
                       modelDataUrl:
-                        description: The URL for the S3 location where model artifacts
+                        description: URL for the S3 location where model artifacts
                           are stored.
                         type: string
                       modelPackageName:
-                        description: The Amazon Resource Name (ARN) of the model package
-                          to use to create the model.
+                        description: |-
+                          Amazon Resource Name (ARN) of the model package to use to create the model.
+                          A list of key value pairs.
                         type: string
                       multiModelConfig:
                         description: Specifies additional configuration for multi-model
@@ -2213,14 +2727,20 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     properties:
                       securityGroupIds:
+                        description: List of security group IDs you want to be applied
+                          to your training job or model. Specify the security groups
+                          for the VPC that is specified in the Subnets field.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       subnets:
+                        description: List of subnet IDs in the VPC to which you want
+                          to connect your training job or model.
                         items:
                           type: string
                         type: array
@@ -2319,8 +2839,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) assigned by AWS to
-                      this model.
+                    description: Amazon Resource Name (ARN) assigned by AWS to this
+                      model.
                     type: string
                   container:
                     description: Specifies containers in the inference pipeline. If
@@ -2328,20 +2848,67 @@ spec:
                       are documented below.
                     items:
                       properties:
+                        additionalModelDataSource:
+                          description: Additional data sources that are available
+                            to the model in addition to those specified in model_data_source.
+                            See Additional Model Data Source.
+                          items:
+                            properties:
+                              channelName:
+                                description: Custom name for the additional model
+                                  data source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                                type: string
+                              s3DataSource:
+                                description: S3 location of model data to deploy.
+                                  See S3 Data Source.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    modelAccessConfig:
+                                      description: Specifies the access configuration
+                                        file for the ML model. You can explicitly
+                                        accept the model end-user license agreement
+                                        (EULA) within the [model_access_config configuration
+                                        block]. See Model Access Config.
+                                      properties:
+                                        acceptEula:
+                                          description: Specifies agreement to the
+                                            model end-user license agreement (EULA).
+                                            The value must be set to true in order
+                                            to accept the EULA that this model requires.
+                                            You are responsible for reviewing and
+                                            complying with any applicable license
+                                            terms and making sure they are acceptable
+                                            for your use case before downloading or
+                                            using a model.
+                                          type: boolean
+                                      type: object
+                                    s3DataType:
+                                      description: 'Type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         containerHostname:
-                          description: The DNS host name for the container.
+                          description: DNS host name for the container.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: |-
-                            Environment variables for the Docker container.
-                            A list of key value pairs.
+                          description: Environment variables for the Docker container.
                           type: object
                           x-kubernetes-map-type: granular
                         image:
-                          description: The registry path where the inference code
-                            image is stored in Amazon ECR.
+                          description: Registry path where the inference code image
+                            is stored in Amazon ECR.
                           type: string
                         imageConfig:
                           description: Specifies whether the model container is in
@@ -2366,32 +2933,33 @@ spec:
                                 Auth Config.
                               properties:
                                 repositoryCredentialsProviderArn:
-                                  description: The Amazon Resource Name (ARN) of an
-                                    AWS Lambda function that provides credentials
-                                    to authenticate to the private Docker registry
-                                    where your model image is hosted. For information
-                                    about how to create an AWS Lambda function, see
-                                    Create a Lambda function with the console in the
-                                    AWS Lambda Developer Guide.
+                                  description: Amazon Resource Name (ARN) of an AWS
+                                    Lambda function that provides credentials to authenticate
+                                    to the private Docker registry where your model
+                                    image is hosted. For information about how to
+                                    create an AWS Lambda function, see Create a Lambda
+                                    function with the console in the AWS Lambda Developer
+                                    Guide.
                                   type: string
                               type: object
                           type: object
                         inferenceSpecificationName:
-                          description: The inference specification name in the model
-                            package version.
+                          description: Inference specification name in the model package
+                            version.
                           type: string
                         mode:
-                          description: The container hosts value SingleModel/MultiModel.
-                            The default value is SingleModel.
+                          description: 'Container hosts value. Allowed values are:
+                            SingleModel and MultiModel. The default value is SingleModel.'
                           type: string
                         modelDataSource:
-                          description: The location of model data to deploy. Use this
+                          description: Location of model data to deploy. Use this
                             for uncompressed model deployment. For information about
                             how to deploy an uncompressed model, see Deploying uncompressed
                             models in the AWS SageMaker AI Developer Guide.
                           properties:
                             s3DataSource:
-                              description: The S3 location of model data to deploy.
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
                               items:
                                 properties:
                                   compressionType:
@@ -2403,23 +2971,22 @@ spec:
                                       file for the ML model. You can explicitly accept
                                       the model end-user license agreement (EULA)
                                       within the [model_access_config configuration
-                                      block]. see Model Access Config.
+                                      block]. See Model Access Config.
                                     properties:
                                       acceptEula:
                                         description: Specifies agreement to the model
-                                          end-user license agreement (EULA). The AcceptEula
-                                          value must be explicitly defined as true
-                                          in order to accept the EULA that this model
-                                          requires. You are responsible for reviewing
-                                          and complying with any applicable license
-                                          terms and making sure they are acceptable
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
                                           for your use case before downloading or
                                           using a model.
                                         type: boolean
                                     type: object
                                   s3DataType:
-                                    description: 'The type of model data to deploy.
-                                      Allowed values are: S3Object and S3Prefix.'
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
                                     type: string
                                   s3Uri:
                                     description: The S3 path of model data to deploy.
@@ -2428,12 +2995,13 @@ spec:
                               type: array
                           type: object
                         modelDataUrl:
-                          description: The URL for the S3 location where model artifacts
+                          description: URL for the S3 location where model artifacts
                             are stored.
                           type: string
                         modelPackageName:
-                          description: The Amazon Resource Name (ARN) of the model
-                            package to use to create the model.
+                          description: |-
+                            Amazon Resource Name (ARN) of the model package to use to create the model.
+                            A list of key value pairs.
                           type: string
                         multiModelConfig:
                           description: Specifies additional configuration for multi-model
@@ -2466,32 +3034,78 @@ spec:
                     type: string
                   inferenceExecutionConfig:
                     description: Specifies details of how containers in a multi-container
-                      endpoint are called. see Inference Execution Config.
+                      endpoint are called. See Inference Execution Config.
                     properties:
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                     type: object
                   primaryContainer:
-                    description: The primary docker image containing inference code
-                      that is used when the model is deployed for predictions.  If
-                      not specified, the container argument is required. Fields are
-                      documented below.
+                    description: Primary docker image containing inference code that
+                      is used when the model is deployed for predictions.  If not
+                      specified, the container argument is required. Fields are documented
+                      below.
                     properties:
+                      additionalModelDataSource:
+                        description: Additional data sources that are available to
+                          the model in addition to those specified in model_data_source.
+                          See Additional Model Data Source.
+                        items:
+                          properties:
+                            channelName:
+                              description: Custom name for the additional model data
+                                source object. It will be stored in /opt/ml/additional-model-data-sources/<channel_name>/.
+                              type: string
+                            s3DataSource:
+                              description: S3 location of model data to deploy. See
+                                S3 Data Source.
+                              items:
+                                properties:
+                                  compressionType:
+                                    description: 'How the model data is prepared.
+                                      Allowed values are: None and Gzip.'
+                                    type: string
+                                  modelAccessConfig:
+                                    description: Specifies the access configuration
+                                      file for the ML model. You can explicitly accept
+                                      the model end-user license agreement (EULA)
+                                      within the [model_access_config configuration
+                                      block]. See Model Access Config.
+                                    properties:
+                                      acceptEula:
+                                        description: Specifies agreement to the model
+                                          end-user license agreement (EULA). The value
+                                          must be set to true in order to accept the
+                                          EULA that this model requires. You are responsible
+                                          for reviewing and complying with any applicable
+                                          license terms and making sure they are acceptable
+                                          for your use case before downloading or
+                                          using a model.
+                                        type: boolean
+                                    type: object
+                                  s3DataType:
+                                    description: 'Type of model data to deploy. Allowed
+                                      values are: S3Object and S3Prefix.'
+                                    type: string
+                                  s3Uri:
+                                    description: The S3 path of model data to deploy.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       containerHostname:
-                        description: The DNS host name for the container.
+                        description: DNS host name for the container.
                         type: string
                       environment:
                         additionalProperties:
                           type: string
-                        description: |-
-                          Environment variables for the Docker container.
-                          A list of key value pairs.
+                        description: Environment variables for the Docker container.
                         type: object
                         x-kubernetes-map-type: granular
                       image:
-                        description: The registry path where the inference code image
+                        description: Registry path where the inference code image
                           is stored in Amazon ECR.
                         type: string
                       imageConfig:
@@ -2517,32 +3131,32 @@ spec:
                               Auth Config.
                             properties:
                               repositoryCredentialsProviderArn:
-                                description: The Amazon Resource Name (ARN) of an
-                                  AWS Lambda function that provides credentials to
-                                  authenticate to the private Docker registry where
-                                  your model image is hosted. For information about
-                                  how to create an AWS Lambda function, see Create
-                                  a Lambda function with the console in the AWS Lambda
-                                  Developer Guide.
+                                description: Amazon Resource Name (ARN) of an AWS
+                                  Lambda function that provides credentials to authenticate
+                                  to the private Docker registry where your model
+                                  image is hosted. For information about how to create
+                                  an AWS Lambda function, see Create a Lambda function
+                                  with the console in the AWS Lambda Developer Guide.
                                 type: string
                             type: object
                         type: object
                       inferenceSpecificationName:
-                        description: The inference specification name in the model
-                          package version.
+                        description: Inference specification name in the model package
+                          version.
                         type: string
                       mode:
-                        description: The container hosts value SingleModel/MultiModel.
-                          The default value is SingleModel.
+                        description: 'Container hosts value. Allowed values are: SingleModel
+                          and MultiModel. The default value is SingleModel.'
                         type: string
                       modelDataSource:
-                        description: The location of model data to deploy. Use this
-                          for uncompressed model deployment. For information about
-                          how to deploy an uncompressed model, see Deploying uncompressed
+                        description: Location of model data to deploy. Use this for
+                          uncompressed model deployment. For information about how
+                          to deploy an uncompressed model, see Deploying uncompressed
                           models in the AWS SageMaker AI Developer Guide.
                         properties:
                           s3DataSource:
-                            description: The S3 location of model data to deploy.
+                            description: S3 location of model data to deploy. See
+                              S3 Data Source.
                             items:
                               properties:
                                 compressionType:
@@ -2554,22 +3168,22 @@ spec:
                                     file for the ML model. You can explicitly accept
                                     the model end-user license agreement (EULA) within
                                     the [model_access_config configuration block].
-                                    see Model Access Config.
+                                    See Model Access Config.
                                   properties:
                                     acceptEula:
                                       description: Specifies agreement to the model
-                                        end-user license agreement (EULA). The AcceptEula
-                                        value must be explicitly defined as true in
-                                        order to accept the EULA that this model requires.
-                                        You are responsible for reviewing and complying
-                                        with any applicable license terms and making
-                                        sure they are acceptable for your use case
-                                        before downloading or using a model.
+                                        end-user license agreement (EULA). The value
+                                        must be set to true in order to accept the
+                                        EULA that this model requires. You are responsible
+                                        for reviewing and complying with any applicable
+                                        license terms and making sure they are acceptable
+                                        for your use case before downloading or using
+                                        a model.
                                       type: boolean
                                   type: object
                                 s3DataType:
-                                  description: 'The type of model data to deploy.
-                                    Allowed values are: S3Object and S3Prefix.'
+                                  description: 'Type of model data to deploy. Allowed
+                                    values are: S3Object and S3Prefix.'
                                   type: string
                                 s3Uri:
                                   description: The S3 path of model data to deploy.
@@ -2578,12 +3192,13 @@ spec:
                             type: array
                         type: object
                       modelDataUrl:
-                        description: The URL for the S3 location where model artifacts
+                        description: URL for the S3 location where model artifacts
                           are stored.
                         type: string
                       modelPackageName:
-                        description: The Amazon Resource Name (ARN) of the model package
-                          to use to create the model.
+                        description: |-
+                          Amazon Resource Name (ARN) of the model package to use to create the model.
+                          A list of key value pairs.
                         type: string
                       multiModelConfig:
                         description: Specifies additional configuration for multi-model
@@ -2624,14 +3239,20 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfig:
                     description: Specifies the VPC that you want your model to connect
-                      to. VpcConfig is used in hosting services and in batch transform.
+                      to. This configuration is used in hosting services and in batch
+                      transform. See VPC Config.
                     properties:
                       securityGroupIds:
+                        description: List of security group IDs you want to be applied
+                          to your training job or model. Specify the security groups
+                          for the VPC that is specified in the Subnets field.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       subnets:
+                        description: List of subnet IDs in the VPC to which you want
+                          to connect your training job or model.
                         items:
                           type: string
                         type: array

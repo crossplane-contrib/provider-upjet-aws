@@ -13,10 +13,65 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CloudWatchLoggingConfigurationInitParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// Repeatable block defining log types to be delivered to CloudWatch.
+	LogType []LogTypeInitParameters `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
+type CloudWatchLoggingConfigurationObservation struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// Repeatable block defining log types to be delivered to CloudWatch.
+	LogType []LogTypeObservation `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
+type CloudWatchLoggingConfigurationParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	// +kubebuilder:validation:Optional
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	// +kubebuilder:validation:Optional
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// Repeatable block defining log types to be delivered to CloudWatch.
+	// +kubebuilder:validation:Optional
+	LogType []LogTypeParameters `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
 type ConfigurationInitParameters struct {
 
 	// Integer for the upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan. Must be at least 10485760.
 	BytesScannedCutoffPerQuery *float64 `json:"bytesScannedCutoffPerQuery,omitempty" tf:"bytes_scanned_cutoff_per_query,omitempty"`
+
+	// Configuration block to specify the KMS key that is used to encrypt the user's data stores in Athena. This setting applies to the PySpark engine for Athena notebooks. See Customer Content Encryption Configuration below.
+	CustomerContentEncryptionConfiguration []CustomerContentEncryptionConfigurationInitParameters `json:"customerContentEncryptionConfiguration,omitempty" tf:"customer_content_encryption_configuration,omitempty"`
+
+	// Boolean indicating whether a minimum level of encryption is enforced for the workgroup for query and calculation results written to Amazon S3.
+	EnableMinimumEncryptionConfiguration *bool `json:"enableMinimumEncryptionConfiguration,omitempty" tf:"enable_minimum_encryption_configuration,omitempty"`
 
 	// Boolean whether the settings for the workgroup override client-side settings. For more information, see Workgroup Settings Override Client-Side Settings. Defaults to true.
 	EnforceWorkgroupConfiguration *bool `json:"enforceWorkgroupConfiguration,omitempty" tf:"enforce_workgroup_configuration,omitempty"`
@@ -30,8 +85,17 @@ type ConfigurationInitParameters struct {
 	// Configuration block to set up an IAM Identity Center enabled workgroup. See Identity Center Configuration below.
 	IdentityCenterConfiguration []IdentityCenterConfigurationInitParameters `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
+	// Configuration block for storing results in Athena owned storage. See Managed Query Results Configuration below.
+	ManagedQueryResultsConfiguration []ManagedQueryResultsConfigurationInitParameters `json:"managedQueryResultsConfiguration,omitempty" tf:"managed_query_results_configuration,omitempty"`
+
+	// Configuration block for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc. Only applicable to Apache Spark engine. See Monitoring Configuration below.
+	MonitoringConfiguration []MonitoringConfigurationInitParameters `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
+
+	// Configuration block for S3 access grants. See Query Results S3 Access Grants Configuration below.
+	QueryResultsS3AccessGrantsConfiguration []QueryResultsS3AccessGrantsConfigurationInitParameters `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
 	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
 	RequesterPaysEnabled *bool `json:"requesterPaysEnabled,omitempty" tf:"requester_pays_enabled,omitempty"`
@@ -45,6 +109,12 @@ type ConfigurationObservation struct {
 	// Integer for the upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan. Must be at least 10485760.
 	BytesScannedCutoffPerQuery *float64 `json:"bytesScannedCutoffPerQuery,omitempty" tf:"bytes_scanned_cutoff_per_query,omitempty"`
 
+	// Configuration block to specify the KMS key that is used to encrypt the user's data stores in Athena. This setting applies to the PySpark engine for Athena notebooks. See Customer Content Encryption Configuration below.
+	CustomerContentEncryptionConfiguration []CustomerContentEncryptionConfigurationObservation `json:"customerContentEncryptionConfiguration,omitempty" tf:"customer_content_encryption_configuration,omitempty"`
+
+	// Boolean indicating whether a minimum level of encryption is enforced for the workgroup for query and calculation results written to Amazon S3.
+	EnableMinimumEncryptionConfiguration *bool `json:"enableMinimumEncryptionConfiguration,omitempty" tf:"enable_minimum_encryption_configuration,omitempty"`
+
 	// Boolean whether the settings for the workgroup override client-side settings. For more information, see Workgroup Settings Override Client-Side Settings. Defaults to true.
 	EnforceWorkgroupConfiguration *bool `json:"enforceWorkgroupConfiguration,omitempty" tf:"enforce_workgroup_configuration,omitempty"`
 
@@ -57,8 +127,17 @@ type ConfigurationObservation struct {
 	// Configuration block to set up an IAM Identity Center enabled workgroup. See Identity Center Configuration below.
 	IdentityCenterConfiguration []IdentityCenterConfigurationObservation `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
+	// Configuration block for storing results in Athena owned storage. See Managed Query Results Configuration below.
+	ManagedQueryResultsConfiguration []ManagedQueryResultsConfigurationObservation `json:"managedQueryResultsConfiguration,omitempty" tf:"managed_query_results_configuration,omitempty"`
+
+	// Configuration block for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc. Only applicable to Apache Spark engine. See Monitoring Configuration below.
+	MonitoringConfiguration []MonitoringConfigurationObservation `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
+
+	// Configuration block for S3 access grants. See Query Results S3 Access Grants Configuration below.
+	QueryResultsS3AccessGrantsConfiguration []QueryResultsS3AccessGrantsConfigurationObservation `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
 	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
 	RequesterPaysEnabled *bool `json:"requesterPaysEnabled,omitempty" tf:"requester_pays_enabled,omitempty"`
@@ -72,6 +151,14 @@ type ConfigurationParameters struct {
 	// Integer for the upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan. Must be at least 10485760.
 	// +kubebuilder:validation:Optional
 	BytesScannedCutoffPerQuery *float64 `json:"bytesScannedCutoffPerQuery,omitempty" tf:"bytes_scanned_cutoff_per_query,omitempty"`
+
+	// Configuration block to specify the KMS key that is used to encrypt the user's data stores in Athena. This setting applies to the PySpark engine for Athena notebooks. See Customer Content Encryption Configuration below.
+	// +kubebuilder:validation:Optional
+	CustomerContentEncryptionConfiguration []CustomerContentEncryptionConfigurationParameters `json:"customerContentEncryptionConfiguration,omitempty" tf:"customer_content_encryption_configuration,omitempty"`
+
+	// Boolean indicating whether a minimum level of encryption is enforced for the workgroup for query and calculation results written to Amazon S3.
+	// +kubebuilder:validation:Optional
+	EnableMinimumEncryptionConfiguration *bool `json:"enableMinimumEncryptionConfiguration,omitempty" tf:"enable_minimum_encryption_configuration,omitempty"`
 
 	// Boolean whether the settings for the workgroup override client-side settings. For more information, see Workgroup Settings Override Client-Side Settings. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -89,9 +176,21 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityCenterConfiguration []IdentityCenterConfigurationParameters `json:"identityCenterConfiguration,omitempty" tf:"identity_center_configuration,omitempty"`
 
+	// Configuration block for storing results in Athena owned storage. See Managed Query Results Configuration below.
+	// +kubebuilder:validation:Optional
+	ManagedQueryResultsConfiguration []ManagedQueryResultsConfigurationParameters `json:"managedQueryResultsConfiguration,omitempty" tf:"managed_query_results_configuration,omitempty"`
+
+	// Configuration block for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc. Only applicable to Apache Spark engine. See Monitoring Configuration below.
+	// +kubebuilder:validation:Optional
+	MonitoringConfiguration []MonitoringConfigurationParameters `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
+
+	// Configuration block for S3 access grants. See Query Results S3 Access Grants Configuration below.
+	// +kubebuilder:validation:Optional
+	QueryResultsS3AccessGrantsConfiguration []QueryResultsS3AccessGrantsConfigurationParameters `json:"queryResultsS3AccessGrantsConfiguration,omitempty" tf:"query_results_s3_access_grants_configuration,omitempty"`
 
 	// If set to true , allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false , workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is false . For more information about Requester Pays buckets, see Requester Pays Buckets in the Amazon Simple Storage Service Developer Guide.
 	// +kubebuilder:validation:Optional
@@ -100,6 +199,25 @@ type ConfigurationParameters struct {
 	// Configuration block with result settings. See Result Configuration below.
 	// +kubebuilder:validation:Optional
 	ResultConfiguration []ResultConfigurationParameters `json:"resultConfiguration,omitempty" tf:"result_configuration,omitempty"`
+}
+
+type CustomerContentEncryptionConfigurationInitParameters struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type CustomerContentEncryptionConfigurationObservation struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type CustomerContentEncryptionConfigurationParameters struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }
 
 type EngineVersionInitParameters struct {
@@ -153,6 +271,193 @@ type IdentityCenterConfigurationParameters struct {
 	IdentityCenterInstanceArn *string `json:"identityCenterInstanceArn,omitempty" tf:"identity_center_instance_arn,omitempty"`
 }
 
+type LogTypeInitParameters struct {
+
+	// Type of worker to deliver logs to CloudWatch (for example, SPARK_DRIVER and SPARK_EXECUTOR).
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// List of log types to be delivered to CloudWatch (for example, STDOUT and STDERR).
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LogTypeObservation struct {
+
+	// Type of worker to deliver logs to CloudWatch (for example, SPARK_DRIVER and SPARK_EXECUTOR).
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// List of log types to be delivered to CloudWatch (for example, STDOUT and STDERR).
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LogTypeParameters struct {
+
+	// Type of worker to deliver logs to CloudWatch (for example, SPARK_DRIVER and SPARK_EXECUTOR).
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// List of log types to be delivered to CloudWatch (for example, STDOUT and STDERR).
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type ManagedLoggingConfigurationInitParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedLoggingConfigurationObservation struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedLoggingConfigurationParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationEncryptionConfigurationInitParameters struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationEncryptionConfigurationObservation struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationEncryptionConfigurationParameters struct {
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationInitParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block with encryption settings. See Encryption Configuration below.
+	EncryptionConfiguration []ManagedQueryResultsConfigurationEncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationObservation struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block with encryption settings. See Encryption Configuration below.
+	EncryptionConfiguration []ManagedQueryResultsConfigurationEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+}
+
+type ManagedQueryResultsConfigurationParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block with encryption settings. See Encryption Configuration below.
+	// +kubebuilder:validation:Optional
+	EncryptionConfiguration []ManagedQueryResultsConfigurationEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+}
+
+type MonitoringConfigurationInitParameters struct {
+
+	// Configuration block for delivering logs to Amazon CloudWatch log groups. See CloudWatch Logging Configuration below.
+	CloudWatchLoggingConfiguration []CloudWatchLoggingConfigurationInitParameters `json:"cloudWatchLoggingConfiguration,omitempty" tf:"cloud_watch_logging_configuration,omitempty"`
+
+	// Configuration block for managed log persistence. See Managed Logging Configuration below.
+	ManagedLoggingConfiguration []ManagedLoggingConfigurationInitParameters `json:"managedLoggingConfiguration,omitempty" tf:"managed_logging_configuration,omitempty"`
+
+	// Configuration block for delivering logs to Amazon S3 buckets. See S3 Logging Configuration below.
+	S3LoggingConfiguration []S3LoggingConfigurationInitParameters `json:"s3LoggingConfiguration,omitempty" tf:"s3_logging_configuration,omitempty"`
+}
+
+type MonitoringConfigurationObservation struct {
+
+	// Configuration block for delivering logs to Amazon CloudWatch log groups. See CloudWatch Logging Configuration below.
+	CloudWatchLoggingConfiguration []CloudWatchLoggingConfigurationObservation `json:"cloudWatchLoggingConfiguration,omitempty" tf:"cloud_watch_logging_configuration,omitempty"`
+
+	// Configuration block for managed log persistence. See Managed Logging Configuration below.
+	ManagedLoggingConfiguration []ManagedLoggingConfigurationObservation `json:"managedLoggingConfiguration,omitempty" tf:"managed_logging_configuration,omitempty"`
+
+	// Configuration block for delivering logs to Amazon S3 buckets. See S3 Logging Configuration below.
+	S3LoggingConfiguration []S3LoggingConfigurationObservation `json:"s3LoggingConfiguration,omitempty" tf:"s3_logging_configuration,omitempty"`
+}
+
+type MonitoringConfigurationParameters struct {
+
+	// Configuration block for delivering logs to Amazon CloudWatch log groups. See CloudWatch Logging Configuration below.
+	// +kubebuilder:validation:Optional
+	CloudWatchLoggingConfiguration []CloudWatchLoggingConfigurationParameters `json:"cloudWatchLoggingConfiguration,omitempty" tf:"cloud_watch_logging_configuration,omitempty"`
+
+	// Configuration block for managed log persistence. See Managed Logging Configuration below.
+	// +kubebuilder:validation:Optional
+	ManagedLoggingConfiguration []ManagedLoggingConfigurationParameters `json:"managedLoggingConfiguration,omitempty" tf:"managed_logging_configuration,omitempty"`
+
+	// Configuration block for delivering logs to Amazon S3 buckets. See S3 Logging Configuration below.
+	// +kubebuilder:validation:Optional
+	S3LoggingConfiguration []S3LoggingConfigurationParameters `json:"s3LoggingConfiguration,omitempty" tf:"s3_logging_configuration,omitempty"`
+}
+
+type QueryResultsS3AccessGrantsConfigurationInitParameters struct {
+
+	// The authentication type used for Amazon S3 access grants. Currently, only DIRECTORY_IDENTITY is supported.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// When enabled, appends the user ID as an Amazon S3 path prefix to the query result output location. Defaults to false.
+	CreateUserLevelPrefix *bool `json:"createUserLevelPrefix,omitempty" tf:"create_user_level_prefix,omitempty"`
+
+	// Specifies whether Amazon S3 access grants are enabled for query results.
+	EnableS3AccessGrants *bool `json:"enableS3AccessGrants,omitempty" tf:"enable_s3_access_grants,omitempty"`
+}
+
+type QueryResultsS3AccessGrantsConfigurationObservation struct {
+
+	// The authentication type used for Amazon S3 access grants. Currently, only DIRECTORY_IDENTITY is supported.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// When enabled, appends the user ID as an Amazon S3 path prefix to the query result output location. Defaults to false.
+	CreateUserLevelPrefix *bool `json:"createUserLevelPrefix,omitempty" tf:"create_user_level_prefix,omitempty"`
+
+	// Specifies whether Amazon S3 access grants are enabled for query results.
+	EnableS3AccessGrants *bool `json:"enableS3AccessGrants,omitempty" tf:"enable_s3_access_grants,omitempty"`
+}
+
+type QueryResultsS3AccessGrantsConfigurationParameters struct {
+
+	// The authentication type used for Amazon S3 access grants. Currently, only DIRECTORY_IDENTITY is supported.
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+
+	// When enabled, appends the user ID as an Amazon S3 path prefix to the query result output location. Defaults to false.
+	// +kubebuilder:validation:Optional
+	CreateUserLevelPrefix *bool `json:"createUserLevelPrefix,omitempty" tf:"create_user_level_prefix,omitempty"`
+
+	// Specifies whether Amazon S3 access grants are enabled for query results.
+	// +kubebuilder:validation:Optional
+	EnableS3AccessGrants *bool `json:"enableS3AccessGrants" tf:"enable_s3_access_grants,omitempty"`
+}
+
 type ResultConfigurationACLConfigurationInitParameters struct {
 
 	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
@@ -177,7 +482,7 @@ type ResultConfigurationEncryptionConfigurationInitParameters struct {
 	// Whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
-	// For SSE_KMS and CSE_KMS, this is the KMS key ARN.
+	// Customer managed KMS key that is used to encrypt the user's data stores in Athena.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -196,7 +501,7 @@ type ResultConfigurationEncryptionConfigurationObservation struct {
 	// Whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
-	// For SSE_KMS and CSE_KMS, this is the KMS key ARN.
+	// Customer managed KMS key that is used to encrypt the user's data stores in Athena.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
 
@@ -206,7 +511,7 @@ type ResultConfigurationEncryptionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
-	// For SSE_KMS and CSE_KMS, this is the KMS key ARN.
+	// Customer managed KMS key that is used to encrypt the user's data stores in Athena.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -268,6 +573,45 @@ type ResultConfigurationParameters struct {
 	// Location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files.
 	// +kubebuilder:validation:Optional
 	OutputLocation *string `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
+}
+
+type S3LoggingConfigurationInitParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Amazon S3 destination URI (s3://bucket/prefix) for log publishing.
+	LogLocation *string `json:"logLocation,omitempty" tf:"log_location,omitempty"`
+}
+
+type S3LoggingConfigurationObservation struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Amazon S3 destination URI (s3://bucket/prefix) for log publishing.
+	LogLocation *string `json:"logLocation,omitempty" tf:"log_location,omitempty"`
+}
+
+type S3LoggingConfigurationParameters struct {
+
+	// Boolean whether Amazon CloudWatch logging is enabled for the workgroup.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Amazon S3 destination URI (s3://bucket/prefix) for log publishing.
+	// +kubebuilder:validation:Optional
+	LogLocation *string `json:"logLocation,omitempty" tf:"log_location,omitempty"`
 }
 
 type WorkgroupInitParameters struct {

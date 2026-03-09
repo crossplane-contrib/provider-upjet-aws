@@ -142,6 +142,9 @@ type ImageInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArnSelector *v1.NamespacedSelector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
+	// Configuration block with logging configuration. Detailed below.
+	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -170,6 +173,7 @@ type ImageObservation struct {
 	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
+	// Amazon Resource Name (ARN) of the image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amazon Resource Name (ARN) of the image recipe.
@@ -183,6 +187,9 @@ type ImageObservation struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
+
+	// Configuration block with logging configuration. Detailed below.
+	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Name of the AMI.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -279,6 +286,10 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArnSelector *v1.NamespacedSelector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
+	// Configuration block with logging configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
@@ -350,6 +361,25 @@ type ImageTestsConfigurationParameters struct {
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
 	// +kubebuilder:validation:Optional
 	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+}
+
+type LoggingConfigurationInitParameters struct {
+
+	// Name of the CloudWatch Log Group to send logs to.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+}
+
+type LoggingConfigurationObservation struct {
+
+	// Name of the CloudWatch Log Group to send logs to.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+}
+
+type LoggingConfigurationParameters struct {
+
+	// Name of the CloudWatch Log Group to send logs to.
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
 }
 
 type OutputResourcesInitParameters struct {

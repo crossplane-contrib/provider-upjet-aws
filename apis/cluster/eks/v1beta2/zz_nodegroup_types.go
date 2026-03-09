@@ -358,21 +358,120 @@ type NodeGroupParameters struct {
 
 type NodeRepairConfigInitParameters struct {
 
-	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+	MaxParallelNodesRepairedCount *float64 `json:"maxParallelNodesRepairedCount,omitempty" tf:"max_parallel_nodes_repaired_count,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+	MaxParallelNodesRepairedPercentage *float64 `json:"maxParallelNodesRepairedPercentage,omitempty" tf:"max_parallel_nodes_repaired_percentage,omitempty"`
+
+	// Count threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+	MaxUnhealthyNodeThresholdCount *float64 `json:"maxUnhealthyNodeThresholdCount,omitempty" tf:"max_unhealthy_node_threshold_count,omitempty"`
+
+	// Percentage threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_count.
+	MaxUnhealthyNodeThresholdPercentage *float64 `json:"maxUnhealthyNodeThresholdPercentage,omitempty" tf:"max_unhealthy_node_threshold_percentage,omitempty"`
+
+	// Granular overrides for specific repair actions. See node_repair_config_overrides below for details.
+	NodeRepairConfigOverrides []NodeRepairConfigOverridesInitParameters `json:"nodeRepairConfigOverrides,omitempty" tf:"node_repair_config_overrides,omitempty"`
 }
 
 type NodeRepairConfigObservation struct {
 
-	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+	MaxParallelNodesRepairedCount *float64 `json:"maxParallelNodesRepairedCount,omitempty" tf:"max_parallel_nodes_repaired_count,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+	MaxParallelNodesRepairedPercentage *float64 `json:"maxParallelNodesRepairedPercentage,omitempty" tf:"max_parallel_nodes_repaired_percentage,omitempty"`
+
+	// Count threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+	MaxUnhealthyNodeThresholdCount *float64 `json:"maxUnhealthyNodeThresholdCount,omitempty" tf:"max_unhealthy_node_threshold_count,omitempty"`
+
+	// Percentage threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_count.
+	MaxUnhealthyNodeThresholdPercentage *float64 `json:"maxUnhealthyNodeThresholdPercentage,omitempty" tf:"max_unhealthy_node_threshold_percentage,omitempty"`
+
+	// Granular overrides for specific repair actions. See node_repair_config_overrides below for details.
+	NodeRepairConfigOverrides []NodeRepairConfigOverridesObservation `json:"nodeRepairConfigOverrides,omitempty" tf:"node_repair_config_overrides,omitempty"`
+}
+
+type NodeRepairConfigOverridesInitParameters struct {
+
+	// Minimum time in minutes to wait before attempting to repair a node with the specified node_monitoring_condition and node_unhealthy_reason.
+	MinRepairWaitTimeMins *float64 `json:"minRepairWaitTimeMins,omitempty" tf:"min_repair_wait_time_mins,omitempty"`
+
+	// Unhealthy condition reported by the node monitoring agent that this override applies to.
+	NodeMonitoringCondition *string `json:"nodeMonitoringCondition,omitempty" tf:"node_monitoring_condition,omitempty"`
+
+	// Reason reported by the node monitoring agent that this override applies to.
+	NodeUnhealthyReason *string `json:"nodeUnhealthyReason,omitempty" tf:"node_unhealthy_reason,omitempty"`
+
+	// Repair action to take for nodes when all of the specified conditions are met. Valid values are defined by the EKS API.
+	RepairAction *string `json:"repairAction,omitempty" tf:"repair_action,omitempty"`
+}
+
+type NodeRepairConfigOverridesObservation struct {
+
+	// Minimum time in minutes to wait before attempting to repair a node with the specified node_monitoring_condition and node_unhealthy_reason.
+	MinRepairWaitTimeMins *float64 `json:"minRepairWaitTimeMins,omitempty" tf:"min_repair_wait_time_mins,omitempty"`
+
+	// Unhealthy condition reported by the node monitoring agent that this override applies to.
+	NodeMonitoringCondition *string `json:"nodeMonitoringCondition,omitempty" tf:"node_monitoring_condition,omitempty"`
+
+	// Reason reported by the node monitoring agent that this override applies to.
+	NodeUnhealthyReason *string `json:"nodeUnhealthyReason,omitempty" tf:"node_unhealthy_reason,omitempty"`
+
+	// Repair action to take for nodes when all of the specified conditions are met. Valid values are defined by the EKS API.
+	RepairAction *string `json:"repairAction,omitempty" tf:"repair_action,omitempty"`
+}
+
+type NodeRepairConfigOverridesParameters struct {
+
+	// Minimum time in minutes to wait before attempting to repair a node with the specified node_monitoring_condition and node_unhealthy_reason.
+	// +kubebuilder:validation:Optional
+	MinRepairWaitTimeMins *float64 `json:"minRepairWaitTimeMins" tf:"min_repair_wait_time_mins,omitempty"`
+
+	// Unhealthy condition reported by the node monitoring agent that this override applies to.
+	// +kubebuilder:validation:Optional
+	NodeMonitoringCondition *string `json:"nodeMonitoringCondition" tf:"node_monitoring_condition,omitempty"`
+
+	// Reason reported by the node monitoring agent that this override applies to.
+	// +kubebuilder:validation:Optional
+	NodeUnhealthyReason *string `json:"nodeUnhealthyReason" tf:"node_unhealthy_reason,omitempty"`
+
+	// Repair action to take for nodes when all of the specified conditions are met. Valid values are defined by the EKS API.
+	// +kubebuilder:validation:Optional
+	RepairAction *string `json:"repairAction" tf:"repair_action,omitempty"`
 }
 
 type NodeRepairConfigParameters struct {
 
-	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default.
+	// Specifies whether to enable node auto repair for the node group. Node auto repair is disabled by default. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+	// +kubebuilder:validation:Optional
+	MaxParallelNodesRepairedCount *float64 `json:"maxParallelNodesRepairedCount,omitempty" tf:"max_parallel_nodes_repaired_count,omitempty"`
+
+	// Maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+	// +kubebuilder:validation:Optional
+	MaxParallelNodesRepairedPercentage *float64 `json:"maxParallelNodesRepairedPercentage,omitempty" tf:"max_parallel_nodes_repaired_percentage,omitempty"`
+
+	// Count threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+	// +kubebuilder:validation:Optional
+	MaxUnhealthyNodeThresholdCount *float64 `json:"maxUnhealthyNodeThresholdCount,omitempty" tf:"max_unhealthy_node_threshold_count,omitempty"`
+
+	// Percentage threshold of unhealthy nodes, above which node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_count.
+	// +kubebuilder:validation:Optional
+	MaxUnhealthyNodeThresholdPercentage *float64 `json:"maxUnhealthyNodeThresholdPercentage,omitempty" tf:"max_unhealthy_node_threshold_percentage,omitempty"`
+
+	// Granular overrides for specific repair actions. See node_repair_config_overrides below for details.
+	// +kubebuilder:validation:Optional
+	NodeRepairConfigOverrides []NodeRepairConfigOverridesParameters `json:"nodeRepairConfigOverrides,omitempty" tf:"node_repair_config_overrides,omitempty"`
 }
 
 type RemoteAccessInitParameters struct {
@@ -529,6 +628,9 @@ type UpdateConfigInitParameters struct {
 
 	// Desired max percentage of unavailable worker nodes during node group update.
 	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+
+	// Strategy to use for updating the node group. Valid values: MINIMAL and DEFAULT.
+	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }
 
 type UpdateConfigObservation struct {
@@ -538,6 +640,9 @@ type UpdateConfigObservation struct {
 
 	// Desired max percentage of unavailable worker nodes during node group update.
 	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+
+	// Strategy to use for updating the node group. Valid values: MINIMAL and DEFAULT.
+	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }
 
 type UpdateConfigParameters struct {
@@ -549,6 +654,10 @@ type UpdateConfigParameters struct {
 	// Desired max percentage of unavailable worker nodes during node group update.
 	// +kubebuilder:validation:Optional
 	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+
+	// Strategy to use for updating the node group. Valid values: MINIMAL and DEFAULT.
+	// +kubebuilder:validation:Optional
+	UpdateStrategy *string `json:"updateStrategy,omitempty" tf:"update_strategy,omitempty"`
 }
 
 // NodeGroupSpec defines the desired state of NodeGroup

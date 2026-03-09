@@ -102,6 +102,18 @@ spec:
                           Mode is enabled..
                         type: string
                     type: object
+                  controlPlaneScalingConfig:
+                    description: Configuration block for the control plane scaling
+                      tier. See EKS Provisioned Control Plane for more information.
+                      Detailed below.
+                    properties:
+                      tier:
+                        description: The control plane scaling tier. Valid values
+                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
+                          standard. For more information about each tier, see EKS
+                          Provisioned Control Plane.
+                        type: string
+                    type: object
                   deletionProtection:
                     description: 'Whether to enable deletion protection for the cluster.
                       When enabled, the cluster cannot be deleted unless deletion
@@ -654,6 +666,18 @@ spec:
                           Managed Instances in your EKS Auto Mode cluster. This value
                           cannot be changed after the compute capability of EKS Auto
                           Mode is enabled..
+                        type: string
+                    type: object
+                  controlPlaneScalingConfig:
+                    description: Configuration block for the control plane scaling
+                      tier. See EKS Provisioned Control Plane for more information.
+                      Detailed below.
+                    properties:
+                      tier:
+                        description: The control plane scaling tier. Valid values
+                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
+                          standard. For more information about each tier, see EKS
+                          Provisioned Control Plane.
                         type: string
                     type: object
                   deletionProtection:
@@ -1276,6 +1300,18 @@ spec:
                           Managed Instances in your EKS Auto Mode cluster. This value
                           cannot be changed after the compute capability of EKS Auto
                           Mode is enabled..
+                        type: string
+                    type: object
+                  controlPlaneScalingConfig:
+                    description: Configuration block for the control plane scaling
+                      tier. See EKS Provisioned Control Plane for more information.
+                      Detailed below.
+                    properties:
+                      tier:
+                        description: The control plane scaling tier. Valid values
+                          are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to
+                          standard. For more information about each tier, see EKS
+                          Provisioned Control Plane.
                         type: string
                     type: object
                   createdAt:

@@ -36,7 +36,7 @@ type ContainersInitParameters struct {
 	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	SecurityContext []SecurityContextInitParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
 	// Volume mounts for the container.
@@ -66,7 +66,7 @@ type ContainersObservation struct {
 	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	SecurityContext []SecurityContextObservation `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
 	// Volume mounts for the container.
@@ -103,7 +103,7 @@ type ContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	Resources []ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	// +kubebuilder:validation:Optional
 	SecurityContext []SecurityContextParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
@@ -328,7 +328,7 @@ type InitContainersInitParameters struct {
 	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
 	Resources []InitContainersResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	SecurityContext []InitContainersSecurityContextInitParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
 	// Volume mounts for the container.
@@ -358,7 +358,7 @@ type InitContainersObservation struct {
 	// Type and amount of resources to assign to a container. The supported resources include memory, cpu, and nvidia.com/gpu.
 	Resources []InitContainersResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	SecurityContext []InitContainersSecurityContextObservation `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
 	// Volume mounts for the container.
@@ -395,7 +395,7 @@ type InitContainersParameters struct {
 	// +kubebuilder:validation:Optional
 	Resources []InitContainersResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Security context for a job.
+	// Security context for a job. See security_context below.
 	// +kubebuilder:validation:Optional
 	SecurityContext []InitContainersSecurityContextParameters `json:"securityContext,omitempty" tf:"security_context,omitempty"`
 
@@ -434,43 +434,67 @@ type InitContainersResourcesParameters struct {
 }
 
 type InitContainersSecurityContextInitParameters struct {
+
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }
 
 type InitContainersSecurityContextObservation struct {
+
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }
 
 type InitContainersSecurityContextParameters struct {
 
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	// +kubebuilder:validation:Optional
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	// +kubebuilder:validation:Optional
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	// +kubebuilder:validation:Optional
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	// +kubebuilder:validation:Optional
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	// +kubebuilder:validation:Optional
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }
@@ -695,21 +719,21 @@ type JobDefinitionParameters struct {
 
 type MetadataInitParameters struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type MetadataObservation struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type MetadataParameters struct {
 
-	// Key-value pairs used to identify, sort, and organize cube resources.
+	// Key-value pairs used to identify, sort, and organize kubernetes resources.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
@@ -902,43 +926,67 @@ type SecretParameters struct {
 }
 
 type SecurityContextInitParameters struct {
+
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }
 
 type SecurityContextObservation struct {
+
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }
 
 type SecurityContextParameters struct {
 
+	// Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is false.
+	// +kubebuilder:validation:Optional
+	AllowPrivilegeEscalation *bool `json:"allowPrivilegeEscalation,omitempty" tf:"allow_privilege_escalation,omitempty"`
+
+	// When this parameter is true, the container is given elevated permissions on the host container instance. The level of permissions are similar to the root user permissions. The default value is false.
 	// +kubebuilder:validation:Optional
 	Privileged *bool `json:"privileged,omitempty" tf:"privileged,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ReadOnlyRootFileSystem *bool `json:"readOnlyRootFileSystem,omitempty" tf:"read_only_root_file_system,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified group ID (gid). If this parameter isn't specified, the default is the group that's specified in the image metadata.
 	// +kubebuilder:validation:Optional
 	RunAsGroup *float64 `json:"runAsGroup,omitempty" tf:"run_as_group,omitempty"`
 
+	// When this parameter is specified, the container is run as a user with a uid other than 0. If this parameter isn't specified, so such rule is enforced.
 	// +kubebuilder:validation:Optional
 	RunAsNonRoot *bool `json:"runAsNonRoot,omitempty" tf:"run_as_non_root,omitempty"`
 
+	// When this parameter is specified, the container is run as the specified user ID (uid). If this parameter isn't specified, the default is the user that's specified in the image metadata.
 	// +kubebuilder:validation:Optional
 	RunAsUser *float64 `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
 }

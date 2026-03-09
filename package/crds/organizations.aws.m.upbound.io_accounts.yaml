@@ -225,7 +225,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN for this account.
+                    description: ARN for this account.
                     type: string
                   closeOnDeletion:
                     description: If true, a deletion event will close the account.
@@ -256,11 +256,13 @@ spec:
                       it will try to recreate the account.
                     type: string
                   id:
-                    description: The AWS account id
+                    description: AWS account ID.
                     type: string
                   joinedMethod:
+                    description: Method by which the account joined the organization.
                     type: string
                   joinedTimestamp:
+                    description: Date the account became a part of the organization.
                     type: string
                   name:
                     description: Friendly name for the member account.
@@ -270,8 +272,12 @@ spec:
                       account. Defaults to the Organization default Root ID. A configuration
                       must be present for this argument to perform drift detection.
                     type: string
+                  state:
+                    description: State of the account in the organization.
+                    type: string
                   status:
-                    description: The status of the account in the organization.
+                    description: (Deprecated use state instead) Status of the account
+                      in the organization.
                     type: string
                   tags:
                     additionalProperties:
