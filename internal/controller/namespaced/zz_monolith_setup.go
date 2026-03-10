@@ -425,6 +425,7 @@ import (
 	registryscanningconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecr/registryscanningconfiguration"
 	replicationconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecr/replicationconfiguration"
 	repositoryecr "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecr/repository"
+	repositorycreationtemplate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecr/repositorycreationtemplate"
 	repositorypolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecr/repositorypolicy"
 	repositoryecrpublic "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecrpublic/repository"
 	repositorypolicyecrpublic "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ecrpublic/repositorypolicy"
@@ -1436,6 +1437,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		registryscanningconfiguration.Setup,
 		replicationconfiguration.Setup,
 		repositoryecr.Setup,
+		repositorycreationtemplate.Setup,
 		repositorypolicy.Setup,
 		repositoryecrpublic.Setup,
 		repositorypolicyecrpublic.Setup,
@@ -2453,6 +2455,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		registryscanningconfiguration.SetupGated,
 		replicationconfiguration.SetupGated,
 		repositoryecr.SetupGated,
+		repositorycreationtemplate.SetupGated,
 		repositorypolicy.SetupGated,
 		repositoryecrpublic.SetupGated,
 		repositorypolicyecrpublic.SetupGated,

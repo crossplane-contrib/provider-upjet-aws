@@ -19,4 +19,7 @@ func (tr *RegistryPolicy) Hub() {}
 func (tr *RegistryScanningConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RepositoryCreationTemplate) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *RepositoryPolicy) Hub() {}
