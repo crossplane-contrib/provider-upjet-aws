@@ -1,158 +1,161 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
   ],
-// The maximum number of PRs to be created in parallel
-  "prConcurrentLimit": 5,
-// The branches renovate should target
-  "baseBranches": ["main"],
-  "ignorePaths": ["design/**"],
-  "postUpdateOptions": ["gomodTidy"],
-// By default renovate will auto detect whether semantic commits have been used
-// in the recent history and comply with that, we explicitly disable it
-  "semanticCommits": "disabled",
-// All PRs should have a label
-  "labels": ["automated"],
-// PackageRules disabled below should be enabled in case of vulnerabilities
-  "vulnerabilityAlerts": {
-    "enabled": true
+  prConcurrentLimit: 5,
+  baseBranchPatterns: [
+    'main',
+  ],
+  ignorePaths: [
+    'design/**',
+  ],
+  postUpdateOptions: [
+    'gomodTidy',
+  ],
+  semanticCommits: 'disabled',
+  labels: [
+    'automated',
+  ],
+  vulnerabilityAlerts: {
+    enabled: true,
   },
-  "packageRules": [
+  packageRules: [
     {
-// We need to ignore k8s.io/client-go older versions as they switched to
-// semantic version and old tags are still available in the repo.
-      "matchDatasources": [
-        "go"
+      matchDatasources: [
+        'go',
       ],
-      "matchDepNames": [
-        "k8s.io/client-go"
+      matchDepNames: [
+        'k8s.io/client-go',
       ],
-      "allowedVersions": "<1.0"
-    }, {
-// We want a single PR for all the patches bumps of kubernetes related
-// dependencies, as most of the times these are all strictly related.
-      "matchDatasources": [
-        "go"
+      allowedVersions: '<1.0',
+    },
+    {
+      matchDatasources: [
+        'go',
       ],
-      "groupName": "kubernetes patches",
-      "matchUpdateTypes": [
-        "patch",
-        "digest"
+      groupName: 'kubernetes patches',
+      matchUpdateTypes: [
+        'patch',
+        'digest',
       ],
-      "matchPackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
-      ]
-    }, {
-// We want dedicated PRs for each minor and major bumps to kubernetes related
-// dependencies.
-      "matchDatasources": [
-        "go"
+      matchPackageNames: [
+        'k8s.io{/,}**',
+        'sigs.k8s.io{/,}**',
       ],
-      "matchUpdateTypes": [
-        "major",
-        "minor"
+    },
+    {
+      matchDatasources: [
+        'go',
       ],
-      "matchPackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
-      ]
-    }, {
-// We want dedicated PRs for each bump to non-kubernetes Go dependencies, but
-// only if there are known vulnerabilities in the current version.
-      "matchDatasources": [
-        "go"
+      matchUpdateTypes: [
+        'major',
+        'minor',
       ],
-      "matchPackagePatterns": [
-        "*"
+      matchPackageNames: [
+        'k8s.io{/,}**',
+        'sigs.k8s.io{/,}**',
       ],
-      "enabled": false,
-      "excludePackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
+    },
+    {
+      matchDatasources: [
+        'go',
       ],
-      "matchUpdateTypes": [
-        "major",
+      enabled: false,
+      matchUpdateTypes: [
+        'major',
       ],
-    }, {
-// We want a single PR for all minor and patch bumps to non-kubernetes Go
-// dependencies, but only if there are known vulnerabilities in the current
-// version.
-      "matchDatasources": [
-        "go"
+      matchPackageNames: [
+        '*',
+        '!k8s.io{/,}**',
+        '!sigs.k8s.io{/,}**',
       ],
-      "matchPackagePatterns": [
-        "*"
+    },
+    {
+      matchDatasources: [
+        'go',
       ],
-      "enabled": false,
-      "excludePackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
+      enabled: false,
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+        'digest',
       ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "digest"
+      groupName: 'all non-major go dependencies',
+      matchPackageNames: [
+        '*',
+        '!k8s.io{/,}**',
+        '!sigs.k8s.io{/,}**',
       ],
-      "groupName": "all non-major go dependencies"
-    }, {
-// We want a single PR for all minor and patch bumps of Github Actions
-      "matchDepTypes": [
-        "action"
+    },
+    {
+      matchDepTypes: [
+        'action',
       ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
+      matchUpdateTypes: [
+        'minor',
+        'patch',
       ],
-      "groupName": "all non-major github action",
-      "pinDigests": true
-    },{
-// We want dedicated PRs for each major bump to Github Actions
-      "matchDepTypes": [
-        "action"
+      groupName: 'all non-major github action',
+      pinDigests: true,
+    },
+    {
+      matchDepTypes: [
+        'action',
       ],
-      "pinDigests": true
-    }
+      pinDigests: true,
+    },
   ],
-  "customManagers": [
+  customManagers: [
     {
-      "customType": "regex",
-      "description": "Bump up version in the Makefile",
-      "fileMatch": ["^Makefile$"],
-      "matchStrings": [
-        "UP_VERSION = (?<currentValue>.*?)\\n"
+      customType: 'regex',
+      description: 'Bump up version in the Makefile',
+      managerFilePatterns: [
+        '/^Makefile$/',
       ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "upbound/up",
-    }, {
-      "customType": "regex",
-      "description": "Bump uptest version in the Makefile",
-      "fileMatch": ["^Makefile$"],
-      "matchStrings": [
-        "UPTEST_VERSION = (?<currentValue>.*?)\\n"
+      matchStrings: [
+        'UP_VERSION = (?<currentValue>.*?)\\n',
       ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "upbound/uptest",
-    }, {
-      "customType": "regex",
-      "description": "Bump kind version in the Makefile",
-      "fileMatch": ["^Makefile$"],
-      "matchStrings": [
-        "KIND_VERSION = (?<currentValue>.*?)\\n"
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'upbound/up',
+    },
+    {
+      customType: 'regex',
+      description: 'Bump uptest version in the Makefile',
+      managerFilePatterns: [
+        '/^Makefile$/',
       ],
-      "datasourceTemplate": "github-tags",
-      "depNameTemplate": "kubernetes-sigs/kind",
-    }, {
-      "customType": "regex",
-      "description": "Bump golangci-lint version in workflows and the Makefile",
-      "fileMatch": ["^\\.github\\/workflows\\/[^/]+\\.ya?ml$","^Makefile$"],
-      "matchStrings": [
-        "GOLANGCILINT_VERSION = (?<currentValue>.*?)\\n"
+      matchStrings: [
+        'UPTEST_VERSION = (?<currentValue>.*?)\\n',
       ],
-      "datasourceTemplate": "github-tags",
-      "depNameTemplate": "golangci/golangci-lint",
-      "extractVersionTemplate": "^v(?<version>.*)$"
-    }
-  ]
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'upbound/uptest',
+    },
+    {
+      customType: 'regex',
+      description: 'Bump kind version in the Makefile',
+      managerFilePatterns: [
+        '/^Makefile$/',
+      ],
+      matchStrings: [
+        'KIND_VERSION = (?<currentValue>.*?)\\n',
+      ],
+      datasourceTemplate: 'github-tags',
+      depNameTemplate: 'kubernetes-sigs/kind',
+    },
+    {
+      customType: 'regex',
+      description: 'Bump golangci-lint version in workflows and the Makefile',
+      managerFilePatterns: [
+        '/^\\.github\\/workflows\\/[^/]+\\.ya?ml$/',
+        '/^Makefile$/',
+      ],
+      matchStrings: [
+        'GOLANGCILINT_VERSION = (?<currentValue>.*?)\\n',
+      ],
+      datasourceTemplate: 'github-tags',
+      depNameTemplate: 'golangci/golangci-lint',
+      extractVersionTemplate: '^v(?<version>.*)$',
+    },
+  ],
 }
