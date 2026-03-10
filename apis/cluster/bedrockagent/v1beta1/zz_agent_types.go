@@ -35,7 +35,17 @@ type AgentInitParameters struct {
 	AgentResourceRoleArnSelector *v1.Selector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the AWS KMS key that encrypts the agent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	CustomerEncryptionKeyArn *string `json:"customerEncryptionKeyArn,omitempty" tf:"customer_encryption_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate customerEncryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	CustomerEncryptionKeyArnRef *v1.Reference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate customerEncryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	CustomerEncryptionKeyArnSelector *v1.Selector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Description of the agent.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -163,8 +173,18 @@ type AgentParameters struct {
 	AgentResourceRoleArnSelector *v1.Selector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the AWS KMS key that encrypts the agent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CustomerEncryptionKeyArn *string `json:"customerEncryptionKeyArn,omitempty" tf:"customer_encryption_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate customerEncryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	CustomerEncryptionKeyArnRef *v1.Reference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate customerEncryptionKeyArn.
+	// +kubebuilder:validation:Optional
+	CustomerEncryptionKeyArnSelector *v1.Selector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Description of the agent.
 	// +kubebuilder:validation:Optional

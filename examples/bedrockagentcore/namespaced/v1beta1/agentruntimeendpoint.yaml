@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Agent Runtime Endpoint Example
+# This example creates an endpoint for an agent runtime
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: AgentRuntimeEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntimeendpoint
+  labels:
+    testing.upbound.io/example-name: agentruntimeendpoint
+  name: agentruntimeendpoint
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    name: TESTXP
+    description: Endpoint for agent runtime communication
+    agentRuntimeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: agentruntime-s3
+    tags:
+      Environment: production
+---
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: AgentRuntime
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntimeendpoint
+  labels:
+    testing.upbound.io/example-name: agentruntime-s3
+  name: agentruntimeendpoint-runtime
+  namespace: upbound-system
+spec:
+  forProvider:
+    agentRuntimeName: example_agent_runtime_ep_test
+    region: us-west-2
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bedrock-agentcore-role-agentruntimeendpoint
+    agentRuntimeArtifact:
+      codeConfiguration:
+        entryPoint:
+          - main.py
+        runtime: PYTHON_3_13
+        code:
+          s3:
+            bucket: bedrock-agentcore-runtime-153891904029-us-west-2-2202juk4oc
+            prefix: 1772724691221-zib6yg-strands_agent.zip
+    networkConfiguration:
+      networkMode: PUBLIC
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntime-code
+  labels:
+    testing.upbound.io/example-name: bedrock-agentcore-role-agentruntimeendpoint
+  name: bedrock-agentcore-agentruntimeendpoint-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---

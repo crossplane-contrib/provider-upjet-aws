@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Semantic Memory Strategy Example
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: MemoryStrategy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/memorystrategy
+  labels:
+    testing.upbound.io/example-name: memorystrategy
+  name: memorystrategy
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_semantic_strategy_xp
+    type: SEMANTIC
+    description: Semantic understanding strategy
+    namespaces:
+    - default
+    memoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: memory
+---
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Memory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/memorystrategy
+  labels:
+    testing.upbound.io/example-name: memory
+  name: memorystrategy-memory
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_memory
+    eventExpiryDuration: 30
