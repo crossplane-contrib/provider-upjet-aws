@@ -73,6 +73,16 @@ func (in *AgentInitParameters) DeepCopyInto(out *AgentInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomerEncryptionKeyArnRef != nil {
+		in, out := &in.CustomerEncryptionKeyArnRef, &out.CustomerEncryptionKeyArnRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomerEncryptionKeyArnSelector != nil {
+		in, out := &in.CustomerEncryptionKeyArnSelector, &out.CustomerEncryptionKeyArnSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -364,6 +374,16 @@ func (in *AgentParameters) DeepCopyInto(out *AgentParameters) {
 		in, out := &in.CustomerEncryptionKeyArn, &out.CustomerEncryptionKeyArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.CustomerEncryptionKeyArnRef != nil {
+		in, out := &in.CustomerEncryptionKeyArnRef, &out.CustomerEncryptionKeyArnRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomerEncryptionKeyArnSelector != nil {
+		in, out := &in.CustomerEncryptionKeyArnSelector, &out.CustomerEncryptionKeyArnSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description

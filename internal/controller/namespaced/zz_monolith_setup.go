@@ -132,6 +132,18 @@ import (
 	schedulingpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/schedulingpolicy"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agent"
+	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/agentruntime"
+	agentruntimeendpoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/agentruntimeendpoint"
+	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/apikeycredentialprovider"
+	browser "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/browser"
+	codeinterpreter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/codeinterpreter"
+	gateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gateway"
+	gatewaytarget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gatewaytarget"
+	memory "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memory"
+	memorystrategy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memorystrategy"
+	oauth2credentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/oauth2credentialprovider"
+	tokenvaultcmk "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/tokenvaultcmk"
+	workloadidentity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/workloadidentity"
 	budget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/v2/internal/controller/namespaced/budgets/budgetaction"
 	anomalymonitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ce/anomalymonitor"
@@ -259,7 +271,7 @@ import (
 	bgppeer "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/bgppeer"
 	connectiondirectconnect "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/connection"
 	connectionassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/connectionassociation"
-	gateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/gateway"
+	gatewaydirectconnect "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/gateway"
 	gatewayassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/gatewayassociation"
 	gatewayassociationproposal "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/gatewayassociationproposal"
 	hostedprivatevirtualinterface "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/hostedprivatevirtualinterface"
@@ -1119,6 +1131,18 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.Setup,
 		inferenceprofile.Setup,
 		agent.Setup,
+		agentruntime.Setup,
+		agentruntimeendpoint.Setup,
+		apikeycredentialprovider.Setup,
+		browser.Setup,
+		codeinterpreter.Setup,
+		gateway.Setup,
+		gatewaytarget.Setup,
+		memory.Setup,
+		memorystrategy.Setup,
+		oauth2credentialprovider.Setup,
+		tokenvaultcmk.Setup,
+		workloadidentity.Setup,
 		budget.Setup,
 		budgetaction.Setup,
 		anomalymonitor.Setup,
@@ -1246,7 +1270,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bgppeer.Setup,
 		connectiondirectconnect.Setup,
 		connectionassociation.Setup,
-		gateway.Setup,
+		gatewaydirectconnect.Setup,
 		gatewayassociation.Setup,
 		gatewayassociationproposal.Setup,
 		hostedprivatevirtualinterface.Setup,
@@ -2112,6 +2136,18 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.SetupGated,
 		inferenceprofile.SetupGated,
 		agent.SetupGated,
+		agentruntime.SetupGated,
+		agentruntimeendpoint.SetupGated,
+		apikeycredentialprovider.SetupGated,
+		browser.SetupGated,
+		codeinterpreter.SetupGated,
+		gateway.SetupGated,
+		gatewaytarget.SetupGated,
+		memory.SetupGated,
+		memorystrategy.SetupGated,
+		oauth2credentialprovider.SetupGated,
+		tokenvaultcmk.SetupGated,
+		workloadidentity.SetupGated,
 		budget.SetupGated,
 		budgetaction.SetupGated,
 		anomalymonitor.SetupGated,
@@ -2239,7 +2275,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bgppeer.SetupGated,
 		connectiondirectconnect.SetupGated,
 		connectionassociation.SetupGated,
-		gateway.SetupGated,
+		gatewaydirectconnect.SetupGated,
 		gatewayassociation.SetupGated,
 		gatewayassociationproposal.SetupGated,
 		hostedprivatevirtualinterface.SetupGated,

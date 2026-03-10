@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Browser Example
+# Creates a Bedrock AgentCore Browser with PUBLIC network mode.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Browser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/browser
+  labels:
+    testing.upbound.io/example-name: browser
+  name: browser
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_browser_xp
+    description: Browser for web data extraction
+    networkConfiguration:
+      networkMode: PUBLIC
+    tags:
+      Environment: production
