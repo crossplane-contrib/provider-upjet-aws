@@ -18,29 +18,13 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-    resourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: route53.aws.upbound.io/v1beta1
-kind: Zone
-metadata:
-  annotations:
-    meta.upbound.io/example-id: route53profiles/v1beta1/resourceassociation
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    name: mycompanydemo.test
-    vpc:
-    - vpcIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      vpcRegion: us-west-1
-
+    # resourceArn reference fields are explicitly disabled, since it accepts multiple kinds
+    # hard-coded valid example resource arn
+    resourceArn: "arn:aws:route53resolver:us-west-1:${data.aws_account_id}:firewall-rule-group/rslvr-frg-4bc9c0829b9e43ea"
+    # resourceProperties are only needed for firewall-rule-group resources.
+    # This is a JSON string, must not have trailing newline, mind the chomping here.
+    resourceProperties: |-
+      {"priority":201}
 ---
 
 apiVersion: route53profiles.aws.upbound.io/v1beta1
@@ -57,18 +41,3 @@ spec:
     region: us-west-1
 
 ---
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  annotations:
-    meta.upbound.io/example-id: route53profiles/v1beta1/resourceassociation
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    region: us-west-1
-    cidrBlock: 10.0.0.0/16
-    enableDnsHostnames: true
-    enableDnsSupport: true
