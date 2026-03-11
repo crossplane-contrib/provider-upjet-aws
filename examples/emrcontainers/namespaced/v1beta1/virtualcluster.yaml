@@ -40,6 +40,9 @@ spec:
     region: us-west-1
     roleArnRef:
       name: example-eks-role
+    accessConfig:
+      authenticationMode: API_AND_CONFIG_MAP
+      bootstrapClusterCreatorAdminPermissions: true
     vpcConfig:
       subnetIdRefs:
         - name: example-subnet-1
