@@ -137,26 +137,6 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("route53.aws.m.upbound.io", "v1beta1", "Zone", "ZoneList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceArnRef,
-			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
-	}
-	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
-	{
 		m, l, err = apisresolver.GetManagedResource("route53profiles.aws.m.upbound.io", "v1beta1", "Profile", "ProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -176,26 +156,6 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.InitProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ProfileIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("route53.aws.m.upbound.io", "v1beta1", "Zone", "ZoneList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.ResourceArnRef,
-			Selector:     mg.Spec.InitProvider.ResourceArnSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
-	}
-	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }

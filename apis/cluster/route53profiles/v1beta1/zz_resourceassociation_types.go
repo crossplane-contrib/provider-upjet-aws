@@ -32,17 +32,7 @@ type ResourceAssociationInitParameters struct {
 	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Resource ID of the resource to be associated with the profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
-
-	// Reference to a Zone in route53 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
-
-	// Selector for a Zone in route53 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// Resource properties for the resource to be associated with the profile.
 	ResourceProperties *string `json:"resourceProperties,omitempty" tf:"resource_properties,omitempty"`
@@ -108,18 +98,8 @@ type ResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Resource ID of the resource to be associated with the profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53/v1beta1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
-
-	// Reference to a Zone in route53 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
-
-	// Selector for a Zone in route53 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// Resource properties for the resource to be associated with the profile.
 	// +kubebuilder:validation:Optional
@@ -163,6 +143,7 @@ type ResourceAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceArn) || (has(self.initProvider) && has(self.initProvider.resourceArn))",message="spec.forProvider.resourceArn is a required parameter"
 	Spec   ResourceAssociationSpec   `json:"spec"`
 	Status ResourceAssociationStatus `json:"status,omitempty"`
 }

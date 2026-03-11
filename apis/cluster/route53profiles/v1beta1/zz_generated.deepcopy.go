@@ -649,16 +649,6 @@ func (in *ResourceAssociationInitParameters) DeepCopyInto(out *ResourceAssociati
 		*out = new(string)
 		**out = **in
 	}
-	if in.ResourceArnRef != nil {
-		in, out := &in.ResourceArnRef, &out.ResourceArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ResourceArnSelector != nil {
-		in, out := &in.ResourceArnSelector, &out.ResourceArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.ResourceProperties != nil {
 		in, out := &in.ResourceProperties, &out.ResourceProperties
 		*out = new(string)
@@ -805,16 +795,6 @@ func (in *ResourceAssociationParameters) DeepCopyInto(out *ResourceAssociationPa
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
 		**out = **in
-	}
-	if in.ResourceArnRef != nil {
-		in, out := &in.ResourceArnRef, &out.ResourceArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ResourceArnSelector != nil {
-		in, out := &in.ResourceArnSelector, &out.ResourceArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceProperties != nil {
 		in, out := &in.ResourceProperties, &out.ResourceProperties

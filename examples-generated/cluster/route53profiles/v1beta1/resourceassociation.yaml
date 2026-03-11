@@ -18,9 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-    resourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    resourceArn: ${aws_route53_zone.example.arn}
 
 ---
 
