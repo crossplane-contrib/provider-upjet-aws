@@ -43,6 +43,9 @@ type ConnectAttachmentInitParameters struct {
 	// Options block. See options for more information.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// The routing policy label to apply to the Connect attachment for traffic routing decisions. Maximum length of 256 characters. Changing this value will force recreation of the resource.
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -95,6 +98,9 @@ type ConnectAttachmentObservation struct {
 	// Attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
+	// The routing policy label to apply to the Connect attachment for traffic routing decisions. Maximum length of 256 characters. Changing this value will force recreation of the resource.
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
+
 	// Name of the segment attachment.
 	SegmentName *string `json:"segmentName,omitempty" tf:"segment_name,omitempty"`
 
@@ -145,6 +151,10 @@ type ConnectAttachmentParameters struct {
 	// Options block. See options for more information.
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// The routing policy label to apply to the Connect attachment for traffic routing decisions. Maximum length of 256 characters. Changing this value will force recreation of the resource.
+	// +kubebuilder:validation:Optional
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

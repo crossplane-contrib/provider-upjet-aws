@@ -161,6 +161,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  tenantId:
+                    description: Tenant Id to serve invocations from specified tenant.
+                    type: string
                   terraformKey:
                     description: JSON key used to store lifecycle information in the
                       input JSON payload. Defaults to tf. This additional key is only
@@ -286,6 +289,9 @@ spec:
                     description: Qualifier (i.e., version) of the Lambda function.
                       Defaults to $LATEST.
                     type: string
+                  tenantId:
+                    description: Tenant Id to serve invocations from specified tenant.
+                    type: string
                   terraformKey:
                     description: JSON key used to store lifecycle information in the
                       input JSON payload. Defaults to tf. This additional key is only
@@ -393,6 +399,9 @@ spec:
                     type: string
                   result:
                     description: String result of the Lambda function invocation.
+                    type: string
+                  tenantId:
+                    description: Tenant Id to serve invocations from specified tenant.
                     type: string
                   terraformKey:
                     description: JSON key used to store lifecycle information in the

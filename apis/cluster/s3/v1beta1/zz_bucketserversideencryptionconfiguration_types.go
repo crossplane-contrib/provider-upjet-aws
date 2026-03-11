@@ -89,6 +89,9 @@ type BucketServerSideEncryptionConfigurationRuleInitParameters struct {
 	// Single object for setting server-side encryption by default. See below.
 	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultInitParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 
+	// List of server-side encryption types to block for object uploads. Valid values are SSE-C (blocks uploads using server-side encryption with customer-provided keys) and NONE (unblocks all encryption types). Starting in March 2026, Amazon S3 will automatically block SSE-C uploads for all new buckets.
+	BlockedEncryptionTypes []*string `json:"blockedEncryptionTypes,omitempty" tf:"blocked_encryption_types,omitempty"`
+
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 }
@@ -97,6 +100,9 @@ type BucketServerSideEncryptionConfigurationRuleObservation struct {
 
 	// Single object for setting server-side encryption by default. See below.
 	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultObservation `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// List of server-side encryption types to block for object uploads. Valid values are SSE-C (blocks uploads using server-side encryption with customer-provided keys) and NONE (unblocks all encryption types). Starting in March 2026, Amazon S3 will automatically block SSE-C uploads for all new buckets.
+	BlockedEncryptionTypes []*string `json:"blockedEncryptionTypes,omitempty" tf:"blocked_encryption_types,omitempty"`
 
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
@@ -107,6 +113,10 @@ type BucketServerSideEncryptionConfigurationRuleParameters struct {
 	// Single object for setting server-side encryption by default. See below.
 	// +kubebuilder:validation:Optional
 	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// List of server-side encryption types to block for object uploads. Valid values are SSE-C (blocks uploads using server-side encryption with customer-provided keys) and NONE (unblocks all encryption types). Starting in March 2026, Amazon S3 will automatically block SSE-C uploads for all new buckets.
+	// +kubebuilder:validation:Optional
+	BlockedEncryptionTypes []*string `json:"blockedEncryptionTypes,omitempty" tf:"blocked_encryption_types,omitempty"`
 
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
 	// +kubebuilder:validation:Optional

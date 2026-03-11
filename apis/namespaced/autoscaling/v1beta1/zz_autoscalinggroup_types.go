@@ -407,7 +407,7 @@ type AutoscalingGroupObservation struct {
 	// Configuration block(s) containing resource tags. See Tag below for more details.
 	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing. To remove all target group attachments an empty list should be specified.
+	// Set of aws_lb_target_group ARNs, for use with Application or Network Load Balancing. To remove all target group attachments an empty list should be specified.
 	// +listType=set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
@@ -1689,7 +1689,7 @@ type PreferencesInitParameters struct {
 	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
 	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
 
-	// Replace instances that already have your desired configuration. Defaults to false.
+	// Skip replacing instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
 
 	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
@@ -1722,7 +1722,7 @@ type PreferencesObservation struct {
 	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
 	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
 
-	// Replace instances that already have your desired configuration. Defaults to false.
+	// Skip replacing instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
 
 	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
@@ -1763,7 +1763,7 @@ type PreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
 
-	// Replace instances that already have your desired configuration. Defaults to false.
+	// Skip replacing instances that already have your desired configuration. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
 

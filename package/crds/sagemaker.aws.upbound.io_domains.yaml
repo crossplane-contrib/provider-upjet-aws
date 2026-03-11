@@ -1587,6 +1587,18 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        trustedIdentityPropagationSettings:
+                          description: Configuration for trusted identity propagation.
+                            See the trusted_identity_propagation_settings Block below.
+                          items:
+                            properties:
+                              status:
+                                description: Describes whether time series forecasting
+                                  is enabled or disabled in the Canvas app. Valid
+                                  values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   kmsKeyId:
@@ -3389,6 +3401,18 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        trustedIdentityPropagationSettings:
+                          description: Configuration for trusted identity propagation.
+                            See the trusted_identity_propagation_settings Block below.
+                          items:
+                            properties:
+                              status:
+                                description: Describes whether time series forecasting
+                                  is enabled or disabled in the Canvas app. Valid
+                                  values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   kmsKeyId:
@@ -5053,6 +5077,18 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        trustedIdentityPropagationSettings:
+                          description: Configuration for trusted identity propagation.
+                            See the trusted_identity_propagation_settings Block below.
+                          items:
+                            properties:
+                              status:
+                                description: Describes whether time series forecasting
+                                  is enabled or disabled in the Canvas app. Valid
+                                  values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   homeEfsFileSystemId:
@@ -6591,6 +6627,16 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      trustedIdentityPropagationSettings:
+                        description: Configuration for trusted identity propagation.
+                          See the trusted_identity_propagation_settings Block below.
+                        properties:
+                          status:
+                            description: Describes whether time series forecasting
+                              is enabled or disabled in the Canvas app. Valid values
+                              are ENABLED and DISABLED.
+                            type: string
+                        type: object
                     type: object
                   kmsKeyId:
                     description: The AWS KMS customer managed CMK used to encrypt
@@ -8221,6 +8267,16 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      trustedIdentityPropagationSettings:
+                        description: Configuration for trusted identity propagation.
+                          See the trusted_identity_propagation_settings Block below.
+                        properties:
+                          status:
+                            description: Describes whether time series forecasting
+                              is enabled or disabled in the Canvas app. Valid values
+                              are ENABLED and DISABLED.
+                            type: string
+                        type: object
                     type: object
                   kmsKeyId:
                     description: The AWS KMS customer managed CMK used to encrypt
@@ -9713,6 +9769,16 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      trustedIdentityPropagationSettings:
+                        description: Configuration for trusted identity propagation.
+                          See the trusted_identity_propagation_settings Block below.
+                        properties:
+                          status:
+                            description: Describes whether time series forecasting
+                              is enabled or disabled in the Canvas app. Valid values
+                              are ENABLED and DISABLED.
+                            type: string
+                        type: object
                     type: object
                   homeEfsFileSystemId:
                     description: The ID of the Amazon Elastic File System (EFS) managed

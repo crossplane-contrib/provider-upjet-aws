@@ -57,7 +57,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 					return 0
 				}
 				if id, ok := tfMap["subnet_id"].(string); ok {
-					buf.WriteString(fmt.Sprintf("%s-", id))
+					buf.WriteString(fmt.Sprintf("%s-", id)) //nolint:staticcheck
 				}
 				return schema.HashString(buf.String())
 			}

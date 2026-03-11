@@ -187,6 +187,9 @@ type CrlConfigurationInitParameters struct {
 	// Name inserted into the certificate CRL Distribution Points extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public. Must be less than or equal to 253 characters in length.
 	CustomCname *string `json:"customCname,omitempty" tf:"custom_cname,omitempty"`
 
+	// Configures a custom path for the CRL in S3. If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>. Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)* and be between 0 and 253 characters in length.
+	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
+
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -204,6 +207,9 @@ type CrlConfigurationObservation struct {
 
 	// Name inserted into the certificate CRL Distribution Points extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public. Must be less than or equal to 253 characters in length.
 	CustomCname *string `json:"customCname,omitempty" tf:"custom_cname,omitempty"`
+
+	// Configures a custom path for the CRL in S3. If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>. Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)* and be between 0 and 253 characters in length.
+	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -223,6 +229,10 @@ type CrlConfigurationParameters struct {
 	// Name inserted into the certificate CRL Distribution Points extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public. Must be less than or equal to 253 characters in length.
 	// +kubebuilder:validation:Optional
 	CustomCname *string `json:"customCname,omitempty" tf:"custom_cname,omitempty"`
+
+	// Configures a custom path for the CRL in S3. If specified, the CRL will be written to s3://<s3_bucket_name>/<custom_path>/<crl_file>. Must conform to the pattern [-a-zA-Z0-9;?:@&=+$,%_.!~*()']+(/[-a-zA-Z0-9;?:@&=+$,%_.!~*()']+)* and be between 0 and 253 characters in length.
+	// +kubebuilder:validation:Optional
+	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. Defaults to false.
 	// +kubebuilder:validation:Optional

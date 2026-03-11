@@ -203,8 +203,8 @@ spec:
                         type: string
                     type: object
                   healthCheckCustomConfig:
-                    description: A complex type that contains settings for ECS managed
-                      health checks. See health_check_custom_config Block for details.
+                    description: Please use health_check_config instead. See health_check_custom_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want
@@ -396,8 +396,8 @@ spec:
                         type: string
                     type: object
                   healthCheckCustomConfig:
-                    description: A complex type that contains settings for ECS managed
-                      health checks. See health_check_custom_config Block for details.
+                    description: Please use health_check_config instead. See health_check_custom_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want
@@ -558,8 +558,8 @@ spec:
                         type: string
                     type: object
                   healthCheckCustomConfig:
-                    description: A complex type that contains settings for ECS managed
-                      health checks. See health_check_custom_config Block for details.
+                    description: Please use health_check_config instead. See health_check_custom_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want

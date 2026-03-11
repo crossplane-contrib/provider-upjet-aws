@@ -4216,8 +4216,8 @@ spec:
                                   are Refresh, Ignore, and Wait. Default is Ignore.
                                 type: string
                               skipMatching:
-                                description: Replace instances that already have your
-                                  desired configuration. Defaults to false.
+                                description: Skip replacing instances that already
+                                  have your desired configuration. Defaults to false.
                                 type: boolean
                               standbyInstances:
                                 description: Behavior when encountering instances
@@ -4859,7 +4859,7 @@ spec:
                                               Amazon EC2 Auto Scaling interprets as
                                               a percentage. To turn off price protection,
                                               specify a high value, such as 999999.
-                                              Default is 100.
+                                              Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
                                             type: number
                                           totalLocalStorageGb:
                                             description: Block describing the minimum
@@ -5624,8 +5624,8 @@ spec:
                                   are Refresh, Ignore, and Wait. Default is Ignore.
                                 type: string
                               skipMatching:
-                                description: Replace instances that already have your
-                                  desired configuration. Defaults to false.
+                                description: Skip replacing instances that already
+                                  have your desired configuration. Defaults to false.
                                 type: boolean
                               standbyInstances:
                                 description: Behavior when encountering instances
@@ -6267,7 +6267,7 @@ spec:
                                               Amazon EC2 Auto Scaling interprets as
                                               a percentage. To turn off price protection,
                                               specify a high value, such as 999999.
-                                              Default is 100.
+                                              Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
                                             type: number
                                           totalLocalStorageGb:
                                             description: Block describing the minimum
@@ -7118,8 +7118,8 @@ spec:
                                   are Refresh, Ignore, and Wait. Default is Ignore.
                                 type: string
                               skipMatching:
-                                description: Replace instances that already have your
-                                  desired configuration. Defaults to false.
+                                description: Skip replacing instances that already
+                                  have your desired configuration. Defaults to false.
                                 type: boolean
                               standbyInstances:
                                 description: Behavior when encountering instances
@@ -7541,7 +7541,7 @@ spec:
                                               Amazon EC2 Auto Scaling interprets as
                                               a percentage. To turn off price protection,
                                               specify a high value, such as 999999.
-                                              Default is 100.
+                                              Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
                                             type: number
                                           totalLocalStorageGb:
                                             description: Block describing the minimum
@@ -7659,7 +7659,7 @@ spec:
                       type: object
                     type: array
                   targetGroupArns:
-                    description: Set of aws_alb_target_group ARNs, for use with Application
+                    description: Set of aws_lb_target_group ARNs, for use with Application
                       or Network Load Balancing. To remove all target group attachments
                       an empty list should be specified.
                     items:
@@ -8100,8 +8100,8 @@ spec:
                               Ignore, and Wait. Default is Ignore.
                             type: string
                           skipMatching:
-                            description: Replace instances that already have your
-                              desired configuration. Defaults to false.
+                            description: Skip replacing instances that already have
+                              your desired configuration. Defaults to false.
                             type: boolean
                           standbyInstances:
                             description: Behavior when encountering instances in the
@@ -9436,8 +9436,8 @@ spec:
                               Ignore, and Wait. Default is Ignore.
                             type: string
                           skipMatching:
-                            description: Replace instances that already have your
-                              desired configuration. Defaults to false.
+                            description: Skip replacing instances that already have
+                              your desired configuration. Defaults to false.
                             type: boolean
                           standbyInstances:
                             description: Behavior when encountering instances in the
@@ -10858,8 +10858,8 @@ spec:
                               Ignore, and Wait. Default is Ignore.
                             type: string
                           skipMatching:
-                            description: Replace instances that already have your
-                              desired configuration. Defaults to false.
+                            description: Skip replacing instances that already have
+                              your desired configuration. Defaults to false.
                             type: boolean
                           standbyInstances:
                             description: Behavior when encountering instances in the
@@ -11349,7 +11349,7 @@ spec:
                       type: object
                     type: array
                   targetGroupArns:
-                    description: Set of aws_alb_target_group ARNs, for use with Application
+                    description: Set of aws_lb_target_group ARNs, for use with Application
                       or Network Load Balancing. To remove all target group attachments
                       an empty list should be specified.
                     items:

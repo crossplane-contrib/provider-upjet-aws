@@ -79,7 +79,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tableName:
-                    description: Name of the table to contain the item.
+                    description: Name or ARN of the table to contain the item.
                     type: string
                   tableNameRef:
                     description: Reference to a Table in dynamodb to populate tableName.
@@ -192,7 +192,7 @@ spec:
                       the item. Required if there is range key defined in the table.
                     type: string
                   tableName:
-                    description: Name of the table to contain the item.
+                    description: Name or ARN of the table to contain the item.
                     type: string
                   tableNameRef:
                     description: Reference to a Table in dynamodb to populate tableName.
@@ -369,7 +369,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   tableName:
-                    description: Name of the table to contain the item.
+                    description: Name or ARN of the table to contain the item.
                     type: string
                 type: object
               conditions:

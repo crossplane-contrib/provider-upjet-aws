@@ -44,19 +44,39 @@ type SubnetInitParameters_2 struct {
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. Default: false.
 	EnableResourceNameDNSAaaaRecordOnLaunch *bool `json:"enableResourceNameDnsAaaaRecordOnLaunch,omitempty" tf:"enable_resource_name_dns_aaaa_record_on_launch,omitempty"`
 
+	// ID of an IPv4 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+
+	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolIDRef *v1.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolIDSelector *v1.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+
+	// Netmask. Requires specifying a ipv4_ipam_pool_id.
+	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
+
 	// The IPv6 network range for the subnet,
-	// in CIDR notation. The subnet size must use a /64 prefix length.
+	// in CIDR notation. The subnet size must use a /64 prefix length. If the existing IPv6 subnet was created with assign_ipv6_address_on_creation = true, changing this value will force resource recreation.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// ID of an IPv6 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
 	// Indicates whether to create an IPv6-only subnet. Default: false.
 	IPv6Native *bool `json:"ipv6Native,omitempty" tf:"ipv6_native,omitempty"`
 
+	// Netmask. Requires specifying a ipv6_ipam_pool_id. Valid values are from 44 to 64 in increments of 4.
+	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
+
 	// Specify true to indicate that network interfaces created in the subnet should be assigned a customer owned IP address. The customer_owned_ipv4_pool and outpost_arn arguments must be specified when set to true. Default is false.
 	MapCustomerOwnedIPOnLaunch *bool `json:"mapCustomerOwnedIpOnLaunch,omitempty" tf:"map_customer_owned_ip_on_launch,omitempty"`
 
-	// Specify true to indicate
-	// that instances launched into the subnet should be assigned
-	// a public IP address. Default is false.
+	// Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false.
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Outpost.
@@ -119,22 +139,32 @@ type SubnetObservation_2 struct {
 	// The ID of the subnet
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of an IPv4 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+
+	// Netmask. Requires specifying a ipv4_ipam_pool_id.
+	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
+
 	// The IPv6 network range for the subnet,
-	// in CIDR notation. The subnet size must use a /64 prefix length.
+	// in CIDR notation. The subnet size must use a /64 prefix length. If the existing IPv6 subnet was created with assign_ipv6_address_on_creation = true, changing this value will force resource recreation.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// The association ID for the IPv6 CIDR block.
 	IPv6CidrBlockAssociationID *string `json:"ipv6CidrBlockAssociationId,omitempty" tf:"ipv6_cidr_block_association_id,omitempty"`
 
+	// ID of an IPv6 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
+
 	// Indicates whether to create an IPv6-only subnet. Default: false.
 	IPv6Native *bool `json:"ipv6Native,omitempty" tf:"ipv6_native,omitempty"`
+
+	// Netmask. Requires specifying a ipv6_ipam_pool_id. Valid values are from 44 to 64 in increments of 4.
+	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
 	// Specify true to indicate that network interfaces created in the subnet should be assigned a customer owned IP address. The customer_owned_ipv4_pool and outpost_arn arguments must be specified when set to true. Default is false.
 	MapCustomerOwnedIPOnLaunch *bool `json:"mapCustomerOwnedIpOnLaunch,omitempty" tf:"map_customer_owned_ip_on_launch,omitempty"`
 
-	// Specify true to indicate
-	// that instances launched into the subnet should be assigned
-	// a public IP address. Default is false.
+	// Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false.
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Outpost.
@@ -202,22 +232,46 @@ type SubnetParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EnableResourceNameDNSAaaaRecordOnLaunch *bool `json:"enableResourceNameDnsAaaaRecordOnLaunch,omitempty" tf:"enable_resource_name_dns_aaaa_record_on_launch,omitempty"`
 
+	// ID of an IPv4 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolID *string `json:"ipv4IpamPoolId,omitempty" tf:"ipv4_ipam_pool_id,omitempty"`
+
+	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolIDRef *v1.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
+	// +kubebuilder:validation:Optional
+	IPv4IpamPoolIDSelector *v1.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+
+	// Netmask. Requires specifying a ipv4_ipam_pool_id.
+	// +kubebuilder:validation:Optional
+	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
+
 	// The IPv6 network range for the subnet,
-	// in CIDR notation. The subnet size must use a /64 prefix length.
+	// in CIDR notation. The subnet size must use a /64 prefix length. If the existing IPv6 subnet was created with assign_ipv6_address_on_creation = true, changing this value will force resource recreation.
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// ID of an IPv6 VPC Resource Planning IPAM Pool. The CIDR of this pool is used to allocate the CIDR for the subnet.
+	// +kubebuilder:validation:Optional
+	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
 	// Indicates whether to create an IPv6-only subnet. Default: false.
 	// +kubebuilder:validation:Optional
 	IPv6Native *bool `json:"ipv6Native,omitempty" tf:"ipv6_native,omitempty"`
 
+	// Netmask. Requires specifying a ipv6_ipam_pool_id. Valid values are from 44 to 64 in increments of 4.
+	// +kubebuilder:validation:Optional
+	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
+
 	// Specify true to indicate that network interfaces created in the subnet should be assigned a customer owned IP address. The customer_owned_ipv4_pool and outpost_arn arguments must be specified when set to true. Default is false.
 	// +kubebuilder:validation:Optional
 	MapCustomerOwnedIPOnLaunch *bool `json:"mapCustomerOwnedIpOnLaunch,omitempty" tf:"map_customer_owned_ip_on_launch,omitempty"`
 
-	// Specify true to indicate
-	// that instances launched into the subnet should be assigned
-	// a public IP address. Default is false.
+	// Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false.
 	// +kubebuilder:validation:Optional
 	MapPublicIPOnLaunch *bool `json:"mapPublicIpOnLaunch,omitempty" tf:"map_public_ip_on_launch,omitempty"`
 
@@ -280,7 +334,7 @@ type SubnetStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Subnet is the Schema for the Subnets API. Provides an VPC subnet resource.
+// Subnet is the Schema for the Subnets API. Provides an VPC Subnet resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

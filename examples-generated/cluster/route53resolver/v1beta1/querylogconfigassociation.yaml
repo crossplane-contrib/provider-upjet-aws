@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: route53resolver.aws.upbound.io/v1beta1
+kind: QueryLogConfigAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resolverQueryLogConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

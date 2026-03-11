@@ -57,6 +57,9 @@ type LogDestinationConfigParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
+	// Whether to enable the detailed firewall monitoring dashboard on the firewall. Defaults to false.
+	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
@@ -95,6 +98,9 @@ type LoggingConfigurationLoggingConfigurationParameters struct {
 
 type LoggingConfigurationObservation struct {
 
+	// Whether to enable the detailed firewall monitoring dashboard on the firewall. Defaults to false.
+	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
 
@@ -110,6 +116,10 @@ type LoggingConfigurationObservation struct {
 }
 
 type LoggingConfigurationParameters struct {
+
+	// Whether to enable the detailed firewall monitoring dashboard on the firewall. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnableMonitoringDashboard *bool `json:"enableMonitoringDashboard,omitempty" tf:"enable_monitoring_dashboard,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2.Firewall

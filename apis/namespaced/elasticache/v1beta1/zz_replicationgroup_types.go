@@ -14,6 +14,85 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type NodeGroupConfigurationInitParameters struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
+type NodeGroupConfigurationObservation struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
+type NodeGroupConfigurationParameters struct {
+
+	// ID for the node group. Redis (cluster mode disabled) replication groups don't have node group IDs, so this value is ignored. For Redis (cluster mode enabled) replication groups, the node group ID is a 1 to 4 character alphanumeric string.
+	// +kubebuilder:validation:Optional
+	NodeGroupID *string `json:"nodeGroupId,omitempty" tf:"node_group_id,omitempty"`
+
+	// Availability zone for the primary node.
+	// +kubebuilder:validation:Optional
+	PrimaryAvailabilityZone *string `json:"primaryAvailabilityZone,omitempty" tf:"primary_availability_zone,omitempty"`
+
+	// ARN of the Outpost for the primary node.
+	// +kubebuilder:validation:Optional
+	PrimaryOutpostArn *string `json:"primaryOutpostArn,omitempty" tf:"primary_outpost_arn,omitempty"`
+
+	// List of availability zones for the replica nodes.
+	// +kubebuilder:validation:Optional
+	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
+
+	// Number of replica nodes in this node group.
+	// +kubebuilder:validation:Optional
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// List of ARNs of the Outposts for the replica nodes.
+	// +kubebuilder:validation:Optional
+	ReplicaOutpostArns []*string `json:"replicaOutpostArns,omitempty" tf:"replica_outpost_arns,omitempty"`
+
+	// Keyspace for this node group. Format is start-end (e.g., 0-5460). For Redis (cluster mode disabled) replication groups, this value is ignored.
+	// +kubebuilder:validation:Optional
+	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`
+}
+
 type ReplicationGroupInitParameters struct {
 
 	// Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is false.
@@ -28,7 +107,7 @@ type ReplicationGroupInitParameters struct {
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	AuthTokenSecretRef *v1.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
+	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -105,6 +184,9 @@ type ReplicationGroupInitParameters struct {
 
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	NodeGroupConfiguration []NodeGroupConfigurationInitParameters `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
 
 	// Instance class to be used.
 	// See AWS documentation for information on supported node types and guidance on selecting node types.
@@ -265,7 +347,7 @@ type ReplicationGroupObservation struct {
 	// When engine is valkey, default is true.
 	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
+	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -339,6 +421,9 @@ type ReplicationGroupObservation struct {
 
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	NodeGroupConfiguration []NodeGroupConfigurationObservation `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
 
 	// Instance class to be used.
 	// See AWS documentation for information on supported node types and guidance on selecting node types.
@@ -448,7 +533,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Required if auth_token is set.
+	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
@@ -547,6 +632,10 @@ type ReplicationGroupParameters struct {
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Configuration block for node groups (shards). Can be specified only if num_node_groups is set. Conflicts with preferred_cache_cluster_azs. See Node Group Configuration below for more details.
+	// +kubebuilder:validation:Optional
+	NodeGroupConfiguration []NodeGroupConfigurationParameters `json:"nodeGroupConfiguration,omitempty" tf:"node_group_configuration,omitempty"`
 
 	// Instance class to be used.
 	// See AWS documentation for information on supported node types and guidance on selecting node types.

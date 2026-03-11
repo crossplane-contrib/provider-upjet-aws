@@ -55,9 +55,11 @@ type HealthCheckInitParameters struct {
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
 	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port the load balancer uses when performing health checks on targets.
@@ -91,9 +93,11 @@ type HealthCheckObservation struct {
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
 	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port the load balancer uses when performing health checks on targets.
@@ -130,10 +134,12 @@ type HealthCheckParameters struct {
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	// +kubebuilder:validation:Optional
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
 	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
+	// Once the value has been set, removing it has no effect. To unset it, set it to an empty string "".
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -196,7 +202,7 @@ type LBTargetGroupInitParameters struct {
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
 	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
-	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, UDP, QUIC, or TCP_QUIC.
 	// Required when target_type is instance, ip, or alb.
 	// Does not apply when target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -216,6 +222,9 @@ type LBTargetGroupInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature. Only applicable for Application Load Balancer target groups when target_type is instance or ip.
+	TargetControlPort *float64 `json:"targetControlPort,omitempty" tf:"target_control_port,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverInitParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
@@ -293,7 +302,7 @@ type LBTargetGroupObservation struct {
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
 	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
-	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, UDP, QUIC, or TCP_QUIC.
 	// Required when target_type is instance, ip, or alb.
 	// Does not apply when target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -321,6 +330,9 @@ type LBTargetGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature. Only applicable for Application Load Balancer target groups when target_type is instance or ip.
+	TargetControlPort *float64 `json:"targetControlPort,omitempty" tf:"target_control_port,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverObservation `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
@@ -387,7 +399,7 @@ type LBTargetGroupParameters struct {
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
 	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
-	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, UDP, QUIC, or TCP_QUIC.
 	// Required when target_type is instance, ip, or alb.
 	// Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
@@ -418,6 +430,10 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature. Only applicable for Application Load Balancer target groups when target_type is instance or ip.
+	// +kubebuilder:validation:Optional
+	TargetControlPort *float64 `json:"targetControlPort,omitempty" tf:"target_control_port,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	// +kubebuilder:validation:Optional

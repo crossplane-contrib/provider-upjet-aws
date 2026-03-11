@@ -284,6 +284,19 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      imageLogGroupName:
+                        description: Name of the CloudWatch Log Group to send image
+                          logs to.
+                        type: string
+                      pipelineLogGroupName:
+                        description: Name of the CloudWatch Log Group to send pipeline
+                          logs to.
+                        type: string
+                    type: object
                   name:
                     description: Name of the image pipeline.
                     type: string
@@ -598,6 +611,19 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      imageLogGroupName:
+                        description: Name of the CloudWatch Log Group to send image
+                          logs to.
+                        type: string
+                      pipelineLogGroupName:
+                        description: Name of the CloudWatch Log Group to send pipeline
+                          logs to.
+                        type: string
+                    type: object
                   name:
                     description: Name of the image pipeline.
                     type: string
@@ -769,6 +795,7 @@ spec:
                       role to be used by Image Builder to execute workflows.
                     type: string
                   id:
+                    description: Amazon Resource Name (ARN) of the image pipeline.
                     type: string
                   imageRecipeArn:
                     description: Amazon Resource Name (ARN) of the image recipe.
@@ -813,6 +840,19 @@ spec:
                     description: Amazon Resource Name (ARN) of the Image Builder Infrastructure
                       Configuration.
                     type: string
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      imageLogGroupName:
+                        description: Name of the CloudWatch Log Group to send image
+                          logs to.
+                        type: string
+                      pipelineLogGroupName:
+                        description: Name of the CloudWatch Log Group to send pipeline
+                          logs to.
+                        type: string
+                    type: object
                   name:
                     description: Name of the image pipeline.
                     type: string

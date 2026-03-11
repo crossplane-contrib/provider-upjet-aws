@@ -34,6 +34,9 @@ type TransitGatewayInitParameters_2 struct {
 	// Description of the EC2 Transit Gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Whether encryption support for VPC Encryption Control is enabled. Valid values: disable, enable. Default value: disable. Once set, switching to disable requires explicitly specifying disable rather than removing the argument.
+	EncryptionSupport *string `json:"encryptionSupport,omitempty" tf:"encryption_support,omitempty"`
+
 	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
 	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
 
@@ -77,6 +80,9 @@ type TransitGatewayObservation_2 struct {
 
 	// Description of the EC2 Transit Gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether encryption support for VPC Encryption Control is enabled. Valid values: disable, enable. Default value: disable. Once set, switching to disable requires explicitly specifying disable rather than removing the argument.
+	EncryptionSupport *string `json:"encryptionSupport,omitempty" tf:"encryption_support,omitempty"`
 
 	// EC2 Transit Gateway identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -138,6 +144,10 @@ type TransitGatewayParameters_2 struct {
 	// Description of the EC2 Transit Gateway.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether encryption support for VPC Encryption Control is enabled. Valid values: disable, enable. Default value: disable. Once set, switching to disable requires explicitly specifying disable rather than removing the argument.
+	// +kubebuilder:validation:Optional
+	EncryptionSupport *string `json:"encryptionSupport,omitempty" tf:"encryption_support,omitempty"`
 
 	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional

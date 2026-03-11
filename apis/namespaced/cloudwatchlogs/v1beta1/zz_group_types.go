@@ -16,6 +16,9 @@ import (
 
 type GroupInitParameters struct {
 
+	// –  Boolean to indicate whether deletion protection is enabled. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing this argument.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group,
 	// AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires
 	// permissions for the CMK whenever the encrypted data is requested.
@@ -51,6 +54,9 @@ type GroupObservation struct {
 	// The Amazon Resource Name (ARN) specifying the log group. Any :* suffix added by the API, denoting all CloudWatch Log Streams under the CloudWatch Log Group, is removed for greater compatibility with other AWS services that do not accept the suffix.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  Boolean to indicate whether deletion protection is enabled. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing this argument.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group,
@@ -82,6 +88,10 @@ type GroupObservation struct {
 }
 
 type GroupParameters struct {
+
+	// –  Boolean to indicate whether deletion protection is enabled. Defaults to false. Once set, switching to false requires explicitly specifying false rather than removing this argument.
+	// +kubebuilder:validation:Optional
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// The ARN of the KMS Key to use when encrypting log data. Please note, after the AWS KMS CMK is disassociated from the log group,
 	// AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires

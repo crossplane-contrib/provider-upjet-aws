@@ -108,6 +108,20 @@ spec:
                             description: A username for the authorization.
                             type: string
                         type: object
+                      connectivityParameters:
+                        description: Parameters used for oauth with private API. Documented
+                          below.
+                        properties:
+                          resourceParameters:
+                            description: The parameters for EventBridge to use when
+                              invoking the resource endpoint. Documented below.
+                            properties:
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
+                        type: object
                       invocationHttpParameters:
                         description: Invocation Http Parameters are additional credentials
                           used to sign each Invocation of the ApiDestination created
@@ -528,6 +542,20 @@ spec:
                             type: string
                         required:
                         - passwordSecretRef
+                        type: object
+                      connectivityParameters:
+                        description: Parameters used for oauth with private API. Documented
+                          below.
+                        properties:
+                          resourceParameters:
+                            description: The parameters for EventBridge to use when
+                              invoking the resource endpoint. Documented below.
+                            properties:
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
                         type: object
                       invocationHttpParameters:
                         description: Invocation Http Parameters are additional credentials
@@ -976,6 +1004,24 @@ spec:
                           username:
                             description: A username for the authorization.
                             type: string
+                        type: object
+                      connectivityParameters:
+                        description: Parameters used for oauth with private API. Documented
+                          below.
+                        properties:
+                          resourceParameters:
+                            description: The parameters for EventBridge to use when
+                              invoking the resource endpoint. Documented below.
+                            properties:
+                              resourceAssociationArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  connection.
+                                type: string
+                              resourceConfigurationArn:
+                                description: ARN of the Amazon VPC Lattice resource
+                                  configuration for the resource endpoint.
+                                type: string
+                            type: object
                         type: object
                       invocationHttpParameters:
                         description: Invocation Http Parameters are additional credentials

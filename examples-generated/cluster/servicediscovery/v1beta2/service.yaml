@@ -21,7 +21,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       routingPolicy: MULTIVALUE
-    healthCheckCustomConfig:
+    healthCheckConfig:
       failureThreshold: 1
     name: example
     region: us-west-1

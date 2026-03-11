@@ -34,8 +34,14 @@ type CriterionInitParameters struct {
 	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
+	// List of string values to be evaluated as matching conditions.
+	Matches []*string `json:"matches,omitempty" tf:"matches,omitempty"`
+
 	// List of string values to be evaluated.
 	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
+
+	// List of string values to be evaluated as non-matching conditions.
+	NotMatches []*string `json:"notMatches,omitempty" tf:"not_matches,omitempty"`
 }
 
 type CriterionObservation struct {
@@ -58,8 +64,14 @@ type CriterionObservation struct {
 	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
+	// List of string values to be evaluated as matching conditions.
+	Matches []*string `json:"matches,omitempty" tf:"matches,omitempty"`
+
 	// List of string values to be evaluated.
 	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
+
+	// List of string values to be evaluated as non-matching conditions.
+	NotMatches []*string `json:"notMatches,omitempty" tf:"not_matches,omitempty"`
 }
 
 type CriterionParameters struct {
@@ -88,9 +100,17 @@ type CriterionParameters struct {
 	// +kubebuilder:validation:Optional
 	LessThanOrEqual *string `json:"lessThanOrEqual,omitempty" tf:"less_than_or_equal,omitempty"`
 
+	// List of string values to be evaluated as matching conditions.
+	// +kubebuilder:validation:Optional
+	Matches []*string `json:"matches,omitempty" tf:"matches,omitempty"`
+
 	// List of string values to be evaluated.
 	// +kubebuilder:validation:Optional
 	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
+
+	// List of string values to be evaluated as non-matching conditions.
+	// +kubebuilder:validation:Optional
+	NotMatches []*string `json:"notMatches,omitempty" tf:"not_matches,omitempty"`
 }
 
 type FilterInitParameters struct {

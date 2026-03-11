@@ -564,6 +564,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ACLNameRef != nil {
+		in, out := &in.ACLNameRef, &out.ACLNameRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ACLNameSelector != nil {
+		in, out := &in.ACLNameSelector, &out.ACLNameSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(bool)
@@ -594,6 +604,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -619,6 +634,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -638,6 +658,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
@@ -838,6 +868,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -850,6 +885,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MultiRegionClusterName != nil {
 		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -994,6 +1034,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ACLNameRef != nil {
+		in, out := &in.ACLNameRef, &out.ACLNameRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ACLNameSelector != nil {
+		in, out := &in.ACLNameSelector, &out.ACLNameSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(bool)
@@ -1024,6 +1074,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -1049,6 +1104,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -1068,6 +1128,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port

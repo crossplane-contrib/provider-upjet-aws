@@ -68,6 +68,11 @@ func (in *StreamInitParameters) DeepCopyInto(out *StreamInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaxRecordSizeInKib != nil {
+		in, out := &in.MaxRecordSizeInKib, &out.MaxRecordSizeInKib
+		*out = new(float64)
+		**out = **in
+	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
 		*out = new(float64)
@@ -242,6 +247,11 @@ func (in *StreamObservation) DeepCopyInto(out *StreamObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MaxRecordSizeInKib != nil {
+		in, out := &in.MaxRecordSizeInKib, &out.MaxRecordSizeInKib
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -344,6 +354,11 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.MaxRecordSizeInKib != nil {
+		in, out := &in.MaxRecordSizeInKib, &out.MaxRecordSizeInKib
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

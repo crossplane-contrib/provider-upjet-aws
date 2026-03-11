@@ -120,6 +120,9 @@ type ConnectorInitParameters struct {
 	// Either SFTP or AS2 is configured.The parameters to configure for the connector object. Fields documented below.
 	As2Config *As2ConfigInitParameters `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
 
+	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	EgressConfig *EgressConfigInitParameters `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
+
 	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
@@ -133,7 +136,7 @@ type ConnectorInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint.
+	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -150,6 +153,9 @@ type ConnectorObservation struct {
 
 	// The unique identifier for the AS2 profile or SFTP Profile.
 	ConnectorID *string `json:"connectorId,omitempty" tf:"connector_id,omitempty"`
+
+	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	EgressConfig *EgressConfigObservation `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -173,7 +179,7 @@ type ConnectorObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint.
+	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -197,6 +203,10 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	As2Config *As2ConfigParameters `json:"as2Config,omitempty" tf:"as2_config,omitempty"`
 
+	// Specifies the egress configuration for the connector. When set, enables routing through customer VPCs using VPC Lattice for private connectivity. Fields documented below.
+	// +kubebuilder:validation:Optional
+	EgressConfig *EgressConfigParameters `json:"egressConfig,omitempty" tf:"egress_config,omitempty"`
+
 	// The IAM Role which is required for allowing the connector to turn on CloudWatch logging for Amazon S3 events.
 	// +kubebuilder:validation:Optional
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
@@ -219,9 +229,28 @@ type ConnectorParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The URL of the partners AS2 endpoint or SFTP endpoint.
+	// The URL of the partners AS2 endpoint or SFTP endpoint. Required for AS2 connectors and service-managed SFTP connectors. Must be null when using VPC Lattice egress configuration.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
+type EgressConfigInitParameters struct {
+
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	VPCLattice *VPCLatticeInitParameters `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
+}
+
+type EgressConfigObservation struct {
+
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	VPCLattice *VPCLatticeObservation `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
+}
+
+type EgressConfigParameters struct {
+
+	// VPC Lattice configuration for routing connector traffic through customer VPCs. Fields documented below.
+	// +kubebuilder:validation:Optional
+	VPCLattice *VPCLatticeParameters `json:"vpcLattice,omitempty" tf:"vpc_lattice,omitempty"`
 }
 
 type SftpConfigInitParameters struct {
@@ -276,6 +305,35 @@ type SftpConfigParameters struct {
 	UserSecretIDSelector *v1.Selector `json:"userSecretIdSelector,omitempty" tf:"-"`
 }
 
+type VPCLatticeInitParameters struct {
+
+	// Port number for connecting to the SFTP server through VPC Lattice. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening. Valid values are between 1 and 65535.
+	PortNumber *float64 `json:"portNumber,omitempty" tf:"port_number,omitempty"`
+
+	// ARN of the VPC Lattice Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in a VPC with appropriate network connectivity to the SFTP server.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type VPCLatticeObservation struct {
+
+	// Port number for connecting to the SFTP server through VPC Lattice. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening. Valid values are between 1 and 65535.
+	PortNumber *float64 `json:"portNumber,omitempty" tf:"port_number,omitempty"`
+
+	// ARN of the VPC Lattice Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in a VPC with appropriate network connectivity to the SFTP server.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type VPCLatticeParameters struct {
+
+	// Port number for connecting to the SFTP server through VPC Lattice. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening. Valid values are between 1 and 65535.
+	// +kubebuilder:validation:Optional
+	PortNumber *float64 `json:"portNumber,omitempty" tf:"port_number,omitempty"`
+
+	// ARN of the VPC Lattice Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in a VPC with appropriate network connectivity to the SFTP server.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn" tf:"resource_configuration_arn,omitempty"`
+}
+
 // ConnectorSpec defines the desired state of Connector
 type ConnectorSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -311,9 +369,8 @@ type ConnectorStatus struct {
 type Connector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || (has(self.initProvider) && has(self.initProvider.url))",message="spec.forProvider.url is a required parameter"
-	Spec   ConnectorSpec   `json:"spec"`
-	Status ConnectorStatus `json:"status,omitempty"`
+	Spec              ConnectorSpec   `json:"spec"`
+	Status            ConnectorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -16,54 +16,58 @@ import (
 
 type VirtualMfaDeviceInitParameters struct {
 
-	// The path for the virtual MFA device.
+	// Path for the virtual MFA device.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+	// Name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
 	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }
 
 type VirtualMfaDeviceObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the virtual mfa device.
+	// Amazon Resource Name (ARN), which is also the serial number, of the virtual MFA device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.
+	// Base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.
 	Base32StringSeed *string `json:"base32StringSeed,omitempty" tf:"base_32_string_seed,omitempty"`
 
-	// The date and time when the virtual MFA device was enabled.
+	// Date and time when the virtual MFA device was enabled.
 	EnableDate *string `json:"enableDate,omitempty" tf:"enable_date,omitempty"`
 
+	// Serial number associated with the virtual MFA device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The path for the virtual MFA device.
+	// Path for the virtual MFA device.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID), and Base32String is the seed in base32 format.
+	// QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID), and Base32String is the seed in base32 format.
 	QrCodePng *string `json:"qrCodePng,omitempty" tf:"qr_code_png,omitempty"`
+
+	// Serial number associated with the virtual MFA device.
+	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The associated IAM User name if the virtual MFA device is enabled.
+	// Name of the IAM user associated with this virtual MFA device.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+	// Name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
 	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }
 
 type VirtualMfaDeviceParameters struct {
 
-	// The path for the virtual MFA device.
+	// Path for the virtual MFA device.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -72,7 +76,7 @@ type VirtualMfaDeviceParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+	// Name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
 	// +kubebuilder:validation:Optional
 	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }

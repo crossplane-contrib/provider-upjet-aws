@@ -15,3 +15,5 @@ spec:
   forProvider:
     globalSettings:
       isCrossAccountBackupEnabled: "true"
+      isDelegatedAdministratorEnabled: "false"
+      isMpaEnabled: "false"

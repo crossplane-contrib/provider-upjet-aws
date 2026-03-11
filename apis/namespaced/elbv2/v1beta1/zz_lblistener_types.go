@@ -14,6 +14,48 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type AdditionalClaimInitParameters struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of expected values of the claim.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AdditionalClaimObservation struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of expected values of the claim.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AdditionalClaimParameters struct {
+
+	// Format of the claim value. Valid values are single-string, string-array and space-separated-values.
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format" tf:"format,omitempty"`
+
+	// Name of the claim to validate. exp, iss, nbf, or iat cannot be specified because they are validated by default.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// List of expected values of the claim.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
 type AuthenticateCognitoInitParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. See below.
@@ -243,6 +285,9 @@ type DefaultActionInitParameters struct {
 	// +kubebuilder:default:=default
 	Index *string `json:"index,omitempty" tf:"-"`
 
+	// Configuration block for creating a JWT validation action. Required if type is jwt-validation.
+	JwtValidation *JwtValidationInitParameters `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
+
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -261,7 +306,7 @@ type DefaultActionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
-	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -283,6 +328,9 @@ type DefaultActionObservation struct {
 	// +kubebuilder:default:=default
 	Index *string `json:"index,omitempty" tf:"-"`
 
+	// Configuration block for creating a JWT validation action. Required if type is jwt-validation.
+	JwtValidation *JwtValidationObservation `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
+
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -292,7 +340,7 @@ type DefaultActionObservation struct {
 	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -319,6 +367,10 @@ type DefaultActionParameters struct {
 	// +kubebuilder:default:=default
 	Index *string `json:"index" tf:"-"`
 
+	// Configuration block for creating a JWT validation action. Required if type is jwt-validation.
+	// +kubebuilder:validation:Optional
+	JwtValidation *JwtValidationParameters `json:"jwtValidation,omitempty" tf:"jwt_validation,omitempty"`
+
 	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
@@ -340,7 +392,7 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
-	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -413,6 +465,45 @@ type ForwardParameters struct {
 	TargetGroup []TargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 }
 
+type JwtValidationInitParameters struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	AdditionalClaim []AdditionalClaimInitParameters `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	JwksEndpoint *string `json:"jwksEndpoint,omitempty" tf:"jwks_endpoint,omitempty"`
+}
+
+type JwtValidationObservation struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	AdditionalClaim []AdditionalClaimObservation `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	JwksEndpoint *string `json:"jwksEndpoint,omitempty" tf:"jwks_endpoint,omitempty"`
+}
+
+type JwtValidationParameters struct {
+
+	// Repeatable configuration block for additional claims to validate.
+	// +kubebuilder:validation:Optional
+	AdditionalClaim []AdditionalClaimParameters `json:"additionalClaim,omitempty" tf:"additional_claim,omitempty"`
+
+	// Issuer of the JWT.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+
+	// JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK) that are used to validate signatures from the provider. This must be a full URL, including the HTTPS protocol, the domain, and the path.
+	// +kubebuilder:validation:Optional
+	JwksEndpoint *string `json:"jwksEndpoint" tf:"jwks_endpoint,omitempty"`
+}
+
 type LBListenerInitParameters struct {
 
 	// Name of the Application-Layer Protocol Negotiation (ALPN) policy. Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
@@ -444,7 +535,7 @@ type LBListenerInitParameters struct {
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid to use QUIC or TCP_QUIC if security groups are configured or dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Enables you to modify the header name of the X-Amzn-Mtls-Clientcert HTTP request header. Can only be set if protocol is HTTPS for Application Load Balancers.
@@ -542,7 +633,7 @@ type LBListenerObservation struct {
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid to use QUIC or TCP_QUIC if security groups are configured or dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -658,7 +749,7 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid to use QUIC or TCP_QUIC if security groups are configured or dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 

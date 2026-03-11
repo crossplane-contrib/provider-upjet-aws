@@ -355,7 +355,8 @@ spec:
                             properties:
                               logGroupArn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  destination Amazon CloudWatch Logs log group.
+                                  destination Amazon CloudWatch Logs log group. The
+                                  ARN must end with :*
                                 type: string
                             type: object
                           type: array
@@ -844,7 +845,8 @@ spec:
                             properties:
                               logGroupArn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  destination Amazon CloudWatch Logs log group.
+                                  destination Amazon CloudWatch Logs log group. The
+                                  ARN must end with :*
                                 type: string
                             type: object
                           type: array
@@ -1268,7 +1270,8 @@ spec:
                             properties:
                               logGroupArn:
                                 description: The Amazon Resource Name (ARN) of the
-                                  destination Amazon CloudWatch Logs log group.
+                                  destination Amazon CloudWatch Logs log group. The
+                                  ARN must end with :*
                                 type: string
                             type: object
                           type: array
@@ -1774,7 +1777,8 @@ spec:
                         properties:
                           logGroupArn:
                             description: The Amazon Resource Name (ARN) of the destination
-                              Amazon CloudWatch Logs log group.
+                              Amazon CloudWatch Logs log group. The ARN must end with
+                              :*
                             type: string
                         type: object
                       logSchemaVersion:
@@ -2244,7 +2248,8 @@ spec:
                         properties:
                           logGroupArn:
                             description: The Amazon Resource Name (ARN) of the destination
-                              Amazon CloudWatch Logs log group.
+                              Amazon CloudWatch Logs log group. The ARN must end with
+                              :*
                             type: string
                         type: object
                       logSchemaVersion:
@@ -2649,7 +2654,8 @@ spec:
                         properties:
                           logGroupArn:
                             description: The Amazon Resource Name (ARN) of the destination
-                              Amazon CloudWatch Logs log group.
+                              Amazon CloudWatch Logs log group. The ARN must end with
+                              :*
                             type: string
                         type: object
                       logSchemaVersion:

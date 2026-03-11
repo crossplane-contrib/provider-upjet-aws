@@ -111,6 +111,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			" contain one."
 
 		r.Version = "v1beta2"
+		r.Conversions = r.Conversions[1:]
+		r.Conversions = append([]conversion.Conversion{conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), "clusterMode")},
+			r.Conversions...)
 		r.Conversions = append(r.Conversions,
 			conversion.NewCustomConverter("v1beta1", "v1beta2", func(src, target xpresource.Managed) error {
 				srcTyped := src.(*v1beta1.ReplicationGroup)

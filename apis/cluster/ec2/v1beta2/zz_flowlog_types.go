@@ -110,6 +110,9 @@ type FlowLogInitParameters struct {
 	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
+	// Regional NAT Gateway ID to attach to.
+	RegionalNATGatewayID *string `json:"regionalNatGatewayId,omitempty" tf:"regional_nat_gateway_id,omitempty"`
+
 	// Subnet ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -126,7 +129,7 @@ type FlowLogInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
 	// Transit Gateway Attachment ID to attach to.
@@ -186,6 +189,9 @@ type FlowLogObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Regional NAT Gateway ID to attach to.
+	RegionalNATGatewayID *string `json:"regionalNatGatewayId,omitempty" tf:"regional_nat_gateway_id,omitempty"`
+
 	// Subnet ID to attach to.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -197,7 +203,7 @@ type FlowLogObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
 	// Transit Gateway Attachment ID to attach to.
@@ -281,6 +287,10 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// Regional NAT Gateway ID to attach to.
+	// +kubebuilder:validation:Optional
+	RegionalNATGatewayID *string `json:"regionalNatGatewayId,omitempty" tf:"regional_nat_gateway_id,omitempty"`
+
 	// Subnet ID to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
@@ -299,7 +309,7 @@ type FlowLogParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	// +kubebuilder:validation:Optional
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 

@@ -2809,6 +2809,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeRolloutOrder:
+                    description: Order in which the instances are upgraded (first,
+                      second, last). See the AWS documentation for details.
+                    type: string
                   upgradeStorageConfig:
                     description: Whether to upgrade the storage file system configuration
                       on the read replica. Can only be set with replicate_source_db.
@@ -5630,6 +5634,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeRolloutOrder:
+                    description: Order in which the instances are upgraded (first,
+                      second, last). See the AWS documentation for details.
+                    type: string
                   upgradeStorageConfig:
                     description: Whether to upgrade the storage file system configuration
                       on the read replica. Can only be set with replicate_source_db.
@@ -8419,6 +8427,10 @@ spec:
                       creation. See MSSQL User
                       Guide
                       for more information.
+                    type: string
+                  upgradeRolloutOrder:
+                    description: Order in which the instances are upgraded (first,
+                      second, last). See the AWS documentation for details.
                     type: string
                   upgradeStorageConfig:
                     description: |-
