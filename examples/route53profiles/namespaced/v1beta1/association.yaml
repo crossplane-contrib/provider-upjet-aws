@@ -54,5 +54,5 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    cidr: 10.0.0.0/16
+    cidrBlock: 10.0.0.0/16
     region: us-west-1
