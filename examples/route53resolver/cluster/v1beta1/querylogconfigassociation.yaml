@@ -15,7 +15,7 @@ spec:
     region: us-west-1
     resolverQueryLogConfigIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-querylogconfig
+        testing.upbound.io/example-name: example-querylogconfigassociation
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-querylogconfigassociation
@@ -26,29 +26,32 @@ metadata:
   annotations:
     meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
   labels:
-    testing.upbound.io/example-name: example-querylogconfig
-  name: example-querylogconfig
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfig-qlca
 spec:
   forProvider:
-    destinationArn: arn:aws:s3:::example-querylogconfig-bucket
-    name: example-querylogconfig
+    destinationArn: arn:aws:logs:us-west-1:${data.aws_account_id}:log-group:example-querylogconfig-qlca-group
+    name: example-querylogconfig-qlca
     region: us-west-1
     tags:
       Environment: test
 ---
-apiVersion: s3.aws.upbound.io/v1beta1
-kind: Bucket
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
 metadata:
   annotations:
     meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
   labels:
-    testing.upbound.io/example-name: example-querylogconfig
-  name: example-querylogconfig-bucket
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfig-qlca-group
 spec:
   forProvider:
     region: us-west-1
+    skipDestroy: false
+    deletionProtectionEnabled: false
+    retentionInDays: 1
     tags:
-      Name: QueryLogBucket
+      Name: QueryLogConfigAssociation
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
