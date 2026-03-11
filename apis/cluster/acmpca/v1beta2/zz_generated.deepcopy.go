@@ -735,6 +735,11 @@ func (in *CrlConfigurationInitParameters) DeepCopyInto(out *CrlConfigurationInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomPath != nil {
+		in, out := &in.CustomPath, &out.CustomPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
@@ -775,6 +780,11 @@ func (in *CrlConfigurationObservation) DeepCopyInto(out *CrlConfigurationObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomPath != nil {
+		in, out := &in.CustomPath, &out.CustomPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
@@ -812,6 +822,11 @@ func (in *CrlConfigurationParameters) DeepCopyInto(out *CrlConfigurationParamete
 	*out = *in
 	if in.CustomCname != nil {
 		in, out := &in.CustomCname, &out.CustomCname
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomPath != nil {
+		in, out := &in.CustomPath, &out.CustomPath
 		*out = new(string)
 		**out = **in
 	}

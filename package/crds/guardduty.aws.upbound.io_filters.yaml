@@ -194,8 +194,20 @@ spec:
                                 description: A value to be evaluated. Accepts either
                                   an integer or a date in RFC 3339 format.
                                 type: string
+                              matches:
+                                description: List of string values to be evaluated
+                                  as matching conditions.
+                                items:
+                                  type: string
+                                type: array
                               notEquals:
                                 description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                              notMatches:
+                                description: List of string values to be evaluated
+                                  as non-matching conditions.
                                 items:
                                   type: string
                                 type: array
@@ -277,8 +289,20 @@ spec:
                                 description: A value to be evaluated. Accepts either
                                   an integer or a date in RFC 3339 format.
                                 type: string
+                              matches:
+                                description: List of string values to be evaluated
+                                  as matching conditions.
+                                items:
+                                  type: string
+                                type: array
                               notEquals:
                                 description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                              notMatches:
+                                description: List of string values to be evaluated
+                                  as non-matching conditions.
                                 items:
                                   type: string
                                 type: array
@@ -450,8 +474,20 @@ spec:
                                 description: A value to be evaluated. Accepts either
                                   an integer or a date in RFC 3339 format.
                                 type: string
+                              matches:
+                                description: List of string values to be evaluated
+                                  as matching conditions.
+                                items:
+                                  type: string
+                                type: array
                               notEquals:
                                 description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                              notMatches:
+                                description: List of string values to be evaluated
+                                  as non-matching conditions.
                                 items:
                                   type: string
                                 type: array
@@ -721,8 +757,20 @@ spec:
                               description: A value to be evaluated. Accepts either
                                 an integer or a date in RFC 3339 format.
                               type: string
+                            matches:
+                              description: List of string values to be evaluated as
+                                matching conditions.
+                              items:
+                                type: string
+                              type: array
                             notEquals:
                               description: List of string values to be evaluated.
+                              items:
+                                type: string
+                              type: array
+                            notMatches:
+                              description: List of string values to be evaluated as
+                                non-matching conditions.
                               items:
                                 type: string
                               type: array
@@ -801,8 +849,20 @@ spec:
                               description: A value to be evaluated. Accepts either
                                 an integer or a date in RFC 3339 format.
                               type: string
+                            matches:
+                              description: List of string values to be evaluated as
+                                matching conditions.
+                              items:
+                                type: string
+                              type: array
                             notEquals:
                               description: List of string values to be evaluated.
+                              items:
+                                type: string
+                              type: array
+                            notMatches:
+                              description: List of string values to be evaluated as
+                                non-matching conditions.
                               items:
                                 type: string
                               type: array
@@ -971,8 +1031,20 @@ spec:
                               description: A value to be evaluated. Accepts either
                                 an integer or a date in RFC 3339 format.
                               type: string
+                            matches:
+                              description: List of string values to be evaluated as
+                                matching conditions.
+                              items:
+                                type: string
+                              type: array
                             notEquals:
                               description: List of string values to be evaluated.
+                              items:
+                                type: string
+                              type: array
+                            notMatches:
+                              description: List of string values to be evaluated as
+                                non-matching conditions.
                               items:
                                 type: string
                               type: array

@@ -185,10 +185,10 @@ type ServerlessCacheInitParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Available for Redis only.
+	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Only supported for engine types "redis" or "valkey".
 	SnapshotArnsToRestore []*string `json:"snapshotArnsToRestore,omitempty" tf:"snapshot_arns_to_restore,omitempty"`
 
-	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Available for Redis only.
+	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Only supported for engine types "redis" or "valkey".
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -210,7 +210,7 @@ type ServerlessCacheInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis only. Default is NULL.
+	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis and Valkey. Default is NULL.
 	UserGroupID *string `json:"userGroupId,omitempty" tf:"user_group_id,omitempty"`
 }
 
@@ -260,10 +260,10 @@ type ServerlessCacheObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Available for Redis only.
+	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Only supported for engine types "redis" or "valkey".
 	SnapshotArnsToRestore []*string `json:"snapshotArnsToRestore,omitempty" tf:"snapshot_arns_to_restore,omitempty"`
 
-	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Available for Redis only.
+	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Only supported for engine types "redis" or "valkey".
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// The current status of the serverless cache. The allowed values are CREATING, AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
@@ -280,7 +280,7 @@ type ServerlessCacheObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis only. Default is NULL.
+	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis and Valkey. Default is NULL.
 	UserGroupID *string `json:"userGroupId,omitempty" tf:"user_group_id,omitempty"`
 }
 
@@ -341,11 +341,11 @@ type ServerlessCacheParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Available for Redis only.
+	// The list of ARN(s) of the snapshot that the new serverless cache will be created from. Only supported for engine types "redis" or "valkey".
 	// +kubebuilder:validation:Optional
 	SnapshotArnsToRestore []*string `json:"snapshotArnsToRestore,omitempty" tf:"snapshot_arns_to_restore,omitempty"`
 
-	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Available for Redis only.
+	// The number of snapshots that will be retained for the serverless cache that is being created. As new snapshots beyond this limit are added, the oldest snapshots will be deleted on a rolling basis. Only supported for engine types "redis" or "valkey".
 	// +kubebuilder:validation:Optional
 	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
@@ -370,7 +370,7 @@ type ServerlessCacheParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis only. Default is NULL.
+	// The identifier of the UserGroup to be associated with the serverless cache. Available for Redis and Valkey. Default is NULL.
 	// +kubebuilder:validation:Optional
 	UserGroupID *string `json:"userGroupId,omitempty" tf:"user_group_id,omitempty"`
 }

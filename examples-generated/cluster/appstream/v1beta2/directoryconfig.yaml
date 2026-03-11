@@ -13,6 +13,9 @@ metadata:
   name: example
 spec:
   forProvider:
+    certificateBasedAuthProperties:
+      certificateAuthorityArn: ARN OF CERTIFICATE AUTHORITY
+      status: STATUS OF CERTIFICATE BASED AUTHENTICATION
     directoryName: NAME OF DIRECTORY
     organizationalUnitDistinguishedNames:
     - DISTINGUISHED NAME

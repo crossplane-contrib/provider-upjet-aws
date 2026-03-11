@@ -68,6 +68,22 @@ spec:
                           for the amount of bytes a single query in a workgroup is
                           allowed to scan. Must be at least 10485760.
                         type: number
+                      customerContentEncryptionConfiguration:
+                        description: Configuration block to specify the KMS key that
+                          is used to encrypt the user's data stores in Athena. This
+                          setting applies to the PySpark engine for Athena notebooks.
+                          See Customer Content Encryption Configuration below.
+                        properties:
+                          kmsKey:
+                            description: KMS key ARN to encrypt the logs published
+                              to the given Amazon S3 destination.
+                            type: string
+                        type: object
+                      enableMinimumEncryptionConfiguration:
+                        description: Boolean indicating whether a minimum level of
+                          encryption is enforced for the workgroup for query and calculation
+                          results written to Amazon S3.
+                        type: boolean
                       enforceWorkgroupConfiguration:
                         description: Boolean whether the settings for the workgroup
                           override client-side settings. For more information, see
@@ -102,10 +118,121 @@ spec:
                               the workgroup associates to.
                             type: string
                         type: object
+                      managedQueryResultsConfiguration:
+                        description: Configuration block for storing results in Athena
+                          owned storage. See Managed Query Results Configuration below.
+                        properties:
+                          enabled:
+                            description: Boolean whether Amazon CloudWatch logging
+                              is enabled for the workgroup.
+                            type: boolean
+                          encryptionConfiguration:
+                            description: Configuration block with encryption settings.
+                              See Encryption Configuration below.
+                            properties:
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                        type: object
+                      monitoringConfiguration:
+                        description: Configuration block for managed log persistence,
+                          delivering logs to Amazon S3 buckets, Amazon CloudWatch
+                          log groups etc. Only applicable to Apache Spark engine.
+                          See Monitoring Configuration below.
+                        properties:
+                          cloudWatchLoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon CloudWatch log groups. See CloudWatch Logging
+                              Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              logGroup:
+                                description: Name of the log group in Amazon CloudWatch
+                                  Logs where you want to publish your logs.
+                                type: string
+                              logStreamNamePrefix:
+                                description: Prefix for the CloudWatch log stream
+                                  name.
+                                type: string
+                              logType:
+                                description: Repeatable block defining log types to
+                                  be delivered to CloudWatch.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Type of worker to deliver logs
+                                        to CloudWatch (for example, SPARK_DRIVER and
+                                        SPARK_EXECUTOR).
+                                      type: string
+                                    values:
+                                      description: List of log types to be delivered
+                                        to CloudWatch (for example, STDOUT and STDERR).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          managedLoggingConfiguration:
+                            description: Configuration block for managed log persistence.
+                              See Managed Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                          s3LoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon S3 buckets. See S3 Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                              logLocation:
+                                description: Amazon S3 destination URI (s3://bucket/prefix)
+                                  for log publishing.
+                                type: string
+                            type: object
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.
                         type: boolean
+                      queryResultsS3AccessGrantsConfiguration:
+                        description: Configuration block for S3 access grants. See
+                          Query Results S3 Access Grants Configuration below.
+                        properties:
+                          authenticationType:
+                            description: The authentication type used for Amazon S3
+                              access grants. Currently, only DIRECTORY_IDENTITY is
+                              supported.
+                            type: string
+                          createUserLevelPrefix:
+                            description: When enabled, appends the user ID as an Amazon
+                              S3 path prefix to the query result output location.
+                              Defaults to false.
+                            type: boolean
+                          enableS3AccessGrants:
+                            description: Specifies whether Amazon S3 access grants
+                              are enabled for query results.
+                            type: boolean
+                        type: object
                       requesterPaysEnabled:
                         description: If set to true , allows members assigned to a
                           workgroup to reference Amazon S3 Requester Pays buckets
@@ -147,8 +274,8 @@ spec:
                                   that run in this workgroup.
                                 type: string
                               kmsKeyArn:
-                                description: For SSE_KMS and CSE_KMS, this is the
-                                  KMS key ARN.
+                                description: Customer managed KMS key that is used
+                                  to encrypt the user's data stores in Athena.
                                 type: string
                               kmsKeyArnRef:
                                 description: Reference to a Key in kms to populate
@@ -291,6 +418,22 @@ spec:
                           for the amount of bytes a single query in a workgroup is
                           allowed to scan. Must be at least 10485760.
                         type: number
+                      customerContentEncryptionConfiguration:
+                        description: Configuration block to specify the KMS key that
+                          is used to encrypt the user's data stores in Athena. This
+                          setting applies to the PySpark engine for Athena notebooks.
+                          See Customer Content Encryption Configuration below.
+                        properties:
+                          kmsKey:
+                            description: KMS key ARN to encrypt the logs published
+                              to the given Amazon S3 destination.
+                            type: string
+                        type: object
+                      enableMinimumEncryptionConfiguration:
+                        description: Boolean indicating whether a minimum level of
+                          encryption is enforced for the workgroup for query and calculation
+                          results written to Amazon S3.
+                        type: boolean
                       enforceWorkgroupConfiguration:
                         description: Boolean whether the settings for the workgroup
                           override client-side settings. For more information, see
@@ -325,10 +468,121 @@ spec:
                               the workgroup associates to.
                             type: string
                         type: object
+                      managedQueryResultsConfiguration:
+                        description: Configuration block for storing results in Athena
+                          owned storage. See Managed Query Results Configuration below.
+                        properties:
+                          enabled:
+                            description: Boolean whether Amazon CloudWatch logging
+                              is enabled for the workgroup.
+                            type: boolean
+                          encryptionConfiguration:
+                            description: Configuration block with encryption settings.
+                              See Encryption Configuration below.
+                            properties:
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                        type: object
+                      monitoringConfiguration:
+                        description: Configuration block for managed log persistence,
+                          delivering logs to Amazon S3 buckets, Amazon CloudWatch
+                          log groups etc. Only applicable to Apache Spark engine.
+                          See Monitoring Configuration below.
+                        properties:
+                          cloudWatchLoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon CloudWatch log groups. See CloudWatch Logging
+                              Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              logGroup:
+                                description: Name of the log group in Amazon CloudWatch
+                                  Logs where you want to publish your logs.
+                                type: string
+                              logStreamNamePrefix:
+                                description: Prefix for the CloudWatch log stream
+                                  name.
+                                type: string
+                              logType:
+                                description: Repeatable block defining log types to
+                                  be delivered to CloudWatch.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Type of worker to deliver logs
+                                        to CloudWatch (for example, SPARK_DRIVER and
+                                        SPARK_EXECUTOR).
+                                      type: string
+                                    values:
+                                      description: List of log types to be delivered
+                                        to CloudWatch (for example, STDOUT and STDERR).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          managedLoggingConfiguration:
+                            description: Configuration block for managed log persistence.
+                              See Managed Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                          s3LoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon S3 buckets. See S3 Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                              logLocation:
+                                description: Amazon S3 destination URI (s3://bucket/prefix)
+                                  for log publishing.
+                                type: string
+                            type: object
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.
                         type: boolean
+                      queryResultsS3AccessGrantsConfiguration:
+                        description: Configuration block for S3 access grants. See
+                          Query Results S3 Access Grants Configuration below.
+                        properties:
+                          authenticationType:
+                            description: The authentication type used for Amazon S3
+                              access grants. Currently, only DIRECTORY_IDENTITY is
+                              supported.
+                            type: string
+                          createUserLevelPrefix:
+                            description: When enabled, appends the user ID as an Amazon
+                              S3 path prefix to the query result output location.
+                              Defaults to false.
+                            type: boolean
+                          enableS3AccessGrants:
+                            description: Specifies whether Amazon S3 access grants
+                              are enabled for query results.
+                            type: boolean
+                        type: object
                       requesterPaysEnabled:
                         description: If set to true , allows members assigned to a
                           workgroup to reference Amazon S3 Requester Pays buckets
@@ -370,8 +624,8 @@ spec:
                                   that run in this workgroup.
                                 type: string
                               kmsKeyArn:
-                                description: For SSE_KMS and CSE_KMS, this is the
-                                  KMS key ARN.
+                                description: Customer managed KMS key that is used
+                                  to encrypt the user's data stores in Athena.
                                 type: string
                               kmsKeyArnRef:
                                 description: Reference to a Key in kms to populate
@@ -560,6 +814,22 @@ spec:
                           for the amount of bytes a single query in a workgroup is
                           allowed to scan. Must be at least 10485760.
                         type: number
+                      customerContentEncryptionConfiguration:
+                        description: Configuration block to specify the KMS key that
+                          is used to encrypt the user's data stores in Athena. This
+                          setting applies to the PySpark engine for Athena notebooks.
+                          See Customer Content Encryption Configuration below.
+                        properties:
+                          kmsKey:
+                            description: KMS key ARN to encrypt the logs published
+                              to the given Amazon S3 destination.
+                            type: string
+                        type: object
+                      enableMinimumEncryptionConfiguration:
+                        description: Boolean indicating whether a minimum level of
+                          encryption is enforced for the workgroup for query and calculation
+                          results written to Amazon S3.
+                        type: boolean
                       enforceWorkgroupConfiguration:
                         description: Boolean whether the settings for the workgroup
                           override client-side settings. For more information, see
@@ -599,10 +869,121 @@ spec:
                               the workgroup associates to.
                             type: string
                         type: object
+                      managedQueryResultsConfiguration:
+                        description: Configuration block for storing results in Athena
+                          owned storage. See Managed Query Results Configuration below.
+                        properties:
+                          enabled:
+                            description: Boolean whether Amazon CloudWatch logging
+                              is enabled for the workgroup.
+                            type: boolean
+                          encryptionConfiguration:
+                            description: Configuration block with encryption settings.
+                              See Encryption Configuration below.
+                            properties:
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                        type: object
+                      monitoringConfiguration:
+                        description: Configuration block for managed log persistence,
+                          delivering logs to Amazon S3 buckets, Amazon CloudWatch
+                          log groups etc. Only applicable to Apache Spark engine.
+                          See Monitoring Configuration below.
+                        properties:
+                          cloudWatchLoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon CloudWatch log groups. See CloudWatch Logging
+                              Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              logGroup:
+                                description: Name of the log group in Amazon CloudWatch
+                                  Logs where you want to publish your logs.
+                                type: string
+                              logStreamNamePrefix:
+                                description: Prefix for the CloudWatch log stream
+                                  name.
+                                type: string
+                              logType:
+                                description: Repeatable block defining log types to
+                                  be delivered to CloudWatch.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Type of worker to deliver logs
+                                        to CloudWatch (for example, SPARK_DRIVER and
+                                        SPARK_EXECUTOR).
+                                      type: string
+                                    values:
+                                      description: List of log types to be delivered
+                                        to CloudWatch (for example, STDOUT and STDERR).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          managedLoggingConfiguration:
+                            description: Configuration block for managed log persistence.
+                              See Managed Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                            type: object
+                          s3LoggingConfiguration:
+                            description: Configuration block for delivering logs to
+                              Amazon S3 buckets. See S3 Logging Configuration below.
+                            properties:
+                              enabled:
+                                description: Boolean whether Amazon CloudWatch logging
+                                  is enabled for the workgroup.
+                                type: boolean
+                              kmsKey:
+                                description: KMS key ARN to encrypt the logs published
+                                  to the given Amazon S3 destination.
+                                type: string
+                              logLocation:
+                                description: Amazon S3 destination URI (s3://bucket/prefix)
+                                  for log publishing.
+                                type: string
+                            type: object
+                        type: object
                       publishCloudwatchMetricsEnabled:
                         description: Boolean whether Amazon CloudWatch metrics are
                           enabled for the workgroup. Defaults to true.
                         type: boolean
+                      queryResultsS3AccessGrantsConfiguration:
+                        description: Configuration block for S3 access grants. See
+                          Query Results S3 Access Grants Configuration below.
+                        properties:
+                          authenticationType:
+                            description: The authentication type used for Amazon S3
+                              access grants. Currently, only DIRECTORY_IDENTITY is
+                              supported.
+                            type: string
+                          createUserLevelPrefix:
+                            description: When enabled, appends the user ID as an Amazon
+                              S3 path prefix to the query result output location.
+                              Defaults to false.
+                            type: boolean
+                          enableS3AccessGrants:
+                            description: Specifies whether Amazon S3 access grants
+                              are enabled for query results.
+                            type: boolean
+                        type: object
                       requesterPaysEnabled:
                         description: If set to true , allows members assigned to a
                           workgroup to reference Amazon S3 Requester Pays buckets
@@ -644,8 +1025,8 @@ spec:
                                   that run in this workgroup.
                                 type: string
                               kmsKeyArn:
-                                description: For SSE_KMS and CSE_KMS, this is the
-                                  KMS key ARN.
+                                description: Customer managed KMS key that is used
+                                  to encrypt the user's data stores in Athena.
                                 type: string
                             type: object
                           expectedBucketOwner:

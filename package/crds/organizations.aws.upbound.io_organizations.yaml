@@ -88,16 +88,27 @@ spec:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
                       ALL. For additional information about valid policy types (e.g.,
-                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY,
-                      SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations
-                      API Reference.
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY,
+                      DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY,
+                      S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY
+                      and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference.
+                      To enable INSPECTOR_POLICY, aws_service_access_principals must
+                      include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY,
+                      aws_service_access_principals must include securityhub.amazonaws.com.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   featureSet:
-                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+                    description: Specify ALL (default) or CONSOLIDATED_BILLING.
                     type: string
+                  returnOrganizationOnly:
+                    description: 'Return (as attributes) only the results of the DescribeOrganization
+                      API to avoid API limits. When configured to true only the arn,
+                      feature_set, master_account_arn, master_account_email and master_account_id
+                      attributes will be returned. All others will be empty. Default:
+                      false.'
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -127,16 +138,27 @@ spec:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
                       ALL. For additional information about valid policy types (e.g.,
-                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY,
-                      SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations
-                      API Reference.
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY,
+                      DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY,
+                      S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY
+                      and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference.
+                      To enable INSPECTOR_POLICY, aws_service_access_principals must
+                      include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY,
+                      aws_service_access_principals must include securityhub.amazonaws.com.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   featureSet:
-                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+                    description: Specify ALL (default) or CONSOLIDATED_BILLING.
                     type: string
+                  returnOrganizationOnly:
+                    description: 'Return (as attributes) only the results of the DescribeOrganization
+                      API to avoid API limits. When configured to true only the arn,
+                      feature_set, master_account_arn, master_account_email and master_account_id
+                      attributes will be returned. All others will be empty. Default:
+                      false.'
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -236,24 +258,34 @@ spec:
                     items:
                       properties:
                         arn:
-                          description: ARN of the account
+                          description: ARN of the account.
                           type: string
                         email:
-                          description: Email of the account
+                          description: Email of the account.
                           type: string
                         id:
-                          description: Identifier of the account
+                          description: Identifier of the account.
+                          type: string
+                        joinedMethod:
+                          description: Method by which the account joined the organization.
+                          type: string
+                        joinedTimestamp:
+                          description: Date the account became a part of the organization.
                           type: string
                         name:
-                          description: Name of the account
+                          description: Name of the account.
+                          type: string
+                        state:
+                          description: State of the account.
                           type: string
                         status:
-                          description: Current status of the account
+                          description: (Deprecated use state instead) Status of the
+                            account.
                           type: string
                       type: object
                     type: array
                   arn:
-                    description: ARN of the account
+                    description: ARN of the account.
                     type: string
                   awsServiceAccessPrincipals:
                     description: List of AWS service principal names for which you
@@ -270,30 +302,34 @@ spec:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
                       ALL. For additional information about valid policy types (e.g.,
-                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY,
-                      SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations
-                      API Reference.
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY,
+                      DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY,
+                      S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY
+                      and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference.
+                      To enable INSPECTOR_POLICY, aws_service_access_principals must
+                      include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY,
+                      aws_service_access_principals must include securityhub.amazonaws.com.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   featureSet:
-                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+                    description: Specify ALL (default) or CONSOLIDATED_BILLING.
                     type: string
                   id:
-                    description: Identifier of the account
+                    description: Identifier of the account.
                     type: string
                   masterAccountArn:
-                    description: ARN of the master account
+                    description: ARN of the master account.
                     type: string
                   masterAccountEmail:
-                    description: Email address of the master account
+                    description: Email address of the master account.
                     type: string
                   masterAccountId:
-                    description: Identifier of the master account
+                    description: Identifier of the master account.
                     type: string
                   masterAccountName:
-                    description: Name of the master account
+                    description: Name of the master account.
                     type: string
                   nonMasterAccounts:
                     description: 'List of organization accounts excluding the master
@@ -302,35 +338,52 @@ spec:
                     items:
                       properties:
                         arn:
-                          description: ARN of the account
+                          description: ARN of the account.
                           type: string
                         email:
-                          description: Email of the account
+                          description: Email of the account.
                           type: string
                         id:
-                          description: Identifier of the account
+                          description: Identifier of the account.
+                          type: string
+                        joinedMethod:
+                          description: Method by which the account joined the organization.
+                          type: string
+                        joinedTimestamp:
+                          description: Date the account became a part of the organization.
                           type: string
                         name:
-                          description: Name of the account
+                          description: Name of the account.
+                          type: string
+                        state:
+                          description: State of the account.
                           type: string
                         status:
-                          description: Current status of the account
+                          description: (Deprecated use state instead) Status of the
+                            account.
                           type: string
                       type: object
                     type: array
+                  returnOrganizationOnly:
+                    description: 'Return (as attributes) only the results of the DescribeOrganization
+                      API to avoid API limits. When configured to true only the arn,
+                      feature_set, master_account_arn, master_account_email and master_account_id
+                      attributes will be returned. All others will be empty. Default:
+                      false.'
+                    type: boolean
                   roots:
                     description: 'List of organization roots. All elements have these
                       attributes:'
                     items:
                       properties:
                         arn:
-                          description: ARN of the account
+                          description: ARN of the account.
                           type: string
                         id:
-                          description: Identifier of the account
+                          description: Identifier of the account.
                           type: string
                         name:
-                          description: Name of the account
+                          description: Name of the account.
                           type: string
                         policyTypes:
                           description: 'List of policy types enabled for this root.
@@ -338,7 +391,8 @@ spec:
                           items:
                             properties:
                               status:
-                                description: Current status of the account
+                                description: (Deprecated use state instead) Status
+                                  of the account.
                                 type: string
                               type:
                                 type: string

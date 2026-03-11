@@ -85,6 +85,7 @@ aws_connect_hours_of_operation
 aws_connect_instance_storage_config
 aws_connect_queue
 aws_connect_quick_connect
+aws_connect_routing_profile
 aws_connect_user
 aws_connect_user_hierarchy_structure
 aws_datasync_location_s3

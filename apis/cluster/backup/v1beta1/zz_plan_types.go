@@ -124,6 +124,9 @@ type PlanInitParameters struct {
 	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
+	ScanSetting []ScanSettingInitParameters `json:"scanSetting,omitempty" tf:"scan_setting,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -149,6 +152,9 @@ type PlanObservation struct {
 
 	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
+	ScanSetting []ScanSettingObservation `json:"scanSetting,omitempty" tf:"scan_setting,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -181,6 +187,10 @@ type PlanParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental. Detailed below.
+	// +kubebuilder:validation:Optional
+	ScanSetting []ScanSettingParameters `json:"scanSetting,omitempty" tf:"scan_setting,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -208,6 +218,9 @@ type RuleInitParameters struct {
 	// An display name for a backup rule.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
 
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	ScanAction []ScanActionInitParameters `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
+
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -216,6 +229,9 @@ type RuleInitParameters struct {
 
 	// The amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
 	// The name of a logical container where backups are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
@@ -290,6 +306,9 @@ type RuleObservation struct {
 	// An display name for a backup rule.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
 
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	ScanAction []ScanActionObservation `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
+
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -298,6 +317,9 @@ type RuleObservation struct {
 
 	// The amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
 	// The name of a logical container where backups are stored.
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
@@ -330,6 +352,10 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RuleName *string `json:"ruleName" tf:"rule_name,omitempty"`
 
+	// Block for scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.
+	// +kubebuilder:validation:Optional
+	ScanAction []ScanActionParameters `json:"scanAction,omitempty" tf:"scan_action,omitempty"`
+
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
@@ -341,6 +367,10 @@ type RuleParameters struct {
 	// The amount of time in minutes before beginning a backup.
 	// +kubebuilder:validation:Optional
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+
+	// The ARN of a logically air-gapped vault. ARN must be in the same account and region. If provided, supported fully managed resources back up directly to logically air-gapped vault, while other supported resources create a temporary (billable) snapshot in backup vault, then copy it to logically air-gapped vault. Unsupported resources only back up to the specified backup vault.
+	// +kubebuilder:validation:Optional
+	TargetLogicallyAirGappedBackupVaultArn *string `json:"targetLogicallyAirGappedBackupVaultArn,omitempty" tf:"target_logically_air_gapped_backup_vault_arn,omitempty"`
 
 	// The name of a logical container where backups are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta1.Vault
@@ -354,6 +384,77 @@ type RuleParameters struct {
 	// Selector for a Vault in backup to populate targetVaultName.
 	// +kubebuilder:validation:Optional
 	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
+}
+
+type ScanActionInitParameters struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
+
+	// Scanning mode to use for the scan action. Valid values are FULL_SCAN and INCREMENTAL_SCAN.
+	ScanMode *string `json:"scanMode,omitempty" tf:"scan_mode,omitempty"`
+}
+
+type ScanActionObservation struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
+
+	// Scanning mode to use for the scan action. Valid values are FULL_SCAN and INCREMENTAL_SCAN.
+	ScanMode *string `json:"scanMode,omitempty" tf:"scan_mode,omitempty"`
+}
+
+type ScanActionParameters struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// +kubebuilder:validation:Optional
+	MalwareScanner *string `json:"malwareScanner" tf:"malware_scanner,omitempty"`
+
+	// Scanning mode to use for the scan action. Valid values are FULL_SCAN and INCREMENTAL_SCAN.
+	// +kubebuilder:validation:Optional
+	ScanMode *string `json:"scanMode" tf:"scan_mode,omitempty"`
+}
+
+type ScanSettingInitParameters struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
+
+	// List of resource types to apply the scan setting to. Valid values are EBS, EC2, S3 and ALL.
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+
+	// ARN of the IAM role that AWS Backup uses to scan resources. See the AWS documentation for details.
+	ScannerRoleArn *string `json:"scannerRoleArn,omitempty" tf:"scanner_role_arn,omitempty"`
+}
+
+type ScanSettingObservation struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	MalwareScanner *string `json:"malwareScanner,omitempty" tf:"malware_scanner,omitempty"`
+
+	// List of resource types to apply the scan setting to. Valid values are EBS, EC2, S3 and ALL.
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+
+	// ARN of the IAM role that AWS Backup uses to scan resources. See the AWS documentation for details.
+	ScannerRoleArn *string `json:"scannerRoleArn,omitempty" tf:"scanner_role_arn,omitempty"`
+}
+
+type ScanSettingParameters struct {
+
+	// Malware scanner to use for the scan action. Currently only GUARDDUTY is supported.
+	// +kubebuilder:validation:Optional
+	MalwareScanner *string `json:"malwareScanner" tf:"malware_scanner,omitempty"`
+
+	// List of resource types to apply the scan setting to. Valid values are EBS, EC2, S3 and ALL.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes" tf:"resource_types,omitempty"`
+
+	// ARN of the IAM role that AWS Backup uses to scan resources. See the AWS documentation for details.
+	// +kubebuilder:validation:Optional
+	ScannerRoleArn *string `json:"scannerRoleArn" tf:"scanner_role_arn,omitempty"`
 }
 
 // PlanSpec defines the desired state of Plan

@@ -16,14 +16,14 @@ import (
 
 type GlobalSettingsInitParameters struct {
 
-	// A list of resources along with the opt-in preferences for the account.
+	// A list of resources along with the opt-in preferences for the account. For a list of inputs, see UpdateGlobalSettings in the AWS Backup Developer Guide.
 	// +mapType=granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 }
 
 type GlobalSettingsObservation struct {
 
-	// A list of resources along with the opt-in preferences for the account.
+	// A list of resources along with the opt-in preferences for the account. For a list of inputs, see UpdateGlobalSettings in the AWS Backup Developer Guide.
 	// +mapType=granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 
@@ -33,7 +33,7 @@ type GlobalSettingsObservation struct {
 
 type GlobalSettingsParameters struct {
 
-	// A list of resources along with the opt-in preferences for the account.
+	// A list of resources along with the opt-in preferences for the account. For a list of inputs, see UpdateGlobalSettings in the AWS Backup Developer Guide.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`

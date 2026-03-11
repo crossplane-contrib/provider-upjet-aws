@@ -25,6 +25,10 @@ type SerialConsoleAccessObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type SerialConsoleAccessParameters struct {
@@ -32,6 +36,11 @@ type SerialConsoleAccessParameters struct {
 	// Whether or not serial console access is enabled. Valid values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+	// Region is the region you'd like your resource to be created in.
+	// +kubebuilder:validation:Required
+	Region *string `json:"region" tf:"region,omitempty"`
 }
 
 // SerialConsoleAccessSpec defines the desired state of SerialConsoleAccess

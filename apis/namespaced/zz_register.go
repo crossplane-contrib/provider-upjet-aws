@@ -34,6 +34,7 @@ import (
 	v1beta1batch "github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1"
 	v1beta1bedrock "github.com/upbound/provider-aws/v2/apis/namespaced/bedrock/v1beta1"
 	v1beta1bedrockagent "github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagent/v1beta1"
+	v1beta1bedrockagentcore "github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/v2/apis/namespaced/budgets/v1beta1"
 	v1beta1ce "github.com/upbound/provider-aws/v2/apis/namespaced/ce/v1beta1"
 	v1beta1chime "github.com/upbound/provider-aws/v2/apis/namespaced/chime/v1beta1"
@@ -129,6 +130,7 @@ import (
 	v1beta1neptune "github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1"
 	v1beta1networkfirewall "github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1"
 	v1beta1networkmanager "github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1"
+	v1beta1oam "github.com/upbound/provider-aws/v2/apis/namespaced/oam/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/v2/apis/namespaced/opensearch/v1beta1"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/v2/apis/namespaced/opensearchserverless/v1beta1"
 	v1beta1organizations "github.com/upbound/provider-aws/v2/apis/namespaced/organizations/v1beta1"
@@ -210,6 +212,7 @@ func init() {
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta1bedrock.SchemeBuilder.AddToScheme,
 		v1beta1bedrockagent.SchemeBuilder.AddToScheme,
+		v1beta1bedrockagentcore.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
 		v1beta1ce.SchemeBuilder.AddToScheme,
 		v1beta1chime.SchemeBuilder.AddToScheme,
@@ -305,6 +308,7 @@ func init() {
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
+		v1beta1oam.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,

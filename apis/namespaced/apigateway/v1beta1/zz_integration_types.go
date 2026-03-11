@@ -66,6 +66,19 @@ type IntegrationInitParameters struct {
 	// e.g., Lambda function can only be invoked via POST.
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
+	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	IntegrationTarget *string `json:"integrationTarget,omitempty" tf:"integration_target,omitempty"`
+
+	// Reference to a LB in elbv2 to populate integrationTarget.
+	// +kubebuilder:validation:Optional
+	IntegrationTargetRef *v1.NamespacedReference `json:"integrationTargetRef,omitempty" tf:"-"`
+
+	// Selector for a LB in elbv2 to populate integrationTarget.
+	// +kubebuilder:validation:Optional
+	IntegrationTargetSelector *v1.NamespacedSelector `json:"integrationTargetSelector,omitempty" tf:"-"`
+
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
@@ -91,6 +104,10 @@ type IntegrationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
+	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
+
 	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -107,7 +124,7 @@ type IntegrationInitParameters struct {
 	// TLS configuration. See below.
 	TLSConfig *TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
+	// Custom timeout in milliseconds. The minimum value is 50. The maximum value is 300,000 when response_transfer_mode is BUFFERED, and 900,000 when response_transfer_mode is STREAM. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds for BUFFERED mode.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
@@ -163,6 +180,9 @@ type IntegrationObservation struct {
 	// e.g., Lambda function can only be invoked via POST.
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
+	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	IntegrationTarget *string `json:"integrationTarget,omitempty" tf:"integration_target,omitempty"`
+
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
@@ -182,13 +202,17 @@ type IntegrationObservation struct {
 	// API resource ID.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
+	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
+
 	// ID of the associated REST API.
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// TLS configuration. See below.
 	TLSConfig *TLSConfigObservation `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
+	// Custom timeout in milliseconds. The minimum value is 50. The maximum value is 300,000 when response_transfer_mode is BUFFERED, and 900,000 when response_transfer_mode is STREAM. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds for BUFFERED mode.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
@@ -260,6 +284,20 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
+	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	IntegrationTarget *string `json:"integrationTarget,omitempty" tf:"integration_target,omitempty"`
+
+	// Reference to a LB in elbv2 to populate integrationTarget.
+	// +kubebuilder:validation:Optional
+	IntegrationTargetRef *v1.NamespacedReference `json:"integrationTargetRef,omitempty" tf:"-"`
+
+	// Selector for a LB in elbv2 to populate integrationTarget.
+	// +kubebuilder:validation:Optional
+	IntegrationTargetSelector *v1.NamespacedSelector `json:"integrationTargetSelector,omitempty" tf:"-"`
+
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
@@ -294,6 +332,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
+	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	// +kubebuilder:validation:Optional
+	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
+
 	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -312,7 +355,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSConfig *TLSConfigParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
+	// Custom timeout in milliseconds. The minimum value is 50. The maximum value is 300,000 when response_transfer_mode is BUFFERED, and 900,000 when response_transfer_mode is STREAM. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds for BUFFERED mode.
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 

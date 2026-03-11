@@ -7,6 +7,9 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *DNSSECConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Endpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.

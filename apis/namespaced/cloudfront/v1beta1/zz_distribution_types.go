@@ -14,6 +14,25 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type ConnectionFunctionAssociationInitParameters struct {
+
+	// Identifier of the connection function to associate with the distribution.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type ConnectionFunctionAssociationObservation struct {
+
+	// Identifier of the connection function to associate with the distribution.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type ConnectionFunctionAssociationParameters struct {
+
+	// Identifier of the connection function to associate with the distribution.
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+}
+
 type CustomErrorResponseInitParameters struct {
 
 	// Minimum amount of time you want HTTP error codes to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.
@@ -92,6 +111,9 @@ type CustomOriginConfigInitParameters struct {
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
+	// IP protocol CloudFront uses when connecting to your origin. Valid values: ipv4, ipv6, dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
@@ -113,6 +135,9 @@ type CustomOriginConfigObservation struct {
 
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+
+	// IP protocol CloudFront uses when connecting to your origin. Valid values: ipv4, ipv6, dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
@@ -137,6 +162,10 @@ type CustomOriginConfigParameters struct {
 	// HTTPS port the custom origin listens on.
 	// +kubebuilder:validation:Optional
 	HTTPSPort *float64 `json:"httpsPort" tf:"https_port,omitempty"`
+
+	// IP protocol CloudFront uses when connecting to your origin. Valid values: ipv4, ipv6, dualstack.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	// +kubebuilder:validation:Optional
@@ -383,6 +412,9 @@ type DistributionInitParameters struct {
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// A connection function association configuration block (maximum one).
+	ConnectionFunctionAssociation *ConnectionFunctionAssociationInitParameters `json:"connectionFunctionAssociation,omitempty" tf:"connection_function_association,omitempty"`
+
 	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
 	ContinuousDeploymentPolicyID *string `json:"continuousDeploymentPolicyId,omitempty" tf:"continuous_deployment_policy_id,omitempty"`
 
@@ -435,6 +467,9 @@ type DistributionInitParameters struct {
 	// The SSL configuration for this distribution (maximum one).
 	ViewerCertificate *ViewerCertificateInitParameters `json:"viewerCertificate,omitempty" tf:"viewer_certificate,omitempty"`
 
+	// The viewer mTLS configuration for this distribution (maximum one).
+	ViewerMtlsConfig *ViewerMtlsConfigInitParameters `json:"viewerMtlsConfig,omitempty" tf:"viewer_mtls_config,omitempty"`
+
 	// If enabled, the resource will wait for the distribution status to change from InProgress to Deployed. Setting this tofalse will skip the process. Default: true.
 	WaitForDeployment *bool `json:"waitForDeployment,omitempty" tf:"wait_for_deployment,omitempty"`
 
@@ -459,6 +494,9 @@ type DistributionObservation struct {
 
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// A connection function association configuration block (maximum one).
+	ConnectionFunctionAssociation *ConnectionFunctionAssociationObservation `json:"connectionFunctionAssociation,omitempty" tf:"connection_function_association,omitempty"`
 
 	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
 	ContinuousDeploymentPolicyID *string `json:"continuousDeploymentPolicyId,omitempty" tf:"continuous_deployment_policy_id,omitempty"`
@@ -487,7 +525,7 @@ type DistributionObservation struct {
 	// CloudFront Route 53 zone ID that can be used to route an Alias Resource Record Set to. This attribute is simply an alias for the zone ID Z2FDTNDATAQYW2.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// Identifier of the connection function to associate with the distribution.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Number of invalidation batches currently in progress.
@@ -501,6 +539,9 @@ type DistributionObservation struct {
 
 	// The logging configuration that controls how logs are written to your distribution (maximum one). AWS provides two versions of access logs for CloudFront: Legacy and v2. This argument configures legacy version standard logs.
 	LoggingConfig *LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+
+	// Whether V1 logging is enabled for the distribution.
+	LoggingV1Enabled *bool `json:"loggingV1Enabled,omitempty" tf:"logging_v1_enabled,omitempty"`
 
 	// Ordered list of cache behaviors resource for this distribution. List from top to bottom in order of precedence. The topmost cache behavior will have precedence 0.
 	OrderedCacheBehavior []OrderedCacheBehaviorObservation `json:"orderedCacheBehavior,omitempty" tf:"ordered_cache_behavior,omitempty"`
@@ -543,6 +584,9 @@ type DistributionObservation struct {
 	// The SSL configuration for this distribution (maximum one).
 	ViewerCertificate *ViewerCertificateObservation `json:"viewerCertificate,omitempty" tf:"viewer_certificate,omitempty"`
 
+	// The viewer mTLS configuration for this distribution (maximum one).
+	ViewerMtlsConfig *ViewerMtlsConfigObservation `json:"viewerMtlsConfig,omitempty" tf:"viewer_mtls_config,omitempty"`
+
 	// If enabled, the resource will wait for the distribution status to change from InProgress to Deployed. Setting this tofalse will skip the process. Default: true.
 	WaitForDeployment *bool `json:"waitForDeployment,omitempty" tf:"wait_for_deployment,omitempty"`
 
@@ -564,6 +608,10 @@ type DistributionParameters struct {
 	// Any comments you want to include about the distribution.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// A connection function association configuration block (maximum one).
+	// +kubebuilder:validation:Optional
+	ConnectionFunctionAssociation *ConnectionFunctionAssociationParameters `json:"connectionFunctionAssociation,omitempty" tf:"connection_function_association,omitempty"`
 
 	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
 	// +kubebuilder:validation:Optional
@@ -633,6 +681,10 @@ type DistributionParameters struct {
 	// The SSL configuration for this distribution (maximum one).
 	// +kubebuilder:validation:Optional
 	ViewerCertificate *ViewerCertificateParameters `json:"viewerCertificate,omitempty" tf:"viewer_certificate,omitempty"`
+
+	// The viewer mTLS configuration for this distribution (maximum one).
+	// +kubebuilder:validation:Optional
+	ViewerMtlsConfig *ViewerMtlsConfigParameters `json:"viewerMtlsConfig,omitempty" tf:"viewer_mtls_config,omitempty"`
 
 	// If enabled, the resource will wait for the distribution status to change from InProgress to Deployed. Setting this tofalse will skip the process. Default: true.
 	// +kubebuilder:validation:Optional
@@ -886,39 +938,39 @@ type LambdaFunctionAssociationParameters struct {
 
 type LoggingConfigInitParameters struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
+	// Amazon S3 bucket for V1 logging where access logs are stored, for example, myawslogbucket.s3.amazonaws.com. V1 logging is enabled when this argument is specified. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Whether to include cookies in access logs (default: false).
+	// Whether to include cookies in access logs (default: false). This argument applies to both V1 and V2 logging.
 	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
 
-	// Prefix to the access log filenames for this distribution, for example, myprefix/.
+	// Prefix added to the access log file names for V1 logging, for example, myprefix/. This argument is effective only when V1 logging is enabled.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type LoggingConfigObservation struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
+	// Amazon S3 bucket for V1 logging where access logs are stored, for example, myawslogbucket.s3.amazonaws.com. V1 logging is enabled when this argument is specified. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Whether to include cookies in access logs (default: false).
+	// Whether to include cookies in access logs (default: false). This argument applies to both V1 and V2 logging.
 	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
 
-	// Prefix to the access log filenames for this distribution, for example, myprefix/.
+	// Prefix added to the access log file names for V1 logging, for example, myprefix/. This argument is effective only when V1 logging is enabled.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type LoggingConfigParameters struct {
 
-	// Amazon S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
+	// Amazon S3 bucket for V1 logging where access logs are stored, for example, myawslogbucket.s3.amazonaws.com. V1 logging is enabled when this argument is specified. The bucket must have correct ACL attached with "FULL_CONTROL" permission for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0") for log transfer to work.
 	// +kubebuilder:validation:Optional
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Whether to include cookies in access logs (default: false).
+	// Whether to include cookies in access logs (default: false). This argument applies to both V1 and V2 logging.
 	// +kubebuilder:validation:Optional
 	IncludeCookies *bool `json:"includeCookies,omitempty" tf:"include_cookies,omitempty"`
 
-	// Prefix to the access log filenames for this distribution, for example, myprefix/.
+	// Prefix added to the access log file names for V1 logging, for example, myprefix/. This argument is effective only when V1 logging is enabled.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -1648,6 +1700,45 @@ type S3OriginConfigParameters struct {
 	OriginAccessIdentitySelector *v1.NamespacedSelector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
+type TrustStoreConfigInitParameters struct {
+
+	// Whether to advertise the trust store CA names to clients. Defaults to false.
+	AdvertiseTrustStoreCANames *bool `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
+	// Whether to ignore certificate expiry for viewer mTLS. Defaults to false.
+	IgnoreCertificateExpiry *bool `json:"ignoreCertificateExpiry,omitempty" tf:"ignore_certificate_expiry,omitempty"`
+
+	// Identifier of the trust store to use for viewer mTLS.
+	TrustStoreID *string `json:"trustStoreId,omitempty" tf:"trust_store_id,omitempty"`
+}
+
+type TrustStoreConfigObservation struct {
+
+	// Whether to advertise the trust store CA names to clients. Defaults to false.
+	AdvertiseTrustStoreCANames *bool `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
+	// Whether to ignore certificate expiry for viewer mTLS. Defaults to false.
+	IgnoreCertificateExpiry *bool `json:"ignoreCertificateExpiry,omitempty" tf:"ignore_certificate_expiry,omitempty"`
+
+	// Identifier of the trust store to use for viewer mTLS.
+	TrustStoreID *string `json:"trustStoreId,omitempty" tf:"trust_store_id,omitempty"`
+}
+
+type TrustStoreConfigParameters struct {
+
+	// Whether to advertise the trust store CA names to clients. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AdvertiseTrustStoreCANames *bool `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
+	// Whether to ignore certificate expiry for viewer mTLS. Defaults to false.
+	// +kubebuilder:validation:Optional
+	IgnoreCertificateExpiry *bool `json:"ignoreCertificateExpiry,omitempty" tf:"ignore_certificate_expiry,omitempty"`
+
+	// Identifier of the trust store to use for viewer mTLS.
+	// +kubebuilder:validation:Optional
+	TrustStoreID *string `json:"trustStoreId" tf:"trust_store_id,omitempty"`
+}
+
 type TrustedKeyGroupsInitParameters struct {
 }
 
@@ -1702,6 +1793,9 @@ type VPCOriginConfigInitParameters struct {
 	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
+	// The AWS account ID that owns the VPC origin. Required when referencing a VPC origin from a different AWS account for cross-account VPC origin access.
+	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
 	// The VPC origin ID.
 	VPCOriginID *string `json:"vpcOriginId,omitempty" tf:"vpc_origin_id,omitempty"`
 }
@@ -1713,6 +1807,9 @@ type VPCOriginConfigObservation struct {
 
 	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+
+	// The AWS account ID that owns the VPC origin. Required when referencing a VPC origin from a different AWS account for cross-account VPC origin access.
+	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// The VPC origin ID.
 	VPCOriginID *string `json:"vpcOriginId,omitempty" tf:"vpc_origin_id,omitempty"`
@@ -1727,6 +1824,10 @@ type VPCOriginConfigParameters struct {
 	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	// +kubebuilder:validation:Optional
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+
+	// The AWS account ID that owns the VPC origin. Required when referencing a VPC origin from a different AWS account for cross-account VPC origin access.
+	// +kubebuilder:validation:Optional
+	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// The VPC origin ID.
 	// +kubebuilder:validation:Optional
@@ -1790,6 +1891,35 @@ type ViewerCertificateParameters struct {
 	// How you want CloudFront to serve HTTPS requests. One of vip, sni-only, or static-ip. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
 	// +kubebuilder:validation:Optional
 	SSLSupportMethod *string `json:"sslSupportMethod,omitempty" tf:"ssl_support_method,omitempty"`
+}
+
+type ViewerMtlsConfigInitParameters struct {
+
+	// The mode for viewer mTLS. Valid values: required, optional.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The trust store configuration for viewer mTLS (maximum one).
+	TrustStoreConfig *TrustStoreConfigInitParameters `json:"trustStoreConfig,omitempty" tf:"trust_store_config,omitempty"`
+}
+
+type ViewerMtlsConfigObservation struct {
+
+	// The mode for viewer mTLS. Valid values: required, optional.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The trust store configuration for viewer mTLS (maximum one).
+	TrustStoreConfig *TrustStoreConfigObservation `json:"trustStoreConfig,omitempty" tf:"trust_store_config,omitempty"`
+}
+
+type ViewerMtlsConfigParameters struct {
+
+	// The mode for viewer mTLS. Valid values: required, optional.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The trust store configuration for viewer mTLS (maximum one).
+	// +kubebuilder:validation:Optional
+	TrustStoreConfig *TrustStoreConfigParameters `json:"trustStoreConfig,omitempty" tf:"trust_store_config,omitempty"`
 }
 
 // DistributionSpec defines the desired state of Distribution

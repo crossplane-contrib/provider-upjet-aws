@@ -13,6 +13,75 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type SourceResourceInitParameters struct {
+
+	// ID of the resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
+	// Owner of the resource.
+	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Region where the resource exists. Must match the locale of the parent IPAM Pool.
+	ResourceRegion *string `json:"resourceRegion,omitempty" tf:"resource_region,omitempty"`
+
+	// Type of the resource. (vpc)
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type SourceResourceObservation struct {
+
+	// ID of the resource.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Owner of the resource.
+	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Region where the resource exists. Must match the locale of the parent IPAM Pool.
+	ResourceRegion *string `json:"resourceRegion,omitempty" tf:"resource_region,omitempty"`
+
+	// Type of the resource. (vpc)
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type SourceResourceParameters struct {
+
+	// ID of the resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
+	// Owner of the resource.
+	// +kubebuilder:validation:Optional
+	ResourceOwner *string `json:"resourceOwner" tf:"resource_owner,omitempty"`
+
+	// Region where the resource exists. Must match the locale of the parent IPAM Pool.
+	// +kubebuilder:validation:Optional
+	ResourceRegion *string `json:"resourceRegion" tf:"resource_region,omitempty"`
+
+	// Type of the resource. (vpc)
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+}
+
 type VPCIpamPoolInitParameters struct {
 
 	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
@@ -78,6 +147,9 @@ type VPCIpamPoolInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIpamPoolIDSelector *v1.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
 
+	// Resource to use to use to configure a resource planning IPAM Pool. If configured, the locale of the parent pool must match the region that the vpc resides in.
+	SourceResource *SourceResourceInitParameters `json:"sourceResource,omitempty" tf:"source_resource,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -142,6 +214,9 @@ type VPCIpamPoolObservation struct {
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
 	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
+
+	// Resource to use to use to configure a resource planning IPAM Pool. If configured, the locale of the parent pool must match the region that the vpc resides in.
+	SourceResource *SourceResourceObservation `json:"sourceResource,omitempty" tf:"source_resource,omitempty"`
 
 	// The ID of the IPAM
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -238,6 +313,10 @@ type VPCIpamPoolParameters struct {
 	// Selector for a VPCIpamPool in ec2 to populate sourceIpamPoolId.
 	// +kubebuilder:validation:Optional
 	SourceIpamPoolIDSelector *v1.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
+
+	// Resource to use to use to configure a resource planning IPAM Pool. If configured, the locale of the parent pool must match the region that the vpc resides in.
+	// +kubebuilder:validation:Optional
+	SourceResource *SourceResourceParameters `json:"sourceResource,omitempty" tf:"source_resource,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

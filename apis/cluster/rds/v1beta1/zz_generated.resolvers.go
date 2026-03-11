@@ -149,7 +149,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RestoreToPointInTime); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -171,7 +171,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Import); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -333,7 +333,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.RestoreToPointInTime); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -355,7 +355,7 @@ func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3Import); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

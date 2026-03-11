@@ -77,8 +77,11 @@ type CsvParameters struct {
 
 type GlobalSecondaryIndexInitParameters struct {
 
-	// Name of the hash key in the index; must be defined as an attribute in the resource.
+	// Name of the hash key in the index; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// Configuration block(s) for the key schema. Mutually exclusive with hash_key and range_key. Required if hash_key is not specified. Supports multi-attribute keys for the Multi-Attribute Keys design pattern. See below.
+	KeySchema []KeySchemaInitParameters `json:"keySchema,omitempty" tf:"key_schema,omitempty"`
 
 	// Name of the index.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -90,10 +93,10 @@ type GlobalSecondaryIndexInitParameters struct {
 	// Sets the maximum number of read and write units for the specified on-demand index. See below.
 	OnDemandThroughput *OnDemandThroughputInitParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
-	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
+	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects into the index only the table and index hash_key and sort_key attributes, INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that KEYS_ONLY project.
 	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
 
-	// Name of the range key; must be defined
+	// Name of the range key; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
@@ -108,8 +111,11 @@ type GlobalSecondaryIndexInitParameters struct {
 
 type GlobalSecondaryIndexObservation struct {
 
-	// Name of the hash key in the index; must be defined as an attribute in the resource.
+	// Name of the hash key in the index; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// Configuration block(s) for the key schema. Mutually exclusive with hash_key and range_key. Required if hash_key is not specified. Supports multi-attribute keys for the Multi-Attribute Keys design pattern. See below.
+	KeySchema []KeySchemaObservation `json:"keySchema,omitempty" tf:"key_schema,omitempty"`
 
 	// Name of the index.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -121,10 +127,10 @@ type GlobalSecondaryIndexObservation struct {
 	// Sets the maximum number of read and write units for the specified on-demand index. See below.
 	OnDemandThroughput *OnDemandThroughputObservation `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
-	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
+	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects into the index only the table and index hash_key and sort_key attributes, INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that KEYS_ONLY project.
 	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
 
-	// Name of the range key; must be defined
+	// Name of the range key; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
@@ -139,9 +145,13 @@ type GlobalSecondaryIndexObservation struct {
 
 type GlobalSecondaryIndexParameters struct {
 
-	// Name of the hash key in the index; must be defined as an attribute in the resource.
+	// Name of the hash key in the index; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	// +kubebuilder:validation:Optional
-	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
+	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// Configuration block(s) for the key schema. Mutually exclusive with hash_key and range_key. Required if hash_key is not specified. Supports multi-attribute keys for the Multi-Attribute Keys design pattern. See below.
+	// +kubebuilder:validation:Optional
+	KeySchema []KeySchemaParameters `json:"keySchema,omitempty" tf:"key_schema,omitempty"`
 
 	// Name of the index.
 	// +kubebuilder:validation:Optional
@@ -156,11 +166,11 @@ type GlobalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandThroughput *OnDemandThroughputParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
-	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
+	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects into the index only the table and index hash_key and sort_key attributes, INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that KEYS_ONLY project.
 	// +kubebuilder:validation:Optional
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
-	// Name of the range key; must be defined
+	// Name of the range key; must be defined as an attribute in the resource. Mutually exclusive with key_schema. Use key_schema instead.
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
@@ -175,6 +185,25 @@ type GlobalSecondaryIndexParameters struct {
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+}
+
+type GlobalTableWitnessInitParameters struct {
+
+	// Name of the AWS Region that serves as a witness for the MRSC global table.
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+}
+
+type GlobalTableWitnessObservation struct {
+
+	// Name of the AWS Region that serves as a witness for the MRSC global table.
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+}
+
+type GlobalTableWitnessParameters struct {
+
+	// Name of the AWS Region that serves as a witness for the MRSC global table.
+	// +kubebuilder:validation:Optional
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
 }
 
 type ImportTableInitParameters struct {
@@ -258,6 +287,35 @@ type InputFormatOptionsParameters struct {
 	// This block contains the processing options for the CSV file being imported:
 	// +kubebuilder:validation:Optional
 	Csv *CsvParameters `json:"csv,omitempty" tf:"csv,omitempty"`
+}
+
+type KeySchemaInitParameters struct {
+
+	// Name of the attribute; must be defined as an attribute in the resource.
+	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
+
+	// The type of key. Valid values are HASH (partition key) or RANGE (sort key). You can specify up to 4 attributes with key_type = "HASH" and up to 4 attributes with key_type = "RANGE".
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+}
+
+type KeySchemaObservation struct {
+
+	// Name of the attribute; must be defined as an attribute in the resource.
+	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
+
+	// The type of key. Valid values are HASH (partition key) or RANGE (sort key). You can specify up to 4 attributes with key_type = "HASH" and up to 4 attributes with key_type = "RANGE".
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+}
+
+type KeySchemaParameters struct {
+
+	// Name of the attribute; must be defined as an attribute in the resource.
+	// +kubebuilder:validation:Optional
+	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
+
+	// The type of key. Valid values are HASH (partition key) or RANGE (sort key). You can specify up to 4 attributes with key_type = "HASH" and up to 4 attributes with key_type = "RANGE".
+	// +kubebuilder:validation:Optional
+	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 }
 
 type LocalSecondaryIndexInitParameters struct {
@@ -484,6 +542,9 @@ type TableInitParameters struct {
 	// Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. See below.
 	GlobalSecondaryIndex []GlobalSecondaryIndexInitParameters `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
+	// Witness Region in a Multi-Region Strong Consistency deployment. Note This must be used alongside a single replica with consistency_mode set to STRONG. Other combinations will fail to provision. See below.
+	GlobalTableWitness *GlobalTableWitnessInitParameters `json:"globalTableWitness,omitempty" tf:"global_table_witness,omitempty"`
+
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
@@ -526,7 +587,9 @@ type TableInitParameters struct {
 	// Whether Streams are enabled.
 	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
 
-	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream.
+	// Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// Only valid when stream_enabled is true.
 	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 
 	// Configuration block for TTL. See below.
@@ -564,6 +627,9 @@ type TableObservation struct {
 
 	// Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. See below.
 	GlobalSecondaryIndex []GlobalSecondaryIndexObservation `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
+
+	// Witness Region in a Multi-Region Strong Consistency deployment. Note This must be used alongside a single replica with consistency_mode set to STRONG. Other combinations will fail to provision. See below.
+	GlobalTableWitness *GlobalTableWitnessObservation `json:"globalTableWitness,omitempty" tf:"global_table_witness,omitempty"`
 
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
@@ -620,7 +686,9 @@ type TableObservation struct {
 	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
 	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 
-	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream.
+	// Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// Only valid when stream_enabled is true.
 	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 
 	// Configuration block for TTL. See below.
@@ -693,6 +761,10 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalSecondaryIndex []GlobalSecondaryIndexParameters `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
+	// Witness Region in a Multi-Region Strong Consistency deployment. Note This must be used alongside a single replica with consistency_mode set to STRONG. Other combinations will fail to provision. See below.
+	// +kubebuilder:validation:Optional
+	GlobalTableWitness *GlobalTableWitnessParameters `json:"globalTableWitness,omitempty" tf:"global_table_witness,omitempty"`
+
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	// +kubebuilder:validation:Optional
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
@@ -754,7 +826,9 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
 
-	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream.
+	// Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// Only valid when stream_enabled is true.
 	// +kubebuilder:validation:Optional
 	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 

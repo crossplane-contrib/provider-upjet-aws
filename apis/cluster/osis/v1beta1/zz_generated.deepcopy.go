@@ -9,6 +9,7 @@
 package v1beta1
 
 import (
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -339,6 +340,21 @@ func (in *PipelineInitParameters) DeepCopyInto(out *PipelineInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PipelineRoleArn != nil {
+		in, out := &in.PipelineRoleArn, &out.PipelineRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.PipelineRoleArnRef != nil {
+		in, out := &in.PipelineRoleArnRef, &out.PipelineRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PipelineRoleArnSelector != nil {
+		in, out := &in.PipelineRoleArnSelector, &out.PipelineRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -466,6 +482,11 @@ func (in *PipelineObservation) DeepCopyInto(out *PipelineObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PipelineRoleArn != nil {
+		in, out := &in.PipelineRoleArn, &out.PipelineRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -560,6 +581,21 @@ func (in *PipelineParameters) DeepCopyInto(out *PipelineParameters) {
 		in, out := &in.PipelineConfigurationBody, &out.PipelineConfigurationBody
 		*out = new(string)
 		**out = **in
+	}
+	if in.PipelineRoleArn != nil {
+		in, out := &in.PipelineRoleArn, &out.PipelineRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.PipelineRoleArnRef != nil {
+		in, out := &in.PipelineRoleArnRef, &out.PipelineRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PipelineRoleArnSelector != nil {
+		in, out := &in.PipelineRoleArnSelector, &out.PipelineRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

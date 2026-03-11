@@ -33,8 +33,15 @@ type DNSOptionsInitParameters struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type DNSOptionsObservation struct {
@@ -42,8 +49,15 @@ type DNSOptionsObservation struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type DNSOptionsParameters struct {
@@ -52,9 +66,18 @@ type DNSOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	// +kubebuilder:validation:Optional
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	// +kubebuilder:validation:Optional
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type SubnetConfigurationInitParameters struct {
@@ -135,7 +158,17 @@ type VPCEndpointInitParameters_2 struct {
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnRef *v1.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
@@ -151,7 +184,17 @@ type VPCEndpointInitParameters_2 struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
+
+	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnRef *v1.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnSelector *v1.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
@@ -301,8 +344,18 @@ type VPCEndpointParameters_2 struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnRef *v1.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
@@ -319,8 +372,18 @@ type VPCEndpointParameters_2 struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceNetworkArn *string `json:"serviceNetworkArn,omitempty" tf:"service_network_arn,omitempty"`
+
+	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnRef *v1.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
+	// +kubebuilder:validation:Optional
+	ServiceNetworkArnSelector *v1.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	// +kubebuilder:validation:Optional

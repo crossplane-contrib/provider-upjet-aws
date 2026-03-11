@@ -207,7 +207,52 @@ spec:
                         enabled:
                           description: Specifies whether to enable node auto repair
                             for the node group. Node auto repair is disabled by default.
+                            Defaults to false.
                           type: boolean
+                        maxParallelNodesRepairedCount:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a count of unhealthy
+                            nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                          type: number
+                        maxParallelNodesRepairedPercentage:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a percentage
+                            of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                          type: number
+                        maxUnhealthyNodeThresholdCount:
+                          description: Count threshold of unhealthy nodes, above which
+                            node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                          type: number
+                        maxUnhealthyNodeThresholdPercentage:
+                          description: Percentage threshold of unhealthy nodes, above
+                            which node auto repair actions will stop. Conflicts with
+                            max_unhealthy_node_threshold_count.
+                          type: number
+                        nodeRepairConfigOverrides:
+                          description: Granular overrides for specific repair actions.
+                            See node_repair_config_overrides below for details.
+                          items:
+                            properties:
+                              minRepairWaitTimeMins:
+                                description: Minimum time in minutes to wait before
+                                  attempting to repair a node with the specified node_monitoring_condition
+                                  and node_unhealthy_reason.
+                                type: number
+                              nodeMonitoringCondition:
+                                description: Unhealthy condition reported by the node
+                                  monitoring agent that this override applies to.
+                                type: string
+                              nodeUnhealthyReason:
+                                description: Reason reported by the node monitoring
+                                  agent that this override applies to.
+                                type: string
+                              repairAction:
+                                description: Repair action to take for nodes when
+                                  all of the specified conditions are met. Valid values
+                                  are defined by the EKS API.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   nodeRoleArn:
@@ -545,6 +590,10 @@ spec:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
                           type: number
+                        updateStrategy:
+                          description: 'Strategy to use for updating the node group.
+                            Valid values: MINIMAL and DEFAULT.'
+                          type: string
                       type: object
                     type: array
                   version:
@@ -698,7 +747,52 @@ spec:
                         enabled:
                           description: Specifies whether to enable node auto repair
                             for the node group. Node auto repair is disabled by default.
+                            Defaults to false.
                           type: boolean
+                        maxParallelNodesRepairedCount:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a count of unhealthy
+                            nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                          type: number
+                        maxParallelNodesRepairedPercentage:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a percentage
+                            of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                          type: number
+                        maxUnhealthyNodeThresholdCount:
+                          description: Count threshold of unhealthy nodes, above which
+                            node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                          type: number
+                        maxUnhealthyNodeThresholdPercentage:
+                          description: Percentage threshold of unhealthy nodes, above
+                            which node auto repair actions will stop. Conflicts with
+                            max_unhealthy_node_threshold_count.
+                          type: number
+                        nodeRepairConfigOverrides:
+                          description: Granular overrides for specific repair actions.
+                            See node_repair_config_overrides below for details.
+                          items:
+                            properties:
+                              minRepairWaitTimeMins:
+                                description: Minimum time in minutes to wait before
+                                  attempting to repair a node with the specified node_monitoring_condition
+                                  and node_unhealthy_reason.
+                                type: number
+                              nodeMonitoringCondition:
+                                description: Unhealthy condition reported by the node
+                                  monitoring agent that this override applies to.
+                                type: string
+                              nodeUnhealthyReason:
+                                description: Reason reported by the node monitoring
+                                  agent that this override applies to.
+                                type: string
+                              repairAction:
+                                description: Repair action to take for nodes when
+                                  all of the specified conditions are met. Valid values
+                                  are defined by the EKS API.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   nodeRoleArn:
@@ -1031,6 +1125,10 @@ spec:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
                           type: number
+                        updateStrategy:
+                          description: 'Strategy to use for updating the node group.
+                            Valid values: MINIMAL and DEFAULT.'
+                          type: string
                       type: object
                     type: array
                   version:
@@ -1275,7 +1373,52 @@ spec:
                         enabled:
                           description: Specifies whether to enable node auto repair
                             for the node group. Node auto repair is disabled by default.
+                            Defaults to false.
                           type: boolean
+                        maxParallelNodesRepairedCount:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a count of unhealthy
+                            nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                          type: number
+                        maxParallelNodesRepairedPercentage:
+                          description: Maximum number of nodes that can be repaired
+                            concurrently or in parallel, expressed as a percentage
+                            of unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                          type: number
+                        maxUnhealthyNodeThresholdCount:
+                          description: Count threshold of unhealthy nodes, above which
+                            node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                          type: number
+                        maxUnhealthyNodeThresholdPercentage:
+                          description: Percentage threshold of unhealthy nodes, above
+                            which node auto repair actions will stop. Conflicts with
+                            max_unhealthy_node_threshold_count.
+                          type: number
+                        nodeRepairConfigOverrides:
+                          description: Granular overrides for specific repair actions.
+                            See node_repair_config_overrides below for details.
+                          items:
+                            properties:
+                              minRepairWaitTimeMins:
+                                description: Minimum time in minutes to wait before
+                                  attempting to repair a node with the specified node_monitoring_condition
+                                  and node_unhealthy_reason.
+                                type: number
+                              nodeMonitoringCondition:
+                                description: Unhealthy condition reported by the node
+                                  monitoring agent that this override applies to.
+                                type: string
+                              nodeUnhealthyReason:
+                                description: Reason reported by the node monitoring
+                                  agent that this override applies to.
+                                type: string
+                              repairAction:
+                                description: Repair action to take for nodes when
+                                  all of the specified conditions are met. Valid values
+                                  are defined by the EKS API.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   nodeRoleArn:
@@ -1414,6 +1557,10 @@ spec:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
                           type: number
+                        updateStrategy:
+                          description: 'Strategy to use for updating the node group.
+                            Valid values: MINIMAL and DEFAULT.'
+                          type: string
                       type: object
                     type: array
                   version:
@@ -1668,7 +1815,52 @@ spec:
                       enabled:
                         description: Specifies whether to enable node auto repair
                           for the node group. Node auto repair is disabled by default.
+                          Defaults to false.
                         type: boolean
+                      maxParallelNodesRepairedCount:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a count of unhealthy
+                          nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                        type: number
+                      maxParallelNodesRepairedPercentage:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a percentage of
+                          unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                        type: number
+                      maxUnhealthyNodeThresholdCount:
+                        description: Count threshold of unhealthy nodes, above which
+                          node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                        type: number
+                      maxUnhealthyNodeThresholdPercentage:
+                        description: Percentage threshold of unhealthy nodes, above
+                          which node auto repair actions will stop. Conflicts with
+                          max_unhealthy_node_threshold_count.
+                        type: number
+                      nodeRepairConfigOverrides:
+                        description: Granular overrides for specific repair actions.
+                          See node_repair_config_overrides below for details.
+                        items:
+                          properties:
+                            minRepairWaitTimeMins:
+                              description: Minimum time in minutes to wait before
+                                attempting to repair a node with the specified node_monitoring_condition
+                                and node_unhealthy_reason.
+                              type: number
+                            nodeMonitoringCondition:
+                              description: Unhealthy condition reported by the node
+                                monitoring agent that this override applies to.
+                              type: string
+                            nodeUnhealthyReason:
+                              description: Reason reported by the node monitoring
+                                agent that this override applies to.
+                              type: string
+                            repairAction:
+                              description: Repair action to take for nodes when all
+                                of the specified conditions are met. Valid values
+                                are defined by the EKS API.
+                              type: string
+                          type: object
+                        type: array
                     type: object
                   nodeRoleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role that provides
@@ -1999,6 +2191,10 @@ spec:
                         description: Desired max percentage of unavailable worker
                           nodes during node group update.
                         type: number
+                      updateStrategy:
+                        description: 'Strategy to use for updating the node group.
+                          Valid values: MINIMAL and DEFAULT.'
+                        type: string
                     type: object
                   version:
                     description: Kubernetes version. Defaults to EKS Cluster Kubernetes
@@ -2148,7 +2344,52 @@ spec:
                       enabled:
                         description: Specifies whether to enable node auto repair
                           for the node group. Node auto repair is disabled by default.
+                          Defaults to false.
                         type: boolean
+                      maxParallelNodesRepairedCount:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a count of unhealthy
+                          nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                        type: number
+                      maxParallelNodesRepairedPercentage:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a percentage of
+                          unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                        type: number
+                      maxUnhealthyNodeThresholdCount:
+                        description: Count threshold of unhealthy nodes, above which
+                          node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                        type: number
+                      maxUnhealthyNodeThresholdPercentage:
+                        description: Percentage threshold of unhealthy nodes, above
+                          which node auto repair actions will stop. Conflicts with
+                          max_unhealthy_node_threshold_count.
+                        type: number
+                      nodeRepairConfigOverrides:
+                        description: Granular overrides for specific repair actions.
+                          See node_repair_config_overrides below for details.
+                        items:
+                          properties:
+                            minRepairWaitTimeMins:
+                              description: Minimum time in minutes to wait before
+                                attempting to repair a node with the specified node_monitoring_condition
+                                and node_unhealthy_reason.
+                              type: number
+                            nodeMonitoringCondition:
+                              description: Unhealthy condition reported by the node
+                                monitoring agent that this override applies to.
+                              type: string
+                            nodeUnhealthyReason:
+                              description: Reason reported by the node monitoring
+                                agent that this override applies to.
+                              type: string
+                            repairAction:
+                              description: Repair action to take for nodes when all
+                                of the specified conditions are met. Valid values
+                                are defined by the EKS API.
+                              type: string
+                          type: object
+                        type: array
                     type: object
                   nodeRoleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role that provides
@@ -2474,6 +2715,10 @@ spec:
                         description: Desired max percentage of unavailable worker
                           nodes during node group update.
                         type: number
+                      updateStrategy:
+                        description: 'Strategy to use for updating the node group.
+                          Valid values: MINIMAL and DEFAULT.'
+                        type: string
                     type: object
                   version:
                     description: Kubernetes version. Defaults to EKS Cluster Kubernetes
@@ -2714,7 +2959,52 @@ spec:
                       enabled:
                         description: Specifies whether to enable node auto repair
                           for the node group. Node auto repair is disabled by default.
+                          Defaults to false.
                         type: boolean
+                      maxParallelNodesRepairedCount:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a count of unhealthy
+                          nodes. Conflicts with max_parallel_nodes_repaired_percentage.
+                        type: number
+                      maxParallelNodesRepairedPercentage:
+                        description: Maximum number of nodes that can be repaired
+                          concurrently or in parallel, expressed as a percentage of
+                          unhealthy nodes. Conflicts with max_parallel_nodes_repaired_count.
+                        type: number
+                      maxUnhealthyNodeThresholdCount:
+                        description: Count threshold of unhealthy nodes, above which
+                          node auto repair actions will stop. Conflicts with max_unhealthy_node_threshold_percentage.
+                        type: number
+                      maxUnhealthyNodeThresholdPercentage:
+                        description: Percentage threshold of unhealthy nodes, above
+                          which node auto repair actions will stop. Conflicts with
+                          max_unhealthy_node_threshold_count.
+                        type: number
+                      nodeRepairConfigOverrides:
+                        description: Granular overrides for specific repair actions.
+                          See node_repair_config_overrides below for details.
+                        items:
+                          properties:
+                            minRepairWaitTimeMins:
+                              description: Minimum time in minutes to wait before
+                                attempting to repair a node with the specified node_monitoring_condition
+                                and node_unhealthy_reason.
+                              type: number
+                            nodeMonitoringCondition:
+                              description: Unhealthy condition reported by the node
+                                monitoring agent that this override applies to.
+                              type: string
+                            nodeUnhealthyReason:
+                              description: Reason reported by the node monitoring
+                                agent that this override applies to.
+                              type: string
+                            repairAction:
+                              description: Repair action to take for nodes when all
+                                of the specified conditions are met. Valid values
+                                are defined by the EKS API.
+                              type: string
+                          type: object
+                        type: array
                     type: object
                   nodeRoleArn:
                     description: Amazon Resource Name (ARN) of the IAM Role that provides
@@ -2846,6 +3136,10 @@ spec:
                         description: Desired max percentage of unavailable worker
                           nodes during node group update.
                         type: number
+                      updateStrategy:
+                        description: 'Strategy to use for updating the node group.
+                          Valid values: MINIMAL and DEFAULT.'
+                        type: string
                     type: object
                   version:
                     description: Kubernetes version. Defaults to EKS Cluster Kubernetes

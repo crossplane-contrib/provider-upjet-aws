@@ -271,9 +271,10 @@ spec:
                     type: string
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
-                      runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
-                      on which version of Amazon Linux you require.
+                      runtime environment. This value can be either notebook-al1-v1(deprecated),
+                      notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3,
+                      or notebook-al2023-v1, depending on which version of Amazon
+                      Linux you require. Defaults to notebook-al2-v3.
                     type: string
                   region:
                     description: |-
@@ -696,9 +697,10 @@ spec:
                     type: string
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
-                      runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
-                      on which version of Amazon Linux you require.
+                      runtime environment. This value can be either notebook-al1-v1(deprecated),
+                      notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3,
+                      or notebook-al2023-v1, depending on which version of Amazon
+                      Linux you require. Defaults to notebook-al2-v3.
                     type: string
                   roleArn:
                     description: The ARN of the IAM role to be used by the notebook
@@ -1019,9 +1021,10 @@ spec:
                     type: string
                   platformIdentifier:
                     description: The platform identifier of the notebook instance
-                      runtime environment. This value can be either notebook-al1-v1,
-                      notebook-al2-v1, notebook-al2-v2, or notebook-al2-v3, depending
-                      on which version of Amazon Linux you require.
+                      runtime environment. This value can be either notebook-al1-v1(deprecated),
+                      notebook-al2-v1(deprecated), notebook-al2-v2(deprecated), notebook-al2-v3,
+                      or notebook-al2023-v1, depending on which version of Amazon
+                      Linux you require. Defaults to notebook-al2-v3.
                     type: string
                   region:
                     description: |-

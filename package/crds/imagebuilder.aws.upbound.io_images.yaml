@@ -371,6 +371,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    items:
+                      properties:
+                        logGroupName:
+                          description: Name of the CloudWatch Log Group to send logs
+                            to.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -727,6 +738,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    items:
+                      properties:
+                        logGroupName:
+                          description: Name of the CloudWatch Log Group to send logs
+                            to.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -878,6 +900,7 @@ spec:
                       role to be used by Image Builder to execute workflows.
                     type: string
                   id:
+                    description: Amazon Resource Name (ARN) of the image.
                     type: string
                   imageRecipeArn:
                     description: Amazon Resource Name (ARN) of the image recipe.
@@ -934,6 +957,17 @@ spec:
                     description: Amazon Resource Name (ARN) of the Image Builder Infrastructure
                       Configuration.
                     type: string
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    items:
+                      properties:
+                        logGroupName:
+                          description: Name of the CloudWatch Log Group to send logs
+                            to.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: Name of the AMI.
                     type: string
@@ -1451,6 +1485,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      logGroupName:
+                        description: Name of the CloudWatch Log Group to send logs
+                          to.
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1801,6 +1844,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      logGroupName:
+                        description: Name of the CloudWatch Log Group to send logs
+                          to.
+                        type: string
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -1952,6 +2004,7 @@ spec:
                       role to be used by Image Builder to execute workflows.
                     type: string
                   id:
+                    description: Amazon Resource Name (ARN) of the image.
                     type: string
                   imageRecipeArn:
                     description: Amazon Resource Name (ARN) of the image recipe.
@@ -2002,6 +2055,15 @@ spec:
                     description: Amazon Resource Name (ARN) of the Image Builder Infrastructure
                       Configuration.
                     type: string
+                  loggingConfiguration:
+                    description: Configuration block with logging configuration. Detailed
+                      below.
+                    properties:
+                      logGroupName:
+                        description: Name of the CloudWatch Log Group to send logs
+                          to.
+                        type: string
+                    type: object
                   name:
                     description: Name of the AMI.
                     type: string

@@ -84,6 +84,9 @@ type ClusterInitParameters struct {
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	ComputeConfig *ComputeConfigInitParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
 
+	// Configuration block for the control plane scaling tier. See EKS Provisioned Control Plane for more information. Detailed below.
+	ControlPlaneScalingConfig *ControlPlaneScalingConfigInitParameters `json:"controlPlaneScalingConfig,omitempty" tf:"control_plane_scaling_config,omitempty"`
+
 	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
@@ -158,6 +161,9 @@ type ClusterObservation struct {
 
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	ComputeConfig *ComputeConfigObservation `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
+	// Configuration block for the control plane scaling tier. See EKS Provisioned Control Plane for more information. Detailed below.
+	ControlPlaneScalingConfig *ControlPlaneScalingConfigObservation `json:"controlPlaneScalingConfig,omitempty" tf:"control_plane_scaling_config,omitempty"`
 
 	// Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
@@ -243,6 +249,10 @@ type ClusterParameters struct {
 	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
 	// +kubebuilder:validation:Optional
 	ComputeConfig *ComputeConfigParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
+	// Configuration block for the control plane scaling tier. See EKS Provisioned Control Plane for more information. Detailed below.
+	// +kubebuilder:validation:Optional
+	ControlPlaneScalingConfig *ControlPlaneScalingConfigParameters `json:"controlPlaneScalingConfig,omitempty" tf:"control_plane_scaling_config,omitempty"`
 
 	// Whether to enable deletion protection for the cluster. When enabled, the cluster cannot be deleted unless deletion protection is first disabled. Default: false.
 	// +kubebuilder:validation:Optional
@@ -377,6 +387,25 @@ type ControlPlanePlacementParameters struct {
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+}
+
+type ControlPlaneScalingConfigInitParameters struct {
+
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+}
+
+type ControlPlaneScalingConfigObservation struct {
+
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+}
+
+type ControlPlaneScalingConfigParameters struct {
+
+	// The control plane scaling tier. Valid values are standard, tier-xl, tier-2xl, or tier-4xl. Defaults to standard. For more information about each tier, see EKS Provisioned Control Plane.
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type ElasticLoadBalancingInitParameters struct {

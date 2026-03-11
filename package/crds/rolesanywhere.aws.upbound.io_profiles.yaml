@@ -73,6 +73,9 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  acceptRoleSessionName:
+                    description: Whether or not a custom role session name is accepted.
+                    type: boolean
                   durationSeconds:
                     description: The number of seconds the vended session credentials
                       are valid for. Defaults to 3600.
@@ -201,6 +204,9 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  acceptRoleSessionName:
+                    description: Whether or not a custom role session name is accepted.
+                    type: boolean
                   durationSeconds:
                     description: The number of seconds the vended session credentials
                       are valid for. Defaults to 3600.
@@ -412,6 +418,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  acceptRoleSessionName:
+                    description: Whether or not a custom role session name is accepted.
+                    type: boolean
                   arn:
                     description: Amazon Resource Name (ARN) of the Profile
                     type: string

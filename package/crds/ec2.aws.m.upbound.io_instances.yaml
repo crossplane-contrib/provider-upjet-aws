@@ -112,6 +112,14 @@ spec:
                           Per Instance Type - specifying this option for unsupported
                           instance types will return an error from the EC2 API.
                         type: number
+                      nestedVirtualization:
+                        description: Indicates whether to enable the instance for
+                          nested virtualization. Nested virtualization is supported
+                          on 8th generation Intel-based instance types (C8i, M8i,
+                          R8i, and their flex variants) only. When nested virtualization
+                          is enabled, Virtual Secure Mode (VSM) is automatically disabled
+                          for the instance. Valid values are enabled and disabled.
+                        type: string
                       threadsPerCore:
                         description: If set to 1, hyperthreading is disabled on the
                           launched instance. Defaults to 2 if not set. See Optimizing
@@ -252,7 +260,14 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: Map of tags to assign to the device.
+                          description: 'Map of tags to assign to the device. Note:
+                            Tags specified here are applied after instance creation
+                            via a separate API call. This means they cannot be used
+                            with IAM policies that require tags during resource creation
+                            (e.g., ABAC policies with ec2:CreateAction conditions
+                            or SCPs requiring volume tags). For ABAC compliance, use
+                            volume_tags instead, which applies uniform tags to all
+                            volumes during instance creation.'
                           type: object
                           x-kubernetes-map-type: granular
                         tagsAll:
@@ -829,7 +844,14 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Map of tags to assign to the device.
+                        description: 'Map of tags to assign to the device. Note: Tags
+                          specified here are applied after instance creation via a
+                          separate API call. This means they cannot be used with IAM
+                          policies that require tags during resource creation (e.g.,
+                          ABAC policies with ec2:CreateAction conditions or SCPs requiring
+                          volume tags). For ABAC compliance, use volume_tags instead,
+                          which applies uniform tags to all volumes during instance
+                          creation.'
                         type: object
                         x-kubernetes-map-type: granular
                       tagsAll:
@@ -854,6 +876,40 @@ spec:
                           type that the AMI uses.
                         type: string
                     type: object
+                  secondaryNetworkInterface:
+                    description: One or more secondary network interfaces to attach
+                      to the instance at launch time. See Secondary Network Interface
+                      below for more details.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: Whether the network interface should be destroyed
+                            when the instance is terminated. Defaults to true. Forces
+                            replacement.
+                          type: boolean
+                        deviceIndex:
+                          description: Device index for the network interface attachment.
+                            Defaults to 0. Forces replacement.
+                          type: number
+                        interfaceType:
+                          description: Type of network interface. Currently only secondary
+                            is supported. Defaults to secondary. Forces replacement.
+                          type: string
+                        networkCardIndex:
+                          description: Network card index for the interface. Each
+                            network card can have one secondary interface. Forces
+                            replacement.
+                          type: number
+                        privateIpAddressCount:
+                          description: Number of private IP addresses to assign to
+                            the network interface. Defaults to 1. Forces replacement.
+                          type: number
+                        secondarySubnetId:
+                          description: ID of the secondary subnet in which to create
+                            the network interface. Forces replacement.
+                          type: string
+                      type: object
+                    type: array
                   secondaryPrivateIps:
                     description: List of secondary private IPv4 addresses to assign
                       to the instance's primary network interface (eth0) in a VPC.
@@ -1154,6 +1210,14 @@ spec:
                           Per Instance Type - specifying this option for unsupported
                           instance types will return an error from the EC2 API.
                         type: number
+                      nestedVirtualization:
+                        description: Indicates whether to enable the instance for
+                          nested virtualization. Nested virtualization is supported
+                          on 8th generation Intel-based instance types (C8i, M8i,
+                          R8i, and their flex variants) only. When nested virtualization
+                          is enabled, Virtual Secure Mode (VSM) is automatically disabled
+                          for the instance. Valid values are enabled and disabled.
+                        type: string
                       threadsPerCore:
                         description: If set to 1, hyperthreading is disabled on the
                           launched instance. Defaults to 2 if not set. See Optimizing
@@ -1294,7 +1358,14 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: Map of tags to assign to the device.
+                          description: 'Map of tags to assign to the device. Note:
+                            Tags specified here are applied after instance creation
+                            via a separate API call. This means they cannot be used
+                            with IAM policies that require tags during resource creation
+                            (e.g., ABAC policies with ec2:CreateAction conditions
+                            or SCPs requiring volume tags). For ABAC compliance, use
+                            volume_tags instead, which applies uniform tags to all
+                            volumes during instance creation.'
                           type: object
                           x-kubernetes-map-type: granular
                         tagsAll:
@@ -1866,7 +1937,14 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Map of tags to assign to the device.
+                        description: 'Map of tags to assign to the device. Note: Tags
+                          specified here are applied after instance creation via a
+                          separate API call. This means they cannot be used with IAM
+                          policies that require tags during resource creation (e.g.,
+                          ABAC policies with ec2:CreateAction conditions or SCPs requiring
+                          volume tags). For ABAC compliance, use volume_tags instead,
+                          which applies uniform tags to all volumes during instance
+                          creation.'
                         type: object
                         x-kubernetes-map-type: granular
                       tagsAll:
@@ -1891,6 +1969,40 @@ spec:
                           type that the AMI uses.
                         type: string
                     type: object
+                  secondaryNetworkInterface:
+                    description: One or more secondary network interfaces to attach
+                      to the instance at launch time. See Secondary Network Interface
+                      below for more details.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: Whether the network interface should be destroyed
+                            when the instance is terminated. Defaults to true. Forces
+                            replacement.
+                          type: boolean
+                        deviceIndex:
+                          description: Device index for the network interface attachment.
+                            Defaults to 0. Forces replacement.
+                          type: number
+                        interfaceType:
+                          description: Type of network interface. Currently only secondary
+                            is supported. Defaults to secondary. Forces replacement.
+                          type: string
+                        networkCardIndex:
+                          description: Network card index for the interface. Each
+                            network card can have one secondary interface. Forces
+                            replacement.
+                          type: number
+                        privateIpAddressCount:
+                          description: Number of private IP addresses to assign to
+                            the network interface. Defaults to 1. Forces replacement.
+                          type: number
+                        secondarySubnetId:
+                          description: ID of the secondary subnet in which to create
+                            the network interface. Forces replacement.
+                          type: string
+                      type: object
+                    type: array
                   secondaryPrivateIps:
                     description: List of secondary private IPv4 addresses to assign
                       to the instance's primary network interface (eth0) in a VPC.
@@ -2242,6 +2354,14 @@ spec:
                           Per Instance Type - specifying this option for unsupported
                           instance types will return an error from the EC2 API.
                         type: number
+                      nestedVirtualization:
+                        description: Indicates whether to enable the instance for
+                          nested virtualization. Nested virtualization is supported
+                          on 8th generation Intel-based instance types (C8i, M8i,
+                          R8i, and their flex variants) only. When nested virtualization
+                          is enabled, Virtual Secure Mode (VSM) is automatically disabled
+                          for the instance. Valid values are enabled and disabled.
+                        type: string
                       threadsPerCore:
                         description: If set to 1, hyperthreading is disabled on the
                           launched instance. Defaults to 2 if not set. See Optimizing
@@ -2302,7 +2422,14 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
-                          description: Map of tags to assign to the device.
+                          description: 'Map of tags to assign to the device. Note:
+                            Tags specified here are applied after instance creation
+                            via a separate API call. This means they cannot be used
+                            with IAM policies that require tags during resource creation
+                            (e.g., ABAC policies with ec2:CreateAction conditions
+                            or SCPs requiring volume tags). For ABAC compliance, use
+                            volume_tags instead, which applies uniform tags to all
+                            volumes during instance creation.'
                           type: object
                           x-kubernetes-map-type: granular
                         tagsAll:
@@ -2688,7 +2815,14 @@ spec:
                       tags:
                         additionalProperties:
                           type: string
-                        description: Map of tags to assign to the device.
+                        description: 'Map of tags to assign to the device. Note: Tags
+                          specified here are applied after instance creation via a
+                          separate API call. This means they cannot be used with IAM
+                          policies that require tags during resource creation (e.g.,
+                          ABAC policies with ec2:CreateAction conditions or SCPs requiring
+                          volume tags). For ABAC compliance, use volume_tags instead,
+                          which applies uniform tags to all volumes during instance
+                          creation.'
                         type: object
                         x-kubernetes-map-type: granular
                       tagsAll:
@@ -2717,6 +2851,63 @@ spec:
                           type that the AMI uses.
                         type: string
                     type: object
+                  secondaryNetworkInterface:
+                    description: One or more secondary network interfaces to attach
+                      to the instance at launch time. See Secondary Network Interface
+                      below for more details.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: Whether the network interface should be destroyed
+                            when the instance is terminated. Defaults to true. Forces
+                            replacement.
+                          type: boolean
+                        deviceIndex:
+                          description: Device index for the network interface attachment.
+                            Defaults to 0. Forces replacement.
+                          type: number
+                        interfaceType:
+                          description: Type of network interface. Currently only secondary
+                            is supported. Defaults to secondary. Forces replacement.
+                          type: string
+                        macAddress:
+                          type: string
+                        networkCardIndex:
+                          description: Network card index for the interface. Each
+                            network card can have one secondary interface. Forces
+                            replacement.
+                          type: number
+                        privateIpAddressCount:
+                          description: Number of private IP addresses to assign to
+                            the network interface. Defaults to 1. Forces replacement.
+                          type: number
+                        privateIpAddresses:
+                          description: List of private IP addresses to assign to the
+                            network interface. If not specified, AWS will automatically
+                            assign IP addresses based on private_ip_address_count.
+                            Forces replacement.
+                          items:
+                            type: string
+                          type: array
+                        secondaryInterfaceId:
+                          description: ID of the instance.
+                          type: string
+                        secondaryNetworkId:
+                          description: ID of the instance.
+                          type: string
+                        secondarySubnetId:
+                          description: ID of the secondary subnet in which to create
+                            the network interface. Forces replacement.
+                          type: string
+                        sourceDestCheck:
+                          description: Controls if traffic is routed to the instance
+                            when the destination address does not match the instance.
+                            Used for NAT or VPNs. Defaults true.
+                          type: boolean
+                        status:
+                          type: string
+                      type: object
+                    type: array
                   secondaryPrivateIps:
                     description: List of secondary private IPv4 addresses to assign
                       to the instance's primary network interface (eth0) in a VPC.

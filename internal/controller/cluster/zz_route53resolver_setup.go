@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	dnssecconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/dnssecconfig"
 	endpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/endpoint"
 	querylogconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfig"
 	querylogconfigassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfigassociation"
@@ -20,6 +21,7 @@ import (
 // the supplied manager.
 func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		dnssecconfig.Setup,
 		endpoint.Setup,
 		querylogconfig.Setup,
 		querylogconfigassociation.Setup,
@@ -37,6 +39,7 @@ func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		dnssecconfig.SetupGated,
 		endpoint.SetupGated,
 		querylogconfig.SetupGated,
 		querylogconfigassociation.SetupGated,

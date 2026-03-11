@@ -3929,6 +3929,21 @@ func (in *SelfManagedActiveDirectoryInitParameters) DeepCopyInto(out *SelfManage
 			}
 		}
 	}
+	if in.DomainJoinServiceAccountSecret != nil {
+		in, out := &in.DomainJoinServiceAccountSecret, &out.DomainJoinServiceAccountSecret
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainJoinServiceAccountSecretRef != nil {
+		in, out := &in.DomainJoinServiceAccountSecretRef, &out.DomainJoinServiceAccountSecretRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainJoinServiceAccountSecretSelector != nil {
+		in, out := &in.DomainJoinServiceAccountSecretSelector, &out.DomainJoinServiceAccountSecretSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
 		*out = new(string)
@@ -3944,7 +3959,11 @@ func (in *SelfManagedActiveDirectoryInitParameters) DeepCopyInto(out *SelfManage
 		*out = new(string)
 		**out = **in
 	}
-	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3975,6 +3994,11 @@ func (in *SelfManagedActiveDirectoryObservation) DeepCopyInto(out *SelfManagedAc
 				**out = **in
 			}
 		}
+	}
+	if in.DomainJoinServiceAccountSecret != nil {
+		in, out := &in.DomainJoinServiceAccountSecret, &out.DomainJoinServiceAccountSecret
+		*out = new(string)
+		**out = **in
 	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
@@ -4022,6 +4046,21 @@ func (in *SelfManagedActiveDirectoryParameters) DeepCopyInto(out *SelfManagedAct
 			}
 		}
 	}
+	if in.DomainJoinServiceAccountSecret != nil {
+		in, out := &in.DomainJoinServiceAccountSecret, &out.DomainJoinServiceAccountSecret
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainJoinServiceAccountSecretRef != nil {
+		in, out := &in.DomainJoinServiceAccountSecretRef, &out.DomainJoinServiceAccountSecretRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainJoinServiceAccountSecretSelector != nil {
+		in, out := &in.DomainJoinServiceAccountSecretSelector, &out.DomainJoinServiceAccountSecretSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
 		*out = new(string)
@@ -4037,7 +4076,11 @@ func (in *SelfManagedActiveDirectoryParameters) DeepCopyInto(out *SelfManagedAct
 		*out = new(string)
 		**out = **in
 	}
-	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)

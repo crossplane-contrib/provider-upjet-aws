@@ -1623,6 +1623,9 @@ type DomainSettingsInitParameters struct {
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Configuration for trusted identity propagation. See the trusted_identity_propagation_settings Block below.
+	TrustedIdentityPropagationSettings *TrustedIdentityPropagationSettingsInitParameters `json:"trustedIdentityPropagationSettings,omitempty" tf:"trusted_identity_propagation_settings,omitempty"`
 }
 
 type DomainSettingsObservation struct {
@@ -1639,6 +1642,9 @@ type DomainSettingsObservation struct {
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Configuration for trusted identity propagation. See the trusted_identity_propagation_settings Block below.
+	TrustedIdentityPropagationSettings *TrustedIdentityPropagationSettingsObservation `json:"trustedIdentityPropagationSettings,omitempty" tf:"trusted_identity_propagation_settings,omitempty"`
 }
 
 type DomainSettingsParameters struct {
@@ -1659,6 +1665,10 @@ type DomainSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Configuration for trusted identity propagation. See the trusted_identity_propagation_settings Block below.
+	// +kubebuilder:validation:Optional
+	TrustedIdentityPropagationSettings *TrustedIdentityPropagationSettingsParameters `json:"trustedIdentityPropagationSettings,omitempty" tf:"trusted_identity_propagation_settings,omitempty"`
 }
 
 type EFSFileSystemConfigInitParameters struct {
@@ -2994,6 +3004,25 @@ type TimeSeriesForecastingSettingsParameters struct {
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type TrustedIdentityPropagationSettingsInitParameters struct {
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type TrustedIdentityPropagationSettingsObservation struct {
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type TrustedIdentityPropagationSettingsParameters struct {
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type WorkspaceSettingsInitParameters struct {

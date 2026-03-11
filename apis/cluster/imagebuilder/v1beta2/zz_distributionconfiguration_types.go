@@ -192,6 +192,7 @@ type DistributionConfigurationObservation struct {
 	// One or more configuration blocks with distribution settings. Detailed below.
 	Distribution []DistributionObservation `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
+	// Amazon Resource Name (ARN) of the distribution configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the distribution configuration.
