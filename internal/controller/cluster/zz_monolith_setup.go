@@ -477,6 +477,7 @@ import (
 	lbtargetgroupattachment "github.com/upbound/provider-aws/v2/internal/controller/cluster/elbv2/lbtargetgroupattachment"
 	lbtruststore "github.com/upbound/provider-aws/v2/internal/controller/cluster/elbv2/lbtruststore"
 	securityconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/emr/securityconfiguration"
+	virtualcluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/emrcontainers/virtualcluster"
 	applicationemrserverless "github.com/upbound/provider-aws/v2/internal/controller/cluster/emrserverless/application"
 	feature "github.com/upbound/provider-aws/v2/internal/controller/cluster/evidently/feature"
 	projectevidently "github.com/upbound/provider-aws/v2/internal/controller/cluster/evidently/project"
@@ -1481,6 +1482,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroupattachment.Setup,
 		lbtruststore.Setup,
 		securityconfiguration.Setup,
+		virtualcluster.Setup,
 		applicationemrserverless.Setup,
 		feature.Setup,
 		projectevidently.Setup,
@@ -2491,6 +2493,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroupattachment.SetupGated,
 		lbtruststore.SetupGated,
 		securityconfiguration.SetupGated,
+		virtualcluster.SetupGated,
 		applicationemrserverless.SetupGated,
 		feature.SetupGated,
 		projectevidently.SetupGated,
