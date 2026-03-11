@@ -48,6 +48,23 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Bedrock Agent can be imported using the agent arn
 	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
 
+	// bedrockagentcore
+	//
+	//
+	"aws_bedrockagentcore_agent_runtime":               config.FrameworkResourceWithComputedIdentifier("agent_runtime_id", "xp_stub_hosted_agent_i3sdp-PCtbZ62Yy2"),
+	"aws_bedrockagentcore_agent_runtime_endpoint":      bedrockAgentCoreAgentRuntimeEndpoint(),
+	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
+	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
+	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
+	"aws_bedrockagentcore_gateway":                     config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_gateway_target":              config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// import using ID of memory, must satisfy regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_memory":                     identifierFromProviderWithDefaultStub("stub_memory_placeholder_xp-stub123456"),
+	"aws_bedrockagentcore_memory_strategy":            config.FrameworkResourceWithComputedIdentifier("memory_strategy_id", "STUB123456"),
+	"aws_bedrockagentcore_oauth2_credential_provider": frameworkNameAsIdentifier(),
+	"aws_bedrockagentcore_token_vault_cmk":            bedrockAgentCoreTokenVaultCMK(),
+	"aws_bedrockagentcore_workload_identity":          frameworkNameAsIdentifier(),
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -1089,6 +1106,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_endpoint_service_allowed_principal": config.IdentifierFromProvider,
 	// VPC Endpoint connection notifications can be imported using the VPC endpoint connection notification id
 	"aws_vpc_endpoint_connection_notification": config.IdentifierFromProvider,
+	// VPC Endpoint connection notifications can be imported using the VPC endpoint service ID and VPC endpoint ID separated by underscore (_)
+	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
 	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
 	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
@@ -1174,8 +1193,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecs_cluster": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "cluster/{{ .external_name }}")),
 	// ECS cluster capacity providers can be imported using the cluster_name attribute
 	"aws_ecs_cluster_capacity_providers": config.IdentifierFromProvider,
-	//
-	"aws_ecs_service": config.NameAsIdentifier,
+	// arn:aws:ecs:us-west-1:153891904029:service/example/sample-service
+	"aws_ecs_service": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "service/{{ .parameters.cluster }}/{{ .external_name }}")),
 	// Imported using ARN that has a random substring, revision at the end:
 	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
 	"aws_ecs_task_definition": config.IdentifierFromProvider,
@@ -1942,6 +1961,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// aws_networkmanager_vpc_attachment can be imported using the attachment ID
 	"aws_networkmanager_vpc_attachment": config.IdentifierFromProvider,
 
+	// oam
+	//
+	// aws_oam_sink can be imported using th ARN
+	// Example: arn:aws:oam:us-west-2:123456789012:sink/sink-id
+	"aws_oam_sink": config.IdentifierFromProvider,
+
 	// opensearch
 	//
 	// NOTE(sergen): Parameter as identifier cannot be used, because terraform
@@ -2182,6 +2207,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Route 53 Resolver configs can be imported using the Route 53 Resolver config ID
 	"aws_route53_resolver_config": config.IdentifierFromProvider,
+	//  Route 53 Resolver DNSSEC configs can be imported using the Route 53 Resolver DNSSEC config ID: rdsc-be1866ecc1683e95
+	"aws_route53_resolver_dnssec_config": config.IdentifierFromProvider,
 	// rslvr-in-abcdef01234567890
 	"aws_route53_resolver_endpoint": config.IdentifierFromProvider,
 	// rslvr-rr-0123456789abcdef0
@@ -3381,5 +3408,84 @@ func dsqlClusterPeering() config.ExternalName {
 		}
 		return idStr, nil
 	}
+	return e
+}
+
+func bedrockAgentCoreTokenVaultCMK() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		if id, ok := tfstate["token_vault_id"]; ok {
+			idStr := fmt.Sprintf("%v", id)
+			if len(idStr) > 0 {
+				return idStr, nil
+			}
+		}
+		return "", errors.Errorf("cannot find attribute %q in tfstate", "token_vault_id")
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		if tvid, ok := base["token_vault_id"].(string); !ok || tvid == "" {
+			base["token_vault_id"] = externalName
+		}
+	}
+	e.IdentifierFields = []string{"token_vault_id"}
+	return e
+}
+
+func frameworkNameAsIdentifier() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.OmittedFields = []string{}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["name"].(string)
+		if !ok {
+			return "", errors.New("name field missing from tfstate")
+		}
+		return name, nil
+	}
+	return e
+}
+
+func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, ":")
+		if len(extNameParts) != 2 {
+			return
+		}
+
+		_, ok := tfstate["agent_runtime_id"].(string)
+		if !ok {
+			tfstate["agent_runtime_id"] = extNameParts[0]
+		}
+
+		_, ok = tfstate["name"].(string)
+		if !ok {
+			tfstate["name"] = extNameParts[1]
+		}
+
+	}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["name"].(string)
+		if !ok {
+			return "", errors.New("name field missing from tfstate")
+		}
+		agentRuntimeId, ok := tfstate["agent_runtime_id"].(string)
+		if !ok {
+			return "", errors.New("agent_runtime_id field missing from tfstate")
+		}
+		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
+	}
+	e.IdentifierFields = []string{"name", "agent_runtime_id"}
 	return e
 }

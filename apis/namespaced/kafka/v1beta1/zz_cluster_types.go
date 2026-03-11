@@ -340,6 +340,9 @@ type ClusterInitParameters struct {
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
 	OpenMonitoring *OpenMonitoringInitParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
+	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	Rebalancing *RebalancingInitParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
+
 	// Controls storage mode for supported storage tiers. Valid values are: LOCAL or TIERED.
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
@@ -421,6 +424,9 @@ type ClusterObservation struct {
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
 	OpenMonitoring *OpenMonitoringObservation `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
 
+	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	Rebalancing *RebalancingObservation `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -484,6 +490,10 @@ type ClusterParameters struct {
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See open_monitoring Argument Reference below.
 	// +kubebuilder:validation:Optional
 	OpenMonitoring *OpenMonitoringParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
+
+	// Configuration block for intelligent rebalancing. See rebalancing Argument Reference below. Only applicable to MSK Provisioned clusters with Express brokers.
+	// +kubebuilder:validation:Optional
+	Rebalancing *RebalancingParameters `json:"rebalancing,omitempty" tf:"rebalancing,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -885,6 +895,25 @@ type PublicAccessParameters struct {
 	// Public access type. Valid values: DISABLED, SERVICE_PROVIDED_EIPS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RebalancingInitParameters struct {
+
+	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type RebalancingObservation struct {
+
+	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type RebalancingParameters struct {
+
+	// The status of intelligent rebalancing. Valid values: ACTIVE, PAUSED. Default is ACTIVE for new Express-based clusters.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type S3InitParameters struct {

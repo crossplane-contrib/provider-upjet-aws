@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCEndpointConnectionAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpcEndpointServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    privateDnsEnabled: false
+    provider: ${aws.alternate}
+    region: us-west-1
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    vpcEndpointType: Interface
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_alternate
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPCEndpointService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    acceptanceRequired: false
+    networkLoadBalancerArnsRefs:
+    - name: example
+    region: us-west-1

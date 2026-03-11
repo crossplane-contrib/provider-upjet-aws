@@ -90,6 +90,7 @@ import (
 	vpcdhcpoptions "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcdhcpoptions"
 	vpcdhcpoptionsassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcdhcpoptionsassociation"
 	vpcendpoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcendpoint"
+	vpcendpointconnectionaccepter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcendpointconnectionaccepter"
 	vpcendpointconnectionnotification "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcendpointconnectionnotification"
 	vpcendpointroutetableassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcendpointroutetableassociation"
 	vpcendpointsecuritygroupassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcendpointsecuritygroupassociation"
@@ -197,6 +198,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcdhcpoptions.Setup,
 		vpcdhcpoptionsassociation.Setup,
 		vpcendpoint.Setup,
+		vpcendpointconnectionaccepter.Setup,
 		vpcendpointconnectionnotification.Setup,
 		vpcendpointroutetableassociation.Setup,
 		vpcendpointsecuritygroupassociation.Setup,
@@ -310,6 +312,7 @@ func SetupGated_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcdhcpoptions.SetupGated,
 		vpcdhcpoptionsassociation.SetupGated,
 		vpcendpoint.SetupGated,
+		vpcendpointconnectionaccepter.SetupGated,
 		vpcendpointconnectionnotification.SetupGated,
 		vpcendpointroutetableassociation.SetupGated,
 		vpcendpointsecuritygroupassociation.SetupGated,

@@ -13,6 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AccessLogConfigurationInitParameters struct {
+
+	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
+}
+
+type AccessLogConfigurationObservation struct {
+
+	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
+}
+
+type AccessLogConfigurationParameters struct {
+
+	// The format for Service Connect access log output. Valid values: TEXT, JSON. See AWS documentation for format details.
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format" tf:"format,omitempty"`
+
+	// Specifies whether to include query parameters in Service Connect access logs. Valid values: ENABLED, DISABLED. Default: DISABLED. Query parameters may contain sensitive information.
+	// +kubebuilder:validation:Optional
+	IncludeQueryParameters *string `json:"includeQueryParameters,omitempty" tf:"include_query_parameters,omitempty"`
+}
+
 type AdvancedConfigurationInitParameters struct {
 
 	// ARN of the alternate target group to use for Blue/Green deployments.
@@ -102,6 +131,35 @@ type AlarmsParameters struct {
 	// Whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	// +kubebuilder:validation:Optional
 	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
+}
+
+type CanaryConfigurationInitParameters struct {
+
+	// Number of minutes to wait before shifting all traffic to the new deployment. Valid range: 0-1440 minutes.
+	CanaryBakeTimeInMinutes *string `json:"canaryBakeTimeInMinutes,omitempty" tf:"canary_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to route to the canary deployment. Valid range: 0.1-100.0.
+	CanaryPercent *float64 `json:"canaryPercent,omitempty" tf:"canary_percent,omitempty"`
+}
+
+type CanaryConfigurationObservation struct {
+
+	// Number of minutes to wait before shifting all traffic to the new deployment. Valid range: 0-1440 minutes.
+	CanaryBakeTimeInMinutes *string `json:"canaryBakeTimeInMinutes,omitempty" tf:"canary_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to route to the canary deployment. Valid range: 0.1-100.0.
+	CanaryPercent *float64 `json:"canaryPercent,omitempty" tf:"canary_percent,omitempty"`
+}
+
+type CanaryConfigurationParameters struct {
+
+	// Number of minutes to wait before shifting all traffic to the new deployment. Valid range: 0-1440 minutes.
+	// +kubebuilder:validation:Optional
+	CanaryBakeTimeInMinutes *string `json:"canaryBakeTimeInMinutes,omitempty" tf:"canary_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to route to the canary deployment. Valid range: 0.1-100.0.
+	// +kubebuilder:validation:Optional
+	CanaryPercent *float64 `json:"canaryPercent,omitempty" tf:"canary_percent,omitempty"`
 }
 
 type CapacityProviderStrategyInitParameters struct {
@@ -213,39 +271,59 @@ type DeploymentCircuitBreakerParameters struct {
 
 type DeploymentConfigurationInitParameters struct {
 
-	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Valid range: 0-1440 minutes. Used with BLUE_GREEN, LINEAR, and CANARY strategies.
 	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for canary deployment strategy. Required when strategy is set to CANARY. See below.
+	CanaryConfiguration *CanaryConfigurationInitParameters `json:"canaryConfiguration,omitempty" tf:"canary_configuration,omitempty"`
 
 	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
 	LifecycleHook []LifecycleHookInitParameters `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
 
-	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	// Configuration block for linear deployment strategy. Required when strategy is set to LINEAR. See below.
+	LinearConfiguration *LinearConfigurationInitParameters `json:"linearConfiguration,omitempty" tf:"linear_configuration,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN, LINEAR, CANARY. Default: ROLLING.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
 
 type DeploymentConfigurationObservation struct {
 
-	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Valid range: 0-1440 minutes. Used with BLUE_GREEN, LINEAR, and CANARY strategies.
 	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for canary deployment strategy. Required when strategy is set to CANARY. See below.
+	CanaryConfiguration *CanaryConfigurationObservation `json:"canaryConfiguration,omitempty" tf:"canary_configuration,omitempty"`
 
 	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
 	LifecycleHook []LifecycleHookObservation `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
 
-	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	// Configuration block for linear deployment strategy. Required when strategy is set to LINEAR. See below.
+	LinearConfiguration *LinearConfigurationObservation `json:"linearConfiguration,omitempty" tf:"linear_configuration,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN, LINEAR, CANARY. Default: ROLLING.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
 
 type DeploymentConfigurationParameters struct {
 
-	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Only used when strategy is set to BLUE_GREEN.
+	// Number of minutes to wait after a new deployment is fully provisioned before terminating the old deployment. Valid range: 0-1440 minutes. Used with BLUE_GREEN, LINEAR, and CANARY strategies.
 	// +kubebuilder:validation:Optional
 	BakeTimeInMinutes *string `json:"bakeTimeInMinutes,omitempty" tf:"bake_time_in_minutes,omitempty"`
+
+	// Configuration block for canary deployment strategy. Required when strategy is set to CANARY. See below.
+	// +kubebuilder:validation:Optional
+	CanaryConfiguration *CanaryConfigurationParameters `json:"canaryConfiguration,omitempty" tf:"canary_configuration,omitempty"`
 
 	// Configuration block for lifecycle hooks that are invoked during deployments. See below.
 	// +kubebuilder:validation:Optional
 	LifecycleHook []LifecycleHookParameters `json:"lifecycleHook,omitempty" tf:"lifecycle_hook,omitempty"`
 
-	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN. Default: ROLLING.
+	// Configuration block for linear deployment strategy. Required when strategy is set to LINEAR. See below.
+	// +kubebuilder:validation:Optional
+	LinearConfiguration *LinearConfigurationParameters `json:"linearConfiguration,omitempty" tf:"linear_configuration,omitempty"`
+
+	// Type of deployment strategy. Valid values: ROLLING, BLUE_GREEN, LINEAR, CANARY. Default: ROLLING.
 	// +kubebuilder:validation:Optional
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 }
@@ -319,6 +397,9 @@ type IssuerCertAuthorityParameters struct {
 
 type LifecycleHookInitParameters struct {
 
+	// Custom parameters that Amazon ECS will pass to the hook target invocations (such as a Lambda function).
+	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
+
 	// ARN of the Lambda function to invoke for the lifecycle hook.
 	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
 
@@ -330,6 +411,9 @@ type LifecycleHookInitParameters struct {
 }
 
 type LifecycleHookObservation struct {
+
+	// Custom parameters that Amazon ECS will pass to the hook target invocations (such as a Lambda function).
+	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
 
 	// ARN of the Lambda function to invoke for the lifecycle hook.
 	HookTargetArn *string `json:"hookTargetArn,omitempty" tf:"hook_target_arn,omitempty"`
@@ -343,6 +427,10 @@ type LifecycleHookObservation struct {
 
 type LifecycleHookParameters struct {
 
+	// Custom parameters that Amazon ECS will pass to the hook target invocations (such as a Lambda function).
+	// +kubebuilder:validation:Optional
+	HookDetails *string `json:"hookDetails,omitempty" tf:"hook_details,omitempty"`
+
 	// ARN of the Lambda function to invoke for the lifecycle hook.
 	// +kubebuilder:validation:Optional
 	HookTargetArn *string `json:"hookTargetArn" tf:"hook_target_arn,omitempty"`
@@ -354,6 +442,35 @@ type LifecycleHookParameters struct {
 	// ARN of the IAM role that grants the service permission to invoke the Lambda function.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+}
+
+type LinearConfigurationInitParameters struct {
+
+	// Number of minutes to wait between each step during a linear deployment. Valid range: 0-1440 minutes.
+	StepBakeTimeInMinutes *string `json:"stepBakeTimeInMinutes,omitempty" tf:"step_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to shift in each step during a linear deployment. Valid range: 3.0-100.0.
+	StepPercent *float64 `json:"stepPercent,omitempty" tf:"step_percent,omitempty"`
+}
+
+type LinearConfigurationObservation struct {
+
+	// Number of minutes to wait between each step during a linear deployment. Valid range: 0-1440 minutes.
+	StepBakeTimeInMinutes *string `json:"stepBakeTimeInMinutes,omitempty" tf:"step_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to shift in each step during a linear deployment. Valid range: 3.0-100.0.
+	StepPercent *float64 `json:"stepPercent,omitempty" tf:"step_percent,omitempty"`
+}
+
+type LinearConfigurationParameters struct {
+
+	// Number of minutes to wait between each step during a linear deployment. Valid range: 0-1440 minutes.
+	// +kubebuilder:validation:Optional
+	StepBakeTimeInMinutes *string `json:"stepBakeTimeInMinutes,omitempty" tf:"step_bake_time_in_minutes,omitempty"`
+
+	// Percentage of traffic to shift in each step during a linear deployment. Valid range: 3.0-100.0.
+	// +kubebuilder:validation:Optional
+	StepPercent *float64 `json:"stepPercent,omitempty" tf:"step_percent,omitempty"`
 }
 
 type LoadBalancerInitParameters struct {
@@ -552,101 +669,9 @@ type ManagedEBSVolumeParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
-type NetworkConfigurationInitParameters struct {
-
-	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
-	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroups.
-	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
-	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
-
-	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
-	// +listType=set
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
-
-	// References to Subnet in ec2 to populate subnets.
-	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
-
-	// Selector for a list of Subnet in ec2 to populate subnets.
-	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
-
-	// Subnets associated with the task or service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
-	// +listType=set
-	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
-}
-
-type NetworkConfigurationObservation struct {
-
-	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
-	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
-
-	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
-	// +listType=set
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
-
-	// Subnets associated with the task or service.
-	// +listType=set
-	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
-}
-
-type NetworkConfigurationParameters struct {
-
-	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
-	// +kubebuilder:validation:Optional
-	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroups.
-	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
-	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
-
-	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
-	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
-
-	// References to Subnet in ec2 to populate subnets.
-	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
-
-	// Selector for a list of Subnet in ec2 to populate subnets.
-	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
-
-	// Subnets associated with the task or service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:refFieldName=SubnetRefs
-	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
-}
-
 type OrderedPlacementStrategyInitParameters struct {
 
-	// For the spread placement strategy, valid values are instanceId (or host,
-	// which has the same effect), or any platform or custom attribute that is applied to a container instance.
-	// For the binpack type, valid values are memory and cpu. For the random type, this attribute is not
-	// needed. For more information, see Placement Strategy.
+	// For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance. For the binpack type, valid values are memory and cpu. For the random type, this attribute is not needed. For more information, see Placement Strategy.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Type of placement strategy. Must be one of: binpack, random, or spread
@@ -655,10 +680,7 @@ type OrderedPlacementStrategyInitParameters struct {
 
 type OrderedPlacementStrategyObservation struct {
 
-	// For the spread placement strategy, valid values are instanceId (or host,
-	// which has the same effect), or any platform or custom attribute that is applied to a container instance.
-	// For the binpack type, valid values are memory and cpu. For the random type, this attribute is not
-	// needed. For more information, see Placement Strategy.
+	// For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance. For the binpack type, valid values are memory and cpu. For the random type, this attribute is not needed. For more information, see Placement Strategy.
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Type of placement strategy. Must be one of: binpack, random, or spread
@@ -667,10 +689,7 @@ type OrderedPlacementStrategyObservation struct {
 
 type OrderedPlacementStrategyParameters struct {
 
-	// For the spread placement strategy, valid values are instanceId (or host,
-	// which has the same effect), or any platform or custom attribute that is applied to a container instance.
-	// For the binpack type, valid values are memory and cpu. For the random type, this attribute is not
-	// needed. For more information, see Placement Strategy.
+	// For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance. For the binpack type, valid values are memory and cpu. For the random type, this attribute is not needed. For more information, see Placement Strategy.
 	// +kubebuilder:validation:Optional
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
@@ -739,6 +758,9 @@ type SecretOptionParameters struct {
 
 type ServiceConnectConfigurationInitParameters struct {
 
+	// Configuration for Service Connect access logs. See below.
+	AccessLogConfiguration *AccessLogConfigurationInitParameters `json:"accessLogConfiguration,omitempty" tf:"access_log_configuration,omitempty"`
+
 	// Whether to use Service Connect with this service.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -796,6 +818,9 @@ type ServiceConnectConfigurationLogConfigurationParameters struct {
 
 type ServiceConnectConfigurationObservation struct {
 
+	// Configuration for Service Connect access logs. See below.
+	AccessLogConfiguration *AccessLogConfigurationObservation `json:"accessLogConfiguration,omitempty" tf:"access_log_configuration,omitempty"`
+
 	// Whether to use Service Connect with this service.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -810,6 +835,10 @@ type ServiceConnectConfigurationObservation struct {
 }
 
 type ServiceConnectConfigurationParameters struct {
+
+	// Configuration for Service Connect access logs. See below.
+	// +kubebuilder:validation:Optional
+	AccessLogConfiguration *AccessLogConfigurationParameters `json:"accessLogConfiguration,omitempty" tf:"access_log_configuration,omitempty"`
 
 	// Whether to use Service Connect with this service.
 	// +kubebuilder:validation:Optional
@@ -905,20 +934,8 @@ type ServiceInitParameters struct {
 	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. When creating a new service, if no value is specified, it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing. When updating an existing service, if no value is specified it defaults to the existing service's AvailabilityZoneRebalancing value. If the service never had an AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
+	// Capacity provider strategies to use for the service. Can be one or more. Updating this argument requires force_new_deployment = true. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
-
-	// Name of an ECS cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.Cluster
-	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
-
-	// Reference to a Cluster in ecs to populate cluster.
-	// +kubebuilder:validation:Optional
-	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
-
-	// Selector for a Cluster in ecs to populate cluster.
-	// +kubebuilder:validation:Optional
-	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
 
 	// Configuration block for deployment circuit breaker. See below.
 	DeploymentCircuitBreaker *DeploymentCircuitBreakerInitParameters `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
@@ -973,7 +990,7 @@ type ServiceInitParameters struct {
 	LoadBalancer []LoadBalancerInitParameters `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
 	// Network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. See below.
-	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+	NetworkConfiguration *ServiceNetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. Updates to this configuration will take effect next task deployment unless force_new_deployment is enabled. The maximum number of ordered_placement_strategy blocks is 5. See below.
 	OrderedPlacementStrategy []OrderedPlacementStrategyInitParameters `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
@@ -1005,6 +1022,7 @@ type ServiceInitParameters struct {
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.TaskDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinition.
@@ -1029,6 +1047,95 @@ type ServiceInitParameters struct {
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
 }
 
+type ServiceNetworkConfigurationInitParameters struct {
+
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
+	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+
+	// Subnets associated with the task or service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
+	// +listType=set
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+}
+
+type ServiceNetworkConfigurationObservation struct {
+
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Subnets associated with the task or service.
+	// +listType=set
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+}
+
+type ServiceNetworkConfigurationParameters struct {
+
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
+	// +kubebuilder:validation:Optional
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
+	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+
+	// Subnets associated with the task or service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+}
+
 type ServiceObservation struct {
 
 	// Information about the CloudWatch alarms. See below.
@@ -1040,7 +1147,7 @@ type ServiceObservation struct {
 	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. When creating a new service, if no value is specified, it defaults to ENABLED if the service is compatible with AvailabilityZoneRebalancing. When updating an existing service, if no value is specified it defaults to the existing service's AvailabilityZoneRebalancing value. If the service never had an AvailabilityZoneRebalancing value set, Amazon ECS treats this as DISABLED.
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
+	// Capacity provider strategies to use for the service. Can be one or more. Updating this argument requires force_new_deployment = true. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyObservation `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
 	// Name of an ECS cluster.
@@ -1091,7 +1198,7 @@ type ServiceObservation struct {
 	LoadBalancer []LoadBalancerObservation `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 
 	// Network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. See below.
-	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+	NetworkConfiguration *ServiceNetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. Updates to this configuration will take effect next task deployment unless force_new_deployment is enabled. The maximum number of ordered_placement_strategy blocks is 5. See below.
 	OrderedPlacementStrategy []OrderedPlacementStrategyObservation `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
@@ -1156,7 +1263,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
+	// Capacity provider strategies to use for the service. Can be one or more. Updating this argument requires force_new_deployment = true. See below. Conflicts with launch_type.
 	// +kubebuilder:validation:Optional
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
@@ -1241,7 +1348,7 @@ type ServiceParameters struct {
 
 	// Network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. See below.
 	// +kubebuilder:validation:Optional
-	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+	NetworkConfiguration *ServiceNetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. Updates to this configuration will take effect next task deployment unless force_new_deployment is enabled. The maximum number of ordered_placement_strategy blocks is 5. See below.
 	// +kubebuilder:validation:Optional
@@ -1287,6 +1394,7 @@ type ServiceParameters struct {
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ecs/v1beta2.TaskDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 

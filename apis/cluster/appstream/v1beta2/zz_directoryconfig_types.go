@@ -13,7 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CertificateBasedAuthPropertiesInitParameters struct {
+
+	// The ARN of the AWS Certificate Manager Private CA resource.
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type CertificateBasedAuthPropertiesObservation struct {
+
+	// The ARN of the AWS Certificate Manager Private CA resource.
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type CertificateBasedAuthPropertiesParameters struct {
+
+	// The ARN of the AWS Certificate Manager Private CA resource.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// The status of the certificate-based authentication properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type DirectoryConfigInitParameters struct {
+
+	// Configuration block for the certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. See certificate_based_auth_properties below.
+	CertificateBasedAuthProperties *CertificateBasedAuthPropertiesInitParameters `json:"certificateBasedAuthProperties,omitempty" tf:"certificate_based_auth_properties,omitempty"`
 
 	// Fully qualified name of the directory.
 	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
@@ -27,6 +59,9 @@ type DirectoryConfigInitParameters struct {
 }
 
 type DirectoryConfigObservation struct {
+
+	// Configuration block for the certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. See certificate_based_auth_properties below.
+	CertificateBasedAuthProperties *CertificateBasedAuthPropertiesObservation `json:"certificateBasedAuthProperties,omitempty" tf:"certificate_based_auth_properties,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when the directory config was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
@@ -50,6 +85,10 @@ type DirectoryConfigObservation struct {
 }
 
 type DirectoryConfigParameters struct {
+
+	// Configuration block for the certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. See certificate_based_auth_properties below.
+	// +kubebuilder:validation:Optional
+	CertificateBasedAuthProperties *CertificateBasedAuthPropertiesParameters `json:"certificateBasedAuthProperties,omitempty" tf:"certificate_based_auth_properties,omitempty"`
 
 	// Fully qualified name of the directory.
 	// +kubebuilder:validation:Optional

@@ -612,6 +612,26 @@ func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
+			Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExecutionRoleArn")
+	}
+	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -655,10 +675,30 @@ func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
+			Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
 			Extract:      reference.ExternalName(),

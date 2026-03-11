@@ -482,6 +482,9 @@ type SagemakerPipelineParametersParameters struct {
 
 type ScheduleInitParameters struct {
 
+	// Action that applies to the schedule after completing invocation of the target. Valid values are NONE and DELETE. Defaults to NONE.
+	ActionAfterCompletion *string `json:"actionAfterCompletion,omitempty" tf:"action_after_completion,omitempty"`
+
 	// Brief description of the schedule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -526,6 +529,9 @@ type ScheduleInitParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// Action that applies to the schedule after completing invocation of the target. Valid values are NONE and DELETE. Defaults to NONE.
+	ActionAfterCompletion *string `json:"actionAfterCompletion,omitempty" tf:"action_after_completion,omitempty"`
 
 	// ARN of the SQS queue specified as the destination for the dead-letter queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -572,6 +578,10 @@ type ScheduleObservation struct {
 }
 
 type ScheduleParameters struct {
+
+	// Action that applies to the schedule after completing invocation of the target. Valid values are NONE and DELETE. Defaults to NONE.
+	// +kubebuilder:validation:Optional
+	ActionAfterCompletion *string `json:"actionAfterCompletion,omitempty" tf:"action_after_completion,omitempty"`
 
 	// Brief description of the schedule.
 	// +kubebuilder:validation:Optional

@@ -956,6 +956,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: Amazon Resource Name (ARN) of the distribution configuration.
                     type: string
                   name:
                     description: Name of the distribution configuration.
@@ -1919,6 +1920,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: Amazon Resource Name (ARN) of the distribution configuration.
                     type: string
                   name:
                     description: Name of the distribution configuration.

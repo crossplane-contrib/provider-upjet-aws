@@ -2752,6 +2752,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeRolloutOrder:
+                    description: Order in which the instances are upgraded (first,
+                      second, last). See the AWS documentation for details.
+                    type: string
                   upgradeStorageConfig:
                     description: |-
                       Whether to upgrade the storage file system configuration on the read replica.

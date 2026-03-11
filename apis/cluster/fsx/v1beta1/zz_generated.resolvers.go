@@ -548,12 +548,34 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SelfManagedActiveDirectory); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretRef,
+				Selector:     mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret")
+		}
+		mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 			Extract:       reference.ExternalName(),
@@ -628,12 +650,34 @@ func (mg *WindowsFileSystem) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SelfManagedActiveDirectory); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretRef,
+				Selector:     mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret")
+		}
+		mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecret = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SelfManagedActiveDirectory[i3].DomainJoinServiceAccountSecretRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
 			Extract:       reference.ExternalName(),

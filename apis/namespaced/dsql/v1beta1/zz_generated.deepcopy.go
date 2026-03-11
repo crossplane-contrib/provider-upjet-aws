@@ -48,6 +48,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.KMSEncryptionKey != nil {
 		in, out := &in.KMSEncryptionKey, &out.KMSEncryptionKey
 		*out = new(string)
@@ -140,6 +145,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -221,6 +231,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	*out = *in
 	if in.DeletionProtectionEnabled != nil {
 		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
 		*out = new(bool)
 		**out = **in
 	}

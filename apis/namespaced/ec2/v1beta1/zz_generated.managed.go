@@ -3207,6 +3207,46 @@ func (mg *VPCEndpoint) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCEndpointConnectionAccepter.
+func (mg *VPCEndpointConnectionAccepter) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VPCEndpointConnectionNotification.
 func (mg *VPCEndpointConnectionNotification) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

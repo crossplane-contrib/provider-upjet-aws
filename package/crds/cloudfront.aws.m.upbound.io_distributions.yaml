@@ -73,6 +73,15 @@ spec:
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
+                  connectionFunctionAssociation:
+                    description: A connection function association configuration block
+                      (maximum one).
+                    properties:
+                      id:
+                        description: Identifier of the connection function to associate
+                          with the distribution.
+                        type: string
+                    type: object
                   continuousDeploymentPolicyId:
                     description: Identifier of a continuous deployment policy. This
                       argument should only be set on a production distribution. See
@@ -312,19 +321,22 @@ spec:
                       argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: 'Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com. The bucket
-                          must have correct ACL attached with "FULL_CONTROL" permission
-                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                        description: 'Amazon S3 bucket for V1 logging where access
+                          logs are stored, for example, myawslogbucket.s3.amazonaws.com.
+                          V1 logging is enabled when this argument is specified. The
+                          bucket must have correct ACL attached with "FULL_CONTROL"
+                          permission for "awslogsdelivery" account (Canonical ID:
+                          "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
                           for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
-                          false).'
+                          false). This argument applies to both V1 and V2 logging.'
                         type: boolean
                       prefix:
-                        description: Prefix to the access log filenames for this distribution,
-                          for example, myprefix/.
+                        description: Prefix added to the access log file names for
+                          V1 logging, for example, myprefix/. This argument is effective
+                          only when V1 logging is enabled.
                         type: string
                     type: object
                   orderedCacheBehavior:
@@ -725,6 +737,10 @@ spec:
                             httpsPort:
                               description: HTTPS port the custom origin listens on.
                               type: number
+                            ipAddressType:
+                              description: 'IP protocol CloudFront uses when connecting
+                                to your origin. Valid values: ipv4, ipv6, dualstack.'
+                              type: string
                             originKeepaliveTimeout:
                               description: The Custom KeepAlive timeout, in seconds.
                                 By default, AWS enforces an upper limit of 60. But
@@ -977,6 +993,11 @@ spec:
                                 default, AWS enforces an upper limit of 60. But you
                                 can request an increase. Defaults to 30.
                               type: number
+                            ownerAccountId:
+                              description: The AWS account ID that owns the VPC origin.
+                                Required when referencing a VPC origin from a different
+                                AWS account for cross-account VPC origin access.
+                              type: string
                             vpcOriginId:
                               description: The VPC origin ID.
                               type: string
@@ -1097,6 +1118,32 @@ spec:
                           CloudFront to use a dedicated IP address and may incur extra
                           charges.'
                         type: string
+                    type: object
+                  viewerMtlsConfig:
+                    description: The viewer mTLS configuration for this distribution
+                      (maximum one).
+                    properties:
+                      mode:
+                        description: 'The mode for viewer mTLS. Valid values: required,
+                          optional.'
+                        type: string
+                      trustStoreConfig:
+                        description: The trust store configuration for viewer mTLS
+                          (maximum one).
+                        properties:
+                          advertiseTrustStoreCaNames:
+                            description: Whether to advertise the trust store CA names
+                              to clients. Defaults to false.
+                            type: boolean
+                          ignoreCertificateExpiry:
+                            description: Whether to ignore certificate expiry for
+                              viewer mTLS. Defaults to false.
+                            type: boolean
+                          trustStoreId:
+                            description: Identifier of the trust store to use for
+                              viewer mTLS.
+                            type: string
+                        type: object
                     type: object
                   waitForDeployment:
                     description: 'If enabled, the resource will wait for the distribution
@@ -1142,6 +1189,15 @@ spec:
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
+                  connectionFunctionAssociation:
+                    description: A connection function association configuration block
+                      (maximum one).
+                    properties:
+                      id:
+                        description: Identifier of the connection function to associate
+                          with the distribution.
+                        type: string
+                    type: object
                   continuousDeploymentPolicyId:
                     description: Identifier of a continuous deployment policy. This
                       argument should only be set on a production distribution. See
@@ -1381,19 +1437,22 @@ spec:
                       argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: 'Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com. The bucket
-                          must have correct ACL attached with "FULL_CONTROL" permission
-                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                        description: 'Amazon S3 bucket for V1 logging where access
+                          logs are stored, for example, myawslogbucket.s3.amazonaws.com.
+                          V1 logging is enabled when this argument is specified. The
+                          bucket must have correct ACL attached with "FULL_CONTROL"
+                          permission for "awslogsdelivery" account (Canonical ID:
+                          "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
                           for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
-                          false).'
+                          false). This argument applies to both V1 and V2 logging.'
                         type: boolean
                       prefix:
-                        description: Prefix to the access log filenames for this distribution,
-                          for example, myprefix/.
+                        description: Prefix added to the access log file names for
+                          V1 logging, for example, myprefix/. This argument is effective
+                          only when V1 logging is enabled.
                         type: string
                     type: object
                   orderedCacheBehavior:
@@ -1794,6 +1853,10 @@ spec:
                             httpsPort:
                               description: HTTPS port the custom origin listens on.
                               type: number
+                            ipAddressType:
+                              description: 'IP protocol CloudFront uses when connecting
+                                to your origin. Valid values: ipv4, ipv6, dualstack.'
+                              type: string
                             originKeepaliveTimeout:
                               description: The Custom KeepAlive timeout, in seconds.
                                 By default, AWS enforces an upper limit of 60. But
@@ -2046,6 +2109,11 @@ spec:
                                 default, AWS enforces an upper limit of 60. But you
                                 can request an increase. Defaults to 30.
                               type: number
+                            ownerAccountId:
+                              description: The AWS account ID that owns the VPC origin.
+                                Required when referencing a VPC origin from a different
+                                AWS account for cross-account VPC origin access.
+                              type: string
                             vpcOriginId:
                               description: The VPC origin ID.
                               type: string
@@ -2166,6 +2234,32 @@ spec:
                           CloudFront to use a dedicated IP address and may incur extra
                           charges.'
                         type: string
+                    type: object
+                  viewerMtlsConfig:
+                    description: The viewer mTLS configuration for this distribution
+                      (maximum one).
+                    properties:
+                      mode:
+                        description: 'The mode for viewer mTLS. Valid values: required,
+                          optional.'
+                        type: string
+                      trustStoreConfig:
+                        description: The trust store configuration for viewer mTLS
+                          (maximum one).
+                        properties:
+                          advertiseTrustStoreCaNames:
+                            description: Whether to advertise the trust store CA names
+                              to clients. Defaults to false.
+                            type: boolean
+                          ignoreCertificateExpiry:
+                            description: Whether to ignore certificate expiry for
+                              viewer mTLS. Defaults to false.
+                            type: boolean
+                          trustStoreId:
+                            description: Identifier of the trust store to use for
+                              viewer mTLS.
+                            type: string
+                        type: object
                     type: object
                   waitForDeployment:
                     description: 'If enabled, the resource will wait for the distribution
@@ -2290,6 +2384,15 @@ spec:
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
+                  connectionFunctionAssociation:
+                    description: A connection function association configuration block
+                      (maximum one).
+                    properties:
+                      id:
+                        description: Identifier of the connection function to associate
+                          with the distribution.
+                        type: string
+                    type: object
                   continuousDeploymentPolicyId:
                     description: Identifier of a continuous deployment policy. This
                       argument should only be set on a production distribution. See
@@ -2533,7 +2636,8 @@ spec:
                       default is http2.
                     type: string
                   id:
-                    description: 'Identifier for the distribution. For example: EDFDVBD632BHDS5.'
+                    description: Identifier of the connection function to associate
+                      with the distribution.
                     type: string
                   inProgressValidationBatches:
                     description: Number of invalidation batches currently in progress.
@@ -2551,21 +2655,27 @@ spec:
                       argument configures legacy version standard logs.'
                     properties:
                       bucket:
-                        description: 'Amazon S3 bucket to store the access logs in,
-                          for example, myawslogbucket.s3.amazonaws.com. The bucket
-                          must have correct ACL attached with "FULL_CONTROL" permission
-                          for "awslogsdelivery" account (Canonical ID: "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
+                        description: 'Amazon S3 bucket for V1 logging where access
+                          logs are stored, for example, myawslogbucket.s3.amazonaws.com.
+                          V1 logging is enabled when this argument is specified. The
+                          bucket must have correct ACL attached with "FULL_CONTROL"
+                          permission for "awslogsdelivery" account (Canonical ID:
+                          "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0")
                           for log transfer to work.'
                         type: string
                       includeCookies:
                         description: 'Whether to include cookies in access logs (default:
-                          false).'
+                          false). This argument applies to both V1 and V2 logging.'
                         type: boolean
                       prefix:
-                        description: Prefix to the access log filenames for this distribution,
-                          for example, myprefix/.
+                        description: Prefix added to the access log file names for
+                          V1 logging, for example, myprefix/. This argument is effective
+                          only when V1 logging is enabled.
                         type: string
                     type: object
+                  loggingV1Enabled:
+                    description: Whether V1 logging is enabled for the distribution.
+                    type: boolean
                   orderedCacheBehavior:
                     description: Ordered list of cache behaviors resource for this
                       distribution. List from top to bottom in order of precedence.
@@ -2800,6 +2910,10 @@ spec:
                             httpsPort:
                               description: HTTPS port the custom origin listens on.
                               type: number
+                            ipAddressType:
+                              description: 'IP protocol CloudFront uses when connecting
+                                to your origin. Valid values: ipv4, ipv6, dualstack.'
+                              type: string
                             originKeepaliveTimeout:
                               description: The Custom KeepAlive timeout, in seconds.
                                 By default, AWS enforces an upper limit of 60. But
@@ -2888,6 +3002,11 @@ spec:
                                 default, AWS enforces an upper limit of 60. But you
                                 can request an increase. Defaults to 30.
                               type: number
+                            ownerAccountId:
+                              description: The AWS account ID that owns the VPC origin.
+                                Required when referencing a VPC origin from a different
+                                AWS account for cross-account VPC origin access.
+                              type: string
                             vpcOriginId:
                               description: The VPC origin ID.
                               type: string
@@ -3075,6 +3194,32 @@ spec:
                           CloudFront to use a dedicated IP address and may incur extra
                           charges.'
                         type: string
+                    type: object
+                  viewerMtlsConfig:
+                    description: The viewer mTLS configuration for this distribution
+                      (maximum one).
+                    properties:
+                      mode:
+                        description: 'The mode for viewer mTLS. Valid values: required,
+                          optional.'
+                        type: string
+                      trustStoreConfig:
+                        description: The trust store configuration for viewer mTLS
+                          (maximum one).
+                        properties:
+                          advertiseTrustStoreCaNames:
+                            description: Whether to advertise the trust store CA names
+                              to clients. Defaults to false.
+                            type: boolean
+                          ignoreCertificateExpiry:
+                            description: Whether to ignore certificate expiry for
+                              viewer mTLS. Defaults to false.
+                            type: boolean
+                          trustStoreId:
+                            description: Identifier of the trust store to use for
+                              viewer mTLS.
+                            type: string
+                        type: object
                     type: object
                   waitForDeployment:
                     description: 'If enabled, the resource will wait for the distribution

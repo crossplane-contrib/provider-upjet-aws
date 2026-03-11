@@ -176,8 +176,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -224,14 +224,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the
@@ -548,8 +544,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -596,14 +592,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the
@@ -925,8 +917,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -976,14 +968,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the
@@ -1332,8 +1320,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -1380,14 +1368,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the
@@ -1702,8 +1686,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -1750,14 +1734,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the
@@ -2077,8 +2057,8 @@ spec:
                       only for alarms based on anomaly detection models.'
                     type: string
                   datapointsToAlarm:
-                    description: The number of datapoints that must be breaching to
-                      trigger the alarm.
+                    description: The number of data points that must be breaching
+                      to trigger the alarm.
                     type: number
                   dimensions:
                     additionalProperties:
@@ -2128,14 +2108,10 @@ spec:
                             located, if this is a cross-account alarm.
                           type: string
                         expression:
-                          description: The math expression to be performed on the
-                            returned data, if this object is performing a math expression.
-                            This expression can use the id of the other metrics to
-                            refer to those metrics, and can also use the id of other
-                            expressions to use the result of those expressions. For
-                            more information about metric math expressions, see Metric
-                            Math Syntax and Functions in the Amazon CloudWatch User
-                            Guide.
+                          description: |-
+                            A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+                            For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+                            For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
                           type: string
                         id:
                           description: A short name used to tie this object to the

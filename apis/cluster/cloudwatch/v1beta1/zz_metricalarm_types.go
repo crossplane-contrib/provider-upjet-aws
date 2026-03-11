@@ -38,7 +38,7 @@ type MetricAlarmInitParameters struct {
 	// The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported: GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold. Additionally, the values  LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, and GreaterThanUpperThreshold are used only for alarms based on anomaly detection models.
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
-	// The number of datapoints that must be breaching to trigger the alarm.
+	// The number of data points that must be breaching to trigger the alarm.
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
@@ -129,7 +129,7 @@ type MetricAlarmObservation struct {
 	// The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported: GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold. Additionally, the values  LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, and GreaterThanUpperThreshold are used only for alarms based on anomaly detection models.
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
-	// The number of datapoints that must be breaching to trigger the alarm.
+	// The number of data points that must be breaching to trigger the alarm.
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
@@ -232,7 +232,7 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
-	// The number of datapoints that must be breaching to trigger the alarm.
+	// The number of data points that must be breaching to trigger the alarm.
 	// +kubebuilder:validation:Optional
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
@@ -419,7 +419,9 @@ type MetricQueryInitParameters struct {
 	// The ID of the account where the metrics are located, if this is a cross-account alarm.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the id of the other metrics to refer to those metrics, and can also use the id of other expressions to use the result of those expressions. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide.
+	// A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+	// For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+	// For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// A short name used to tie this object to the results in the response. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.
@@ -445,7 +447,9 @@ type MetricQueryObservation struct {
 	// The ID of the account where the metrics are located, if this is a cross-account alarm.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the id of the other metrics to refer to those metrics, and can also use the id of other expressions to use the result of those expressions. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide.
+	// A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+	// For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+	// For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// A short name used to tie this object to the results in the response. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.
@@ -472,7 +476,9 @@ type MetricQueryParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the id of the other metrics to refer to those metrics, and can also use the id of other expressions to use the result of those expressions. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide.
+	// A Metrics Insights query or a metric math expression to be evaluated on the returned data.
+	// For details about Metrics Insights queries, see Metrics Insights query components and syntax in the AWS documentation.
+	// For details about metric math expressions, see Metric Math Syntax and Functions in the AWS documentation.
 	// +kubebuilder:validation:Optional
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 

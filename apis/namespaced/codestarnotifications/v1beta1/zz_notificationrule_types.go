@@ -143,7 +143,7 @@ type NotificationRuleParameters struct {
 
 type TargetInitParameters struct {
 
-	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	// The ARN of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
@@ -156,25 +156,25 @@ type TargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressSelector *v1.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
 
-	// The type of the notification target. Default value is SNS.
+	// The type of the notification target. Valid values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams. Default value is SNS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetObservation struct {
 
-	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	// The ARN of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// The type of the notification target. Default value is SNS.
+	// The type of the notification target. Valid values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams. Default value is SNS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetParameters struct {
 
-	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	// The ARN of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -188,7 +188,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressSelector *v1.NamespacedSelector `json:"addressSelector,omitempty" tf:"-"`
 
-	// The type of the notification target. Default value is SNS.
+	// The type of the notification target. Valid values are SNS, AWSChatbotSlack, and AWSChatbotMicrosoftTeams. Default value is SNS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

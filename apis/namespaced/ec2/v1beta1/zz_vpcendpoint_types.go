@@ -34,8 +34,15 @@ type DNSOptionsInitParameters struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type DNSOptionsObservation struct {
@@ -43,8 +50,15 @@ type DNSOptionsObservation struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type DNSOptionsParameters struct {
@@ -53,9 +67,18 @@ type DNSOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// Boolean indicating whether to enable private DNS only for inbound endpoints. This option is available only for interface endpoints of services that support both gateway and interface endpoints. A gateway endpoint for the same service must be created before an interface endpoint is created. Traffic originating from the VPC is routed to the gateway endpoint, while traffic originating from on-premises is routed to the interface endpoint. Defaults to false. This argument can be specified only if private_dns_enabled is true.
 	// +kubebuilder:validation:Optional
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Valid values are ALL_DOMAINS, VERIFIED_DOMAINS_ONLY, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, and SPECIFIED_DOMAINS_ONLY. Only supported when private_dns_enabled is true and when the vpc_endpoint_type is ServiceNetwork or Resource.
+	// +kubebuilder:validation:Optional
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// List of private domains to create private hosted zones for and associate with the specified VPC. Must be specified when private_dns_enabled is true and private_dns_preference is set to either VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY. In all other cases, this argument must not be specified.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
 }
 
 type SubnetConfigurationInitParameters struct {

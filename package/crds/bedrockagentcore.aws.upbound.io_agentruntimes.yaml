@@ -1,0 +1,938 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: agentruntimes.bedrockagentcore.aws.upbound.io
+spec:
+  group: bedrockagentcore.aws.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - aws
+    kind: AgentRuntime
+    listKind: AgentRuntimeList
+    plural: agentruntimes
+    singular: agentruntime
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: AgentRuntime is the Schema for the AgentRuntimes API. Manages
+          an AWS Bedrock AgentCore Agent Runtime.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: AgentRuntimeSpec defines the desired state of AgentRuntime
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  agentRuntimeArtifact:
+                    description: Container artifact configuration. See agent_runtime_artifact
+                      below.
+                    properties:
+                      codeConfiguration:
+                        description: Code configuration block for the agent runtime
+                          artifact, including the source code location and execution
+                          settings. Exactly one of code_configuration or container_configuration
+                          must be specified. See code_configuration below.
+                        properties:
+                          code:
+                            description: Configuration block for the source code location
+                              and configuration details. See code below.
+                            properties:
+                              s3:
+                                description: Configuration block for the Amazon S3
+                                  object that contains the source code for the agent
+                                  runtime. See s3 below.
+                                properties:
+                                  bucket:
+                                    description: Name of the Amazon S3 bucket.
+                                    type: string
+                                  prefix:
+                                    description: Key of the object containing the
+                                      ZIP file of the source code for the agent runtime
+                                      in the Amazon S3 bucket.
+                                    type: string
+                                  versionId:
+                                    description: Version ID of the Amazon S3 object.
+                                      If not specified, the latest version of the
+                                      object is used.
+                                    type: string
+                                type: object
+                            type: object
+                          entryPoint:
+                            description: 'Array specifying the entry point for code
+                              execution, indicating the function or method to invoke
+                              when the code runs. The array must contain 1 or 2 elements.
+                              Examples: ["main.py"], ["opentelemetry-instrument",
+                              "main.py"].'
+                            items:
+                              type: string
+                            type: array
+                          runtime:
+                            description: 'Runtime environment used to execute the
+                              code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
+                              PYTHON_3_13.'
+                            type: string
+                        type: object
+                      containerConfiguration:
+                        description: Container configuration block for the agent artifact.
+                          Exactly one of code_configuration or container_configuration
+                          must be specified. See container_configuration below.
+                        properties:
+                          containerUri:
+                            description: URI of the container image in Amazon ECR.
+                            type: string
+                        type: object
+                    type: object
+                  agentRuntimeName:
+                    description: Name of the agent runtime.
+                    type: string
+                  authorizerConfiguration:
+                    description: Authorization configuration for authenticating incoming
+                      requests. See authorizer_configuration below.
+                    properties:
+                      customJwtAuthorizer:
+                        description: JWT-based authorization configuration block.
+                          See custom_jwt_authorizer below.
+                        properties:
+                          allowedAudience:
+                            description: Set of allowed audience values for JWT token
+                              validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedClients:
+                            description: Set of allowed client IDs for JWT token validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          discoveryUrl:
+                            description: URL used to fetch OpenID Connect configuration
+                              or authorization server metadata. Must end with .well-known/openid-configuration.
+                            type: string
+                        type: object
+                    type: object
+                  description:
+                    description: Description of the agent runtime.
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map of environment variables to pass to the container.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  lifecycleConfiguration:
+                    description: Runtime session and resource lifecycle configuration
+                      for the agent runtime. See lifecycle_configuration below.
+                    properties:
+                      idleRuntimeSessionTimeout:
+                        description: Timeout in seconds for idle runtime sessions.
+                        type: number
+                      maxLifetime:
+                        description: Maximum lifetime for the instance in seconds.
+                        type: number
+                    type: object
+                  networkConfiguration:
+                    description: Network configuration for the agent runtime. See
+                      network_configuration below.
+                    properties:
+                      networkMode:
+                        description: 'Network mode for the agent runtime. Valid values:
+                          PUBLIC, VPC.'
+                        type: string
+                      networkModeConfig:
+                        description: Network mode configuration. See network_mode_config
+                          below.
+                        properties:
+                          securityGroups:
+                            description: Security groups associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnets:
+                            description: Subnets associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                    type: object
+                  protocolConfiguration:
+                    description: Protocol configuration for the agent runtime. See
+                      protocol_configuration below.
+                    properties:
+                      serverProtocol:
+                        description: 'Server protocol for the agent runtime. Valid
+                          values: HTTP, MCP, A2A.'
+                        type: string
+                    type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  requestHeaderConfiguration:
+                    description: Configuration for HTTP request headers that will
+                      be passed through to the runtime. See request_header_configuration
+                      below.
+                    properties:
+                      requestHeaderAllowlist:
+                        description: A list of HTTP request headers that are allowed
+                          to be passed through to the runtime.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  roleArn:
+                    description: ARN of the IAM role that the agent runtime assumes
+                      to access AWS services.
+                    type: string
+                  roleArnRef:
+                    description: Reference to a Role in iam to populate roleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleArnSelector:
+                    description: Selector for a Role in iam to populate roleArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                required:
+                - region
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  agentRuntimeArtifact:
+                    description: Container artifact configuration. See agent_runtime_artifact
+                      below.
+                    properties:
+                      codeConfiguration:
+                        description: Code configuration block for the agent runtime
+                          artifact, including the source code location and execution
+                          settings. Exactly one of code_configuration or container_configuration
+                          must be specified. See code_configuration below.
+                        properties:
+                          code:
+                            description: Configuration block for the source code location
+                              and configuration details. See code below.
+                            properties:
+                              s3:
+                                description: Configuration block for the Amazon S3
+                                  object that contains the source code for the agent
+                                  runtime. See s3 below.
+                                properties:
+                                  bucket:
+                                    description: Name of the Amazon S3 bucket.
+                                    type: string
+                                  prefix:
+                                    description: Key of the object containing the
+                                      ZIP file of the source code for the agent runtime
+                                      in the Amazon S3 bucket.
+                                    type: string
+                                  versionId:
+                                    description: Version ID of the Amazon S3 object.
+                                      If not specified, the latest version of the
+                                      object is used.
+                                    type: string
+                                type: object
+                            type: object
+                          entryPoint:
+                            description: 'Array specifying the entry point for code
+                              execution, indicating the function or method to invoke
+                              when the code runs. The array must contain 1 or 2 elements.
+                              Examples: ["main.py"], ["opentelemetry-instrument",
+                              "main.py"].'
+                            items:
+                              type: string
+                            type: array
+                          runtime:
+                            description: 'Runtime environment used to execute the
+                              code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
+                              PYTHON_3_13.'
+                            type: string
+                        type: object
+                      containerConfiguration:
+                        description: Container configuration block for the agent artifact.
+                          Exactly one of code_configuration or container_configuration
+                          must be specified. See container_configuration below.
+                        properties:
+                          containerUri:
+                            description: URI of the container image in Amazon ECR.
+                            type: string
+                        type: object
+                    type: object
+                  agentRuntimeName:
+                    description: Name of the agent runtime.
+                    type: string
+                  authorizerConfiguration:
+                    description: Authorization configuration for authenticating incoming
+                      requests. See authorizer_configuration below.
+                    properties:
+                      customJwtAuthorizer:
+                        description: JWT-based authorization configuration block.
+                          See custom_jwt_authorizer below.
+                        properties:
+                          allowedAudience:
+                            description: Set of allowed audience values for JWT token
+                              validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedClients:
+                            description: Set of allowed client IDs for JWT token validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          discoveryUrl:
+                            description: URL used to fetch OpenID Connect configuration
+                              or authorization server metadata. Must end with .well-known/openid-configuration.
+                            type: string
+                        type: object
+                    type: object
+                  description:
+                    description: Description of the agent runtime.
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map of environment variables to pass to the container.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  lifecycleConfiguration:
+                    description: Runtime session and resource lifecycle configuration
+                      for the agent runtime. See lifecycle_configuration below.
+                    properties:
+                      idleRuntimeSessionTimeout:
+                        description: Timeout in seconds for idle runtime sessions.
+                        type: number
+                      maxLifetime:
+                        description: Maximum lifetime for the instance in seconds.
+                        type: number
+                    type: object
+                  networkConfiguration:
+                    description: Network configuration for the agent runtime. See
+                      network_configuration below.
+                    properties:
+                      networkMode:
+                        description: 'Network mode for the agent runtime. Valid values:
+                          PUBLIC, VPC.'
+                        type: string
+                      networkModeConfig:
+                        description: Network mode configuration. See network_mode_config
+                          below.
+                        properties:
+                          securityGroups:
+                            description: Security groups associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnets:
+                            description: Subnets associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                    type: object
+                  protocolConfiguration:
+                    description: Protocol configuration for the agent runtime. See
+                      protocol_configuration below.
+                    properties:
+                      serverProtocol:
+                        description: 'Server protocol for the agent runtime. Valid
+                          values: HTTP, MCP, A2A.'
+                        type: string
+                    type: object
+                  requestHeaderConfiguration:
+                    description: Configuration for HTTP request headers that will
+                      be passed through to the runtime. See request_header_configuration
+                      below.
+                    properties:
+                      requestHeaderAllowlist:
+                        description: A list of HTTP request headers that are allowed
+                          to be passed through to the runtime.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  roleArn:
+                    description: ARN of the IAM role that the agent runtime assumes
+                      to access AWS services.
+                    type: string
+                  roleArnRef:
+                    description: Reference to a Role in iam to populate roleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleArnSelector:
+                    description: Selector for a Role in iam to populate roleArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.agentRuntimeName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.agentRuntimeName)
+                || (has(self.initProvider) && has(self.initProvider.agentRuntimeName))'
+          status:
+            description: AgentRuntimeStatus defines the observed state of AgentRuntime.
+            properties:
+              atProvider:
+                properties:
+                  agentRuntimeArn:
+                    description: ARN of the Agent Runtime.
+                    type: string
+                  agentRuntimeArtifact:
+                    description: Container artifact configuration. See agent_runtime_artifact
+                      below.
+                    properties:
+                      codeConfiguration:
+                        description: Code configuration block for the agent runtime
+                          artifact, including the source code location and execution
+                          settings. Exactly one of code_configuration or container_configuration
+                          must be specified. See code_configuration below.
+                        properties:
+                          code:
+                            description: Configuration block for the source code location
+                              and configuration details. See code below.
+                            properties:
+                              s3:
+                                description: Configuration block for the Amazon S3
+                                  object that contains the source code for the agent
+                                  runtime. See s3 below.
+                                properties:
+                                  bucket:
+                                    description: Name of the Amazon S3 bucket.
+                                    type: string
+                                  prefix:
+                                    description: Key of the object containing the
+                                      ZIP file of the source code for the agent runtime
+                                      in the Amazon S3 bucket.
+                                    type: string
+                                  versionId:
+                                    description: Version ID of the Amazon S3 object.
+                                      If not specified, the latest version of the
+                                      object is used.
+                                    type: string
+                                type: object
+                            type: object
+                          entryPoint:
+                            description: 'Array specifying the entry point for code
+                              execution, indicating the function or method to invoke
+                              when the code runs. The array must contain 1 or 2 elements.
+                              Examples: ["main.py"], ["opentelemetry-instrument",
+                              "main.py"].'
+                            items:
+                              type: string
+                            type: array
+                          runtime:
+                            description: 'Runtime environment used to execute the
+                              code. Valid values: PYTHON_3_10, PYTHON_3_11, PYTHON_3_12,
+                              PYTHON_3_13.'
+                            type: string
+                        type: object
+                      containerConfiguration:
+                        description: Container configuration block for the agent artifact.
+                          Exactly one of code_configuration or container_configuration
+                          must be specified. See container_configuration below.
+                        properties:
+                          containerUri:
+                            description: URI of the container image in Amazon ECR.
+                            type: string
+                        type: object
+                    type: object
+                  agentRuntimeId:
+                    description: Unique identifier of the Agent Runtime.
+                    type: string
+                  agentRuntimeName:
+                    description: Name of the agent runtime.
+                    type: string
+                  agentRuntimeVersion:
+                    description: Version of the Agent Runtime.
+                    type: string
+                  authorizerConfiguration:
+                    description: Authorization configuration for authenticating incoming
+                      requests. See authorizer_configuration below.
+                    properties:
+                      customJwtAuthorizer:
+                        description: JWT-based authorization configuration block.
+                          See custom_jwt_authorizer below.
+                        properties:
+                          allowedAudience:
+                            description: Set of allowed audience values for JWT token
+                              validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          allowedClients:
+                            description: Set of allowed client IDs for JWT token validation.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          discoveryUrl:
+                            description: URL used to fetch OpenID Connect configuration
+                              or authorization server metadata. Must end with .well-known/openid-configuration.
+                            type: string
+                        type: object
+                    type: object
+                  description:
+                    description: Description of the agent runtime.
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map of environment variables to pass to the container.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  id:
+                    type: string
+                  lifecycleConfiguration:
+                    description: Runtime session and resource lifecycle configuration
+                      for the agent runtime. See lifecycle_configuration below.
+                    properties:
+                      idleRuntimeSessionTimeout:
+                        description: Timeout in seconds for idle runtime sessions.
+                        type: number
+                      maxLifetime:
+                        description: Maximum lifetime for the instance in seconds.
+                        type: number
+                    type: object
+                  networkConfiguration:
+                    description: Network configuration for the agent runtime. See
+                      network_configuration below.
+                    properties:
+                      networkMode:
+                        description: 'Network mode for the agent runtime. Valid values:
+                          PUBLIC, VPC.'
+                        type: string
+                      networkModeConfig:
+                        description: Network mode configuration. See network_mode_config
+                          below.
+                        properties:
+                          securityGroups:
+                            description: Security groups associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnets:
+                            description: Subnets associated with the VPC configuration.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                    type: object
+                  protocolConfiguration:
+                    description: Protocol configuration for the agent runtime. See
+                      protocol_configuration below.
+                    properties:
+                      serverProtocol:
+                        description: 'Server protocol for the agent runtime. Valid
+                          values: HTTP, MCP, A2A.'
+                        type: string
+                    type: object
+                  region:
+                    description: |-
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                      Region is the region you'd like your resource to be created in.
+                    type: string
+                  requestHeaderConfiguration:
+                    description: Configuration for HTTP request headers that will
+                      be passed through to the runtime. See request_header_configuration
+                      below.
+                    properties:
+                      requestHeaderAllowlist:
+                        description: A list of HTTP request headers that are allowed
+                          to be passed through to the runtime.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  roleArn:
+                    description: ARN of the IAM role that the agent runtime assumes
+                      to access AWS services.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  workloadIdentityDetails:
+                    description: Workload identity details for the agent runtime.
+                      See workload_identity_details below.
+                    items:
+                      properties:
+                        workloadIdentityArn:
+                          description: ARN of the workload identity.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

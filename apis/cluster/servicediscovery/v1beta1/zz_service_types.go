@@ -173,7 +173,7 @@ type ServiceInitParameters struct {
 	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces. See health_check_config Block for details.
 	HealthCheckConfig []HealthCheckConfigInitParameters `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
+	// Please use health_check_config instead. See health_check_custom_config Block for details.
 	HealthCheckCustomConfig []HealthCheckCustomConfigInitParameters `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 
 	// The name of the service.
@@ -207,7 +207,7 @@ type ServiceObservation struct {
 	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces. See health_check_config Block for details.
 	HealthCheckConfig []HealthCheckConfigObservation `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
+	// Please use health_check_config instead. See health_check_custom_config Block for details.
 	HealthCheckCustomConfig []HealthCheckCustomConfigObservation `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 
 	// The ID of the service.
@@ -252,7 +252,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckConfig []HealthCheckConfigParameters `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
+	// Please use health_check_config instead. See health_check_custom_config Block for details.
 	// +kubebuilder:validation:Optional
 	HealthCheckCustomConfig []HealthCheckCustomConfigParameters `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 

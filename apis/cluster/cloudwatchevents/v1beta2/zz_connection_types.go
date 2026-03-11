@@ -47,6 +47,9 @@ type AuthParametersInitParameters struct {
 	// Parameters used for BASIC authorization. A maximum of 1 are allowed. Conflicts with api_key and oauth. Documented below.
 	Basic *BasicInitParameters `json:"basic,omitempty" tf:"basic,omitempty"`
 
+	// Parameters used for oauth with private API. Documented below.
+	ConnectivityParameters *ConnectivityParametersInitParameters `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
+
 	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	InvocationHTTPParameters *InvocationHTTPParametersInitParameters `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
 
@@ -61,6 +64,9 @@ type AuthParametersObservation struct {
 
 	// Parameters used for BASIC authorization. A maximum of 1 are allowed. Conflicts with api_key and oauth. Documented below.
 	Basic *BasicObservation `json:"basic,omitempty" tf:"basic,omitempty"`
+
+	// Parameters used for oauth with private API. Documented below.
+	ConnectivityParameters *ConnectivityParametersObservation `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
 
 	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	InvocationHTTPParameters *InvocationHTTPParametersObservation `json:"invocationHttpParameters,omitempty" tf:"invocation_http_parameters,omitempty"`
@@ -78,6 +84,10 @@ type AuthParametersParameters struct {
 	// Parameters used for BASIC authorization. A maximum of 1 are allowed. Conflicts with api_key and oauth. Documented below.
 	// +kubebuilder:validation:Optional
 	Basic *BasicParameters `json:"basic,omitempty" tf:"basic,omitempty"`
+
+	// Parameters used for oauth with private API. Documented below.
+	// +kubebuilder:validation:Optional
+	ConnectivityParameters *ConnectivityParametersParameters `json:"connectivityParameters,omitempty" tf:"connectivity_parameters,omitempty"`
 
 	// Invocation Http Parameters are additional credentials used to sign each Invocation of the ApiDestination created from this Connection. If the ApiDestination Rule Target has additional HttpParameters, the values will be merged together, with the Connection Invocation Http Parameters taking precedence. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	// +kubebuilder:validation:Optional
@@ -272,6 +282,25 @@ type ConnectionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 }
 
+type ConnectivityParametersInitParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersInitParameters `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type ConnectivityParametersObservation struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	ResourceParameters *ResourceParametersObservation `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+}
+
+type ConnectivityParametersParameters struct {
+
+	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
+	// +kubebuilder:validation:Optional
+	ResourceParameters *ResourceParametersParameters `json:"resourceParameters" tf:"resource_parameters,omitempty"`
+}
+
 type HeaderInitParameters struct {
 
 	// Specified whether the value is secret.
@@ -311,20 +340,42 @@ type HeaderParameters struct {
 type InvocationConnectivityParametersInitParameters struct {
 
 	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
-	ResourceParameters *ResourceParametersInitParameters `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+	ResourceParameters *InvocationConnectivityParametersResourceParametersInitParameters `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
 }
 
 type InvocationConnectivityParametersObservation struct {
 
 	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
-	ResourceParameters *ResourceParametersObservation `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
+	ResourceParameters *InvocationConnectivityParametersResourceParametersObservation `json:"resourceParameters,omitempty" tf:"resource_parameters,omitempty"`
 }
 
 type InvocationConnectivityParametersParameters struct {
 
 	// The parameters for EventBridge to use when invoking the resource endpoint. Documented below.
 	// +kubebuilder:validation:Optional
-	ResourceParameters *ResourceParametersParameters `json:"resourceParameters" tf:"resource_parameters,omitempty"`
+	ResourceParameters *InvocationConnectivityParametersResourceParametersParameters `json:"resourceParameters" tf:"resource_parameters,omitempty"`
+}
+
+type InvocationConnectivityParametersResourceParametersInitParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type InvocationConnectivityParametersResourceParametersObservation struct {
+
+	// The Amazon Resource Name (ARN) of the connection.
+	ResourceAssociationArn *string `json:"resourceAssociationArn,omitempty" tf:"resource_association_arn,omitempty"`
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn,omitempty" tf:"resource_configuration_arn,omitempty"`
+}
+
+type InvocationConnectivityParametersResourceParametersParameters struct {
+
+	// ARN of the Amazon VPC Lattice resource configuration for the resource endpoint.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationArn *string `json:"resourceConfigurationArn" tf:"resource_configuration_arn,omitempty"`
 }
 
 type InvocationHTTPParametersInitParameters struct {

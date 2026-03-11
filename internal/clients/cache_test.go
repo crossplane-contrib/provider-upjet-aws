@@ -128,15 +128,15 @@ func TestGetCallerIdentity(t *testing.T) {
 			if tc.args.cache != nil {
 				opts = append(opts, WithCache(tc.args.cache))
 			}
-			if tc.args.maxSize != 0 {
-				opts = append(opts, WithMaxSize(tc.args.maxSize))
+			if tc.maxSize != 0 {
+				opts = append(opts, WithMaxSize(tc.maxSize))
 			}
 			c := NewCallerIdentityCache(opts...)
-			id, err := c.GetCallerIdentity(context.TODO(), aws.Config{}, tc.args.creds)
-			if diff := cmp.Diff(tc.want.err, err, test.EquateErrors()); diff != "" {
+			id, err := c.GetCallerIdentity(context.TODO(), aws.Config{}, tc.creds)
+			if diff := cmp.Diff(tc.err, err, test.EquateErrors()); diff != "" {
 				t.Fatalf("%s: GetCallerIdentity(...): err -want, +got: %s", tc.reason, diff)
 			}
-			if diff := cmp.Diff(tc.want.id, id,
+			if diff := cmp.Diff(tc.id, id,
 				cmpopts.IgnoreUnexported(sts.GetCallerIdentityOutput{}, middleware.Metadata{})); diff != "" {
 				t.Fatalf("%s: GetCallerIdentity(...): -want, +got: %s", tc.reason, diff)
 			}

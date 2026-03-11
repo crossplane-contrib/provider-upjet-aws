@@ -126,19 +126,19 @@ type CloudwatchDashboardParameters struct {
 
 type CloudwatchLogsConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type CloudwatchLogsConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group. The ARN must end with :*
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
 }
 
 type CloudwatchLogsConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
 }

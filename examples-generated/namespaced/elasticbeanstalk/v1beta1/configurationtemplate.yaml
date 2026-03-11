@@ -9,14 +9,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elasticbeanstalk/v1beta1/configurationtemplate
   labels:
-    testing.upbound.io/example-name: tf_template
-  name: tf-template
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
     applicationSelector:
       matchLabels:
-        testing.upbound.io/example-name: tftest
+        testing.upbound.io/example-name: example
     region: us-west-1
     solutionStackName: 64bit Amazon Linux 2015.09 v2.0.8 running Go 1.4
 
@@ -28,8 +28,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elasticbeanstalk/v1beta1/configurationtemplate
   labels:
-    testing.upbound.io/example-name: tftest
-  name: tftest
+    testing.upbound.io/example-name: example
+  name: example
   namespace: upbound-system
 spec:
   forProvider:

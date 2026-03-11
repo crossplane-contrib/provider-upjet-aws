@@ -228,6 +228,11 @@ func (in *ConnectAttachmentInitParameters) DeepCopyInto(out *ConnectAttachmentIn
 		*out = new(OptionsInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -361,6 +366,11 @@ func (in *ConnectAttachmentObservation) DeepCopyInto(out *ConnectAttachmentObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
+		*out = new(string)
+		**out = **in
+	}
 	if in.SegmentName != nil {
 		in, out := &in.SegmentName, &out.SegmentName
 		*out = new(string)
@@ -457,6 +467,11 @@ func (in *ConnectAttachmentParameters) DeepCopyInto(out *ConnectAttachmentParame
 		in, out := &in.Options, &out.Options
 		*out = new(OptionsParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
+		*out = new(string)
+		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1835,6 +1850,11 @@ func (in *VPCAttachmentInitParameters) DeepCopyInto(out *VPCAttachmentInitParame
 		*out = new(VPCAttachmentOptionsInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetArns != nil {
 		in, out := &in.SubnetArns, &out.SubnetArns
 		*out = make([]*string, len(*in))
@@ -1983,6 +2003,11 @@ func (in *VPCAttachmentObservation) DeepCopyInto(out *VPCAttachmentObservation) 
 	}
 	if in.ResourceArn != nil {
 		in, out := &in.ResourceArn, &out.ResourceArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
 		*out = new(string)
 		**out = **in
 	}
@@ -2183,6 +2208,11 @@ func (in *VPCAttachmentParameters) DeepCopyInto(out *VPCAttachmentParameters) {
 		in, out := &in.Options, &out.Options
 		*out = new(VPCAttachmentOptionsParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.RoutingPolicyLabel != nil {
+		in, out := &in.RoutingPolicyLabel, &out.RoutingPolicyLabel
+		*out = new(string)
+		**out = **in
 	}
 	if in.SubnetArns != nil {
 		in, out := &in.SubnetArns, &out.SubnetArns

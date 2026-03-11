@@ -30,6 +30,9 @@ type VPCAttachmentInitParameters struct {
 	// Options for the VPC attachment. See below.
 	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// The routing policy label to apply to the VPC attachment for traffic routing decisions. Maximum length of 256 characters.
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
+
 	// Subnet ARNs of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
@@ -93,6 +96,9 @@ type VPCAttachmentObservation struct {
 
 	// Attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// The routing policy label to apply to the VPC attachment for traffic routing decisions. Maximum length of 256 characters.
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
 
 	// Name of the segment attachment.
 	SegmentName *string `json:"segmentName,omitempty" tf:"segment_name,omitempty"`
@@ -183,6 +189,10 @@ type VPCAttachmentParameters struct {
 	// Options for the VPC attachment. See below.
 	// +kubebuilder:validation:Optional
 	Options []VPCAttachmentOptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// The routing policy label to apply to the VPC attachment for traffic routing decisions. Maximum length of 256 characters.
+	// +kubebuilder:validation:Optional
+	RoutingPolicyLabel *string `json:"routingPolicyLabel,omitempty" tf:"routing_policy_label,omitempty"`
 
 	// Subnet ARNs of the VPC attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet

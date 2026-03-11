@@ -534,7 +534,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array
@@ -592,7 +593,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array
@@ -1162,7 +1164,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array
@@ -1220,7 +1223,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array
@@ -1815,7 +1819,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array
@@ -1873,7 +1878,8 @@ spec:
                                                                 in CIDR notation.
                                                                 AWS Network Firewall
                                                                 supports all address
-                                                                ranges for IPv4.
+                                                                ranges for IPv4 and
+                                                                IPv6.
                                                               type: string
                                                           type: object
                                                         type: array

@@ -1,0 +1,81 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Gateway Target with MCP Server Example
+# Creates a Bedrock AgentCore Gateway Target pointing to an external MCP server.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: GatewayTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: gatewaytarget
+  name: gatewaytarget
+spec:
+  forProvider:
+    region: us-west-2
+    name: example-target-e17348
+    description: MCP server target with header propagation
+    gatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway
+    credentialProviderConfiguration:
+      apiKey:
+        providerArn: "arn:aws:iam::123456789012:oidc-provider/example.com"
+    targetConfiguration:
+      mcp:
+        openApiSchema:
+          inlinePayload:
+            payload: |
+              {"openapi":"3.0.0","info":{"title":"User Service API","version":"1.0.0"},"servers":[{"url":"https://example.com"}],"paths":{"/users/{userId}":{"get":{"operationId":"getUserById","summary":"Get a user by ID","parameters":[{"name":"userId","in":"path","required":true,"schema":{"type":"string"},"description":"ID of the user"}],"responses":{"200":{"description":"User response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}}}}},"components":{"schemas":{"User":{"type":"object","required":["id","name"],"properties":{"id":{"type":"string"},"name":{"type":"string"},"email":{"type":"string"}}}}}}
+    metadataConfiguration:
+      allowedRequestHeaders:
+      - x-correlation-id
+      - x-tenant-id
+      allowedResponseHeaders:
+      - x-rate-limit-remaining
+      allowedQueryParameters:
+      - version
+---
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: gateway
+  name: gatewaytarget-gateway
+spec:
+  forProvider:
+    region: us-west-2
+    name: example-gateway
+    authorizerType: AWS_IAM
+    protocolType: MCP
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+  name: bedrock-agentcore-gateway-role-gt
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---

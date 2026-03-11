@@ -1020,6 +1020,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
+		*out = new(string)
+		**out = **in
+	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -2919,6 +2924,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.Timezone != nil {
 		in, out := &in.Timezone, &out.Timezone
+		*out = new(string)
+		**out = **in
+	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
 		*out = new(string)
 		**out = **in
 	}

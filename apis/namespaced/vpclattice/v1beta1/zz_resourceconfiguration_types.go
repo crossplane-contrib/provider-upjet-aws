@@ -145,6 +145,12 @@ type ResourceConfigurationInitParameters struct {
 	// Allow or Deny the association of this resource to a shareable service network.
 	AllowAssociationToShareableServiceNetwork *bool `json:"allowAssociationToShareableServiceNetwork,omitempty" tf:"allow_association_to_shareable_service_network,omitempty"`
 
+	// Custom domain name for your resource configuration. Additionally, provide a domain_verification_id to prove your ownership of a domain.
+	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
+
+	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
+
 	// Name for the Resource Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -190,6 +196,18 @@ type ResourceConfigurationObservation struct {
 	// The ARN of the Resource for this configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Custom domain name for your resource configuration. Additionally, provide a domain_verification_id to prove your ownership of a domain.
+	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
+
+	// ARN of the domain verification.
+	DomainVerificationArn *string `json:"domainVerificationArn,omitempty" tf:"domain_verification_arn,omitempty"`
+
+	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
+
+	// Domain verification status.
+	DomainVerificationStatus *string `json:"domainVerificationStatus,omitempty" tf:"domain_verification_status,omitempty"`
+
 	// ID of the resource gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -233,6 +251,14 @@ type ResourceConfigurationParameters struct {
 	// Allow or Deny the association of this resource to a shareable service network.
 	// +kubebuilder:validation:Optional
 	AllowAssociationToShareableServiceNetwork *bool `json:"allowAssociationToShareableServiceNetwork,omitempty" tf:"allow_association_to_shareable_service_network,omitempty"`
+
+	// Custom domain name for your resource configuration. Additionally, provide a domain_verification_id to prove your ownership of a domain.
+	// +kubebuilder:validation:Optional
+	CustomDomainName *string `json:"customDomainName,omitempty" tf:"custom_domain_name,omitempty"`
+
+	// The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself.
+	// +kubebuilder:validation:Optional
+	DomainVerificationID *string `json:"domainVerificationId,omitempty" tf:"domain_verification_id,omitempty"`
 
 	// Name for the Resource Configuration.
 	// +kubebuilder:validation:Optional

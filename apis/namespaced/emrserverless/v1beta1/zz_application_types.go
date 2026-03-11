@@ -37,6 +37,9 @@ type ApplicationInitParameters struct {
 	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityInitParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
+	// The configuration setting for monitoring.
+	MonitoringConfiguration *MonitoringConfigurationInitParameters `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// The name of the application.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -45,6 +48,12 @@ type ApplicationInitParameters struct {
 
 	// The EMR release version associated with the application.
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
+
+	// A configuration specification to be used when provisioning an application. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+	RuntimeConfiguration []RuntimeConfigurationInitParameters `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+
+	// Scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above. See scheduler_configuration Arguments below.
+	SchedulerConfiguration *SchedulerConfigurationInitParameters `json:"schedulerConfiguration,omitempty" tf:"scheduler_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -83,6 +92,9 @@ type ApplicationObservation struct {
 	// The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity *MaximumCapacityObservation `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
+	// The configuration setting for monitoring.
+	MonitoringConfiguration *MonitoringConfigurationObservation `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// The name of the application.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -95,6 +107,12 @@ type ApplicationObservation struct {
 
 	// The EMR release version associated with the application.
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
+
+	// A configuration specification to be used when provisioning an application. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+	RuntimeConfiguration []RuntimeConfigurationObservation `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+
+	// Scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above. See scheduler_configuration Arguments below.
+	SchedulerConfiguration *SchedulerConfigurationObservation `json:"schedulerConfiguration,omitempty" tf:"scheduler_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -138,6 +156,10 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaximumCapacity *MaximumCapacityParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
+	// The configuration setting for monitoring.
+	// +kubebuilder:validation:Optional
+	MonitoringConfiguration *MonitoringConfigurationParameters `json:"monitoringConfiguration,omitempty" tf:"monitoring_configuration,omitempty"`
+
 	// The name of the application.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -154,6 +176,14 @@ type ApplicationParameters struct {
 	// The EMR release version associated with the application.
 	// +kubebuilder:validation:Optional
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
+
+	// A configuration specification to be used when provisioning an application. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+	// +kubebuilder:validation:Optional
+	RuntimeConfiguration []RuntimeConfigurationParameters `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+
+	// Scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above. See scheduler_configuration Arguments below.
+	// +kubebuilder:validation:Optional
+	SchedulerConfiguration *SchedulerConfigurationParameters `json:"schedulerConfiguration,omitempty" tf:"scheduler_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -211,6 +241,65 @@ type AutoStopConfigurationParameters struct {
 	// The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
+}
+
+type CloudwatchLoggingConfigurationInitParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// The types of logs that you want to publish to CloudWatch. If you don't specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. See log_types for more details.
+	LogTypes []LogTypesInitParameters `json:"logTypes,omitempty" tf:"log_types,omitempty"`
+}
+
+type CloudwatchLoggingConfigurationObservation struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// The types of logs that you want to publish to CloudWatch. If you don't specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. See log_types for more details.
+	LogTypes []LogTypesObservation `json:"logTypes,omitempty" tf:"log_types,omitempty"`
+}
+
+type CloudwatchLoggingConfigurationParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Prefix for the CloudWatch log stream name.
+	// +kubebuilder:validation:Optional
+	LogStreamNamePrefix *string `json:"logStreamNamePrefix,omitempty" tf:"log_stream_name_prefix,omitempty"`
+
+	// The types of logs that you want to publish to CloudWatch. If you don't specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. See log_types for more details.
+	// +kubebuilder:validation:Optional
+	LogTypes []LogTypesParameters `json:"logTypes,omitempty" tf:"log_types,omitempty"`
 }
 
 type ImageConfigurationInitParameters struct {
@@ -319,6 +408,67 @@ type InteractiveConfigurationParameters struct {
 	StudioEnabled *bool `json:"studioEnabled,omitempty" tf:"studio_enabled,omitempty"`
 }
 
+type LogTypesInitParameters struct {
+
+	// The name of the application.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of log types to publish. Valid values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and SYSTEM_LOGS.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LogTypesObservation struct {
+
+	// The name of the application.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The list of log types to publish. Valid values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and SYSTEM_LOGS.
+	// +listType=set
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LogTypesParameters struct {
+
+	// The name of the application.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The list of log types to publish. Valid values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and SYSTEM_LOGS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type ManagedPersistenceMonitoringConfigurationInitParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+}
+
+type ManagedPersistenceMonitoringConfigurationObservation struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+}
+
+type ManagedPersistenceMonitoringConfigurationParameters struct {
+
+	// Enables the application to automatically start on job submission. Defaults to true.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+}
+
 type MaximumCapacityInitParameters struct {
 
 	// The maximum allowed CPU for an application.
@@ -358,6 +508,55 @@ type MaximumCapacityParameters struct {
 	Memory *string `json:"memory" tf:"memory,omitempty"`
 }
 
+type MonitoringConfigurationInitParameters struct {
+
+	// The Amazon CloudWatch configuration for monitoring logs.
+	CloudwatchLoggingConfiguration *CloudwatchLoggingConfigurationInitParameters `json:"cloudwatchLoggingConfiguration,omitempty" tf:"cloudwatch_logging_configuration,omitempty"`
+
+	// The managed log persistence configuration for monitoring logs.
+	ManagedPersistenceMonitoringConfiguration *ManagedPersistenceMonitoringConfigurationInitParameters `json:"managedPersistenceMonitoringConfiguration,omitempty" tf:"managed_persistence_monitoring_configuration,omitempty"`
+
+	// The Prometheus configuration for monitoring metrics.
+	PrometheusMonitoringConfiguration *PrometheusMonitoringConfigurationInitParameters `json:"prometheusMonitoringConfiguration,omitempty" tf:"prometheus_monitoring_configuration,omitempty"`
+
+	// The Amazon S3 configuration for monitoring log publishing.
+	S3MonitoringConfiguration *S3MonitoringConfigurationInitParameters `json:"s3MonitoringConfiguration,omitempty" tf:"s3_monitoring_configuration,omitempty"`
+}
+
+type MonitoringConfigurationObservation struct {
+
+	// The Amazon CloudWatch configuration for monitoring logs.
+	CloudwatchLoggingConfiguration *CloudwatchLoggingConfigurationObservation `json:"cloudwatchLoggingConfiguration,omitempty" tf:"cloudwatch_logging_configuration,omitempty"`
+
+	// The managed log persistence configuration for monitoring logs.
+	ManagedPersistenceMonitoringConfiguration *ManagedPersistenceMonitoringConfigurationObservation `json:"managedPersistenceMonitoringConfiguration,omitempty" tf:"managed_persistence_monitoring_configuration,omitempty"`
+
+	// The Prometheus configuration for monitoring metrics.
+	PrometheusMonitoringConfiguration *PrometheusMonitoringConfigurationObservation `json:"prometheusMonitoringConfiguration,omitempty" tf:"prometheus_monitoring_configuration,omitempty"`
+
+	// The Amazon S3 configuration for monitoring log publishing.
+	S3MonitoringConfiguration *S3MonitoringConfigurationObservation `json:"s3MonitoringConfiguration,omitempty" tf:"s3_monitoring_configuration,omitempty"`
+}
+
+type MonitoringConfigurationParameters struct {
+
+	// The Amazon CloudWatch configuration for monitoring logs.
+	// +kubebuilder:validation:Optional
+	CloudwatchLoggingConfiguration *CloudwatchLoggingConfigurationParameters `json:"cloudwatchLoggingConfiguration,omitempty" tf:"cloudwatch_logging_configuration,omitempty"`
+
+	// The managed log persistence configuration for monitoring logs.
+	// +kubebuilder:validation:Optional
+	ManagedPersistenceMonitoringConfiguration *ManagedPersistenceMonitoringConfigurationParameters `json:"managedPersistenceMonitoringConfiguration,omitempty" tf:"managed_persistence_monitoring_configuration,omitempty"`
+
+	// The Prometheus configuration for monitoring metrics.
+	// +kubebuilder:validation:Optional
+	PrometheusMonitoringConfiguration *PrometheusMonitoringConfigurationParameters `json:"prometheusMonitoringConfiguration,omitempty" tf:"prometheus_monitoring_configuration,omitempty"`
+
+	// The Amazon S3 configuration for monitoring log publishing.
+	// +kubebuilder:validation:Optional
+	S3MonitoringConfiguration *S3MonitoringConfigurationParameters `json:"s3MonitoringConfiguration,omitempty" tf:"s3_monitoring_configuration,omitempty"`
+}
+
 type NetworkConfigurationInitParameters struct {
 
 	// The array of security group Ids for customer VPC connectivity.
@@ -391,6 +590,115 @@ type NetworkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type PrometheusMonitoringConfigurationInitParameters struct {
+
+	// The Prometheus remote write URL for sending metrics. Only supported in EMR 7.1.0 and later versions.
+	RemoteWriteURL *string `json:"remoteWriteUrl,omitempty" tf:"remote_write_url,omitempty"`
+}
+
+type PrometheusMonitoringConfigurationObservation struct {
+
+	// The Prometheus remote write URL for sending metrics. Only supported in EMR 7.1.0 and later versions.
+	RemoteWriteURL *string `json:"remoteWriteUrl,omitempty" tf:"remote_write_url,omitempty"`
+}
+
+type PrometheusMonitoringConfigurationParameters struct {
+
+	// The Prometheus remote write URL for sending metrics. Only supported in EMR 7.1.0 and later versions.
+	// +kubebuilder:validation:Optional
+	RemoteWriteURL *string `json:"remoteWriteUrl,omitempty" tf:"remote_write_url,omitempty"`
+}
+
+type RuntimeConfigurationInitParameters struct {
+
+	// The classification within a configuration.
+	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+
+	// A set of properties specified within a configuration classification.
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+}
+
+type RuntimeConfigurationObservation struct {
+
+	// The classification within a configuration.
+	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+
+	// A set of properties specified within a configuration classification.
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+}
+
+type RuntimeConfigurationParameters struct {
+
+	// The classification within a configuration.
+	// +kubebuilder:validation:Optional
+	Classification *string `json:"classification" tf:"classification,omitempty"`
+
+	// A set of properties specified within a configuration classification.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+}
+
+type S3MonitoringConfigurationInitParameters struct {
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The Amazon S3 destination URI for log publishing.
+	LogURI *string `json:"logUri,omitempty" tf:"log_uri,omitempty"`
+}
+
+type S3MonitoringConfigurationObservation struct {
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The Amazon S3 destination URI for log publishing.
+	LogURI *string `json:"logUri,omitempty" tf:"log_uri,omitempty"`
+}
+
+type S3MonitoringConfigurationParameters struct {
+
+	// The AWS Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyArn *string `json:"encryptionKeyArn,omitempty" tf:"encryption_key_arn,omitempty"`
+
+	// The Amazon S3 destination URI for log publishing.
+	// +kubebuilder:validation:Optional
+	LogURI *string `json:"logUri,omitempty" tf:"log_uri,omitempty"`
+}
+
+type SchedulerConfigurationInitParameters struct {
+
+	// Maximum concurrent job runs on this application. Valid range is 1 to 1000. Defaults to 15.
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+
+	// Maximum duration in minutes for the job in QUEUED state. Valid range is from 15 to 720. Defaults to 360.
+	QueueTimeoutMinutes *float64 `json:"queueTimeoutMinutes,omitempty" tf:"queue_timeout_minutes,omitempty"`
+}
+
+type SchedulerConfigurationObservation struct {
+
+	// Maximum concurrent job runs on this application. Valid range is 1 to 1000. Defaults to 15.
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+
+	// Maximum duration in minutes for the job in QUEUED state. Valid range is from 15 to 720. Defaults to 360.
+	QueueTimeoutMinutes *float64 `json:"queueTimeoutMinutes,omitempty" tf:"queue_timeout_minutes,omitempty"`
+}
+
+type SchedulerConfigurationParameters struct {
+
+	// Maximum concurrent job runs on this application. Valid range is 1 to 1000. Defaults to 15.
+	// +kubebuilder:validation:Optional
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+
+	// Maximum duration in minutes for the job in QUEUED state. Valid range is from 15 to 720. Defaults to 360.
+	// +kubebuilder:validation:Optional
+	QueueTimeoutMinutes *float64 `json:"queueTimeoutMinutes,omitempty" tf:"queue_timeout_minutes,omitempty"`
 }
 
 type WorkerConfigurationInitParameters struct {

@@ -407,7 +407,8 @@ spec:
                                   description: The schedule, as a Cron expression.
                                     The schedule interval must be between 1 hour and
                                     1 year. Conflicts with interval, interval_unit,
-                                    and times.
+                                    and times. For details on valid Cron expressions,
+                                    see here.
                                   type: string
                                 interval:
                                   description: How often this lifecycle policy should
@@ -1176,7 +1177,8 @@ spec:
                                   description: The schedule, as a Cron expression.
                                     The schedule interval must be between 1 hour and
                                     1 year. Conflicts with interval, interval_unit,
-                                    and times.
+                                    and times. For details on valid Cron expressions,
+                                    see here.
                                   type: string
                                 interval:
                                   description: How often this lifecycle policy should
@@ -1923,7 +1925,8 @@ spec:
                                   description: The schedule, as a Cron expression.
                                     The schedule interval must be between 1 hour and
                                     1 year. Conflicts with interval, interval_unit,
-                                    and times.
+                                    and times. For details on valid Cron expressions,
+                                    see here.
                                   type: string
                                 interval:
                                   description: How often this lifecycle policy should

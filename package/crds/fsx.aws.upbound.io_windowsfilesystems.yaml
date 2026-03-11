@@ -432,6 +432,88 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        domainJoinServiceAccountSecret:
+                          description: The Amazon Resource Name (ARN) for the AWS
+                            Secrets Manager secret that contains the credentials for
+                            the service account on your self-managed AD domain. Conflicts
+                            with username and password.
+                          type: string
+                        domainJoinServiceAccountSecretRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate domainJoinServiceAccountSecret.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        domainJoinServiceAccountSecretSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate domainJoinServiceAccountSecret.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -457,7 +539,7 @@ spec:
                         passwordSecretRef:
                           description: The password for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
-                            to your AD domain.
+                            to your AD domain. Conflicts with domain_join_service_account_secret.
                           properties:
                             key:
                               description: The key to select.
@@ -476,7 +558,7 @@ spec:
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
-                            to your AD domain.
+                            to your AD domain. Conflicts with domain_join_service_account_secret.
                           type: string
                       type: object
                     type: array
@@ -966,6 +1048,88 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        domainJoinServiceAccountSecret:
+                          description: The Amazon Resource Name (ARN) for the AWS
+                            Secrets Manager secret that contains the credentials for
+                            the service account on your self-managed AD domain. Conflicts
+                            with username and password.
+                          type: string
+                        domainJoinServiceAccountSecretRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate domainJoinServiceAccountSecret.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        domainJoinServiceAccountSecretSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate domainJoinServiceAccountSecret.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -991,7 +1155,7 @@ spec:
                         passwordSecretRef:
                           description: The password for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
-                            to your AD domain.
+                            to your AD domain. Conflicts with domain_join_service_account_secret.
                           properties:
                             key:
                               description: The key to select.
@@ -1010,10 +1174,8 @@ spec:
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
-                            to your AD domain.
+                            to your AD domain. Conflicts with domain_join_service_account_secret.
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   skipFinalBackup:
@@ -1392,6 +1554,12 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        domainJoinServiceAccountSecret:
+                          description: The Amazon Resource Name (ARN) for the AWS
+                            Secrets Manager secret that contains the credentials for
+                            the service account on your self-managed AD domain. Conflicts
+                            with username and password.
+                          type: string
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -1417,7 +1585,7 @@ spec:
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
-                            to your AD domain.
+                            to your AD domain. Conflicts with domain_join_service_account_secret.
                           type: string
                       type: object
                     type: array
@@ -1941,6 +2109,88 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      domainJoinServiceAccountSecret:
+                        description: The Amazon Resource Name (ARN) for the AWS Secrets
+                          Manager secret that contains the credentials for the service
+                          account on your self-managed AD domain. Conflicts with username
+                          and password.
+                        type: string
+                      domainJoinServiceAccountSecretRef:
+                        description: Reference to a Secret in secretsmanager to populate
+                          domainJoinServiceAccountSecret.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      domainJoinServiceAccountSecretSelector:
+                        description: Selector for a Secret in secretsmanager to populate
+                          domainJoinServiceAccountSecret.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
                       domainName:
                         description: The fully qualified domain name of the self-managed
                           AD directory. For example, corp.example.com.
@@ -1965,7 +2215,7 @@ spec:
                       passwordSecretRef:
                         description: The password for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain.
+                          to your AD domain. Conflicts with domain_join_service_account_secret.
                         properties:
                           key:
                             description: The key to select.
@@ -1984,7 +2234,7 @@ spec:
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain.
+                          to your AD domain. Conflicts with domain_join_service_account_secret.
                         type: string
                     type: object
                   skipFinalBackup:
@@ -2467,6 +2717,88 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      domainJoinServiceAccountSecret:
+                        description: The Amazon Resource Name (ARN) for the AWS Secrets
+                          Manager secret that contains the credentials for the service
+                          account on your self-managed AD domain. Conflicts with username
+                          and password.
+                        type: string
+                      domainJoinServiceAccountSecretRef:
+                        description: Reference to a Secret in secretsmanager to populate
+                          domainJoinServiceAccountSecret.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      domainJoinServiceAccountSecretSelector:
+                        description: Selector for a Secret in secretsmanager to populate
+                          domainJoinServiceAccountSecret.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
                       domainName:
                         description: The fully qualified domain name of the self-managed
                           AD directory. For example, corp.example.com.
@@ -2491,7 +2823,7 @@ spec:
                       passwordSecretRef:
                         description: The password for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain.
+                          to your AD domain. Conflicts with domain_join_service_account_secret.
                         properties:
                           key:
                             description: The key to select.
@@ -2510,10 +2842,8 @@ spec:
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain.
+                          to your AD domain. Conflicts with domain_join_service_account_secret.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   skipFinalBackup:
                     description: When enabled, will skip the default final backup
@@ -2885,6 +3215,12 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      domainJoinServiceAccountSecret:
+                        description: The Amazon Resource Name (ARN) for the AWS Secrets
+                          Manager secret that contains the credentials for the service
+                          account on your self-managed AD domain. Conflicts with username
+                          and password.
+                        type: string
                       domainName:
                         description: The fully qualified domain name of the self-managed
                           AD directory. For example, corp.example.com.
@@ -2909,7 +3245,7 @@ spec:
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain.
+                          to your AD domain. Conflicts with domain_join_service_account_secret.
                         type: string
                     type: object
                   skipFinalBackup:

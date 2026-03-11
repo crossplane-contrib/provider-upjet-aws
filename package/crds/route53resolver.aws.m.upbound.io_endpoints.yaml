@@ -184,6 +184,12 @@ spec:
                       Endpoint IP type. This endpoint type is applied to all IP addresses.
                       Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
+                  rniEnhancedMetricsEnabled:
+                    description: Boolean indicating whether RNI enhanced metrics are
+                      enabled for the Resolver endpoint. Defaults to false. Once set,
+                      changing the value back to false requires explicitly specifying
+                      false rather than removing the argument.
+                    type: boolean
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -281,6 +287,13 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetNameServerMetricsEnabled:
+                    description: Boolean indicating whether target name server metrics
+                      are enabled for the outbound Resolver endpoints. Defaults to
+                      false. This argument is supported only for outbound endpoints.
+                      Once set, changing the value back to false requires explicitly
+                      specifying false rather than removing the argument.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -417,6 +430,12 @@ spec:
                       Endpoint IP type. This endpoint type is applied to all IP addresses.
                       Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
+                  rniEnhancedMetricsEnabled:
+                    description: Boolean indicating whether RNI enhanced metrics are
+                      enabled for the Resolver endpoint. Defaults to false. Once set,
+                      changing the value back to false requires explicitly specifying
+                      false rather than removing the argument.
+                    type: boolean
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -514,6 +533,13 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetNameServerMetricsEnabled:
+                    description: Boolean indicating whether target name server metrics
+                      are enabled for the outbound Resolver endpoints. Defaults to
+                      false. This argument is supported only for outbound endpoints.
+                      Once set, changing the value back to false requires explicitly
+                      specifying false rather than removing the argument.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -645,6 +671,12 @@ spec:
                       Endpoint IP type. This endpoint type is applied to all IP addresses.
                       Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
+                  rniEnhancedMetricsEnabled:
+                    description: Boolean indicating whether RNI enhanced metrics are
+                      enabled for the Resolver endpoint. Defaults to false. Once set,
+                      changing the value back to false requires explicitly specifying
+                      false rather than removing the argument.
+                    type: boolean
                   securityGroupIds:
                     description: ID of one or more security groups that you want to
                       use to control access to this VPC.
@@ -665,6 +697,13 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  targetNameServerMetricsEnabled:
+                    description: Boolean indicating whether target name server metrics
+                      are enabled for the outbound Resolver endpoints. Defaults to
+                      false. This argument is supported only for outbound endpoints.
+                      Once set, changing the value back to false requires explicitly
+                      specifying false rather than removing the argument.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

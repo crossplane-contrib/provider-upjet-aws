@@ -165,7 +165,7 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 	// Field renamings for these three resources already bump their versions.
 	// Please see config.injectFieldRenamingConversionFunctions().
 	// We do not bump their versions again here.
-	if !sets.New("aws_connect_hours_of_operation", "aws_connect_queue", "aws_db_instance").Has(r.Name) {
+	if !sets.New("aws_connect_hours_of_operation", "aws_connect_queue", "aws_db_instance", "aws_connect_routing_profile").Has(r.Name) {
 		var err error
 		bumped, err = bumpAPIVersion(r.Version)
 		if err != nil {

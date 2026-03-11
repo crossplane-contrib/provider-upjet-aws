@@ -54,6 +54,7 @@ import (
 	v1beta2batch "github.com/upbound/provider-aws/v2/apis/cluster/batch/v1beta2"
 	v1beta1bedrock "github.com/upbound/provider-aws/v2/apis/cluster/bedrock/v1beta1"
 	v1beta1bedrockagent "github.com/upbound/provider-aws/v2/apis/cluster/bedrockagent/v1beta1"
+	v1beta1bedrockagentcore "github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/v2/apis/cluster/budgets/v1beta1"
 	v1beta2budgets "github.com/upbound/provider-aws/v2/apis/cluster/budgets/v1beta2"
 	v1beta1ce "github.com/upbound/provider-aws/v2/apis/cluster/ce/v1beta1"
@@ -219,6 +220,7 @@ import (
 	v1beta2networkfirewall "github.com/upbound/provider-aws/v2/apis/cluster/networkfirewall/v1beta2"
 	v1beta1networkmanager "github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta1"
 	v1beta2networkmanager "github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2"
+	v1beta1oam "github.com/upbound/provider-aws/v2/apis/cluster/oam/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta1"
 	v1beta2opensearch "github.com/upbound/provider-aws/v2/apis/cluster/opensearch/v1beta2"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1"
@@ -352,6 +354,7 @@ func init() {
 		v1beta2batch.SchemeBuilder.AddToScheme,
 		v1beta1bedrock.SchemeBuilder.AddToScheme,
 		v1beta1bedrockagent.SchemeBuilder.AddToScheme,
+		v1beta1bedrockagentcore.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
 		v1beta2budgets.SchemeBuilder.AddToScheme,
 		v1beta1ce.SchemeBuilder.AddToScheme,
@@ -517,6 +520,7 @@ func init() {
 		v1beta2networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
 		v1beta2networkmanager.SchemeBuilder.AddToScheme,
+		v1beta1oam.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta2opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,

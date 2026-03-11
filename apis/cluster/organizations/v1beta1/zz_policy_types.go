@@ -17,9 +17,17 @@ type PolicyInitParameters struct {
 
 	// The policy content to add to the new policy.
 	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the AI Services opt-out Policy syntax, see the AI Services opt-out Policy Syntax documentation.
+	// For more information about the Backup Policy syntax, see the Backup Policy Syntax documentation.
+	// For more information about the Bedrock Policy syntax, see the Bedrock Policy Syntax documentation.
+	// For more information about the Chatbot Policy syntax, see the Chatbot Policy Syntax documentation.
+	// For more information about the Declarative Policy syntax, see the Declarative Policy Syntax documentation.
+	// For more information about the Inspector Policy syntax, see the Inspector Policy Syntax documentation.
 	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
-	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information about the S3 Policy syntax, see the S3 Policy Syntax documentation.
+	// For more information about the Security Hub Policy syntax, see the Security Hub Policy Syntax documentation. For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
 	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// For more information about the Upgrade Rollout Policy syntax, see the Upgrade Rollout Policy Syntax documentation.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A description to assign to the policy.
@@ -35,7 +43,7 @@ type PolicyInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY (RCP), S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY (SCP), TAG_POLICY, and UPGRADE_ROLLOUT_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -46,9 +54,17 @@ type PolicyObservation struct {
 
 	// The policy content to add to the new policy.
 	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the AI Services opt-out Policy syntax, see the AI Services opt-out Policy Syntax documentation.
+	// For more information about the Backup Policy syntax, see the Backup Policy Syntax documentation.
+	// For more information about the Bedrock Policy syntax, see the Bedrock Policy Syntax documentation.
+	// For more information about the Chatbot Policy syntax, see the Chatbot Policy Syntax documentation.
+	// For more information about the Declarative Policy syntax, see the Declarative Policy Syntax documentation.
+	// For more information about the Inspector Policy syntax, see the Inspector Policy Syntax documentation.
 	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
-	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information about the S3 Policy syntax, see the S3 Policy Syntax documentation.
+	// For more information about the Security Hub Policy syntax, see the Security Hub Policy Syntax documentation. For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
 	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// For more information about the Upgrade Rollout Policy syntax, see the Upgrade Rollout Policy Syntax documentation.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A description to assign to the policy.
@@ -71,7 +87,7 @@ type PolicyObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY (RCP), S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY (SCP), TAG_POLICY, and UPGRADE_ROLLOUT_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -79,9 +95,17 @@ type PolicyParameters struct {
 
 	// The policy content to add to the new policy.
 	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the AI Services opt-out Policy syntax, see the AI Services opt-out Policy Syntax documentation.
+	// For more information about the Backup Policy syntax, see the Backup Policy Syntax documentation.
+	// For more information about the Bedrock Policy syntax, see the Bedrock Policy Syntax documentation.
+	// For more information about the Chatbot Policy syntax, see the Chatbot Policy Syntax documentation.
+	// For more information about the Declarative Policy syntax, see the Declarative Policy Syntax documentation.
+	// For more information about the Inspector Policy syntax, see the Inspector Policy Syntax documentation.
 	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
-	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information about the S3 Policy syntax, see the S3 Policy Syntax documentation.
+	// For more information about the Security Hub Policy syntax, see the Security Hub Policy Syntax documentation. For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
 	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// For more information about the Upgrade Rollout Policy syntax, see the Upgrade Rollout Policy Syntax documentation.
 	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -102,7 +126,7 @@ type PolicyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY (RCP), S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY (SCP), TAG_POLICY, and UPGRADE_ROLLOUT_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
