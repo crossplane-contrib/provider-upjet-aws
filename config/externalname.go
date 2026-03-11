@@ -141,11 +141,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// route53profiles
 	//
 	// route53profiles_association can be imported using the id
-	"aws_route53profiles_association": identifierFromProviderWithDefaultStub("rpa-stub123456"),
+	"aws_route53profiles_association": identifierFromProviderWithDefaultStub("rpassoc-stub123456"),
 	// route53profiles_profile can be imported using the id
 	"aws_route53profiles_profile": identifierFromProviderWithDefaultStub("rp-stub123456"),
 	// route53profiles_resource_association can be imported using the id
-	"aws_route53profiles_resource_association": identifierFromProviderWithDefaultStub("rpassoc-stub123456"),
+	"aws_route53profiles_resource_association": identifierFromProviderWithDefaultStub("rpr-001s0000tu00000001b"),
 
 	// amp
 	//
