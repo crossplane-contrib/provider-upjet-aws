@@ -274,6 +274,9 @@ type BuildStatusConfigParameters struct {
 
 type CacheInitParameters struct {
 
+	// Namespace that determines the scope in which a cache is shared across multiple projects.
+	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
+
 	// Location where the AWS CodeBuild project stores cached resources. For
 	// type S3, the value must be a valid S3 bucket name/prefix.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
@@ -298,6 +301,9 @@ type CacheInitParameters struct {
 
 type CacheObservation struct {
 
+	// Namespace that determines the scope in which a cache is shared across multiple projects.
+	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
+
 	// Location where the AWS CodeBuild project stores cached resources. For
 	// type S3, the value must be a valid S3 bucket name/prefix.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -312,6 +318,10 @@ type CacheObservation struct {
 }
 
 type CacheParameters struct {
+
+	// Namespace that determines the scope in which a cache is shared across multiple projects.
+	// +kubebuilder:validation:Optional
+	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
 
 	// Location where the AWS CodeBuild project stores cached resources. For
 	// type S3, the value must be a valid S3 bucket name/prefix.
@@ -745,6 +755,11 @@ type ProjectInitParameters struct {
 	// Configuration block. Detailed below.
 	Artifacts *ArtifactsInitParameters `json:"artifacts,omitempty" tf:"artifacts,omitempty"`
 
+	// Specify a maximum number of additional automatic retries after a failed build.
+	// The default is 0.
+	// Maximum number of additional automatic retries after a failed build. The default value is 0.
+	AutoRetryLimit *float64 `json:"autoRetryLimit,omitempty" tf:"auto_retry_limit,omitempty"`
+
 	// Generates a publicly-accessible URL for the projects build badge. Available as
 	// badge_url attribute when enabled.
 	BadgeEnabled *bool `json:"badgeEnabled,omitempty" tf:"badge_enabled,omitempty"`
@@ -839,6 +854,11 @@ type ProjectObservation struct {
 
 	// Configuration block. Detailed below.
 	Artifacts *ArtifactsObservation `json:"artifacts,omitempty" tf:"artifacts,omitempty"`
+
+	// Specify a maximum number of additional automatic retries after a failed build.
+	// The default is 0.
+	// Maximum number of additional automatic retries after a failed build. The default value is 0.
+	AutoRetryLimit *float64 `json:"autoRetryLimit,omitempty" tf:"auto_retry_limit,omitempty"`
 
 	// Generates a publicly-accessible URL for the projects build badge. Available as
 	// badge_url attribute when enabled.
@@ -939,6 +959,12 @@ type ProjectParameters struct {
 	// Configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
 	Artifacts *ArtifactsParameters `json:"artifacts,omitempty" tf:"artifacts,omitempty"`
+
+	// Specify a maximum number of additional automatic retries after a failed build.
+	// The default is 0.
+	// Maximum number of additional automatic retries after a failed build. The default value is 0.
+	// +kubebuilder:validation:Optional
+	AutoRetryLimit *float64 `json:"autoRetryLimit,omitempty" tf:"auto_retry_limit,omitempty"`
 
 	// Generates a publicly-accessible URL for the projects build badge. Available as
 	// badge_url attribute when enabled.

@@ -126,6 +126,12 @@ spec:
                           CODEPIPELINE, NO_ARTIFACTS, S3.'
                         type: string
                     type: object
+                  autoRetryLimit:
+                    description: |-
+                      Specify a maximum number of additional automatic retries after a failed build.
+                      The default is 0.
+                      Maximum number of additional automatic retries after a failed build. The default value is 0.
+                    type: number
                   badgeEnabled:
                     description: |-
                       Generates a publicly-accessible URL for the projects build badge. Available as
@@ -175,6 +181,10 @@ spec:
                   cache:
                     description: Configuration block. Detailed below.
                     properties:
+                      cacheNamespace:
+                        description: Namespace that determines the scope in which
+                          a cache is shared across multiple projects.
+                        type: string
                       location:
                         description: |-
                           Location where the AWS CodeBuild project stores cached resources. For
@@ -1111,6 +1121,12 @@ spec:
                           CODEPIPELINE, NO_ARTIFACTS, S3.'
                         type: string
                     type: object
+                  autoRetryLimit:
+                    description: |-
+                      Specify a maximum number of additional automatic retries after a failed build.
+                      The default is 0.
+                      Maximum number of additional automatic retries after a failed build. The default value is 0.
+                    type: number
                   badgeEnabled:
                     description: |-
                       Generates a publicly-accessible URL for the projects build badge. Available as
@@ -1160,6 +1176,10 @@ spec:
                   cache:
                     description: Configuration block. Detailed below.
                     properties:
+                      cacheNamespace:
+                        description: Namespace that determines the scope in which
+                          a cache is shared across multiple projects.
+                        type: string
                       location:
                         description: |-
                           Location where the AWS CodeBuild project stores cached resources. For
@@ -2183,6 +2203,12 @@ spec:
                           CODEPIPELINE, NO_ARTIFACTS, S3.'
                         type: string
                     type: object
+                  autoRetryLimit:
+                    description: |-
+                      Specify a maximum number of additional automatic retries after a failed build.
+                      The default is 0.
+                      Maximum number of additional automatic retries after a failed build. The default value is 0.
+                    type: number
                   badgeEnabled:
                     description: |-
                       Generates a publicly-accessible URL for the projects build badge. Available as
@@ -2235,6 +2261,10 @@ spec:
                   cache:
                     description: Configuration block. Detailed below.
                     properties:
+                      cacheNamespace:
+                        description: Namespace that determines the scope in which
+                          a cache is shared across multiple projects.
+                        type: string
                       location:
                         description: |-
                           Location where the AWS CodeBuild project stores cached resources. For
