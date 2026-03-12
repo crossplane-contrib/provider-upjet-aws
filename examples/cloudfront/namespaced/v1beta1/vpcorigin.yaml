@@ -8,14 +8,22 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
   labels:
-    testing.upbound.io/example-name: example-with-selector
+    testing.upbound.io/example-name: example-vpcorigin
   name: example-with-selector
+  namespace: upbound-system
 spec:
   forProvider:
-    arnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-alb
-    region: us-west-2
+    vpcOriginEndpointConfig:
+      name: example-vpc-origin-xp
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example-alb
+      httpPort: 8080
+      httpsPort: 8443
+      originProtocolPolicy: "https-only"
+      originSslProtocols:
+        items: [ "TLSv1.2" ]
+        quantity: 1
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
@@ -25,6 +33,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-vpc
   name: example-vpc
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 172.16.0.0/16
@@ -40,6 +49,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-subnet-a
   name: example-subnet-a
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-2a
@@ -57,6 +67,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-subnet-b
   name: example-subnet-b
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-west-2b
@@ -74,6 +85,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-sg
   name: example-sg
+  namespace: upbound-system
 spec:
   forProvider:
     description: Security group for ALB
@@ -90,6 +102,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-sg-ingress
   name: example-sg-ingress
+  namespace: upbound-system
 spec:
   forProvider:
     type: ingress
@@ -111,6 +124,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-alb
   name: example-alb
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-west-2
