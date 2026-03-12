@@ -13,7 +13,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    aclName: open-access
+    aclNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     nodeType: db.t4g.small
     numShards: 2
     region: us-west-1
@@ -105,3 +107,15 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+---
+apiVersion: memorydb.aws.upbound.io/v1beta1
+kind: ACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/acl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
