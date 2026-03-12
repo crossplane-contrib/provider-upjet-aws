@@ -86,6 +86,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/redshiftserverless"
 	"github.com/upbound/provider-aws/v2/config/namespaced/rolesanywhere"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53"
+	"github.com/upbound/provider-aws/v2/config/namespaced/route53profiles"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/namespaced/s3"
@@ -170,6 +171,7 @@ func init() {
 	ProviderConfiguration.AddConfig(redshift.Configure)
 	ProviderConfiguration.AddConfig(rolesanywhere.Configure)
 	ProviderConfiguration.AddConfig(route53.Configure)
+	ProviderConfiguration.AddConfig(route53profiles.Configure)
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
