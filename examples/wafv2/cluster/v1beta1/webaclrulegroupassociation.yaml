@@ -15,9 +15,9 @@ spec:
     priority: 100
     region: us-west-1
     ruleGroupReference:
-      - arnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example-custom
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example-custom
     ruleName: example-rule-group-rule
     webAclArnSelector:
       matchLabels:
@@ -37,8 +37,8 @@ spec:
     priority: 50
     region: us-west-1
     managedRuleGroup:
-      - name: AWSManagedRulesCommonRuleSet
-        vendorName: AWS
+      name: AWSManagedRulesCommonRuleSet
+      vendorName: AWS
     ruleName: aws-managed-common-rules
     webAclArnSelector:
       matchLabels:
