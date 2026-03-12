@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     vpcOriginEndpointConfig:
-    - arnSelector:
+      arnSelector:
         matchLabels:
           testing.upbound.io/example-name: this
       httpPort: 8080
@@ -22,6 +22,6 @@ spec:
       name: example-vpc-origin
       originProtocolPolicy: https-only
       originSslProtocols:
-      - items:
+        items:
         - TLSv1.2
         quantity: 1

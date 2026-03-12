@@ -566,48 +566,48 @@ func (mg *VPCOrigin) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCOriginEndpointConfig); i3++ {
+	if mg.Spec.ForProvider.VPCOriginEndpointConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("elbv2.aws.m.upbound.io", "v1beta1", "LB", "LBList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].Arn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCOriginEndpointConfig.Arn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].ArnRef,
-				Selector:     mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].ArnSelector,
+				Reference:    mg.Spec.ForProvider.VPCOriginEndpointConfig.ArnRef,
+				Selector:     mg.Spec.ForProvider.VPCOriginEndpointConfig.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].Arn")
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOriginEndpointConfig.Arn")
 		}
-		mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.VPCOriginEndpointConfig[i3].ArnRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.VPCOriginEndpointConfig.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VPCOriginEndpointConfig.ArnRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCOriginEndpointConfig); i3++ {
+	if mg.Spec.InitProvider.VPCOriginEndpointConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("elbv2.aws.m.upbound.io", "v1beta1", "LB", "LBList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].Arn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCOriginEndpointConfig.Arn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].ArnRef,
-				Selector:     mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].ArnSelector,
+				Reference:    mg.Spec.InitProvider.VPCOriginEndpointConfig.ArnRef,
+				Selector:     mg.Spec.InitProvider.VPCOriginEndpointConfig.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].Arn")
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOriginEndpointConfig.Arn")
 		}
-		mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.VPCOriginEndpointConfig[i3].ArnRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.VPCOriginEndpointConfig.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VPCOriginEndpointConfig.ArnRef = rsp.ResolvedReference
 
 	}
 

@@ -10759,10 +10759,8 @@ func (in *VPCOriginEndpointConfigInitParameters) DeepCopyInto(out *VPCOriginEndp
 	}
 	if in.OriginSSLProtocols != nil {
 		in, out := &in.OriginSSLProtocols, &out.OriginSSLProtocols
-		*out = make([]OriginSSLProtocolsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OriginSSLProtocolsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10806,10 +10804,8 @@ func (in *VPCOriginEndpointConfigObservation) DeepCopyInto(out *VPCOriginEndpoin
 	}
 	if in.OriginSSLProtocols != nil {
 		in, out := &in.OriginSSLProtocols, &out.OriginSSLProtocols
-		*out = make([]OriginSSLProtocolsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OriginSSLProtocolsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10863,10 +10859,8 @@ func (in *VPCOriginEndpointConfigParameters) DeepCopyInto(out *VPCOriginEndpoint
 	}
 	if in.OriginSSLProtocols != nil {
 		in, out := &in.OriginSSLProtocols, &out.OriginSSLProtocols
-		*out = make([]OriginSSLProtocolsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(OriginSSLProtocolsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -10901,10 +10895,8 @@ func (in *VPCOriginInitParameters) DeepCopyInto(out *VPCOriginInitParameters) {
 	}
 	if in.VPCOriginEndpointConfig != nil {
 		in, out := &in.VPCOriginEndpointConfig, &out.VPCOriginEndpointConfig
-		*out = make([]VPCOriginEndpointConfigInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VPCOriginEndpointConfigInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -11002,10 +10994,8 @@ func (in *VPCOriginObservation) DeepCopyInto(out *VPCOriginObservation) {
 	}
 	if in.VPCOriginEndpointConfig != nil {
 		in, out := &in.VPCOriginEndpointConfig, &out.VPCOriginEndpointConfig
-		*out = make([]VPCOriginEndpointConfigObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VPCOriginEndpointConfigObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -11040,10 +11030,8 @@ func (in *VPCOriginParameters) DeepCopyInto(out *VPCOriginParameters) {
 	}
 	if in.VPCOriginEndpointConfig != nil {
 		in, out := &in.VPCOriginEndpointConfig, &out.VPCOriginEndpointConfig
-		*out = make([]VPCOriginEndpointConfigParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VPCOriginEndpointConfigParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

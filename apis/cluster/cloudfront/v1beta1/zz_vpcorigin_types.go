@@ -67,7 +67,7 @@ type VPCOriginEndpointConfigInitParameters struct {
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
 	// A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.
-	OriginSSLProtocols []OriginSSLProtocolsInitParameters `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
+	OriginSSLProtocols *OriginSSLProtocolsInitParameters `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
 }
 
 type VPCOriginEndpointConfigObservation struct {
@@ -88,7 +88,7 @@ type VPCOriginEndpointConfigObservation struct {
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
 	// A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.
-	OriginSSLProtocols []OriginSSLProtocolsObservation `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
+	OriginSSLProtocols *OriginSSLProtocolsObservation `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
 }
 
 type VPCOriginEndpointConfigParameters struct {
@@ -125,7 +125,7 @@ type VPCOriginEndpointConfigParameters struct {
 
 	// A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.
 	// +kubebuilder:validation:Optional
-	OriginSSLProtocols []OriginSSLProtocolsParameters `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
+	OriginSSLProtocols *OriginSSLProtocolsParameters `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
 }
 
 type VPCOriginInitParameters struct {
@@ -135,7 +135,7 @@ type VPCOriginInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC origin endpoint configuration.
-	VPCOriginEndpointConfig []VPCOriginEndpointConfigInitParameters `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
+	VPCOriginEndpointConfig *VPCOriginEndpointConfigInitParameters `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
 }
 
 type VPCOriginObservation struct {
@@ -158,7 +158,7 @@ type VPCOriginObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VPC origin endpoint configuration.
-	VPCOriginEndpointConfig []VPCOriginEndpointConfigObservation `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
+	VPCOriginEndpointConfig *VPCOriginEndpointConfigObservation `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
 }
 
 type VPCOriginParameters struct {
@@ -170,7 +170,7 @@ type VPCOriginParameters struct {
 
 	// The VPC origin endpoint configuration.
 	// +kubebuilder:validation:Optional
-	VPCOriginEndpointConfig []VPCOriginEndpointConfigParameters `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
+	VPCOriginEndpointConfig *VPCOriginEndpointConfigParameters `json:"vpcOriginEndpointConfig,omitempty" tf:"vpc_origin_endpoint_config,omitempty"`
 }
 
 // VPCOriginSpec defines the desired state of VPCOrigin
