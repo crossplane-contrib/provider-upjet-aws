@@ -158,6 +158,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: ARN of the Group.
+                    type: string
                   description:
                     description: A string containing the description of the group.
                     type: string

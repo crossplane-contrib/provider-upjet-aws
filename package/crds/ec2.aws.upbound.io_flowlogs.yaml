@@ -351,6 +351,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -436,7 +439,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.
@@ -810,6 +814,9 @@ spec:
                       Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
                       When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -895,7 +902,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.
@@ -1132,6 +1140,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -1151,7 +1162,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.
@@ -1555,6 +1567,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -1640,7 +1655,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.
@@ -2012,6 +2028,9 @@ spec:
                       Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
                       When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
                     type: number
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -2097,7 +2116,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.
@@ -2332,6 +2352,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  regionalNatGatewayId:
+                    description: Regional NAT Gateway ID to attach to.
+                    type: string
                   subnetId:
                     description: Subnet ID to attach to.
                     type: string
@@ -2351,7 +2374,8 @@ spec:
                     x-kubernetes-map-type: granular
                   trafficType:
                     description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
-                      ALL.'
+                      ALL. Required if eni_id, regional_nat_gateway_id, subnet_id,
+                      or vpc_id is specified.'
                     type: string
                   transitGatewayAttachmentId:
                     description: Transit Gateway Attachment ID to attach to.

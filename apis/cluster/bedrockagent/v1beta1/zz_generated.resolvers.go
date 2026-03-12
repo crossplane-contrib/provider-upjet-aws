@@ -45,6 +45,26 @@ func (mg *Agent) ResolveReferences( // ResolveReferences of this Agent.
 	mg.Spec.ForProvider.AgentResourceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AgentResourceRoleArnRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomerEncryptionKeyArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CustomerEncryptionKeyArnRef,
+			Selector:     mg.Spec.ForProvider.CustomerEncryptionKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomerEncryptionKeyArn")
+	}
+	mg.Spec.ForProvider.CustomerEncryptionKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CustomerEncryptionKeyArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -64,6 +84,26 @@ func (mg *Agent) ResolveReferences( // ResolveReferences of this Agent.
 	}
 	mg.Spec.InitProvider.AgentResourceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AgentResourceRoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomerEncryptionKeyArn),
+			Extract:      common.ARNExtractor(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CustomerEncryptionKeyArnRef,
+			Selector:     mg.Spec.InitProvider.CustomerEncryptionKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CustomerEncryptionKeyArn")
+	}
+	mg.Spec.InitProvider.CustomerEncryptionKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CustomerEncryptionKeyArnRef = rsp.ResolvedReference
 
 	return nil
 }

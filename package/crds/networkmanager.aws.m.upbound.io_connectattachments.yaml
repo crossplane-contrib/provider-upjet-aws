@@ -238,6 +238,12 @@ spec:
                           Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
+                  routingPolicyLabel:
+                    description: The routing policy label to apply to the Connect
+                      attachment for traffic routing decisions. Maximum length of
+                      256 characters. Changing this value will force recreation of
+                      the resource.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -522,6 +528,12 @@ spec:
                           Valid values: GRE, NO_ENCAP.'
                         type: string
                     type: object
+                  routingPolicyLabel:
+                    description: The routing policy label to apply to the Connect
+                      attachment for traffic routing decisions. Maximum length of
+                      256 characters. Changing this value will force recreation of
+                      the resource.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -719,6 +731,12 @@ spec:
                     type: string
                   resourceArn:
                     description: Attachment resource ARN.
+                    type: string
+                  routingPolicyLabel:
+                    description: The routing policy label to apply to the Connect
+                      attachment for traffic routing decisions. Maximum length of
+                      256 characters. Changing this value will force recreation of
+                      the resource.
                     type: string
                   segmentName:
                     description: Name of the segment attachment.

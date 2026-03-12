@@ -24,6 +24,12 @@ spec:
     mediaConcurrencies:
     - channel: VOICE
       concurrency: 1
+      crossChannelBehavior:
+        behaviorType: ROUTE_ANY_CHANNEL
+    - channel: CHAT
+      concurrency: 3
+      crossChannelBehavior:
+        behaviorType: ROUTE_CURRENT_CHANNEL_ONLY
     name: example
     queueConfigs:
     - channel: VOICE

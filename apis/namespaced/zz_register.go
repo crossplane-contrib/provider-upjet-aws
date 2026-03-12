@@ -34,6 +34,7 @@ import (
 	v1beta1batch "github.com/upbound/provider-aws/v2/apis/namespaced/batch/v1beta1"
 	v1beta1bedrock "github.com/upbound/provider-aws/v2/apis/namespaced/bedrock/v1beta1"
 	v1beta1bedrockagent "github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagent/v1beta1"
+	v1beta1bedrockagentcore "github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/v2/apis/namespaced/budgets/v1beta1"
 	v1beta1ce "github.com/upbound/provider-aws/v2/apis/namespaced/ce/v1beta1"
 	v1beta1chime "github.com/upbound/provider-aws/v2/apis/namespaced/chime/v1beta1"
@@ -85,6 +86,7 @@ import (
 	v1beta1elb "github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1"
 	v1beta1emr "github.com/upbound/provider-aws/v2/apis/namespaced/emr/v1beta1"
+	v1beta1emrcontainers "github.com/upbound/provider-aws/v2/apis/namespaced/emrcontainers/v1beta1"
 	v1beta1emrserverless "github.com/upbound/provider-aws/v2/apis/namespaced/emrserverless/v1beta1"
 	v1beta1evidently "github.com/upbound/provider-aws/v2/apis/namespaced/evidently/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1"
@@ -146,6 +148,7 @@ import (
 	v1beta1resourcegroups "github.com/upbound/provider-aws/v2/apis/namespaced/resourcegroups/v1beta1"
 	v1beta1rolesanywhere "github.com/upbound/provider-aws/v2/apis/namespaced/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1"
+	v1beta1route53profiles "github.com/upbound/provider-aws/v2/apis/namespaced/route53profiles/v1beta1"
 	v1beta1route53recoverycontrolconfig "github.com/upbound/provider-aws/v2/apis/namespaced/route53recoverycontrolconfig/v1beta1"
 	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/v2/apis/namespaced/route53recoveryreadiness/v1beta1"
 	v1beta1route53resolver "github.com/upbound/provider-aws/v2/apis/namespaced/route53resolver/v1beta1"
@@ -212,6 +215,7 @@ func init() {
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta1bedrock.SchemeBuilder.AddToScheme,
 		v1beta1bedrockagent.SchemeBuilder.AddToScheme,
+		v1beta1bedrockagentcore.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
 		v1beta1ce.SchemeBuilder.AddToScheme,
 		v1beta1chime.SchemeBuilder.AddToScheme,
@@ -263,6 +267,7 @@ func init() {
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta1emr.SchemeBuilder.AddToScheme,
+		v1beta1emrcontainers.SchemeBuilder.AddToScheme,
 		v1beta1emrserverless.SchemeBuilder.AddToScheme,
 		v1beta1evidently.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
@@ -324,6 +329,7 @@ func init() {
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
 		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
+		v1beta1route53profiles.SchemeBuilder.AddToScheme,
 		v1beta1route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,

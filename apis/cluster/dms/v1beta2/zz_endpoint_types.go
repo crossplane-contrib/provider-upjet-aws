@@ -86,7 +86,7 @@ type EndpointInitParameters struct {
 	// Type of endpoint. Valid values are source, target.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, s3, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
@@ -113,6 +113,9 @@ type EndpointInitParameters struct {
 
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings *MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
+
+	// Configuration block for MySQL settings. See below.
+	MySQLSettings *MySQLSettingsInitParameters `json:"mysqlSettings,omitempty" tf:"mysql_settings,omitempty"`
 
 	// Configuration block for Oracle settings. See below.
 	OracleSettings *OracleSettingsInitParameters `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
@@ -194,7 +197,7 @@ type EndpointObservation struct {
 	// Type of endpoint. Valid values are source, target.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, s3, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
@@ -213,6 +216,9 @@ type EndpointObservation struct {
 
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings *MongodbSettingsObservation `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
+
+	// Configuration block for MySQL settings. See below.
+	MySQLSettings *MySQLSettingsObservation `json:"mysqlSettings,omitempty" tf:"mysql_settings,omitempty"`
 
 	// Configuration block for Oracle settings. See below.
 	OracleSettings *OracleSettingsObservation `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
@@ -280,7 +286,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, s3, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, aurora-serverless, aurora-postgresql-serverless,azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,redshift-serverless, sqlserver, neptune ,sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	// +kubebuilder:validation:Optional
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
@@ -313,6 +319,10 @@ type EndpointParameters struct {
 	// Configuration block for MongoDB settings. See below.
 	// +kubebuilder:validation:Optional
 	MongodbSettings *MongodbSettingsParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
+
+	// Configuration block for MySQL settings. See below.
+	// +kubebuilder:validation:Optional
+	MySQLSettings *MySQLSettingsParameters `json:"mysqlSettings,omitempty" tf:"mysql_settings,omitempty"`
 
 	// Configuration block for Oracle settings. See below.
 	// +kubebuilder:validation:Optional
@@ -717,6 +727,9 @@ type MongodbSettingsInitParameters struct {
 
 	// Specifies either document or table mode. Default is none. Valid values are one (table mode) and none (document mode).
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
+
+	// If true, DMS retrieves the entire document from the MongoDB source during migration. Default is false.
+	UseUpdateLookup *bool `json:"useUpdateLookup,omitempty" tf:"use_update_lookup,omitempty"`
 }
 
 type MongodbSettingsObservation struct {
@@ -738,6 +751,9 @@ type MongodbSettingsObservation struct {
 
 	// Specifies either document or table mode. Default is none. Valid values are one (table mode) and none (document mode).
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
+
+	// If true, DMS retrieves the entire document from the MongoDB source during migration. Default is false.
+	UseUpdateLookup *bool `json:"useUpdateLookup,omitempty" tf:"use_update_lookup,omitempty"`
 }
 
 type MongodbSettingsParameters struct {
@@ -765,25 +781,492 @@ type MongodbSettingsParameters struct {
 	// Specifies either document or table mode. Default is none. Valid values are one (table mode) and none (document mode).
 	// +kubebuilder:validation:Optional
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
+
+	// If true, DMS retrieves the entire document from the MongoDB source during migration. Default is false.
+	// +kubebuilder:validation:Optional
+	UseUpdateLookup *bool `json:"useUpdateLookup,omitempty" tf:"use_update_lookup,omitempty"`
+}
+
+type MySQLSettingsInitParameters struct {
+
+	// Script to run immediately after AWS DMS connects to the endpoint.
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// Authentication method to use. Valid values: password, iam.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Whether to clean and recreate table metadata information on the replication instance when a mismatch occurs.
+	CleanSourceMetadataOnMismatch *bool `json:"cleanSourceMetadataOnMismatch,omitempty" tf:"clean_source_metadata_on_mismatch,omitempty"`
+
+	// Time interval to check the binary log for new changes/events when the database is idle. Default is 5.
+	EventsPollInterval *float64 `json:"eventsPollInterval,omitempty" tf:"events_poll_interval,omitempty"`
+
+	// Client statement timeout (in seconds) for a MySQL source endpoint.
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// Maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Number of threads to use to load the data into the MySQL-compatible target database.
+	ParallelLoadThreads *float64 `json:"parallelLoadThreads,omitempty" tf:"parallel_load_threads,omitempty"`
+
+	// Time zone for the source MySQL database.
+	ServerTimezone *string `json:"serverTimezone,omitempty" tf:"server_timezone,omitempty"`
+
+	// ARN of the IAM role to authenticate when connecting to the endpoint.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Where to migrate source tables on the target. Valid values are specific-database and multiple-databases.
+	TargetDBType *string `json:"targetDbType,omitempty" tf:"target_db_type,omitempty"`
+}
+
+type MySQLSettingsObservation struct {
+
+	// Script to run immediately after AWS DMS connects to the endpoint.
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// Authentication method to use. Valid values: password, iam.
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Whether to clean and recreate table metadata information on the replication instance when a mismatch occurs.
+	CleanSourceMetadataOnMismatch *bool `json:"cleanSourceMetadataOnMismatch,omitempty" tf:"clean_source_metadata_on_mismatch,omitempty"`
+
+	// Time interval to check the binary log for new changes/events when the database is idle. Default is 5.
+	EventsPollInterval *float64 `json:"eventsPollInterval,omitempty" tf:"events_poll_interval,omitempty"`
+
+	// Client statement timeout (in seconds) for a MySQL source endpoint.
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// Maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Number of threads to use to load the data into the MySQL-compatible target database.
+	ParallelLoadThreads *float64 `json:"parallelLoadThreads,omitempty" tf:"parallel_load_threads,omitempty"`
+
+	// Time zone for the source MySQL database.
+	ServerTimezone *string `json:"serverTimezone,omitempty" tf:"server_timezone,omitempty"`
+
+	// ARN of the IAM role to authenticate when connecting to the endpoint.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Where to migrate source tables on the target. Valid values are specific-database and multiple-databases.
+	TargetDBType *string `json:"targetDbType,omitempty" tf:"target_db_type,omitempty"`
+}
+
+type MySQLSettingsParameters struct {
+
+	// Script to run immediately after AWS DMS connects to the endpoint.
+	// +kubebuilder:validation:Optional
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// Authentication method to use. Valid values: password, iam.
+	// +kubebuilder:validation:Optional
+	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Whether to clean and recreate table metadata information on the replication instance when a mismatch occurs.
+	// +kubebuilder:validation:Optional
+	CleanSourceMetadataOnMismatch *bool `json:"cleanSourceMetadataOnMismatch,omitempty" tf:"clean_source_metadata_on_mismatch,omitempty"`
+
+	// Time interval to check the binary log for new changes/events when the database is idle. Default is 5.
+	// +kubebuilder:validation:Optional
+	EventsPollInterval *float64 `json:"eventsPollInterval,omitempty" tf:"events_poll_interval,omitempty"`
+
+	// Client statement timeout (in seconds) for a MySQL source endpoint.
+	// +kubebuilder:validation:Optional
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// Maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.
+	// +kubebuilder:validation:Optional
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Number of threads to use to load the data into the MySQL-compatible target database.
+	// +kubebuilder:validation:Optional
+	ParallelLoadThreads *float64 `json:"parallelLoadThreads,omitempty" tf:"parallel_load_threads,omitempty"`
+
+	// Time zone for the source MySQL database.
+	// +kubebuilder:validation:Optional
+	ServerTimezone *string `json:"serverTimezone,omitempty" tf:"server_timezone,omitempty"`
+
+	// ARN of the IAM role to authenticate when connecting to the endpoint.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Where to migrate source tables on the target. Valid values are specific-database and multiple-databases.
+	// +kubebuilder:validation:Optional
+	TargetDBType *string `json:"targetDbType,omitempty" tf:"target_db_type,omitempty"`
 }
 
 type OracleSettingsInitParameters struct {
 
+	// Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.
+	AccessAlternateDirectly *bool `json:"accessAlternateDirectly,omitempty" tf:"access_alternate_directly,omitempty"`
+
+	// Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.
+	AddSupplementalLogging *bool `json:"addSupplementalLogging,omitempty" tf:"add_supplemental_logging,omitempty"`
+
+	// Set this attribute with archived_log_dest_id in a primary/standby setup. This attribute is useful in the case of a switchover.
+	AdditionalArchivedLogDestID *float64 `json:"additionalArchivedLogDestId,omitempty" tf:"additional_archived_log_dest_id,omitempty"`
+
+	// Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.
+	AllowSelectedNestedTables *bool `json:"allowSelectedNestedTables,omitempty" tf:"allow_selected_nested_tables,omitempty"`
+
+	// Specifies the ID of the destination for the archived redo logs. This value should be the same as a number in the dest_id column of the v$archived_log view.
+	ArchivedLogDestID *float64 `json:"archivedLogDestId,omitempty" tf:"archived_log_dest_id,omitempty"`
+
+	// When this field is set to true, AWS DMS only accesses the archived redo logs.
+	ArchivedLogsOnly *bool `json:"archivedLogsOnly,omitempty" tf:"archived_logs_only,omitempty"`
+
+	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
+	AsmPasswordSecretRef *v1.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
+
+	// For an Oracle source endpoint, your ASM server address.
+	AsmServer *string `json:"asmServer,omitempty" tf:"asm_server,omitempty"`
+
+	// For an Oracle source endpoint, your ASM user name.
+	AsmUser *string `json:"asmUser,omitempty" tf:"asm_user,omitempty"`
+
 	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
 	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Specifies whether the length of a character column is in bytes or in characters. Valid values are default, char, and byte.
+	CharLengthSemantics *string `json:"charLengthSemantics,omitempty" tf:"char_length_semantics,omitempty"`
+
+	// When true, converts timestamps with the timezone datatype to their UTC value.
+	ConvertTimestampWithZoneToUtc *bool `json:"convertTimestampWithZoneToUtc,omitempty" tf:"convert_timestamp_with_zone_to_utc,omitempty"`
+
+	// When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.
+	DirectPathNoLog *bool `json:"directPathNoLog,omitempty" tf:"direct_path_no_log,omitempty"`
+
+	// When set to true, this attribute specifies a parallel load when use_direct_path_full_load is set to true.
+	DirectPathParallelLoad *bool `json:"directPathParallelLoad,omitempty" tf:"direct_path_parallel_load,omitempty"`
+
+	// Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.
+	EnableHomogenousTablespace *bool `json:"enableHomogenousTablespace,omitempty" tf:"enable_homogenous_tablespace,omitempty"`
+
+	// Specifies the IDs of one more destinations for one or more archived redo logs. These IDs are the values of the dest_id column in the v$archived_log view.
+	ExtraArchivedLogDestIds []*float64 `json:"extraArchivedLogDestIds,omitempty" tf:"extra_archived_log_dest_ids,omitempty"`
+
+	// When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified lob_max_size.
+	FailTaskOnLobTruncation *bool `json:"failTaskOnLobTruncation,omitempty" tf:"fail_task_on_lob_truncation,omitempty"`
+
+	// Specifies the number scale.
+	NumberDatatypeScale *float64 `json:"numberDatatypeScale,omitempty" tf:"number_datatype_scale,omitempty"`
+
+	// The timeframe in minutes to check for open transactions for a CDC-only task. You can specify an integer value between 0 (the default) and 240 (the maximum).
+	OpenTransactionWindow *float64 `json:"openTransactionWindow,omitempty" tf:"open_transaction_window,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the default Oracle root used to access the redo logs.
+	OraclePathPrefix *string `json:"oraclePathPrefix,omitempty" tf:"oracle_path_prefix,omitempty"`
+
+	// Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 2 (the default) and 8 (the maximum).
+	ParallelAsmReadThreads *float64 `json:"parallelAsmReadThreads,omitempty" tf:"parallel_asm_read_threads,omitempty"`
+
+	// Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 1000 (the default) and 200,000 (the maximum).
+	ReadAheadBlocks *float64 `json:"readAheadBlocks,omitempty" tf:"read_ahead_blocks,omitempty"`
+
+	// When set to true, this attribute supports tablespace replication.
+	ReadTableSpaceName *bool `json:"readTableSpaceName,omitempty" tf:"read_table_space_name,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This setting tells DMS instance to replace the default Oracle root with the specified use_path_prefix setting to access the redo logs.
+	ReplacePathPrefix *bool `json:"replacePathPrefix,omitempty" tf:"replace_path_prefix,omitempty"`
+
+	// Specifies the number of seconds that the system waits before resending a query.
+	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the secrets_manager_oracle_asm_secret_id.
+	SecretsManagerOracleAsmAccessRoleArn *string `json:"secretsManagerOracleAsmAccessRoleArn,omitempty" tf:"secrets_manager_oracle_asm_access_role_arn,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN, partial ARN, or friendly name of the secret that contains the Oracle ASM connection details for the Oracle endpoint.
+	SecretsManagerOracleAsmSecretID *string `json:"secretsManagerOracleAsmSecretId,omitempty" tf:"secrets_manager_oracle_asm_secret_id,omitempty"`
+
+	// For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.
+	SecurityDBEncryptionName *string `json:"securityDbEncryptionName,omitempty" tf:"security_db_encryption_name,omitempty"`
+
+	// For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
+	SecurityDBEncryptionSecretRef *v1.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
+
+	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible.
+	SpatialDataOptionToGeoJSONFunctionName *string `json:"spatialDataOptionToGeoJsonFunctionName,omitempty" tf:"spatial_data_option_to_geo_json_function_name,omitempty"`
+
+	// Use this attribute to specify a time in minutes for the delay in standby sync. If the source is an Oracle Active Data Guard standby database, use this attribute to specify the time lag between primary and standby databases.
+	StandbyDelayTime *float64 `json:"standbyDelayTime,omitempty" tf:"standby_delay_time,omitempty"`
+
+	// Use this attribute to trim data on CHAR and NCHAR data types during migration. The default value is true.
+	TrimSpaceInChar *bool `json:"trimSpaceInChar,omitempty" tf:"trim_space_in_char,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This tells the DMS instance to use any specified prefix replacement to access all online redo logs.
+	UseAlternateFolderForOnline *bool `json:"useAlternateFolderForOnline,omitempty" tf:"use_alternate_folder_for_online,omitempty"`
+
+	// Set this attribute to true to capture change data using the Binary Reader utility. Set use_logminer_reader to false to set this attribute to true.
+	UseBfile *bool `json:"useBfile,omitempty" tf:"use_bfile,omitempty"`
+
+	// Set this attribute to true to have AWS DMS use a direct path full load. Specify this value to use the direct path protocol in the Oracle Call Interface (OCI).
+	UseDirectPathFullLoad *bool `json:"useDirectPathFullLoad,omitempty" tf:"use_direct_path_full_load,omitempty"`
+
+	// Set this attribute to true to capture change data using the Oracle LogMiner utility (the default). Set this attribute to false if you want to access the redo logs as a binary file.
+	UseLogminerReader *bool `json:"useLogminerReader,omitempty" tf:"use_logminer_reader,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the path prefix used to replace the default Oracle root to access the redo logs.
+	UsePathPrefix *string `json:"usePathPrefix,omitempty" tf:"use_path_prefix,omitempty"`
 }
 
 type OracleSettingsObservation struct {
 
+	// Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.
+	AccessAlternateDirectly *bool `json:"accessAlternateDirectly,omitempty" tf:"access_alternate_directly,omitempty"`
+
+	// Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.
+	AddSupplementalLogging *bool `json:"addSupplementalLogging,omitempty" tf:"add_supplemental_logging,omitempty"`
+
+	// Set this attribute with archived_log_dest_id in a primary/standby setup. This attribute is useful in the case of a switchover.
+	AdditionalArchivedLogDestID *float64 `json:"additionalArchivedLogDestId,omitempty" tf:"additional_archived_log_dest_id,omitempty"`
+
+	// Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.
+	AllowSelectedNestedTables *bool `json:"allowSelectedNestedTables,omitempty" tf:"allow_selected_nested_tables,omitempty"`
+
+	// Specifies the ID of the destination for the archived redo logs. This value should be the same as a number in the dest_id column of the v$archived_log view.
+	ArchivedLogDestID *float64 `json:"archivedLogDestId,omitempty" tf:"archived_log_dest_id,omitempty"`
+
+	// When this field is set to true, AWS DMS only accesses the archived redo logs.
+	ArchivedLogsOnly *bool `json:"archivedLogsOnly,omitempty" tf:"archived_logs_only,omitempty"`
+
+	// For an Oracle source endpoint, your ASM server address.
+	AsmServer *string `json:"asmServer,omitempty" tf:"asm_server,omitempty"`
+
+	// For an Oracle source endpoint, your ASM user name.
+	AsmUser *string `json:"asmUser,omitempty" tf:"asm_user,omitempty"`
+
 	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
 	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Specifies whether the length of a character column is in bytes or in characters. Valid values are default, char, and byte.
+	CharLengthSemantics *string `json:"charLengthSemantics,omitempty" tf:"char_length_semantics,omitempty"`
+
+	// When true, converts timestamps with the timezone datatype to their UTC value.
+	ConvertTimestampWithZoneToUtc *bool `json:"convertTimestampWithZoneToUtc,omitempty" tf:"convert_timestamp_with_zone_to_utc,omitempty"`
+
+	// When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.
+	DirectPathNoLog *bool `json:"directPathNoLog,omitempty" tf:"direct_path_no_log,omitempty"`
+
+	// When set to true, this attribute specifies a parallel load when use_direct_path_full_load is set to true.
+	DirectPathParallelLoad *bool `json:"directPathParallelLoad,omitempty" tf:"direct_path_parallel_load,omitempty"`
+
+	// Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.
+	EnableHomogenousTablespace *bool `json:"enableHomogenousTablespace,omitempty" tf:"enable_homogenous_tablespace,omitempty"`
+
+	// Specifies the IDs of one more destinations for one or more archived redo logs. These IDs are the values of the dest_id column in the v$archived_log view.
+	ExtraArchivedLogDestIds []*float64 `json:"extraArchivedLogDestIds,omitempty" tf:"extra_archived_log_dest_ids,omitempty"`
+
+	// When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified lob_max_size.
+	FailTaskOnLobTruncation *bool `json:"failTaskOnLobTruncation,omitempty" tf:"fail_task_on_lob_truncation,omitempty"`
+
+	// Specifies the number scale.
+	NumberDatatypeScale *float64 `json:"numberDatatypeScale,omitempty" tf:"number_datatype_scale,omitempty"`
+
+	// The timeframe in minutes to check for open transactions for a CDC-only task. You can specify an integer value between 0 (the default) and 240 (the maximum).
+	OpenTransactionWindow *float64 `json:"openTransactionWindow,omitempty" tf:"open_transaction_window,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the default Oracle root used to access the redo logs.
+	OraclePathPrefix *string `json:"oraclePathPrefix,omitempty" tf:"oracle_path_prefix,omitempty"`
+
+	// Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 2 (the default) and 8 (the maximum).
+	ParallelAsmReadThreads *float64 `json:"parallelAsmReadThreads,omitempty" tf:"parallel_asm_read_threads,omitempty"`
+
+	// Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 1000 (the default) and 200,000 (the maximum).
+	ReadAheadBlocks *float64 `json:"readAheadBlocks,omitempty" tf:"read_ahead_blocks,omitempty"`
+
+	// When set to true, this attribute supports tablespace replication.
+	ReadTableSpaceName *bool `json:"readTableSpaceName,omitempty" tf:"read_table_space_name,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This setting tells DMS instance to replace the default Oracle root with the specified use_path_prefix setting to access the redo logs.
+	ReplacePathPrefix *bool `json:"replacePathPrefix,omitempty" tf:"replace_path_prefix,omitempty"`
+
+	// Specifies the number of seconds that the system waits before resending a query.
+	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the secrets_manager_oracle_asm_secret_id.
+	SecretsManagerOracleAsmAccessRoleArn *string `json:"secretsManagerOracleAsmAccessRoleArn,omitempty" tf:"secrets_manager_oracle_asm_access_role_arn,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN, partial ARN, or friendly name of the secret that contains the Oracle ASM connection details for the Oracle endpoint.
+	SecretsManagerOracleAsmSecretID *string `json:"secretsManagerOracleAsmSecretId,omitempty" tf:"secrets_manager_oracle_asm_secret_id,omitempty"`
+
+	// For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.
+	SecurityDBEncryptionName *string `json:"securityDbEncryptionName,omitempty" tf:"security_db_encryption_name,omitempty"`
+
+	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible.
+	SpatialDataOptionToGeoJSONFunctionName *string `json:"spatialDataOptionToGeoJsonFunctionName,omitempty" tf:"spatial_data_option_to_geo_json_function_name,omitempty"`
+
+	// Use this attribute to specify a time in minutes for the delay in standby sync. If the source is an Oracle Active Data Guard standby database, use this attribute to specify the time lag between primary and standby databases.
+	StandbyDelayTime *float64 `json:"standbyDelayTime,omitempty" tf:"standby_delay_time,omitempty"`
+
+	// Use this attribute to trim data on CHAR and NCHAR data types during migration. The default value is true.
+	TrimSpaceInChar *bool `json:"trimSpaceInChar,omitempty" tf:"trim_space_in_char,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This tells the DMS instance to use any specified prefix replacement to access all online redo logs.
+	UseAlternateFolderForOnline *bool `json:"useAlternateFolderForOnline,omitempty" tf:"use_alternate_folder_for_online,omitempty"`
+
+	// Set this attribute to true to capture change data using the Binary Reader utility. Set use_logminer_reader to false to set this attribute to true.
+	UseBfile *bool `json:"useBfile,omitempty" tf:"use_bfile,omitempty"`
+
+	// Set this attribute to true to have AWS DMS use a direct path full load. Specify this value to use the direct path protocol in the Oracle Call Interface (OCI).
+	UseDirectPathFullLoad *bool `json:"useDirectPathFullLoad,omitempty" tf:"use_direct_path_full_load,omitempty"`
+
+	// Set this attribute to true to capture change data using the Oracle LogMiner utility (the default). Set this attribute to false if you want to access the redo logs as a binary file.
+	UseLogminerReader *bool `json:"useLogminerReader,omitempty" tf:"use_logminer_reader,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the path prefix used to replace the default Oracle root to access the redo logs.
+	UsePathPrefix *string `json:"usePathPrefix,omitempty" tf:"use_path_prefix,omitempty"`
 }
 
 type OracleSettingsParameters struct {
 
+	// Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.
+	// +kubebuilder:validation:Optional
+	AccessAlternateDirectly *bool `json:"accessAlternateDirectly,omitempty" tf:"access_alternate_directly,omitempty"`
+
+	// Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.
+	// +kubebuilder:validation:Optional
+	AddSupplementalLogging *bool `json:"addSupplementalLogging,omitempty" tf:"add_supplemental_logging,omitempty"`
+
+	// Set this attribute with archived_log_dest_id in a primary/standby setup. This attribute is useful in the case of a switchover.
+	// +kubebuilder:validation:Optional
+	AdditionalArchivedLogDestID *float64 `json:"additionalArchivedLogDestId,omitempty" tf:"additional_archived_log_dest_id,omitempty"`
+
+	// Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.
+	// +kubebuilder:validation:Optional
+	AllowSelectedNestedTables *bool `json:"allowSelectedNestedTables,omitempty" tf:"allow_selected_nested_tables,omitempty"`
+
+	// Specifies the ID of the destination for the archived redo logs. This value should be the same as a number in the dest_id column of the v$archived_log view.
+	// +kubebuilder:validation:Optional
+	ArchivedLogDestID *float64 `json:"archivedLogDestId,omitempty" tf:"archived_log_dest_id,omitempty"`
+
+	// When this field is set to true, AWS DMS only accesses the archived redo logs.
+	// +kubebuilder:validation:Optional
+	ArchivedLogsOnly *bool `json:"archivedLogsOnly,omitempty" tf:"archived_logs_only,omitempty"`
+
+	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
+	// +kubebuilder:validation:Optional
+	AsmPasswordSecretRef *v1.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
+
+	// For an Oracle source endpoint, your ASM server address.
+	// +kubebuilder:validation:Optional
+	AsmServer *string `json:"asmServer,omitempty" tf:"asm_server,omitempty"`
+
+	// For an Oracle source endpoint, your ASM user name.
+	// +kubebuilder:validation:Optional
+	AsmUser *string `json:"asmUser,omitempty" tf:"asm_user,omitempty"`
+
 	// Authentication mechanism to access the Oracle source endpoint. Default is password. Valid values are password and kerberos.
 	// +kubebuilder:validation:Optional
 	AuthenticationMethod *string `json:"authenticationMethod,omitempty" tf:"authentication_method,omitempty"`
+
+	// Specifies whether the length of a character column is in bytes or in characters. Valid values are default, char, and byte.
+	// +kubebuilder:validation:Optional
+	CharLengthSemantics *string `json:"charLengthSemantics,omitempty" tf:"char_length_semantics,omitempty"`
+
+	// When true, converts timestamps with the timezone datatype to their UTC value.
+	// +kubebuilder:validation:Optional
+	ConvertTimestampWithZoneToUtc *bool `json:"convertTimestampWithZoneToUtc,omitempty" tf:"convert_timestamp_with_zone_to_utc,omitempty"`
+
+	// When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.
+	// +kubebuilder:validation:Optional
+	DirectPathNoLog *bool `json:"directPathNoLog,omitempty" tf:"direct_path_no_log,omitempty"`
+
+	// When set to true, this attribute specifies a parallel load when use_direct_path_full_load is set to true.
+	// +kubebuilder:validation:Optional
+	DirectPathParallelLoad *bool `json:"directPathParallelLoad,omitempty" tf:"direct_path_parallel_load,omitempty"`
+
+	// Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.
+	// +kubebuilder:validation:Optional
+	EnableHomogenousTablespace *bool `json:"enableHomogenousTablespace,omitempty" tf:"enable_homogenous_tablespace,omitempty"`
+
+	// Specifies the IDs of one more destinations for one or more archived redo logs. These IDs are the values of the dest_id column in the v$archived_log view.
+	// +kubebuilder:validation:Optional
+	ExtraArchivedLogDestIds []*float64 `json:"extraArchivedLogDestIds,omitempty" tf:"extra_archived_log_dest_ids,omitempty"`
+
+	// When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified lob_max_size.
+	// +kubebuilder:validation:Optional
+	FailTaskOnLobTruncation *bool `json:"failTaskOnLobTruncation,omitempty" tf:"fail_task_on_lob_truncation,omitempty"`
+
+	// Specifies the number scale.
+	// +kubebuilder:validation:Optional
+	NumberDatatypeScale *float64 `json:"numberDatatypeScale,omitempty" tf:"number_datatype_scale,omitempty"`
+
+	// The timeframe in minutes to check for open transactions for a CDC-only task. You can specify an integer value between 0 (the default) and 240 (the maximum).
+	// +kubebuilder:validation:Optional
+	OpenTransactionWindow *float64 `json:"openTransactionWindow,omitempty" tf:"open_transaction_window,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the default Oracle root used to access the redo logs.
+	// +kubebuilder:validation:Optional
+	OraclePathPrefix *string `json:"oraclePathPrefix,omitempty" tf:"oracle_path_prefix,omitempty"`
+
+	// Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 2 (the default) and 8 (the maximum).
+	// +kubebuilder:validation:Optional
+	ParallelAsmReadThreads *float64 `json:"parallelAsmReadThreads,omitempty" tf:"parallel_asm_read_threads,omitempty"`
+
+	// Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 1000 (the default) and 200,000 (the maximum).
+	// +kubebuilder:validation:Optional
+	ReadAheadBlocks *float64 `json:"readAheadBlocks,omitempty" tf:"read_ahead_blocks,omitempty"`
+
+	// When set to true, this attribute supports tablespace replication.
+	// +kubebuilder:validation:Optional
+	ReadTableSpaceName *bool `json:"readTableSpaceName,omitempty" tf:"read_table_space_name,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This setting tells DMS instance to replace the default Oracle root with the specified use_path_prefix setting to access the redo logs.
+	// +kubebuilder:validation:Optional
+	ReplacePathPrefix *bool `json:"replacePathPrefix,omitempty" tf:"replace_path_prefix,omitempty"`
+
+	// Specifies the number of seconds that the system waits before resending a query.
+	// +kubebuilder:validation:Optional
+	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the secrets_manager_oracle_asm_secret_id.
+	// +kubebuilder:validation:Optional
+	SecretsManagerOracleAsmAccessRoleArn *string `json:"secretsManagerOracleAsmAccessRoleArn,omitempty" tf:"secrets_manager_oracle_asm_access_role_arn,omitempty"`
+
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN, partial ARN, or friendly name of the secret that contains the Oracle ASM connection details for the Oracle endpoint.
+	// +kubebuilder:validation:Optional
+	SecretsManagerOracleAsmSecretID *string `json:"secretsManagerOracleAsmSecretId,omitempty" tf:"secrets_manager_oracle_asm_secret_id,omitempty"`
+
+	// For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.
+	// +kubebuilder:validation:Optional
+	SecurityDBEncryptionName *string `json:"securityDbEncryptionName,omitempty" tf:"security_db_encryption_name,omitempty"`
+
+	// For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
+	// +kubebuilder:validation:Optional
+	SecurityDBEncryptionSecretRef *v1.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
+
+	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible.
+	// +kubebuilder:validation:Optional
+	SpatialDataOptionToGeoJSONFunctionName *string `json:"spatialDataOptionToGeoJsonFunctionName,omitempty" tf:"spatial_data_option_to_geo_json_function_name,omitempty"`
+
+	// Use this attribute to specify a time in minutes for the delay in standby sync. If the source is an Oracle Active Data Guard standby database, use this attribute to specify the time lag between primary and standby databases.
+	// +kubebuilder:validation:Optional
+	StandbyDelayTime *float64 `json:"standbyDelayTime,omitempty" tf:"standby_delay_time,omitempty"`
+
+	// Use this attribute to trim data on CHAR and NCHAR data types during migration. The default value is true.
+	// +kubebuilder:validation:Optional
+	TrimSpaceInChar *bool `json:"trimSpaceInChar,omitempty" tf:"trim_space_in_char,omitempty"`
+
+	// Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This tells the DMS instance to use any specified prefix replacement to access all online redo logs.
+	// +kubebuilder:validation:Optional
+	UseAlternateFolderForOnline *bool `json:"useAlternateFolderForOnline,omitempty" tf:"use_alternate_folder_for_online,omitempty"`
+
+	// Set this attribute to true to capture change data using the Binary Reader utility. Set use_logminer_reader to false to set this attribute to true.
+	// +kubebuilder:validation:Optional
+	UseBfile *bool `json:"useBfile,omitempty" tf:"use_bfile,omitempty"`
+
+	// Set this attribute to true to have AWS DMS use a direct path full load. Specify this value to use the direct path protocol in the Oracle Call Interface (OCI).
+	// +kubebuilder:validation:Optional
+	UseDirectPathFullLoad *bool `json:"useDirectPathFullLoad,omitempty" tf:"use_direct_path_full_load,omitempty"`
+
+	// Set this attribute to true to capture change data using the Oracle LogMiner utility (the default). Set this attribute to false if you want to access the redo logs as a binary file.
+	// +kubebuilder:validation:Optional
+	UseLogminerReader *bool `json:"useLogminerReader,omitempty" tf:"use_logminer_reader,omitempty"`
+
+	// Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the path prefix used to replace the default Oracle root to access the redo logs.
+	// +kubebuilder:validation:Optional
+	UsePathPrefix *string `json:"usePathPrefix,omitempty" tf:"use_path_prefix,omitempty"`
 }
 
 type PostgresSettingsInitParameters struct {
@@ -833,7 +1316,7 @@ type PostgresSettingsInitParameters struct {
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
 	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
-	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test-decoding.
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
 
 	// Specifies the IAM role to use to authenticate the connection.
@@ -890,7 +1373,7 @@ type PostgresSettingsObservation struct {
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
 	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
-	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test-decoding.
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
 
 	// Specifies the IAM role to use to authenticate the connection.
@@ -962,7 +1445,7 @@ type PostgresSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
-	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test-decoding.
 	// +kubebuilder:validation:Optional
 	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
 

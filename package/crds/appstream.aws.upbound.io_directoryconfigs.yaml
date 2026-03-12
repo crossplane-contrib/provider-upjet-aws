@@ -73,6 +73,23 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The ARN of the AWS Certificate Manager Private
+                            CA resource.
+                          type: string
+                        status:
+                          description: The status of the certificate-based authentication
+                            properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                          type: string
+                      type: object
+                    type: array
                   directoryName:
                     description: Fully qualified name of the directory.
                     type: string
@@ -137,6 +154,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The ARN of the AWS Certificate Manager Private
+                            CA resource.
+                          type: string
+                        status:
+                          description: The status of the certificate-based authentication
+                            properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                          type: string
+                      type: object
+                    type: array
                   directoryName:
                     description: Fully qualified name of the directory.
                     type: string
@@ -288,6 +322,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    items:
+                      properties:
+                        certificateAuthorityArn:
+                          description: The ARN of the AWS Certificate Manager Private
+                            CA resource.
+                          type: string
+                        status:
+                          description: The status of the certificate-based authentication
+                            properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                          type: string
+                      type: object
+                    type: array
                   createdTime:
                     description: Date and time, in UTC and extended RFC 3339 format,
                       when the directory config was created.
@@ -444,6 +495,21 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    properties:
+                      certificateAuthorityArn:
+                        description: The ARN of the AWS Certificate Manager Private
+                          CA resource.
+                        type: string
+                      status:
+                        description: The status of the certificate-based authentication
+                          properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                        type: string
+                    type: object
                   directoryName:
                     description: Fully qualified name of the directory.
                     type: string
@@ -506,6 +572,21 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    properties:
+                      certificateAuthorityArn:
+                        description: The ARN of the AWS Certificate Manager Private
+                          CA resource.
+                        type: string
+                      status:
+                        description: The status of the certificate-based authentication
+                          properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                        type: string
+                    type: object
                   directoryName:
                     description: Fully qualified name of the directory.
                     type: string
@@ -655,6 +736,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  certificateBasedAuthProperties:
+                    description: Configuration block for the certificate-based authentication
+                      properties used to authenticate SAML 2.0 Identity Provider (IdP)
+                      user identities to Active Directory domain-joined streaming
+                      instances. See certificate_based_auth_properties below.
+                    properties:
+                      certificateAuthorityArn:
+                        description: The ARN of the AWS Certificate Manager Private
+                          CA resource.
+                        type: string
+                      status:
+                        description: The status of the certificate-based authentication
+                          properties. Valid values - ["DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"].
+                        type: string
+                    type: object
                   createdTime:
                     description: Date and time, in UTC and extended RFC 3339 format,
                       when the directory config was created.

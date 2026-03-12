@@ -1,0 +1,129 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: GatewayTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    credentialProviderConfiguration:
+      gatewayIamRole: {}
+    description: Lambda function target for processing requests
+    gatewayIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-target
+    region: us-west-1
+    targetConfiguration:
+      mcp:
+        lambda:
+          lambdaArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          toolSchema:
+            inlinePayload:
+            - description: Process incoming requests
+              inputSchema:
+                description: Request processing schema
+                property:
+                - description: Message to process
+                  name: message
+                  required: true
+                  type: string
+                - name: options
+                  property:
+                  - name: priority
+                    type: string
+                  - items:
+                    - type: string
+                    name: tags
+                    type: array
+                  type: object
+                type: object
+              name: process_request
+              outputSchema:
+                property:
+                - name: status
+                  required: true
+                  type: string
+                - name: result
+                  type: string
+                type: object
+
+---
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authorizerConfiguration:
+      customJwtAuthorizer:
+        discoveryUrl: https://accounts.google.com/.well-known/openid-configuration
+    name: example-gateway
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gateway_role
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: gateway_role
+  name: gateway-role
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.gateway_assume.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: lambda_role
+  name: lambda-role
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.lambda_assume.json}
+    region: us-west-1
+
+---
+
+apiVersion: lambda.aws.upbound.io/v1beta2
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gatewaytarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    filename: example.zip
+    handler: index.handler
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda_role
+    runtime: nodejs20.x

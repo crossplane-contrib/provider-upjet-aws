@@ -296,8 +296,12 @@ spec:
                       (helpful for identifying single health_check set amongst others)
                     type: string
                   regions:
-                    description: A list of AWS regions that you want Amazon Route
-                      53 health checkers to check the specified endpoint from.
+                    description: List of AWS Regions from which Amazon Route 53 health
+                      checkers check the specified endpoint. Valid values are us-east-1,
+                      us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2,
+                      ap-northeast-1, and sa-east-1. If not specified, all of the
+                      regions listed under Valid values are used by default. Once
+                      this argument is set, removing it has no effect.
                     items:
                       type: string
                     type: array
@@ -592,8 +596,12 @@ spec:
                       (helpful for identifying single health_check set amongst others)
                     type: string
                   regions:
-                    description: A list of AWS regions that you want Amazon Route
-                      53 health checkers to check the specified endpoint from.
+                    description: List of AWS Regions from which Amazon Route 53 health
+                      checkers check the specified endpoint. Valid values are us-east-1,
+                      us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2,
+                      ap-northeast-1, and sa-east-1. If not specified, all of the
+                      regions listed under Valid values are used by default. Once
+                      this argument is set, removing it has no effect.
                     items:
                       type: string
                     type: array
@@ -782,8 +790,12 @@ spec:
                       (helpful for identifying single health_check set amongst others)
                     type: string
                   regions:
-                    description: A list of AWS regions that you want Amazon Route
-                      53 health checkers to check the specified endpoint from.
+                    description: List of AWS Regions from which Amazon Route 53 health
+                      checkers check the specified endpoint. Valid values are us-east-1,
+                      us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2,
+                      ap-northeast-1, and sa-east-1. If not specified, all of the
+                      regions listed under Valid values are used by default. Once
+                      this argument is set, removing it has no effect.
                     items:
                       type: string
                     type: array

@@ -11,6 +11,8 @@ import (
 
 	dnssecconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/dnssecconfig"
 	endpoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/endpoint"
+	querylogconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfig"
+	querylogconfigassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/querylogconfigassociation"
 	rule "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/route53resolver/ruleassociation"
 )
@@ -21,6 +23,8 @@ func Setup_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		dnssecconfig.Setup,
 		endpoint.Setup,
+		querylogconfig.Setup,
+		querylogconfigassociation.Setup,
 		rule.Setup,
 		ruleassociation.Setup,
 	} {
@@ -37,6 +41,8 @@ func SetupGated_route53resolver(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		dnssecconfig.SetupGated,
 		endpoint.SetupGated,
+		querylogconfig.SetupGated,
+		querylogconfigassociation.SetupGated,
 		rule.SetupGated,
 		ruleassociation.SetupGated,
 	} {

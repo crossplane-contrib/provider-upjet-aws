@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CrossChannelBehaviorInitParameters struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	BehaviorType *string `json:"behaviorType,omitempty" tf:"behavior_type,omitempty"`
+}
+
+type CrossChannelBehaviorObservation struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	BehaviorType *string `json:"behaviorType,omitempty" tf:"behavior_type,omitempty"`
+}
+
+type CrossChannelBehaviorParameters struct {
+
+	// Specifies the cross-channel behavior for routing contacts across multiple channels. Valid values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL. ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive contacts only from the channel they are currently handling. ROUTE_ANY_CHANNEL allows agents to receive contacts from any channel regardless of what they are currently handling.
+	// +kubebuilder:validation:Optional
+	BehaviorType *string `json:"behaviorType" tf:"behavior_type,omitempty"`
+}
+
 type MediaConcurrenciesInitParameters struct {
 
 	// Specifies the channels that agents can handle in the Contact Control Panel (CCP). Valid values are VOICE, CHAT, TASK.
@@ -20,6 +39,9 @@ type MediaConcurrenciesInitParameters struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	CrossChannelBehavior *CrossChannelBehaviorInitParameters `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type MediaConcurrenciesObservation struct {
@@ -29,6 +51,9 @@ type MediaConcurrenciesObservation struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	CrossChannelBehavior *CrossChannelBehaviorObservation `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type MediaConcurrenciesParameters struct {
@@ -40,6 +65,10 @@ type MediaConcurrenciesParameters struct {
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
+
+	// Defines the cross-channel routing behavior for each traffic type. Documented below.
+	// +kubebuilder:validation:Optional
+	CrossChannelBehavior *CrossChannelBehaviorParameters `json:"crossChannelBehavior,omitempty" tf:"cross_channel_behavior,omitempty"`
 }
 
 type QueueConfigsInitParameters struct {
@@ -144,7 +173,7 @@ type RoutingProfileInitParameters struct {
 
 type RoutingProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Routing Profile.
+	// Amazon Resource Name (ARN) of the Routing Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the default outbound queue for the Routing Profile.
@@ -153,7 +182,7 @@ type RoutingProfileObservation struct {
 	// Specifies the description of the Routing Profile.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the hosting Amazon Connect Instance and identifier of the Routing Profile separated by a colon (:).
+	// Identifier of the hosting Amazon Connect Instance and identifier of the Routing Profile separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
@@ -172,7 +201,7 @@ type RoutingProfileObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The identifier for the Routing Profile.
+	// Identifier for the Routing Profile.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
 	// Key-value map of resource tags.

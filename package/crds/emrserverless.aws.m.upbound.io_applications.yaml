@@ -159,6 +159,86 @@ spec:
                         description: The maximum allowed resources for an application.
                         type: string
                     type: object
+                  monitoringConfiguration:
+                    description: The configuration setting for monitoring.
+                    properties:
+                      cloudwatchLoggingConfiguration:
+                        description: The Amazon CloudWatch configuration for monitoring
+                          logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logGroupName:
+                            description: The name of the log group in Amazon CloudWatch
+                              Logs where you want to publish your logs.
+                            type: string
+                          logStreamNamePrefix:
+                            description: Prefix for the CloudWatch log stream name.
+                            type: string
+                          logTypes:
+                            description: The types of logs that you want to publish
+                              to CloudWatch. If you don't specify any log types, driver
+                              STDOUT and STDERR logs will be published to CloudWatch
+                              Logs by default. See log_types for more details.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the application.
+                                  type: string
+                                values:
+                                  description: The list of log types to publish. Valid
+                                    values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and
+                                    SYSTEM_LOGS.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
+                            type: array
+                        type: object
+                      managedPersistenceMonitoringConfiguration:
+                        description: The managed log persistence configuration for
+                          monitoring logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                        type: object
+                      prometheusMonitoringConfiguration:
+                        description: The Prometheus configuration for monitoring metrics.
+                        properties:
+                          remoteWriteUrl:
+                            description: The Prometheus remote write URL for sending
+                              metrics. Only supported in EMR 7.1.0 and later versions.
+                            type: string
+                        type: object
+                      s3MonitoringConfiguration:
+                        description: The Amazon S3 configuration for monitoring log
+                          publishing.
+                        properties:
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logUri:
+                            description: The Amazon S3 destination URI for log publishing.
+                            type: string
+                        type: object
+                    type: object
                   name:
                     description: The name of the application.
                     type: string
@@ -187,6 +267,40 @@ spec:
                   releaseLabel:
                     description: The EMR release version associated with the application.
                     type: string
+                  runtimeConfiguration:
+                    description: A configuration specification to be used when provisioning
+                      an application. A configuration consists of a classification,
+                      properties, and optional nested configurations. A classification
+                      refers to an application-specific configuration file. Properties
+                      are the settings you want to change in that file.
+                    items:
+                      properties:
+                        classification:
+                          description: The classification within a configuration.
+                          type: string
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: A set of properties specified within a configuration
+                            classification.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
+                  schedulerConfiguration:
+                    description: Scheduler configuration for batch and streaming jobs
+                      running on this application. Supported with release labels emr-7.0.0
+                      and above. See scheduler_configuration Arguments below.
+                    properties:
+                      maxConcurrentRuns:
+                        description: Maximum concurrent job runs on this application.
+                          Valid range is 1 to 1000. Defaults to 15.
+                        type: number
+                      queueTimeoutMinutes:
+                        description: Maximum duration in minutes for the job in QUEUED
+                          state. Valid range is from 15 to 720. Defaults to 360.
+                        type: number
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -313,6 +427,86 @@ spec:
                         description: The maximum allowed resources for an application.
                         type: string
                     type: object
+                  monitoringConfiguration:
+                    description: The configuration setting for monitoring.
+                    properties:
+                      cloudwatchLoggingConfiguration:
+                        description: The Amazon CloudWatch configuration for monitoring
+                          logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logGroupName:
+                            description: The name of the log group in Amazon CloudWatch
+                              Logs where you want to publish your logs.
+                            type: string
+                          logStreamNamePrefix:
+                            description: Prefix for the CloudWatch log stream name.
+                            type: string
+                          logTypes:
+                            description: The types of logs that you want to publish
+                              to CloudWatch. If you don't specify any log types, driver
+                              STDOUT and STDERR logs will be published to CloudWatch
+                              Logs by default. See log_types for more details.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the application.
+                                  type: string
+                                values:
+                                  description: The list of log types to publish. Valid
+                                    values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and
+                                    SYSTEM_LOGS.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
+                            type: array
+                        type: object
+                      managedPersistenceMonitoringConfiguration:
+                        description: The managed log persistence configuration for
+                          monitoring logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                        type: object
+                      prometheusMonitoringConfiguration:
+                        description: The Prometheus configuration for monitoring metrics.
+                        properties:
+                          remoteWriteUrl:
+                            description: The Prometheus remote write URL for sending
+                              metrics. Only supported in EMR 7.1.0 and later versions.
+                            type: string
+                        type: object
+                      s3MonitoringConfiguration:
+                        description: The Amazon S3 configuration for monitoring log
+                          publishing.
+                        properties:
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logUri:
+                            description: The Amazon S3 destination URI for log publishing.
+                            type: string
+                        type: object
+                    type: object
                   name:
                     description: The name of the application.
                     type: string
@@ -336,6 +530,40 @@ spec:
                   releaseLabel:
                     description: The EMR release version associated with the application.
                     type: string
+                  runtimeConfiguration:
+                    description: A configuration specification to be used when provisioning
+                      an application. A configuration consists of a classification,
+                      properties, and optional nested configurations. A classification
+                      refers to an application-specific configuration file. Properties
+                      are the settings you want to change in that file.
+                    items:
+                      properties:
+                        classification:
+                          description: The classification within a configuration.
+                          type: string
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: A set of properties specified within a configuration
+                            classification.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
+                  schedulerConfiguration:
+                    description: Scheduler configuration for batch and streaming jobs
+                      running on this application. Supported with release labels emr-7.0.0
+                      and above. See scheduler_configuration Arguments below.
+                    properties:
+                      maxConcurrentRuns:
+                        description: Maximum concurrent job runs on this application.
+                          Valid range is 1 to 1000. Defaults to 15.
+                        type: number
+                      queueTimeoutMinutes:
+                        description: Maximum duration in minutes for the job in QUEUED
+                          state. Valid range is from 15 to 720. Defaults to 360.
+                        type: number
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -529,6 +757,86 @@ spec:
                         description: The maximum allowed resources for an application.
                         type: string
                     type: object
+                  monitoringConfiguration:
+                    description: The configuration setting for monitoring.
+                    properties:
+                      cloudwatchLoggingConfiguration:
+                        description: The Amazon CloudWatch configuration for monitoring
+                          logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logGroupName:
+                            description: The name of the log group in Amazon CloudWatch
+                              Logs where you want to publish your logs.
+                            type: string
+                          logStreamNamePrefix:
+                            description: Prefix for the CloudWatch log stream name.
+                            type: string
+                          logTypes:
+                            description: The types of logs that you want to publish
+                              to CloudWatch. If you don't specify any log types, driver
+                              STDOUT and STDERR logs will be published to CloudWatch
+                              Logs by default. See log_types for more details.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the application.
+                                  type: string
+                                values:
+                                  description: The list of log types to publish. Valid
+                                    values are STDOUT, STDERR, HIVE_LOG, TEZ_AM, and
+                                    SYSTEM_LOGS.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
+                            type: array
+                        type: object
+                      managedPersistenceMonitoringConfiguration:
+                        description: The managed log persistence configuration for
+                          monitoring logs.
+                        properties:
+                          enabled:
+                            description: Enables the application to automatically
+                              start on job submission. Defaults to true.
+                            type: boolean
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                        type: object
+                      prometheusMonitoringConfiguration:
+                        description: The Prometheus configuration for monitoring metrics.
+                        properties:
+                          remoteWriteUrl:
+                            description: The Prometheus remote write URL for sending
+                              metrics. Only supported in EMR 7.1.0 and later versions.
+                            type: string
+                        type: object
+                      s3MonitoringConfiguration:
+                        description: The Amazon S3 configuration for monitoring log
+                          publishing.
+                        properties:
+                          encryptionKeyArn:
+                            description: The AWS Key Management Service (KMS) key
+                              ARN to encrypt the logs that you store in CloudWatch
+                              Logs.
+                            type: string
+                          logUri:
+                            description: The Amazon S3 destination URI for log publishing.
+                            type: string
+                        type: object
+                    type: object
                   name:
                     description: The name of the application.
                     type: string
@@ -557,6 +865,40 @@ spec:
                   releaseLabel:
                     description: The EMR release version associated with the application.
                     type: string
+                  runtimeConfiguration:
+                    description: A configuration specification to be used when provisioning
+                      an application. A configuration consists of a classification,
+                      properties, and optional nested configurations. A classification
+                      refers to an application-specific configuration file. Properties
+                      are the settings you want to change in that file.
+                    items:
+                      properties:
+                        classification:
+                          description: The classification within a configuration.
+                          type: string
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: A set of properties specified within a configuration
+                            classification.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
+                  schedulerConfiguration:
+                    description: Scheduler configuration for batch and streaming jobs
+                      running on this application. Supported with release labels emr-7.0.0
+                      and above. See scheduler_configuration Arguments below.
+                    properties:
+                      maxConcurrentRuns:
+                        description: Maximum concurrent job runs on this application.
+                          Valid range is 1 to 1000. Defaults to 15.
+                        type: number
+                      queueTimeoutMinutes:
+                        description: Maximum duration in minutes for the job in QUEUED
+                          state. Valid range is from 15 to 720. Defaults to 360.
+                        type: number
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

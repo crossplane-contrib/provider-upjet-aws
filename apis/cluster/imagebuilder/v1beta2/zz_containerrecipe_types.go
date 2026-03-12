@@ -192,6 +192,7 @@ type ContainerRecipeObservation struct {
 	// A flag that indicates if the target container is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// Amazon Resource Name (ARN) of the container recipe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Configuration block used to configure an instance for building and testing container images. Detailed below.

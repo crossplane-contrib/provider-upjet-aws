@@ -209,6 +209,26 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HTTPMethodRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationTarget),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.IntegrationTargetRef,
+			Selector:     mg.Spec.ForProvider.IntegrationTargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationTarget")
+	}
+	mg.Spec.ForProvider.IntegrationTarget = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationTargetRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -308,6 +328,26 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IntegrationTarget),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.IntegrationTargetRef,
+			Selector:     mg.Spec.InitProvider.IntegrationTargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IntegrationTarget")
+	}
+	mg.Spec.InitProvider.IntegrationTarget = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IntegrationTargetRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("apigateway.aws.upbound.io", "v1beta1", "Resource", "ResourceList")
 		if err != nil {

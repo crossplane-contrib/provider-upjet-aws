@@ -49,7 +49,7 @@ type EventSubscriptionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster, db-cluster-snapshot, or db-proxy. If not set, all sources will be subscribed to.
+	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -86,7 +86,7 @@ type EventSubscriptionObservation struct {
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster, db-cluster-snapshot, or db-proxy. If not set, all sources will be subscribed to.
+	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -143,7 +143,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
-	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster, db-cluster-snapshot, or db-proxy. If not set, all sources will be subscribed to.
+	// The type of source that will be generating the events. Valid options are db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, and zero-etl. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 

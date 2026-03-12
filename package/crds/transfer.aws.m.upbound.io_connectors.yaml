@@ -183,6 +183,29 @@ spec:
                           | SHA512 | SHA1 | NONE .
                         type: string
                     type: object
+                  egressConfig:
+                    description: Specifies the egress configuration for the connector.
+                      When set, enables routing through customer VPCs using VPC Lattice
+                      for private connectivity. Fields documented below.
+                    properties:
+                      vpcLattice:
+                        description: VPC Lattice configuration for routing connector
+                          traffic through customer VPCs. Fields documented below.
+                        properties:
+                          portNumber:
+                            description: Port number for connecting to the SFTP server
+                              through VPC Lattice. Defaults to 22 if not specified.
+                              Must match the port on which the target SFTP server
+                              is listening. Valid values are between 1 and 65535.
+                            type: number
+                          resourceConfigurationArn:
+                            description: ARN of the VPC Lattice Resource Configuration
+                              that defines the target SFTP server location. Must point
+                              to a valid Resource Configuration in a VPC with appropriate
+                              network connectivity to the SFTP server.
+                            type: string
+                        type: object
+                    type: object
                   loggingRole:
                     description: The IAM Role which is required for allowing the connector
                       to turn on CloudWatch logging for Amazon S3 events.
@@ -304,6 +327,8 @@ spec:
                     x-kubernetes-map-type: granular
                   url:
                     description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                      Required for AS2 connectors and service-managed SFTP connectors.
+                      Must be null when using VPC Lattice egress configuration.
                     type: string
                 required:
                 - region
@@ -445,6 +470,29 @@ spec:
                           | SHA512 | SHA1 | NONE .
                         type: string
                     type: object
+                  egressConfig:
+                    description: Specifies the egress configuration for the connector.
+                      When set, enables routing through customer VPCs using VPC Lattice
+                      for private connectivity. Fields documented below.
+                    properties:
+                      vpcLattice:
+                        description: VPC Lattice configuration for routing connector
+                          traffic through customer VPCs. Fields documented below.
+                        properties:
+                          portNumber:
+                            description: Port number for connecting to the SFTP server
+                              through VPC Lattice. Defaults to 22 if not specified.
+                              Must match the port on which the target SFTP server
+                              is listening. Valid values are between 1 and 65535.
+                            type: number
+                          resourceConfigurationArn:
+                            description: ARN of the VPC Lattice Resource Configuration
+                              that defines the target SFTP server location. Must point
+                              to a valid Resource Configuration in a VPC with appropriate
+                              network connectivity to the SFTP server.
+                            type: string
+                        type: object
+                    type: object
                   loggingRole:
                     description: The IAM Role which is required for allowing the connector
                       to turn on CloudWatch logging for Amazon S3 events.
@@ -561,6 +609,8 @@ spec:
                     x-kubernetes-map-type: granular
                   url:
                     description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                      Required for AS2 connectors and service-managed SFTP connectors.
+                      Must be null when using VPC Lattice egress configuration.
                     type: string
                 type: object
               managementPolicies:
@@ -621,11 +671,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.url is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
-                || (has(self.initProvider) && has(self.initProvider.url))'
           status:
             description: ConnectorStatus defines the observed state of Connector.
             properties:
@@ -682,6 +727,29 @@ spec:
                     description: The unique identifier for the AS2 profile or SFTP
                       Profile.
                     type: string
+                  egressConfig:
+                    description: Specifies the egress configuration for the connector.
+                      When set, enables routing through customer VPCs using VPC Lattice
+                      for private connectivity. Fields documented below.
+                    properties:
+                      vpcLattice:
+                        description: VPC Lattice configuration for routing connector
+                          traffic through customer VPCs. Fields documented below.
+                        properties:
+                          portNumber:
+                            description: Port number for connecting to the SFTP server
+                              through VPC Lattice. Defaults to 22 if not specified.
+                              Must match the port on which the target SFTP server
+                              is listening. Valid values are between 1 and 65535.
+                            type: number
+                          resourceConfigurationArn:
+                            description: ARN of the VPC Lattice Resource Configuration
+                              that defines the target SFTP server location. Must point
+                              to a valid Resource Configuration in a VPC with appropriate
+                              network connectivity to the SFTP server.
+                            type: string
+                        type: object
+                    type: object
                   id:
                     type: string
                   loggingRole:
@@ -728,6 +796,8 @@ spec:
                     x-kubernetes-map-type: granular
                   url:
                     description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                      Required for AS2 connectors and service-managed SFTP connectors.
+                      Must be null when using VPC Lattice egress configuration.
                     type: string
                 type: object
               conditions:

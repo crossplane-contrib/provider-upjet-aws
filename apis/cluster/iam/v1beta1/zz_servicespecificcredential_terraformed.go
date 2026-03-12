@@ -21,7 +21,7 @@ func (mg *ServiceSpecificCredential) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ServiceSpecificCredential
 func (tr *ServiceSpecificCredential) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"service_password": "status.atProvider.servicePassword"}
+	return map[string]string{"service_credential_secret": "status.atProvider.serviceCredentialSecret", "service_password": "status.atProvider.servicePassword"}
 }
 
 // GetObservation of this ServiceSpecificCredential

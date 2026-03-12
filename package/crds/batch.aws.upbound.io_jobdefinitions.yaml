@@ -170,18 +170,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -305,18 +332,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -346,7 +400,7 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: Key-value pairs used to identify,
-                                        sort, and organize cube resources.
+                                        sort, and organize kubernetes resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -626,18 +680,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -761,18 +842,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -802,7 +910,7 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: Key-value pairs used to identify,
-                                        sort, and organize cube resources.
+                                        sort, and organize kubernetes resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -1168,18 +1276,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -1303,18 +1438,45 @@ spec:
                                         type: object
                                       type: array
                                     securityContext:
-                                      description: Security context for a job.
+                                      description: Security context for a job. See
+                                        security_context below.
                                       items:
                                         properties:
+                                          allowPrivilegeEscalation:
+                                            description: Whether or not a container
+                                              or a Kubernetes pod is allowed to gain
+                                              more privileges than its parent process.
+                                              The default value is false.
+                                            type: boolean
                                           privileged:
+                                            description: When this parameter is true,
+                                              the container is given elevated permissions
+                                              on the host container instance. The
+                                              level of permissions are similar to
+                                              the root user permissions. The default
+                                              value is false.
                                             type: boolean
                                           readOnlyRootFileSystem:
                                             type: boolean
                                           runAsGroup:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              group ID (gid). If this parameter isn't
+                                              specified, the default is the group
+                                              that's specified in the image metadata.
                                             type: number
                                           runAsNonRoot:
+                                            description: When this parameter is specified,
+                                              the container is run as a user with
+                                              a uid other than 0. If this parameter
+                                              isn't specified, so such rule is enforced.
                                             type: boolean
                                           runAsUser:
+                                            description: When this parameter is specified,
+                                              the container is run as the specified
+                                              user ID (uid). If this parameter isn't
+                                              specified, the default is the user that's
+                                              specified in the image metadata.
                                             type: number
                                         type: object
                                       type: array
@@ -1344,7 +1506,7 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: Key-value pairs used to identify,
-                                        sort, and organize cube resources.
+                                        sort, and organize kubernetes resources.
                                       type: object
                                       x-kubernetes-map-type: granular
                                   type: object
@@ -1731,17 +1893,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:
@@ -1859,17 +2047,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:
@@ -2156,17 +2370,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:
@@ -2284,17 +2524,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:
@@ -2667,17 +2933,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:
@@ -2795,17 +3087,43 @@ spec:
                                       x-kubernetes-map-type: granular
                                   type: object
                                 securityContext:
-                                  description: Security context for a job.
+                                  description: Security context for a job. See security_context
+                                    below.
                                   properties:
+                                    allowPrivilegeEscalation:
+                                      description: Whether or not a container or a
+                                        Kubernetes pod is allowed to gain more privileges
+                                        than its parent process. The default value
+                                        is false.
+                                      type: boolean
                                     privileged:
+                                      description: When this parameter is true, the
+                                        container is given elevated permissions on
+                                        the host container instance. The level of
+                                        permissions are similar to the root user permissions.
+                                        The default value is false.
                                       type: boolean
                                     readOnlyRootFileSystem:
                                       type: boolean
                                     runAsGroup:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified group
+                                        ID (gid). If this parameter isn't specified,
+                                        the default is the group that's specified
+                                        in the image metadata.
                                       type: number
                                     runAsNonRoot:
+                                      description: When this parameter is specified,
+                                        the container is run as a user with a uid
+                                        other than 0. If this parameter isn't specified,
+                                        so such rule is enforced.
                                       type: boolean
                                     runAsUser:
+                                      description: When this parameter is specified,
+                                        the container is run as the specified user
+                                        ID (uid). If this parameter isn't specified,
+                                        the default is the user that's specified in
+                                        the image metadata.
                                       type: number
                                   type: object
                                 volumeMounts:

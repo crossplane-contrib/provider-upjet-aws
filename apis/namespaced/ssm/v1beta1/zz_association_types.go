@@ -25,6 +25,10 @@ type AssociationInitParameters struct {
 	// Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls. This should be set to the SSM document parameter that will define how your automation will branch out.
 	AutomationTargetParameterName *string `json:"automationTargetParameterName,omitempty" tf:"automation_target_parameter_name,omitempty"`
 
+	// One or more Systems Manager Change Calendar names. The association runs only when the Change Calendar is open.
+	// +listType=set
+	CalendarNames []*string `json:"calendarNames,omitempty" tf:"calendar_names,omitempty"`
+
 	// The compliance severity for the association. Can be one of the following: UNSPECIFIED, LOW, MEDIUM, HIGH or CRITICAL
 	ComplianceSeverity *string `json:"complianceSeverity,omitempty" tf:"compliance_severity,omitempty"`
 
@@ -90,6 +94,10 @@ type AssociationObservation struct {
 	// Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls. This should be set to the SSM document parameter that will define how your automation will branch out.
 	AutomationTargetParameterName *string `json:"automationTargetParameterName,omitempty" tf:"automation_target_parameter_name,omitempty"`
 
+	// One or more Systems Manager Change Calendar names. The association runs only when the Change Calendar is open.
+	// +listType=set
+	CalendarNames []*string `json:"calendarNames,omitempty" tf:"calendar_names,omitempty"`
+
 	// The compliance severity for the association. Can be one of the following: UNSPECIFIED, LOW, MEDIUM, HIGH or CRITICAL
 	ComplianceSeverity *string `json:"complianceSeverity,omitempty" tf:"compliance_severity,omitempty"`
 
@@ -152,6 +160,11 @@ type AssociationParameters struct {
 	// Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls. This should be set to the SSM document parameter that will define how your automation will branch out.
 	// +kubebuilder:validation:Optional
 	AutomationTargetParameterName *string `json:"automationTargetParameterName,omitempty" tf:"automation_target_parameter_name,omitempty"`
+
+	// One or more Systems Manager Change Calendar names. The association runs only when the Change Calendar is open.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	CalendarNames []*string `json:"calendarNames,omitempty" tf:"calendar_names,omitempty"`
 
 	// The compliance severity for the association. Can be one of the following: UNSPECIFIED, LOW, MEDIUM, HIGH or CRITICAL
 	// +kubebuilder:validation:Optional
@@ -259,10 +272,10 @@ type OutputLocationParameters struct {
 
 type TargetsInitParameters struct {
 
-	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
+	// User-defined criteria for sending commands that target managed nodes that meet the criteria. See the AWS documentation for the list of available keys.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
+	// List of values that correspond to the specified key. See the AWS documentation for details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
@@ -278,20 +291,20 @@ type TargetsInitParameters struct {
 
 type TargetsObservation struct {
 
-	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
+	// User-defined criteria for sending commands that target managed nodes that meet the criteria. See the AWS documentation for the list of available keys.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
+	// List of values that correspond to the specified key. See the AWS documentation for details.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TargetsParameters struct {
 
-	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
+	// User-defined criteria for sending commands that target managed nodes that meet the criteria. See the AWS documentation for the list of available keys.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// User-defined criteria that maps to Key. A list of instance IDs or tag values.
+	// List of values that correspond to the specified key. See the AWS documentation for details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

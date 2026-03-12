@@ -131,7 +131,7 @@ func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Manage
 	targetTyped := target.(*v1beta1.AutoscalingGroup)
 
 	if srcTyped.Spec.ForProvider.Tag != nil {
-		var tl []map[string]*string
+		var tl []map[string]*string // nolint:prealloc
 		for _, e := range srcTyped.Spec.ForProvider.Tag {
 			m := map[string]*string{}
 			if e.Key != nil {
@@ -151,7 +151,7 @@ func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Manage
 	}
 
 	if srcTyped.Spec.InitProvider.Tag != nil {
-		var tl []map[string]*string
+		var tl []map[string]*string // nolint:prealloc
 		for _, e := range srcTyped.Spec.InitProvider.Tag {
 			m := map[string]*string{}
 			if e.Key != nil {
@@ -171,7 +171,7 @@ func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Manage
 	}
 
 	if srcTyped.Status.AtProvider.Tag != nil {
-		var tl []map[string]*string
+		var tl []map[string]*string // nolint:prealloc
 		for _, e := range srcTyped.Status.AtProvider.Tag {
 			m := map[string]*string{}
 			if e.Key != nil {

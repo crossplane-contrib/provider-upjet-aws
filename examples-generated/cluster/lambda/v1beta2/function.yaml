@@ -13,6 +13,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    codeSha256: ${data.archive_file.example.output_base64sha256}
     environment:
       variables:
         ENVIRONMENT: production
@@ -24,7 +25,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     runtime: nodejs20.x
-    sourceCodeHash: ${data.archive_file.example.output_base64sha256}
     tags:
       Application: example
       Environment: production

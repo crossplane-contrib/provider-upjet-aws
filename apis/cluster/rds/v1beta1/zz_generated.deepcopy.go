@@ -2535,6 +2535,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
+		*out = new(string)
+		**out = **in
+	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -7005,6 +7010,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeRolloutOrder != nil {
+		in, out := &in.UpgradeRolloutOrder, &out.UpgradeRolloutOrder
+		*out = new(string)
+		**out = **in
+	}
 	if in.UpgradeStorageConfig != nil {
 		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
 		*out = new(bool)
@@ -9699,6 +9709,16 @@ func (in *ProxyInitParameters) DeepCopyInto(out *ProxyInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineFamily != nil {
 		in, out := &in.EngineFamily, &out.EngineFamily
 		*out = new(string)
@@ -9744,6 +9764,11 @@ func (in *ProxyInitParameters) DeepCopyInto(out *ProxyInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
@@ -9855,8 +9880,18 @@ func (in *ProxyObservation) DeepCopyInto(out *ProxyObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -9922,6 +9957,11 @@ func (in *ProxyObservation) DeepCopyInto(out *ProxyObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -9969,6 +10009,16 @@ func (in *ProxyParameters) DeepCopyInto(out *ProxyParameters) {
 	if in.DebugLogging != nil {
 		in, out := &in.DebugLogging, &out.DebugLogging
 		*out = new(bool)
+		**out = **in
+	}
+	if in.DefaultAuthScheme != nil {
+		in, out := &in.DefaultAuthScheme, &out.DefaultAuthScheme
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointNetworkType != nil {
+		in, out := &in.EndpointNetworkType, &out.EndpointNetworkType
+		*out = new(string)
 		**out = **in
 	}
 	if in.EngineFamily != nil {
@@ -10021,6 +10071,11 @@ func (in *ProxyParameters) DeepCopyInto(out *ProxyParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetConnectionNetworkType != nil {
+		in, out := &in.TargetConnectionNetworkType, &out.TargetConnectionNetworkType
+		*out = new(string)
+		**out = **in
 	}
 	if in.VPCSecurityGroupIDRefs != nil {
 		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs

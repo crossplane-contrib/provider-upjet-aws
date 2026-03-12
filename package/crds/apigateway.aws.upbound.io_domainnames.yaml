@@ -198,6 +198,11 @@ spec:
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -346,10 +351,15 @@ spec:
                       certificate_arn, certificate_name, certificate_body, certificate_chain,
                       and certificate_private_key.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -498,6 +508,11 @@ spec:
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -641,10 +656,15 @@ spec:
                       certificate_arn, certificate_name, certificate_body, certificate_chain,
                       and certificate_private_key.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -796,6 +816,11 @@ spec:
                     description: The identifier for the domain name resource. Supported
                       only for private custom domain names.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -879,10 +904,15 @@ spec:
                     description: Hosted zone ID that can be used to create a Route53
                       alias record for the regional endpoint.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -1139,6 +1169,11 @@ spec:
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -1283,10 +1318,15 @@ spec:
                       certificate_arn, certificate_name, certificate_body, certificate_chain,
                       and certificate_private_key.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -1435,6 +1475,11 @@ spec:
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -1574,10 +1619,15 @@ spec:
                       certificate_arn, certificate_name, certificate_body, certificate_chain,
                       and certificate_private_key.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -1729,6 +1779,11 @@ spec:
                     description: The identifier for the domain name resource. Supported
                       only for private custom domain names.
                     type: string
+                  endpointAccessMode:
+                    description: 'Endpoint access mode of the DomainName. Only available
+                      for domain names that use security policies that start with
+                      SecurityPolicy_. Valid values: BASIC, STRICT.'
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -1808,10 +1863,15 @@ spec:
                     description: Hosted zone ID that can be used to create a Route53
                       alias record for the regional endpoint.
                     type: string
+                  routingMode:
+                    description: 'Mode to route traffic for the domain name. Valid
+                      values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.'
+                    type: string
                   securityPolicy:
                     description: Transport Layer Security (TLS) version + cipher suite
-                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
-                      be configured to perform drift detection.
+                      for this DomainName. Must be configured to perform drift detection.
+                      For a list of valid security policies, see DomainName in the
+                      Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:

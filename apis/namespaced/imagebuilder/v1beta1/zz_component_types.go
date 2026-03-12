@@ -81,6 +81,7 @@ type ComponentObservation struct {
 	// Encryption status of the component.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// Amazon Resource Name (ARN) of the component.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.

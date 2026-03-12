@@ -1001,6 +1001,7 @@ spec:
                       encrypted.
                     type: boolean
                   id:
+                    description: Amazon Resource Name (ARN) of the container recipe.
                     type: string
                   instanceConfiguration:
                     description: Configuration block used to configure an instance

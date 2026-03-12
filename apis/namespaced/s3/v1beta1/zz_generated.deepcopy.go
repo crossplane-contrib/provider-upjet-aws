@@ -6812,6 +6812,17 @@ func (in *BucketServerSideEncryptionConfigurationRuleInitParameters) DeepCopyInt
 		*out = new(RuleApplyServerSideEncryptionByDefaultInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.BlockedEncryptionTypes != nil {
+		in, out := &in.BlockedEncryptionTypes, &out.BlockedEncryptionTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.BucketKeyEnabled != nil {
 		in, out := &in.BucketKeyEnabled, &out.BucketKeyEnabled
 		*out = new(bool)
@@ -6837,6 +6848,17 @@ func (in *BucketServerSideEncryptionConfigurationRuleObservation) DeepCopyInto(o
 		*out = new(RuleApplyServerSideEncryptionByDefaultObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.BlockedEncryptionTypes != nil {
+		in, out := &in.BlockedEncryptionTypes, &out.BlockedEncryptionTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.BucketKeyEnabled != nil {
 		in, out := &in.BucketKeyEnabled, &out.BucketKeyEnabled
 		*out = new(bool)
@@ -6861,6 +6883,17 @@ func (in *BucketServerSideEncryptionConfigurationRuleParameters) DeepCopyInto(ou
 		in, out := &in.ApplyServerSideEncryptionByDefault, &out.ApplyServerSideEncryptionByDefault
 		*out = new(RuleApplyServerSideEncryptionByDefaultParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.BlockedEncryptionTypes != nil {
+		in, out := &in.BlockedEncryptionTypes, &out.BlockedEncryptionTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.BucketKeyEnabled != nil {
 		in, out := &in.BucketKeyEnabled, &out.BucketKeyEnabled

@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Basic Code Interpreter Example
+# Creates a Bedrock AgentCore Code Interpreter for secure Python code execution.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: CodeInterpreter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
+  labels:
+    testing.upbound.io/example-name: codeinterpreter
+  name: codeinterpreter
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    name: xp_example_code_interpreter_tool
+    description: Code interpreter for data analysis
+    networkConfiguration:
+      networkMode: PUBLIC
+    tags:
+      Environment: production

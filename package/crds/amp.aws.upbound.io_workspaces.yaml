@@ -164,7 +164,7 @@ spec:
                         logGroupArn:
                           description: The ARN of the CloudWatch log group to which
                             the vended log data will be published. This log group
-                            must exist.
+                            must exist. The ARN must end with :*
                           type: string
                       type: object
                     type: array
@@ -286,7 +286,7 @@ spec:
                         logGroupArn:
                           description: The ARN of the CloudWatch log group to which
                             the vended log data will be published. This log group
-                            must exist.
+                            must exist. The ARN must end with :*
                           type: string
                       type: object
                     type: array
@@ -411,7 +411,7 @@ spec:
                         logGroupArn:
                           description: The ARN of the CloudWatch log group to which
                             the vended log data will be published. This log group
-                            must exist.
+                            must exist. The ARN must end with :*
                           type: string
                       type: object
                     type: array
@@ -644,7 +644,7 @@ spec:
                       logGroupArn:
                         description: The ARN of the CloudWatch log group to which
                           the vended log data will be published. This log group must
-                          exist.
+                          exist. The ARN must end with :*
                         type: string
                     type: object
                   region:
@@ -764,7 +764,7 @@ spec:
                       logGroupArn:
                         description: The ARN of the CloudWatch log group to which
                           the vended log data will be published. This log group must
-                          exist.
+                          exist. The ARN must end with :*
                         type: string
                     type: object
                   tags:
@@ -887,7 +887,7 @@ spec:
                       logGroupArn:
                         description: The ARN of the CloudWatch log group to which
                           the vended log data will be published. This log group must
-                          exist.
+                          exist. The ARN must end with :*
                         type: string
                     type: object
                   prometheusEndpoint:

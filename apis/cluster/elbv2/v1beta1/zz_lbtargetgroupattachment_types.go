@@ -21,6 +21,9 @@ type LBTargetGroupAttachmentInitParameters struct {
 	// The port on which targets receive traffic.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Server ID for the targets, consisting of the 0x prefix followed by 16 hexadecimal characters. The value must be unique at the listener level. Required if aws_lb_target_group protocol is QUIC or TCP_QUIC. Not valid with other protocols. Forces replacement if modified.
+	QuicServerID *string `json:"quicServerId,omitempty" tf:"quic_server_id,omitempty"`
+
 	// The ARN of the target group with which to register targets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -48,6 +51,9 @@ type LBTargetGroupAttachmentObservation struct {
 	// The port on which targets receive traffic.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Server ID for the targets, consisting of the 0x prefix followed by 16 hexadecimal characters. The value must be unique at the listener level. Required if aws_lb_target_group protocol is QUIC or TCP_QUIC. Not valid with other protocols. Forces replacement if modified.
+	QuicServerID *string `json:"quicServerId,omitempty" tf:"quic_server_id,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -68,6 +74,10 @@ type LBTargetGroupAttachmentParameters struct {
 	// The port on which targets receive traffic.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Server ID for the targets, consisting of the 0x prefix followed by 16 hexadecimal characters. The value must be unique at the listener level. Required if aws_lb_target_group protocol is QUIC or TCP_QUIC. Not valid with other protocols. Forces replacement if modified.
+	// +kubebuilder:validation:Optional
+	QuicServerID *string `json:"quicServerId,omitempty" tf:"quic_server_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
