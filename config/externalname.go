@@ -576,7 +576,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Cloudfront Response Headers Policies can be imported using the id
 	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
 	// Cloudfront VPC Origin can be imported using the id
-	"aws_cloudfront_vpc_origin": config.IdentifierFromProvider,
+	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
 
 	// cloudsearch
 	//
