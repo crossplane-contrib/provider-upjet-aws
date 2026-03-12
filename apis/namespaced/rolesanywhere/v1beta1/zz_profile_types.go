@@ -16,6 +16,9 @@ import (
 
 type ProfileInitParameters struct {
 
+	// Whether or not a custom role session name is accepted.
+	AcceptRoleSessionName *bool `json:"acceptRoleSessionName,omitempty" tf:"accept_role_session_name,omitempty"`
+
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
 	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
 
@@ -56,6 +59,9 @@ type ProfileInitParameters struct {
 
 type ProfileObservation struct {
 
+	// Whether or not a custom role session name is accepted.
+	AcceptRoleSessionName *bool `json:"acceptRoleSessionName,omitempty" tf:"accept_role_session_name,omitempty"`
+
 	// Amazon Resource Name (ARN) of the Profile
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -95,6 +101,10 @@ type ProfileObservation struct {
 }
 
 type ProfileParameters struct {
+
+	// Whether or not a custom role session name is accepted.
+	// +kubebuilder:validation:Optional
+	AcceptRoleSessionName *bool `json:"acceptRoleSessionName,omitempty" tf:"accept_role_session_name,omitempty"`
 
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
 	// +kubebuilder:validation:Optional

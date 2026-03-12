@@ -2462,12 +2462,34 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AllocationIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AvailabilityZoneAddress); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "EIP", "EIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIdsRefs,
+				Selector:      mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIds")
+		}
+		mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.AvailabilityZoneAddress[i3].AllocationIdsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "EIP", "EIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecondaryAllocationIds),
 			Extract:       resource.ExtractResourceID(),
@@ -2503,6 +2525,26 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VPCIDRef,
+			Selector:     mg.Spec.ForProvider.VPCIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCID")
+	}
+	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "EIP", "EIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -2522,12 +2564,34 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.InitProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AllocationIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AvailabilityZoneAddress); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "EIP", "EIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIds),
+				Extract:       resource.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIdsRefs,
+				Selector:      mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIds")
+		}
+		mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.AvailabilityZoneAddress[i3].AllocationIdsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "EIP", "EIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecondaryAllocationIds),
 			Extract:       resource.ExtractResourceID(),
@@ -2562,6 +2626,26 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.VPCIDRef,
+			Selector:     mg.Spec.InitProvider.VPCIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -4524,6 +4608,26 @@ func (mg *Subnet) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCIpamPool", "VPCIpamPoolList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPv4IpamPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.IPv4IpamPoolIDRef,
+			Selector:     mg.Spec.ForProvider.IPv4IpamPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPv4IpamPoolID")
+	}
+	mg.Spec.ForProvider.IPv4IpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IPv4IpamPoolIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -4543,6 +4647,26 @@ func (mg *Subnet) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCIpamPool", "VPCIpamPoolList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPv4IpamPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.IPv4IpamPoolIDRef,
+			Selector:     mg.Spec.InitProvider.IPv4IpamPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPv4IpamPoolID")
+	}
+	mg.Spec.InitProvider.IPv4IpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPv4IpamPoolIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
@@ -7048,12 +7172,34 @@ func (mg *VPCIpamPool) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.SourceIpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceIpamPoolIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.SourceResource != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResource.ResourceID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.SourceResource.ResourceIDRef,
+				Selector:     mg.Spec.ForProvider.SourceResource.ResourceIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SourceResource.ResourceID")
+		}
+		mg.Spec.ForProvider.SourceResource.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SourceResource.ResourceIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPCIpamScope", "VPCIpamScopeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IpamScopeID),
 			Extract:      reference.ExternalName(),
@@ -7088,6 +7234,29 @@ func (mg *VPCIpamPool) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.SourceIpamPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceIpamPoolIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.SourceResource != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.m.upbound.io", "v1beta1", "VPC", "VPCList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResource.ResourceID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.SourceResource.ResourceIDRef,
+				Selector:     mg.Spec.InitProvider.SourceResource.ResourceIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SourceResource.ResourceID")
+		}
+		mg.Spec.InitProvider.SourceResource.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SourceResource.ResourceIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

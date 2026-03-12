@@ -25,7 +25,7 @@ type TableItemInitParameters struct {
 	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
-	// Name of the table to contain the item.
+	// Name or ARN of the table to contain the item.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
@@ -55,7 +55,7 @@ type TableItemObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Name of the table to contain the item.
+	// Name or ARN of the table to contain the item.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
@@ -78,7 +78,7 @@ type TableItemParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Name of the table to contain the item.
+	// Name or ARN of the table to contain the item.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`

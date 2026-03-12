@@ -232,6 +232,10 @@ type ImageRecipeComponentParameters struct {
 
 type ImageRecipeInitParameters struct {
 
+	// Tags that are applied to the AMI that Image Builder creates during the Build phase prior to image distribution. Maximum of 50 tags.
+	// +mapType=granular
+	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
+
 	// Configuration block(s) with block device mappings for the image recipe. Detailed below.
 	BlockDeviceMapping []ImageRecipeBlockDeviceMappingInitParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
 
@@ -244,7 +248,7 @@ type ImageRecipeInitParameters struct {
 	// Name of the image recipe.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
+	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN, an AMI ID, or an SSM Parameter referencing the AMI. For an SSM Parameter, enter the prefix ssm:, followed by the parameter name or ARN.
 	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
@@ -266,6 +270,10 @@ type ImageRecipeInitParameters struct {
 
 type ImageRecipeObservation struct {
 
+	// Tags that are applied to the AMI that Image Builder creates during the Build phase prior to image distribution. Maximum of 50 tags.
+	// +mapType=granular
+	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
+
 	// Amazon Resource Name (ARN) of the image recipe.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -281,6 +289,7 @@ type ImageRecipeObservation struct {
 	// Description of the image recipe.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Amazon Resource Name (ARN) of the image recipe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the image recipe.
@@ -289,7 +298,7 @@ type ImageRecipeObservation struct {
 	// Owner of the image recipe.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
+	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN, an AMI ID, or an SSM Parameter referencing the AMI. For an SSM Parameter, enter the prefix ssm:, followed by the parameter name or ARN.
 	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Platform of the image recipe.
@@ -322,6 +331,11 @@ type ImageRecipeObservation struct {
 
 type ImageRecipeParameters struct {
 
+	// Tags that are applied to the AMI that Image Builder creates during the Build phase prior to image distribution. Maximum of 50 tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
+
 	// Configuration block(s) with block device mappings for the image recipe. Detailed below.
 	// +kubebuilder:validation:Optional
 	BlockDeviceMapping []ImageRecipeBlockDeviceMappingParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
@@ -338,7 +352,7 @@ type ImageRecipeParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
+	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN, an AMI ID, or an SSM Parameter referencing the AMI. For an SSM Parameter, enter the prefix ssm:, followed by the parameter name or ARN.
 	// +kubebuilder:validation:Optional
 	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 

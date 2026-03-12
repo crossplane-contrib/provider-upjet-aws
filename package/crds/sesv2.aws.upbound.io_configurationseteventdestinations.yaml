@@ -197,6 +197,10 @@ spec:
                             false.'
                           type: boolean
                         eventBridgeDestination:
+                          description: An object that defines an Amazon EventBridge
+                            destination for email events. You can use Amazon EventBridge
+                            to send notifications when certain email events occur.
+                            See event_bridge_destination Block for details.
                           items:
                             properties:
                               eventBusArn:
@@ -709,6 +713,10 @@ spec:
                             false.'
                           type: boolean
                         eventBridgeDestination:
+                          description: An object that defines an Amazon EventBridge
+                            destination for email events. You can use Amazon EventBridge
+                            to send notifications when certain email events occur.
+                            See event_bridge_destination Block for details.
                           items:
                             properties:
                               eventBusArn:
@@ -1226,6 +1234,10 @@ spec:
                             false.'
                           type: boolean
                         eventBridgeDestination:
+                          description: An object that defines an Amazon EventBridge
+                            destination for email events. You can use Amazon EventBridge
+                            to send notifications when certain email events occur.
+                            See event_bridge_destination Block for details.
                           items:
                             properties:
                               eventBusArn:

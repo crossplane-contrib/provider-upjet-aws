@@ -19,6 +19,7 @@ spec:
         testing.upbound.io/example-name: example
     foundationModel: anthropic.claude-v2
     idleSessionTtlInSeconds: 500
+    instruction: You are a friendly assistant who helps answer questions.
     region: us-west-1
 
 ---

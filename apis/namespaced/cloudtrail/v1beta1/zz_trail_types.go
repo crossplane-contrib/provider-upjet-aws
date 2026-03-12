@@ -246,7 +246,7 @@ type TrailInitParameters struct {
 	// Whether log file integrity validation is enabled. Defaults to false.
 	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
 
-	// Enables logging for the trail. Defaults to true. Setting this to false will pause logging.
+	// Enables logging for the trail. When set to true, logging is started by calling the StartLogging API. When set to false, logging is stopped by calling the StopLogging API. Defaults to true.
 	EnableLogging *bool `json:"enableLogging,omitempty" tf:"enable_logging,omitempty"`
 
 	// Specifies an event selector for enabling data event logging. Fields documented below. Please note the CloudTrail limits when configuring these. Conflicts with advanced_event_selector.
@@ -317,7 +317,7 @@ type TrailObservation struct {
 	// Whether log file integrity validation is enabled. Defaults to false.
 	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
 
-	// Enables logging for the trail. Defaults to true. Setting this to false will pause logging.
+	// Enables logging for the trail. When set to true, logging is started by calling the StartLogging API. When set to false, logging is stopped by calling the StopLogging API. Defaults to true.
 	EnableLogging *bool `json:"enableLogging,omitempty" tf:"enable_logging,omitempty"`
 
 	// Specifies an event selector for enabling data event logging. Fields documented below. Please note the CloudTrail limits when configuring these. Conflicts with advanced_event_selector.
@@ -397,7 +397,7 @@ type TrailParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
 
-	// Enables logging for the trail. Defaults to true. Setting this to false will pause logging.
+	// Enables logging for the trail. When set to true, logging is started by calling the StartLogging API. When set to false, logging is stopped by calling the StopLogging API. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableLogging *bool `json:"enableLogging,omitempty" tf:"enable_logging,omitempty"`
 

@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: TokenVaultCmk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/tokenvaultcmk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kmsConfiguration:
+      keyType: CustomerManagedKey
+      kmsKeyArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    region: us-west-1

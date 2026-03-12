@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: route53profiles.aws.m.upbound.io/v1beta1
+kind: ResourceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53profiles/v1beta1/resourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    profileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    # resourceArn reference fields are explicitly disabled, since it accepts multiple kinds
+    # hard-coded valid example resource arn
+    resourceArn: "arn:aws:route53resolver:us-west-1:${data.aws_account_id}:firewall-rule-group/rslvr-frg-4bc9c0829b9e43ea"
+    # resourceProperties are only needed for firewall-rule-group resources.
+    # This is a JSON string, must not have trailing newline, mind the chomping here.
+    resourceProperties: |-
+      {"priority":201}
+
+
+---
+
+apiVersion: route53profiles.aws.m.upbound.io/v1beta1
+kind: Profile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53profiles/v1beta1/resourceassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+

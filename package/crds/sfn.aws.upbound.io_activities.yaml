@@ -392,8 +392,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the activity.
+                    type: string
                   creationDate:
-                    description: The date the activity was created.
+                    description: Date the activity was created.
                     type: string
                   encryptionConfiguration:
                     description: Defines what encryption configuration is used to
@@ -419,8 +422,7 @@ spec:
                         type: string
                     type: object
                   id:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      created activity.
+                    description: Amazon Resource Name (ARN) of the activity.
                     type: string
                   region:
                     description: |-

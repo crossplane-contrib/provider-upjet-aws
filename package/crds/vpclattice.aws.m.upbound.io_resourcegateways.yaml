@@ -64,6 +64,11 @@ spec:
                       a resource gateway must be compatible with the subnets of the
                       resource gateway and the IP address type of the resource.
                     type: string
+                  ipv4AddressesPerEni:
+                    description: The number of IPv4 addresses per ENI for your resource.
+                      This argument is only applicable to IPV4 and DUALSTACK IP address
+                      types. Defaults to 16.
+                    type: number
                   name:
                     description: Name of the resource gateway.
                     type: string
@@ -365,6 +370,11 @@ spec:
                       a resource gateway must be compatible with the subnets of the
                       resource gateway and the IP address type of the resource.
                     type: string
+                  ipv4AddressesPerEni:
+                    description: The number of IPv4 addresses per ENI for your resource.
+                      This argument is only applicable to IPV4 and DUALSTACK IP address
+                      types. Defaults to 16.
+                    type: number
                   name:
                     description: Name of the resource gateway.
                     type: string
@@ -720,6 +730,11 @@ spec:
                       a resource gateway must be compatible with the subnets of the
                       resource gateway and the IP address type of the resource.
                     type: string
+                  ipv4AddressesPerEni:
+                    description: The number of IPv4 addresses per ENI for your resource.
+                      This argument is only applicable to IPV4 and DUALSTACK IP address
+                      types. Defaults to 16.
+                    type: number
                   name:
                     description: Name of the resource gateway.
                     type: string

@@ -43,6 +43,9 @@ type DomainNameInitParameters struct {
 	// Fully-qualified domain name to register.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Endpoint access mode of the DomainName. Only available for domain names that use security policies that start with SecurityPolicy_. Valid values: BASIC, STRICT.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint information including type. See below.
 	EndpointConfiguration []EndpointConfigurationInitParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
@@ -71,7 +74,10 @@ type DomainNameInitParameters struct {
 	// User-friendly name of the certificate that will be used by regional endpoint for this domain name. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
+	// Mode to route traffic for the domain name. Valid values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+
+	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -111,6 +117,9 @@ type DomainNameObservation struct {
 	// The identifier for the domain name resource. Supported only for private custom domain names.
 	DomainNameID *string `json:"domainNameId,omitempty" tf:"domain_name_id,omitempty"`
 
+	// Endpoint access mode of the DomainName. Only available for domain names that use security policies that start with SecurityPolicy_. Valid values: BASIC, STRICT.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint information including type. See below.
 	EndpointConfiguration []EndpointConfigurationObservation `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
@@ -142,7 +151,10 @@ type DomainNameObservation struct {
 	// Hosted zone ID that can be used to create a Route53 alias record for the regional endpoint.
 	RegionalZoneID *string `json:"regionalZoneId,omitempty" tf:"regional_zone_id,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
+	// Mode to route traffic for the domain name. Valid values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+
+	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -190,6 +202,10 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Endpoint access mode of the DomainName. Only available for domain names that use security policies that start with SecurityPolicy_. Valid values: BASIC, STRICT.
+	// +kubebuilder:validation:Optional
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint information including type. See below.
 	// +kubebuilder:validation:Optional
 	EndpointConfiguration []EndpointConfigurationParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
@@ -229,7 +245,11 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`
 
-	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must be configured to perform drift detection.
+	// Mode to route traffic for the domain name. Valid values: BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING.
+	// +kubebuilder:validation:Optional
+	RoutingMode *string `json:"routingMode,omitempty" tf:"routing_mode,omitempty"`
+
+	// Transport Layer Security (TLS) version + cipher suite for this DomainName. Must be configured to perform drift detection. For a list of valid security policies, see DomainName in the Amazon API Gateway API Reference.
 	// +kubebuilder:validation:Optional
 	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 

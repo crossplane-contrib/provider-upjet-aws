@@ -213,29 +213,29 @@ type LogConfigurationParameters struct {
 
 type ManagedStorageConfigurationInitParameters struct {
 
-	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ID to encrypt the managed storage.
+	// AWS Key Management Service key ARN to encrypt the managed storage.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ManagedStorageConfigurationObservation struct {
 
-	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ID to encrypt the managed storage.
+	// AWS Key Management Service key ARN to encrypt the managed storage.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ManagedStorageConfigurationParameters struct {
 
-	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	// AWS Key Management Service key ARN for the Fargate ephemeral storage.
 	// +kubebuilder:validation:Optional
 	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
 
-	// AWS Key Management Service key ID to encrypt the managed storage.
+	// AWS Key Management Service key ARN to encrypt the managed storage.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }

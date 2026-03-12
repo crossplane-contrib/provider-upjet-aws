@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Token Vault CMK Example
+# Configures a customer-managed KMS key for the Bedrock AgentCore token vault.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: TokenVaultCmk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/tokenvaultcmk
+  labels:
+    testing.upbound.io/example-name: tokenvaultcmk
+  name: tokenvaultcmk
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    tokenVaultId: "default"
+    kmsConfiguration:
+      keyType: CustomerManagedKey
+      kmsKeyArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: token-vault-kms-key
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/tokenvaultcmk
+  labels:
+    testing.upbound.io/example-name: token-vault-kms-key
+  name: token-vault-kms-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    description: KMS key for Bedrock AgentCore token vault
+    deletionWindowInDays: 7

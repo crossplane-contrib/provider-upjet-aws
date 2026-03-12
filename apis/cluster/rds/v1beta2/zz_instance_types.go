@@ -712,6 +712,9 @@ type InstanceObservation struct {
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
+	// Order in which the instances are upgraded (first, second, last). See the AWS documentation for details.
+	UpgradeRolloutOrder *string `json:"upgradeRolloutOrder,omitempty" tf:"upgrade_rollout_order,omitempty"`
+
 	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
 	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 

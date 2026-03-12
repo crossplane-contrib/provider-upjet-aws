@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Gateway with JWT Authorization Example
+# Creates a Bedrock AgentCore Gateway with custom JWT authorizer and MCP protocol.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gateway
+  labels:
+    testing.upbound.io/example-name: gateway
+  name: gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    name: example-gateway-xp-x11y2z
+    authorizerType: AWS_IAM
+    protocolType: MCP
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+    tags:
+      Environment: production
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/gateway
+  labels:
+    testing.upbound.io/example-name: bedrock-agentcore-gateway-role
+  name: example-bedrock-agentcore-gateway-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "bedrock-agentcore.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }

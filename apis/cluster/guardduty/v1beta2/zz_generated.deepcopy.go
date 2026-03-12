@@ -112,8 +112,30 @@ func (in *CriterionInitParameters) DeepCopyInto(out *CriterionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Matches != nil {
+		in, out := &in.Matches, &out.Matches
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.NotEquals != nil {
 		in, out := &in.NotEquals, &out.NotEquals
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.NotMatches != nil {
+		in, out := &in.NotMatches, &out.NotMatches
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
@@ -174,8 +196,30 @@ func (in *CriterionObservation) DeepCopyInto(out *CriterionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Matches != nil {
+		in, out := &in.Matches, &out.Matches
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.NotEquals != nil {
 		in, out := &in.NotEquals, &out.NotEquals
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.NotMatches != nil {
+		in, out := &in.NotMatches, &out.NotMatches
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
@@ -236,8 +280,30 @@ func (in *CriterionParameters) DeepCopyInto(out *CriterionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Matches != nil {
+		in, out := &in.Matches, &out.Matches
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.NotEquals != nil {
 		in, out := &in.NotEquals, &out.NotEquals
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.NotMatches != nil {
+		in, out := &in.NotMatches, &out.NotMatches
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {

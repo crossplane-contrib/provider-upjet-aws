@@ -251,6 +251,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -487,6 +504,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -666,6 +700,23 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          items:
+                            properties:
+                              behaviorType:
+                                description: Specifies the cross-channel behavior
+                                  for routing contacts across multiple channels. Valid
+                                  values are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                  ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                  contacts only from the channel they are currently
+                                  handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                  contacts from any channel regardless of what they
+                                  are currently handling.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   name:
@@ -1048,6 +1099,21 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          properties:
+                            behaviorType:
+                              description: Specifies the cross-channel behavior for
+                                routing contacts across multiple channels. Valid values
+                                are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                contacts only from the channel they are currently
+                                handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                contacts from any channel regardless of what they
+                                are currently handling.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   name:
@@ -1284,6 +1350,21 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          properties:
+                            behaviorType:
+                              description: Specifies the cross-channel behavior for
+                                routing contacts across multiple channels. Valid values
+                                are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                contacts only from the channel they are currently
+                                handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                contacts from any channel regardless of what they
+                                are currently handling.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   name:
@@ -1427,7 +1508,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Routing Profile.
+                    description: Amazon Resource Name (ARN) of the Routing Profile.
                     type: string
                   defaultOutboundQueueId:
                     description: Specifies the default outbound queue for the Routing
@@ -1437,7 +1518,7 @@ spec:
                     description: Specifies the description of the Routing Profile.
                     type: string
                   id:
-                    description: The identifier of the hosting Amazon Connect Instance
+                    description: Identifier of the hosting Amazon Connect Instance
                       and identifier of the Routing Profile separated by a colon (:).
                     type: string
                   instanceId:
@@ -1463,6 +1544,21 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
+                        crossChannelBehavior:
+                          description: Defines the cross-channel routing behavior
+                            for each traffic type. Documented below.
+                          properties:
+                            behaviorType:
+                              description: Specifies the cross-channel behavior for
+                                routing contacts across multiple channels. Valid values
+                                are ROUTE_CURRENT_CHANNEL_ONLY and ROUTE_ANY_CHANNEL.
+                                ROUTE_CURRENT_CHANNEL_ONLY restricts agents to receive
+                                contacts only from the channel they are currently
+                                handling. ROUTE_ANY_CHANNEL allows agents to receive
+                                contacts from any channel regardless of what they
+                                are currently handling.
+                              type: string
+                          type: object
                       type: object
                     type: array
                   name:
@@ -1506,7 +1602,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   routingProfileId:
-                    description: The identifier for the Routing Profile.
+                    description: Identifier for the Routing Profile.
                     type: string
                   tags:
                     additionalProperties:

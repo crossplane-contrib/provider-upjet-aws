@@ -301,6 +301,105 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sourceResource:
+                    description: Resource to use to use to configure a resource planning
+                      IPAM Pool. If configured, the locale of the parent pool must
+                      match the region that the vpc resides in.
+                    properties:
+                      resourceId:
+                        description: ID of the resource.
+                        type: string
+                      resourceIdRef:
+                        description: Reference to a VPC in ec2 to populate resourceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      resourceIdSelector:
+                        description: Selector for a VPC in ec2 to populate resourceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      resourceOwner:
+                        description: Owner of the resource.
+                        type: string
+                      resourceRegion:
+                        description: Region where the resource exists. Must match
+                          the locale of the parent IPAM Pool.
+                        type: string
+                      resourceType:
+                        description: Type of the resource. (vpc)
+                        type: string
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -560,6 +659,105 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sourceResource:
+                    description: Resource to use to use to configure a resource planning
+                      IPAM Pool. If configured, the locale of the parent pool must
+                      match the region that the vpc resides in.
+                    properties:
+                      resourceId:
+                        description: ID of the resource.
+                        type: string
+                      resourceIdRef:
+                        description: Reference to a VPC in ec2 to populate resourceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      resourceIdSelector:
+                        description: Selector for a VPC in ec2 to populate resourceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      resourceOwner:
+                        description: Owner of the resource.
+                        type: string
+                      resourceRegion:
+                        description: Region where the resource exists. Must match
+                          the locale of the parent IPAM Pool.
+                        type: string
+                      resourceType:
+                        description: Type of the resource. (vpc)
+                        type: string
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -727,6 +925,25 @@ spec:
                     description: The ID of the source IPAM pool. Use this argument
                       to create a child pool within an existing pool.
                     type: string
+                  sourceResource:
+                    description: Resource to use to use to configure a resource planning
+                      IPAM Pool. If configured, the locale of the parent pool must
+                      match the region that the vpc resides in.
+                    properties:
+                      resourceId:
+                        description: ID of the resource.
+                        type: string
+                      resourceOwner:
+                        description: Owner of the resource.
+                        type: string
+                      resourceRegion:
+                        description: Region where the resource exists. Must match
+                          the locale of the parent IPAM Pool.
+                        type: string
+                      resourceType:
+                        description: Type of the resource. (vpc)
+                        type: string
+                    type: object
                   state:
                     description: The ID of the IPAM
                     type: string

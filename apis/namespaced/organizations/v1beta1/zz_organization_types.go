@@ -19,19 +19,28 @@ type AccountsInitParameters struct {
 
 type AccountsObservation struct {
 
-	// ARN of the account
+	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Email of the account
+	// Email of the account.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Identifier of the account
+	// Identifier of the account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the account
+	// Method by which the account joined the organization.
+	JoinedMethod *string `json:"joinedMethod,omitempty" tf:"joined_method,omitempty"`
+
+	// Date the account became a part of the organization.
+	JoinedTimestamp *string `json:"joinedTimestamp,omitempty" tf:"joined_timestamp,omitempty"`
+
+	// Name of the account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Current status of the account
+	// State of the account.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// (Deprecated use state instead) Status of the account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -43,19 +52,28 @@ type NonMasterAccountsInitParameters struct {
 
 type NonMasterAccountsObservation struct {
 
-	// ARN of the account
+	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Email of the account
+	// Email of the account.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Identifier of the account
+	// Identifier of the account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the account
+	// Method by which the account joined the organization.
+	JoinedMethod *string `json:"joinedMethod,omitempty" tf:"joined_method,omitempty"`
+
+	// Date the account became a part of the organization.
+	JoinedTimestamp *string `json:"joinedTimestamp,omitempty" tf:"joined_timestamp,omitempty"`
+
+	// Name of the account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Current status of the account
+	// State of the account.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// (Deprecated use state instead) Status of the account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -68,12 +86,15 @@ type OrganizationInitParameters struct {
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY, S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference. To enable INSPECTOR_POLICY, aws_service_access_principals must include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY, aws_service_access_principals must include securityhub.amazonaws.com.
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
-	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+	// Specify ALL (default) or CONSOLIDATED_BILLING.
 	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
+
+	// Return (as attributes) only the results of the DescribeOrganization API to avoid API limits. When configured to true only the arn, feature_set, master_account_arn, master_account_email and master_account_id attributes will be returned. All others will be empty. Default: false.
+	ReturnOrganizationOnly *bool `json:"returnOrganizationOnly,omitempty" tf:"return_organization_only,omitempty"`
 }
 
 type OrganizationObservation struct {
@@ -81,37 +102,40 @@ type OrganizationObservation struct {
 	// List of organization accounts including the master account. For a list excluding the master account, see the non_master_accounts attribute. All elements have these attributes:
 	Accounts []AccountsObservation `json:"accounts,omitempty" tf:"accounts,omitempty"`
 
-	// ARN of the account
+	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY, S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference. To enable INSPECTOR_POLICY, aws_service_access_principals must include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY, aws_service_access_principals must include securityhub.amazonaws.com.
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
-	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+	// Specify ALL (default) or CONSOLIDATED_BILLING.
 	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
 
-	// Identifier of the account
+	// Identifier of the account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ARN of the master account
+	// ARN of the master account.
 	MasterAccountArn *string `json:"masterAccountArn,omitempty" tf:"master_account_arn,omitempty"`
 
-	// Email address of the master account
+	// Email address of the master account.
 	MasterAccountEmail *string `json:"masterAccountEmail,omitempty" tf:"master_account_email,omitempty"`
 
-	// Identifier of the master account
+	// Identifier of the master account.
 	MasterAccountID *string `json:"masterAccountId,omitempty" tf:"master_account_id,omitempty"`
 
-	// Name of the master account
+	// Name of the master account.
 	MasterAccountName *string `json:"masterAccountName,omitempty" tf:"master_account_name,omitempty"`
 
 	// List of organization accounts excluding the master account. For a list including the master account, see the accounts attribute. All elements have these attributes:
 	NonMasterAccounts []NonMasterAccountsObservation `json:"nonMasterAccounts,omitempty" tf:"non_master_accounts,omitempty"`
+
+	// Return (as attributes) only the results of the DescribeOrganization API to avoid API limits. When configured to true only the arn, feature_set, master_account_arn, master_account_email and master_account_id attributes will be returned. All others will be empty. Default: false.
+	ReturnOrganizationOnly *bool `json:"returnOrganizationOnly,omitempty" tf:"return_organization_only,omitempty"`
 
 	// List of organization roots. All elements have these attributes:
 	Roots []RootsObservation `json:"roots,omitempty" tf:"roots,omitempty"`
@@ -124,14 +148,18 @@ type OrganizationParameters struct {
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, BEDROCK_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, INSPECTOR_POLICY, RESOURCE_CONTROL_POLICY, S3_POLICY, SECURITYHUB_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY and UPGRADE_ROLLOUT_POLICY), see the AWS Organizations API Reference. To enable INSPECTOR_POLICY, aws_service_access_principals must include inspector2.amazonaws.com. To enable SECURITYHUB_POLICY, aws_service_access_principals must include securityhub.amazonaws.com.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
-	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+	// Specify ALL (default) or CONSOLIDATED_BILLING.
 	// +kubebuilder:validation:Optional
 	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
+
+	// Return (as attributes) only the results of the DescribeOrganization API to avoid API limits. When configured to true only the arn, feature_set, master_account_arn, master_account_email and master_account_id attributes will be returned. All others will be empty. Default: false.
+	// +kubebuilder:validation:Optional
+	ReturnOrganizationOnly *bool `json:"returnOrganizationOnly,omitempty" tf:"return_organization_only,omitempty"`
 }
 
 type PolicyTypesInitParameters struct {
@@ -139,7 +167,7 @@ type PolicyTypesInitParameters struct {
 
 type PolicyTypesObservation struct {
 
-	// Current status of the account
+	// (Deprecated use state instead) Status of the account.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -153,13 +181,13 @@ type RootsInitParameters struct {
 
 type RootsObservation struct {
 
-	// ARN of the account
+	// ARN of the account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Identifier of the account
+	// Identifier of the account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the account
+	// Name of the account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of policy types enabled for this root. All elements have these attributes:

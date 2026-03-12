@@ -118,10 +118,10 @@ type ClusterInitParameters struct {
 	// Enable HTTP endpoint (data API). Only valid for some combinations of engine_mode, engine and engine_version and only available in some regions. See the Region and version availability section of the documentation. This option also does not work with any of these options specified: snapshot_identifier, replication_source_identifier, s3_import.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
 
-	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -134,7 +134,7 @@ type ClusterInitParameters struct {
 	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. Specify an empty value ("") for no engine mode. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
@@ -191,7 +191,7 @@ type ClusterInitParameters struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
 	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
@@ -276,24 +276,6 @@ type ClusterInitParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
-}
-
-type ClusterMasterUserSecretInitParameters struct {
-}
-
-type ClusterMasterUserSecretObservation struct {
-
-	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
-
-	// Amazon Resource Name (ARN) of the secret.
-	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
-
-	// Status of the secret. Valid Values: creating | active | rotating | impaired.
-	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
-}
-
-type ClusterMasterUserSecretParameters struct {
 }
 
 type ClusterObservation struct {
@@ -383,10 +365,10 @@ type ClusterObservation struct {
 	// Enable HTTP endpoint (data API). Only valid for some combinations of engine_mode, engine and engine_version and only available in some regions. See the Region and version availability section of the documentation. This option also does not work with any of these options specified: snapshot_identifier, replication_source_identifier, s3_import.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
 
-	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -402,7 +384,7 @@ type ClusterObservation struct {
 	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned, serverless. Defaults to: provisioned. Specify an empty value ("") for no engine mode. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Running version of the database.
@@ -448,7 +430,7 @@ type ClusterObservation struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
 	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Clusters.
@@ -520,6 +502,9 @@ type ClusterObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Order in which the clusters are upgraded (first, second, last). See the AWS documentation for details.
+	UpgradeRolloutOrder *string `json:"upgradeRolloutOrder,omitempty" tf:"upgrade_rollout_order,omitempty"`
 
 	// List of VPC security groups to associate with the Cluster
 	// +listType=set
@@ -659,11 +644,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
 
-	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
 	// +kubebuilder:validation:Optional
 	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
-	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, iam-db-auth-error, postgresql (PostgreSQL).
+	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, iam-db-auth-error, instance, postgresql (PostgreSQL), slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
@@ -680,7 +665,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -749,7 +734,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// Interval, in seconds, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	// +kubebuilder:validation:Optional
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
@@ -862,6 +847,24 @@ type ClusterParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
+type ClusterMasterUserSecretInitParameters struct {
+}
+
+type ClusterMasterUserSecretObservation struct {
+
+	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the secret.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Status of the secret. Valid Values: creating | active | rotating | impaired.
+	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
+}
+
+type ClusterMasterUserSecretParameters struct {
+}
+
 type ClusterRestoreToPointInTimeInitParameters struct {
 
 	// Date and time in UTC format to restore the database cluster to. Conflicts with use_latest_restorable_time.
@@ -872,7 +875,7 @@ type ClusterRestoreToPointInTimeInitParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
@@ -921,7 +924,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
@@ -945,7 +948,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 type ClusterS3ImportInitParameters struct {
 
 	// Bucket name where your backup is stored
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketName.
@@ -990,7 +993,7 @@ type ClusterS3ImportObservation struct {
 type ClusterS3ImportParameters struct {
 
 	// Bucket name where your backup is stored
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 

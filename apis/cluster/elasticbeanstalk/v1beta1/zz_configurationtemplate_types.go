@@ -115,13 +115,13 @@ type SettingInitParameters struct {
 	// A unique name for this Template.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// unique namespace identifying the option's associated AWS resource
+	// Unique namespace identifying the option's associated AWS resource
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// resource name for scheduled action
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
-	// value for the configuration option
+	// Value for the configuration option
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -130,13 +130,13 @@ type SettingObservation struct {
 	// A unique name for this Template.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// unique namespace identifying the option's associated AWS resource
+	// Unique namespace identifying the option's associated AWS resource
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// resource name for scheduled action
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
-	// value for the configuration option
+	// Value for the configuration option
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -146,7 +146,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// unique namespace identifying the option's associated AWS resource
+	// Unique namespace identifying the option's associated AWS resource
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
@@ -154,7 +154,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Optional
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
-	// value for the configuration option
+	// Value for the configuration option
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

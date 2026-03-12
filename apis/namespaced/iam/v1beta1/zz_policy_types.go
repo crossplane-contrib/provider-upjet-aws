@@ -16,6 +16,9 @@ import (
 
 type PolicyInitParameters struct {
 
+	// Number of ms to wait between creating the policy and setting its version as default. May be required in environments with very high S3 IO loads.
+	DelayAfterPolicyCreationInMs *float64 `json:"delayAfterPolicyCreationInMs,omitempty" tf:"delay_after_policy_creation_in_ms,omitempty"`
+
 	// Description of the IAM policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -37,6 +40,9 @@ type PolicyObservation struct {
 
 	// Number of entities (users, groups, and roles) that the policy is attached to.
 	AttachmentCount *float64 `json:"attachmentCount,omitempty" tf:"attachment_count,omitempty"`
+
+	// Number of ms to wait between creating the policy and setting its version as default. May be required in environments with very high S3 IO loads.
+	DelayAfterPolicyCreationInMs *float64 `json:"delayAfterPolicyCreationInMs,omitempty" tf:"delay_after_policy_creation_in_ms,omitempty"`
 
 	// Description of the IAM policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -63,6 +69,10 @@ type PolicyObservation struct {
 }
 
 type PolicyParameters struct {
+
+	// Number of ms to wait between creating the policy and setting its version as default. May be required in environments with very high S3 IO loads.
+	// +kubebuilder:validation:Optional
+	DelayAfterPolicyCreationInMs *float64 `json:"delayAfterPolicyCreationInMs,omitempty" tf:"delay_after_policy_creation_in_ms,omitempty"`
 
 	// Description of the IAM policy.
 	// +kubebuilder:validation:Optional

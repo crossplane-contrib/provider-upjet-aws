@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: route53resolver.aws.m.upbound.io/v1beta1
+kind: QueryLogConfigAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfigassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    resolverQueryLogConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-querylogconfigassociation
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-querylogconfigassociation
+---
+apiVersion: route53resolver.aws.m.upbound.io/v1beta1
+kind: QueryLogConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfig-qlca
+  namespace: upbound-system
+spec:
+  forProvider:
+    destinationArn: arn:aws:logs:us-west-1:${data.aws_account_id}:log-group:example-querylogconfig-qlca-group
+    name: example-querylogconfig-qlca
+    region: us-west-1
+    tags:
+      Environment: test
+---
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfig-qlca-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    skipDestroy: false
+    deletionProtectionEnabled: false
+    retentionInDays: 1
+    tags:
+      Name: QueryLogConfigAssociation
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53resolver/v1beta1/querylogconfigassociation
+  labels:
+    testing.upbound.io/example-name: example-querylogconfigassociation
+  name: example-querylogconfigassociation-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: QueryLogVPC

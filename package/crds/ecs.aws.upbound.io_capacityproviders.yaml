@@ -75,7 +75,8 @@ spec:
                 properties:
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     items:
                       properties:
                         autoScalingGroupArn:
@@ -200,6 +201,399 @@ spec:
                           type: string
                       type: object
                     type: array
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    items:
+                      properties:
+                        infrastructureOptimization:
+                          description: Defines how Amazon ECS Managed Instances optimizes
+                            the infrastructure in your capacity provider. Configure
+                            it to turn on or off the infrastructure optimization in
+                            your capacity provider, and to control the idle EC2 instances
+                            optimization delay.
+                          items:
+                            properties:
+                              scaleInAfter:
+                                description: 'This parameter defines the number of
+                                  seconds Amazon ECS Managed Instances waits before
+                                  optimizing EC2 instances that have become idle or
+                                  underutilized. A longer delay increases the likelihood
+                                  of placing new tasks on idle instances, reducing
+                                  startup time. A shorter delay helps reduce infrastructure
+                                  costs by optimizing idle instances more quickly.
+                                  Valid values are:'
+                                type: number
+                            type: object
+                          type: array
+                        infrastructureRoleArn:
+                          description: The Amazon Resource Name (ARN) of the infrastructure
+                            role that Amazon ECS uses to manage instances on your
+                            behalf. This role must have permissions to launch, terminate,
+                            and manage Amazon EC2 instances, as well as access to
+                            other AWS services required for Amazon ECS Managed Instances
+                            functionality. For more information, see Amazon ECS infrastructure
+                            IAM role in the Amazon ECS Developer Guide.
+                          type: string
+                        instanceLaunchTemplate:
+                          description: The launch template configuration that specifies
+                            how Amazon ECS should launch Amazon EC2 instances. This
+                            includes the instance profile, network configuration,
+                            storage settings, and instance requirements for attribute-based
+                            instance type selection. For more information, see Store
+                            instance launch parameters in Amazon EC2 launch templates
+                            in the Amazon EC2 User Guide. Detailed below.
+                          items:
+                            properties:
+                              capacityOptionType:
+                                description: The purchasing option for the EC2 instances
+                                  used in the capacity provider. Determines whether
+                                  to use On-Demand or Spot instances. Valid values
+                                  are ON_DEMAND and SPOT. Defaults to ON_DEMAND when
+                                  not specified. Changing this value will trigger
+                                  replacement of the capacity provider. For more information,
+                                  see Amazon EC2 billing and purchasing options in
+                                  the Amazon EC2 User Guide.
+                                type: string
+                              ec2InstanceProfileArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  instance profile that Amazon ECS applies to Amazon
+                                  ECS Managed Instances. This instance profile must
+                                  include the necessary permissions for your tasks
+                                  to access AWS services and resources. For more information,
+                                  see Amazon ECS instance profile for Managed Instances
+                                  in the Amazon ECS Developer Guide.
+                                type: string
+                              instanceRequirements:
+                                description: The instance requirements. You can specify
+                                  the instance types and instance requirements such
+                                  as vCPU count, memory, network performance, and
+                                  accelerator specifications. Amazon ECS automatically
+                                  selects the instances that match the specified criteria.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    acceleratorCount:
+                                      description: The minimum and maximum number
+                                        of accelerators for the instance types. This
+                                        is used when you need instances with specific
+                                        numbers of GPUs or other accelerators.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorManufacturers:
+                                      description: The accelerator manufacturers to
+                                        include. You can specify nvidia, amd, amazon-web-services,
+                                        xilinx, or habana depending on your accelerator
+                                        requirements. Valid values are amazon-web-services,
+                                        amd, nvidia, xilinx, habana.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorNames:
+                                      description: The specific accelerator names
+                                        to include. For example, you can specify a100,
+                                        v100, k80, or other specific accelerator models.
+                                        Valid values are a100, inferentia, k520, k80,
+                                        m60, radeon-pro-v520, t4, vu9p, v100, a10g,
+                                        h100, t4g.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorTotalMemoryMib:
+                                      description: The minimum and maximum total accelerator
+                                        memory in mebibytes (MiB). This is important
+                                        for GPU workloads that require specific amounts
+                                        of video memory.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorTypes:
+                                      description: The accelerator types to include.
+                                        You can specify gpu for graphics processing
+                                        units, fpga for field programmable gate arrays,
+                                        or inference for machine learning inference
+                                        accelerators. Valid values are gpu, fpga,
+                                        inference.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    allowedInstanceTypes:
+                                      description: The instance types to include in
+                                        the selection. When specified, Amazon ECS
+                                        only considers these instance types, subject
+                                        to the other requirements specified. Maximum
+                                        of 400 instance types. You can specify instance
+                                        type patterns using wildcards (e.g., m5.*).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    bareMetal:
+                                      description: Indicates whether to include bare
+                                        metal instance types. Set to included to allow
+                                        bare metal instances, excluded to exclude
+                                        them, or required to use only bare metal instances.
+                                        Valid values are included, excluded, required.
+                                      type: string
+                                    baselineEbsBandwidthMbps:
+                                      description: The minimum and maximum baseline
+                                        Amazon EBS bandwidth in megabits per second
+                                        (Mbps). This is important for workloads with
+                                        high storage I/O requirements.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    burstablePerformance:
+                                      description: Indicates whether to include burstable
+                                        performance instance types (T2, T3, T3a, T4g).
+                                        Set to included to allow burstable instances,
+                                        excluded to exclude them, or required to use
+                                        only burstable instances. Valid values are
+                                        included, excluded, required.
+                                      type: string
+                                    cpuManufacturers:
+                                      description: The CPU manufacturers to include
+                                        or exclude. You can specify intel, amd, or
+                                        amazon-web-services to control which CPU types
+                                        are used for your workloads. Valid values
+                                        are intel, amd, amazon-web-services.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    excludedInstanceTypes:
+                                      description: The instance types to exclude from
+                                        selection. Use this to prevent Amazon ECS
+                                        from selecting specific instance types that
+                                        may not be suitable for your workloads. Maximum
+                                        of 400 instance types.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    instanceGenerations:
+                                      description: The instance generations to include.
+                                        You can specify current to use the latest
+                                        generation instances, or previous to include
+                                        previous generation instances for cost optimization.
+                                        Valid values are current, previous.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    localStorage:
+                                      description: Indicates whether to include instance
+                                        types with local storage. Set to included
+                                        to allow local storage, excluded to exclude
+                                        it, or required to use only instances with
+                                        local storage. Valid values are included,
+                                        excluded, required.
+                                      type: string
+                                    localStorageTypes:
+                                      description: The local storage types to include.
+                                        You can specify hdd for hard disk drives,
+                                        ssd for solid state drives, or both. Valid
+                                        values are hdd, ssd.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage of the optimal On-Demand price.
+                                        This provides more precise cost control for
+                                        Spot instance selection.
+                                      type: number
+                                    memoryGibPerVcpu:
+                                      description: The minimum and maximum amount
+                                        of memory per vCPU in gibibytes (GiB). This
+                                        helps ensure that instance types have the
+                                        appropriate memory-to-CPU ratio for your workloads.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    memoryMib:
+                                      description: The minimum and maximum amount
+                                        of memory in mebibytes (MiB) for the instance
+                                        types. Amazon ECS selects instance types that
+                                        have memory within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkBandwidthGbps:
+                                      description: The minimum and maximum network
+                                        bandwidth in gigabits per second (Gbps). This
+                                        is crucial for network-intensive workloads
+                                        that require high throughput.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkInterfaceCount:
+                                      description: The minimum and maximum number
+                                        of network interfaces for the instance types.
+                                        This is useful for workloads that require
+                                        multiple network interfaces.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    onDemandMaxPricePercentageOverLowestPrice:
+                                      description: The price protection threshold
+                                        for On-Demand Instances, as a percentage higher
+                                        than an identified On-Demand price. The identified
+                                        On-Demand price is the price of the lowest
+                                        priced current generation C, M, or R instance
+                                        type with your specified attributes. When
+                                        Amazon ECS selects instance types with your
+                                        attributes, it will exclude instance types
+                                        whose price exceeds your specified threshold.
+                                      type: number
+                                    requireHibernateSupport:
+                                      description: Indicates whether the instance
+                                        types must support hibernation. When set to
+                                        true, only instance types that support hibernation
+                                        are selected.
+                                      type: boolean
+                                    spotMaxPricePercentageOverLowestPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage over the lowest priced On-Demand
+                                        instance. This helps control Spot instance
+                                        costs while maintaining access to capacity.
+                                      type: number
+                                    totalLocalStorageGb:
+                                      description: The minimum and maximum total local
+                                        storage in gigabytes (GB) for instance types
+                                        with local storage.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    vcpuCount:
+                                      description: The minimum and maximum number
+                                        of vCPUs for the instance types. Amazon ECS
+                                        selects instance types that have vCPU counts
+                                        within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              monitoring:
+                                description: 'CloudWatch provides two categories of
+                                  monitoring: basic monitoring and detailed monitoring.
+                                  By default, your managed instance is configured
+                                  for basic monitoring. You can optionally enable
+                                  detailed monitoring to help you more quickly identify
+                                  and act on operational issues. You can enable or
+                                  turn off detailed monitoring at launch or when the
+                                  managed instance is running or stopped. For more
+                                  information, see Detailed monitoring for Amazon
+                                  ECS Managed Instances in the Amazon ECS Developer
+                                  Guide. Valid values are BASIC and DETAILED.'
+                                type: string
+                              networkConfiguration:
+                                description: The network configuration for Amazon
+                                  ECS Managed Instances. This specifies the subnets
+                                  and security groups that instances use for network
+                                  connectivity. Detailed below.
+                                items:
+                                  properties:
+                                    securityGroups:
+                                      description: The list of security group IDs
+                                        to apply to Amazon ECS Managed Instances.
+                                        These security groups control the network
+                                        traffic allowed to and from the instances.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    subnets:
+                                      description: The list of subnet IDs where Amazon
+                                        ECS can launch Amazon ECS Managed Instances.
+                                        Instances are distributed across the specified
+                                        subnets for high availability. All subnets
+                                        must be in the same VPC.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                              storageConfiguration:
+                                description: The storage configuration for Amazon
+                                  ECS Managed Instances. This defines the root volume
+                                  size and type for the instances. Detailed below.
+                                items:
+                                  properties:
+                                    storageSizeGib:
+                                      description: The size of the tasks volume in
+                                        GiB. Must be at least 1.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        propagateTags:
+                          description: Specifies whether to propagate tags from the
+                            capacity provider to the Amazon ECS Managed Instances.
+                            When enabled, tags applied to the capacity provider are
+                            automatically applied to all instances launched by this
+                            provider. Valid values are CAPACITY_PROVIDER and NONE.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -229,7 +623,8 @@ spec:
                 properties:
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     items:
                       properties:
                         autoScalingGroupArn:
@@ -351,6 +746,399 @@ spec:
                           description: '- Enables or disables container-aware termination
                             of instances in the auto scaling group when scale-in happens.
                             Valid values are ENABLED and DISABLED.'
+                          type: string
+                      type: object
+                    type: array
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    items:
+                      properties:
+                        infrastructureOptimization:
+                          description: Defines how Amazon ECS Managed Instances optimizes
+                            the infrastructure in your capacity provider. Configure
+                            it to turn on or off the infrastructure optimization in
+                            your capacity provider, and to control the idle EC2 instances
+                            optimization delay.
+                          items:
+                            properties:
+                              scaleInAfter:
+                                description: 'This parameter defines the number of
+                                  seconds Amazon ECS Managed Instances waits before
+                                  optimizing EC2 instances that have become idle or
+                                  underutilized. A longer delay increases the likelihood
+                                  of placing new tasks on idle instances, reducing
+                                  startup time. A shorter delay helps reduce infrastructure
+                                  costs by optimizing idle instances more quickly.
+                                  Valid values are:'
+                                type: number
+                            type: object
+                          type: array
+                        infrastructureRoleArn:
+                          description: The Amazon Resource Name (ARN) of the infrastructure
+                            role that Amazon ECS uses to manage instances on your
+                            behalf. This role must have permissions to launch, terminate,
+                            and manage Amazon EC2 instances, as well as access to
+                            other AWS services required for Amazon ECS Managed Instances
+                            functionality. For more information, see Amazon ECS infrastructure
+                            IAM role in the Amazon ECS Developer Guide.
+                          type: string
+                        instanceLaunchTemplate:
+                          description: The launch template configuration that specifies
+                            how Amazon ECS should launch Amazon EC2 instances. This
+                            includes the instance profile, network configuration,
+                            storage settings, and instance requirements for attribute-based
+                            instance type selection. For more information, see Store
+                            instance launch parameters in Amazon EC2 launch templates
+                            in the Amazon EC2 User Guide. Detailed below.
+                          items:
+                            properties:
+                              capacityOptionType:
+                                description: The purchasing option for the EC2 instances
+                                  used in the capacity provider. Determines whether
+                                  to use On-Demand or Spot instances. Valid values
+                                  are ON_DEMAND and SPOT. Defaults to ON_DEMAND when
+                                  not specified. Changing this value will trigger
+                                  replacement of the capacity provider. For more information,
+                                  see Amazon EC2 billing and purchasing options in
+                                  the Amazon EC2 User Guide.
+                                type: string
+                              ec2InstanceProfileArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  instance profile that Amazon ECS applies to Amazon
+                                  ECS Managed Instances. This instance profile must
+                                  include the necessary permissions for your tasks
+                                  to access AWS services and resources. For more information,
+                                  see Amazon ECS instance profile for Managed Instances
+                                  in the Amazon ECS Developer Guide.
+                                type: string
+                              instanceRequirements:
+                                description: The instance requirements. You can specify
+                                  the instance types and instance requirements such
+                                  as vCPU count, memory, network performance, and
+                                  accelerator specifications. Amazon ECS automatically
+                                  selects the instances that match the specified criteria.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    acceleratorCount:
+                                      description: The minimum and maximum number
+                                        of accelerators for the instance types. This
+                                        is used when you need instances with specific
+                                        numbers of GPUs or other accelerators.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorManufacturers:
+                                      description: The accelerator manufacturers to
+                                        include. You can specify nvidia, amd, amazon-web-services,
+                                        xilinx, or habana depending on your accelerator
+                                        requirements. Valid values are amazon-web-services,
+                                        amd, nvidia, xilinx, habana.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorNames:
+                                      description: The specific accelerator names
+                                        to include. For example, you can specify a100,
+                                        v100, k80, or other specific accelerator models.
+                                        Valid values are a100, inferentia, k520, k80,
+                                        m60, radeon-pro-v520, t4, vu9p, v100, a10g,
+                                        h100, t4g.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorTotalMemoryMib:
+                                      description: The minimum and maximum total accelerator
+                                        memory in mebibytes (MiB). This is important
+                                        for GPU workloads that require specific amounts
+                                        of video memory.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorTypes:
+                                      description: The accelerator types to include.
+                                        You can specify gpu for graphics processing
+                                        units, fpga for field programmable gate arrays,
+                                        or inference for machine learning inference
+                                        accelerators. Valid values are gpu, fpga,
+                                        inference.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    allowedInstanceTypes:
+                                      description: The instance types to include in
+                                        the selection. When specified, Amazon ECS
+                                        only considers these instance types, subject
+                                        to the other requirements specified. Maximum
+                                        of 400 instance types. You can specify instance
+                                        type patterns using wildcards (e.g., m5.*).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    bareMetal:
+                                      description: Indicates whether to include bare
+                                        metal instance types. Set to included to allow
+                                        bare metal instances, excluded to exclude
+                                        them, or required to use only bare metal instances.
+                                        Valid values are included, excluded, required.
+                                      type: string
+                                    baselineEbsBandwidthMbps:
+                                      description: The minimum and maximum baseline
+                                        Amazon EBS bandwidth in megabits per second
+                                        (Mbps). This is important for workloads with
+                                        high storage I/O requirements.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    burstablePerformance:
+                                      description: Indicates whether to include burstable
+                                        performance instance types (T2, T3, T3a, T4g).
+                                        Set to included to allow burstable instances,
+                                        excluded to exclude them, or required to use
+                                        only burstable instances. Valid values are
+                                        included, excluded, required.
+                                      type: string
+                                    cpuManufacturers:
+                                      description: The CPU manufacturers to include
+                                        or exclude. You can specify intel, amd, or
+                                        amazon-web-services to control which CPU types
+                                        are used for your workloads. Valid values
+                                        are intel, amd, amazon-web-services.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    excludedInstanceTypes:
+                                      description: The instance types to exclude from
+                                        selection. Use this to prevent Amazon ECS
+                                        from selecting specific instance types that
+                                        may not be suitable for your workloads. Maximum
+                                        of 400 instance types.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    instanceGenerations:
+                                      description: The instance generations to include.
+                                        You can specify current to use the latest
+                                        generation instances, or previous to include
+                                        previous generation instances for cost optimization.
+                                        Valid values are current, previous.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    localStorage:
+                                      description: Indicates whether to include instance
+                                        types with local storage. Set to included
+                                        to allow local storage, excluded to exclude
+                                        it, or required to use only instances with
+                                        local storage. Valid values are included,
+                                        excluded, required.
+                                      type: string
+                                    localStorageTypes:
+                                      description: The local storage types to include.
+                                        You can specify hdd for hard disk drives,
+                                        ssd for solid state drives, or both. Valid
+                                        values are hdd, ssd.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage of the optimal On-Demand price.
+                                        This provides more precise cost control for
+                                        Spot instance selection.
+                                      type: number
+                                    memoryGibPerVcpu:
+                                      description: The minimum and maximum amount
+                                        of memory per vCPU in gibibytes (GiB). This
+                                        helps ensure that instance types have the
+                                        appropriate memory-to-CPU ratio for your workloads.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    memoryMib:
+                                      description: The minimum and maximum amount
+                                        of memory in mebibytes (MiB) for the instance
+                                        types. Amazon ECS selects instance types that
+                                        have memory within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkBandwidthGbps:
+                                      description: The minimum and maximum network
+                                        bandwidth in gigabits per second (Gbps). This
+                                        is crucial for network-intensive workloads
+                                        that require high throughput.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkInterfaceCount:
+                                      description: The minimum and maximum number
+                                        of network interfaces for the instance types.
+                                        This is useful for workloads that require
+                                        multiple network interfaces.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    onDemandMaxPricePercentageOverLowestPrice:
+                                      description: The price protection threshold
+                                        for On-Demand Instances, as a percentage higher
+                                        than an identified On-Demand price. The identified
+                                        On-Demand price is the price of the lowest
+                                        priced current generation C, M, or R instance
+                                        type with your specified attributes. When
+                                        Amazon ECS selects instance types with your
+                                        attributes, it will exclude instance types
+                                        whose price exceeds your specified threshold.
+                                      type: number
+                                    requireHibernateSupport:
+                                      description: Indicates whether the instance
+                                        types must support hibernation. When set to
+                                        true, only instance types that support hibernation
+                                        are selected.
+                                      type: boolean
+                                    spotMaxPricePercentageOverLowestPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage over the lowest priced On-Demand
+                                        instance. This helps control Spot instance
+                                        costs while maintaining access to capacity.
+                                      type: number
+                                    totalLocalStorageGb:
+                                      description: The minimum and maximum total local
+                                        storage in gigabytes (GB) for instance types
+                                        with local storage.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    vcpuCount:
+                                      description: The minimum and maximum number
+                                        of vCPUs for the instance types. Amazon ECS
+                                        selects instance types that have vCPU counts
+                                        within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              monitoring:
+                                description: 'CloudWatch provides two categories of
+                                  monitoring: basic monitoring and detailed monitoring.
+                                  By default, your managed instance is configured
+                                  for basic monitoring. You can optionally enable
+                                  detailed monitoring to help you more quickly identify
+                                  and act on operational issues. You can enable or
+                                  turn off detailed monitoring at launch or when the
+                                  managed instance is running or stopped. For more
+                                  information, see Detailed monitoring for Amazon
+                                  ECS Managed Instances in the Amazon ECS Developer
+                                  Guide. Valid values are BASIC and DETAILED.'
+                                type: string
+                              networkConfiguration:
+                                description: The network configuration for Amazon
+                                  ECS Managed Instances. This specifies the subnets
+                                  and security groups that instances use for network
+                                  connectivity. Detailed below.
+                                items:
+                                  properties:
+                                    securityGroups:
+                                      description: The list of security group IDs
+                                        to apply to Amazon ECS Managed Instances.
+                                        These security groups control the network
+                                        traffic allowed to and from the instances.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    subnets:
+                                      description: The list of subnet IDs where Amazon
+                                        ECS can launch Amazon ECS Managed Instances.
+                                        Instances are distributed across the specified
+                                        subnets for high availability. All subnets
+                                        must be in the same VPC.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                              storageConfiguration:
+                                description: The storage configuration for Amazon
+                                  ECS Managed Instances. This defines the root volume
+                                  size and type for the instances. Detailed below.
+                                items:
+                                  properties:
+                                    storageSizeGib:
+                                      description: The size of the tasks volume in
+                                        GiB. Must be at least 1.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        propagateTags:
+                          description: Specifies whether to propagate tags from the
+                            capacity provider to the Amazon ECS Managed Instances.
+                            When enabled, tags applied to the capacity provider are
+                            automatically applied to all instances launched by this
+                            provider. Valid values are CAPACITY_PROVIDER and NONE.
                           type: string
                       type: object
                     type: array
@@ -447,11 +1235,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.autoScalingGroupProvider is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoScalingGroupProvider)
-                || (has(self.initProvider) && has(self.initProvider.autoScalingGroupProvider))'
           status:
             description: CapacityProviderStatus defines the observed state of CapacityProvider.
             properties:
@@ -462,7 +1245,8 @@ spec:
                     type: string
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     items:
                       properties:
                         autoScalingGroupArn:
@@ -511,8 +1295,401 @@ spec:
                           type: string
                       type: object
                     type: array
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
                   id:
                     type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    items:
+                      properties:
+                        infrastructureOptimization:
+                          description: Defines how Amazon ECS Managed Instances optimizes
+                            the infrastructure in your capacity provider. Configure
+                            it to turn on or off the infrastructure optimization in
+                            your capacity provider, and to control the idle EC2 instances
+                            optimization delay.
+                          items:
+                            properties:
+                              scaleInAfter:
+                                description: 'This parameter defines the number of
+                                  seconds Amazon ECS Managed Instances waits before
+                                  optimizing EC2 instances that have become idle or
+                                  underutilized. A longer delay increases the likelihood
+                                  of placing new tasks on idle instances, reducing
+                                  startup time. A shorter delay helps reduce infrastructure
+                                  costs by optimizing idle instances more quickly.
+                                  Valid values are:'
+                                type: number
+                            type: object
+                          type: array
+                        infrastructureRoleArn:
+                          description: The Amazon Resource Name (ARN) of the infrastructure
+                            role that Amazon ECS uses to manage instances on your
+                            behalf. This role must have permissions to launch, terminate,
+                            and manage Amazon EC2 instances, as well as access to
+                            other AWS services required for Amazon ECS Managed Instances
+                            functionality. For more information, see Amazon ECS infrastructure
+                            IAM role in the Amazon ECS Developer Guide.
+                          type: string
+                        instanceLaunchTemplate:
+                          description: The launch template configuration that specifies
+                            how Amazon ECS should launch Amazon EC2 instances. This
+                            includes the instance profile, network configuration,
+                            storage settings, and instance requirements for attribute-based
+                            instance type selection. For more information, see Store
+                            instance launch parameters in Amazon EC2 launch templates
+                            in the Amazon EC2 User Guide. Detailed below.
+                          items:
+                            properties:
+                              capacityOptionType:
+                                description: The purchasing option for the EC2 instances
+                                  used in the capacity provider. Determines whether
+                                  to use On-Demand or Spot instances. Valid values
+                                  are ON_DEMAND and SPOT. Defaults to ON_DEMAND when
+                                  not specified. Changing this value will trigger
+                                  replacement of the capacity provider. For more information,
+                                  see Amazon EC2 billing and purchasing options in
+                                  the Amazon EC2 User Guide.
+                                type: string
+                              ec2InstanceProfileArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  instance profile that Amazon ECS applies to Amazon
+                                  ECS Managed Instances. This instance profile must
+                                  include the necessary permissions for your tasks
+                                  to access AWS services and resources. For more information,
+                                  see Amazon ECS instance profile for Managed Instances
+                                  in the Amazon ECS Developer Guide.
+                                type: string
+                              instanceRequirements:
+                                description: The instance requirements. You can specify
+                                  the instance types and instance requirements such
+                                  as vCPU count, memory, network performance, and
+                                  accelerator specifications. Amazon ECS automatically
+                                  selects the instances that match the specified criteria.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    acceleratorCount:
+                                      description: The minimum and maximum number
+                                        of accelerators for the instance types. This
+                                        is used when you need instances with specific
+                                        numbers of GPUs or other accelerators.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorManufacturers:
+                                      description: The accelerator manufacturers to
+                                        include. You can specify nvidia, amd, amazon-web-services,
+                                        xilinx, or habana depending on your accelerator
+                                        requirements. Valid values are amazon-web-services,
+                                        amd, nvidia, xilinx, habana.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorNames:
+                                      description: The specific accelerator names
+                                        to include. For example, you can specify a100,
+                                        v100, k80, or other specific accelerator models.
+                                        Valid values are a100, inferentia, k520, k80,
+                                        m60, radeon-pro-v520, t4, vu9p, v100, a10g,
+                                        h100, t4g.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    acceleratorTotalMemoryMib:
+                                      description: The minimum and maximum total accelerator
+                                        memory in mebibytes (MiB). This is important
+                                        for GPU workloads that require specific amounts
+                                        of video memory.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorTypes:
+                                      description: The accelerator types to include.
+                                        You can specify gpu for graphics processing
+                                        units, fpga for field programmable gate arrays,
+                                        or inference for machine learning inference
+                                        accelerators. Valid values are gpu, fpga,
+                                        inference.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    allowedInstanceTypes:
+                                      description: The instance types to include in
+                                        the selection. When specified, Amazon ECS
+                                        only considers these instance types, subject
+                                        to the other requirements specified. Maximum
+                                        of 400 instance types. You can specify instance
+                                        type patterns using wildcards (e.g., m5.*).
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    bareMetal:
+                                      description: Indicates whether to include bare
+                                        metal instance types. Set to included to allow
+                                        bare metal instances, excluded to exclude
+                                        them, or required to use only bare metal instances.
+                                        Valid values are included, excluded, required.
+                                      type: string
+                                    baselineEbsBandwidthMbps:
+                                      description: The minimum and maximum baseline
+                                        Amazon EBS bandwidth in megabits per second
+                                        (Mbps). This is important for workloads with
+                                        high storage I/O requirements.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    burstablePerformance:
+                                      description: Indicates whether to include burstable
+                                        performance instance types (T2, T3, T3a, T4g).
+                                        Set to included to allow burstable instances,
+                                        excluded to exclude them, or required to use
+                                        only burstable instances. Valid values are
+                                        included, excluded, required.
+                                      type: string
+                                    cpuManufacturers:
+                                      description: The CPU manufacturers to include
+                                        or exclude. You can specify intel, amd, or
+                                        amazon-web-services to control which CPU types
+                                        are used for your workloads. Valid values
+                                        are intel, amd, amazon-web-services.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    excludedInstanceTypes:
+                                      description: The instance types to exclude from
+                                        selection. Use this to prevent Amazon ECS
+                                        from selecting specific instance types that
+                                        may not be suitable for your workloads. Maximum
+                                        of 400 instance types.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    instanceGenerations:
+                                      description: The instance generations to include.
+                                        You can specify current to use the latest
+                                        generation instances, or previous to include
+                                        previous generation instances for cost optimization.
+                                        Valid values are current, previous.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    localStorage:
+                                      description: Indicates whether to include instance
+                                        types with local storage. Set to included
+                                        to allow local storage, excluded to exclude
+                                        it, or required to use only instances with
+                                        local storage. Valid values are included,
+                                        excluded, required.
+                                      type: string
+                                    localStorageTypes:
+                                      description: The local storage types to include.
+                                        You can specify hdd for hard disk drives,
+                                        ssd for solid state drives, or both. Valid
+                                        values are hdd, ssd.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage of the optimal On-Demand price.
+                                        This provides more precise cost control for
+                                        Spot instance selection.
+                                      type: number
+                                    memoryGibPerVcpu:
+                                      description: The minimum and maximum amount
+                                        of memory per vCPU in gibibytes (GiB). This
+                                        helps ensure that instance types have the
+                                        appropriate memory-to-CPU ratio for your workloads.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    memoryMib:
+                                      description: The minimum and maximum amount
+                                        of memory in mebibytes (MiB) for the instance
+                                        types. Amazon ECS selects instance types that
+                                        have memory within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkBandwidthGbps:
+                                      description: The minimum and maximum network
+                                        bandwidth in gigabits per second (Gbps). This
+                                        is crucial for network-intensive workloads
+                                        that require high throughput.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkInterfaceCount:
+                                      description: The minimum and maximum number
+                                        of network interfaces for the instance types.
+                                        This is useful for workloads that require
+                                        multiple network interfaces.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    onDemandMaxPricePercentageOverLowestPrice:
+                                      description: The price protection threshold
+                                        for On-Demand Instances, as a percentage higher
+                                        than an identified On-Demand price. The identified
+                                        On-Demand price is the price of the lowest
+                                        priced current generation C, M, or R instance
+                                        type with your specified attributes. When
+                                        Amazon ECS selects instance types with your
+                                        attributes, it will exclude instance types
+                                        whose price exceeds your specified threshold.
+                                      type: number
+                                    requireHibernateSupport:
+                                      description: Indicates whether the instance
+                                        types must support hibernation. When set to
+                                        true, only instance types that support hibernation
+                                        are selected.
+                                      type: boolean
+                                    spotMaxPricePercentageOverLowestPrice:
+                                      description: The maximum price for Spot instances
+                                        as a percentage over the lowest priced On-Demand
+                                        instance. This helps control Spot instance
+                                        costs while maintaining access to capacity.
+                                      type: number
+                                    totalLocalStorageGb:
+                                      description: The minimum and maximum total local
+                                        storage in gigabytes (GB) for instance types
+                                        with local storage.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    vcpuCount:
+                                      description: The minimum and maximum number
+                                        of vCPUs for the instance types. Amazon ECS
+                                        selects instance types that have vCPU counts
+                                        within this range.
+                                      items:
+                                        properties:
+                                          max:
+                                            type: number
+                                          min:
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              monitoring:
+                                description: 'CloudWatch provides two categories of
+                                  monitoring: basic monitoring and detailed monitoring.
+                                  By default, your managed instance is configured
+                                  for basic monitoring. You can optionally enable
+                                  detailed monitoring to help you more quickly identify
+                                  and act on operational issues. You can enable or
+                                  turn off detailed monitoring at launch or when the
+                                  managed instance is running or stopped. For more
+                                  information, see Detailed monitoring for Amazon
+                                  ECS Managed Instances in the Amazon ECS Developer
+                                  Guide. Valid values are BASIC and DETAILED.'
+                                type: string
+                              networkConfiguration:
+                                description: The network configuration for Amazon
+                                  ECS Managed Instances. This specifies the subnets
+                                  and security groups that instances use for network
+                                  connectivity. Detailed below.
+                                items:
+                                  properties:
+                                    securityGroups:
+                                      description: The list of security group IDs
+                                        to apply to Amazon ECS Managed Instances.
+                                        These security groups control the network
+                                        traffic allowed to and from the instances.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    subnets:
+                                      description: The list of subnet IDs where Amazon
+                                        ECS can launch Amazon ECS Managed Instances.
+                                        Instances are distributed across the specified
+                                        subnets for high availability. All subnets
+                                        must be in the same VPC.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                              storageConfiguration:
+                                description: The storage configuration for Amazon
+                                  ECS Managed Instances. This defines the root volume
+                                  size and type for the instances. Detailed below.
+                                items:
+                                  properties:
+                                    storageSizeGib:
+                                      description: The size of the tasks volume in
+                                        GiB. Must be at least 1.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        propagateTags:
+                          description: Specifies whether to propagate tags from the
+                            capacity provider to the Amazon ECS Managed Instances.
+                            When enabled, tags applied to the capacity provider are
+                            automatically applied to all instances launched by this
+                            provider. Valid values are CAPACITY_PROVIDER and NONE.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -650,7 +1827,8 @@ spec:
                 properties:
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     properties:
                       autoScalingGroupArn:
                         description: '- ARN of the associated auto scaling group.'
@@ -768,6 +1946,356 @@ spec:
                         description: '- Enables or disables container-aware termination
                           of instances in the auto scaling group when scale-in happens.
                           Valid values are ENABLED and DISABLED.'
+                        type: string
+                    type: object
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    properties:
+                      infrastructureOptimization:
+                        description: Defines how Amazon ECS Managed Instances optimizes
+                          the infrastructure in your capacity provider. Configure
+                          it to turn on or off the infrastructure optimization in
+                          your capacity provider, and to control the idle EC2 instances
+                          optimization delay.
+                        properties:
+                          scaleInAfter:
+                            description: 'This parameter defines the number of seconds
+                              Amazon ECS Managed Instances waits before optimizing
+                              EC2 instances that have become idle or underutilized.
+                              A longer delay increases the likelihood of placing new
+                              tasks on idle instances, reducing startup time. A shorter
+                              delay helps reduce infrastructure costs by optimizing
+                              idle instances more quickly. Valid values are:'
+                            type: number
+                        type: object
+                      infrastructureRoleArn:
+                        description: The Amazon Resource Name (ARN) of the infrastructure
+                          role that Amazon ECS uses to manage instances on your behalf.
+                          This role must have permissions to launch, terminate, and
+                          manage Amazon EC2 instances, as well as access to other
+                          AWS services required for Amazon ECS Managed Instances functionality.
+                          For more information, see Amazon ECS infrastructure IAM
+                          role in the Amazon ECS Developer Guide.
+                        type: string
+                      instanceLaunchTemplate:
+                        description: The launch template configuration that specifies
+                          how Amazon ECS should launch Amazon EC2 instances. This
+                          includes the instance profile, network configuration, storage
+                          settings, and instance requirements for attribute-based
+                          instance type selection. For more information, see Store
+                          instance launch parameters in Amazon EC2 launch templates
+                          in the Amazon EC2 User Guide. Detailed below.
+                        properties:
+                          capacityOptionType:
+                            description: The purchasing option for the EC2 instances
+                              used in the capacity provider. Determines whether to
+                              use On-Demand or Spot instances. Valid values are ON_DEMAND
+                              and SPOT. Defaults to ON_DEMAND when not specified.
+                              Changing this value will trigger replacement of the
+                              capacity provider. For more information, see Amazon
+                              EC2 billing and purchasing options in the Amazon EC2
+                              User Guide.
+                            type: string
+                          ec2InstanceProfileArn:
+                            description: The Amazon Resource Name (ARN) of the instance
+                              profile that Amazon ECS applies to Amazon ECS Managed
+                              Instances. This instance profile must include the necessary
+                              permissions for your tasks to access AWS services and
+                              resources. For more information, see Amazon ECS instance
+                              profile for Managed Instances in the Amazon ECS Developer
+                              Guide.
+                            type: string
+                          instanceRequirements:
+                            description: The instance requirements. You can specify
+                              the instance types and instance requirements such as
+                              vCPU count, memory, network performance, and accelerator
+                              specifications. Amazon ECS automatically selects the
+                              instances that match the specified criteria. Detailed
+                              below.
+                            properties:
+                              acceleratorCount:
+                                description: The minimum and maximum number of accelerators
+                                  for the instance types. This is used when you need
+                                  instances with specific numbers of GPUs or other
+                                  accelerators.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorManufacturers:
+                                description: The accelerator manufacturers to include.
+                                  You can specify nvidia, amd, amazon-web-services,
+                                  xilinx, or habana depending on your accelerator
+                                  requirements. Valid values are amazon-web-services,
+                                  amd, nvidia, xilinx, habana.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorNames:
+                                description: The specific accelerator names to include.
+                                  For example, you can specify a100, v100, k80, or
+                                  other specific accelerator models. Valid values
+                                  are a100, inferentia, k520, k80, m60, radeon-pro-v520,
+                                  t4, vu9p, v100, a10g, h100, t4g.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorTotalMemoryMib:
+                                description: The minimum and maximum total accelerator
+                                  memory in mebibytes (MiB). This is important for
+                                  GPU workloads that require specific amounts of video
+                                  memory.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorTypes:
+                                description: The accelerator types to include. You
+                                  can specify gpu for graphics processing units, fpga
+                                  for field programmable gate arrays, or inference
+                                  for machine learning inference accelerators. Valid
+                                  values are gpu, fpga, inference.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              allowedInstanceTypes:
+                                description: The instance types to include in the
+                                  selection. When specified, Amazon ECS only considers
+                                  these instance types, subject to the other requirements
+                                  specified. Maximum of 400 instance types. You can
+                                  specify instance type patterns using wildcards (e.g.,
+                                  m5.*).
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              bareMetal:
+                                description: Indicates whether to include bare metal
+                                  instance types. Set to included to allow bare metal
+                                  instances, excluded to exclude them, or required
+                                  to use only bare metal instances. Valid values are
+                                  included, excluded, required.
+                                type: string
+                              baselineEbsBandwidthMbps:
+                                description: The minimum and maximum baseline Amazon
+                                  EBS bandwidth in megabits per second (Mbps). This
+                                  is important for workloads with high storage I/O
+                                  requirements.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              burstablePerformance:
+                                description: Indicates whether to include burstable
+                                  performance instance types (T2, T3, T3a, T4g). Set
+                                  to included to allow burstable instances, excluded
+                                  to exclude them, or required to use only burstable
+                                  instances. Valid values are included, excluded,
+                                  required.
+                                type: string
+                              cpuManufacturers:
+                                description: The CPU manufacturers to include or exclude.
+                                  You can specify intel, amd, or amazon-web-services
+                                  to control which CPU types are used for your workloads.
+                                  Valid values are intel, amd, amazon-web-services.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              excludedInstanceTypes:
+                                description: The instance types to exclude from selection.
+                                  Use this to prevent Amazon ECS from selecting specific
+                                  instance types that may not be suitable for your
+                                  workloads. Maximum of 400 instance types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              instanceGenerations:
+                                description: The instance generations to include.
+                                  You can specify current to use the latest generation
+                                  instances, or previous to include previous generation
+                                  instances for cost optimization. Valid values are
+                                  current, previous.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              localStorage:
+                                description: Indicates whether to include instance
+                                  types with local storage. Set to included to allow
+                                  local storage, excluded to exclude it, or required
+                                  to use only instances with local storage. Valid
+                                  values are included, excluded, required.
+                                type: string
+                              localStorageTypes:
+                                description: The local storage types to include. You
+                                  can specify hdd for hard disk drives, ssd for solid
+                                  state drives, or both. Valid values are hdd, ssd.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage of the optimal On-Demand price.
+                                  This provides more precise cost control for Spot
+                                  instance selection.
+                                type: number
+                              memoryGibPerVcpu:
+                                description: The minimum and maximum amount of memory
+                                  per vCPU in gibibytes (GiB). This helps ensure that
+                                  instance types have the appropriate memory-to-CPU
+                                  ratio for your workloads.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              memoryMib:
+                                description: The minimum and maximum amount of memory
+                                  in mebibytes (MiB) for the instance types. Amazon
+                                  ECS selects instance types that have memory within
+                                  this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkBandwidthGbps:
+                                description: The minimum and maximum network bandwidth
+                                  in gigabits per second (Gbps). This is crucial for
+                                  network-intensive workloads that require high throughput.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkInterfaceCount:
+                                description: The minimum and maximum number of network
+                                  interfaces for the instance types. This is useful
+                                  for workloads that require multiple network interfaces.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              onDemandMaxPricePercentageOverLowestPrice:
+                                description: The price protection threshold for On-Demand
+                                  Instances, as a percentage higher than an identified
+                                  On-Demand price. The identified On-Demand price
+                                  is the price of the lowest priced current generation
+                                  C, M, or R instance type with your specified attributes.
+                                  When Amazon ECS selects instance types with your
+                                  attributes, it will exclude instance types whose
+                                  price exceeds your specified threshold.
+                                type: number
+                              requireHibernateSupport:
+                                description: Indicates whether the instance types
+                                  must support hibernation. When set to true, only
+                                  instance types that support hibernation are selected.
+                                type: boolean
+                              spotMaxPricePercentageOverLowestPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage over the lowest priced On-Demand
+                                  instance. This helps control Spot instance costs
+                                  while maintaining access to capacity.
+                                type: number
+                              totalLocalStorageGb:
+                                description: The minimum and maximum total local storage
+                                  in gigabytes (GB) for instance types with local
+                                  storage.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              vcpuCount:
+                                description: The minimum and maximum number of vCPUs
+                                  for the instance types. Amazon ECS selects instance
+                                  types that have vCPU counts within this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                            type: object
+                          monitoring:
+                            description: 'CloudWatch provides two categories of monitoring:
+                              basic monitoring and detailed monitoring. By default,
+                              your managed instance is configured for basic monitoring.
+                              You can optionally enable detailed monitoring to help
+                              you more quickly identify and act on operational issues.
+                              You can enable or turn off detailed monitoring at launch
+                              or when the managed instance is running or stopped.
+                              For more information, see Detailed monitoring for Amazon
+                              ECS Managed Instances in the Amazon ECS Developer Guide.
+                              Valid values are BASIC and DETAILED.'
+                            type: string
+                          networkConfiguration:
+                            description: The network configuration for Amazon ECS
+                              Managed Instances. This specifies the subnets and security
+                              groups that instances use for network connectivity.
+                              Detailed below.
+                            properties:
+                              securityGroups:
+                                description: The list of security group IDs to apply
+                                  to Amazon ECS Managed Instances. These security
+                                  groups control the network traffic allowed to and
+                                  from the instances.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              subnets:
+                                description: The list of subnet IDs where Amazon ECS
+                                  can launch Amazon ECS Managed Instances. Instances
+                                  are distributed across the specified subnets for
+                                  high availability. All subnets must be in the same
+                                  VPC.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          storageConfiguration:
+                            description: The storage configuration for Amazon ECS
+                              Managed Instances. This defines the root volume size
+                              and type for the instances. Detailed below.
+                            properties:
+                              storageSizeGib:
+                                description: The size of the tasks volume in GiB.
+                                  Must be at least 1.
+                                type: number
+                            type: object
+                        type: object
+                      propagateTags:
+                        description: Specifies whether to propagate tags from the
+                          capacity provider to the Amazon ECS Managed Instances. When
+                          enabled, tags applied to the capacity provider are automatically
+                          applied to all instances launched by this provider. Valid
+                          values are CAPACITY_PROVIDER and NONE.
                         type: string
                     type: object
                   region:
@@ -799,7 +2327,8 @@ spec:
                 properties:
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     properties:
                       autoScalingGroupArn:
                         description: '- ARN of the associated auto scaling group.'
@@ -917,6 +2446,356 @@ spec:
                         description: '- Enables or disables container-aware termination
                           of instances in the auto scaling group when scale-in happens.
                           Valid values are ENABLED and DISABLED.'
+                        type: string
+                    type: object
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    properties:
+                      infrastructureOptimization:
+                        description: Defines how Amazon ECS Managed Instances optimizes
+                          the infrastructure in your capacity provider. Configure
+                          it to turn on or off the infrastructure optimization in
+                          your capacity provider, and to control the idle EC2 instances
+                          optimization delay.
+                        properties:
+                          scaleInAfter:
+                            description: 'This parameter defines the number of seconds
+                              Amazon ECS Managed Instances waits before optimizing
+                              EC2 instances that have become idle or underutilized.
+                              A longer delay increases the likelihood of placing new
+                              tasks on idle instances, reducing startup time. A shorter
+                              delay helps reduce infrastructure costs by optimizing
+                              idle instances more quickly. Valid values are:'
+                            type: number
+                        type: object
+                      infrastructureRoleArn:
+                        description: The Amazon Resource Name (ARN) of the infrastructure
+                          role that Amazon ECS uses to manage instances on your behalf.
+                          This role must have permissions to launch, terminate, and
+                          manage Amazon EC2 instances, as well as access to other
+                          AWS services required for Amazon ECS Managed Instances functionality.
+                          For more information, see Amazon ECS infrastructure IAM
+                          role in the Amazon ECS Developer Guide.
+                        type: string
+                      instanceLaunchTemplate:
+                        description: The launch template configuration that specifies
+                          how Amazon ECS should launch Amazon EC2 instances. This
+                          includes the instance profile, network configuration, storage
+                          settings, and instance requirements for attribute-based
+                          instance type selection. For more information, see Store
+                          instance launch parameters in Amazon EC2 launch templates
+                          in the Amazon EC2 User Guide. Detailed below.
+                        properties:
+                          capacityOptionType:
+                            description: The purchasing option for the EC2 instances
+                              used in the capacity provider. Determines whether to
+                              use On-Demand or Spot instances. Valid values are ON_DEMAND
+                              and SPOT. Defaults to ON_DEMAND when not specified.
+                              Changing this value will trigger replacement of the
+                              capacity provider. For more information, see Amazon
+                              EC2 billing and purchasing options in the Amazon EC2
+                              User Guide.
+                            type: string
+                          ec2InstanceProfileArn:
+                            description: The Amazon Resource Name (ARN) of the instance
+                              profile that Amazon ECS applies to Amazon ECS Managed
+                              Instances. This instance profile must include the necessary
+                              permissions for your tasks to access AWS services and
+                              resources. For more information, see Amazon ECS instance
+                              profile for Managed Instances in the Amazon ECS Developer
+                              Guide.
+                            type: string
+                          instanceRequirements:
+                            description: The instance requirements. You can specify
+                              the instance types and instance requirements such as
+                              vCPU count, memory, network performance, and accelerator
+                              specifications. Amazon ECS automatically selects the
+                              instances that match the specified criteria. Detailed
+                              below.
+                            properties:
+                              acceleratorCount:
+                                description: The minimum and maximum number of accelerators
+                                  for the instance types. This is used when you need
+                                  instances with specific numbers of GPUs or other
+                                  accelerators.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorManufacturers:
+                                description: The accelerator manufacturers to include.
+                                  You can specify nvidia, amd, amazon-web-services,
+                                  xilinx, or habana depending on your accelerator
+                                  requirements. Valid values are amazon-web-services,
+                                  amd, nvidia, xilinx, habana.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorNames:
+                                description: The specific accelerator names to include.
+                                  For example, you can specify a100, v100, k80, or
+                                  other specific accelerator models. Valid values
+                                  are a100, inferentia, k520, k80, m60, radeon-pro-v520,
+                                  t4, vu9p, v100, a10g, h100, t4g.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorTotalMemoryMib:
+                                description: The minimum and maximum total accelerator
+                                  memory in mebibytes (MiB). This is important for
+                                  GPU workloads that require specific amounts of video
+                                  memory.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorTypes:
+                                description: The accelerator types to include. You
+                                  can specify gpu for graphics processing units, fpga
+                                  for field programmable gate arrays, or inference
+                                  for machine learning inference accelerators. Valid
+                                  values are gpu, fpga, inference.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              allowedInstanceTypes:
+                                description: The instance types to include in the
+                                  selection. When specified, Amazon ECS only considers
+                                  these instance types, subject to the other requirements
+                                  specified. Maximum of 400 instance types. You can
+                                  specify instance type patterns using wildcards (e.g.,
+                                  m5.*).
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              bareMetal:
+                                description: Indicates whether to include bare metal
+                                  instance types. Set to included to allow bare metal
+                                  instances, excluded to exclude them, or required
+                                  to use only bare metal instances. Valid values are
+                                  included, excluded, required.
+                                type: string
+                              baselineEbsBandwidthMbps:
+                                description: The minimum and maximum baseline Amazon
+                                  EBS bandwidth in megabits per second (Mbps). This
+                                  is important for workloads with high storage I/O
+                                  requirements.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              burstablePerformance:
+                                description: Indicates whether to include burstable
+                                  performance instance types (T2, T3, T3a, T4g). Set
+                                  to included to allow burstable instances, excluded
+                                  to exclude them, or required to use only burstable
+                                  instances. Valid values are included, excluded,
+                                  required.
+                                type: string
+                              cpuManufacturers:
+                                description: The CPU manufacturers to include or exclude.
+                                  You can specify intel, amd, or amazon-web-services
+                                  to control which CPU types are used for your workloads.
+                                  Valid values are intel, amd, amazon-web-services.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              excludedInstanceTypes:
+                                description: The instance types to exclude from selection.
+                                  Use this to prevent Amazon ECS from selecting specific
+                                  instance types that may not be suitable for your
+                                  workloads. Maximum of 400 instance types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              instanceGenerations:
+                                description: The instance generations to include.
+                                  You can specify current to use the latest generation
+                                  instances, or previous to include previous generation
+                                  instances for cost optimization. Valid values are
+                                  current, previous.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              localStorage:
+                                description: Indicates whether to include instance
+                                  types with local storage. Set to included to allow
+                                  local storage, excluded to exclude it, or required
+                                  to use only instances with local storage. Valid
+                                  values are included, excluded, required.
+                                type: string
+                              localStorageTypes:
+                                description: The local storage types to include. You
+                                  can specify hdd for hard disk drives, ssd for solid
+                                  state drives, or both. Valid values are hdd, ssd.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage of the optimal On-Demand price.
+                                  This provides more precise cost control for Spot
+                                  instance selection.
+                                type: number
+                              memoryGibPerVcpu:
+                                description: The minimum and maximum amount of memory
+                                  per vCPU in gibibytes (GiB). This helps ensure that
+                                  instance types have the appropriate memory-to-CPU
+                                  ratio for your workloads.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              memoryMib:
+                                description: The minimum and maximum amount of memory
+                                  in mebibytes (MiB) for the instance types. Amazon
+                                  ECS selects instance types that have memory within
+                                  this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkBandwidthGbps:
+                                description: The minimum and maximum network bandwidth
+                                  in gigabits per second (Gbps). This is crucial for
+                                  network-intensive workloads that require high throughput.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkInterfaceCount:
+                                description: The minimum and maximum number of network
+                                  interfaces for the instance types. This is useful
+                                  for workloads that require multiple network interfaces.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              onDemandMaxPricePercentageOverLowestPrice:
+                                description: The price protection threshold for On-Demand
+                                  Instances, as a percentage higher than an identified
+                                  On-Demand price. The identified On-Demand price
+                                  is the price of the lowest priced current generation
+                                  C, M, or R instance type with your specified attributes.
+                                  When Amazon ECS selects instance types with your
+                                  attributes, it will exclude instance types whose
+                                  price exceeds your specified threshold.
+                                type: number
+                              requireHibernateSupport:
+                                description: Indicates whether the instance types
+                                  must support hibernation. When set to true, only
+                                  instance types that support hibernation are selected.
+                                type: boolean
+                              spotMaxPricePercentageOverLowestPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage over the lowest priced On-Demand
+                                  instance. This helps control Spot instance costs
+                                  while maintaining access to capacity.
+                                type: number
+                              totalLocalStorageGb:
+                                description: The minimum and maximum total local storage
+                                  in gigabytes (GB) for instance types with local
+                                  storage.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              vcpuCount:
+                                description: The minimum and maximum number of vCPUs
+                                  for the instance types. Amazon ECS selects instance
+                                  types that have vCPU counts within this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                            type: object
+                          monitoring:
+                            description: 'CloudWatch provides two categories of monitoring:
+                              basic monitoring and detailed monitoring. By default,
+                              your managed instance is configured for basic monitoring.
+                              You can optionally enable detailed monitoring to help
+                              you more quickly identify and act on operational issues.
+                              You can enable or turn off detailed monitoring at launch
+                              or when the managed instance is running or stopped.
+                              For more information, see Detailed monitoring for Amazon
+                              ECS Managed Instances in the Amazon ECS Developer Guide.
+                              Valid values are BASIC and DETAILED.'
+                            type: string
+                          networkConfiguration:
+                            description: The network configuration for Amazon ECS
+                              Managed Instances. This specifies the subnets and security
+                              groups that instances use for network connectivity.
+                              Detailed below.
+                            properties:
+                              securityGroups:
+                                description: The list of security group IDs to apply
+                                  to Amazon ECS Managed Instances. These security
+                                  groups control the network traffic allowed to and
+                                  from the instances.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              subnets:
+                                description: The list of subnet IDs where Amazon ECS
+                                  can launch Amazon ECS Managed Instances. Instances
+                                  are distributed across the specified subnets for
+                                  high availability. All subnets must be in the same
+                                  VPC.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          storageConfiguration:
+                            description: The storage configuration for Amazon ECS
+                              Managed Instances. This defines the root volume size
+                              and type for the instances. Detailed below.
+                            properties:
+                              storageSizeGib:
+                                description: The size of the tasks volume in GiB.
+                                  Must be at least 1.
+                                type: number
+                            type: object
+                        type: object
+                      propagateTags:
+                        description: Specifies whether to propagate tags from the
+                          capacity provider to the Amazon ECS Managed Instances. When
+                          enabled, tags applied to the capacity provider are automatically
+                          applied to all instances launched by this provider. Valid
+                          values are CAPACITY_PROVIDER and NONE.
                         type: string
                     type: object
                   tags:
@@ -1012,11 +2891,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.autoScalingGroupProvider is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoScalingGroupProvider)
-                || (has(self.initProvider) && has(self.initProvider.autoScalingGroupProvider))'
           status:
             description: CapacityProviderStatus defines the observed state of CapacityProvider.
             properties:
@@ -1027,7 +2901,8 @@ spec:
                     type: string
                   autoScalingGroupProvider:
                     description: Configuration block for the provider for the ECS
-                      auto scaling group. Detailed below.
+                      auto scaling group. Detailed below. Exactly one of auto_scaling_group_provider
+                      or managed_instances_provider must be specified.
                     properties:
                       autoScalingGroupArn:
                         description: '- ARN of the associated auto scaling group.'
@@ -1071,8 +2946,358 @@ spec:
                           Valid values are ENABLED and DISABLED.'
                         type: string
                     type: object
+                  cluster:
+                    description: Name of the ECS cluster. Required when using managed_instances_provider.
+                      Must not be set when using auto_scaling_group_provider.
+                    type: string
                   id:
                     type: string
+                  managedInstancesProvider:
+                    description: Configuration block for the managed instances provider.
+                      Detailed below. Exactly one of auto_scaling_group_provider or
+                      managed_instances_provider must be specified.
+                    properties:
+                      infrastructureOptimization:
+                        description: Defines how Amazon ECS Managed Instances optimizes
+                          the infrastructure in your capacity provider. Configure
+                          it to turn on or off the infrastructure optimization in
+                          your capacity provider, and to control the idle EC2 instances
+                          optimization delay.
+                        properties:
+                          scaleInAfter:
+                            description: 'This parameter defines the number of seconds
+                              Amazon ECS Managed Instances waits before optimizing
+                              EC2 instances that have become idle or underutilized.
+                              A longer delay increases the likelihood of placing new
+                              tasks on idle instances, reducing startup time. A shorter
+                              delay helps reduce infrastructure costs by optimizing
+                              idle instances more quickly. Valid values are:'
+                            type: number
+                        type: object
+                      infrastructureRoleArn:
+                        description: The Amazon Resource Name (ARN) of the infrastructure
+                          role that Amazon ECS uses to manage instances on your behalf.
+                          This role must have permissions to launch, terminate, and
+                          manage Amazon EC2 instances, as well as access to other
+                          AWS services required for Amazon ECS Managed Instances functionality.
+                          For more information, see Amazon ECS infrastructure IAM
+                          role in the Amazon ECS Developer Guide.
+                        type: string
+                      instanceLaunchTemplate:
+                        description: The launch template configuration that specifies
+                          how Amazon ECS should launch Amazon EC2 instances. This
+                          includes the instance profile, network configuration, storage
+                          settings, and instance requirements for attribute-based
+                          instance type selection. For more information, see Store
+                          instance launch parameters in Amazon EC2 launch templates
+                          in the Amazon EC2 User Guide. Detailed below.
+                        properties:
+                          capacityOptionType:
+                            description: The purchasing option for the EC2 instances
+                              used in the capacity provider. Determines whether to
+                              use On-Demand or Spot instances. Valid values are ON_DEMAND
+                              and SPOT. Defaults to ON_DEMAND when not specified.
+                              Changing this value will trigger replacement of the
+                              capacity provider. For more information, see Amazon
+                              EC2 billing and purchasing options in the Amazon EC2
+                              User Guide.
+                            type: string
+                          ec2InstanceProfileArn:
+                            description: The Amazon Resource Name (ARN) of the instance
+                              profile that Amazon ECS applies to Amazon ECS Managed
+                              Instances. This instance profile must include the necessary
+                              permissions for your tasks to access AWS services and
+                              resources. For more information, see Amazon ECS instance
+                              profile for Managed Instances in the Amazon ECS Developer
+                              Guide.
+                            type: string
+                          instanceRequirements:
+                            description: The instance requirements. You can specify
+                              the instance types and instance requirements such as
+                              vCPU count, memory, network performance, and accelerator
+                              specifications. Amazon ECS automatically selects the
+                              instances that match the specified criteria. Detailed
+                              below.
+                            properties:
+                              acceleratorCount:
+                                description: The minimum and maximum number of accelerators
+                                  for the instance types. This is used when you need
+                                  instances with specific numbers of GPUs or other
+                                  accelerators.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorManufacturers:
+                                description: The accelerator manufacturers to include.
+                                  You can specify nvidia, amd, amazon-web-services,
+                                  xilinx, or habana depending on your accelerator
+                                  requirements. Valid values are amazon-web-services,
+                                  amd, nvidia, xilinx, habana.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorNames:
+                                description: The specific accelerator names to include.
+                                  For example, you can specify a100, v100, k80, or
+                                  other specific accelerator models. Valid values
+                                  are a100, inferentia, k520, k80, m60, radeon-pro-v520,
+                                  t4, vu9p, v100, a10g, h100, t4g.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              acceleratorTotalMemoryMib:
+                                description: The minimum and maximum total accelerator
+                                  memory in mebibytes (MiB). This is important for
+                                  GPU workloads that require specific amounts of video
+                                  memory.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              acceleratorTypes:
+                                description: The accelerator types to include. You
+                                  can specify gpu for graphics processing units, fpga
+                                  for field programmable gate arrays, or inference
+                                  for machine learning inference accelerators. Valid
+                                  values are gpu, fpga, inference.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              allowedInstanceTypes:
+                                description: The instance types to include in the
+                                  selection. When specified, Amazon ECS only considers
+                                  these instance types, subject to the other requirements
+                                  specified. Maximum of 400 instance types. You can
+                                  specify instance type patterns using wildcards (e.g.,
+                                  m5.*).
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              bareMetal:
+                                description: Indicates whether to include bare metal
+                                  instance types. Set to included to allow bare metal
+                                  instances, excluded to exclude them, or required
+                                  to use only bare metal instances. Valid values are
+                                  included, excluded, required.
+                                type: string
+                              baselineEbsBandwidthMbps:
+                                description: The minimum and maximum baseline Amazon
+                                  EBS bandwidth in megabits per second (Mbps). This
+                                  is important for workloads with high storage I/O
+                                  requirements.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              burstablePerformance:
+                                description: Indicates whether to include burstable
+                                  performance instance types (T2, T3, T3a, T4g). Set
+                                  to included to allow burstable instances, excluded
+                                  to exclude them, or required to use only burstable
+                                  instances. Valid values are included, excluded,
+                                  required.
+                                type: string
+                              cpuManufacturers:
+                                description: The CPU manufacturers to include or exclude.
+                                  You can specify intel, amd, or amazon-web-services
+                                  to control which CPU types are used for your workloads.
+                                  Valid values are intel, amd, amazon-web-services.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              excludedInstanceTypes:
+                                description: The instance types to exclude from selection.
+                                  Use this to prevent Amazon ECS from selecting specific
+                                  instance types that may not be suitable for your
+                                  workloads. Maximum of 400 instance types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              instanceGenerations:
+                                description: The instance generations to include.
+                                  You can specify current to use the latest generation
+                                  instances, or previous to include previous generation
+                                  instances for cost optimization. Valid values are
+                                  current, previous.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              localStorage:
+                                description: Indicates whether to include instance
+                                  types with local storage. Set to included to allow
+                                  local storage, excluded to exclude it, or required
+                                  to use only instances with local storage. Valid
+                                  values are included, excluded, required.
+                                type: string
+                              localStorageTypes:
+                                description: The local storage types to include. You
+                                  can specify hdd for hard disk drives, ssd for solid
+                                  state drives, or both. Valid values are hdd, ssd.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage of the optimal On-Demand price.
+                                  This provides more precise cost control for Spot
+                                  instance selection.
+                                type: number
+                              memoryGibPerVcpu:
+                                description: The minimum and maximum amount of memory
+                                  per vCPU in gibibytes (GiB). This helps ensure that
+                                  instance types have the appropriate memory-to-CPU
+                                  ratio for your workloads.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              memoryMib:
+                                description: The minimum and maximum amount of memory
+                                  in mebibytes (MiB) for the instance types. Amazon
+                                  ECS selects instance types that have memory within
+                                  this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkBandwidthGbps:
+                                description: The minimum and maximum network bandwidth
+                                  in gigabits per second (Gbps). This is crucial for
+                                  network-intensive workloads that require high throughput.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              networkInterfaceCount:
+                                description: The minimum and maximum number of network
+                                  interfaces for the instance types. This is useful
+                                  for workloads that require multiple network interfaces.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              onDemandMaxPricePercentageOverLowestPrice:
+                                description: The price protection threshold for On-Demand
+                                  Instances, as a percentage higher than an identified
+                                  On-Demand price. The identified On-Demand price
+                                  is the price of the lowest priced current generation
+                                  C, M, or R instance type with your specified attributes.
+                                  When Amazon ECS selects instance types with your
+                                  attributes, it will exclude instance types whose
+                                  price exceeds your specified threshold.
+                                type: number
+                              requireHibernateSupport:
+                                description: Indicates whether the instance types
+                                  must support hibernation. When set to true, only
+                                  instance types that support hibernation are selected.
+                                type: boolean
+                              spotMaxPricePercentageOverLowestPrice:
+                                description: The maximum price for Spot instances
+                                  as a percentage over the lowest priced On-Demand
+                                  instance. This helps control Spot instance costs
+                                  while maintaining access to capacity.
+                                type: number
+                              totalLocalStorageGb:
+                                description: The minimum and maximum total local storage
+                                  in gigabytes (GB) for instance types with local
+                                  storage.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                              vcpuCount:
+                                description: The minimum and maximum number of vCPUs
+                                  for the instance types. Amazon ECS selects instance
+                                  types that have vCPU counts within this range.
+                                properties:
+                                  max:
+                                    type: number
+                                  min:
+                                    type: number
+                                type: object
+                            type: object
+                          monitoring:
+                            description: 'CloudWatch provides two categories of monitoring:
+                              basic monitoring and detailed monitoring. By default,
+                              your managed instance is configured for basic monitoring.
+                              You can optionally enable detailed monitoring to help
+                              you more quickly identify and act on operational issues.
+                              You can enable or turn off detailed monitoring at launch
+                              or when the managed instance is running or stopped.
+                              For more information, see Detailed monitoring for Amazon
+                              ECS Managed Instances in the Amazon ECS Developer Guide.
+                              Valid values are BASIC and DETAILED.'
+                            type: string
+                          networkConfiguration:
+                            description: The network configuration for Amazon ECS
+                              Managed Instances. This specifies the subnets and security
+                              groups that instances use for network connectivity.
+                              Detailed below.
+                            properties:
+                              securityGroups:
+                                description: The list of security group IDs to apply
+                                  to Amazon ECS Managed Instances. These security
+                                  groups control the network traffic allowed to and
+                                  from the instances.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              subnets:
+                                description: The list of subnet IDs where Amazon ECS
+                                  can launch Amazon ECS Managed Instances. Instances
+                                  are distributed across the specified subnets for
+                                  high availability. All subnets must be in the same
+                                  VPC.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          storageConfiguration:
+                            description: The storage configuration for Amazon ECS
+                              Managed Instances. This defines the root volume size
+                              and type for the instances. Detailed below.
+                            properties:
+                              storageSizeGib:
+                                description: The size of the tasks volume in GiB.
+                                  Must be at least 1.
+                                type: number
+                            type: object
+                        type: object
+                      propagateTags:
+                        description: Specifies whether to propagate tags from the
+                          capacity provider to the Amazon ECS Managed Instances. When
+                          enabled, tags applied to the capacity provider are automatically
+                          applied to all instances launched by this provider. Valid
+                          values are CAPACITY_PROVIDER and NONE.
+                        type: string
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

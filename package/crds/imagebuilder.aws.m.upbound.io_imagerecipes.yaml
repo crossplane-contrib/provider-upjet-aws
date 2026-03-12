@@ -59,6 +59,14 @@ spec:
             properties:
               forProvider:
                 properties:
+                  amiTags:
+                    additionalProperties:
+                      type: string
+                    description: Tags that are applied to the AMI that Image Builder
+                      creates during the Build phase prior to image distribution.
+                      Maximum of 50 tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   blockDeviceMapping:
                     description: Configuration block(s) with block device mappings
                       for the image recipe. Detailed below.
@@ -230,7 +238,9 @@ spec:
                   parentImage:
                     description: The image recipe uses this image as a base from which
                       to build your customized image. The value can be the base image
-                      ARN or an AMI ID.
+                      ARN, an AMI ID, or an SSM Parameter referencing the AMI. For
+                      an SSM Parameter, enter the prefix ssm:, followed by the parameter
+                      name or ARN.
                     type: string
                   region:
                     description: |-
@@ -282,6 +292,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  amiTags:
+                    additionalProperties:
+                      type: string
+                    description: Tags that are applied to the AMI that Image Builder
+                      creates during the Build phase prior to image distribution.
+                      Maximum of 50 tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   blockDeviceMapping:
                     description: Configuration block(s) with block device mappings
                       for the image recipe. Detailed below.
@@ -453,7 +471,9 @@ spec:
                   parentImage:
                     description: The image recipe uses this image as a base from which
                       to build your customized image. The value can be the base image
-                      ARN or an AMI ID.
+                      ARN, an AMI ID, or an SSM Parameter referencing the AMI. For
+                      an SSM Parameter, enter the prefix ssm:, followed by the parameter
+                      name or ARN.
                     type: string
                   systemsManagerAgent:
                     description: Configuration block for the Systems Manager Agent
@@ -565,6 +585,14 @@ spec:
             properties:
               atProvider:
                 properties:
+                  amiTags:
+                    additionalProperties:
+                      type: string
+                    description: Tags that are applied to the AMI that Image Builder
+                      creates during the Build phase prior to image distribution.
+                      Maximum of 50 tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   arn:
                     description: Amazon Resource Name (ARN) of the image recipe.
                     type: string
@@ -655,6 +683,7 @@ spec:
                     description: Description of the image recipe.
                     type: string
                   id:
+                    description: Amazon Resource Name (ARN) of the image recipe.
                     type: string
                   name:
                     description: Name of the image recipe.
@@ -665,7 +694,9 @@ spec:
                   parentImage:
                     description: The image recipe uses this image as a base from which
                       to build your customized image. The value can be the base image
-                      ARN or an AMI ID.
+                      ARN, an AMI ID, or an SSM Parameter referencing the AMI. For
+                      an SSM Parameter, enter the prefix ssm:, followed by the parameter
+                      name or ARN.
                     type: string
                   platform:
                     description: Platform of the image recipe.

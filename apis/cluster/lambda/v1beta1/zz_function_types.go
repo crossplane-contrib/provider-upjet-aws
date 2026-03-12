@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CapacityProviderConfigInitParameters struct {
+
+	// Configuration block for Lambda Managed Instances Capacity Provider. See below.
+	LambdaManagedInstancesCapacityProviderConfig []LambdaManagedInstancesCapacityProviderConfigInitParameters `json:"lambdaManagedInstancesCapacityProviderConfig,omitempty" tf:"lambda_managed_instances_capacity_provider_config,omitempty"`
+}
+
+type CapacityProviderConfigObservation struct {
+
+	// Configuration block for Lambda Managed Instances Capacity Provider. See below.
+	LambdaManagedInstancesCapacityProviderConfig []LambdaManagedInstancesCapacityProviderConfigObservation `json:"lambdaManagedInstancesCapacityProviderConfig,omitempty" tf:"lambda_managed_instances_capacity_provider_config,omitempty"`
+}
+
+type CapacityProviderConfigParameters struct {
+
+	// Configuration block for Lambda Managed Instances Capacity Provider. See below.
+	// +kubebuilder:validation:Optional
+	LambdaManagedInstancesCapacityProviderConfig []LambdaManagedInstancesCapacityProviderConfigParameters `json:"lambdaManagedInstancesCapacityProviderConfig" tf:"lambda_managed_instances_capacity_provider_config,omitempty"`
+}
+
 type DeadLetterConfigInitParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails.
@@ -50,6 +69,35 @@ type DeadLetterConfigParameters struct {
 	// Selector for a Queue in sqs to populate targetArn.
 	// +kubebuilder:validation:Optional
 	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+}
+
+type DurableConfigInitParameters struct {
+
+	// Maximum execution time in seconds for the durable function. Valid value between 1 and 31622400 (366 days).
+	ExecutionTimeout *float64 `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
+
+	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+}
+
+type DurableConfigObservation struct {
+
+	// Maximum execution time in seconds for the durable function. Valid value between 1 and 31622400 (366 days).
+	ExecutionTimeout *float64 `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
+
+	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+}
+
+type DurableConfigParameters struct {
+
+	// Maximum execution time in seconds for the durable function. Valid value between 1 and 31622400 (366 days).
+	// +kubebuilder:validation:Optional
+	ExecutionTimeout *float64 `json:"executionTimeout" tf:"execution_timeout,omitempty"`
+
+	// Number of days to retain the function's execution state. Valid value between 1 and 90. If not specified, the function's execution state is not retained. Defaults to 14.
+	// +kubebuilder:validation:Optional
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type EnvironmentInitParameters struct {
@@ -147,6 +195,12 @@ type FunctionInitParameters struct {
 	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stays the same.
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
+	// Configuration block for Lambda Capacity Provider. See below.
+	CapacityProviderConfig []CapacityProviderConfigInitParameters `json:"capacityProviderConfig,omitempty" tf:"capacity_provider_config,omitempty"`
+
+	// Base64-encoded representation the source code package file. Use this argument to trigger updates when the function source code changes. For OCI, this value is relayed directly from the image digest. For zip files, this value is the Base64 encoded SHA-256 hash of the .zip file. Layers are not included in the calculation. To trigger updates using a non-standard hashing algorithm, use the source_code_hash argument instead.
+	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
+
 	// ARN of a code-signing configuration to enable code signing for this function.
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 
@@ -155,6 +209,9 @@ type FunctionInitParameters struct {
 
 	// Description of what your Lambda Function does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block for durable function settings. See below. durable_config may only be available in limited regions, including us-east-2.
+	DurableConfig []DurableConfigInitParameters `json:"durableConfig,omitempty" tf:"durable_config,omitempty"`
 
 	// Configuration block for environment variables. See below.
 	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
@@ -202,7 +259,7 @@ type FunctionInitParameters struct {
 	// Configuration block for advanced logging settings. See below.
 	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 32,768 MB (32 GB), in 1 MB increments. Defaults to 128.
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
@@ -210,6 +267,9 @@ type FunctionInitParameters struct {
 
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Whether to publish to a alias or version number. Omit for regular version publishing. Option is LATEST_PUBLISHED.
+	PublishTo *string `json:"publishTo,omitempty" tf:"publish_to,omitempty"`
 
 	// Whether to replace the security groups on the function's VPC configuration prior to destruction. Default is false.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
@@ -282,6 +342,9 @@ type FunctionInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Configuration block for Tenancy. See below.
+	TenancyConfig []TenancyConfigInitParameters `json:"tenancyConfig,omitempty" tf:"tenancy_config,omitempty"`
+
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
@@ -300,7 +363,10 @@ type FunctionObservation struct {
 	// ARN identifying your Lambda Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Base64-encoded representation of raw SHA-256 sum of the zip file.
+	// Configuration block for Lambda Capacity Provider. See below.
+	CapacityProviderConfig []CapacityProviderConfigObservation `json:"capacityProviderConfig,omitempty" tf:"capacity_provider_config,omitempty"`
+
+	// Base64-encoded representation the source code package file. Use this argument to trigger updates when the function source code changes. For OCI, this value is relayed directly from the image digest. For zip files, this value is the Base64 encoded SHA-256 hash of the .zip file. Layers are not included in the calculation. To trigger updates using a non-standard hashing algorithm, use the source_code_hash argument instead.
 	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
 
 	// ARN of a code-signing configuration to enable code signing for this function.
@@ -311,6 +377,9 @@ type FunctionObservation struct {
 
 	// Description of what your Lambda Function does.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block for durable function settings. See below. durable_config may only be available in limited regions, including us-east-2.
+	DurableConfig []DurableConfigObservation `json:"durableConfig,omitempty" tf:"durable_config,omitempty"`
 
 	// Configuration block for environment variables. See below.
 	Environment []EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
@@ -347,7 +416,7 @@ type FunctionObservation struct {
 	// Configuration block for advanced logging settings. See below.
 	LoggingConfig []LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 32,768 MB (32 GB), in 1 MB increments. Defaults to 128.
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
@@ -355,6 +424,9 @@ type FunctionObservation struct {
 
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Whether to publish to a alias or version number. Omit for regular version publishing. Option is LATEST_PUBLISHED.
+	PublishTo *string `json:"publishTo,omitempty" tf:"publish_to,omitempty"`
 
 	// ARN identifying your Lambda Function Version (if versioning is enabled via publish = true).
 	QualifiedArn *string `json:"qualifiedArn,omitempty" tf:"qualified_arn,omitempty"`
@@ -375,6 +447,9 @@ type FunctionObservation struct {
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1.
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
+
+	// ARN to be used for invoking Lambda Function from API Gateway with response streaming - to be used in aws_api_gateway_integration's uri.
+	ResponseStreamingInvokeArn *string `json:"responseStreamingInvokeArn,omitempty" tf:"response_streaming_invoke_arn,omitempty"`
 
 	// ARN of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -420,6 +495,9 @@ type FunctionObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Configuration block for Tenancy. See below.
+	TenancyConfig []TenancyConfigObservation `json:"tenancyConfig,omitempty" tf:"tenancy_config,omitempty"`
+
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
@@ -439,6 +517,14 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
+	// Configuration block for Lambda Capacity Provider. See below.
+	// +kubebuilder:validation:Optional
+	CapacityProviderConfig []CapacityProviderConfigParameters `json:"capacityProviderConfig,omitempty" tf:"capacity_provider_config,omitempty"`
+
+	// Base64-encoded representation the source code package file. Use this argument to trigger updates when the function source code changes. For OCI, this value is relayed directly from the image digest. For zip files, this value is the Base64 encoded SHA-256 hash of the .zip file. Layers are not included in the calculation. To trigger updates using a non-standard hashing algorithm, use the source_code_hash argument instead.
+	// +kubebuilder:validation:Optional
+	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
+
 	// ARN of a code-signing configuration to enable code signing for this function.
 	// +kubebuilder:validation:Optional
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
@@ -450,6 +536,10 @@ type FunctionParameters struct {
 	// Description of what your Lambda Function does.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block for durable function settings. See below. durable_config may only be available in limited regions, including us-east-2.
+	// +kubebuilder:validation:Optional
+	DurableConfig []DurableConfigParameters `json:"durableConfig,omitempty" tf:"durable_config,omitempty"`
 
 	// Configuration block for environment variables. See below.
 	// +kubebuilder:validation:Optional
@@ -506,7 +596,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingConfig []LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
-	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 10,240 MB (10 GB), in 1 MB increments. Defaults to 128.
+	// Amount of memory in MB your Lambda Function can use at runtime. Valid value between 128 MB to 32,768 MB (32 GB), in 1 MB increments. Defaults to 128.
 	// +kubebuilder:validation:Optional
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
@@ -517,6 +607,10 @@ type FunctionParameters struct {
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Whether to publish to a alias or version number. Omit for regular version publishing. Option is LATEST_PUBLISHED.
+	// +kubebuilder:validation:Optional
+	PublishTo *string `json:"publishTo,omitempty" tf:"publish_to,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -607,6 +701,10 @@ type FunctionParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Configuration block for Tenancy. See below.
+	// +kubebuilder:validation:Optional
+	TenancyConfig []TenancyConfigParameters `json:"tenancyConfig,omitempty" tf:"tenancy_config,omitempty"`
+
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. Valid between 1 and 900.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
@@ -657,6 +755,45 @@ type ImageConfigParameters struct {
 	// Working directory for the container image.
 	// +kubebuilder:validation:Optional
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
+}
+
+type LambdaManagedInstancesCapacityProviderConfigInitParameters struct {
+
+	// ARN of the Capacity Provider.
+	CapacityProviderArn *string `json:"capacityProviderArn,omitempty" tf:"capacity_provider_arn,omitempty"`
+
+	// Memory GiB per vCPU for the execution environment.
+	ExecutionEnvironmentMemoryGibPerVcpu *float64 `json:"executionEnvironmentMemoryGibPerVcpu,omitempty" tf:"execution_environment_memory_gib_per_vcpu,omitempty"`
+
+	// Maximum concurrency per execution environment.
+	PerExecutionEnvironmentMaxConcurrency *float64 `json:"perExecutionEnvironmentMaxConcurrency,omitempty" tf:"per_execution_environment_max_concurrency,omitempty"`
+}
+
+type LambdaManagedInstancesCapacityProviderConfigObservation struct {
+
+	// ARN of the Capacity Provider.
+	CapacityProviderArn *string `json:"capacityProviderArn,omitempty" tf:"capacity_provider_arn,omitempty"`
+
+	// Memory GiB per vCPU for the execution environment.
+	ExecutionEnvironmentMemoryGibPerVcpu *float64 `json:"executionEnvironmentMemoryGibPerVcpu,omitempty" tf:"execution_environment_memory_gib_per_vcpu,omitempty"`
+
+	// Maximum concurrency per execution environment.
+	PerExecutionEnvironmentMaxConcurrency *float64 `json:"perExecutionEnvironmentMaxConcurrency,omitempty" tf:"per_execution_environment_max_concurrency,omitempty"`
+}
+
+type LambdaManagedInstancesCapacityProviderConfigParameters struct {
+
+	// ARN of the Capacity Provider.
+	// +kubebuilder:validation:Optional
+	CapacityProviderArn *string `json:"capacityProviderArn" tf:"capacity_provider_arn,omitempty"`
+
+	// Memory GiB per vCPU for the execution environment.
+	// +kubebuilder:validation:Optional
+	ExecutionEnvironmentMemoryGibPerVcpu *float64 `json:"executionEnvironmentMemoryGibPerVcpu,omitempty" tf:"execution_environment_memory_gib_per_vcpu,omitempty"`
+
+	// Maximum concurrency per execution environment.
+	// +kubebuilder:validation:Optional
+	PerExecutionEnvironmentMaxConcurrency *float64 `json:"perExecutionEnvironmentMaxConcurrency,omitempty" tf:"per_execution_environment_max_concurrency,omitempty"`
 }
 
 type LoggingConfigInitParameters struct {
@@ -746,6 +883,25 @@ type SnapStartParameters struct {
 	// When to apply snap start optimization. Valid value: PublishedVersions.
 	// +kubebuilder:validation:Optional
 	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
+}
+
+type TenancyConfigInitParameters struct {
+
+	// Tenant Isolation Mode. Valid values: PER_TENANT.
+	TenantIsolationMode *string `json:"tenantIsolationMode,omitempty" tf:"tenant_isolation_mode,omitempty"`
+}
+
+type TenancyConfigObservation struct {
+
+	// Tenant Isolation Mode. Valid values: PER_TENANT.
+	TenantIsolationMode *string `json:"tenantIsolationMode,omitempty" tf:"tenant_isolation_mode,omitempty"`
+}
+
+type TenancyConfigParameters struct {
+
+	// Tenant Isolation Mode. Valid values: PER_TENANT.
+	// +kubebuilder:validation:Optional
+	TenantIsolationMode *string `json:"tenantIsolationMode" tf:"tenant_isolation_mode,omitempty"`
 }
 
 type TracingConfigInitParameters struct {

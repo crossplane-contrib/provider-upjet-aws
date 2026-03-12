@@ -72,6 +72,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  delayAfterPolicyCreationInMs:
+                    description: Number of ms to wait between creating the policy
+                      and setting its version as default. May be required in environments
+                      with very high S3 IO loads.
+                    type: number
                   description:
                     description: Description of the IAM policy.
                     type: string
@@ -102,6 +107,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  delayAfterPolicyCreationInMs:
+                    description: Number of ms to wait between creating the policy
+                      and setting its version as default. May be required in environments
+                      with very high S3 IO loads.
+                    type: number
                   description:
                     description: Description of the IAM policy.
                     type: string
@@ -221,6 +231,11 @@ spec:
                   attachmentCount:
                     description: Number of entities (users, groups, and roles) that
                       the policy is attached to.
+                    type: number
+                  delayAfterPolicyCreationInMs:
+                    description: Number of ms to wait between creating the policy
+                      and setting its version as default. May be required in environments
+                      with very high S3 IO loads.
                     type: number
                   description:
                     description: Description of the IAM policy.

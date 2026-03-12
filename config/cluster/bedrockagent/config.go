@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 
-package backup
+package bedrockagent
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"

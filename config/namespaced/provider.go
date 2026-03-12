@@ -16,6 +16,8 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/autoscaling"
 	"github.com/upbound/provider-aws/v2/config/namespaced/backup"
 	"github.com/upbound/provider-aws/v2/config/namespaced/batch"
+	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagent"
+	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagentcore"
 	"github.com/upbound/provider-aws/v2/config/namespaced/budgets"
 	"github.com/upbound/provider-aws/v2/config/namespaced/cloudformation"
 	"github.com/upbound/provider-aws/v2/config/namespaced/cloudfront"
@@ -47,6 +49,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/elasticache"
 	"github.com/upbound/provider-aws/v2/config/namespaced/elb"
 	"github.com/upbound/provider-aws/v2/config/namespaced/elbv2"
+	"github.com/upbound/provider-aws/v2/config/namespaced/emrcontainers"
 	"github.com/upbound/provider-aws/v2/config/namespaced/firehose"
 	"github.com/upbound/provider-aws/v2/config/namespaced/fsx"
 	"github.com/upbound/provider-aws/v2/config/namespaced/gamelift"
@@ -83,6 +86,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/redshiftserverless"
 	"github.com/upbound/provider-aws/v2/config/namespaced/rolesanywhere"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53"
+	"github.com/upbound/provider-aws/v2/config/namespaced/route53profiles"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/namespaced/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/namespaced/s3"
@@ -112,6 +116,8 @@ func init() {
 	ProviderConfiguration.AddConfig(autoscaling.Configure)
 	ProviderConfiguration.AddConfig(backup.Configure)
 	ProviderConfiguration.AddConfig(batch.Configure)
+	ProviderConfiguration.AddConfig(bedrockagent.Configure)
+	ProviderConfiguration.AddConfig(bedrockagentcore.Configure)
 	ProviderConfiguration.AddConfig(cloudfront.Configure)
 	ProviderConfiguration.AddConfig(cloudsearch.Configure)
 	ProviderConfiguration.AddConfig(cloudwatch.Configure)
@@ -137,6 +143,7 @@ func init() {
 	ProviderConfiguration.AddConfig(elasticache.Configure)
 	ProviderConfiguration.AddConfig(elb.Configure)
 	ProviderConfiguration.AddConfig(elbv2.Configure)
+	ProviderConfiguration.AddConfig(emrcontainers.Configure)
 	ProviderConfiguration.AddConfig(firehose.Configure)
 	ProviderConfiguration.AddConfig(gamelift.Configure)
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
@@ -164,6 +171,7 @@ func init() {
 	ProviderConfiguration.AddConfig(redshift.Configure)
 	ProviderConfiguration.AddConfig(rolesanywhere.Configure)
 	ProviderConfiguration.AddConfig(route53.Configure)
+	ProviderConfiguration.AddConfig(route53profiles.Configure)
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)

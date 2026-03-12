@@ -16,7 +16,10 @@ import (
 
 type SubscriptionFilterInitParameters struct {
 
-	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
+	// Boolean to indicate whether to apply the subscription filter on the transformed version of the log events instead of the original ingested log events. Defaults to false. Valid only for log groups that have an active log transformer.
+	ApplyOnTransformedLogs *bool `json:"applyOnTransformedLogs,omitempty" tf:"apply_on_transformed_logs,omitempty"`
+
+	// ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
@@ -29,19 +32,23 @@ type SubscriptionFilterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationArnSelector *v1.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
 
-	// The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
+	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// +listType=set
+	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`
+
+	// Valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
 	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
-	// The name of the log group to associate the subscription filter with
+	// Name of the log group to associate the subscription filter with.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// A name for the subscription filter
+	// Name for the subscription filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
+	// ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -57,34 +64,45 @@ type SubscriptionFilterInitParameters struct {
 
 type SubscriptionFilterObservation struct {
 
-	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
+	// Boolean to indicate whether to apply the subscription filter on the transformed version of the log events instead of the original ingested log events. Defaults to false. Valid only for log groups that have an active log transformer.
+	ApplyOnTransformedLogs *bool `json:"applyOnTransformedLogs,omitempty" tf:"apply_on_transformed_logs,omitempty"`
+
+	// ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
-	// The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
+	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// +listType=set
+	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`
+
+	// Valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
 	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the log group to associate the subscription filter with
+	// Name of the log group to associate the subscription filter with.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// A name for the subscription filter
+	// Name for the subscription filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
+	// ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type SubscriptionFilterParameters struct {
 
-	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
+	// Boolean to indicate whether to apply the subscription filter on the transformed version of the log events instead of the original ingested log events. Defaults to false. Valid only for log groups that have an active log transformer.
+	// +kubebuilder:validation:Optional
+	ApplyOnTransformedLogs *bool `json:"applyOnTransformedLogs,omitempty" tf:"apply_on_transformed_logs,omitempty"`
+
+	// ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.TerraformID()
 	// +kubebuilder:validation:Optional
@@ -98,19 +116,24 @@ type SubscriptionFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationArnSelector *v1.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
 
-	// The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
+	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	// +kubebuilder:validation:Optional
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`
+
+	// Valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
 	// +kubebuilder:validation:Optional
 	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
-	// The name of the log group to associate the subscription filter with
+	// Name of the log group to associate the subscription filter with.
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
-	// A name for the subscription filter
+	// Name for the subscription filter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -119,7 +142,7 @@ type SubscriptionFilterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
+	// ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

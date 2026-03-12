@@ -20,6 +20,10 @@ type GatewayInitParameters struct {
 
 	// The name of the connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type GatewayObservation struct {
@@ -38,6 +42,14 @@ type GatewayObservation struct {
 
 	// AWS Account ID of the gateway.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type GatewayParameters struct {
@@ -49,6 +61,11 @@ type GatewayParameters struct {
 	// The name of the connection.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // GatewaySpec defines the desired state of Gateway

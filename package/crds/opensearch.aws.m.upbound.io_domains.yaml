@@ -81,6 +81,26 @@ spec:
                         description: Whether the internal user database is enabled.
                           Default is false.
                         type: boolean
+                      jwtOptions:
+                        description: Configuration block for JWT authentication. Requires
+                          OpenSearch 2.11 or later. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether JWT authentication is enabled.
+                            type: boolean
+                          publicKey:
+                            description: PEM-encoded public key used to verify JWT
+                              signatures.
+                            type: string
+                          rolesKey:
+                            description: Element of the JWT assertion to use for roles.
+                              Default is roles.
+                            type: string
+                          subjectKey:
+                            description: Element of the JWT assertion to use for the
+                              user name. Default is sub.
+                            type: string
+                        type: object
                       masterUserOptions:
                         description: Configuration block for the main user. Detailed
                           below.
@@ -110,6 +130,38 @@ spec:
                             - key
                             - name
                             type: object
+                        type: object
+                    type: object
+                  aimlOptions:
+                    description: Configuration block for parameters required to enable
+                      all machine learning features. Detailed below.
+                    properties:
+                      naturalLanguageQueryGenerationOptions:
+                        description: Configuration block for parameters required for
+                          natural language query generation on the specified domain.
+                        properties:
+                          desiredState:
+                            description: The desired state of the natural language
+                              query generation feature. Valid values are ENABLED and
+                              DISABLED.
+                            type: string
+                        type: object
+                      s3VectorsEngine:
+                        description: Configuration block for parameters required to
+                          enable S3 vectors engine features on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables S3 vectors engine features.
+                            type: boolean
+                        type: object
+                      serverlessVectorAcceleration:
+                        description: Configuration block for parameters required to
+                          enable GPU-accelerated vector search on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables GPU-accelerated vector search for
+                              improved performance on vector workloads.
+                            type: boolean
                         type: object
                     type: object
                   autoTuneOptions:
@@ -426,6 +478,25 @@ spec:
                   engineVersion:
                     description: while Elasticsearch has elasticsearch_version
                     type: string
+                  identityCenterOptions:
+                    description: Configuration block for enabling and managing IAM
+                      Identity Center integration within a domain. Detailed below.
+                    properties:
+                      enabledApiAccess:
+                        description: is set to true.
+                        type: boolean
+                      identityCenterInstanceArn:
+                        description: ARN of the domain.
+                        type: string
+                      rolesKey:
+                        description: Element of the JWT assertion to use for roles.
+                          Default is roles.
+                        type: string
+                      subjectKey:
+                        description: Element of the JWT assertion to use for the user
+                          name. Default is sub.
+                        type: string
+                    type: object
                   ipAddressType:
                     description: The IP address type for the endpoint. Valid values
                       are ipv4 and dualstack.
@@ -829,6 +900,26 @@ spec:
                         description: Whether the internal user database is enabled.
                           Default is false.
                         type: boolean
+                      jwtOptions:
+                        description: Configuration block for JWT authentication. Requires
+                          OpenSearch 2.11 or later. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether JWT authentication is enabled.
+                            type: boolean
+                          publicKey:
+                            description: PEM-encoded public key used to verify JWT
+                              signatures.
+                            type: string
+                          rolesKey:
+                            description: Element of the JWT assertion to use for roles.
+                              Default is roles.
+                            type: string
+                          subjectKey:
+                            description: Element of the JWT assertion to use for the
+                              user name. Default is sub.
+                            type: string
+                        type: object
                       masterUserOptions:
                         description: Configuration block for the main user. Detailed
                           below.
@@ -858,6 +949,38 @@ spec:
                             - key
                             - name
                             type: object
+                        type: object
+                    type: object
+                  aimlOptions:
+                    description: Configuration block for parameters required to enable
+                      all machine learning features. Detailed below.
+                    properties:
+                      naturalLanguageQueryGenerationOptions:
+                        description: Configuration block for parameters required for
+                          natural language query generation on the specified domain.
+                        properties:
+                          desiredState:
+                            description: The desired state of the natural language
+                              query generation feature. Valid values are ENABLED and
+                              DISABLED.
+                            type: string
+                        type: object
+                      s3VectorsEngine:
+                        description: Configuration block for parameters required to
+                          enable S3 vectors engine features on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables S3 vectors engine features.
+                            type: boolean
+                        type: object
+                      serverlessVectorAcceleration:
+                        description: Configuration block for parameters required to
+                          enable GPU-accelerated vector search on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables GPU-accelerated vector search for
+                              improved performance on vector workloads.
+                            type: boolean
                         type: object
                     type: object
                   autoTuneOptions:
@@ -1174,6 +1297,25 @@ spec:
                   engineVersion:
                     description: while Elasticsearch has elasticsearch_version
                     type: string
+                  identityCenterOptions:
+                    description: Configuration block for enabling and managing IAM
+                      Identity Center integration within a domain. Detailed below.
+                    properties:
+                      enabledApiAccess:
+                        description: is set to true.
+                        type: boolean
+                      identityCenterInstanceArn:
+                        description: ARN of the domain.
+                        type: string
+                      rolesKey:
+                        description: Element of the JWT assertion to use for roles.
+                          Default is roles.
+                        type: string
+                      subjectKey:
+                        description: Element of the JWT assertion to use for the user
+                          name. Default is sub.
+                        type: string
+                    type: object
                   ipAddressType:
                     description: The IP address type for the endpoint. Valid values
                       are ipv4 and dualstack.
@@ -1628,6 +1770,26 @@ spec:
                         description: Whether the internal user database is enabled.
                           Default is false.
                         type: boolean
+                      jwtOptions:
+                        description: Configuration block for JWT authentication. Requires
+                          OpenSearch 2.11 or later. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether JWT authentication is enabled.
+                            type: boolean
+                          publicKey:
+                            description: PEM-encoded public key used to verify JWT
+                              signatures.
+                            type: string
+                          rolesKey:
+                            description: Element of the JWT assertion to use for roles.
+                              Default is roles.
+                            type: string
+                          subjectKey:
+                            description: Element of the JWT assertion to use for the
+                              user name. Default is sub.
+                            type: string
+                        type: object
                       masterUserOptions:
                         description: Configuration block for the main user. Detailed
                           below.
@@ -1642,6 +1804,38 @@ spec:
                               Only specify if internal_user_database_enabled is set
                               to true.
                             type: string
+                        type: object
+                    type: object
+                  aimlOptions:
+                    description: Configuration block for parameters required to enable
+                      all machine learning features. Detailed below.
+                    properties:
+                      naturalLanguageQueryGenerationOptions:
+                        description: Configuration block for parameters required for
+                          natural language query generation on the specified domain.
+                        properties:
+                          desiredState:
+                            description: The desired state of the natural language
+                              query generation feature. Valid values are ENABLED and
+                              DISABLED.
+                            type: string
+                        type: object
+                      s3VectorsEngine:
+                        description: Configuration block for parameters required to
+                          enable S3 vectors engine features on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables S3 vectors engine features.
+                            type: boolean
+                        type: object
+                      serverlessVectorAcceleration:
+                        description: Configuration block for parameters required to
+                          enable GPU-accelerated vector search on the specified domain.
+                        properties:
+                          enabled:
+                            description: Enables GPU-accelerated vector search for
+                              improved performance on vector workloads.
+                            type: boolean
                         type: object
                     type: object
                   arn:
@@ -1906,6 +2100,25 @@ spec:
                     type: string
                   id:
                     type: string
+                  identityCenterOptions:
+                    description: Configuration block for enabling and managing IAM
+                      Identity Center integration within a domain. Detailed below.
+                    properties:
+                      enabledApiAccess:
+                        description: is set to true.
+                        type: boolean
+                      identityCenterInstanceArn:
+                        description: ARN of the domain.
+                        type: string
+                      rolesKey:
+                        description: Element of the JWT assertion to use for roles.
+                          Default is roles.
+                        type: string
+                      subjectKey:
+                        description: Element of the JWT assertion to use for the user
+                          name. Default is sub.
+                        type: string
+                    type: object
                   ipAddressType:
                     description: The IP address type for the endpoint. Valid values
                       are ipv4 and dualstack.

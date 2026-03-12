@@ -13,7 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type DNSOptionsInitParameters struct {
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private_dns_enabled is true. Valid Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS and SPECIFIED_DOMAINS_ONLY.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// Private domains to create private hosted zones for and associate with the specified VPC. Only supported when private_dns_enabled is true and private_dns_preference is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
+}
+
+type DNSOptionsObservation struct {
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private_dns_enabled is true. Valid Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS and SPECIFIED_DOMAINS_ONLY.
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// Private domains to create private hosted zones for and associate with the specified VPC. Only supported when private_dns_enabled is true and private_dns_preference is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
+}
+
+type DNSOptionsParameters struct {
+
+	// Preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private_dns_enabled is true. Valid Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS and SPECIFIED_DOMAINS_ONLY.
+	// +kubebuilder:validation:Optional
+	PrivateDNSPreference *string `json:"privateDnsPreference,omitempty" tf:"private_dns_preference,omitempty"`
+
+	// Private domains to create private hosted zones for and associate with the specified VPC. Only supported when private_dns_enabled is true and private_dns_preference is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	PrivateDNSSpecifiedDomains []*string `json:"privateDnsSpecifiedDomains,omitempty" tf:"private_dns_specified_domains,omitempty"`
+}
+
 type ServiceNetworkVPCAssociationInitParameters struct {
+
+	// Configuration block for DNS option. See dns_options block below for details.
+	DNSOptions *DNSOptionsInitParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
+	// Boolean to indicate whether to enable private DNS for the VPC association. Defaults to false.
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -69,8 +107,14 @@ type ServiceNetworkVPCAssociationObservation struct {
 	// The account that created the association.
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
+	// Configuration block for DNS option. See dns_options block below for details.
+	DNSOptions *DNSOptionsObservation `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
 	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Boolean to indicate whether to enable private DNS for the VPC association. Defaults to false.
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -99,6 +143,14 @@ type ServiceNetworkVPCAssociationObservation struct {
 }
 
 type ServiceNetworkVPCAssociationParameters struct {
+
+	// Configuration block for DNS option. See dns_options block below for details.
+	// +kubebuilder:validation:Optional
+	DNSOptions *DNSOptionsParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
+	// Boolean to indicate whether to enable private DNS for the VPC association. Defaults to false.
+	// +kubebuilder:validation:Optional
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

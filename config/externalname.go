@@ -48,6 +48,23 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Bedrock Agent can be imported using the agent arn
 	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
 
+	// bedrockagentcore
+	//
+	//
+	"aws_bedrockagentcore_agent_runtime":               config.FrameworkResourceWithComputedIdentifier("agent_runtime_id", "xp_stub_hosted_agent_i3sdp-PCtbZ62Yy2"),
+	"aws_bedrockagentcore_agent_runtime_endpoint":      bedrockAgentCoreAgentRuntimeEndpoint(),
+	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
+	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
+	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
+	"aws_bedrockagentcore_gateway":                     config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_gateway_target":              config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// import using ID of memory, must satisfy regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_memory":                     identifierFromProviderWithDefaultStub("stub_memory_placeholder_xp-stub123456"),
+	"aws_bedrockagentcore_memory_strategy":            config.FrameworkResourceWithComputedIdentifier("memory_strategy_id", "STUB123456"),
+	"aws_bedrockagentcore_oauth2_credential_provider": frameworkNameAsIdentifier(),
+	"aws_bedrockagentcore_token_vault_cmk":            bedrockAgentCoreTokenVaultCMK(),
+	"aws_bedrockagentcore_workload_identity":          frameworkNameAsIdentifier(),
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -120,6 +137,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// OSIS Pipeline can be imported using the name
 	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
+
+	// route53profiles
+	//
+	// route53profiles_association can be imported using the id
+	"aws_route53profiles_association": identifierFromProviderWithDefaultStub("rpassoc-stub123456"),
+	// route53profiles_profile can be imported using the id
+	"aws_route53profiles_profile": identifierFromProviderWithDefaultStub("rp-stub123456"),
+	// route53profiles_resource_association can be imported using the id
+	"aws_route53profiles_resource_association": identifierFromProviderWithDefaultStub("rpr-001s0000tu00000001b"),
 
 	// amp
 	//
@@ -1310,6 +1336,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// EMR Severless applications can be imported using the id
 	"aws_emrserverless_application": config.IdentifierFromProvider,
 
+	// emrcontainers
+	//
+	// EMR Containers Virtual Clusters can be imported using the id
+	"aws_emrcontainers_virtual_cluster": config.IdentifierFromProvider,
+
 	// evidently
 	//
 	// CloudWatch Evidently Feature can be imported using the feature name and name or arn of the hosting CloudWatch Evidently Project separated by a :
@@ -2200,6 +2231,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route53_resolver_rule": config.IdentifierFromProvider,
 	// rslvr-rrassoc-97242eaf88example
 	"aws_route53_resolver_rule_association": config.IdentifierFromProvider,
+	// rqlc-92edc3b1838248bf
+	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
+	// rqlca-b320624fef3c4d70
+	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 
 	// rum
 	//
@@ -3393,5 +3428,84 @@ func dsqlClusterPeering() config.ExternalName {
 		}
 		return idStr, nil
 	}
+	return e
+}
+
+func bedrockAgentCoreTokenVaultCMK() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		if id, ok := tfstate["token_vault_id"]; ok {
+			idStr := fmt.Sprintf("%v", id)
+			if len(idStr) > 0 {
+				return idStr, nil
+			}
+		}
+		return "", errors.Errorf("cannot find attribute %q in tfstate", "token_vault_id")
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		if tvid, ok := base["token_vault_id"].(string); !ok || tvid == "" {
+			base["token_vault_id"] = externalName
+		}
+	}
+	e.IdentifierFields = []string{"token_vault_id"}
+	return e
+}
+
+func frameworkNameAsIdentifier() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.OmittedFields = []string{}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["name"].(string)
+		if !ok {
+			return "", errors.New("name field missing from tfstate")
+		}
+		return name, nil
+	}
+	return e
+}
+
+func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, ":")
+		if len(extNameParts) != 2 {
+			return
+		}
+
+		_, ok := tfstate["agent_runtime_id"].(string)
+		if !ok {
+			tfstate["agent_runtime_id"] = extNameParts[0]
+		}
+
+		_, ok = tfstate["name"].(string)
+		if !ok {
+			tfstate["name"] = extNameParts[1]
+		}
+
+	}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["name"].(string)
+		if !ok {
+			return "", errors.New("name field missing from tfstate")
+		}
+		agentRuntimeId, ok := tfstate["agent_runtime_id"].(string)
+		if !ok {
+			return "", errors.New("agent_runtime_id field missing from tfstate")
+		}
+		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
+	}
+	e.IdentifierFields = []string{"name", "agent_runtime_id"}
 	return e
 }

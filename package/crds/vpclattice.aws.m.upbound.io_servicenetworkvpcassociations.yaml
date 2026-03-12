@@ -60,6 +60,31 @@ spec:
             properties:
               forProvider:
                 properties:
+                  dnsOptions:
+                    description: Configuration block for DNS option. See dns_options
+                      block below for details.
+                    properties:
+                      privateDnsPreference:
+                        description: Preference for which private domains have a private
+                          hosted zone created for and associated with the specified
+                          VPC. Only supported when private_dns_enabled is true. Valid
+                          Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS
+                          and SPECIFIED_DOMAINS_ONLY.
+                        type: string
+                      privateDnsSpecifiedDomains:
+                        description: Private domains to create private hosted zones
+                          for and associate with the specified VPC. Only supported
+                          when private_dns_enabled is true and private_dns_preference
+                          is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  privateDnsEnabled:
+                    description: Boolean to indicate whether to enable private DNS
+                      for the VPC association. Defaults to false.
+                    type: boolean
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -346,6 +371,31 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dnsOptions:
+                    description: Configuration block for DNS option. See dns_options
+                      block below for details.
+                    properties:
+                      privateDnsPreference:
+                        description: Preference for which private domains have a private
+                          hosted zone created for and associated with the specified
+                          VPC. Only supported when private_dns_enabled is true. Valid
+                          Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS
+                          and SPECIFIED_DOMAINS_ONLY.
+                        type: string
+                      privateDnsSpecifiedDomains:
+                        description: Private domains to create private hosted zones
+                          for and associate with the specified VPC. Only supported
+                          when private_dns_enabled is true and private_dns_preference
+                          is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  privateDnsEnabled:
+                    description: Boolean to indicate whether to enable private DNS
+                      for the VPC association. Defaults to false.
+                    type: boolean
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -682,9 +732,34 @@ spec:
                   createdBy:
                     description: The account that created the association.
                     type: string
+                  dnsOptions:
+                    description: Configuration block for DNS option. See dns_options
+                      block below for details.
+                    properties:
+                      privateDnsPreference:
+                        description: Preference for which private domains have a private
+                          hosted zone created for and associated with the specified
+                          VPC. Only supported when private_dns_enabled is true. Valid
+                          Values are VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS
+                          and SPECIFIED_DOMAINS_ONLY.
+                        type: string
+                      privateDnsSpecifiedDomains:
+                        description: Private domains to create private hosted zones
+                          for and associate with the specified VPC. Only supported
+                          when private_dns_enabled is true and private_dns_preference
+                          is VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS or SPECIFIED_DOMAINS_ONLY.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   id:
                     description: The ID of the association.
                     type: string
+                  privateDnsEnabled:
+                    description: Boolean to indicate whether to enable private DNS
+                      for the VPC association. Defaults to false.
+                    type: boolean
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

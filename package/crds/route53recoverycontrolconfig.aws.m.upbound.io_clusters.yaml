@@ -62,6 +62,16 @@ spec:
                   name:
                     description: Unique name describing the cluster.
                     type: string
+                  networkType:
+                    description: Network type of cluster. Valid values are IPV4 and
+                      DUALSTACK. Defaults to IPV4.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: |-
@@ -79,6 +89,16 @@ spec:
                   name:
                     description: Unique name describing the cluster.
                     type: string
+                  networkType:
+                    description: Network type of cluster. Valid values are IPV4 and
+                      DUALSTACK. Defaults to IPV4.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -169,10 +189,28 @@ spec:
                   name:
                     description: Unique name describing the cluster.
                     type: string
+                  networkType:
+                    description: Network type of cluster. Valid values are IPV4 and
+                      DUALSTACK. Defaults to IPV4.
+                    type: string
                   status:
                     description: Status of cluster. PENDING when it is being created,
                       PENDING_DELETION when it is being deleted and DEPLOYED otherwise.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

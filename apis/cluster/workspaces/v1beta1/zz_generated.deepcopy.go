@@ -318,6 +318,11 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Tenancy != nil {
+		in, out := &in.Tenancy, &out.Tenancy
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserIdentityType != nil {
 		in, out := &in.UserIdentityType, &out.UserIdentityType
 		*out = new(string)
@@ -537,6 +542,11 @@ func (in *DirectoryObservation) DeepCopyInto(out *DirectoryObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Tenancy != nil {
+		in, out := &in.Tenancy, &out.Tenancy
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserIdentityType != nil {
 		in, out := &in.UserIdentityType, &out.UserIdentityType
 		*out = new(string)
@@ -700,6 +710,11 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Tenancy != nil {
+		in, out := &in.Tenancy, &out.Tenancy
+		*out = new(string)
+		**out = **in
 	}
 	if in.UserIdentityType != nil {
 		in, out := &in.UserIdentityType, &out.UserIdentityType

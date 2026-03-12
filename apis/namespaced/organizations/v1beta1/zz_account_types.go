@@ -41,7 +41,7 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
-	// The ARN for this account.
+	// ARN for this account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// If true, a deletion event will close the account. Otherwise, it will only remove from the organization. This is not supported for GovCloud accounts.
@@ -59,11 +59,13 @@ type AccountObservation struct {
 	// If set to ALLOW, the new account enables IAM users and roles to access account billing information if they have the required permissions. If set to DENY, then only the root user (and no roles) of the new account can access account billing information. If this is unset, the AWS API will default this to ALLOW. If the resource is created and this option is changed, it will try to recreate the account.
 	IAMUserAccessToBilling *string `json:"iamUserAccessToBilling,omitempty" tf:"iam_user_access_to_billing,omitempty"`
 
-	// The AWS account id
+	// AWS account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Method by which the account joined the organization.
 	JoinedMethod *string `json:"joinedMethod,omitempty" tf:"joined_method,omitempty"`
 
+	// Date the account became a part of the organization.
 	JoinedTimestamp *string `json:"joinedTimestamp,omitempty" tf:"joined_timestamp,omitempty"`
 
 	// Friendly name for the member account.
@@ -72,7 +74,10 @@ type AccountObservation struct {
 	// Parent Organizational Unit ID or Root ID for the account. Defaults to the Organization default Root ID. A configuration must be present for this argument to perform drift detection.
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
-	// The status of the account in the organization.
+	// State of the account in the organization.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// (Deprecated use state instead) Status of the account in the organization.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
