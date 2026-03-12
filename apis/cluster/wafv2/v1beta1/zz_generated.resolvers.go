@@ -150,26 +150,26 @@ func (mg *WebACLRuleGroupAssociation) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.RuleGroupReference); i3++ {
+	if mg.Spec.ForProvider.RuleGroupReference != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RuleGroupReference[i3].Arn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RuleGroupReference.Arn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.RuleGroupReference[i3].ArnRef,
-				Selector:     mg.Spec.ForProvider.RuleGroupReference[i3].ArnSelector,
+				Reference:    mg.Spec.ForProvider.RuleGroupReference.ArnRef,
+				Selector:     mg.Spec.ForProvider.RuleGroupReference.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.RuleGroupReference[i3].Arn")
+			return errors.Wrap(err, "mg.Spec.ForProvider.RuleGroupReference.Arn")
 		}
-		mg.Spec.ForProvider.RuleGroupReference[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.RuleGroupReference[i3].ArnRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.RuleGroupReference.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RuleGroupReference.ArnRef = rsp.ResolvedReference
 
 	}
 	{
@@ -192,26 +192,26 @@ func (mg *WebACLRuleGroupAssociation) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.WebACLArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WebACLArnRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.RuleGroupReference); i3++ {
+	if mg.Spec.InitProvider.RuleGroupReference != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("wafv2.aws.upbound.io", "v1beta1", "RuleGroup", "RuleGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroupReference[i3].Arn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroupReference.Arn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.RuleGroupReference[i3].ArnRef,
-				Selector:     mg.Spec.InitProvider.RuleGroupReference[i3].ArnSelector,
+				Reference:    mg.Spec.InitProvider.RuleGroupReference.ArnRef,
+				Selector:     mg.Spec.InitProvider.RuleGroupReference.ArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.RuleGroupReference[i3].Arn")
+			return errors.Wrap(err, "mg.Spec.InitProvider.RuleGroupReference.Arn")
 		}
-		mg.Spec.InitProvider.RuleGroupReference[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.RuleGroupReference[i3].ArnRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.RuleGroupReference.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RuleGroupReference.ArnRef = rsp.ResolvedReference
 
 	}
 	{

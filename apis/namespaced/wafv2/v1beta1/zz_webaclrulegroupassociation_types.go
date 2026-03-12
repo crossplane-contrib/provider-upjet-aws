@@ -36,20 +36,20 @@ type ActionToUseAllowCustomRequestHandlingParameters struct {
 type ActionToUseAllowInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []AllowCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *AllowCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseAllowObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []AllowCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *AllowCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseAllowParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []AllowCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *AllowCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseBlockCustomResponseInitParameters struct {
@@ -94,20 +94,20 @@ type ActionToUseBlockCustomResponseParameters struct {
 type ActionToUseBlockInitParameters struct {
 
 	// Custom response for blocked requests. See below.
-	CustomResponse []BlockCustomResponseInitParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *BlockCustomResponseInitParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type ActionToUseBlockObservation struct {
 
 	// Custom response for blocked requests. See below.
-	CustomResponse []BlockCustomResponseObservation `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *BlockCustomResponseObservation `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type ActionToUseBlockParameters struct {
 
 	// Custom response for blocked requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomResponse []BlockCustomResponseParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *BlockCustomResponseParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type ActionToUseCaptchaCustomRequestHandlingInitParameters struct {
@@ -161,20 +161,20 @@ type ActionToUseCaptchaCustomRequestHandlingParameters struct {
 type ActionToUseCaptchaInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseCaptchaCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCaptchaCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseCaptchaObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseCaptchaCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCaptchaCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseCaptchaParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []ActionToUseCaptchaCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCaptchaCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseChallengeCustomRequestHandlingInitParameters struct {
@@ -228,20 +228,20 @@ type ActionToUseChallengeCustomRequestHandlingParameters struct {
 type ActionToUseChallengeInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseChallengeCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ChallengeCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseChallengeObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseChallengeCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ChallengeCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseChallengeParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []ActionToUseChallengeCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ChallengeCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseCountCustomRequestHandlingInitParameters struct {
@@ -295,79 +295,101 @@ type ActionToUseCountCustomRequestHandlingParameters struct {
 type ActionToUseCountInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseCountCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCountCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseCountObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseCountCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCountCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseCountParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []ActionToUseCountCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseCountCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ActionToUseInitParameters struct {
 
 	// Allow the request. See below.
-	Allow []ActionToUseAllowInitParameters `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *ActionToUseAllowInitParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
-	Block []ActionToUseBlockInitParameters `json:"block,omitempty" tf:"block,omitempty"`
+	Block *ActionToUseBlockInitParameters `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
-	Captcha []CaptchaInitParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *CaptchaInitParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
-	Challenge []ChallengeInitParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *ActionToUseChallengeInitParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
-	Count []CountInitParameters `json:"count,omitempty" tf:"count,omitempty"`
+	Count *CountInitParameters `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ActionToUseObservation struct {
 
 	// Allow the request. See below.
-	Allow []ActionToUseAllowObservation `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *ActionToUseAllowObservation `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
-	Block []ActionToUseBlockObservation `json:"block,omitempty" tf:"block,omitempty"`
+	Block *ActionToUseBlockObservation `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
-	Captcha []CaptchaObservation `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *CaptchaObservation `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
-	Challenge []ChallengeObservation `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *ActionToUseChallengeObservation `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
-	Count []CountObservation `json:"count,omitempty" tf:"count,omitempty"`
+	Count *CountObservation `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ActionToUseParameters struct {
 
 	// Allow the request. See below.
 	// +kubebuilder:validation:Optional
-	Allow []ActionToUseAllowParameters `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *ActionToUseAllowParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
 	// +kubebuilder:validation:Optional
-	Block []ActionToUseBlockParameters `json:"block,omitempty" tf:"block,omitempty"`
+	Block *ActionToUseBlockParameters `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
 	// +kubebuilder:validation:Optional
-	Captcha []CaptchaParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *CaptchaParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
 	// +kubebuilder:validation:Optional
-	Challenge []ChallengeParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	Challenge *ActionToUseChallengeParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
 	// +kubebuilder:validation:Optional
-	Count []CountParameters `json:"count,omitempty" tf:"count,omitempty"`
+	Count *CountParameters `json:"count,omitempty" tf:"count,omitempty"`
+}
+
+type AddressFieldsInitParameters struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the address fields
+	Identifiers []*string `json:"identifiers,omitempty" tf:"identifiers,omitempty"`
+}
+
+type AddressFieldsObservation struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the address fields
+	Identifiers []*string `json:"identifiers,omitempty" tf:"identifiers,omitempty"`
+}
+
+type AddressFieldsParameters struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the address fields
+	// +kubebuilder:validation:Optional
+	Identifiers []*string `json:"identifiers" tf:"identifiers,omitempty"`
 }
 
 type AllowCustomRequestHandlingInitParameters struct {
@@ -416,6 +438,266 @@ type AllowCustomRequestHandlingParameters struct {
 	// Headers to insert into the request. See below.
 	// +kubebuilder:validation:Optional
 	InsertHeader []CustomRequestHandlingInsertHeaderParameters `json:"insertHeader,omitempty" tf:"insert_header,omitempty"`
+}
+
+type AwsManagedRulesAcfpRuleSetInitParameters struct {
+
+	// Path of the account creation endpoint for your application. This is the page on your website that accepts the completed registration form for a new user. This page must accept POST requests.
+	// Path to the account creation endpoint on the protected website
+	CreationPath *string `json:"creationPath,omitempty" tf:"creation_path,omitempty"`
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the account registration endpoint for your application. This is the page on your website that presents the registration form to new users. This page must accept GET text/html requests.
+	RegistrationPagePath *string `json:"registrationPagePath,omitempty" tf:"registration_page_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	RequestInspection *RequestInspectionInitParameters `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	ResponseInspection *ResponseInspectionInitParameters `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAcfpRuleSetObservation struct {
+
+	// Path of the account creation endpoint for your application. This is the page on your website that accepts the completed registration form for a new user. This page must accept POST requests.
+	// Path to the account creation endpoint on the protected website
+	CreationPath *string `json:"creationPath,omitempty" tf:"creation_path,omitempty"`
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the account registration endpoint for your application. This is the page on your website that presents the registration form to new users. This page must accept GET text/html requests.
+	RegistrationPagePath *string `json:"registrationPagePath,omitempty" tf:"registration_page_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	RequestInspection *RequestInspectionObservation `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	ResponseInspection *ResponseInspectionObservation `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAcfpRuleSetParameters struct {
+
+	// Path of the account creation endpoint for your application. This is the page on your website that accepts the completed registration form for a new user. This page must accept POST requests.
+	// Path to the account creation endpoint on the protected website
+	// +kubebuilder:validation:Optional
+	CreationPath *string `json:"creationPath" tf:"creation_path,omitempty"`
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	// +kubebuilder:validation:Optional
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the account registration endpoint for your application. This is the page on your website that presents the registration form to new users. This page must accept GET text/html requests.
+	// +kubebuilder:validation:Optional
+	RegistrationPagePath *string `json:"registrationPagePath" tf:"registration_page_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	// +kubebuilder:validation:Optional
+	RequestInspection *RequestInspectionParameters `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	// +kubebuilder:validation:Optional
+	ResponseInspection *ResponseInspectionParameters `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAntiDdosRuleSetInitParameters struct {
+
+	// Configuration for the request handling that's applied by the managed rule group rules ChallengeAllDuringEvent and ChallengeDDoSRequests during a distributed denial of service (DDoS) attack. See below.
+	ClientSideActionConfig *ClientSideActionConfigInitParameters `json:"clientSideActionConfig,omitempty" tf:"client_side_action_config,omitempty"`
+
+	// Sensitivity that the rule group rule DDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW (Default), MEDIUM, and HIGH.
+	SensitivityToBlock *string `json:"sensitivityToBlock,omitempty" tf:"sensitivity_to_block,omitempty"`
+}
+
+type AwsManagedRulesAntiDdosRuleSetObservation struct {
+
+	// Configuration for the request handling that's applied by the managed rule group rules ChallengeAllDuringEvent and ChallengeDDoSRequests during a distributed denial of service (DDoS) attack. See below.
+	ClientSideActionConfig *ClientSideActionConfigObservation `json:"clientSideActionConfig,omitempty" tf:"client_side_action_config,omitempty"`
+
+	// Sensitivity that the rule group rule DDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW (Default), MEDIUM, and HIGH.
+	SensitivityToBlock *string `json:"sensitivityToBlock,omitempty" tf:"sensitivity_to_block,omitempty"`
+}
+
+type AwsManagedRulesAntiDdosRuleSetParameters struct {
+
+	// Configuration for the request handling that's applied by the managed rule group rules ChallengeAllDuringEvent and ChallengeDDoSRequests during a distributed denial of service (DDoS) attack. See below.
+	// +kubebuilder:validation:Optional
+	ClientSideActionConfig *ClientSideActionConfigParameters `json:"clientSideActionConfig,omitempty" tf:"client_side_action_config,omitempty"`
+
+	// Sensitivity that the rule group rule DDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW (Default), MEDIUM, and HIGH.
+	// +kubebuilder:validation:Optional
+	SensitivityToBlock *string `json:"sensitivityToBlock,omitempty" tf:"sensitivity_to_block,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetInitParameters struct {
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the login endpoint for your application.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	RequestInspection *AwsManagedRulesAtpRuleSetRequestInspectionInitParameters `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	ResponseInspection *AwsManagedRulesAtpRuleSetResponseInspectionInitParameters `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetObservation struct {
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the login endpoint for your application.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	RequestInspection *AwsManagedRulesAtpRuleSetRequestInspectionObservation `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	ResponseInspection *AwsManagedRulesAtpRuleSetResponseInspectionObservation `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetParameters struct {
+
+	// Whether or not to allow the use of regular expressions in the login page path.
+	// +kubebuilder:validation:Optional
+	EnableRegexInPath *bool `json:"enableRegexInPath,omitempty" tf:"enable_regex_in_path,omitempty"`
+
+	// Path of the login endpoint for your application.
+	// +kubebuilder:validation:Optional
+	LoginPath *string `json:"loginPath" tf:"login_path,omitempty"`
+
+	// Criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. See below.
+	// +kubebuilder:validation:Optional
+	RequestInspection *AwsManagedRulesAtpRuleSetRequestInspectionParameters `json:"requestInspection,omitempty" tf:"request_inspection,omitempty"`
+
+	// Criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. Note that Response Inspection is available only on web ACLs that protect CloudFront distributions. See below.
+	// +kubebuilder:validation:Optional
+	ResponseInspection *AwsManagedRulesAtpRuleSetResponseInspectionParameters `json:"responseInspection,omitempty" tf:"response_inspection,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetRequestInspectionInitParameters struct {
+
+	// Details about your login page password field. See below.
+	PasswordField *RequestInspectionPasswordFieldInitParameters `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	PayloadType *string `json:"payloadType,omitempty" tf:"payload_type,omitempty"`
+
+	// Details about your login page username field. See below.
+	UsernameField *RequestInspectionUsernameFieldInitParameters `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetRequestInspectionObservation struct {
+
+	// Details about your login page password field. See below.
+	PasswordField *RequestInspectionPasswordFieldObservation `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	PayloadType *string `json:"payloadType,omitempty" tf:"payload_type,omitempty"`
+
+	// Details about your login page username field. See below.
+	UsernameField *RequestInspectionUsernameFieldObservation `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetRequestInspectionParameters struct {
+
+	// Details about your login page password field. See below.
+	// +kubebuilder:validation:Optional
+	PasswordField *RequestInspectionPasswordFieldParameters `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	// +kubebuilder:validation:Optional
+	PayloadType *string `json:"payloadType" tf:"payload_type,omitempty"`
+
+	// Details about your login page username field. See below.
+	// +kubebuilder:validation:Optional
+	UsernameField *RequestInspectionUsernameFieldParameters `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetResponseInspectionInitParameters struct {
+
+	// Configures inspection of the response body. See below.
+	BodyContains *ResponseInspectionBodyContainsInitParameters `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	Header *ResponseInspectionHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	JSON *ResponseInspectionJSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	StatusCode *ResponseInspectionStatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetResponseInspectionObservation struct {
+
+	// Configures inspection of the response body. See below.
+	BodyContains *ResponseInspectionBodyContainsObservation `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	Header *ResponseInspectionHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	JSON *ResponseInspectionJSONObservation `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	StatusCode *ResponseInspectionStatusCodeObservation `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type AwsManagedRulesAtpRuleSetResponseInspectionParameters struct {
+
+	// Configures inspection of the response body. See below.
+	// +kubebuilder:validation:Optional
+	BodyContains *ResponseInspectionBodyContainsParameters `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	// +kubebuilder:validation:Optional
+	Header *ResponseInspectionHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	// +kubebuilder:validation:Optional
+	JSON *ResponseInspectionJSONParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	// +kubebuilder:validation:Optional
+	StatusCode *ResponseInspectionStatusCodeParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type AwsManagedRulesBotControlRuleSetInitParameters struct {
+
+	// Applies only to the targeted inspection level. Determines whether to use machine learning (ML) to analyze your web traffic for bot-related activity. Defaults to false.
+	EnableMachineLearning *bool `json:"enableMachineLearning,omitempty" tf:"enable_machine_learning,omitempty"`
+
+	// Inspection level to use for the Bot Control rule group.
+	InspectionLevel *string `json:"inspectionLevel,omitempty" tf:"inspection_level,omitempty"`
+}
+
+type AwsManagedRulesBotControlRuleSetObservation struct {
+
+	// Applies only to the targeted inspection level. Determines whether to use machine learning (ML) to analyze your web traffic for bot-related activity. Defaults to false.
+	EnableMachineLearning *bool `json:"enableMachineLearning,omitempty" tf:"enable_machine_learning,omitempty"`
+
+	// Inspection level to use for the Bot Control rule group.
+	InspectionLevel *string `json:"inspectionLevel,omitempty" tf:"inspection_level,omitempty"`
+}
+
+type AwsManagedRulesBotControlRuleSetParameters struct {
+
+	// Applies only to the targeted inspection level. Determines whether to use machine learning (ML) to analyze your web traffic for bot-related activity. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnableMachineLearning *bool `json:"enableMachineLearning,omitempty" tf:"enable_machine_learning,omitempty"`
+
+	// Inspection level to use for the Bot Control rule group.
+	// +kubebuilder:validation:Optional
+	InspectionLevel *string `json:"inspectionLevel" tf:"inspection_level,omitempty"`
 }
 
 type BlockCustomResponseInitParameters struct {
@@ -486,6 +768,47 @@ type BlockCustomResponseResponseHeaderParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type BodyContainsInitParameters struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings,omitempty" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings,omitempty" tf:"success_strings,omitempty"`
+}
+
+type BodyContainsObservation struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings,omitempty" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings,omitempty" tf:"success_strings,omitempty"`
+}
+
+type BodyContainsParameters struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings" tf:"success_strings,omitempty"`
+}
+
 type CaptchaCustomRequestHandlingInitParameters struct {
 
 	// Headers to insert into the request. See below.
@@ -537,20 +860,20 @@ type CaptchaCustomRequestHandlingParameters struct {
 type CaptchaInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []CaptchaCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CaptchaCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type CaptchaObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []CaptchaCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CaptchaCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type CaptchaParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []CaptchaCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CaptchaCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type ChallengeCustomRequestHandlingInitParameters struct {
@@ -603,21 +926,60 @@ type ChallengeCustomRequestHandlingParameters struct {
 
 type ChallengeInitParameters struct {
 
-	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ChallengeCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	// Block for the list of the regular expressions to match against the web request URI, used to identify requests that can't handle a silent browser challenge. See below.
+	ExemptURIRegularExpression []ExemptURIRegularExpressionInitParameters `json:"exemptUriRegularExpression,omitempty" tf:"exempt_uri_regular_expression,omitempty"`
+
+	// Sensitivity that the rule group rule ChallengeDDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW, MEDIUM and HIGH (Default).
+	Sensitivity *string `json:"sensitivity,omitempty" tf:"sensitivity,omitempty"`
+
+	// Configuration whether to use the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests in the rule group evaluation. Valid values are ENABLED and DISABLED.
+	UsageOfAction *string `json:"usageOfAction,omitempty" tf:"usage_of_action,omitempty"`
 }
 
 type ChallengeObservation struct {
 
-	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ChallengeCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	// Block for the list of the regular expressions to match against the web request URI, used to identify requests that can't handle a silent browser challenge. See below.
+	ExemptURIRegularExpression []ExemptURIRegularExpressionObservation `json:"exemptUriRegularExpression,omitempty" tf:"exempt_uri_regular_expression,omitempty"`
+
+	// Sensitivity that the rule group rule ChallengeDDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW, MEDIUM and HIGH (Default).
+	Sensitivity *string `json:"sensitivity,omitempty" tf:"sensitivity,omitempty"`
+
+	// Configuration whether to use the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests in the rule group evaluation. Valid values are ENABLED and DISABLED.
+	UsageOfAction *string `json:"usageOfAction,omitempty" tf:"usage_of_action,omitempty"`
 }
 
 type ChallengeParameters struct {
 
-	// Custom handling for counted requests. See below.
+	// Block for the list of the regular expressions to match against the web request URI, used to identify requests that can't handle a silent browser challenge. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []ChallengeCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	ExemptURIRegularExpression []ExemptURIRegularExpressionParameters `json:"exemptUriRegularExpression,omitempty" tf:"exempt_uri_regular_expression,omitempty"`
+
+	// Sensitivity that the rule group rule ChallengeDDoSRequests uses when matching against the DDoS suspicion labeling on a request. Valid values are LOW, MEDIUM and HIGH (Default).
+	// +kubebuilder:validation:Optional
+	Sensitivity *string `json:"sensitivity,omitempty" tf:"sensitivity,omitempty"`
+
+	// Configuration whether to use the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests in the rule group evaluation. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	UsageOfAction *string `json:"usageOfAction" tf:"usage_of_action,omitempty"`
+}
+
+type ClientSideActionConfigInitParameters struct {
+
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *ChallengeInitParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
+}
+
+type ClientSideActionConfigObservation struct {
+
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *ChallengeObservation `json:"challenge,omitempty" tf:"challenge,omitempty"`
+}
+
+type ClientSideActionConfigParameters struct {
+
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	// +kubebuilder:validation:Optional
+	Challenge *ChallengeParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
 }
 
 type CountCustomRequestHandlingInitParameters struct {
@@ -671,20 +1033,20 @@ type CountCustomRequestHandlingParameters struct {
 type CountInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []CountCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CountCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type CountObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []CountCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CountCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type CountParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []CountCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *CountCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type CustomRequestHandlingInsertHeaderInitParameters struct {
@@ -745,7 +1107,208 @@ type CustomResponseResponseHeaderParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type EmailFieldInitParameters struct {
+
+	// Name of the username field.
+	// Identifier of the email field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type EmailFieldObservation struct {
+
+	// Name of the username field.
+	// Identifier of the email field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type EmailFieldParameters struct {
+
+	// Name of the username field.
+	// Identifier of the email field
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+}
+
+type ExemptURIRegularExpressionInitParameters struct {
+
+	// Regular expression string.
+	RegexString *string `json:"regexString,omitempty" tf:"regex_string,omitempty"`
+}
+
+type ExemptURIRegularExpressionObservation struct {
+
+	// Regular expression string.
+	RegexString *string `json:"regexString,omitempty" tf:"regex_string,omitempty"`
+}
+
+type ExemptURIRegularExpressionParameters struct {
+
+	// Regular expression string.
+	// +kubebuilder:validation:Optional
+	RegexString *string `json:"regexString,omitempty" tf:"regex_string,omitempty"`
+}
+
+type HeaderInitParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the header to match against. The name must be an exact match, including case.
+	// Name of the HTTP header to inspect
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type HeaderObservation struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the header to match against. The name must be an exact match, including case.
+	// Name of the HTTP header to inspect
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type HeaderParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureValues []*string `json:"failureValues" tf:"failure_values,omitempty"`
+
+	// Name of the header to match against. The name must be an exact match, including case.
+	// Name of the HTTP header to inspect
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessValues []*string `json:"successValues" tf:"success_values,omitempty"`
+}
+
+type JSONInitParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Identifier for the value to match against in the JSON.
+	// Identifier of the JSON field to inspect
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type JSONObservation struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Identifier for the value to match against in the JSON.
+	// Identifier of the JSON field to inspect
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type JSONParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureValues []*string `json:"failureValues" tf:"failure_values,omitempty"`
+
+	// Identifier for the value to match against in the JSON.
+	// Identifier of the JSON field to inspect
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessValues []*string `json:"successValues" tf:"success_values,omitempty"`
+}
+
+type ManagedRuleGroupConfigsInitParameters struct {
+
+	// Additional configuration for using the Account Creation Fraud Prevention managed rule group. Use this to specify information such as the registration page of your application and the type of content to accept or reject from the client. See below.
+	AwsManagedRulesAcfpRuleSet *AwsManagedRulesAcfpRuleSetInitParameters `json:"awsManagedRulesAcfpRuleSet,omitempty" tf:"aws_managed_rules_acfp_rule_set,omitempty"`
+
+	// Configuration for using the anti-DDoS managed rule group. See below.
+	AwsManagedRulesAntiDdosRuleSet *AwsManagedRulesAntiDdosRuleSetInitParameters `json:"awsManagedRulesAntiDdosRuleSet,omitempty" tf:"aws_managed_rules_anti_ddos_rule_set,omitempty"`
+
+	// Additional configuration for using the Account Takeover Protection managed rule group. Use this to specify information such as the sign-in page of your application and the type of content to accept or reject from the client. See below.
+	AwsManagedRulesAtpRuleSet *AwsManagedRulesAtpRuleSetInitParameters `json:"awsManagedRulesAtpRuleSet,omitempty" tf:"aws_managed_rules_atp_rule_set,omitempty"`
+
+	// Additional configuration for using the Bot Control managed rule group. Use this to specify the inspection level that you want to use. See below.
+	AwsManagedRulesBotControlRuleSet *AwsManagedRulesBotControlRuleSetInitParameters `json:"awsManagedRulesBotControlRuleSet,omitempty" tf:"aws_managed_rules_bot_control_rule_set,omitempty"`
+}
+
+type ManagedRuleGroupConfigsObservation struct {
+
+	// Additional configuration for using the Account Creation Fraud Prevention managed rule group. Use this to specify information such as the registration page of your application and the type of content to accept or reject from the client. See below.
+	AwsManagedRulesAcfpRuleSet *AwsManagedRulesAcfpRuleSetObservation `json:"awsManagedRulesAcfpRuleSet,omitempty" tf:"aws_managed_rules_acfp_rule_set,omitempty"`
+
+	// Configuration for using the anti-DDoS managed rule group. See below.
+	AwsManagedRulesAntiDdosRuleSet *AwsManagedRulesAntiDdosRuleSetObservation `json:"awsManagedRulesAntiDdosRuleSet,omitempty" tf:"aws_managed_rules_anti_ddos_rule_set,omitempty"`
+
+	// Additional configuration for using the Account Takeover Protection managed rule group. Use this to specify information such as the sign-in page of your application and the type of content to accept or reject from the client. See below.
+	AwsManagedRulesAtpRuleSet *AwsManagedRulesAtpRuleSetObservation `json:"awsManagedRulesAtpRuleSet,omitempty" tf:"aws_managed_rules_atp_rule_set,omitempty"`
+
+	// Additional configuration for using the Bot Control managed rule group. Use this to specify the inspection level that you want to use. See below.
+	AwsManagedRulesBotControlRuleSet *AwsManagedRulesBotControlRuleSetObservation `json:"awsManagedRulesBotControlRuleSet,omitempty" tf:"aws_managed_rules_bot_control_rule_set,omitempty"`
+}
+
+type ManagedRuleGroupConfigsParameters struct {
+
+	// Additional configuration for using the Account Creation Fraud Prevention managed rule group. Use this to specify information such as the registration page of your application and the type of content to accept or reject from the client. See below.
+	// +kubebuilder:validation:Optional
+	AwsManagedRulesAcfpRuleSet *AwsManagedRulesAcfpRuleSetParameters `json:"awsManagedRulesAcfpRuleSet,omitempty" tf:"aws_managed_rules_acfp_rule_set,omitempty"`
+
+	// Configuration for using the anti-DDoS managed rule group. See below.
+	// +kubebuilder:validation:Optional
+	AwsManagedRulesAntiDdosRuleSet *AwsManagedRulesAntiDdosRuleSetParameters `json:"awsManagedRulesAntiDdosRuleSet,omitempty" tf:"aws_managed_rules_anti_ddos_rule_set,omitempty"`
+
+	// Additional configuration for using the Account Takeover Protection managed rule group. Use this to specify information such as the sign-in page of your application and the type of content to accept or reject from the client. See below.
+	// +kubebuilder:validation:Optional
+	AwsManagedRulesAtpRuleSet *AwsManagedRulesAtpRuleSetParameters `json:"awsManagedRulesAtpRuleSet,omitempty" tf:"aws_managed_rules_atp_rule_set,omitempty"`
+
+	// Additional configuration for using the Bot Control managed rule group. Use this to specify the inspection level that you want to use. See below.
+	// +kubebuilder:validation:Optional
+	AwsManagedRulesBotControlRuleSet *AwsManagedRulesBotControlRuleSetParameters `json:"awsManagedRulesBotControlRuleSet,omitempty" tf:"aws_managed_rules_bot_control_rule_set,omitempty"`
+}
+
 type ManagedRuleGroupInitParameters struct {
+
+	// Additional information that's used by a managed rule group. Only one rule attribute is allowed in each config. See below.
+	ManagedRuleGroupConfigs *ManagedRuleGroupConfigsInitParameters `json:"managedRuleGroupConfigs,omitempty" tf:"managed_rule_group_configs,omitempty"`
 
 	// Name of the managed rule group.
 	// Name of the managed rule group.
@@ -766,6 +1329,9 @@ type ManagedRuleGroupInitParameters struct {
 
 type ManagedRuleGroupObservation struct {
 
+	// Additional information that's used by a managed rule group. Only one rule attribute is allowed in each config. See below.
+	ManagedRuleGroupConfigs *ManagedRuleGroupConfigsObservation `json:"managedRuleGroupConfigs,omitempty" tf:"managed_rule_group_configs,omitempty"`
+
 	// Name of the managed rule group.
 	// Name of the managed rule group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -784,6 +1350,10 @@ type ManagedRuleGroupObservation struct {
 }
 
 type ManagedRuleGroupParameters struct {
+
+	// Additional information that's used by a managed rule group. Only one rule attribute is allowed in each config. See below.
+	// +kubebuilder:validation:Optional
+	ManagedRuleGroupConfigs *ManagedRuleGroupConfigsParameters `json:"managedRuleGroupConfigs,omitempty" tf:"managed_rule_group_configs,omitempty"`
 
 	// Name of the managed rule group.
 	// Name of the managed rule group.
@@ -806,108 +1376,526 @@ type ManagedRuleGroupParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type PasswordFieldInitParameters struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type PasswordFieldObservation struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type PasswordFieldParameters struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+}
+
+type PhoneNumberFieldsInitParameters struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the phone number fields
+	Identifiers []*string `json:"identifiers,omitempty" tf:"identifiers,omitempty"`
+}
+
+type PhoneNumberFieldsObservation struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the phone number fields
+	Identifiers []*string `json:"identifiers,omitempty" tf:"identifiers,omitempty"`
+}
+
+type PhoneNumberFieldsParameters struct {
+
+	// Names of the phone number fields.
+	// Identifiers of the phone number fields
+	// +kubebuilder:validation:Optional
+	Identifiers []*string `json:"identifiers" tf:"identifiers,omitempty"`
+}
+
+type RequestInspectionInitParameters struct {
+
+	// Names of the fields in the request payload that contain your customer's primary physical address. See below.
+	AddressFields *AddressFieldsInitParameters `json:"addressFields,omitempty" tf:"address_fields,omitempty"`
+
+	// Name of the field in the request payload that contains your customer's email. See below.
+	EmailField *EmailFieldInitParameters `json:"emailField,omitempty" tf:"email_field,omitempty"`
+
+	// Details about your login page password field. See below.
+	PasswordField *PasswordFieldInitParameters `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	PayloadType *string `json:"payloadType,omitempty" tf:"payload_type,omitempty"`
+
+	// Names of the fields in the request payload that contain your customer's primary phone number. See below.
+	PhoneNumberFields *PhoneNumberFieldsInitParameters `json:"phoneNumberFields,omitempty" tf:"phone_number_fields,omitempty"`
+
+	// Details about your login page username field. See below.
+	UsernameField *UsernameFieldInitParameters `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type RequestInspectionObservation struct {
+
+	// Names of the fields in the request payload that contain your customer's primary physical address. See below.
+	AddressFields *AddressFieldsObservation `json:"addressFields,omitempty" tf:"address_fields,omitempty"`
+
+	// Name of the field in the request payload that contains your customer's email. See below.
+	EmailField *EmailFieldObservation `json:"emailField,omitempty" tf:"email_field,omitempty"`
+
+	// Details about your login page password field. See below.
+	PasswordField *PasswordFieldObservation `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	PayloadType *string `json:"payloadType,omitempty" tf:"payload_type,omitempty"`
+
+	// Names of the fields in the request payload that contain your customer's primary phone number. See below.
+	PhoneNumberFields *PhoneNumberFieldsObservation `json:"phoneNumberFields,omitempty" tf:"phone_number_fields,omitempty"`
+
+	// Details about your login page username field. See below.
+	UsernameField *UsernameFieldObservation `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type RequestInspectionParameters struct {
+
+	// Names of the fields in the request payload that contain your customer's primary physical address. See below.
+	// +kubebuilder:validation:Optional
+	AddressFields *AddressFieldsParameters `json:"addressFields,omitempty" tf:"address_fields,omitempty"`
+
+	// Name of the field in the request payload that contains your customer's email. See below.
+	// +kubebuilder:validation:Optional
+	EmailField *EmailFieldParameters `json:"emailField,omitempty" tf:"email_field,omitempty"`
+
+	// Details about your login page password field. See below.
+	// +kubebuilder:validation:Optional
+	PasswordField *PasswordFieldParameters `json:"passwordField,omitempty" tf:"password_field,omitempty"`
+
+	// Payload type for your login endpoint, either JSON or form encoded.
+	// Payload type for inspection, either JSON or FORM_ENCODED.
+	// +kubebuilder:validation:Optional
+	PayloadType *string `json:"payloadType" tf:"payload_type,omitempty"`
+
+	// Names of the fields in the request payload that contain your customer's primary phone number. See below.
+	// +kubebuilder:validation:Optional
+	PhoneNumberFields *PhoneNumberFieldsParameters `json:"phoneNumberFields,omitempty" tf:"phone_number_fields,omitempty"`
+
+	// Details about your login page username field. See below.
+	// +kubebuilder:validation:Optional
+	UsernameField *UsernameFieldParameters `json:"usernameField,omitempty" tf:"username_field,omitempty"`
+}
+
+type RequestInspectionPasswordFieldInitParameters struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type RequestInspectionPasswordFieldObservation struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type RequestInspectionPasswordFieldParameters struct {
+
+	// Name of the username field.
+	// Identifier of the password field
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+}
+
+type RequestInspectionUsernameFieldInitParameters struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type RequestInspectionUsernameFieldObservation struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type RequestInspectionUsernameFieldParameters struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+}
+
+type ResponseInspectionBodyContainsInitParameters struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings,omitempty" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings,omitempty" tf:"success_strings,omitempty"`
+}
+
+type ResponseInspectionBodyContainsObservation struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings,omitempty" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings,omitempty" tf:"success_strings,omitempty"`
+}
+
+type ResponseInspectionBodyContainsParameters struct {
+
+	// Strings in the body of the response that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureStrings []*string `json:"failureStrings" tf:"failure_strings,omitempty"`
+
+	// Strings in the body of the response that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessStrings []*string `json:"successStrings" tf:"success_strings,omitempty"`
+}
+
+type ResponseInspectionHeaderInitParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
+	// Name of the HTTP header to inspect
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionHeaderObservation struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
+	// Name of the HTTP header to inspect
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionHeaderParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureValues []*string `json:"failureValues" tf:"failure_values,omitempty"`
+
+	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
+	// Name of the HTTP header to inspect
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessValues []*string `json:"successValues" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionInitParameters struct {
+
+	// Configures inspection of the response body. See below.
+	BodyContains *BodyContainsInitParameters `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	Header *HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	JSON *JSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	StatusCode *StatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ResponseInspectionJSONInitParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the username field.
+	// Identifier of the JSON field to inspect
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionJSONObservation struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureValues []*string `json:"failureValues,omitempty" tf:"failure_values,omitempty"`
+
+	// Name of the username field.
+	// Identifier of the JSON field to inspect
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessValues []*string `json:"successValues,omitempty" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionJSONParameters struct {
+
+	// Values in the response header with the specified name that indicate a failed login attempt.
+	// Strings that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureValues []*string `json:"failureValues" tf:"failure_values,omitempty"`
+
+	// Name of the username field.
+	// Identifier of the JSON field to inspect
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+
+	// Values in the response header with the specified name that indicate a successful login attempt.
+	// Strings that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessValues []*string `json:"successValues" tf:"success_values,omitempty"`
+}
+
+type ResponseInspectionObservation struct {
+
+	// Configures inspection of the response body. See below.
+	BodyContains *BodyContainsObservation `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	Header *HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	JSON *JSONObservation `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	StatusCode *StatusCodeObservation `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ResponseInspectionParameters struct {
+
+	// Configures inspection of the response body. See below.
+	// +kubebuilder:validation:Optional
+	BodyContains *BodyContainsParameters `json:"bodyContains,omitempty" tf:"body_contains,omitempty"`
+
+	// Configures inspection of the response header. See below.
+	// +kubebuilder:validation:Optional
+	Header *HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Configures inspection of the response JSON. See below.
+	// +kubebuilder:validation:Optional
+	JSON *JSONParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// Configures inspection of the response status code. See below.
+	// +kubebuilder:validation:Optional
+	StatusCode *StatusCodeParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ResponseInspectionStatusCodeInitParameters struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes,omitempty" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes,omitempty" tf:"success_codes,omitempty"`
+}
+
+type ResponseInspectionStatusCodeObservation struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes,omitempty" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes,omitempty" tf:"success_codes,omitempty"`
+}
+
+type ResponseInspectionStatusCodeParameters struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes" tf:"success_codes,omitempty"`
+}
+
 type RuleActionOverrideActionToUseAllowInitParameters struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseAllowCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseAllowCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type RuleActionOverrideActionToUseAllowObservation struct {
 
 	// Custom handling for counted requests. See below.
-	CustomRequestHandling []ActionToUseAllowCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseAllowCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type RuleActionOverrideActionToUseAllowParameters struct {
 
 	// Custom handling for counted requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomRequestHandling []ActionToUseAllowCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+	CustomRequestHandling *ActionToUseAllowCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type RuleActionOverrideActionToUseBlockInitParameters struct {
 
 	// Custom response for blocked requests. See below.
-	CustomResponse []ActionToUseBlockCustomResponseInitParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *ActionToUseBlockCustomResponseInitParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type RuleActionOverrideActionToUseBlockObservation struct {
 
 	// Custom response for blocked requests. See below.
-	CustomResponse []ActionToUseBlockCustomResponseObservation `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *ActionToUseBlockCustomResponseObservation `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
 }
 
 type RuleActionOverrideActionToUseBlockParameters struct {
 
 	// Custom response for blocked requests. See below.
 	// +kubebuilder:validation:Optional
-	CustomResponse []ActionToUseBlockCustomResponseParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+	CustomResponse *ActionToUseBlockCustomResponseParameters `json:"customResponse,omitempty" tf:"custom_response,omitempty"`
+}
+
+type RuleActionOverrideActionToUseChallengeInitParameters struct {
+
+	// Custom handling for counted requests. See below.
+	CustomRequestHandling *ActionToUseChallengeCustomRequestHandlingInitParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+}
+
+type RuleActionOverrideActionToUseChallengeObservation struct {
+
+	// Custom handling for counted requests. See below.
+	CustomRequestHandling *ActionToUseChallengeCustomRequestHandlingObservation `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
+}
+
+type RuleActionOverrideActionToUseChallengeParameters struct {
+
+	// Custom handling for counted requests. See below.
+	// +kubebuilder:validation:Optional
+	CustomRequestHandling *ActionToUseChallengeCustomRequestHandlingParameters `json:"customRequestHandling,omitempty" tf:"custom_request_handling,omitempty"`
 }
 
 type RuleActionOverrideActionToUseInitParameters struct {
 
 	// Allow the request. See below.
-	Allow []RuleActionOverrideActionToUseAllowInitParameters `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *RuleActionOverrideActionToUseAllowInitParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
-	Block []RuleActionOverrideActionToUseBlockInitParameters `json:"block,omitempty" tf:"block,omitempty"`
+	Block *RuleActionOverrideActionToUseBlockInitParameters `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
-	Captcha []ActionToUseCaptchaInitParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *ActionToUseCaptchaInitParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
-	Challenge []ActionToUseChallengeInitParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *RuleActionOverrideActionToUseChallengeInitParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
-	Count []ActionToUseCountInitParameters `json:"count,omitempty" tf:"count,omitempty"`
+	Count *ActionToUseCountInitParameters `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type RuleActionOverrideActionToUseObservation struct {
 
 	// Allow the request. See below.
-	Allow []RuleActionOverrideActionToUseAllowObservation `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *RuleActionOverrideActionToUseAllowObservation `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
-	Block []RuleActionOverrideActionToUseBlockObservation `json:"block,omitempty" tf:"block,omitempty"`
+	Block *RuleActionOverrideActionToUseBlockObservation `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
-	Captcha []ActionToUseCaptchaObservation `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *ActionToUseCaptchaObservation `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
-	Challenge []ActionToUseChallengeObservation `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
+	Challenge *RuleActionOverrideActionToUseChallengeObservation `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
-	Count []ActionToUseCountObservation `json:"count,omitempty" tf:"count,omitempty"`
+	Count *ActionToUseCountObservation `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type RuleActionOverrideActionToUseParameters struct {
 
 	// Allow the request. See below.
 	// +kubebuilder:validation:Optional
-	Allow []RuleActionOverrideActionToUseAllowParameters `json:"allow,omitempty" tf:"allow,omitempty"`
+	Allow *RuleActionOverrideActionToUseAllowParameters `json:"allow,omitempty" tf:"allow,omitempty"`
 
 	// Block the request. See below.
 	// +kubebuilder:validation:Optional
-	Block []RuleActionOverrideActionToUseBlockParameters `json:"block,omitempty" tf:"block,omitempty"`
+	Block *RuleActionOverrideActionToUseBlockParameters `json:"block,omitempty" tf:"block,omitempty"`
 
 	// Require CAPTCHA verification. See below.
 	// +kubebuilder:validation:Optional
-	Captcha []ActionToUseCaptchaParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
+	Captcha *ActionToUseCaptchaParameters `json:"captcha,omitempty" tf:"captcha,omitempty"`
 
-	// Require challenge verification. See below.
+	// Configuration for the use of the AWSManagedRulesAntiDDoSRuleSet rules ChallengeAllDuringEvent and ChallengeDDoSRequests. See below.
 	// +kubebuilder:validation:Optional
-	Challenge []ActionToUseChallengeParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
+	Challenge *RuleActionOverrideActionToUseChallengeParameters `json:"challenge,omitempty" tf:"challenge,omitempty"`
 
 	// Count the request without taking action. See below.
 	// +kubebuilder:validation:Optional
-	Count []ActionToUseCountParameters `json:"count,omitempty" tf:"count,omitempty"`
+	Count *ActionToUseCountParameters `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type RuleActionOverrideInitParameters struct {
 
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
-	ActionToUse []ActionToUseInitParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *ActionToUseInitParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -918,7 +1906,7 @@ type RuleActionOverrideObservation struct {
 
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
-	ActionToUse []ActionToUseObservation `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *ActionToUseObservation `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -930,7 +1918,7 @@ type RuleActionOverrideParameters struct {
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
 	// +kubebuilder:validation:Optional
-	ActionToUse []ActionToUseParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *ActionToUseParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -997,7 +1985,7 @@ type RuleGroupReferenceRuleActionOverrideInitParameters struct {
 
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
-	ActionToUse []RuleActionOverrideActionToUseInitParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *RuleActionOverrideActionToUseInitParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -1008,7 +1996,7 @@ type RuleGroupReferenceRuleActionOverrideObservation struct {
 
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
-	ActionToUse []RuleActionOverrideActionToUseObservation `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *RuleActionOverrideActionToUseObservation `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -1020,7 +2008,7 @@ type RuleGroupReferenceRuleActionOverrideParameters struct {
 	// Action to use instead of the rule's original action. See below.
 	// Action to use in place of the rule action.
 	// +kubebuilder:validation:Optional
-	ActionToUse []RuleActionOverrideActionToUseParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
+	ActionToUse *RuleActionOverrideActionToUseParameters `json:"actionToUse,omitempty" tf:"action_to_use,omitempty"`
 
 	// Name of the rule to override within the rule group. Verify the name carefully. With managed rule groups, WAF silently ignores any override that uses an invalid rule name. With customer-owned rule groups, invalid rule names in your overrides will cause web ACL updates to fail. An invalid rule name is any name that doesn't exactly match the case-sensitive name of an existing rule in the rule group.
 	// Name of the rule to override.
@@ -1028,11 +2016,74 @@ type RuleGroupReferenceRuleActionOverrideParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
+type StatusCodeInitParameters struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes,omitempty" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes,omitempty" tf:"success_codes,omitempty"`
+}
+
+type StatusCodeObservation struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes,omitempty" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes,omitempty" tf:"success_codes,omitempty"`
+}
+
+type StatusCodeParameters struct {
+
+	// Status codes in the response that indicate a failed login attempt.
+	// Status codes that indicate a failed login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	FailureCodes []*float64 `json:"failureCodes" tf:"failure_codes,omitempty"`
+
+	// Status codes in the response that indicate a successful login attempt.
+	// Status codes that indicate a successful login or account creation attempt
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SuccessCodes []*float64 `json:"successCodes" tf:"success_codes,omitempty"`
+}
+
+type UsernameFieldInitParameters struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type UsernameFieldObservation struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type UsernameFieldParameters struct {
+
+	// Name of the username field.
+	// Identifier of the username field
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+}
+
 type WebACLRuleGroupAssociationInitParameters struct {
 
 	// Managed Rule Group configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with rule_group_reference. See below.
 	// Managed rule group configuration.
-	ManagedRuleGroup []ManagedRuleGroupInitParameters `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
+	ManagedRuleGroup *ManagedRuleGroupInitParameters `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
 
 	// Override action for the rule group. Valid values are none and count. Defaults to none. When set to count, the actions defined in the rule group rules are overridden to count matches instead of blocking or allowing requests.
 	// Override action for the rule group. Valid values are 'none' and 'count'. Defaults to 'none'.
@@ -1044,11 +2095,15 @@ type WebACLRuleGroupAssociationInitParameters struct {
 
 	// Custom Rule Group reference configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with managed_rule_group. See below.
 	// Rule Group reference configuration.
-	RuleGroupReference []RuleGroupReferenceInitParameters `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
+	RuleGroupReference *RuleGroupReferenceInitParameters `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
 
 	// Name of the rule to create in the Web ACL that references the rule group. Must be between 1 and 128 characters.
 	// Name of the rule to create in the Web ACL that references the rule group.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See below.
+	// Visibility configuration for the rule.
+	VisibilityConfig *WebACLRuleGroupAssociationVisibilityConfigInitParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 
 	// ARN of the Web ACL to associate the Rule Group with.
 	// ARN of the Web ACL to associate the Rule Group with.
@@ -1070,7 +2125,7 @@ type WebACLRuleGroupAssociationObservation struct {
 
 	// Managed Rule Group configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with rule_group_reference. See below.
 	// Managed rule group configuration.
-	ManagedRuleGroup []ManagedRuleGroupObservation `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
+	ManagedRuleGroup *ManagedRuleGroupObservation `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
 
 	// Override action for the rule group. Valid values are none and count. Defaults to none. When set to count, the actions defined in the rule group rules are overridden to count matches instead of blocking or allowing requests.
 	// Override action for the rule group. Valid values are 'none' and 'count'. Defaults to 'none'.
@@ -1086,11 +2141,15 @@ type WebACLRuleGroupAssociationObservation struct {
 
 	// Custom Rule Group reference configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with managed_rule_group. See below.
 	// Rule Group reference configuration.
-	RuleGroupReference []RuleGroupReferenceObservation `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
+	RuleGroupReference *RuleGroupReferenceObservation `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
 
 	// Name of the rule to create in the Web ACL that references the rule group. Must be between 1 and 128 characters.
 	// Name of the rule to create in the Web ACL that references the rule group.
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See below.
+	// Visibility configuration for the rule.
+	VisibilityConfig *WebACLRuleGroupAssociationVisibilityConfigObservation `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 
 	// ARN of the Web ACL to associate the Rule Group with.
 	// ARN of the Web ACL to associate the Rule Group with.
@@ -1102,7 +2161,7 @@ type WebACLRuleGroupAssociationParameters struct {
 	// Managed Rule Group configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with rule_group_reference. See below.
 	// Managed rule group configuration.
 	// +kubebuilder:validation:Optional
-	ManagedRuleGroup []ManagedRuleGroupParameters `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
+	ManagedRuleGroup *ManagedRuleGroupParameters `json:"managedRuleGroup,omitempty" tf:"managed_rule_group,omitempty"`
 
 	// Override action for the rule group. Valid values are none and count. Defaults to none. When set to count, the actions defined in the rule group rules are overridden to count matches instead of blocking or allowing requests.
 	// Override action for the rule group. Valid values are 'none' and 'count'. Defaults to 'none'.
@@ -1122,12 +2181,17 @@ type WebACLRuleGroupAssociationParameters struct {
 	// Custom Rule Group reference configuration. One of rule_group_reference or managed_rule_group is required. Conflicts with managed_rule_group. See below.
 	// Rule Group reference configuration.
 	// +kubebuilder:validation:Optional
-	RuleGroupReference []RuleGroupReferenceParameters `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
+	RuleGroupReference *RuleGroupReferenceParameters `json:"ruleGroupReference,omitempty" tf:"rule_group_reference,omitempty"`
 
 	// Name of the rule to create in the Web ACL that references the rule group. Must be between 1 and 128 characters.
 	// Name of the rule to create in the Web ACL that references the rule group.
 	// +kubebuilder:validation:Optional
 	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection. See below.
+	// Visibility configuration for the rule.
+	// +kubebuilder:validation:Optional
+	VisibilityConfig *WebACLRuleGroupAssociationVisibilityConfigParameters `json:"visibilityConfig,omitempty" tf:"visibility_config,omitempty"`
 
 	// ARN of the Web ACL to associate the Rule Group with.
 	// ARN of the Web ACL to associate the Rule Group with.
@@ -1143,6 +2207,54 @@ type WebACLRuleGroupAssociationParameters struct {
 	// Selector for a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
 	WebACLArnSelector *v1.NamespacedSelector `json:"webAclArnSelector,omitempty" tf:"-"`
+}
+
+type WebACLRuleGroupAssociationVisibilityConfigInitParameters struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Indicates whether the rule is available for use in the metrics for the web ACL.
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// A name for the metrics for this rule.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Indicates whether to store a sampling of the web requests that match the rule.
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+}
+
+type WebACLRuleGroupAssociationVisibilityConfigObservation struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Indicates whether the rule is available for use in the metrics for the web ACL.
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled,omitempty" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// A name for the metrics for this rule.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Indicates whether to store a sampling of the web requests that match the rule.
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled,omitempty" tf:"sampled_requests_enabled,omitempty"`
+}
+
+type WebACLRuleGroupAssociationVisibilityConfigParameters struct {
+
+	// Whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see AWS WAF Metrics.
+	// Indicates whether the rule is available for use in the metrics for the web ACL.
+	// +kubebuilder:validation:Optional
+	CloudwatchMetricsEnabled *bool `json:"cloudwatchMetricsEnabled" tf:"cloudwatch_metrics_enabled,omitempty"`
+
+	// Friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9) hyphen(-) and underscore (_), with length from one to 128 characters. It can't contain whitespace or metric names reserved for AWS WAF, for example All and Default_Action.
+	// A name for the metrics for this rule.
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+
+	// Whether AWS WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the AWS WAF console.
+	// Indicates whether to store a sampling of the web requests that match the rule.
+	// +kubebuilder:validation:Optional
+	SampledRequestsEnabled *bool `json:"sampledRequestsEnabled" tf:"sampled_requests_enabled,omitempty"`
 }
 
 // WebACLRuleGroupAssociationSpec defines the desired state of WebACLRuleGroupAssociation
