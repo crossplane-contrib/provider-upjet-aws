@@ -60,14 +60,14 @@ spec:
   forProvider:
     comment: test comment
     encryptionEntities:
-      - items:
-          - fieldPatterns:
-              - items:
-                  - DateOfBirth
-            providerId: testprovider
-            publicKeyIdSelector:
-              matchLabels:
-                testing.upbound.io/example-name: publickey
+      items:
+      - fieldPatterns:
+          items:
+            - DateOfBirth
+        providerId: testprovider
+        publicKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: publickey
     name: ${Rand.RFC1123Subdomain}
 ---
 apiVersion: cloudfront.aws.m.upbound.io/v1beta1
@@ -81,16 +81,16 @@ spec:
   forProvider:
     comment: test comment
     contentTypeProfileConfig:
-      - contentTypeProfiles:
-          - items:
-              - contentType: application/x-www-form-urlencoded
-                format: URLEncoded
-        forwardWhenContentTypeIsUnknown: true
+      contentTypeProfiles:
+        items:
+          - contentType: application/x-www-form-urlencoded
+            format: URLEncoded
+      forwardWhenContentTypeIsUnknown: true
     queryArgProfileConfig:
-      - forwardWhenQueryArgProfileIsUnknown: true
-        queryArgProfiles:
-          - items:
-              - profileIdSelector:
-                  matchLabels:
-                    testing.upbound.io/example-name: publickey
-                queryArg: Arg1
+      forwardWhenQueryArgProfileIsUnknown: true
+      queryArgProfiles:
+        items:
+          - profileIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: publickey
+            queryArg: Arg1
