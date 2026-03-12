@@ -74,6 +74,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
+	// cloudfront
+	//
+	// Cloudfront VPC Origin can be imported using the ID
+	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
+
 	// dsql
 	//
 	// DSQL Cluster can be imported using the identifier
@@ -575,8 +580,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudfront_realtime_log_config": config.IdentifierFromProvider,
 	// Cloudfront Response Headers Policies can be imported using the id
 	"aws_cloudfront_response_headers_policy": config.IdentifierFromProvider,
-	// Cloudfront VPC Origin can be imported using the id
-	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
 
 	// cloudsearch
 	//
