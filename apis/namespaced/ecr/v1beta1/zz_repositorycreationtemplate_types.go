@@ -150,6 +150,9 @@ type RepositoryCreationTemplateObservation struct {
 	// The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument.
 	LifecyclePolicy *string `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
+	// The repository name prefix to match against. Use ROOT to match any prefix that doesn't explicitly match another template.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
@@ -195,6 +198,10 @@ type RepositoryCreationTemplateParameters struct {
 	// The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument.
 	// +kubebuilder:validation:Optional
 	LifecyclePolicy *string `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
+
+	// The repository name prefix to match against. Use ROOT to match any prefix that doesn't explicitly match another template.
+	// +kubebuilder:validation:Required
+	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

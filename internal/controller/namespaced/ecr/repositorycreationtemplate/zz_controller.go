@@ -39,7 +39,6 @@ func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.RepositoryCreationTemplate_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.RepositoryCreationTemplate_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.RepositoryCreationTemplate_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{

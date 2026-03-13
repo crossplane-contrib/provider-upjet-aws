@@ -1862,6 +1862,11 @@ func (in *RepositoryCreationTemplateObservation) DeepCopyInto(out *RepositoryCre
 		*out = new(string)
 		**out = **in
 	}
+	if in.Prefix != nil {
+		in, out := &in.Prefix, &out.Prefix
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -1950,6 +1955,11 @@ func (in *RepositoryCreationTemplateParameters) DeepCopyInto(out *RepositoryCrea
 	}
 	if in.LifecyclePolicy != nil {
 		in, out := &in.LifecyclePolicy, &out.LifecyclePolicy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Prefix != nil {
+		in, out := &in.Prefix, &out.Prefix
 		*out = new(string)
 		**out = **in
 	}

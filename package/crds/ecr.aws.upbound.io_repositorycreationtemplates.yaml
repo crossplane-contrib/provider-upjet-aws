@@ -210,6 +210,11 @@ spec:
                       data_source to generate/manage the JSON document used for the
                       lifecycle_policy argument.
                     type: string
+                  prefix:
+                    description: The repository name prefix to match against. Use
+                      ROOT to match any prefix that doesn't explicitly match another
+                      template.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -226,6 +231,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                 required:
+                - prefix
                 - region
                 type: object
               initProvider:
@@ -548,6 +554,11 @@ spec:
                       official AWS docs. Consider using the aws_ecr_lifecycle_policy_document
                       data_source to generate/manage the JSON document used for the
                       lifecycle_policy argument.
+                    type: string
+                  prefix:
+                    description: The repository name prefix to match against. Use
+                      ROOT to match any prefix that doesn't explicitly match another
+                      template.
                     type: string
                   region:
                     description: |-

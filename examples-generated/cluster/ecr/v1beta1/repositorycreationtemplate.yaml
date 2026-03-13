@@ -38,6 +38,7 @@ spec:
           }
         ]
       }
+    prefix: example
     region: us-west-1
     repositoryPolicy: ${data.aws_iam_policy_document.example.json}
     resourceTags:
