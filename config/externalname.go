@@ -3434,47 +3434,31 @@ func dsqlClusterPeering() config.ExternalName {
 	return e
 }
 
-// getFirstBlockAttr extracts the first element of a block-type attribute from
-// Terraform state and returns it as a map. Returns nil if the attribute is
-// missing, empty, or not the expected type.
-func getFirstBlockAttr(tfstate map[string]any, key string) map[string]interface{} {
-	block, ok := tfstate[key]
-	if !ok {
-		return nil
-	}
-	items, ok := block.([]interface{})
-	if !ok || len(items) == 0 {
-		return nil
-	}
-	m, _ := items[0].(map[string]interface{})
-	return m
-}
-
 // customRuleGroupIdentifier returns the ARN from a rule_group_reference block,
 // or an empty string if none is found.
 func customRuleGroupIdentifier(tfstate map[string]any) string {
-	ref := getFirstBlockAttr(tfstate, "rule_group_reference")
-	if ref == nil {
+	rgr, ok := tfstate["rule_group_reference"].(map[string]interface{})
+	if !ok || rgr == nil {
 		return ""
 	}
-	arn, _ := ref["arn"].(string)
+	arn, _ := rgr["arn"].(string)
 	return arn
 }
 
 // managedRuleGroupIdentifier returns the "vendorName:name[:version]" identifier
 // from a managed_rule_group block, or an empty string if none is found.
 func managedRuleGroupIdentifier(tfstate map[string]any) string {
-	group := getFirstBlockAttr(tfstate, "managed_rule_group")
-	if group == nil {
+	mrg, ok := tfstate["managed_rule_group"].(map[string]interface{})
+	if !ok || mrg == nil {
 		return ""
 	}
-	vendorName, _ := group["vendor_name"].(string)
-	name, _ := group["name"].(string)
+	vendorName, _ := mrg["vendor_name"].(string)
+	name, _ := mrg["name"].(string)
 	if vendorName == "" || name == "" {
 		return ""
 	}
 	identifier := vendorName + ":" + name
-	if version, _ := group["version"].(string); version != "" {
+	if version, _ := mrg["version"].(string); version != "" {
 		identifier += ":" + version
 	}
 	return identifier
