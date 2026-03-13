@@ -1206,6 +1206,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using the parameter called repository but this is not the name
 	// of the resource, only a configuration/reference.
 	"aws_ecr_repository_policy": config.IdentifierFromProvider,
+	// Imported using the prefix.
+	"aws_ecr_repository_creation_template": ecrRepositoryCreationTemplate(),
 
 	// ecrpublic
 	//
@@ -3595,6 +3597,35 @@ func codebuildWebhook() config.ExternalName {
 			return
 		}
 		tfstate["project_name"] = externalName
+	}
+	return e
+}
+
+func ecrRepositoryCreationTemplate() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.IdentifierFields = []string{"prefix"}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		base["prefix"] = externalName
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		if externalName != "" {
+			return externalName, nil
+		}
+		prefix, ok := parameters["prefix"].(string)
+		if !ok {
+			return "", errors.New("field \"prefix\" field missing from parameters")
+		}
+		return prefix, nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		prefix, ok := tfstate["prefix"].(string)
+		if !ok {
+			return "", errors.New("attribute \"prefix\" missing from TF state")
+		}
+		return prefix, nil
 	}
 	return e
 }

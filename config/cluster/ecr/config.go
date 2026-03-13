@@ -22,4 +22,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// Deletion takes a while.
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_ecr_repository_creation_template", func(r *config.Resource) {
+		r.References = map[string]config.Reference{
+			"encryption_configuration.kms_key": {
+				TerraformName: "aws_kms_key",
+				Extractor:     common.PathARNExtractor,
+			},
+		}
+	})
 }
