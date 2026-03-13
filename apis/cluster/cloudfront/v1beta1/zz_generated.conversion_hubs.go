@@ -20,3 +20,6 @@ func (tr *OriginAccessIdentity) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PublicKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCOrigin) Hub() {}
