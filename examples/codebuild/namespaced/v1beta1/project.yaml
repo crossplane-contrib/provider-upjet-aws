@@ -6,6 +6,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   name: example-codebuild-role
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: example-codebuild-project
 spec:
@@ -28,6 +29,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   name: example-codebuild-policy
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: example-codebuild-project
 spec:
@@ -47,7 +49,6 @@ spec:
           }
         ]
       }
-    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-codebuild-project
@@ -56,6 +57,7 @@ apiVersion: codebuild.aws.m.upbound.io/v1beta1
 kind: Project
 metadata:
   name: example
+  namespace: upbound-system
   annotations:
     meta.upbound.io/example-id: codebuild/v1beta1/project
   labels:
@@ -63,22 +65,21 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    name: example-project
     description: Example CodeBuild Project
     serviceRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-codebuild-project
     artifacts:
-      - type: NO_ARTIFACTS
+      type: NO_ARTIFACTS
     environment:
-      - computeType: BUILD_GENERAL1_SMALL
-        image: aws/codebuild/standard:5.0
-        type: LINUX_CONTAINER
+      computeType: BUILD_GENERAL1_SMALL
+      image: aws/codebuild/standard:5.0
+      type: LINUX_CONTAINER
     source:
-      - type: NO_SOURCE
-        buildspec: |
-          version: 0.2
-          phases:
-            build:
-              commands:
-                - echo "Hello, World!"
+      type: NO_SOURCE
+      buildspec: |
+        version: 0.2
+        phases:
+          build:
+            commands:
+              - echo "Hello, World!"

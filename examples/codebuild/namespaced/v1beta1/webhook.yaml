@@ -6,6 +6,7 @@ apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   name: example-webhook-role
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: example-codebuild-webhook
 spec:
@@ -28,31 +29,33 @@ apiVersion: codebuild.aws.m.upbound.io/v1beta1
 kind: Project
 metadata:
   name: example-webhook-project
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: example-codebuild-webhook
 spec:
   forProvider:
     region: us-west-1
-    name: example-webhook-project
     serviceRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-codebuild-webhook
     artifacts:
-      - type: NO_ARTIFACTS
+      type: NO_ARTIFACTS
     environment:
-      - computeType: BUILD_GENERAL1_SMALL
-        image: aws/codebuild/standard:5.0
-        type: LINUX_CONTAINER
+      computeType: BUILD_GENERAL1_SMALL
+      image: aws/codebuild/standard:5.0
+      type: LINUX_CONTAINER
     source:
-      - type: GITHUB
-        location: https://github.com/example/example-repo.git
+      type: GITHUB
+      location: https://github.com/example/example-repo.git
 ---
 apiVersion: codebuild.aws.m.upbound.io/v1beta1
 kind: Webhook
 metadata:
   name: example
+  namespace: upbound-system
   annotations:
     meta.upbound.io/example-id: codebuild/v1beta1/webhook
+    upjet.upbound.io/manual-intervention: "needs a real github setup"
   labels:
     testing.upbound.io/example-name: example-codebuild-webhook
 spec:

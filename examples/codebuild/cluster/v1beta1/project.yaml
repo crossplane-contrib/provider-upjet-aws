@@ -47,7 +47,6 @@ spec:
           }
         ]
       }
-    region: us-west-1
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-codebuild-project
@@ -63,22 +62,21 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    name: example-project
     description: Example CodeBuild Project
     serviceRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-codebuild-project
     artifacts:
-      - type: NO_ARTIFACTS
+      type: NO_ARTIFACTS
     environment:
-      - computeType: BUILD_GENERAL1_SMALL
-        image: aws/codebuild/standard:5.0
-        type: LINUX_CONTAINER
+      computeType: BUILD_GENERAL1_SMALL
+      image: aws/codebuild/standard:5.0
+      type: LINUX_CONTAINER
     source:
-      - type: NO_SOURCE
-        buildspec: |
-          version: 0.2
-          phases:
-            build:
-              commands:
-                - echo "Hello, World!"
+      type: NO_SOURCE
+      buildspec: |
+        version: 0.2
+        phases:
+          build:
+            commands:
+              - echo "Hello, World!"
