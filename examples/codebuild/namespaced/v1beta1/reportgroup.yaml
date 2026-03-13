@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: xp-example-codebuild-reports-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+  labels:
+    testing.upbound.io/example-name: example-codebuild-reportgroup
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/reportgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: codebuild report group uptest
+    region: us-west-1
+---
+apiVersion: codebuild.aws.m.upbound.io/v1beta1
+kind: ReportGroup
+metadata:
+  name: example
+  namespace: upbound-system
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/reportgroup
+  labels:
+    testing.upbound.io/example-name: example-codebuild-reportgroup
+spec:
+  forProvider:
+    region: us-west-1
+    type: TEST
+    exportConfig:
+      type: S3
+      s3Destination:
+        bucketSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-codebuild-reportgroup
+        encryptionDisabled: false
+        encryptionKeySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        packaging: NONE

@@ -661,6 +661,17 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	"aws_codecommit_trigger": config.IdentifierFromProvider,
 
+	// codebuild
+	//
+	// CodeBuild Projects can be imported using the name
+	"aws_codebuild_project": config.TemplatedStringAsIdentifier("name", fullARNTemplate("codebuild", "project/{{ .external_name }}")),
+	// CodeBuild Report Groups can be imported using the name
+	"aws_codebuild_report_group": config.TemplatedStringAsIdentifier("name", fullARNTemplate("codebuild", "report-group/{{ .external_name }}")),
+	// CodeBuild Source Credentials can be imported using the arn
+	"aws_codebuild_source_credential": config.IdentifierFromProvider,
+	// CodeBuild Webhooks can be imported using the project name
+	"aws_codebuild_webhook": codebuildWebhook(),
+
 	// codepipeline
 	//
 	// CodePipelines can be imported using the name
@@ -3505,5 +3516,16 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
 	}
 	e.IdentifierFields = []string{"name", "agent_runtime_id"}
+	return e
+}
+
+func codebuildWebhook() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["project_name"] = externalName
+	}
 	return e
 }

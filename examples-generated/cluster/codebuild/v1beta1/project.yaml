@@ -1,0 +1,131 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: codebuild.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    artifacts:
+      type: NO_ARTIFACTS
+    buildTimeout: 5
+    cache:
+      locationSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      type: S3
+    description: test_codebuild_project
+    environment:
+      computeType: BUILD_GENERAL1_SMALL
+      environmentVariable:
+      - name: SOME_KEY1
+        value: SOME_VALUE1
+      - name: SOME_KEY2
+        type: PARAMETER_STORE
+        value: SOME_VALUE2
+      image: aws/codebuild/amazonlinux2-x86_64-standard:4.0
+      imagePullCredentialsType: CODEBUILD
+      type: LINUX_CONTAINER
+    logsConfig:
+      cloudwatchLogs:
+        groupName: log-group
+        streamName: log-stream
+      s3Logs:
+        location: ${aws_s3_bucket.example.id}/build-log
+        status: ENABLED
+    region: us-west-1
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    source:
+      gitCloneDepth: 1
+      gitSubmodulesConfig:
+        fetchSubmodules: true
+      location: https://github.com/mitchellh/packer.git
+      type: GITHUB
+    sourceVersion: master
+    tags:
+      Environment: Test
+    vpcConfig:
+      securityGroupIdsRefs:
+      - name: example1
+      - name: example2
+      subnetsRefs:
+      - name: example1
+      - name: example2
+      vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.example.json}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    acl: private
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
