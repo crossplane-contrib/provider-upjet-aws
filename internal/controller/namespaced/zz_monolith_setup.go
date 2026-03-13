@@ -173,6 +173,7 @@ import (
 	publickey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/publickey"
 	realtimelogconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/realtimelogconfig"
 	responseheaderspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/responseheaderspolicy"
+	vpcorigin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudfront/vpcorigin"
 	domain "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudsearch/domain"
 	domainserviceaccesspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudsearch/domainserviceaccesspolicy"
 	eventdatastore "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudtrail/eventdatastore"
@@ -201,6 +202,10 @@ import (
 	domainpermissionspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codeartifact/domainpermissionspolicy"
 	repository "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codeartifact/repository"
 	repositorypermissionspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codeartifact/repositorypermissionspolicy"
+	project "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codebuild/project"
+	reportgroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codebuild/reportgroup"
+	sourcecredential "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codebuild/sourcecredential"
+	webhookcodebuild "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codebuild/webhook"
 	approvalruletemplate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/approvalruletemplate"
 	approvalruletemplateassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/approvalruletemplateassociation"
 	repositorycodecommit "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codecommit/repository"
@@ -265,7 +270,7 @@ import (
 	devicepool "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/devicepool"
 	instanceprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/instanceprofile"
 	networkprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/networkprofile"
-	project "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/project"
+	projectdevicefarm "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/project"
 	testgridproject "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/testgridproject"
 	upload "github.com/upbound/provider-aws/v2/internal/controller/namespaced/devicefarm/upload"
 	bgppeer "github.com/upbound/provider-aws/v2/internal/controller/namespaced/directconnect/bgppeer"
@@ -1179,6 +1184,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		publickey.Setup,
 		realtimelogconfig.Setup,
 		responseheaderspolicy.Setup,
+		vpcorigin.Setup,
 		domain.Setup,
 		domainserviceaccesspolicy.Setup,
 		eventdatastore.Setup,
@@ -1207,6 +1213,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainpermissionspolicy.Setup,
 		repository.Setup,
 		repositorypermissionspolicy.Setup,
+		project.Setup,
+		reportgroup.Setup,
+		sourcecredential.Setup,
+		webhookcodebuild.Setup,
 		approvalruletemplate.Setup,
 		approvalruletemplateassociation.Setup,
 		repositorycodecommit.Setup,
@@ -1271,7 +1281,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		devicepool.Setup,
 		instanceprofile.Setup,
 		networkprofile.Setup,
-		project.Setup,
+		projectdevicefarm.Setup,
 		testgridproject.Setup,
 		upload.Setup,
 		bgppeer.Setup,
@@ -2191,6 +2201,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		publickey.SetupGated,
 		realtimelogconfig.SetupGated,
 		responseheaderspolicy.SetupGated,
+		vpcorigin.SetupGated,
 		domain.SetupGated,
 		domainserviceaccesspolicy.SetupGated,
 		eventdatastore.SetupGated,
@@ -2219,6 +2230,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainpermissionspolicy.SetupGated,
 		repository.SetupGated,
 		repositorypermissionspolicy.SetupGated,
+		project.SetupGated,
+		reportgroup.SetupGated,
+		sourcecredential.SetupGated,
+		webhookcodebuild.SetupGated,
 		approvalruletemplate.SetupGated,
 		approvalruletemplateassociation.SetupGated,
 		repositorycodecommit.SetupGated,
@@ -2283,7 +2298,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		devicepool.SetupGated,
 		instanceprofile.SetupGated,
 		networkprofile.SetupGated,
-		project.SetupGated,
+		projectdevicefarm.SetupGated,
 		testgridproject.SetupGated,
 		upload.SetupGated,
 		bgppeer.SetupGated,

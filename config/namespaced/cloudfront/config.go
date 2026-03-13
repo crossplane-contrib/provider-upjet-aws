@@ -48,4 +48,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
+
+	p.AddResourceConfigurator("aws_cloudfront_vpc_origin", func(r *config.Resource) {
+		r.AddSingletonListConversion("vpc_origin_endpoint_config", "vpcOriginEndpointConfig")
+		r.AddSingletonListConversion("vpc_origin_endpoint_config[*].origin_ssl_protocols", "vpcOriginEndpointConfig[*].originSslProtocols")
+	})
 }

@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: example-codebuild-role
+  labels:
+    testing.upbound.io/example-name: example-codebuild-project
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "codebuild.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  name: example-codebuild-policy
+  labels:
+    testing.upbound.io/example-name: example-codebuild-project
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Resource": ["*"],
+            "Action": [
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ]
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-codebuild-project
+---
+apiVersion: codebuild.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/project
+  labels:
+    testing.upbound.io/example-name: example-codebuild-project
+spec:
+  forProvider:
+    region: us-west-1
+    description: Example CodeBuild Project
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-codebuild-project
+    artifacts:
+      type: NO_ARTIFACTS
+    environment:
+      computeType: BUILD_GENERAL1_SMALL
+      image: aws/codebuild/standard:5.0
+      type: LINUX_CONTAINER
+    source:
+      type: NO_SOURCE
+      buildspec: |
+        version: 0.2
+        phases:
+          build:
+            commands:
+              - echo "Hello, World!"

@@ -74,6 +74,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
+	// cloudfront
+	//
+	// Cloudfront VPC Origin can be imported using the ID
+	"aws_cloudfront_vpc_origin": identifierFromProviderWithDefaultStub("vo_stub000000000000000000"),
+
 	// dsql
 	//
 	// DSQL Cluster can be imported using the identifier
@@ -665,6 +670,17 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_codecommit_repository": config.ParameterAsIdentifier("repository_name"),
 	// No import
 	"aws_codecommit_trigger": config.IdentifierFromProvider,
+
+	// codebuild
+	//
+	// CodeBuild Projects can be imported using the name
+	"aws_codebuild_project": config.TemplatedStringAsIdentifier("name", fullARNTemplate("codebuild", "project/{{ .external_name }}")),
+	// CodeBuild Report Groups can be imported using the name
+	"aws_codebuild_report_group": config.TemplatedStringAsIdentifier("name", fullARNTemplate("codebuild", "report-group/{{ .external_name }}")),
+	// CodeBuild Source Credentials can be imported using the arn
+	"aws_codebuild_source_credential": config.IdentifierFromProvider,
+	// CodeBuild Webhooks can be imported using the project name
+	"aws_codebuild_webhook": codebuildWebhook(),
 
 	// codepipeline
 	//
@@ -3569,5 +3585,16 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
 	}
 	e.IdentifierFields = []string{"name", "agent_runtime_id"}
+	return e
+}
+
+func codebuildWebhook() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["project_name"] = externalName
+	}
 	return e
 }

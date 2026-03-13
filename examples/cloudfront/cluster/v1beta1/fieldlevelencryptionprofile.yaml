@@ -14,9 +14,9 @@ spec:
   forProvider:
     comment: test comment
     encryptionEntities:
-      items:
+    - items:
       - fieldPatterns:
-          items:
+        - items:
             - DateOfBirth
         providerId: testprovider
         publicKeyIdSelector:
