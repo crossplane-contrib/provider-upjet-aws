@@ -13,6 +13,21 @@ spec:
   forProvider:
     region: us-west-1
 ---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codebuild/v1beta1/reportgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: codebuild report group uptest
+    region: us-west-1
+---
 apiVersion: codebuild.aws.m.upbound.io/v1beta1
 kind: ReportGroup
 metadata:
@@ -33,4 +48,7 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: example-codebuild-reportgroup
         encryptionDisabled: false
+        encryptionKeySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
         packaging: NONE
