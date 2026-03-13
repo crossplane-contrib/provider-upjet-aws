@@ -23,3 +23,6 @@ func (tr *WebACLAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *WebACLLoggingConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WebACLRuleGroupAssociation) Hub() {}
