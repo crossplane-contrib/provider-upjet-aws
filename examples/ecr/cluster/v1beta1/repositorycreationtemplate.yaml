@@ -18,5 +18,5 @@ spec:
     encryptionConfiguration:
       - encryptionType: AES256
     imageTagMutability: IMMUTABLE
-    prefix: example
+    prefix: example-xp
     region: us-west-1
