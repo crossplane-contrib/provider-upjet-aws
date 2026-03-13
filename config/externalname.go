@@ -670,7 +670,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// CodeBuild Source Credentials can be imported using the arn
 	"aws_codebuild_source_credential": config.IdentifierFromProvider,
 	// CodeBuild Webhooks can be imported using the project name
-	"aws_codebuild_webhook": config.ParameterAsIdentifier("project_name"),
+	"aws_codebuild_webhook": codebuildWebhook(),
 
 	// codepipeline
 	//
@@ -3516,5 +3516,16 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
 	}
 	e.IdentifierFields = []string{"name", "agent_runtime_id"}
+	return e
+}
+
+func codebuildWebhook() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["project_name"] = externalName
+	}
 	return e
 }
