@@ -22,7 +22,8 @@ spec:
       httpsPort: 8443
       originProtocolPolicy: "https-only"
       originSslProtocols:
-        items: [ "TLSv1.2" ]
+        items:
+        - "TLSv1.2"
         quantity: 1
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
@@ -115,6 +116,100 @@ spec:
     securityGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sg
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-igw
+  name: example-igw
+  namespace: upbound-system
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+    region: us-west-2
+    tags:
+      Name: example-igw
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rt
+  name: example-route
+  namespace: upbound-system
+spec:
+  forProvider:
+    destinationCidrBlock: "0.0.0.0/0"
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-igw
+    region: us-west-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rt
+  name: example-rt
+  namespace: upbound-system
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+    region: us-west-2
+    tags:
+      Name: example-rt
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rta-a
+  name: example-rta-a
+  namespace: upbound-system
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-subnet-a
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    region: us-west-2
+---
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rta-b
+  name: example-rta-b
+  namespace: upbound-system
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-subnet-b
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    region: us-west-2
 ---
 apiVersion: elbv2.aws.m.upbound.io/v1beta1
 kind: LB
