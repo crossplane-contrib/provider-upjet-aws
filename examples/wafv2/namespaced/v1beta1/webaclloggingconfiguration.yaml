@@ -37,12 +37,12 @@ spec:
     region: us-west-1
     destination: extended_s3
     extendedS3Configuration:
-      - bucketArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-        roleArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+      bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     name: aws-waf-logs-example
 ---
 apiVersion: s3.aws.m.upbound.io/v1beta1
