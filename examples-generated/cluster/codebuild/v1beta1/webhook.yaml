@@ -20,4 +20,7 @@ spec:
         type: EVENT
       - pattern: master
         type: BASE_REF
+    projectNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1

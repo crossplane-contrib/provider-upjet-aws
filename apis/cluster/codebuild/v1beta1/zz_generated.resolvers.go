@@ -354,3 +354,55 @@ func (mg *ReportGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	return nil
 }
+
+// ResolveReferences of this Webhook.
+func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("codebuild.aws.upbound.io", "v1beta1", "Project", "ProjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProjectName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ProjectNameRef,
+			Selector:     mg.Spec.ForProvider.ProjectNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ProjectName")
+	}
+	mg.Spec.ForProvider.ProjectName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProjectNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("codebuild.aws.upbound.io", "v1beta1", "Project", "ProjectList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProjectName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ProjectNameRef,
+			Selector:     mg.Spec.InitProvider.ProjectNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProjectName")
+	}
+	mg.Spec.InitProvider.ProjectName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProjectNameRef = rsp.ResolvedReference
+
+	return nil
+}

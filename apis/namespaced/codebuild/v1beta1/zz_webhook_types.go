@@ -157,6 +157,18 @@ type WebhookInitParameters struct {
 	// If true, CodeBuild doesn't create a webhook in GitHub and instead returns payload_url and secret values for the webhook. The payload_url and secret values in the output can be used to manually create a webhook within GitHub.
 	ManualCreation *bool `json:"manualCreation,omitempty" tf:"manual_creation,omitempty"`
 
+	// The name of the build project.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/codebuild/v1beta1.Project
+	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+
+	// Reference to a Project in codebuild to populate projectName.
+	// +kubebuilder:validation:Optional
+	ProjectNameRef *v1.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
+
+	// Selector for a Project in codebuild to populate projectName.
+	// +kubebuilder:validation:Optional
+	ProjectNameSelector *v1.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
+
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	PullRequestBuildPolicy *PullRequestBuildPolicyInitParameters `json:"pullRequestBuildPolicy,omitempty" tf:"pull_request_build_policy,omitempty"`
 
@@ -183,6 +195,9 @@ type WebhookObservation struct {
 
 	// The CodeBuild endpoint where webhook events are sent.
 	PayloadURL *string `json:"payloadUrl,omitempty" tf:"payload_url,omitempty"`
+
+	// The name of the build project.
+	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	PullRequestBuildPolicy *PullRequestBuildPolicyObservation `json:"pullRequestBuildPolicy,omitempty" tf:"pull_request_build_policy,omitempty"`
@@ -215,6 +230,19 @@ type WebhookParameters struct {
 	// If true, CodeBuild doesn't create a webhook in GitHub and instead returns payload_url and secret values for the webhook. The payload_url and secret values in the output can be used to manually create a webhook within GitHub.
 	// +kubebuilder:validation:Optional
 	ManualCreation *bool `json:"manualCreation,omitempty" tf:"manual_creation,omitempty"`
+
+	// The name of the build project.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/codebuild/v1beta1.Project
+	// +kubebuilder:validation:Optional
+	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+
+	// Reference to a Project in codebuild to populate projectName.
+	// +kubebuilder:validation:Optional
+	ProjectNameRef *v1.NamespacedReference `json:"projectNameRef,omitempty" tf:"-"`
+
+	// Selector for a Project in codebuild to populate projectName.
+	// +kubebuilder:validation:Optional
+	ProjectNameSelector *v1.NamespacedSelector `json:"projectNameSelector,omitempty" tf:"-"`
 
 	// Defines comment-based approval requirements for triggering builds on pull requests. See pull_request_build_policy for details.
 	// +kubebuilder:validation:Optional

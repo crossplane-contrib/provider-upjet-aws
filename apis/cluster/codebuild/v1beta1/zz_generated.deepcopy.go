@@ -4429,6 +4429,21 @@ func (in *WebhookInitParameters) DeepCopyInto(out *WebhookInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ProjectName != nil {
+		in, out := &in.ProjectName, &out.ProjectName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectNameRef != nil {
+		in, out := &in.ProjectNameRef, &out.ProjectNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ProjectNameSelector != nil {
+		in, out := &in.ProjectNameSelector, &out.ProjectNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PullRequestBuildPolicy != nil {
 		in, out := &in.PullRequestBuildPolicy, &out.PullRequestBuildPolicy
 		*out = new(PullRequestBuildPolicyInitParameters)
@@ -4518,6 +4533,11 @@ func (in *WebhookObservation) DeepCopyInto(out *WebhookObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProjectName != nil {
+		in, out := &in.ProjectName, &out.ProjectName
+		*out = new(string)
+		**out = **in
+	}
 	if in.PullRequestBuildPolicy != nil {
 		in, out := &in.PullRequestBuildPolicy, &out.PullRequestBuildPolicy
 		*out = new(PullRequestBuildPolicyObservation)
@@ -4574,6 +4594,21 @@ func (in *WebhookParameters) DeepCopyInto(out *WebhookParameters) {
 		in, out := &in.ManualCreation, &out.ManualCreation
 		*out = new(bool)
 		**out = **in
+	}
+	if in.ProjectName != nil {
+		in, out := &in.ProjectName, &out.ProjectName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectNameRef != nil {
+		in, out := &in.ProjectNameRef, &out.ProjectNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ProjectNameSelector != nil {
+		in, out := &in.ProjectNameSelector, &out.ProjectNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PullRequestBuildPolicy != nil {
 		in, out := &in.PullRequestBuildPolicy, &out.PullRequestBuildPolicy
