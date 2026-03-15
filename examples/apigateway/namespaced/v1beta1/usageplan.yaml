@@ -93,7 +93,6 @@ kind: Stage
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta1/usageplan
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: stage
   name: development
@@ -114,7 +113,6 @@ kind: Stage
 metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta1/usageplan
-    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: stage
   name: production
