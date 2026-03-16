@@ -43,4 +43,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			Extractor:     common.PathARNExtractor,
 		}
 	})
+
+	p.AddResourceConfigurator("aws_dynamodb_table", func(r *config.Resource) {
+		r.References["server_side_encryption.kms_key_arn"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["replica.kms_key_arn"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
 }
