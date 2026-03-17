@@ -46,10 +46,10 @@ spec:
         testing.upbound.io/example-name: example
     name: example
     publicAccessBlockConfiguration:
-      - blockPublicAcls: true
-        blockPublicPolicy: false
-        ignorePublicAcls: true
-        restrictPublicBuckets: false
+      blockPublicAcls: true
+      blockPublicPolicy: false
+      ignorePublicAcls: true
+      restrictPublicBuckets: false
     region: us-west-1
 ---
 apiVersion: s3.aws.m.upbound.io/v1beta1

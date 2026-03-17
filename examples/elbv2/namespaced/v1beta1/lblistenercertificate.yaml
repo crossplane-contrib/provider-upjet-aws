@@ -56,8 +56,8 @@ spec:
     certificateArn: "<default certificate arn>"
     defaultAction:
       - fixedResponse:
-          - statusCode: "404"
-            contentType: "text/plain"
+          statusCode: "404"
+          contentType: "text/plain"
         type: fixed-response
     loadBalancerArnSelector:
       matchLabels:

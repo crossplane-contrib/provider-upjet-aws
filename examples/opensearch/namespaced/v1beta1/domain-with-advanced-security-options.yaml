@@ -19,19 +19,19 @@ spec:
     engineVersion: OpenSearch_1.0
     region: us-west-1
     advancedSecurityOptions:
-      - enabled: true
-        internalUserDatabaseEnabled: false
-        masterUserOptions:
-          - masterUserArn: arn:aws:iam::${data.aws_account_id}:user/example
+      enabled: true
+      internalUserDatabaseEnabled: false
+      masterUserOptions:
+        masterUserArn: arn:aws:iam::${data.aws_account_id}:user/example
     nodeToNodeEncryption:
-      - enabled: true
+      enabled: true
     encryptAtRest:
-      - enabled: true
+      enabled: true
     domainEndpointOptions:
-      - enforceHttps: true
+      enforceHttps: true
     clusterConfig:
-      - instanceType: m4.large.search
+      instanceType: m4.large.search
     ebsOptions:
-      - ebsEnabled: true
-        volumeType: gp2
-        volumeSize: 10
+      ebsEnabled: true
+      volumeType: gp2
+      volumeSize: 10

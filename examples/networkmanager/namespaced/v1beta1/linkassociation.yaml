@@ -35,8 +35,8 @@ metadata:
 spec:
   forProvider:
     bandwidth:
-      - downloadSpeed: 50
-        uploadSpeed: 10
+      downloadSpeed: 50
+      uploadSpeed: 10
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

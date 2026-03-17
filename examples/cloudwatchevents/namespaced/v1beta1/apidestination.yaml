@@ -37,11 +37,11 @@ metadata:
 spec:
   forProvider:
     authParameters:
-      - apiKey:
-          - key: x-signature
-            valueSecretRef:
-              key: example-key
-              name: example-secret-api
+      apiKey:
+        key: x-signature
+        valueSecretRef:
+          key: example-key
+          name: example-secret-api
     authorizationType: API_KEY
     description: A connection description
     region: us-west-1

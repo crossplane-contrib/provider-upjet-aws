@@ -82,15 +82,15 @@ metadata:
 spec:
   forProvider:
     accessConfig:
-      - authenticationMode: "API_AND_CONFIG_MAP"
-        bootstrapClusterCreatorAdminPermissions: true
+      authenticationMode: "API_AND_CONFIG_MAP"
+      bootstrapClusterCreatorAdminPermissions: true
     region: us-east-2
     roleArnRef:
       name: access-entry-eks-cluster
     vpcConfig:
-      - subnetIdRefs:
-          - name: sample-subnet1
-          - name: sample-subnet2
+      subnetIdRefs:
+        - name: sample-subnet1
+        - name: sample-subnet2
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role

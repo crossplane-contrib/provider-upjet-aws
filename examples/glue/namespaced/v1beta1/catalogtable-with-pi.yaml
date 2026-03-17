@@ -18,13 +18,13 @@ spec:
       name: example-ct-cd
     region: us-east-1
     storageDescriptor:
-    - columns:
-      - name: my_column_1
-        type: string
-      - name: my_column_2
-        type: string
-      - name: my_column_3
-        type: string
+      columns:
+        - name: my_column_1
+          type: string
+        - name: my_column_2
+          type: string
+        - name: my_column_3
+          type: string
     tableType: EXTERNAL
     partitionIndex:
       - indexName: partition_index_1

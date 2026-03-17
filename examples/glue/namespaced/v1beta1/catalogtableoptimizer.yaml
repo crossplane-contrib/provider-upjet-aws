@@ -50,26 +50,26 @@ spec:
     databaseNameRef:
       name: example-glue-cto
     openTableFormatInput:
-    - icebergInput: 
-      - metadataOperation: "CREATE" 
+      icebergInput:
+        metadataOperation: "CREATE"
     parameters:
       classification: "csv"
     region: us-east-1
     storageDescriptor:
-    - columns:
-      - name: year
-        type: bigint
-      - name: quarter
-        type: bigint
-      - name: month
-        type: bigint
-      - name: day_of_month
-        type: bigint
+      columns:
+        - name: year
+          type: bigint
+        - name: quarter
+          type: bigint
+        - name: month
+          type: bigint
+        - name: day_of_month
+          type: bigint
       inputFormat: "org.apache.hadoop.mapred.TextInputFormat"
       location: s3://example-glue-cto/flight/2016/csv
       outputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"
       serDeInfo:
-      - serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
+        serializationLibrary: "org.apache.hadoop.hive.serde2.OpenCSVSerde"
         parameters:
           field.delim: ','
     tableType: EXTERNAL_TABLE
