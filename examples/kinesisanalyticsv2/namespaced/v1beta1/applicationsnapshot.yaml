@@ -30,25 +30,25 @@ spec:
     region: us-west-1
     startApplication: true
     applicationConfiguration:
-      - applicationCodeConfiguration:
-          - codeContent:
-              - s3ContentLocation:
-                  - bucketArnSelector:
-                      matchLabels:
-                        testing.upbound.io/example-name: s3
-                    fileKeySelector:
-                      matchLabels:
-                        testing.upbound.io/example-name: s3object
-            codeContentType: ZIPFILE
-        environmentProperties:
-          - propertyGroup:
-              - propertyGroupId: PROPERTY-GROUP-1
-                propertyMap:
-                  Key1: Value1
-              - propertyGroupId: PROPERTY-GROUP-2
-                propertyMap:
-                  KeyA: ValueA
-                  KeyB: ValueB
+      applicationCodeConfiguration:
+        codeContent:
+          s3ContentLocation:
+            bucketArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: s3
+            fileKeySelector:
+              matchLabels:
+                testing.upbound.io/example-name: s3object
+        codeContentType: ZIPFILE
+      environmentProperties:
+        propertyGroup:
+          - propertyGroupId: PROPERTY-GROUP-1
+            propertyMap:
+              Key1: Value1
+          - propertyGroupId: PROPERTY-GROUP-2
+            propertyMap:
+              KeyA: ValueA
+              KeyB: ValueB
     runtimeEnvironment: FLINK-1_8
     serviceExecutionRoleRef:
       name: kinesis-app-role

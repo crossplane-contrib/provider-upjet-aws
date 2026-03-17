@@ -71,9 +71,9 @@ spec:
   forProvider:
     name: example
     passwordPolicy:
-      - minimumLength: 6
-        requireNumbers: false
-        requireSymbols: false
-        requireUppercase: false
-        temporaryPasswordValidityDays: 7
+      minimumLength: 6
+      requireNumbers: false
+      requireSymbols: false
+      requireUppercase: false
+      temporaryPasswordValidityDays: 7
     region: us-west-1

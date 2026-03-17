@@ -195,8 +195,8 @@ spec:
       - name: BACKUP_RECOVERY_POINT_ENCRYPTED
       - name: BACKUP_RESOURCES_PROTECTED_BY_BACKUP_PLAN
         scope:
-          - complianceResourceTypes:
-              - EBS
+          complianceResourceTypes:
+            - EBS
       - name: BACKUP_RECOVERY_POINT_MANUAL_DELETION_DISABLED
     description: this is an example framework
     name: exampleFramework
@@ -218,7 +218,7 @@ spec:
     name: up_example_backup_plan
     rule:
       - lifecycle:
-          - deleteAfter: 14
+          deleteAfter: 14
         ruleName: up_example_backup_rule
         schedule: cron(0 12 * * ? *)
         targetVaultName: example-bucket-vault
@@ -258,12 +258,12 @@ spec:
     description: example description
     name: example_name
     reportDeliveryChannel:
-      - formats:
-          - CSV
-          - JSON
-        s3BucketName: example-bucket-name
+      formats:
+        - CSV
+        - JSON
+      s3BucketName: example-bucket-name
     reportSetting:
-      - reportTemplate: RESTORE_JOB_REPORT
+      reportTemplate: RESTORE_JOB_REPORT
     tags:
       Name: Example Report Plan
 ---

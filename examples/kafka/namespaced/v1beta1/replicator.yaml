@@ -68,15 +68,15 @@ metadata:
 spec:
   forProvider:
     brokerNodeGroupInfo:
-      - clientSubnetsRefs:
-          - name: source-subnet-1
-          - name: source-subnet-2
-        instanceType: kafka.t3.small
-        securityGroupsRefs:
-          - name: source-sg
-        storageInfo:
-          - ebsStorageInfo:
-              - volumeSize: 1000
+      clientSubnetsRefs:
+        - name: source-subnet-1
+        - name: source-subnet-2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+        - name: source-sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
     clusterName: ${Rand.RFC1123Subdomain}
     kafkaVersion: 3.2.0
     numberOfBrokerNodes: 2
@@ -95,15 +95,15 @@ metadata:
 spec:
   forProvider:
     brokerNodeGroupInfo:
-      - clientSubnetsRefs:
-          - name: target-subnet-1
-          - name: target-subnet-2
-        instanceType: kafka.t3.small
-        securityGroupsRefs:
-          - name: target-sg
-        storageInfo:
-          - ebsStorageInfo:
-              - volumeSize: 1000
+      clientSubnetsRefs:
+        - name: target-subnet-1
+        - name: target-subnet-2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+        - name: target-sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
     clusterName: ${Rand.RFC1123Subdomain}
     kafkaVersion: 3.2.0
     numberOfBrokerNodes: 2
