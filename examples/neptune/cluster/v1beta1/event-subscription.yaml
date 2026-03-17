@@ -5,6 +5,8 @@
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:
+  annotations:
+    crossplane.io/external-name: "sample-neptune-topic"
   name: sample-neptune-topic
 spec:
   forProvider:
