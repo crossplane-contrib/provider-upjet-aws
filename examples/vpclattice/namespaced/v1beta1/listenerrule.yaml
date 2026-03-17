@@ -74,6 +74,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example2
   name: example2
+  namespace: upbound-system
 spec:
   forProvider:
     config:
