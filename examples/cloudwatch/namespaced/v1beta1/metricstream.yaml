@@ -89,7 +89,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    destination: s3
+    destination: extended_s3
     name: metric-stream-test-stream
     region: us-west-1
     extendedS3Configuration:
