@@ -5,11 +5,15 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: EventSourceMapping
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: |
+      eventSourceArn does not support reference fields due to multiple
+      valid referenceable kinds. Needs to be manually set or through compositions.
   name: example
 spec:
   forProvider:
     region: us-west-1
-    eventSourceArn: ###arn###
+    eventSourceArn: "###arn###"
     functionNameRef:
       name: example
     startingPosition: LATEST
