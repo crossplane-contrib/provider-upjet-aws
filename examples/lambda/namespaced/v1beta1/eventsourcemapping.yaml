@@ -11,7 +11,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    eventSourceArn: null
+    eventSourceArn: "###arn###"
     functionNameRef:
       name: example
     region: us-west-1

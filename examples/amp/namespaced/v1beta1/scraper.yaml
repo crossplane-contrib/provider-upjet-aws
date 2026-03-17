@@ -162,7 +162,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: scraper-monolithic-demo-cluster
     vpcConfig:
-      - subnetIdRefs:
+      subnetIdRefs:
         - name: subnet-1
         - name: subnet-2
 ---

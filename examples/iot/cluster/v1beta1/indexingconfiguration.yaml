@@ -14,5 +14,5 @@ spec:
   forProvider:
     region: us-west-1
     thingIndexingConfiguration:
-    - customField:
+    - customField: []
       thingIndexingMode: REGISTRY_AND_SHADOW
