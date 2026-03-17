@@ -24,6 +24,7 @@ kind: DomainIdentity
 metadata:
   annotations:
     meta.upbound.io/example-id: ses/v1beta1/identitypolicy
+    crossplane.io/external-name: example.com
   labels:
     testing.upbound.io/example-name: example
   name: example
