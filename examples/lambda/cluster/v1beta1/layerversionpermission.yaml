@@ -13,4 +13,4 @@ spec:
     principal: "*"
     statementId: dev-account
     versionNumber: 1
-    layerName: ###arn###
+    layerName: "###arn###"
