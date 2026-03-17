@@ -9,6 +9,7 @@ metadata:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
     uptest.upbound.io/timeout: "3600"
   name: example-virtual-cluster
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -33,6 +34,7 @@ metadata:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
     uptest.upbound.io/timeout: "2400"
   name: example-eks-cluster
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -56,6 +58,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-eks-role
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -82,6 +85,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-eks-policy
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -98,6 +102,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-vpc
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -117,6 +122,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-subnet-1
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -138,6 +144,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-subnet-2
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -159,6 +166,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-igw
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
@@ -177,6 +185,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: emrcontainers/v1beta1/virtualcluster
   name: example-rt
+  namespace: upbound-system
   labels:
     testing.upbound.io/example-name: virtualcluster
 spec:
