@@ -106,13 +106,12 @@ kind: Stage
 metadata:
   annotations:
     meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
-  name: example
+  name: example-stage
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
 spec:
   forProvider:
     region: us-west-1
-    name: example-stage
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
