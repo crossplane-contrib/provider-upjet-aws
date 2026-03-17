@@ -16,8 +16,7 @@ spec:
       allowRemoteVpcDnsResolution: true
     region: eu-west-1
     requester:
-      allowClassicLinkToRemoteVpc: true
-      allowVpcToRemoteClassicLink: true
+      allowRemoteVpcDnsResolution: true
     vpcPeeringConnectionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpcpeerconnectionlabel
