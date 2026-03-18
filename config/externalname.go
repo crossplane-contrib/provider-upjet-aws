@@ -1255,6 +1255,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
+	// import EKS Capability using the cluster_name and capability_name separated by a comma (,).
+	"aws_eks_capability": FormattedIdentifierFromProvider(",", "cluster_name", "capability_name"),
 	// import EKS cluster using the name.
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// my_cluster:my_fargate_profile
