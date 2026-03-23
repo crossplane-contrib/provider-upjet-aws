@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Capability
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capabilityName: argocd
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    configuration:
+    - argoCd:
+      - awsIdc:
+        - idcInstanceArn: arn:aws:sso:::instance/ssoins-1234567890abcdef0
+        namespace: argocd
+    deletePropagationPolicy: RETAIN
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Name: example-capability
+    type: ARGOCD
