@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	bucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucket"
+	bucketabac "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketabac"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketanalyticsconfiguration"
@@ -40,6 +41,7 @@ import (
 func Setup_s3(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		bucket.Setup,
+		bucketabac.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
@@ -76,6 +78,7 @@ func Setup_s3(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_s3(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		bucket.SetupGated,
+		bucketabac.SetupGated,
 		bucketaccelerateconfiguration.SetupGated,
 		bucketacl.SetupGated,
 		bucketanalyticsconfiguration.SetupGated,

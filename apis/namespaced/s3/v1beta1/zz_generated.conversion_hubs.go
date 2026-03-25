@@ -10,6 +10,9 @@ package v1beta1
 func (tr *Bucket) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BucketAbac) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *BucketAccelerateConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.

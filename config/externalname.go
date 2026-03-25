@@ -170,8 +170,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
+	// the S3 bucket ABAC configuration resource should be imported using the bucket
+	"aws_s3_bucket_abac": s3BucketIdentifier(),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
+	"aws_s3_bucket_lifecycle_configuration": s3BucketIdentifier(),
 
 	// s3vectors
 	//
@@ -3583,7 +3585,7 @@ func rdsInstanceState() config.ExternalName {
 	return e
 }
 
-func s3LifecycleConfiguration() config.ExternalName {
+func s3BucketIdentifier() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["bucket"]
