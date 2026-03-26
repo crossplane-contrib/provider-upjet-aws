@@ -592,6 +592,7 @@ import (
 	scramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/serverlesscluster"
 	singlescramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/singlescramsecretassociation"
+	vpcconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/vpcconnection"
 	connector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/connector"
 	customplugin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/customplugin"
 	workerconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/workerconfiguration"
@@ -1610,6 +1611,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		singlescramsecretassociation.Setup,
+		vpcconnection.Setup,
 		connector.Setup,
 		customplugin.Setup,
 		workerconfiguration.Setup,
@@ -2634,6 +2636,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.SetupGated,
 		serverlesscluster.SetupGated,
 		singlescramsecretassociation.SetupGated,
+		vpcconnection.SetupGated,
 		connector.SetupGated,
 		customplugin.SetupGated,
 		workerconfiguration.SetupGated,
