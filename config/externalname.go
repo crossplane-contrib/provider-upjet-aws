@@ -159,6 +159,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_prometheus_scraper": identifierFromProviderWithDefaultStub("scraper12345"),
 
+	// quicksight
+	//
+	// QuickSight VPC Connection can be imported using the aws account id and the vpc connection id separated by a comma
+	"aws_quicksight_vpc_connection": FormattedIdentifierUserDefinedNameLast("vpc_connection_id", ",", "aws_account_id"),
+
 	// rds
 	//
 	// aws_rds_instance_state import format: rdsInstanceId-12345678
@@ -2068,6 +2073,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_quicksight_user": config.IdentifierFromProvider,
+	// QuickSight Account Subscription can be imported using aws_account_id
+	"aws_quicksight_account_subscription": config.ParameterAsIdentifier("aws_account_id"),
+	// QuickSight Data Source can be imported using the aws account id and the data source id separated by /
+	"aws_quicksight_data_source": FormattedIdentifierFromProvider("/", "aws_account_id", "data_source_id"),
+	// QuickSight Data Set can be imported using the aws account id and the data set id separated by a comma
+	"aws_quicksight_data_set": FormattedIdentifierFromProvider(",", "aws_account_id", "data_set_id"),
+	// QuickSight Dashboard can be imported using the aws account id and the dashboard id separated by a comma
+	"aws_quicksight_dashboard": FormattedIdentifierFromProvider(",", "aws_account_id", "dashboard_id"),
+	// QuickSight Analysis can be imported using the aws account id and the analysis id separated by a comma
+	"aws_quicksight_analysis": FormattedIdentifierFromProvider(",", "aws_account_id", "analysis_id"),
+	// QuickSight Group Membership can be imported using the aws account id, namespace, group name and member name separated by /
+	"aws_quicksight_group_membership": FormattedIdentifierFromProvider("/", "aws_account_id", "namespace", "group_name", "member_name"),
 
 	// ram
 	//

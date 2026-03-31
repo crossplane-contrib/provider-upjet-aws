@@ -80,6 +80,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/opensearchserverless"
 	"github.com/upbound/provider-aws/v2/config/cluster/organization"
 	"github.com/upbound/provider-aws/v2/config/cluster/qldb"
+	"github.com/upbound/provider-aws/v2/config/cluster/quicksight"
 	"github.com/upbound/provider-aws/v2/config/cluster/ram"
 	"github.com/upbound/provider-aws/v2/config/cluster/rds"
 	"github.com/upbound/provider-aws/v2/config/cluster/redshift"
@@ -189,6 +190,7 @@ func init() {
 	ProviderConfiguration.AddConfig(ds.Configure)
 	ProviderConfiguration.AddConfig(dsql.Configure)
 	ProviderConfiguration.AddConfig(qldb.Configure)
+	ProviderConfiguration.AddConfig(quicksight.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
 	ProviderConfiguration.AddConfig(sagemaker.Configure)
