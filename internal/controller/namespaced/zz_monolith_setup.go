@@ -949,6 +949,8 @@ import (
 	permissionset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionset"
 	permissionsetinlinepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/v2/internal/controller/namespaced/swf/domain"
+	dbcluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbcluster"
+	dbinstance "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbinstance"
 	databasetimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/table"
 	languagemodel "github.com/upbound/provider-aws/v2/internal/controller/namespaced/transcribe/languagemodel"
@@ -1961,6 +1963,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.Setup,
 		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
+		dbcluster.Setup,
+		dbinstance.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		languagemodel.Setup,
@@ -2979,6 +2983,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.SetupGated,
 		permissionsetinlinepolicy.SetupGated,
 		domainswf.SetupGated,
+		dbcluster.SetupGated,
+		dbinstance.SetupGated,
 		databasetimestreamwrite.SetupGated,
 		tabletimestreamwrite.SetupGated,
 		languagemodel.SetupGated,

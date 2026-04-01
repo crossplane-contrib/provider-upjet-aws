@@ -98,6 +98,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/sns"
 	"github.com/upbound/provider-aws/v2/config/cluster/sqs"
 	"github.com/upbound/provider-aws/v2/config/cluster/ssoadmin"
+	"github.com/upbound/provider-aws/v2/config/cluster/timestreaminfluxdb"
 	"github.com/upbound/provider-aws/v2/config/cluster/transfer"
 	"github.com/upbound/provider-aws/v2/config/cluster/verifiedaccess"
 	"github.com/upbound/provider-aws/v2/config/cluster/vpclattice"
@@ -202,4 +203,5 @@ func init() {
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
+	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
 }

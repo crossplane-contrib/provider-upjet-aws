@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: timestreaminfluxdb.aws.upbound.io/v1beta1
+kind: DBCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocatedStorage: 20
+    bucket: example-bucket-name
+    dbInstanceType: db.influx.medium
+    failoverMode: AUTOMATIC
+    name: example-db-cluster
+    organization: organization
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    port: 8086
+    region: us-west-1
+    username: admin
+    vpcSecurityGroupIdsRefs:
+    - name: example
+    vpcSubnetIdsRefs:
+    - name: example_1
+    - name: example_2
