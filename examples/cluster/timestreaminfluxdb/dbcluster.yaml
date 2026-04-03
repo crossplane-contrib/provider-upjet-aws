@@ -32,3 +32,87 @@ spec:
     - name: example-2
   providerConfigRef:
     name: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass123!
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Security group for InfluxDB cluster
+    name: influxdb-cluster-sg
+    tags:
+      Name: influxdb-cluster-sg
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+  labels:
+    testing.upbound.io/example-name: example-1
+  name: example-1
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    cidrBlock: 172.16.10.0/24
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+  labels:
+    testing.upbound.io/example-name: example-2
+  name: example-2
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    cidrBlock: 172.16.20.0/24
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+  labels:
+    testing.upbound.io/example-name: sample-vpc
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: influxdb-cluster-vpc
