@@ -23,7 +23,7 @@ spec:
       name: influxdb-password
       namespace: upbound-system
     port: 8086
-    region: us-west-1
+    region: us-east-1
     username: admin
     vpcSecurityGroupIdsRefs:
     - name: example
@@ -58,7 +58,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     description: Security group for InfluxDB cluster
     name: influxdb-cluster-sg
     tags:
@@ -79,8 +79,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1a
+    region: us-east-1
+    availabilityZone: us-east-1a
     cidrBlock: 172.16.10.0/24
     vpcIdRef:
       name: sample-vpc
@@ -98,8 +98,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-1
+    availabilityZone: us-east-1b
     cidrBlock: 172.16.20.0/24
     vpcIdRef:
       name: sample-vpc
@@ -117,7 +117,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-1
     cidrBlock: 172.16.0.0/16
     tags:
       Name: influxdb-cluster-vpc
