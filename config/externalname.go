@@ -174,9 +174,9 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// timestreaminfluxdb
 	//
 	// Timestream for InfluxDB DB instances can be imported using the instance ID
-	"aws_timestreaminfluxdb_db_instance": frameworkNameAsIdentifier(),
+	"aws_timestreaminfluxdb_db_instance": identifierFromProviderWithDefaultStub("xpstub000000"),
 	// Timestream for InfluxDB DB clusters can be imported using the cluster ID
-	"aws_timestreaminfluxdb_db_cluster": frameworkNameAsIdentifier(),
+	"aws_timestreaminfluxdb_db_cluster": identifierFromProviderWithDefaultStub("xpstub000000"),
 
 	// vpclattice
 	//

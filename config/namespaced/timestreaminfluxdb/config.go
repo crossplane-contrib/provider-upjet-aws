@@ -17,6 +17,8 @@ func Configure(p *config.Provider) {
 		r.References["vpc_security_group_ids"] = config.Reference{
 			TerraformName: "aws_security_group",
 		}
+		r.AddSingletonListConversion("log_delivery_configuration", "logDeliveryConfiguration")
+		r.AddSingletonListConversion("log_delivery_configuration[*].s3_configuration", "logDeliveryConfiguration[*].s3Configuration")
 	})
 	p.AddResourceConfigurator("aws_timestreaminfluxdb_db_cluster", func(r *config.Resource) {
 		r.References["vpc_subnet_ids"] = config.Reference{
@@ -25,5 +27,7 @@ func Configure(p *config.Provider) {
 		r.References["vpc_security_group_ids"] = config.Reference{
 			TerraformName: "aws_security_group",
 		}
+		r.AddSingletonListConversion("log_delivery_configuration", "logDeliveryConfiguration")
+		r.AddSingletonListConversion("log_delivery_configuration[*].s3_configuration", "logDeliveryConfiguration[*].s3Configuration")
 	})
 }
