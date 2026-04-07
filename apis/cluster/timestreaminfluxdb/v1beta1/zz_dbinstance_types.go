@@ -47,7 +47,7 @@ type DBInstanceInitParameters struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-	LogDeliveryConfiguration []DBInstanceLogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
@@ -130,14 +130,14 @@ type DBInstanceLogDeliveryConfigurationInitParameters struct {
 
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
-	S3Configuration []LogDeliveryConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *LogDeliveryConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type DBInstanceLogDeliveryConfigurationObservation struct {
 
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
-	S3Configuration []LogDeliveryConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *LogDeliveryConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type DBInstanceLogDeliveryConfigurationParameters struct {
@@ -145,7 +145,7 @@ type DBInstanceLogDeliveryConfigurationParameters struct {
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
 	// +kubebuilder:validation:Optional
-	S3Configuration []LogDeliveryConfigurationS3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *LogDeliveryConfigurationS3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type DBInstanceObservation struct {
@@ -203,7 +203,7 @@ type DBInstanceObservation struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-	LogDeliveryConfiguration []DBInstanceLogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
@@ -311,7 +311,7 @@ type DBInstanceParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	// +kubebuilder:validation:Optional
-	LogDeliveryConfiguration []DBInstanceLogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the

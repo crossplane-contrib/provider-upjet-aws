@@ -42,7 +42,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	for _, i := range o.Provider.Resources["aws_timestreaminfluxdb_db_instance"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
 	}
-	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.DBInstance_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.DBInstance_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{

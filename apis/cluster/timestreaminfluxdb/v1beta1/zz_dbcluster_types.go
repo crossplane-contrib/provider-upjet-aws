@@ -58,7 +58,7 @@ type DBClusterInitParameters struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-	LogDeliveryConfiguration []LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -207,7 +207,7 @@ type DBClusterObservation struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-	LogDeliveryConfiguration []LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -329,7 +329,7 @@ type DBClusterParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	// +kubebuilder:validation:Optional
-	LogDeliveryConfiguration []LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+	LogDeliveryConfiguration *LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -431,14 +431,14 @@ type LogDeliveryConfigurationInitParameters struct {
 
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
-	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogDeliveryConfigurationObservation struct {
 
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
-	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type LogDeliveryConfigurationParameters struct {
@@ -446,7 +446,7 @@ type LogDeliveryConfigurationParameters struct {
 	// Configuration for S3 bucket log delivery.
 	// Configuration for S3 bucket log delivery.
 	// +kubebuilder:validation:Optional
-	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type S3ConfigurationInitParameters struct {
