@@ -9,7 +9,7 @@
 package v1beta1
 
 import (
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -80,10 +80,8 @@ func (in *DBClusterInitParameters) DeepCopyInto(out *DBClusterInitParameters) {
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]LogDeliveryConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -291,10 +289,8 @@ func (in *DBClusterObservation) DeepCopyInto(out *DBClusterObservation) {
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]LogDeliveryConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -442,10 +438,8 @@ func (in *DBClusterParameters) DeepCopyInto(out *DBClusterParameters) {
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]LogDeliveryConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -658,10 +652,8 @@ func (in *DBInstanceInitParameters) DeepCopyInto(out *DBInstanceInitParameters) 
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]DBInstanceLogDeliveryConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceLogDeliveryConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -805,10 +797,8 @@ func (in *DBInstanceLogDeliveryConfigurationInitParameters) DeepCopyInto(out *DB
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]LogDeliveryConfigurationS3ConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationS3ConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -827,10 +817,8 @@ func (in *DBInstanceLogDeliveryConfigurationObservation) DeepCopyInto(out *DBIns
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]LogDeliveryConfigurationS3ConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationS3ConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -849,10 +837,8 @@ func (in *DBInstanceLogDeliveryConfigurationParameters) DeepCopyInto(out *DBInst
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]LogDeliveryConfigurationS3ConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LogDeliveryConfigurationS3ConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -926,10 +912,8 @@ func (in *DBInstanceObservation) DeepCopyInto(out *DBInstanceObservation) {
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]DBInstanceLogDeliveryConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceLogDeliveryConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1072,10 +1056,8 @@ func (in *DBInstanceParameters) DeepCopyInto(out *DBInstanceParameters) {
 	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
-		*out = make([]DBInstanceLogDeliveryConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceLogDeliveryConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1227,10 +1209,8 @@ func (in *LogDeliveryConfigurationInitParameters) DeepCopyInto(out *LogDeliveryC
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1249,10 +1229,8 @@ func (in *LogDeliveryConfigurationObservation) DeepCopyInto(out *LogDeliveryConf
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1271,10 +1249,8 @@ func (in *LogDeliveryConfigurationParameters) DeepCopyInto(out *LogDeliveryConfi
 	*out = *in
 	if in.S3Configuration != nil {
 		in, out := &in.S3Configuration, &out.S3Configuration
-		*out = make([]S3ConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3ConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

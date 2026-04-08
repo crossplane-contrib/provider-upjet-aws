@@ -26,28 +26,27 @@ func (mg *DBCluster) ResolveReferences( // ResolveReferences of this DBCluster.
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogDeliveryConfiguration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration); i4++ {
+	if mg.Spec.ForProvider.LogDeliveryConfiguration != nil {
+		if mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName),
 					Extract:      reference.ExternalName(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef,
-					Selector:     mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameSelector,
+					Reference:    mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef,
+					Selector:     mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName")
 			}
-			mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef = rsp.ResolvedReference
-
+			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
 		}
 	}
 	{
@@ -90,28 +89,27 @@ func (mg *DBCluster) ResolveReferences( // ResolveReferences of this DBCluster.
 	mg.Spec.ForProvider.VPCSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSubnetIdsRefs = mrsp.ResolvedReferences
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogDeliveryConfiguration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration); i4++ {
+	if mg.Spec.InitProvider.LogDeliveryConfiguration != nil {
+		if mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName),
 					Extract:      reference.ExternalName(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef,
-					Selector:     mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameSelector,
+					Reference:    mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef,
+					Selector:     mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName")
 			}
-			mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef = rsp.ResolvedReference
-
+			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
 		}
 	}
 	{
@@ -167,28 +165,27 @@ func (mg *DBInstance) ResolveReferences(ctx context.Context, c client.Reader) er
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogDeliveryConfiguration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration); i4++ {
+	if mg.Spec.ForProvider.LogDeliveryConfiguration != nil {
+		if mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName),
 					Extract:      reference.ExternalName(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef,
-					Selector:     mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameSelector,
+					Reference:    mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef,
+					Selector:     mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName")
 			}
-			mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef = rsp.ResolvedReference
-
+			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
 		}
 	}
 	{
@@ -231,28 +228,27 @@ func (mg *DBInstance) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.VPCSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSubnetIdsRefs = mrsp.ResolvedReferences
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogDeliveryConfiguration); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration); i4++ {
+	if mg.Spec.InitProvider.LogDeliveryConfiguration != nil {
+		if mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName),
 					Extract:      reference.ExternalName(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef,
-					Selector:     mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameSelector,
+					Reference:    mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef,
+					Selector:     mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName")
 			}
-			mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.LogDeliveryConfiguration[i3].S3Configuration[i4].BucketNameRef = rsp.ResolvedReference
-
+			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
 		}
 	}
 	{
