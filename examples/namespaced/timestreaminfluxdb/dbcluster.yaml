@@ -7,6 +7,7 @@ kind: DBCluster
 metadata:
   annotations:
     meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbcluster
+    upjet.upbound.io/manual-intervention: Requires an active subscription for InfluxDB Read Replicas from AWS Marketplace
   labels:
     testing.upbound.io/example-name: example
   name: example
