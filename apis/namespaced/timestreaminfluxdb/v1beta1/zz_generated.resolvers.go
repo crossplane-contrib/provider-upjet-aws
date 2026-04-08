@@ -8,7 +8,6 @@ package v1beta1
 
 import (
 	"context"
-
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	errors "github.com/pkg/errors"
@@ -47,6 +46,7 @@ func (mg *DBCluster) ResolveReferences( // ResolveReferences of this DBCluster.
 			}
 			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
+
 		}
 	}
 	{
@@ -110,6 +110,7 @@ func (mg *DBCluster) ResolveReferences( // ResolveReferences of this DBCluster.
 			}
 			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
+
 		}
 	}
 	{
@@ -186,6 +187,7 @@ func (mg *DBInstance) ResolveReferences(ctx context.Context, c client.Reader) er
 			}
 			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
+
 		}
 	}
 	{
@@ -249,6 +251,7 @@ func (mg *DBInstance) ResolveReferences(ctx context.Context, c client.Reader) er
 			}
 			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.LogDeliveryConfiguration.S3Configuration.BucketNameRef = rsp.ResolvedReference
+
 		}
 	}
 	{
