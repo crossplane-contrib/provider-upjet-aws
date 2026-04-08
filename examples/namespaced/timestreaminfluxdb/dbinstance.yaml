@@ -41,7 +41,7 @@ metadata:
   namespace: upbound-system
 type: Opaque
 stringData:
-  password: TestPass123!
+  password: TestPass123
 
 ---
 
