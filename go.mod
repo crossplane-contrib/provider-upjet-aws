@@ -11,13 +11,13 @@ tool golang.org/x/tools/cmd/goimports
 require (
 	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/aws/aws-sdk-go-v2 v1.41.2
+	github.com/aws/aws-sdk-go-v2 v1.41.5
 	github.com/aws/aws-sdk-go-v2/config v1.32.10
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.10
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.18
 	github.com/aws/aws-sdk-go-v2/service/eks v1.80.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.7
-	github.com/aws/smithy-go v1.24.1
+	github.com/aws/smithy-go v1.24.2
 	github.com/crossplane/crossplane-runtime/v2 v2.0.0-20250730220209-c306b1c8b181
 	github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec
 	github.com/crossplane/upjet/v2 v2.2.1-0.20251128133821-1e4f37b6b5f8
@@ -53,10 +53,10 @@ require (
 	github.com/antchfx/htmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.3.6 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.5 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.22.3 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.18 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.18 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.21 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.21 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.18 // indirect
 	github.com/aws/aws-sdk-go-v2/service/accessanalyzer v1.45.9 // indirect
@@ -106,7 +106,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.32.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.55.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.55.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs v1.63.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs v1.65.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/codeartifact v1.38.18 // indirect
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.68.10 // indirect
 	github.com/aws/aws-sdk-go-v2/service/codecatalyst v1.21.9 // indirect
