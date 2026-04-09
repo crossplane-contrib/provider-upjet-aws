@@ -171,6 +171,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
 
+	// s3vectors
+	//
+	// S3 Vectors Vector Bucket can be imported using the vector bucket ARN
+	"aws_s3vectors_vector_bucket": identifierFromProviderWithDefaultStub("arn:aws:s3vectors:us-west-1:123456789012:vector-bucket/xpstub"),
+	// S3 Vectors Index can be imported using the index ARN
+	"aws_s3vectors_index": identifierFromProviderWithDefaultStub("arn:aws:s3vectors:us-west-1:123456789012:vector-bucket/xpstub/index/xpstub"),
+	// S3 Vectors Vector Bucket Policy can be imported using the vector bucket ARN
+	"aws_s3vectors_vector_bucket_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.vector_bucket_arn }}"),
+
 	// timestreaminfluxdb
 	//
 	// Timestream for InfluxDB DB instances can be imported using the instance ID

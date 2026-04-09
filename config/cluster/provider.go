@@ -90,6 +90,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
 	"github.com/upbound/provider-aws/v2/config/cluster/servicecatalog"
@@ -204,4 +205,5 @@ func init() {
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
 	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
+	ProviderConfiguration.AddConfig(s3vectors.Configure)
 }
