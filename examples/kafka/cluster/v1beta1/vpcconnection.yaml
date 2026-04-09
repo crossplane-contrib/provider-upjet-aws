@@ -1,0 +1,180 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: VPCConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/vpcconnection
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: example
+spec:
+  forProvider:
+    authentication: SASL_IAM
+    region: us-east-2
+    targetClusterArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection-client
+    clientSubnetsRefs:
+      - name: client-subnet-az1
+      - name: client-subnet-az2
+    securityGroupsRefs:
+      - name: client-sg
+
+---
+
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/vpcconnection
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: example
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      - clientSubnetsRefs:
+          - name: cluster-subnet-az1
+          - name: cluster-subnet-az2
+        instanceType: kafka.t3.small
+        securityGroupsRefs:
+          - name: cluster-sg
+        storageInfo:
+          - ebsStorageInfo:
+              - volumeSize: 100
+    clusterName: example
+    kafkaVersion: 2.8.1
+    numberOfBrokerNodes: 2
+    region: us-east-2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: cluster-vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: cluster-subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: cluster-subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2c
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection
+  name: cluster-sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection-client
+  name: client-vpc
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/22
+    region: us-east-2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection-client
+  name: client-subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 10.0.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection-client
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection-client
+  name: client-subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2c
+    cidrBlock: 10.0.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection-client
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: vpc-connection-client
+  name: client-sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc-connection-client

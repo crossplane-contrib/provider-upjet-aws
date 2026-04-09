@@ -1673,6 +1673,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
 	// Managed Streaming for Kafka Cluster Policy resource can be imported using the cluster_arn
 	"aws_msk_cluster_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }}"),
+	// MSK VPC Connection can be imported using the ARN
+	"aws_msk_vpc_connection": config.IdentifierFromProvider,
 
 	// kafkaconnect
 	//
