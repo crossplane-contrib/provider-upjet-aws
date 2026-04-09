@@ -171,6 +171,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
 
+	// timestreaminfluxdb
+	//
+	// Timestream for InfluxDB DB instances can be imported using the instance ID
+	"aws_timestreaminfluxdb_db_instance": identifierFromProviderWithDefaultStub("xpstub000000"),
+	// Timestream for InfluxDB DB clusters can be imported using the cluster ID
+	"aws_timestreaminfluxdb_db_cluster": identifierFromProviderWithDefaultStub("xpstub000000"),
+
 	// vpclattice
 	//
 	// VPC Lattice Resource Configuration can be imported using the id
