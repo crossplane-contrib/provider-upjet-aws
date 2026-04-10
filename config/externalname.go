@@ -171,6 +171,17 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
 
+	// s3vectors
+	//
+	// S3 Vectors Vector Bucket can be imported using the vector bucket ARN
+	"aws_s3vectors_vector_bucket": s3vectorsComputedARNIdentifier("vector_bucket_arn", "bucket/xpstub"),
+	// S3 Vectors Index can be imported using the index ARN
+	"aws_s3vectors_index": s3vectorsComputedARNIdentifier("index_arn", "bucket/xpstub/index/xpstub"),
+	// S3 Vectors Vector Bucket Policy can be imported using the vector bucket ARN.
+	// vector_bucket_arn is Required (not Computed) so must NOT be in
+	// ComputedIdentifierAttributes, otherwise it gets removed from the config.
+	"aws_s3vectors_vector_bucket_policy": s3vectorsPolicyIdentifier(),
+
 	// timestreaminfluxdb
 	//
 	// Timestream for InfluxDB DB instances can be imported using the instance ID
@@ -3001,6 +3012,65 @@ func kmsAlias() config.ExternalName {
 		return externalName, nil
 	}
 	return e
+}
+
+// s3vectorsComputedARNIdentifier handles S3 Vectors resources that use
+// @ArnIdentity in the Terraform provider. The stub ARN must include the
+// correct region from parameters so the API doesn't reject a region mismatch.
+func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
+	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if _, ok := base[identifier]; ok {
+				return
+			}
+			if externalName != "" {
+				base[identifier] = externalName
+				return
+			}
+			// Only set the stub when region is available (i.e., when called
+			// with params, not with the empty tfState). copyParameters will
+			// then propagate the correct-region stub into the final state.
+			if region, _ := base["region"].(string); region != "" {
+				base[identifier] = fmt.Sprintf("arn:aws:s3vectors:%s:000000000000:%s", region, resourcePath)
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[identifier]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", identifier)
+		}),
+	)
+	en.TFPluginFrameworkOptions.ComputedIdentifierAttributes = []string{identifier}
+	return en
+}
+
+// s3vectorsPolicyIdentifier handles VectorBucketPolicy where vector_bucket_arn
+// is both Required (user provides it) and serves as the identity. Unlike
+// s3vectorsComputedARNIdentifier, it does NOT set ComputedIdentifierAttributes
+// so vector_bucket_arn stays in the CRD spec and is not removed from the config.
+func s3vectorsPolicyIdentifier() config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if arn, ok := base["vector_bucket_arn"].(string); !ok || arn == "" {
+					base["vector_bucket_arn"] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState["vector_bucket_arn"]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", "vector_bucket_arn")
+		}),
+	)
 }
 
 func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
