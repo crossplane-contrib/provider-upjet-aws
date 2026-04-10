@@ -840,6 +840,9 @@ import (
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/objectlambdaaccesspointpolicy"
 	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3control/storagelensconfiguration"
+	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/index"
+	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucket"
+	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3vectors/vectorbucketpolicy"
 	appsagemaker "github.com/upbound/provider-aws/v2/internal/controller/cluster/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/v2/internal/controller/cluster/sagemaker/coderepository"
@@ -1855,6 +1858,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
 		storagelensconfiguration.Setup,
+		indexs3vectors.Setup,
+		vectorbucket.Setup,
+		vectorbucketpolicy.Setup,
 		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
@@ -2876,6 +2882,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.SetupGated,
 		objectlambdaaccesspointpolicy.SetupGated,
 		storagelensconfiguration.SetupGated,
+		indexs3vectors.SetupGated,
+		vectorbucket.SetupGated,
+		vectorbucketpolicy.SetupGated,
 		appsagemaker.SetupGated,
 		appimageconfig.SetupGated,
 		coderepository.SetupGated,
