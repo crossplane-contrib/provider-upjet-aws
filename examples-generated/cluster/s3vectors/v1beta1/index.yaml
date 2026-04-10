@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: s3vectors.aws.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3vectors/v1beta1/index
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataType: float32
+    dimension: 2
+    distanceMetric: euclidean
+    indexName: example-index
+    region: us-west-1
+    vectorBucketNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
