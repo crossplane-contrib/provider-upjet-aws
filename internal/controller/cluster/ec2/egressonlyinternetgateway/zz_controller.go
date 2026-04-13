@@ -72,8 +72,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	// register webhooks for the kind v1beta1.EgressOnlyInternetGateway
 	// if they're enabled.
 	if o.StartWebhooks {
-		if err := ctrl.NewWebhookManagedBy(mgr).
-			For(&v1beta1.EgressOnlyInternetGateway{}).
+		if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.EgressOnlyInternetGateway{}).
 			Complete(); err != nil {
 			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.EgressOnlyInternetGateway")
 		}
