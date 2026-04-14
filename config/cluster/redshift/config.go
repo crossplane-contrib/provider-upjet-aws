@@ -12,6 +12,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.UseAsync = true
 		r.Version = "v1beta2"
 		r.SetCRDStorageVersion("v1beta1")
-		r.ControllerReconcileVersion = "v1beta1"
+		r.ControllerReconcileVersion = "v1beta1" //nolint:staticcheck // still handling the deprecated behavior until rollout
 	})
 }
