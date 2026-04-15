@@ -174,9 +174,9 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// s3vectors
 	//
 	// S3 Vectors Vector Bucket can be imported using the vector bucket ARN
-	"aws_s3vectors_vector_bucket": identifierFromProviderWithDefaultStub("xpstub000000"),
+	"aws_s3vectors_vector_bucket": config.FrameworkResourceWithComputedIdentifier("vector_bucket_arn", "arn:aws:s3vectors:us-east-1:123456789012:bucket/xpstub-crossplane"),
 	// S3 Vectors Index can be imported using the index ARN
-	"aws_s3vectors_index": identifierFromProviderWithDefaultStub("xpstub000000"),
+	"aws_s3vectors_index": config.FrameworkResourceWithComputedIdentifier("index_arn", "arn:aws:s3vectors:us-east-1:123456789012:bucket/xpstub-crossplane/index/xpstub-index"),
 	// S3 Vectors Vector Bucket Policy can be imported using the vector bucket ARN
 	"aws_s3vectors_vector_bucket_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.vector_bucket_arn }}"),
 
