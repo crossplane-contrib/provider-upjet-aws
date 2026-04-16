@@ -187,7 +187,7 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 	r.SetCRDStorageVersion(currentVer)
 	// because the controller reconciles on the API version with the singleton list API,
 	// no need for a Terraform conversion.
-	r.ControllerReconcileVersion = currentVer
+	r.ControllerReconcileVersion = currentVer //nolint:staticcheck // still handling the deprecated behavior until rollout
 
 	// This block is to fix the issue described in the following PR: https://github.com/crossplane/upjet/pull/465
 	// In EKS Cluster object v1beta1, for spec.vpcConfig field, we mark
