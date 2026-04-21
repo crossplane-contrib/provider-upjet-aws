@@ -7,7 +7,7 @@ kind: VPCConnection
 metadata:
   annotations:
     meta.upbound.io/example-id: kafka/v1beta1/vpcconnection
-    uptest.upbound.io/timeout: "3600"
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: vpc-connection
   name: example
@@ -29,31 +29,41 @@ spec:
 
 ---
 
-apiVersion: kafka.aws.upbound.io/v1beta1
+apiVersion: kafka.aws.upbound.io/v1beta3
 kind: Cluster
 metadata:
   annotations:
     meta.upbound.io/example-id: kafka/v1beta1/vpcconnection
-    uptest.upbound.io/timeout: "3600"
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: vpc-connection
   name: example
 spec:
   forProvider:
     brokerNodeGroupInfo:
-      - clientSubnetsRefs:
-          - name: cluster-subnet-az1
-          - name: cluster-subnet-az2
-        instanceType: kafka.t3.small
-        securityGroupsRefs:
-          - name: cluster-sg
-        storageInfo:
-          - ebsStorageInfo:
-              - volumeSize: 100
+      connectivityInfo:
+        vpcConnectivity:
+          clientAuthentication:
+            sasl:
+              iam: true
+              scram: true
+      clientSubnetsRefs:
+        - name: cluster-subnet-az1
+        - name: cluster-subnet-az2
+      instanceType: kafka.m7g.large
+      securityGroupsRefs:
+        - name: cluster-sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 100
     clusterName: example
-    kafkaVersion: 2.8.1
+    kafkaVersion: 3.9.x
     numberOfBrokerNodes: 2
     region: us-east-2
+    clientAuthentication:
+      sasl:
+        iam: true
+        scram: true
 
 ---
 
@@ -127,6 +137,7 @@ metadata:
   name: client-vpc
 spec:
   forProvider:
+    enableDnsHostnames: true
     cidrBlock: 10.0.0.0/22
     region: us-east-2
 
