@@ -15,11 +15,8 @@ import (
 // 000000000000) as "resource not found" so the reconciler proceeds to create.
 func s3vectorsNotFoundDiagnostic(diags []*tfprotov6.Diagnostic) bool {
 	for _, d := range diags {
-		if d.Severity != tfprotov6.DiagnosticSeverityError {
-			continue
-		}
-		if strings.Contains(d.Detail, "No account found") ||
-			strings.Contains(d.Summary, "Missing Resource Identity After Read") {
+		if d.Severity == tfprotov6.DiagnosticSeverityError &&
+			strings.Contains(d.Detail, "No account found") {
 			return true
 		}
 	}
