@@ -164,3 +164,26 @@ spec:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
     roleRef:
       name: sample-eks-cluster
+---
+apiVersion: protection.crossplane.io/v1beta1
+kind: Usage
+metadata:
+  annotations:
+    "uptest.upbound.io/conditions": "Ready"
+    "uptest.upbound.io/disable-import": "true"
+  name: eks-cluster-uses-role-binding
+  namespace: upbound-system
+spec:
+  replayDeletion: true
+  by:
+    apiVersion: eks.aws.upbound.io/v1beta2
+    kind: Cluster
+    resourceRef:
+      name: sample-eks-cluster
+      namespace: upbound-system
+  of:
+    apiVersion: iam.aws.upbound.io/v1beta1
+    kind: RolePolicyAttachment
+    resourceRef:
+      name: sample-cluster-policy
+      namespace: upbound-system
