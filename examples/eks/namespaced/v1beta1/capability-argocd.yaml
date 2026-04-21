@@ -176,14 +176,12 @@ metadata:
 spec:
   replayDeletion: true
   by:
-    apiVersion: eks.aws.upbound.io/v1beta2
+    apiVersion: eks.aws.m.upbound.io/v1beta1
     kind: Cluster
     resourceRef:
       name: sample-eks-cluster
-      namespace: upbound-system
   of:
-    apiVersion: iam.aws.upbound.io/v1beta1
+    apiVersion: iam.aws.m.upbound.io/v1beta1
     kind: RolePolicyAttachment
     resourceRef:
       name: sample-cluster-policy
-      namespace: upbound-system
