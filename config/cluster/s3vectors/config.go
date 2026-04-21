@@ -27,6 +27,7 @@ func s3vectorsNotFoundDiagnostic(diags []*tfprotov6.Diagnostic) bool {
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_s3vectors_vector_bucket", func(r *config.Resource) {
 		r.ExternalName.IsNotFoundDiagnosticFn = s3vectorsNotFoundDiagnostic
+		r.AddSingletonListConversion("encryption_configuration", "encryptionConfiguration")
 	})
 	p.AddResourceConfigurator("aws_s3vectors_index", func(r *config.Resource) {
 		r.ExternalName.IsNotFoundDiagnosticFn = s3vectorsNotFoundDiagnostic
@@ -34,6 +35,8 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_s3vectors_vector_bucket",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("vector_bucket_name",true)`,
 		}
+		r.AddSingletonListConversion("encryption_configuration", "encryptionConfiguration")
+		r.AddSingletonListConversion("metadata_configuration", "metadataConfiguration")
 	})
 	p.AddResourceConfigurator("aws_s3vectors_vector_bucket_policy", func(r *config.Resource) {
 		r.ExternalName.IsNotFoundDiagnosticFn = s3vectorsNotFoundDiagnostic
