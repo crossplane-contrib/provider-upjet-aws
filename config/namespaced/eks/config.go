@@ -137,4 +137,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			},
 		}
 	})
+
+	p.AddResourceConfigurator("aws_eks_capability", func(r *config.Resource) {
+		r.AddSingletonListConversion("configuration", "configuration")
+		r.AddSingletonListConversion("configuration[*].argo_cd", "configuration[*].argoCd")
+		r.AddSingletonListConversion("configuration[*].argo_cd[*].aws_idc", "configuration[*].argoCd[*].awsIdc")
+		r.AddSingletonListConversion("configuration[*].argo_cd[*].network_access", "configuration[*].argoCd[*].networkAccess")
+	})
 }
