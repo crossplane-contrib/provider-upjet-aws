@@ -1166,10 +1166,8 @@ func (in *ArgoCdInitParameters) DeepCopyInto(out *ArgoCdInitParameters) {
 	*out = *in
 	if in.AwsIdc != nil {
 		in, out := &in.AwsIdc, &out.AwsIdc
-		*out = make([]AwsIdcInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsIdcInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
@@ -1178,10 +1176,8 @@ func (in *ArgoCdInitParameters) DeepCopyInto(out *ArgoCdInitParameters) {
 	}
 	if in.NetworkAccess != nil {
 		in, out := &in.NetworkAccess, &out.NetworkAccess
-		*out = make([]NetworkAccessInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkAccessInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RbacRoleMapping != nil {
 		in, out := &in.RbacRoleMapping, &out.RbacRoleMapping
@@ -1207,10 +1203,8 @@ func (in *ArgoCdObservation) DeepCopyInto(out *ArgoCdObservation) {
 	*out = *in
 	if in.AwsIdc != nil {
 		in, out := &in.AwsIdc, &out.AwsIdc
-		*out = make([]AwsIdcObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsIdcObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
@@ -1219,10 +1213,8 @@ func (in *ArgoCdObservation) DeepCopyInto(out *ArgoCdObservation) {
 	}
 	if in.NetworkAccess != nil {
 		in, out := &in.NetworkAccess, &out.NetworkAccess
-		*out = make([]NetworkAccessObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkAccessObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RbacRoleMapping != nil {
 		in, out := &in.RbacRoleMapping, &out.RbacRoleMapping
@@ -1253,10 +1245,8 @@ func (in *ArgoCdParameters) DeepCopyInto(out *ArgoCdParameters) {
 	*out = *in
 	if in.AwsIdc != nil {
 		in, out := &in.AwsIdc, &out.AwsIdc
-		*out = make([]AwsIdcParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AwsIdcParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
@@ -1265,10 +1255,8 @@ func (in *ArgoCdParameters) DeepCopyInto(out *ArgoCdParameters) {
 	}
 	if in.NetworkAccess != nil {
 		in, out := &in.NetworkAccess, &out.NetworkAccess
-		*out = make([]NetworkAccessParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkAccessParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RbacRoleMapping != nil {
 		in, out := &in.RbacRoleMapping, &out.RbacRoleMapping
@@ -1531,10 +1519,8 @@ func (in *CapabilityInitParameters) DeepCopyInto(out *CapabilityInitParameters) 
 	}
 	if in.Configuration != nil {
 		in, out := &in.Configuration, &out.Configuration
-		*out = make([]ConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeletePropagationPolicy != nil {
 		in, out := &in.DeletePropagationPolicy, &out.DeletePropagationPolicy
@@ -1641,10 +1627,8 @@ func (in *CapabilityObservation) DeepCopyInto(out *CapabilityObservation) {
 	}
 	if in.Configuration != nil {
 		in, out := &in.Configuration, &out.Configuration
-		*out = make([]ConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeletePropagationPolicy != nil {
 		in, out := &in.DeletePropagationPolicy, &out.DeletePropagationPolicy
@@ -1745,10 +1729,8 @@ func (in *CapabilityParameters) DeepCopyInto(out *CapabilityParameters) {
 	}
 	if in.Configuration != nil {
 		in, out := &in.Configuration, &out.Configuration
-		*out = make([]ConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeletePropagationPolicy != nil {
 		in, out := &in.DeletePropagationPolicy, &out.DeletePropagationPolicy
@@ -2755,10 +2737,8 @@ func (in *ConfigurationInitParameters) DeepCopyInto(out *ConfigurationInitParame
 	*out = *in
 	if in.ArgoCd != nil {
 		in, out := &in.ArgoCd, &out.ArgoCd
-		*out = make([]ArgoCdInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ArgoCdInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2777,10 +2757,8 @@ func (in *ConfigurationObservation) DeepCopyInto(out *ConfigurationObservation) 
 	*out = *in
 	if in.ArgoCd != nil {
 		in, out := &in.ArgoCd, &out.ArgoCd
-		*out = make([]ArgoCdObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ArgoCdObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2799,10 +2777,8 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 	*out = *in
 	if in.ArgoCd != nil {
 		in, out := &in.ArgoCd, &out.ArgoCd
-		*out = make([]ArgoCdParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ArgoCdParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

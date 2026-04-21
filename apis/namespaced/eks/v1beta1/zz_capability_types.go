@@ -17,13 +17,13 @@ import (
 type ArgoCdInitParameters struct {
 
 	// AWS IAM Identity Center configuration. See aws_idc below.
-	AwsIdc []AwsIdcInitParameters `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
+	AwsIdc *AwsIdcInitParameters `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
 
 	// Kubernetes namespace for ArgoCD.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Network access configuration. See network_access below.
-	NetworkAccess []NetworkAccessInitParameters `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
+	NetworkAccess *NetworkAccessInitParameters `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
 
 	// RBAC role mappings. See rbac_role_mapping below.
 	RbacRoleMapping []RbacRoleMappingInitParameters `json:"rbacRoleMapping,omitempty" tf:"rbac_role_mapping,omitempty"`
@@ -32,13 +32,13 @@ type ArgoCdInitParameters struct {
 type ArgoCdObservation struct {
 
 	// AWS IAM Identity Center configuration. See aws_idc below.
-	AwsIdc []AwsIdcObservation `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
+	AwsIdc *AwsIdcObservation `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
 
 	// Kubernetes namespace for ArgoCD.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Network access configuration. See network_access below.
-	NetworkAccess []NetworkAccessObservation `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
+	NetworkAccess *NetworkAccessObservation `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
 
 	// RBAC role mappings. See rbac_role_mapping below.
 	RbacRoleMapping []RbacRoleMappingObservation `json:"rbacRoleMapping,omitempty" tf:"rbac_role_mapping,omitempty"`
@@ -51,7 +51,7 @@ type ArgoCdParameters struct {
 
 	// AWS IAM Identity Center configuration. See aws_idc below.
 	// +kubebuilder:validation:Optional
-	AwsIdc []AwsIdcParameters `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
+	AwsIdc *AwsIdcParameters `json:"awsIdc,omitempty" tf:"aws_idc,omitempty"`
 
 	// Kubernetes namespace for ArgoCD.
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type ArgoCdParameters struct {
 
 	// Network access configuration. See network_access below.
 	// +kubebuilder:validation:Optional
-	NetworkAccess []NetworkAccessParameters `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
+	NetworkAccess *NetworkAccessParameters `json:"networkAccess,omitempty" tf:"network_access,omitempty"`
 
 	// RBAC role mappings. See rbac_role_mapping below.
 	// +kubebuilder:validation:Optional
@@ -116,7 +116,7 @@ type CapabilityInitParameters struct {
 	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Configuration for the capability. See configuration below.
-	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	Configuration *ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Delete propagation policy for the capability. Valid values: RETAIN.
 	DeletePropagationPolicy *string `json:"deletePropagationPolicy,omitempty" tf:"delete_propagation_policy,omitempty"`
@@ -154,7 +154,7 @@ type CapabilityObservation struct {
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Configuration for the capability. See configuration below.
-	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Delete propagation policy for the capability. Valid values: RETAIN.
 	DeletePropagationPolicy *string `json:"deletePropagationPolicy,omitempty" tf:"delete_propagation_policy,omitempty"`
@@ -205,7 +205,7 @@ type CapabilityParameters struct {
 
 	// Configuration for the capability. See configuration below.
 	// +kubebuilder:validation:Optional
-	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Delete propagation policy for the capability. Valid values: RETAIN.
 	// +kubebuilder:validation:Optional
@@ -243,20 +243,20 @@ type CapabilityParameters struct {
 type ConfigurationInitParameters struct {
 
 	// ArgoCD configuration. See argo_cd below.
-	ArgoCd []ArgoCdInitParameters `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
+	ArgoCd *ArgoCdInitParameters `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
 	// ArgoCD configuration. See argo_cd below.
-	ArgoCd []ArgoCdObservation `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
+	ArgoCd *ArgoCdObservation `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
 	// ArgoCD configuration. See argo_cd below.
 	// +kubebuilder:validation:Optional
-	ArgoCd []ArgoCdParameters `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
+	ArgoCd *ArgoCdParameters `json:"argoCd,omitempty" tf:"argo_cd,omitempty"`
 }
 
 type IdentityInitParameters struct {

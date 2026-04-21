@@ -149,72 +149,61 @@ spec:
                   configuration:
                     description: Configuration for the capability. See configuration
                       below.
-                    items:
-                      properties:
-                        argoCd:
-                          description: ArgoCD configuration. See argo_cd below.
-                          items:
+                    properties:
+                      argoCd:
+                        description: ArgoCD configuration. See argo_cd below.
+                        properties:
+                          awsIdc:
+                            description: AWS IAM Identity Center configuration. See
+                              aws_idc below.
                             properties:
-                              awsIdc:
-                                description: AWS IAM Identity Center configuration.
-                                  See aws_idc below.
-                                items:
-                                  properties:
-                                    idcInstanceArn:
-                                      description: ARN of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                    idcRegion:
-                                      description: Region of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                  type: object
-                                type: array
-                              namespace:
-                                description: Kubernetes namespace for ArgoCD.
+                              idcInstanceArn:
+                                description: ARN of the IAM Identity Center instance.
                                 type: string
-                              networkAccess:
-                                description: Network access configuration. See network_access
-                                  below.
-                                items:
-                                  properties:
-                                    vpceIds:
-                                      description: VPC Endpoint IDs.
-                                      items:
-                                        type: string
-                                      type: array
-                                      x-kubernetes-list-type: set
-                                  type: object
-                                type: array
-                              rbacRoleMapping:
-                                description: RBAC role mappings. See rbac_role_mapping
-                                  below.
-                                items:
-                                  properties:
-                                    identity:
-                                      description: List of identities. See identity
-                                        below.
-                                      items:
-                                        properties:
-                                          id:
-                                            description: Identity ID.
-                                            type: string
-                                          type:
-                                            description: 'Type of the capability.
-                                              Valid values: ACK, KRO, ARGOCD.'
-                                            type: string
-                                        type: object
-                                      type: array
-                                    role:
-                                      description: 'ArgoCD role. Valid values: ADMIN,
-                                        EDITOR, VIEWER.'
-                                      type: string
-                                  type: object
-                                type: array
+                              idcRegion:
+                                description: Region of the IAM Identity Center instance.
+                                type: string
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                          namespace:
+                            description: Kubernetes namespace for ArgoCD.
+                            type: string
+                          networkAccess:
+                            description: Network access configuration. See network_access
+                              below.
+                            properties:
+                              vpceIds:
+                                description: VPC Endpoint IDs.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          rbacRoleMapping:
+                            description: RBAC role mappings. See rbac_role_mapping
+                              below.
+                            items:
+                              properties:
+                                identity:
+                                  description: List of identities. See identity below.
+                                  items:
+                                    properties:
+                                      id:
+                                        description: Identity ID.
+                                        type: string
+                                      type:
+                                        description: 'Type of the capability. Valid
+                                          values: ACK, KRO, ARGOCD.'
+                                        type: string
+                                    type: object
+                                  type: array
+                                role:
+                                  description: 'ArgoCD role. Valid values: ADMIN,
+                                    EDITOR, VIEWER.'
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                    type: object
                   deletePropagationPolicy:
                     description: 'Delete propagation policy for the capability. Valid
                       values: RETAIN.'
@@ -423,72 +412,61 @@ spec:
                   configuration:
                     description: Configuration for the capability. See configuration
                       below.
-                    items:
-                      properties:
-                        argoCd:
-                          description: ArgoCD configuration. See argo_cd below.
-                          items:
+                    properties:
+                      argoCd:
+                        description: ArgoCD configuration. See argo_cd below.
+                        properties:
+                          awsIdc:
+                            description: AWS IAM Identity Center configuration. See
+                              aws_idc below.
                             properties:
-                              awsIdc:
-                                description: AWS IAM Identity Center configuration.
-                                  See aws_idc below.
-                                items:
-                                  properties:
-                                    idcInstanceArn:
-                                      description: ARN of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                    idcRegion:
-                                      description: Region of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                  type: object
-                                type: array
-                              namespace:
-                                description: Kubernetes namespace for ArgoCD.
+                              idcInstanceArn:
+                                description: ARN of the IAM Identity Center instance.
                                 type: string
-                              networkAccess:
-                                description: Network access configuration. See network_access
-                                  below.
-                                items:
-                                  properties:
-                                    vpceIds:
-                                      description: VPC Endpoint IDs.
-                                      items:
-                                        type: string
-                                      type: array
-                                      x-kubernetes-list-type: set
-                                  type: object
-                                type: array
-                              rbacRoleMapping:
-                                description: RBAC role mappings. See rbac_role_mapping
-                                  below.
-                                items:
-                                  properties:
-                                    identity:
-                                      description: List of identities. See identity
-                                        below.
-                                      items:
-                                        properties:
-                                          id:
-                                            description: Identity ID.
-                                            type: string
-                                          type:
-                                            description: 'Type of the capability.
-                                              Valid values: ACK, KRO, ARGOCD.'
-                                            type: string
-                                        type: object
-                                      type: array
-                                    role:
-                                      description: 'ArgoCD role. Valid values: ADMIN,
-                                        EDITOR, VIEWER.'
-                                      type: string
-                                  type: object
-                                type: array
+                              idcRegion:
+                                description: Region of the IAM Identity Center instance.
+                                type: string
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                          namespace:
+                            description: Kubernetes namespace for ArgoCD.
+                            type: string
+                          networkAccess:
+                            description: Network access configuration. See network_access
+                              below.
+                            properties:
+                              vpceIds:
+                                description: VPC Endpoint IDs.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          rbacRoleMapping:
+                            description: RBAC role mappings. See rbac_role_mapping
+                              below.
+                            items:
+                              properties:
+                                identity:
+                                  description: List of identities. See identity below.
+                                  items:
+                                    properties:
+                                      id:
+                                        description: Identity ID.
+                                        type: string
+                                      type:
+                                        description: 'Type of the capability. Valid
+                                          values: ACK, KRO, ARGOCD.'
+                                        type: string
+                                    type: object
+                                  type: array
+                                role:
+                                  description: 'ArgoCD role. Valid values: ADMIN,
+                                    EDITOR, VIEWER.'
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                    type: object
                   deletePropagationPolicy:
                     description: 'Delete propagation policy for the capability. Valid
                       values: RETAIN.'
@@ -676,78 +654,67 @@ spec:
                   configuration:
                     description: Configuration for the capability. See configuration
                       below.
-                    items:
-                      properties:
-                        argoCd:
-                          description: ArgoCD configuration. See argo_cd below.
-                          items:
+                    properties:
+                      argoCd:
+                        description: ArgoCD configuration. See argo_cd below.
+                        properties:
+                          awsIdc:
+                            description: AWS IAM Identity Center configuration. See
+                              aws_idc below.
                             properties:
-                              awsIdc:
-                                description: AWS IAM Identity Center configuration.
-                                  See aws_idc below.
-                                items:
-                                  properties:
-                                    idcInstanceArn:
-                                      description: ARN of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                    idcManagedApplicationArn:
-                                      description: ARN of the capability.
-                                      type: string
-                                    idcRegion:
-                                      description: Region of the IAM Identity Center
-                                        instance.
-                                      type: string
-                                  type: object
-                                type: array
-                              namespace:
-                                description: Kubernetes namespace for ArgoCD.
+                              idcInstanceArn:
+                                description: ARN of the IAM Identity Center instance.
                                 type: string
-                              networkAccess:
-                                description: Network access configuration. See network_access
-                                  below.
-                                items:
-                                  properties:
-                                    vpceIds:
-                                      description: VPC Endpoint IDs.
-                                      items:
-                                        type: string
-                                      type: array
-                                      x-kubernetes-list-type: set
-                                  type: object
-                                type: array
-                              rbacRoleMapping:
-                                description: RBAC role mappings. See rbac_role_mapping
-                                  below.
-                                items:
-                                  properties:
-                                    identity:
-                                      description: List of identities. See identity
-                                        below.
-                                      items:
-                                        properties:
-                                          id:
-                                            description: Identity ID.
-                                            type: string
-                                          type:
-                                            description: 'Type of the capability.
-                                              Valid values: ACK, KRO, ARGOCD.'
-                                            type: string
-                                        type: object
-                                      type: array
-                                    role:
-                                      description: 'ArgoCD role. Valid values: ADMIN,
-                                        EDITOR, VIEWER.'
-                                      type: string
-                                  type: object
-                                type: array
-                              serverUrl:
-                                description: URL of the Argo CD server.
+                              idcManagedApplicationArn:
+                                description: ARN of the capability.
+                                type: string
+                              idcRegion:
+                                description: Region of the IAM Identity Center instance.
                                 type: string
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                          namespace:
+                            description: Kubernetes namespace for ArgoCD.
+                            type: string
+                          networkAccess:
+                            description: Network access configuration. See network_access
+                              below.
+                            properties:
+                              vpceIds:
+                                description: VPC Endpoint IDs.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          rbacRoleMapping:
+                            description: RBAC role mappings. See rbac_role_mapping
+                              below.
+                            items:
+                              properties:
+                                identity:
+                                  description: List of identities. See identity below.
+                                  items:
+                                    properties:
+                                      id:
+                                        description: Identity ID.
+                                        type: string
+                                      type:
+                                        description: 'Type of the capability. Valid
+                                          values: ACK, KRO, ARGOCD.'
+                                        type: string
+                                    type: object
+                                  type: array
+                                role:
+                                  description: 'ArgoCD role. Valid values: ADMIN,
+                                    EDITOR, VIEWER.'
+                                  type: string
+                              type: object
+                            type: array
+                          serverUrl:
+                            description: URL of the Argo CD server.
+                            type: string
+                        type: object
+                    type: object
                   deletePropagationPolicy:
                     description: 'Delete propagation policy for the capability. Valid
                       values: RETAIN.'
