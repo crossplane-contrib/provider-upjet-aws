@@ -105,6 +105,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// eks
 	//
+	// EKS capability can be imported as cluster_name and capability_name separated by a comma (,) foo-cluster,foo-capability
+	"aws_eks_capability": eksCapability(),
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
@@ -1262,6 +1264,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
+
 	// import EKS cluster using the name.
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// my_cluster:my_fargate_profile
@@ -3343,6 +3346,42 @@ func eksOIDCIdentityProvider() config.ExternalName {
 			"oidc.identity_provider_config_name_prefix",
 		},
 	}
+}
+
+func eksCapability() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const sep = ","
+	keys := []string{"cluster_name", "capability_name"}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := tfstate[key]
+			if !ok {
+				return "", errors.Errorf("%q is missing from tfstate", key)
+			}
+			s, ok := val.(string)
+			if !ok || s == "" {
+				return "", errors.Errorf("%q in tfstate must be a non-empty string", key)
+			}
+			vals[i] = s
+		}
+		return strings.Join(vals, sep), nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, sep)
+		if len(extNameParts) != len(keys) {
+			return
+		}
+		for i, key := range keys {
+			if _, ok := base[key]; !ok {
+				base[key] = extNameParts[i]
+			}
+		}
+	}
+	return e
 }
 
 func eksPodIdentityAssociation() config.ExternalName {
