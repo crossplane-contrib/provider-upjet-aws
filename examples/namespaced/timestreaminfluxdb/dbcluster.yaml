@@ -23,7 +23,6 @@ spec:
     passwordSecretRef:
       key: password
       name: influxdb-password
-      namespace: upbound-system
     port: 8086
     region: us-east-1
     username: admin
