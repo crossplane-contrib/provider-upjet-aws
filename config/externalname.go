@@ -105,11 +105,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// eks
 	//
+	// EKS capability can be imported as cluster_name and capability_name separated by a comma (,) foo-cluster,foo-capability
+	"aws_eks_capability": eksCapability(),
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
-	// import EKS Capability using the cluster_name and capability_name separated by a comma (,).
-	// The Terraform resource has no top-level id attribute in state; read the composite id from attributes.
-	"aws_eks_capability": eksCapability(),
 
 	// glue
 	//
@@ -3368,20 +3367,19 @@ func eksCapability() config.ExternalName {
 		}
 		return strings.Join(vals, sep), nil
 	}
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		vals := make([]string, len(keys))
-		for i, key := range keys {
-			val, ok := parameters[key]
-			if !ok {
-				return "", errors.Errorf("%s cannot be empty", key)
-			}
-			s, ok := val.(string)
-			if !ok {
-				return "", errors.Errorf("%s needs to be string", key)
-			}
-			vals[i] = s
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if externalName == "" {
+			return
 		}
-		return strings.Join(vals, sep), nil
+		extNameParts := strings.Split(externalName, sep)
+		if len(extNameParts) != len(keys) {
+			return
+		}
+		for i, key := range keys {
+			if _, ok := base[key]; !ok {
+				base[key] = extNameParts[i]
+			}
+		}
 	}
 	return e
 }
