@@ -9,30 +9,22 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/capability
     uptest.upbound.io/timeout: "2400"
-    upjet.upbound.io/manual-intervention: "ARGOCD requires a real IAM Identity Center idc_instance_arn; replace placeholders before create."
   labels:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    capabilityName: argocd
+    capabilityName: sample-ack
     clusterNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    configuration:
-      - argoCd:
-        - awsIdc:
-            - idcInstanceArn: arn:aws:sso:::instance/ssoins-REPLACE_WITH_REAL_INSTANCE_ID
-          namespace: argocd
+        testing.upbound.io/example-name: example-eks-for-capability
     deletePropagationPolicy: RETAIN
     region: us-west-1
     roleArnRef:
       name: sample-eks-capability-role
     tags:
       Name: example-capability
-    type: ARGOCD
-
+    type: ACK
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -57,9 +49,7 @@ spec:
           }
         ]
       }
-
 ---
-
 apiVersion: eks.aws.upbound.io/v1beta2
 kind: Cluster
 metadata:
@@ -68,7 +58,7 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/capability
   name: sample-eks-cluster
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-eks-for-capability
 spec:
   forProvider:
     region: us-west-1
@@ -78,9 +68,11 @@ spec:
       subnetIdRefs:
         - name: sample-subnet1
         - name: sample-subnet2
+    accessConfig:
+      authenticationMode: API_AND_CONFIG_MAP
+      bootstrapClusterCreatorAdminPermissions: true
 
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -98,13 +90,11 @@ spec:
             "Principal": {
               "Service": "eks.amazonaws.com"
             },
-            "Action": "sts:AssumeRole"
+            "Action": ["sts:AssumeRole", "sts:TagSession"]
           }
         ]
       }
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -118,9 +108,7 @@ spec:
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -135,9 +123,7 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
-
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -152,9 +138,7 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
-
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:

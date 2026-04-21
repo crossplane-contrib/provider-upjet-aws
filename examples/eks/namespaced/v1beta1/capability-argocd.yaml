@@ -9,22 +9,28 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/capability
     uptest.upbound.io/timeout: "2400"
+    upjet.upbound.io/manual-intervention: "ARGOCD requires a real IAM Identity Center idc_instance_arn; replace placeholders before create."
   labels:
     testing.upbound.io/example-name: example
   namespace: upbound-system
 spec:
   forProvider:
-    capabilityName: sample-ack
+    capabilityName: argocd
     clusterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-eks-for-capability
+    configuration:
+      argoCd:
+        namespace: argocd
+        awsIdc:
+          idcInstanceArn: arn:aws:sso:::instance/ssoins-REPLACE_WITH_REAL_INSTANCE_ID
     deletePropagationPolicy: RETAIN
     region: us-west-1
     roleArnRef:
       name: sample-eks-capability-role
     tags:
       Name: example-capability
-    type: ACK
+    type: ARGOCD
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
