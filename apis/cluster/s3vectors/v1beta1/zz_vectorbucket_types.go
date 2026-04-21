@@ -65,7 +65,7 @@ type VectorBucketEncryptionConfigurationParameters struct {
 type VectorBucketInitParameters struct {
 
 	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
-	EncryptionConfiguration []VectorBucketEncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *VectorBucketEncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Boolean that indicates all indexes and vectors should be deleted from the vector bucket when the vector bucket is destroyed so that the vector bucket can be destroyed without error. If setting this field in the same operation that would require replacing the vector bucket or destroying the vector bucket, this flag will not work.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
@@ -84,7 +84,7 @@ type VectorBucketObservation struct {
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
-	EncryptionConfiguration []VectorBucketEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *VectorBucketEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Boolean that indicates all indexes and vectors should be deleted from the vector bucket when the vector bucket is destroyed so that the vector bucket can be destroyed without error. If setting this field in the same operation that would require replacing the vector bucket or destroying the vector bucket, this flag will not work.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
@@ -114,7 +114,7 @@ type VectorBucketParameters struct {
 
 	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
 	// +kubebuilder:validation:Optional
-	EncryptionConfiguration []VectorBucketEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *VectorBucketEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Boolean that indicates all indexes and vectors should be deleted from the vector bucket when the vector bucket is destroyed so that the vector bucket can be destroyed without error. If setting this field in the same operation that would require replacing the vector bucket or destroying the vector bucket, this flag will not work.
 	// +kubebuilder:validation:Optional

@@ -54,13 +54,13 @@ type IndexInitParameters struct {
 	DistanceMetric *string `json:"distanceMetric,omitempty" tf:"distance_metric,omitempty"`
 
 	// Block for encryption configuration for the vector index. See encyption_configuration block below.
-	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Name of the vector index.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
 	// Block for metadata configuration for the vector index. See metadata_configuration block below.
-	MetadataConfiguration []MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
+	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -95,7 +95,7 @@ type IndexObservation struct {
 	DistanceMetric *string `json:"distanceMetric,omitempty" tf:"distance_metric,omitempty"`
 
 	// Block for encryption configuration for the vector index. See encyption_configuration block below.
-	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -106,7 +106,7 @@ type IndexObservation struct {
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
 	// Block for metadata configuration for the vector index. See metadata_configuration block below.
-	MetadataConfiguration []MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
+	MetadataConfiguration *MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -140,7 +140,7 @@ type IndexParameters struct {
 
 	// Block for encryption configuration for the vector index. See encyption_configuration block below.
 	// +kubebuilder:validation:Optional
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration *EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Name of the vector index.
 	// +kubebuilder:validation:Optional
@@ -148,7 +148,7 @@ type IndexParameters struct {
 
 	// Block for metadata configuration for the vector index. See metadata_configuration block below.
 	// +kubebuilder:validation:Optional
-	MetadataConfiguration []MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
+	MetadataConfiguration *MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

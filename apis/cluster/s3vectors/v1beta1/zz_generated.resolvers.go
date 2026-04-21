@@ -77,48 +77,48 @@ func (mg *VectorBucket) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionConfiguration); i3++ {
+	if mg.Spec.ForProvider.EncryptionConfiguration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArnRef,
-				Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArnSelector,
+				Reference:    mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArn")
+			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArn")
 		}
-		mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyArnRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionConfiguration); i3++ {
+	if mg.Spec.InitProvider.EncryptionConfiguration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArn),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Namespace:    mg.GetNamespace(),
-				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArnRef,
-				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArnSelector,
+				Reference:    mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArnSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArn")
+			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArn")
 		}
-		mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyArnRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EncryptionConfiguration.KMSKeyArnRef = rsp.ResolvedReference
 
 	}
 

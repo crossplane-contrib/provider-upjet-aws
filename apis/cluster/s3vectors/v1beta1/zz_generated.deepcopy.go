@@ -135,10 +135,8 @@ func (in *IndexInitParameters) DeepCopyInto(out *IndexInitParameters) {
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]EncryptionConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
@@ -147,10 +145,8 @@ func (in *IndexInitParameters) DeepCopyInto(out *IndexInitParameters) {
 	}
 	if in.MetadataConfiguration != nil {
 		in, out := &in.MetadataConfiguration, &out.MetadataConfiguration
-		*out = make([]MetadataConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -252,10 +248,8 @@ func (in *IndexObservation) DeepCopyInto(out *IndexObservation) {
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]EncryptionConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -274,10 +268,8 @@ func (in *IndexObservation) DeepCopyInto(out *IndexObservation) {
 	}
 	if in.MetadataConfiguration != nil {
 		in, out := &in.MetadataConfiguration, &out.MetadataConfiguration
-		*out = make([]MetadataConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -353,10 +345,8 @@ func (in *IndexParameters) DeepCopyInto(out *IndexParameters) {
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]EncryptionConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
@@ -365,10 +355,8 @@ func (in *IndexParameters) DeepCopyInto(out *IndexParameters) {
 	}
 	if in.MetadataConfiguration != nil {
 		in, out := &in.MetadataConfiguration, &out.MetadataConfiguration
-		*out = make([]MetadataConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MetadataConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -658,10 +646,8 @@ func (in *VectorBucketInitParameters) DeepCopyInto(out *VectorBucketInitParamete
 	*out = *in
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]VectorBucketEncryptionConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorBucketEncryptionConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ForceDestroy != nil {
 		in, out := &in.ForceDestroy, &out.ForceDestroy
@@ -743,10 +729,8 @@ func (in *VectorBucketObservation) DeepCopyInto(out *VectorBucketObservation) {
 	}
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]VectorBucketEncryptionConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorBucketEncryptionConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ForceDestroy != nil {
 		in, out := &in.ForceDestroy, &out.ForceDestroy
@@ -822,10 +806,8 @@ func (in *VectorBucketParameters) DeepCopyInto(out *VectorBucketParameters) {
 	*out = *in
 	if in.EncryptionConfiguration != nil {
 		in, out := &in.EncryptionConfiguration, &out.EncryptionConfiguration
-		*out = make([]VectorBucketEncryptionConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorBucketEncryptionConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ForceDestroy != nil {
 		in, out := &in.ForceDestroy, &out.ForceDestroy

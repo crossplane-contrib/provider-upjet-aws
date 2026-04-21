@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.1
   name: indices.s3vectors.aws.m.upbound.io
 spec:
   group: s3vectors.aws.m.upbound.io
@@ -73,37 +73,33 @@ spec:
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
                       index. See encyption_configuration block below.
-                    items:
-                      properties:
-                        kmsKeyArn:
-                          description: AWS Key Management Service (KMS) customer managed
-                            key ID to use for the encryption configuration. This parameter
-                            is allowed if and only if sse_type is set to aws:kms.
-                            To specify the KMS key, you must use the format of the
-                            KMS key Amazon Resource Name (ARN).
-                          type: string
-                        sseType:
-                          description: 'Type of encryption to use. Valid values: AES256,
-                            aws:kms. Defaults to AES256.'
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      kmsKeyArn:
+                        description: AWS Key Management Service (KMS) customer managed
+                          key ID to use for the encryption configuration. This parameter
+                          is allowed if and only if sse_type is set to aws:kms. To
+                          specify the KMS key, you must use the format of the KMS
+                          key Amazon Resource Name (ARN).
+                        type: string
+                      sseType:
+                        description: 'Type of encryption to use. Valid values: AES256,
+                          aws:kms. Defaults to AES256.'
+                        type: string
+                    type: object
                   indexName:
                     description: Name of the vector index.
                     type: string
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
                       See metadata_configuration block below.
-                    items:
-                      properties:
-                        nonFilterableMetadataKeys:
-                          description: List of non-filterable metadata keys.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                      type: object
-                    type: array
+                    properties:
+                      nonFilterableMetadataKeys:
+                        description: List of non-filterable metadata keys.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -231,37 +227,33 @@ spec:
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
                       index. See encyption_configuration block below.
-                    items:
-                      properties:
-                        kmsKeyArn:
-                          description: AWS Key Management Service (KMS) customer managed
-                            key ID to use for the encryption configuration. This parameter
-                            is allowed if and only if sse_type is set to aws:kms.
-                            To specify the KMS key, you must use the format of the
-                            KMS key Amazon Resource Name (ARN).
-                          type: string
-                        sseType:
-                          description: 'Type of encryption to use. Valid values: AES256,
-                            aws:kms. Defaults to AES256.'
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      kmsKeyArn:
+                        description: AWS Key Management Service (KMS) customer managed
+                          key ID to use for the encryption configuration. This parameter
+                          is allowed if and only if sse_type is set to aws:kms. To
+                          specify the KMS key, you must use the format of the KMS
+                          key Amazon Resource Name (ARN).
+                        type: string
+                      sseType:
+                        description: 'Type of encryption to use. Valid values: AES256,
+                          aws:kms. Defaults to AES256.'
+                        type: string
+                    type: object
                   indexName:
                     description: Name of the vector index.
                     type: string
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
                       See metadata_configuration block below.
-                    items:
-                      properties:
-                        nonFilterableMetadataKeys:
-                          description: List of non-filterable metadata keys.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                      type: object
-                    type: array
+                    properties:
+                      nonFilterableMetadataKeys:
+                        description: List of non-filterable metadata keys.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -452,21 +444,19 @@ spec:
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
                       index. See encyption_configuration block below.
-                    items:
-                      properties:
-                        kmsKeyArn:
-                          description: AWS Key Management Service (KMS) customer managed
-                            key ID to use for the encryption configuration. This parameter
-                            is allowed if and only if sse_type is set to aws:kms.
-                            To specify the KMS key, you must use the format of the
-                            KMS key Amazon Resource Name (ARN).
-                          type: string
-                        sseType:
-                          description: 'Type of encryption to use. Valid values: AES256,
-                            aws:kms. Defaults to AES256.'
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      kmsKeyArn:
+                        description: AWS Key Management Service (KMS) customer managed
+                          key ID to use for the encryption configuration. This parameter
+                          is allowed if and only if sse_type is set to aws:kms. To
+                          specify the KMS key, you must use the format of the KMS
+                          key Amazon Resource Name (ARN).
+                        type: string
+                      sseType:
+                        description: 'Type of encryption to use. Valid values: AES256,
+                          aws:kms. Defaults to AES256.'
+                        type: string
+                    type: object
                   id:
                     type: string
                   indexArn:
@@ -478,16 +468,14 @@ spec:
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
                       See metadata_configuration block below.
-                    items:
-                      properties:
-                        nonFilterableMetadataKeys:
-                          description: List of non-filterable metadata keys.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                      type: object
-                    type: array
+                    properties:
+                      nonFilterableMetadataKeys:
+                        description: List of non-filterable metadata keys.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
