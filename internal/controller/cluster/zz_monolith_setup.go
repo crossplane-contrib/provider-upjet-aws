@@ -730,8 +730,15 @@ import (
 	providerconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/providerconfig"
 	ledger "github.com/upbound/provider-aws/v2/internal/controller/cluster/qldb/ledger"
 	streamqldb "github.com/upbound/provider-aws/v2/internal/controller/cluster/qldb/stream"
+	accountsubscription "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/accountsubscription"
+	analysis "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/analysis"
+	dashboardquicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/dashboard"
+	datasetquicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/dataset"
+	datasourcequicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/datasource"
 	groupquicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/group"
+	groupmembershipquicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/groupmembership"
 	userquicksight "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/user"
+	vpcconnection "github.com/upbound/provider-aws/v2/internal/controller/cluster/quicksight/vpcconnection"
 	principalassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ram/principalassociation"
 	resourceassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/v2/internal/controller/cluster/ram/resourceshare"
@@ -1749,8 +1756,15 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		providerconfig.Setup,
 		ledger.Setup,
 		streamqldb.Setup,
+		accountsubscription.Setup,
+		analysis.Setup,
+		dashboardquicksight.Setup,
+		datasetquicksight.Setup,
+		datasourcequicksight.Setup,
 		groupquicksight.Setup,
+		groupmembershipquicksight.Setup,
 		userquicksight.Setup,
+		vpcconnection.Setup,
 		principalassociation.Setup,
 		resourceassociation.Setup,
 		resourceshare.Setup,
@@ -2774,8 +2788,15 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		providerconfig.SetupGated,
 		ledger.SetupGated,
 		streamqldb.SetupGated,
+		accountsubscription.SetupGated,
+		analysis.SetupGated,
+		dashboardquicksight.SetupGated,
+		datasetquicksight.SetupGated,
+		datasourcequicksight.SetupGated,
 		groupquicksight.SetupGated,
+		groupmembershipquicksight.SetupGated,
 		userquicksight.SetupGated,
+		vpcconnection.SetupGated,
 		principalassociation.SetupGated,
 		resourceassociation.SetupGated,
 		resourceshare.SetupGated,
