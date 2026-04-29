@@ -258,6 +258,7 @@ import (
 	v1beta2s3 "github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1"
 	v1beta2s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2"
+	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/cluster/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1"
 	v1beta2sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2"
 	v1beta1scheduler "github.com/upbound/provider-aws/v2/apis/cluster/scheduler/v1beta1"
@@ -288,6 +289,7 @@ import (
 	v1beta1ssoadmin "github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta1"
 	v1beta2ssoadmin "github.com/upbound/provider-aws/v2/apis/cluster/ssoadmin/v1beta2"
 	v1beta1swf "github.com/upbound/provider-aws/v2/apis/cluster/swf/v1beta1"
+	v1beta1timestreaminfluxdb "github.com/upbound/provider-aws/v2/apis/cluster/timestreaminfluxdb/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/v2/apis/cluster/timestreamwrite/v1beta1"
 	v1beta2timestreamwrite "github.com/upbound/provider-aws/v2/apis/cluster/timestreamwrite/v1beta2"
 	v1beta1transcribe "github.com/upbound/provider-aws/v2/apis/cluster/transcribe/v1beta1"
@@ -561,6 +563,7 @@ func init() {
 		v1beta2s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta2s3control.SchemeBuilder.AddToScheme,
+		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta2sagemaker.SchemeBuilder.AddToScheme,
 		v1beta1scheduler.SchemeBuilder.AddToScheme,
@@ -591,6 +594,7 @@ func init() {
 		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta2ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
+		v1beta1timestreaminfluxdb.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta2timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transcribe.SchemeBuilder.AddToScheme,

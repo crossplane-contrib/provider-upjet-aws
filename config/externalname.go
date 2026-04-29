@@ -105,6 +105,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// eks
 	//
+	// EKS capability can be imported as cluster_name and capability_name separated by a comma (,) foo-cluster,foo-capability
+	"aws_eks_capability": eksCapability(),
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
@@ -175,6 +177,24 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
+
+	// s3vectors
+	//
+	// S3 Vectors Vector Bucket can be imported using the vector bucket ARN
+	"aws_s3vectors_vector_bucket": s3vectorsComputedARNIdentifier("vector_bucket_arn", "bucket/xpstub"),
+	// S3 Vectors Index can be imported using the index ARN
+	"aws_s3vectors_index": s3vectorsComputedARNIdentifier("index_arn", "bucket/xpstub/index/xpstub"),
+	// S3 Vectors Vector Bucket Policy can be imported using the vector bucket ARN.
+	// vector_bucket_arn is Required (not Computed) so must NOT be in
+	// ComputedIdentifierAttributes, otherwise it gets removed from the config.
+	"aws_s3vectors_vector_bucket_policy": s3vectorsPolicyIdentifier(),
+
+	// timestreaminfluxdb
+	//
+	// Timestream for InfluxDB DB instances can be imported using the instance ID
+	"aws_timestreaminfluxdb_db_instance": identifierFromProviderWithDefaultStub("xpstub000000"),
+	// Timestream for InfluxDB DB clusters can be imported using the cluster ID
+	"aws_timestreaminfluxdb_db_cluster": identifierFromProviderWithDefaultStub("xpstub000000"),
 
 	// vpclattice
 	//
@@ -1260,6 +1280,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
+
 	// import EKS cluster using the name.
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// my_cluster:my_fargate_profile
@@ -1671,6 +1692,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
 	// Managed Streaming for Kafka Cluster Policy resource can be imported using the cluster_arn
 	"aws_msk_cluster_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }}"),
+	// MSK VPC Connection can be imported using the ARN
+	"aws_msk_vpc_connection": config.IdentifierFromProvider,
 
 	// kafkaconnect
 	//
@@ -3013,6 +3036,65 @@ func kmsAlias() config.ExternalName {
 	return e
 }
 
+// s3vectorsComputedARNIdentifier handles S3 Vectors resources that use
+// @ArnIdentity in the Terraform provider. The stub ARN must include the
+// correct region from parameters so the API doesn't reject a region mismatch.
+func s3vectorsComputedARNIdentifier(identifier, resourcePath string) config.ExternalName {
+	en := config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if _, ok := base[identifier]; ok {
+				return
+			}
+			if externalName != "" {
+				base[identifier] = externalName
+				return
+			}
+			// Only set the stub when region is available (i.e., when called
+			// with params, not with the empty tfState). copyParameters will
+			// then propagate the correct-region stub into the final state.
+			if region, _ := base["region"].(string); region != "" {
+				base[identifier] = fmt.Sprintf("arn:aws:s3vectors:%s:000000000000:%s", region, resourcePath)
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[identifier]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", identifier)
+		}),
+	)
+	en.TFPluginFrameworkOptions.ComputedIdentifierAttributes = []string{identifier}
+	return en
+}
+
+// s3vectorsPolicyIdentifier handles VectorBucketPolicy where vector_bucket_arn
+// is both Required (user provides it) and serves as the identity. Unlike
+// s3vectorsComputedARNIdentifier, it does NOT set ComputedIdentifierAttributes
+// so vector_bucket_arn stays in the CRD spec and is not removed from the config.
+func s3vectorsPolicyIdentifier() config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if arn, ok := base["vector_bucket_arn"].(string); !ok || arn == "" {
+					base["vector_bucket_arn"] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState["vector_bucket_arn"]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", "vector_bucket_arn")
+		}),
+	)
+}
+
 func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
 	// Terraform does not always allow id to be empty.
 	// Using a stub value to pass validation.
@@ -3353,6 +3435,42 @@ func eksOIDCIdentityProvider() config.ExternalName {
 			"oidc.identity_provider_config_name_prefix",
 		},
 	}
+}
+
+func eksCapability() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const sep = ","
+	keys := []string{"cluster_name", "capability_name"}
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vals := make([]string, len(keys))
+		for i, key := range keys {
+			val, ok := tfstate[key]
+			if !ok {
+				return "", errors.Errorf("%q is missing from tfstate", key)
+			}
+			s, ok := val.(string)
+			if !ok || s == "" {
+				return "", errors.Errorf("%q in tfstate must be a non-empty string", key)
+			}
+			vals[i] = s
+		}
+		return strings.Join(vals, sep), nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if externalName == "" {
+			return
+		}
+		extNameParts := strings.Split(externalName, sep)
+		if len(extNameParts) != len(keys) {
+			return
+		}
+		for i, key := range keys {
+			if _, ok := base[key]; !ok {
+				base[key] = extNameParts[i]
+			}
+		}
+	}
+	return e
 }
 
 func eksPodIdentityAssociation() config.ExternalName {

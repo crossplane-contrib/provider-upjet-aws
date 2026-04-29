@@ -91,6 +91,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
 	"github.com/upbound/provider-aws/v2/config/cluster/servicecatalog"
@@ -99,6 +100,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/sns"
 	"github.com/upbound/provider-aws/v2/config/cluster/sqs"
 	"github.com/upbound/provider-aws/v2/config/cluster/ssoadmin"
+	"github.com/upbound/provider-aws/v2/config/cluster/timestreaminfluxdb"
 	"github.com/upbound/provider-aws/v2/config/cluster/transfer"
 	"github.com/upbound/provider-aws/v2/config/cluster/verifiedaccess"
 	"github.com/upbound/provider-aws/v2/config/cluster/vpclattice"
@@ -176,6 +178,7 @@ func init() {
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(s3vectors.Configure)
 	ProviderConfiguration.AddConfig(secretsmanager.Configure)
 	ProviderConfiguration.AddConfig(servicecatalog.Configure)
 	ProviderConfiguration.AddConfig(organization.Configure)
@@ -204,4 +207,5 @@ func init() {
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
+	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
 }

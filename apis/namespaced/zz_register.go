@@ -155,6 +155,7 @@ import (
 	v1beta1rum "github.com/upbound/provider-aws/v2/apis/namespaced/rum/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1"
+	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/namespaced/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/namespaced/sagemaker/v1beta1"
 	v1beta1scheduler "github.com/upbound/provider-aws/v2/apis/namespaced/scheduler/v1beta1"
 	v1beta1schemas "github.com/upbound/provider-aws/v2/apis/namespaced/schemas/v1beta1"
@@ -173,6 +174,7 @@ import (
 	v1beta1ssm "github.com/upbound/provider-aws/v2/apis/namespaced/ssm/v1beta1"
 	v1beta1ssoadmin "github.com/upbound/provider-aws/v2/apis/namespaced/ssoadmin/v1beta1"
 	v1beta1swf "github.com/upbound/provider-aws/v2/apis/namespaced/swf/v1beta1"
+	v1beta1timestreaminfluxdb "github.com/upbound/provider-aws/v2/apis/namespaced/timestreaminfluxdb/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/v2/apis/namespaced/timestreamwrite/v1beta1"
 	v1beta1transcribe "github.com/upbound/provider-aws/v2/apis/namespaced/transcribe/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1"
@@ -336,6 +338,7 @@ func init() {
 		v1beta1rum.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
+		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta1scheduler.SchemeBuilder.AddToScheme,
 		v1beta1schemas.SchemeBuilder.AddToScheme,
@@ -354,6 +357,7 @@ func init() {
 		v1beta1ssm.SchemeBuilder.AddToScheme,
 		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
+		v1beta1timestreaminfluxdb.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transcribe.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,

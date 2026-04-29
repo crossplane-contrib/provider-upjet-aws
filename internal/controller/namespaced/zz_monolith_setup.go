@@ -444,6 +444,7 @@ import (
 	accessentry "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accessentry"
 	accesspolicyassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/addon"
+	capability "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/capability"
 	clustereks "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/clusterauth"
 	fargateprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/fargateprofile"
@@ -591,6 +592,7 @@ import (
 	scramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/serverlesscluster"
 	singlescramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/singlescramsecretassociation"
+	vpcconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/vpcconnection"
 	connector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/connector"
 	customplugin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/customplugin"
 	workerconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/workerconfiguration"
@@ -846,6 +848,9 @@ import (
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/objectlambdaaccesspointpolicy"
 	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/storagelensconfiguration"
+	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/index"
+	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/vectorbucket"
+	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/vectorbucketpolicy"
 	appsagemaker "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/coderepository"
@@ -956,6 +961,8 @@ import (
 	permissionset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionset"
 	permissionsetinlinepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/v2/internal/controller/namespaced/swf/domain"
+	dbcluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbcluster"
+	dbinstance "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbinstance"
 	databasetimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/table"
 	languagemodel "github.com/upbound/provider-aws/v2/internal/controller/namespaced/transcribe/languagemodel"
@@ -1463,6 +1470,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.Setup,
 		accesspolicyassociation.Setup,
 		addon.Setup,
+		capability.Setup,
 		clustereks.Setup,
 		clusterauth.Setup,
 		fargateprofile.Setup,
@@ -1610,6 +1618,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		singlescramsecretassociation.Setup,
+		vpcconnection.Setup,
 		connector.Setup,
 		customplugin.Setup,
 		workerconfiguration.Setup,
@@ -1865,6 +1874,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
 		storagelensconfiguration.Setup,
+		indexs3vectors.Setup,
+		vectorbucket.Setup,
+		vectorbucketpolicy.Setup,
 		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
@@ -1975,6 +1987,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.Setup,
 		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
+		dbcluster.Setup,
+		dbinstance.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		languagemodel.Setup,
@@ -2488,6 +2502,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.SetupGated,
 		accesspolicyassociation.SetupGated,
 		addon.SetupGated,
+		capability.SetupGated,
 		clustereks.SetupGated,
 		clusterauth.SetupGated,
 		fargateprofile.SetupGated,
@@ -2635,6 +2650,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.SetupGated,
 		serverlesscluster.SetupGated,
 		singlescramsecretassociation.SetupGated,
+		vpcconnection.SetupGated,
 		connector.SetupGated,
 		customplugin.SetupGated,
 		workerconfiguration.SetupGated,
@@ -2890,6 +2906,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.SetupGated,
 		objectlambdaaccesspointpolicy.SetupGated,
 		storagelensconfiguration.SetupGated,
+		indexs3vectors.SetupGated,
+		vectorbucket.SetupGated,
+		vectorbucketpolicy.SetupGated,
 		appsagemaker.SetupGated,
 		appimageconfig.SetupGated,
 		coderepository.SetupGated,
@@ -3000,6 +3019,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.SetupGated,
 		permissionsetinlinepolicy.SetupGated,
 		domainswf.SetupGated,
+		dbcluster.SetupGated,
+		dbinstance.SetupGated,
 		databasetimestreamwrite.SetupGated,
 		tabletimestreamwrite.SetupGated,
 		languagemodel.SetupGated,
