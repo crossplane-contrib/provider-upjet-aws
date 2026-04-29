@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: quicksight.aws.m.upbound.io/v1beta1
+kind: AccountSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/accountsubscription
+  labels:
+    testing.upbound.io/example-name: subscription
+  name: subscription
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountName: quicksight-terraform
+    authenticationMethod: IAM_AND_QUICKSIGHT
+    edition: ENTERPRISE
+    notificationEmail: notification@email.com
+    region: us-west-1
