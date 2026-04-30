@@ -674,6 +674,7 @@ import (
 	containerpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/mediastore/containerpolicy"
 	acl "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/acl"
 	clustermemorydb "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/cluster"
+	multiregioncluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/multiregioncluster"
 	parametergroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/snapshot"
 	subnetgroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/subnetgroup"
@@ -1694,6 +1695,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.Setup,
 		acl.Setup,
 		clustermemorydb.Setup,
+		multiregioncluster.Setup,
 		parametergroupmemorydb.Setup,
 		snapshot.Setup,
 		subnetgroupmemorydb.Setup,
@@ -2720,6 +2722,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.SetupGated,
 		acl.SetupGated,
 		clustermemorydb.SetupGated,
+		multiregioncluster.SetupGated,
 		parametergroupmemorydb.SetupGated,
 		snapshot.SetupGated,
 		subnetgroupmemorydb.SetupGated,
