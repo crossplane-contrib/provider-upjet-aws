@@ -436,7 +436,17 @@ type ReplicaInitParameters struct {
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
 	// Note: This attribute will not be populated with the ARN of default keys.
 	// Note: Changing this value will recreate the replica.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
@@ -505,8 +515,18 @@ type ReplicaParameters struct {
 	// This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb.
 	// Note: This attribute will not be populated with the ARN of default keys.
 	// Note: Changing this value will recreate the replica.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	// +kubebuilder:validation:Optional
@@ -571,7 +591,17 @@ type ServerSideEncryptionInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type ServerSideEncryptionObservation struct {
@@ -590,8 +620,18 @@ type ServerSideEncryptionParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type TTLInitParameters struct {

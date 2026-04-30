@@ -48,6 +48,7 @@ import (
 	v1beta1cloudwatchevents "github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1"
 	v1beta1cloudwatchlogs "github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchlogs/v1beta1"
 	v1beta1codeartifact "github.com/upbound/provider-aws/v2/apis/namespaced/codeartifact/v1beta1"
+	v1beta1codebuild "github.com/upbound/provider-aws/v2/apis/namespaced/codebuild/v1beta1"
 	v1beta1codecommit "github.com/upbound/provider-aws/v2/apis/namespaced/codecommit/v1beta1"
 	v1beta1codeguruprofiler "github.com/upbound/provider-aws/v2/apis/namespaced/codeguruprofiler/v1beta1"
 	v1beta1codepipeline "github.com/upbound/provider-aws/v2/apis/namespaced/codepipeline/v1beta1"
@@ -85,6 +86,7 @@ import (
 	v1beta1elb "github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1"
 	v1beta1emr "github.com/upbound/provider-aws/v2/apis/namespaced/emr/v1beta1"
+	v1beta1emrcontainers "github.com/upbound/provider-aws/v2/apis/namespaced/emrcontainers/v1beta1"
 	v1beta1emrserverless "github.com/upbound/provider-aws/v2/apis/namespaced/emrserverless/v1beta1"
 	v1beta1evidently "github.com/upbound/provider-aws/v2/apis/namespaced/evidently/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1"
@@ -146,12 +148,14 @@ import (
 	v1beta1resourcegroups "github.com/upbound/provider-aws/v2/apis/namespaced/resourcegroups/v1beta1"
 	v1beta1rolesanywhere "github.com/upbound/provider-aws/v2/apis/namespaced/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/v2/apis/namespaced/route53/v1beta1"
+	v1beta1route53profiles "github.com/upbound/provider-aws/v2/apis/namespaced/route53profiles/v1beta1"
 	v1beta1route53recoverycontrolconfig "github.com/upbound/provider-aws/v2/apis/namespaced/route53recoverycontrolconfig/v1beta1"
 	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/v2/apis/namespaced/route53recoveryreadiness/v1beta1"
 	v1beta1route53resolver "github.com/upbound/provider-aws/v2/apis/namespaced/route53resolver/v1beta1"
 	v1beta1rum "github.com/upbound/provider-aws/v2/apis/namespaced/rum/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1"
+	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/namespaced/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/namespaced/sagemaker/v1beta1"
 	v1beta1scheduler "github.com/upbound/provider-aws/v2/apis/namespaced/scheduler/v1beta1"
 	v1beta1schemas "github.com/upbound/provider-aws/v2/apis/namespaced/schemas/v1beta1"
@@ -170,6 +174,7 @@ import (
 	v1beta1ssm "github.com/upbound/provider-aws/v2/apis/namespaced/ssm/v1beta1"
 	v1beta1ssoadmin "github.com/upbound/provider-aws/v2/apis/namespaced/ssoadmin/v1beta1"
 	v1beta1swf "github.com/upbound/provider-aws/v2/apis/namespaced/swf/v1beta1"
+	v1beta1timestreaminfluxdb "github.com/upbound/provider-aws/v2/apis/namespaced/timestreaminfluxdb/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/v2/apis/namespaced/timestreamwrite/v1beta1"
 	v1beta1transcribe "github.com/upbound/provider-aws/v2/apis/namespaced/transcribe/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1"
@@ -226,6 +231,7 @@ func init() {
 		v1beta1cloudwatchevents.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta1codeartifact.SchemeBuilder.AddToScheme,
+		v1beta1codebuild.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,
 		v1beta1codeguruprofiler.SchemeBuilder.AddToScheme,
 		v1beta1codepipeline.SchemeBuilder.AddToScheme,
@@ -263,6 +269,7 @@ func init() {
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta1emr.SchemeBuilder.AddToScheme,
+		v1beta1emrcontainers.SchemeBuilder.AddToScheme,
 		v1beta1emrserverless.SchemeBuilder.AddToScheme,
 		v1beta1evidently.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
@@ -324,12 +331,14 @@ func init() {
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
 		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
+		v1beta1route53profiles.SchemeBuilder.AddToScheme,
 		v1beta1route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
 		v1beta1rum.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
+		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta1scheduler.SchemeBuilder.AddToScheme,
 		v1beta1schemas.SchemeBuilder.AddToScheme,
@@ -348,6 +357,7 @@ func init() {
 		v1beta1ssm.SchemeBuilder.AddToScheme,
 		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
+		v1beta1timestreaminfluxdb.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transcribe.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,

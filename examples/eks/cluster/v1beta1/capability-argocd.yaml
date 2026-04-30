@@ -1,0 +1,198 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Capability
+metadata:
+  name: example-capability
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+    uptest.upbound.io/timeout: "2400"
+    upjet.upbound.io/manual-intervention: "ARGOCD requires a real IAM Identity Center idc_instance_arn; replace placeholders before create."
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    capabilityName: argocd
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-eks-for-capability
+    configuration:
+      argoCd:
+        namespace: argocd
+        awsIdc:
+          idcInstanceArn: arn:aws:sso:::instance/ssoins-REPLACE_WITH_REAL_INSTANCE_ID
+    deletePropagationPolicy: RETAIN
+    region: us-west-1
+    roleArnRef:
+      name: sample-eks-capability-role
+    tags:
+      Name: example-capability
+    type: ARGOCD
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: sample-eks-capability-role
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "capabilities.eks.amazonaws.com"
+            },
+            "Action": [
+              "sts:AssumeRole",
+              "sts:TagSession"
+            ]
+          }
+        ]
+      }
+---
+apiVersion: eks.aws.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "2400"
+    meta.upbound.io/example-id: eks/v1beta1/capability
+  name: sample-eks-cluster
+  labels:
+    testing.upbound.io/example-name: example-eks-for-capability
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnRef:
+      name: sample-eks-cluster
+    vpcConfig:
+      subnetIdRefs:
+        - name: sample-subnet1
+        - name: sample-subnet2
+    accessConfig:
+      authenticationMode: API_AND_CONFIG_MAP
+      bootstrapClusterCreatorAdminPermissions: true
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: sample-eks-cluster
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": ["sts:AssumeRole", "sts:TagSession"]
+          }
+        ]
+      }
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+spec:
+  forProvider:
+    enableDnsHostnames: true
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet2
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/capability
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: sample-cluster-policy
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/cluster
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: sample-eks-cluster
+---
+apiVersion: protection.crossplane.io/v1beta1
+kind: ClusterUsage
+metadata:
+  annotations:
+    "uptest.upbound.io/conditions": "Ready"
+    "uptest.upbound.io/disable-import": "true"
+  name: eks-cluster-uses-role
+spec:
+  replayDeletion: true
+  by:
+    apiVersion: eks.aws.upbound.io/v1beta2
+    kind: Cluster
+    resourceRef:
+      name: sample-eks-cluster
+  of:
+    apiVersion: iam.aws.upbound.io/v1beta1
+    kind: Role
+    resourceRef:
+      name: sample-eks-cluster
+---
+apiVersion: protection.crossplane.io/v1beta1
+kind: ClusterUsage
+metadata:
+  annotations:
+    "uptest.upbound.io/conditions": "Ready"
+    "uptest.upbound.io/disable-import": "true"
+  name: eks-cluster-uses-role-binding
+spec:
+  replayDeletion: true
+  by:
+    apiVersion: eks.aws.upbound.io/v1beta2
+    kind: Cluster
+    resourceRef:
+      name: sample-eks-cluster
+  of:
+    apiVersion: iam.aws.upbound.io/v1beta1
+    kind: RolePolicyAttachment
+    resourceRef:
+      name: sample-cluster-policy

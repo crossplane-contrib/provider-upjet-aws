@@ -1,0 +1,102 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: timestreaminfluxdb.aws.m.upbound.io/v1beta1
+kind: DBInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocatedStorage: 20
+    bucket: example-bucket-name
+    dbInstanceType: db.influx.medium
+    name: example-db-instance
+    organization: organization
+    passwordSecretRef:
+      key: password
+      name: influxdb-password
+      namespace: upbound-system
+    port: 8086
+    region: us-east-1
+    username: admin
+    vpcSecurityGroupIdsRefs:
+    - name: example
+    vpcSubnetIdsRefs:
+    - name: example
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass123
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    description: Security group for InfluxDB instance
+    name: influxdb-instance-sg
+    tags:
+      Name: influxdb-instance-sg
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1b
+    cidrBlock: 172.16.10.0/24
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.m.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
+  labels:
+    testing.upbound.io/example-name: sample-vpc
+  name: sample-vpc
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: influxdb-instance-vpc

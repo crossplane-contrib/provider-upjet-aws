@@ -49,6 +49,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/elasticache"
 	"github.com/upbound/provider-aws/v2/config/cluster/elb"
 	"github.com/upbound/provider-aws/v2/config/cluster/elbv2"
+	"github.com/upbound/provider-aws/v2/config/cluster/emrcontainers"
 	"github.com/upbound/provider-aws/v2/config/cluster/firehose"
 	"github.com/upbound/provider-aws/v2/config/cluster/fsx"
 	"github.com/upbound/provider-aws/v2/config/cluster/gamelift"
@@ -85,9 +86,11 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/redshiftserverless"
 	"github.com/upbound/provider-aws/v2/config/cluster/rolesanywhere"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53"
+	"github.com/upbound/provider-aws/v2/config/cluster/route53profiles"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
 	"github.com/upbound/provider-aws/v2/config/cluster/servicecatalog"
@@ -96,6 +99,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/sns"
 	"github.com/upbound/provider-aws/v2/config/cluster/sqs"
 	"github.com/upbound/provider-aws/v2/config/cluster/ssoadmin"
+	"github.com/upbound/provider-aws/v2/config/cluster/timestreaminfluxdb"
 	"github.com/upbound/provider-aws/v2/config/cluster/transfer"
 	"github.com/upbound/provider-aws/v2/config/cluster/verifiedaccess"
 	"github.com/upbound/provider-aws/v2/config/cluster/vpclattice"
@@ -141,6 +145,7 @@ func init() {
 	ProviderConfiguration.AddConfig(elasticache.Configure)
 	ProviderConfiguration.AddConfig(elb.Configure)
 	ProviderConfiguration.AddConfig(elbv2.Configure)
+	ProviderConfiguration.AddConfig(emrcontainers.Configure)
 	ProviderConfiguration.AddConfig(firehose.Configure)
 	ProviderConfiguration.AddConfig(gamelift.Configure)
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
@@ -168,9 +173,11 @@ func init() {
 	ProviderConfiguration.AddConfig(redshift.Configure)
 	ProviderConfiguration.AddConfig(rolesanywhere.Configure)
 	ProviderConfiguration.AddConfig(route53.Configure)
+	ProviderConfiguration.AddConfig(route53profiles.Configure)
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(s3vectors.Configure)
 	ProviderConfiguration.AddConfig(secretsmanager.Configure)
 	ProviderConfiguration.AddConfig(servicecatalog.Configure)
 	ProviderConfiguration.AddConfig(organization.Configure)
@@ -198,4 +205,5 @@ func init() {
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
+	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
 }

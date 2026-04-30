@@ -1,0 +1,224 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.upbound.io/v1beta1
+kind: VPCOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-vpcorigin
+  name: example-with-selector
+spec:
+  forProvider:
+    vpcOriginEndpointConfig:
+      name: example-vpc-origin-xp
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example-alb
+      httpPort: 8080
+      httpsPort: 8443
+      originProtocolPolicy: "https-only"
+      originSslProtocols:
+        items:
+        - "TLSv1.2"
+        quantity: 1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-vpc
+  name: example-vpc
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-2
+    tags:
+      Name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-subnet-a
+  name: example-subnet-a
+spec:
+  forProvider:
+    availabilityZone: us-west-2a
+    cidrBlock: 172.16.0.0/24
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-subnet-b
+  name: example-subnet-b
+spec:
+  forProvider:
+    availabilityZone: us-west-2b
+    cidrBlock: 172.16.1.0/24
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-sg
+  name: example-sg
+spec:
+  forProvider:
+    description: Security group for ALB
+    region: us-west-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-sg-ingress
+  name: example-sg-ingress
+spec:
+  forProvider:
+    type: ingress
+    fromPort: 80
+    toPort: 80
+    protocol: tcp
+    cidrBlocks:
+      - 0.0.0.0/0
+    region: us-west-2
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sg
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-igw
+  name: example-igw
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+    region: us-west-2
+    tags:
+      Name: example-igw
+---
+apiVersion: ec2.aws.upbound.io/v1beta2
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rt
+  name: example-route
+spec:
+  forProvider:
+    destinationCidrBlock: "0.0.0.0/0"
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-igw
+    region: us-west-2
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rt
+  name: example-rt
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vpc
+    region: us-west-2
+    tags:
+      Name: example-rt
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rta-a
+  name: example-rta-a
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-subnet-a
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    region: us-west-2
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-rta-b
+  name: example-rta-b
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-subnet-b
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-rt
+    region: us-west-2
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/vpcorigin
+  labels:
+    testing.upbound.io/example-name: example-alb
+  name: example-alb
+spec:
+  forProvider:
+    region: us-west-2
+    loadBalancerType: application
+    securityGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sg
+    subnetMapping:
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-subnet-b
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example-subnet-a

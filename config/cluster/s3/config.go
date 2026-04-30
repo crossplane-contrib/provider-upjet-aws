@@ -125,7 +125,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.Version = "v1beta2"
 		r.PreviousVersions = []string{"v1beta1"}
 		r.SetCRDStorageVersion("v1beta1")
-		r.ControllerReconcileVersion = "v1beta1"
+		r.ControllerReconcileVersion = "v1beta1" //nolint:staticcheck // still handling the deprecated behavior until rollout
 
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {

@@ -44,3 +44,6 @@ func (tr *RealtimeLogConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ResponseHeadersPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCOrigin) Hub() {}

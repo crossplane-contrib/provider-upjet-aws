@@ -40,11 +40,32 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				return diff, nil
 			}
 			nameDiff, ok := diff.Attributes["name"]
-			if !ok {
-				return diff, nil
+			if ok {
+				if strings.TrimSuffix(nameDiff.New, ".") == strings.TrimSuffix(nameDiff.Old, ".") {
+					delete(diff.Attributes, "name")
+				}
 			}
-			if strings.TrimSuffix(nameDiff.New, ".") == strings.TrimSuffix(nameDiff.Old, ".") {
-				delete(diff.Attributes, "name")
+			// When `records` are being modified, AWS SDK expects `ttl` to be
+			// present in the request body. The underlying TF provider checks
+			// the RawPlan to find `ttl` and inject it to request body, but
+			// it can't find since we are converting the diff to RawPlan during
+			// diff calculation. So, if `ttl` isn't being changed by user, we
+			// need to inject it manually from the current state for a successful
+			// update.
+			for k := range diff.Attributes {
+				if strings.HasPrefix(k, "records.") {
+					if _, exists := diff.Attributes["ttl"]; !exists {
+						if state != nil && state.Attributes != nil {
+							if ttlState, ok := state.Attributes["ttl"]; ok {
+								diff.Attributes["ttl"] = &terraform.ResourceAttrDiff{
+									Old: ttlState,
+									New: ttlState,
+								}
+							}
+						}
+					}
+					break
+				}
 			}
 			return diff, nil
 		}
