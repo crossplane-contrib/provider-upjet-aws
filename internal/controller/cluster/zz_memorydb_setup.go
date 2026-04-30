@@ -11,6 +11,7 @@ import (
 
 	acl "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/acl"
 	cluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/cluster"
+	multiregioncluster "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/multiregioncluster"
 	parametergroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/snapshot"
 	subnetgroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/memorydb/subnetgroup"
@@ -23,6 +24,7 @@ func Setup_memorydb(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		acl.Setup,
 		cluster.Setup,
+		multiregioncluster.Setup,
 		parametergroup.Setup,
 		snapshot.Setup,
 		subnetgroup.Setup,
@@ -41,6 +43,7 @@ func SetupGated_memorydb(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		acl.SetupGated,
 		cluster.SetupGated,
+		multiregioncluster.SetupGated,
 		parametergroup.SetupGated,
 		snapshot.SetupGated,
 		subnetgroup.SetupGated,

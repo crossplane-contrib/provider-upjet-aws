@@ -1930,6 +1930,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_memorydb_acl": config.NameAsIdentifier,
 	// Use the name to import a cluster
 	"aws_memorydb_cluster": config.NameAsIdentifier,
+	// Use the multi_region_cluster_name to import a multi region cluster
+	"aws_memorydb_multi_region_cluster": config.IdentifierFromProvider,
 	// Use the name to import a parameter group
 	"aws_memorydb_parameter_group": config.NameAsIdentifier,
 	// Use the name to import a snapshot

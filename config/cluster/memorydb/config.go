@@ -12,6 +12,10 @@ import (
 
 // Configure adds configurations for the memorydb group.
 func Configure(p *config.Provider) { //nolint:gocyclo
+	p.AddResourceConfigurator("aws_memorydb_multi_region_cluster", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
 	p.AddResourceConfigurator("aws_memorydb_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["parameter_group_name"] = config.Reference{
