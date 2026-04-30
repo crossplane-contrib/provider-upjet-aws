@@ -530,6 +530,7 @@ import (
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/grafana/workspacesamlconfiguration"
 	detector "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/filter"
+	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/malwareprotectionplan"
 	memberguardduty "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/member"
 	accesskey "github.com/upbound/provider-aws/v2/internal/controller/cluster/iam/accesskey"
 	accountalias "github.com/upbound/provider-aws/v2/internal/controller/cluster/iam/accountalias"
@@ -1551,6 +1552,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.Setup,
 		detector.Setup,
 		filter.Setup,
+		malwareprotectionplan.Setup,
 		memberguardduty.Setup,
 		accesskey.Setup,
 		accountalias.Setup,
@@ -2578,6 +2580,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.SetupGated,
 		detector.SetupGated,
 		filter.SetupGated,
+		malwareprotectionplan.SetupGated,
 		memberguardduty.SetupGated,
 		accesskey.SetupGated,
 		accountalias.SetupGated,

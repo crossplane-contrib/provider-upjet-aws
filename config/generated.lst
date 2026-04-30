@@ -463,6 +463,7 @@
 "aws_grafana_workspace_saml_configuration",
 "aws_guardduty_detector",
 "aws_guardduty_filter",
+"aws_guardduty_malware_protection_plan",
 "aws_guardduty_member",
 "aws_iam_access_key",
 "aws_iam_account_alias",

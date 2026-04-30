@@ -48,6 +48,106 @@ func (mg *Filter) ResolveReferences( // ResolveReferences of this Filter.
 	return nil
 }
 
+// ResolveReferences of this MalwareProtectionPlan.
+func (mg *MalwareProtectionPlan) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ProtectedResource); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef,
+					Selector:     mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName")
+			}
+			mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.RoleRef,
+			Selector:     mg.Spec.ForProvider.RoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Role")
+	}
+	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ProtectedResource); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef,
+					Selector:     mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName")
+			}
+			mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.RoleRef,
+			Selector:     mg.Spec.InitProvider.RoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Member.
 func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
