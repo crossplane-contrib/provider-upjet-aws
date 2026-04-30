@@ -17,6 +17,7 @@ e2e/*/_output
 # ignore IDE folders
 .vscode/
 .idea/
+.kiro/
 
 # packages
 *.xpkg
