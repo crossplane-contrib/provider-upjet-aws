@@ -11,6 +11,7 @@ import (
 
 	detector "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/filter"
+	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/malwareprotectionplan"
 	member "github.com/upbound/provider-aws/v2/internal/controller/cluster/guardduty/member"
 )
 
@@ -20,6 +21,7 @@ func Setup_guardduty(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		detector.Setup,
 		filter.Setup,
+		malwareprotectionplan.Setup,
 		member.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -35,6 +37,7 @@ func SetupGated_guardduty(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		detector.SetupGated,
 		filter.SetupGated,
+		malwareprotectionplan.SetupGated,
 		member.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

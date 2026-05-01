@@ -115,6 +115,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 
+	// guardduty
+	//
+	// GuardDuty Malware Protection Plans can be imported using the malware protection plan ID
+	"aws_guardduty_malware_protection_plan": identifierFromProviderWithDefaultStub("xpstub000000"),
+
 	// kafka
 	//
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
