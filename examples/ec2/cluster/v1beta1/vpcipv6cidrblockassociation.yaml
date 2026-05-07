@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCIPv6CidrBlockAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipv6CidrBlock: aaaa:bbbb:cccc:0000::/56
+    ipv6IpamPoolIdSelector:
+      matchLabels:
+        example-name: test
+    region: us-west-1
+    vpcIdRef:
+      name: sample-vpc
