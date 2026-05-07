@@ -1176,6 +1176,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
+	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
+	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
 	"aws_vpc_peering_connection": config.IdentifierFromProvider,
 	// Imported using the peering connection id: pcx-12345678
