@@ -289,6 +289,9 @@ func (tr *VPCIpamScope) Hub() {}
 func (tr *VPCIPv4CidrBlockAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VPCIPv6CidrBlockAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VPCPeeringConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -790,6 +790,15 @@ func (l *VPCIPv4CidrBlockAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VPCIPv6CidrBlockAssociationList.
+func (l *VPCIPv6CidrBlockAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPCIpamList.
 func (l *VPCIpamList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
