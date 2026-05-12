@@ -2228,6 +2228,7 @@ type VirtualNodeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VirtualNode is the Schema for the VirtualNodes API. Provides an AWS App Mesh virtual node resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

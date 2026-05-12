@@ -257,6 +257,7 @@ type FeatureStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Feature is the Schema for the Features API. Provides a CloudWatch Evidently Feature resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

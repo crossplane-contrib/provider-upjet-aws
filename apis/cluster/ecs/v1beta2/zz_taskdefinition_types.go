@@ -699,6 +699,7 @@ type TaskDefinitionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TaskDefinition is the Schema for the TaskDefinitions API. Manages a revision of an ECS task definition.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

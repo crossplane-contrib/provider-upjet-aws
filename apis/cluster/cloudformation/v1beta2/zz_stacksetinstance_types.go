@@ -322,6 +322,7 @@ type StackSetInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StackSetInstance is the Schema for the StackSetInstances API. Manages a CloudFormation StackSet Instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

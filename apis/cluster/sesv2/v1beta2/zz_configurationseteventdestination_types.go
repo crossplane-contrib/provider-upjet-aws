@@ -409,6 +409,7 @@ type ConfigurationSetEventDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConfigurationSetEventDestination is the Schema for the ConfigurationSetEventDestinations API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -202,6 +202,7 @@ type SigningProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SigningProfile is the Schema for the SigningProfiles API. Creates a Signer Signing Profile.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

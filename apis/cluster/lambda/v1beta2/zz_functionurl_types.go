@@ -216,6 +216,7 @@ type FunctionURLStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FunctionURL is the Schema for the FunctionURLs API. Manages a Lambda function URL.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

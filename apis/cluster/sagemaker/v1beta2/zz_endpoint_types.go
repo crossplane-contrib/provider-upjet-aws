@@ -446,6 +446,7 @@ type EndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Endpoint is the Schema for the Endpoints API. Provides a SageMaker AI Endpoint resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

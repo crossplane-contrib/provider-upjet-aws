@@ -308,6 +308,7 @@ type DeploymentConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DeploymentConfig is the Schema for the DeploymentConfigs API. Provides a CodeDeploy deployment config.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

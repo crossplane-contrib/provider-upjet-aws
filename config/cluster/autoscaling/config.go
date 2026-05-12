@@ -39,6 +39,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			conversion.NewCustomConverter("v1beta1", "v1beta2", autoScalingGroupConverterFromv1beta1Tov1beta2),
 			conversion.NewCustomConverter("v1beta2", "v1beta1", autoScalingGroupConverterFromv1beta2Tov1beta1),
 		)
+		r.PreviousVersions = append(r.PreviousVersions, "v1beta1", "v1beta2")
+		if err := r.SetDeprecatedVersion("v1beta2",
+			config.VersionDeprecation{
+				Warning:            "This API version is deprecated.",
+				DeprecationRelease: "v2.6.0",
+			}); err != nil {
+			panic(err)
+		}
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{

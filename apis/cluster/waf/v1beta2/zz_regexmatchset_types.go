@@ -182,6 +182,7 @@ type RegexMatchSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RegexMatchSet is the Schema for the RegexMatchSets API. Provides a AWS WAF Regex Match Set resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

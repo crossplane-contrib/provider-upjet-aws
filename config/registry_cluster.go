@@ -145,14 +145,9 @@ func bumpVersionsWithEmbeddedLists(pc *config.Provider) error {
 			if err := configureSingletonListAPIConverters(r); err != nil {
 				return errors.Wrap(err, "failed to configure singleton list API converters")
 			}
-		} else {
-			// the controller will be reconciling on the CRD API version
-			// with the converted API (with embedded objects in place of
-			// singleton lists), so we need the appropriate Terraform
-			// converter in this case.
-			r.TerraformConversions = []config.TerraformConversion{
-				config.NewTFSingletonConversion(),
-			}
+		}
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
 		}
 		pc.Resources[name] = r
 	}
@@ -161,7 +156,6 @@ func bumpVersionsWithEmbeddedLists(pc *config.Provider) error {
 
 func configureSingletonListAPIConverters(r *config.Resource) error {
 	bumped := r.Version
-	currentVer := "v1beta2"
 	// Field renamings for these three resources already bump their versions.
 	// Please see config.injectFieldRenamingConversionFunctions().
 	// We do not bump their versions again here.
@@ -171,7 +165,6 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 		if err != nil {
 			return errors.Wrapf(err, errFmtCannotBumpSingletonList, r.Name)
 		}
-		currentVer = r.Version
 	}
 
 	r.Version = bumped
@@ -184,10 +177,10 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 	}
 	// we would like to set the storage version to v1beta1 to facilitate
 	// downgrades.
-	r.SetCRDStorageVersion(currentVer)
+	r.SetCRDStorageVersion(r.Version)
 	// because the controller reconciles on the API version with the singleton list API,
 	// no need for a Terraform conversion.
-	r.ControllerReconcileVersion = currentVer //nolint:staticcheck // still handling the deprecated behavior until rollout
+	r.ControllerReconcileVersion = r.Version //nolint:staticcheck // still handling the deprecated behavior until rollout
 
 	// This block is to fix the issue described in the following PR: https://github.com/crossplane/upjet/pull/465
 	// In EKS Cluster object v1beta1, for spec.vpcConfig field, we mark
@@ -217,6 +210,13 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 				},
 			},
 		}))
+	}
+	if err := r.SetDeprecatedVersion("v1beta1",
+		config.VersionDeprecation{
+			Warning:            "This API version is deprecated.",
+			DeprecationRelease: "v2.6.0",
+		}); err != nil {
+		panic(err)
 	}
 
 	// assumes the first element is the identity conversion from

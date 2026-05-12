@@ -889,6 +889,7 @@ type CapacityProviderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CapacityProvider is the Schema for the CapacityProviders API. Provides an ECS cluster capacity provider.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
