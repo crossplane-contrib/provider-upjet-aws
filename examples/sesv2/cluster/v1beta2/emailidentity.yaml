@@ -7,10 +7,10 @@ kind: EmailIdentity
 metadata:
   annotations:
     meta.upbound.io/example-id: sesv2/v1beta2/emailidentity
+    crossplane.io/external-name: "v2-example@example.com"
   labels:
     testing.upbound.io/example-name: example
   name: v2-example
 spec:
   forProvider:
-    email: v2-example@example.com
     region: us-west-1
