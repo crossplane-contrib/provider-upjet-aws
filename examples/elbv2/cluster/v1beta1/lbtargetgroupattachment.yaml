@@ -33,3 +33,20 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: elbv2
     targetId: 172.16.10.25
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta2/lblistenerrule
+  labels:
+    testing.upbound.io/example-name: elbv2
+  name: elbv2-vpc
+spec:
+  forProvider:
+    cidrBlock: 172.16.0.0/16
+    region: us-west-1
+    tags:
+      Name: DemoVpc
