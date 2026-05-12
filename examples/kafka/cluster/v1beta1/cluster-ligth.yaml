@@ -23,7 +23,7 @@ spec:
           - ebsStorageInfo:
               - volumeSize: 1000
     clusterName: ${Rand.RFC1123Subdomain}
-    kafkaVersion: 2.6.0
+    kafkaVersion: 3.6.0
     numberOfBrokerNodes: 2
     region: us-east-2
     tags:
