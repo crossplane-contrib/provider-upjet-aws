@@ -142,6 +142,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 						targetTyped.Status.AtProvider.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ClusterMode[0].ReplicasPerNodeGroup
 					}
 				}
+				// cluster_mode renaming
+				if srcTyped.Spec.ForProvider.ClusterOperationMode != nil {
+					targetTyped.Spec.ForProvider.ClusterMode = srcTyped.Spec.ForProvider.ClusterOperationMode
+				}
+				if srcTyped.Spec.InitProvider.ClusterOperationMode != nil {
+					targetTyped.Spec.InitProvider.ClusterMode = srcTyped.Spec.InitProvider.ClusterOperationMode
+				}
+				if srcTyped.Status.AtProvider.ClusterOperationMode != nil {
+					targetTyped.Status.AtProvider.ClusterMode = srcTyped.Status.AtProvider.ClusterOperationMode
+				}
 				return nil
 			}),
 			conversion.NewCustomConverter("v1beta2", "v1beta1", func(src, target xpresource.Managed) error {
@@ -173,6 +183,17 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 					cmo.ReplicasPerNodeGroup = srcTyped.Status.AtProvider.ReplicasPerNodeGroup
 				}
 				targetTyped.Status.AtProvider.ClusterMode = []v1beta1.ClusterModeObservation{cmo}
+
+				// cluster_mode renaming
+				if srcTyped.Spec.ForProvider.ClusterMode != nil {
+					targetTyped.Spec.ForProvider.ClusterOperationMode = srcTyped.Spec.ForProvider.ClusterMode
+				}
+				if srcTyped.Spec.InitProvider.ClusterMode != nil {
+					targetTyped.Spec.InitProvider.ClusterOperationMode = srcTyped.Spec.InitProvider.ClusterMode
+				}
+				if srcTyped.Status.AtProvider.ClusterMode != nil {
+					targetTyped.Status.AtProvider.ClusterOperationMode = srcTyped.Status.AtProvider.ClusterMode
+				}
 				return nil
 			}),
 		)
