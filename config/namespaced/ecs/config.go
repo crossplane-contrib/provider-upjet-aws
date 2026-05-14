@@ -119,5 +119,17 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				Extractor:     common.PathARNExtractor,
 			},
 		}
+		// resourceTaskDefinitionRead uses d.Get("arn") instead of d.Id() to
+		// call DescribeTaskDefinition. On a cold-start observe, "arn" is a
+		// computed-only attribute and is not present in params, so the API
+		// call goes out with an empty identifier and AWS returns a 400 that
+		// surfaces as "external resource does not exist". Seed params["arn"]
+		// from the external name (via SetIdentifierArgumentFn) so the read
+		// always has a non-empty identifier regardless of which format was used.
+		r.ExternalName.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+			if arn, _ := base["arn"].(string); arn == "" && externalName != "" {
+				base["arn"] = externalName
+			}
+		}
 	})
 }
