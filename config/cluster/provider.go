@@ -56,6 +56,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/globalaccelerator"
 	"github.com/upbound/provider-aws/v2/config/cluster/glue"
 	"github.com/upbound/provider-aws/v2/config/cluster/grafana"
+	"github.com/upbound/provider-aws/v2/config/cluster/guardduty"
 	"github.com/upbound/provider-aws/v2/config/cluster/iam"
 	"github.com/upbound/provider-aws/v2/config/cluster/identitystore"
 	"github.com/upbound/provider-aws/v2/config/cluster/iot"
@@ -151,6 +152,7 @@ func init() {
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
 	ProviderConfiguration.AddConfig(glue.Configure)
 	ProviderConfiguration.AddConfig(grafana.Configure)
+	ProviderConfiguration.AddConfig(guardduty.Configure)
 	ProviderConfiguration.AddConfig(iam.Configure)
 	ProviderConfiguration.AddConfig(kafka.Configure)
 	ProviderConfiguration.AddConfig(kafkaconnect.Configure)
