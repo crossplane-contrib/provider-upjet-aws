@@ -242,6 +242,7 @@ type ContainerServiceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ContainerService is the Schema for the ContainerServices API. Manages a Lightsail container service for running containerized applications.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

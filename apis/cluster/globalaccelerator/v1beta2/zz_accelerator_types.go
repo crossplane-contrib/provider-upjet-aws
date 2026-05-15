@@ -188,6 +188,7 @@ type AcceleratorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Accelerator is the Schema for the Accelerators API. Provides a Global Accelerator accelerator.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

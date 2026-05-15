@@ -190,6 +190,7 @@ type ProvisioningTemplateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ProvisioningTemplate is the Schema for the ProvisioningTemplates API. Manages an IoT fleet provisioning template.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

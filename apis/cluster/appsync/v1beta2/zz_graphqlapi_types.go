@@ -694,6 +694,7 @@ type GraphQLAPIStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GraphQLAPI is the Schema for the GraphQLAPIs API. Provides an AppSync GraphQL API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -158,6 +158,7 @@ type ServiceActionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ServiceAction is the Schema for the ServiceActions API. Manages a Service Catalog Service Action
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

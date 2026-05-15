@@ -191,6 +191,7 @@ type BotAliasStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BotAlias is the Schema for the BotAliass API. Provides an Amazon Lex Bot Alias resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

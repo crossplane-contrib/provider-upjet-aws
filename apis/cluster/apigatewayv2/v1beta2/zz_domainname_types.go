@@ -226,6 +226,7 @@ type DomainNameStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DomainName is the Schema for the DomainNames API. Manages an Amazon API Gateway Version 2 domain name.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

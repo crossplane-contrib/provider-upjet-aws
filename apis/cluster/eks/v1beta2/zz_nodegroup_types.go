@@ -685,6 +685,7 @@ type NodeGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NodeGroup is the Schema for the NodeGroups API. Manages an EKS Node Group
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

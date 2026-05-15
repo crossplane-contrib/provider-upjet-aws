@@ -329,6 +329,7 @@ type APIStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // API is the Schema for the APIs API. Manages an Amazon API Gateway Version 2 API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

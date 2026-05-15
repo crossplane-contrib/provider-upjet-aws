@@ -274,6 +274,7 @@ type AccessPointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccessPoint is the Schema for the AccessPoints API. Manages an S3 Access Point.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

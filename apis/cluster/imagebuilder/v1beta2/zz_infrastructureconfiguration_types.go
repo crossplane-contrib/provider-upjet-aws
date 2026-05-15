@@ -464,6 +464,7 @@ type InfrastructureConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InfrastructureConfiguration is the Schema for the InfrastructureConfigurations API. Manages an Image Builder Infrastructure Configuration
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

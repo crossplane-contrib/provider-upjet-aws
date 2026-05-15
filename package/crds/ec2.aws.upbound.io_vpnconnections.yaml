@@ -31,13 +31,14 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
+    deprecated: true
+    deprecationWarning: This API version is deprecated. Deprecated since v2.6.0.
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VPNConnection is the Schema for the VPNConnections API. Manages
-          a Site-to-Site VPN connection. A Site-to-Site VPN connection is an Internet
-          Protocol security (IPsec) VPN connection between a VPC and an on-premises
-          network.
+        description: |-
+          VPNConnection is the Schema for the VPNConnections API. Manages a Site-to-Site VPN connection. A Site-to-Site VPN connection is an Internet Protocol security (IPsec) VPN connection between a VPC and an on-premises network.
+          Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
         properties:
           apiVersion:
             description: |-
@@ -2194,7 +2195,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -4337,6 +4338,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

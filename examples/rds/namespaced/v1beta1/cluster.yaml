@@ -7,7 +7,7 @@ kind: Cluster
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/cluster
-  name: example
+  name: exampleuptest
   namespace: upbound-system
 spec:
   forProvider:
@@ -35,7 +35,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster
-  name: example-ci-cluster
+  name: example-ci-cluster-uptest
   namespace: upbound-system
 spec:
   forProvider:
@@ -54,7 +54,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster-instance
-  name: example-parametergroup-ci-cluster-instance
+  name: example-parametergroup-ci-cluster-instance-uptest
   namespace: upbound-system
 spec:
   forProvider:

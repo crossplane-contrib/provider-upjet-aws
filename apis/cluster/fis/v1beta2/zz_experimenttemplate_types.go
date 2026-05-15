@@ -769,6 +769,7 @@ type ExperimentTemplateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ExperimentTemplate is the Schema for the ExperimentTemplates API. Provides an FIS Experiment Template.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
