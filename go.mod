@@ -34,7 +34,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.79.3
 	gopkg.in/yaml.v3 v3.0.1
-	k8s.io/api v0.35.3
+	k8s.io/api v0.36.1
 	k8s.io/apiextensions-apiserver v0.35.3
 	k8s.io/apimachinery v0.35.3
 	k8s.io/client-go v0.35.3
