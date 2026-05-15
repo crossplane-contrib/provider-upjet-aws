@@ -118,7 +118,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// guardduty
 	//
 	// GuardDuty Malware Protection Plans can be imported using the malware protection plan ID
-	"aws_guardduty_malware_protection_plan": identifierFromProviderWithDefaultStub("xpstub000000"),
+	"aws_guardduty_malware_protection_plan": identifierFromProviderWithDefaultStub("00000000000000000000"),
 
 	// kafka
 	//
