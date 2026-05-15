@@ -42,7 +42,7 @@ type AbacStatusParameters struct {
 type BucketAbacInitParameters struct {
 
 	// ABAC status configuration. See abac_status Block for details.
-	AbacStatus []AbacStatusInitParameters `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
+	AbacStatus *AbacStatusInitParameters `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
 
 	// General purpose bucket that you want to create the metadata configuration for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
@@ -63,7 +63,7 @@ type BucketAbacInitParameters struct {
 type BucketAbacObservation struct {
 
 	// ABAC status configuration. See abac_status Block for details.
-	AbacStatus []AbacStatusObservation `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
+	AbacStatus *AbacStatusObservation `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
 
 	// General purpose bucket that you want to create the metadata configuration for.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -82,7 +82,7 @@ type BucketAbacParameters struct {
 
 	// ABAC status configuration. See abac_status Block for details.
 	// +kubebuilder:validation:Optional
-	AbacStatus []AbacStatusParameters `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
+	AbacStatus *AbacStatusParameters `json:"abacStatus,omitempty" tf:"abac_status,omitempty"`
 
 	// General purpose bucket that you want to create the metadata configuration for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket

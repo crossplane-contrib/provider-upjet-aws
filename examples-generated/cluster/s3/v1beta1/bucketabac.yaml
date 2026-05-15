@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     abacStatus:
-    - status: Enabled
+      status: Enabled
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example

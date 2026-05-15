@@ -62,16 +62,14 @@ spec:
                   abacStatus:
                     description: ABAC status configuration. See abac_status Block
                       for details.
-                    items:
-                      properties:
-                        status:
-                          description: |-
-                            ABAC status of the general purpose bucket.
-                            Valid values are Enabled and Disabled.
-                            By default, ABAC is disabled for all Amazon S3 general purpose buckets.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      status:
+                        description: |-
+                          ABAC status of the general purpose bucket.
+                          Valid values are Enabled and Disabled.
+                          By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+                        type: string
+                    type: object
                   bucket:
                     description: General purpose bucket that you want to create the
                       metadata configuration for.
@@ -183,16 +181,14 @@ spec:
                   abacStatus:
                     description: ABAC status configuration. See abac_status Block
                       for details.
-                    items:
-                      properties:
-                        status:
-                          description: |-
-                            ABAC status of the general purpose bucket.
-                            Valid values are Enabled and Disabled.
-                            By default, ABAC is disabled for all Amazon S3 general purpose buckets.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      status:
+                        description: |-
+                          ABAC status of the general purpose bucket.
+                          Valid values are Enabled and Disabled.
+                          By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+                        type: string
+                    type: object
                   bucket:
                     description: General purpose bucket that you want to create the
                       metadata configuration for.
@@ -347,16 +343,14 @@ spec:
                   abacStatus:
                     description: ABAC status configuration. See abac_status Block
                       for details.
-                    items:
-                      properties:
-                        status:
-                          description: |-
-                            ABAC status of the general purpose bucket.
-                            Valid values are Enabled and Disabled.
-                            By default, ABAC is disabled for all Amazon S3 general purpose buckets.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      status:
+                        description: |-
+                          ABAC status of the general purpose bucket.
+                          Valid values are Enabled and Disabled.
+                          By default, ABAC is disabled for all Amazon S3 general purpose buckets.
+                        type: string
+                    type: object
                   bucket:
                     description: General purpose bucket that you want to create the
                       metadata configuration for.

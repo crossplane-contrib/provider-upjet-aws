@@ -825,10 +825,8 @@ func (in *BucketAbacInitParameters) DeepCopyInto(out *BucketAbacInitParameters) 
 	*out = *in
 	if in.AbacStatus != nil {
 		in, out := &in.AbacStatus, &out.AbacStatus
-		*out = make([]AbacStatusInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbacStatusInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Bucket != nil {
 		in, out := &in.Bucket, &out.Bucket
@@ -899,10 +897,8 @@ func (in *BucketAbacObservation) DeepCopyInto(out *BucketAbacObservation) {
 	*out = *in
 	if in.AbacStatus != nil {
 		in, out := &in.AbacStatus, &out.AbacStatus
-		*out = make([]AbacStatusObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbacStatusObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Bucket != nil {
 		in, out := &in.Bucket, &out.Bucket
@@ -941,10 +937,8 @@ func (in *BucketAbacParameters) DeepCopyInto(out *BucketAbacParameters) {
 	*out = *in
 	if in.AbacStatus != nil {
 		in, out := &in.AbacStatus, &out.AbacStatus
-		*out = make([]AbacStatusParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AbacStatusParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Bucket != nil {
 		in, out := &in.Bucket, &out.Bucket
