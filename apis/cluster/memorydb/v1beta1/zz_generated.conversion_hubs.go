@@ -13,6 +13,9 @@ func (tr *ACL) Hub() {}
 func (tr *Cluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MultiRegionCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ParameterGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

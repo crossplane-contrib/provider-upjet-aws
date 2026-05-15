@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: memorydb.aws.m.upbound.io/v1beta1
+kind: MultiRegionCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/multiregioncluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    multiRegionClusterNameSuffix: example
+    nodeType: db.r7g.xlarge
+    region: us-west-1
+
+---
+
+apiVersion: memorydb.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/multiregioncluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    aclNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    autoMinorVersionUpgrade: false
+    multiRegionClusterName: ${aws_memorydb_multi_region_cluster.example.multi_region_cluster_name}
+    nodeType: db.t4g.small
+    numShards: 2
+    region: us-west-1
+    securityGroupIdRefs:
+    - name: example
+    snapshotRetentionLimit: 7
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
