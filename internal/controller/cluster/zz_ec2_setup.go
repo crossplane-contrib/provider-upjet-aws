@@ -103,6 +103,7 @@ import (
 	vpcipampoolcidrallocation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipampoolcidrallocation"
 	vpcipamscope "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipv4cidrblockassociation"
+	vpcipv6cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipv6cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnectionoptions"
@@ -211,6 +212,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.Setup,
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
+		vpcipv6cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
@@ -325,6 +327,7 @@ func SetupGated_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.SetupGated,
 		vpcipamscope.SetupGated,
 		vpcipv4cidrblockassociation.SetupGated,
+		vpcipv6cidrblockassociation.SetupGated,
 		vpcpeeringconnection.SetupGated,
 		vpcpeeringconnectionaccepter.SetupGated,
 		vpcpeeringconnectionoptions.SetupGated,

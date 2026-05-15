@@ -3527,6 +3527,46 @@ func (mg *VPCIPv4CidrBlockAssociation) SetWriteConnectionSecretToReference(r *xp
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VPCIpam.
 func (mg *VPCIpam) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
