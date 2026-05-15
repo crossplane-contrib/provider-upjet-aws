@@ -1377,17 +1377,13 @@ func (in *MalwareProtectionPlanInitParameters) DeepCopyInto(out *MalwareProtecti
 	*out = *in
 	if in.Actions != nil {
 		in, out := &in.Actions, &out.Actions
-		*out = make([]ActionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ActionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ProtectedResource != nil {
 		in, out := &in.ProtectedResource, &out.ProtectedResource
-		*out = make([]ProtectedResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ProtectedResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Role != nil {
 		in, out := &in.Role, &out.Role
@@ -1469,10 +1465,8 @@ func (in *MalwareProtectionPlanObservation) DeepCopyInto(out *MalwareProtectionP
 	*out = *in
 	if in.Actions != nil {
 		in, out := &in.Actions, &out.Actions
-		*out = make([]ActionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ActionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
@@ -1491,10 +1485,8 @@ func (in *MalwareProtectionPlanObservation) DeepCopyInto(out *MalwareProtectionP
 	}
 	if in.ProtectedResource != nil {
 		in, out := &in.ProtectedResource, &out.ProtectedResource
-		*out = make([]ProtectedResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ProtectedResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -1560,17 +1552,13 @@ func (in *MalwareProtectionPlanParameters) DeepCopyInto(out *MalwareProtectionPl
 	*out = *in
 	if in.Actions != nil {
 		in, out := &in.Actions, &out.Actions
-		*out = make([]ActionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ActionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ProtectedResource != nil {
 		in, out := &in.ProtectedResource, &out.ProtectedResource
-		*out = make([]ProtectedResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ProtectedResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
@@ -1949,10 +1937,8 @@ func (in *ProtectedResourceInitParameters) DeepCopyInto(out *ProtectedResourceIn
 	*out = *in
 	if in.S3Bucket != nil {
 		in, out := &in.S3Bucket, &out.S3Bucket
-		*out = make([]S3BucketInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3BucketInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1971,10 +1957,8 @@ func (in *ProtectedResourceObservation) DeepCopyInto(out *ProtectedResourceObser
 	*out = *in
 	if in.S3Bucket != nil {
 		in, out := &in.S3Bucket, &out.S3Bucket
-		*out = make([]S3BucketObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3BucketObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1993,10 +1977,8 @@ func (in *ProtectedResourceParameters) DeepCopyInto(out *ProtectedResourceParame
 	*out = *in
 	if in.S3Bucket != nil {
 		in, out := &in.S3Bucket, &out.S3Bucket
-		*out = make([]S3BucketParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(S3BucketParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

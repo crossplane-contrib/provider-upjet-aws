@@ -57,27 +57,27 @@ func (mg *MalwareProtectionPlan) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.ProtectedResource); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket); i4++ {
+	if mg.Spec.ForProvider.ProtectedResource != nil {
+		if mg.Spec.ForProvider.ProtectedResource.S3Bucket != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketName),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef,
-					Selector:     mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameSelector,
+					Reference:    mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketNameRef,
+					Selector:     mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketName")
 			}
-			mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ProtectedResource.S3Bucket.BucketNameRef = rsp.ResolvedReference
 
 		}
 	}
@@ -101,27 +101,27 @@ func (mg *MalwareProtectionPlan) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.ProtectedResource); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket); i4++ {
+	if mg.Spec.InitProvider.ProtectedResource != nil {
+		if mg.Spec.InitProvider.ProtectedResource.S3Bucket != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketName),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef,
-					Selector:     mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameSelector,
+					Reference:    mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketNameRef,
+					Selector:     mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName")
+				return errors.Wrap(err, "mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketName")
 			}
-			mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.ProtectedResource[i3].S3Bucket[i4].BucketNameRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ProtectedResource.S3Bucket.BucketNameRef = rsp.ResolvedReference
 
 		}
 	}
