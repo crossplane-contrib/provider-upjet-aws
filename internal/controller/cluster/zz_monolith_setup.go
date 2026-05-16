@@ -813,6 +813,7 @@ import (
 	appmonitor "github.com/upbound/provider-aws/v2/internal/controller/cluster/rum/appmonitor"
 	metricsdestination "github.com/upbound/provider-aws/v2/internal/controller/cluster/rum/metricsdestination"
 	buckets3 "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucket"
+	bucketabac "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketabac"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/v2/internal/controller/cluster/s3/bucketanalyticsconfiguration"
@@ -1835,6 +1836,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.Setup,
 		metricsdestination.Setup,
 		buckets3.Setup,
+		bucketabac.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
@@ -2863,6 +2865,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.SetupGated,
 		metricsdestination.SetupGated,
 		buckets3.SetupGated,
+		bucketabac.SetupGated,
 		bucketaccelerateconfiguration.SetupGated,
 		bucketacl.SetupGated,
 		bucketanalyticsconfiguration.SetupGated,
