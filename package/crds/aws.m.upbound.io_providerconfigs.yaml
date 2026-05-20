@@ -398,6 +398,43 @@ spec:
                 required:
                 - url
                 type: object
+              reconciliationPolicy:
+                description: ReconciliationPolicy
+                properties:
+                  exponentialFailureRateLimiter:
+                    description: |-
+                      ExponentialFailureRateLimiter configures the
+                      Exponential Failure Rate Limiter configuration parameters.
+                      Currently, the base-delay and the max-delay are configurable.
+                      API Validations:
+                      - baseDelay must be >= 1s, if specified.
+                      - maxDelay must be >= 60s, if specified.
+                      - maxDelay must be >= baseDelay, if both are specified.
+                    properties:
+                      baseDelay:
+                        description: BaseDelay is the initial delay between retries.
+                        type: string
+                        x-kubernetes-validations:
+                        - message: baseDelay must be at least 1s
+                          rule: duration(self) >= duration('1s')
+                      maxDelay:
+                        description: MaxDelay is the maximum delay between retries.
+                        type: string
+                        x-kubernetes-validations:
+                        - message: maxDelay must be at least 60s
+                          rule: duration(self) >= duration('60s')
+                    type: object
+                    x-kubernetes-validations:
+                    - message: maxDelay must be greater than or equal to baseDelay
+                      rule: '!has(self.maxDelay) || !has(self.baseDelay) || duration(self.maxDelay)
+                        >= duration(self.baseDelay)'
+                type: object
+                x-kubernetes-validations:
+                - message: when maxDelay is omitted it defaults to 60s; baseDelay
+                    must be <= 60s
+                  rule: '!has(self.exponentialFailureRateLimiter) || !has(self.exponentialFailureRateLimiter.baseDelay)
+                    || has(self.exponentialFailureRateLimiter.maxDelay) || duration(self.exponentialFailureRateLimiter.baseDelay)
+                    <= duration(''60s'')'
               s3_use_path_style:
                 description: Whether to enable the request to use path-style addressing,
                   i.e., https://s3.amazonaws.com/BUCKET/KEY.

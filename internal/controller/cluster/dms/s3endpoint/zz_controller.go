@@ -9,6 +9,7 @@ package s3endpoint
 import (
 	"time"
 
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
 	xpfeature "github.com/crossplane/crossplane-runtime/v2/pkg/feature"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
@@ -18,10 +19,11 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/controller/handler"
 	"github.com/crossplane/upjet/v2/pkg/metrics"
-	"github.com/pkg/errors"
+	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/v2/apis/cluster/dms/v1beta1"
+	"github.com/upbound/provider-aws/v2/internal/clients"
 	features "github.com/upbound/provider-aws/v2/internal/features"
 )
 
@@ -45,6 +47,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.S3Endpoint_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.S3Endpoint_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
+	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
 			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_dms_s3_endpoint"],
@@ -55,7 +58,11 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+		managed.WithFinalizer(reconciliationpolicy.NewFinalizer(
+			tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName)),
+			reconciliationpolicy.WithFinalizerRateLimiter(rl),
+		),
+		),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithPollInterval(o.PollInterval),
@@ -93,11 +100,20 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.S3Endpoint_GroupVersionKind), opts...)
+	co := o.ForControllerRuntime()
+	co.RateLimiter = rl
 
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
-		WithOptions(o.ForControllerRuntime()).
+		WithOptions(co).
 		WithEventFilter(xpresource.DesiredStateChanged()).
 		Watches(&v1beta1.S3Endpoint{}, eventHandler).
-		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
+		Complete(reconciliationpolicy.NewReconciler(
+			ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
+			mgr,
+			v1beta1.S3Endpoint_GroupVersionKind,
+			reconciliationpolicy.WithRateLimiter(rl),
+			reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
+		),
+		)
 }
