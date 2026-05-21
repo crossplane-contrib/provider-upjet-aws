@@ -6,6 +6,7 @@ package lambda
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/v2/config/cluster/common"
 )
@@ -62,7 +63,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		delete(r.TerraformResource.Schema, "filename")
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"source_code_hash"},
+			IgnoredFields: []string{"source_code_hash", "code_sha256"},
+		}
+		// code_sha256 became Optional+Computed in terraform-provider-aws
+		// v6.27.0. AWS always returns its actual value, so when the spec
+		// leaves it unset the diff would be permanently non-empty and the
+		// resource would reconcile in a loop. Drop it from the diff so it
+		// behaves as a read-only/computed attribute.
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			delete(diff.Attributes, "code_sha256")
+			return diff, nil
 		}
 		r.MetaResource.ArgumentDocs["source_code_hash"] = "Used to trigger updates. Must be set to " +
 			"a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. " +
