@@ -668,6 +668,8 @@
 "aws_networkmanager_transit_gateway_connect_peer_association",
 "aws_networkmanager_transit_gateway_registration",
 "aws_networkmanager_vpc_attachment",
+"aws_networkmonitor_monitor",
+"aws_networkmonitor_probe",
 "aws_oam_sink",
 "aws_opensearch_domain",
 "aws_opensearch_domain_policy",

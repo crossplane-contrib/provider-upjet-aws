@@ -132,6 +132,7 @@ import (
 	v1beta1neptune "github.com/upbound/provider-aws/v2/apis/namespaced/neptune/v1beta1"
 	v1beta1networkfirewall "github.com/upbound/provider-aws/v2/apis/namespaced/networkfirewall/v1beta1"
 	v1beta1networkmanager "github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1"
+	v1beta1networkmonitor "github.com/upbound/provider-aws/v2/apis/namespaced/networkmonitor/v1beta1"
 	v1beta1oam "github.com/upbound/provider-aws/v2/apis/namespaced/oam/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/v2/apis/namespaced/opensearch/v1beta1"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/v2/apis/namespaced/opensearchserverless/v1beta1"
@@ -315,6 +316,7 @@ func init() {
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
+		v1beta1networkmonitor.SchemeBuilder.AddToScheme,
 		v1beta1oam.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,
