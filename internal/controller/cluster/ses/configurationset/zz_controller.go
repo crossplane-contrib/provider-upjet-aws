@@ -52,18 +52,22 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
 				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta2.ConfigurationSet_GroupVersionKind, mgr, o.PollInterval)),
-				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
+				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)),
+			),
+		),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(reconciliationpolicy.NewFinalizer(
-			tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName)),
-			reconciliationpolicy.WithFinalizerRateLimiter(rl),
-		),
+		managed.WithFinalizer(
+			reconciliationpolicy.NewFinalizer(
+				tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName)),
+				reconciliationpolicy.WithFinalizerRateLimiter(rl),
+			),
 		),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithPollInterval(o.PollInterval),
 	}
+
 	if o.PollJitter != 0 {
 		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
@@ -73,9 +77,11 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.MetricOptions != nil {
 		opts = append(opts, managed.WithMetricRecorder(o.MetricOptions.MRMetrics))
 	}
+	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
+		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
+	}
 
-	// register webhooks for the kind v1beta2.ConfigurationSet
-	// if they're enabled.
+	// register webhooks for the kind v1beta2.ConfigurationSet if they're enabled.
 	if o.StartWebhooks {
 		if err := ctrl.NewWebhookManagedBy(mgr, &v1beta2.ConfigurationSet{}).
 			Complete(); err != nil {
@@ -92,10 +98,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		}
 	}
 
-	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
-		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
-	}
-
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta2.ConfigurationSet_GroupVersionKind), opts...)
 	co := o.ForControllerRuntime()
 	co.RateLimiter = rl
@@ -105,12 +107,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		WithOptions(co).
 		WithEventFilter(xpresource.DesiredStateChanged()).
 		Watches(&v1beta2.ConfigurationSet{}, eventHandler).
-		Complete(reconciliationpolicy.NewReconciler(
-			ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
-			mgr,
-			v1beta2.ConfigurationSet_GroupVersionKind,
-			reconciliationpolicy.WithRateLimiter(rl),
-			reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
-		),
+		Complete(
+			reconciliationpolicy.NewReconciler(
+				ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
+				mgr,
+				v1beta2.ConfigurationSet_GroupVersionKind,
+				reconciliationpolicy.WithRateLimiter(rl),
+				reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
+			),
 		)
 }
