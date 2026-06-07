@@ -265,6 +265,7 @@ type AppMonitorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AppMonitor is the Schema for the AppMonitors API. Provides a CloudWatch RUM App Monitor resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

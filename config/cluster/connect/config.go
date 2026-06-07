@@ -32,6 +32,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_connect_instance",
 			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
 		}
+		r.PreviousVersions = append(r.PreviousVersions, "v1beta1", "v1beta2")
+		if err := r.SetDeprecatedVersion("v1beta2",
+			config.VersionDeprecation{
+				Warning:            "This API version is deprecated.",
+				DeprecationRelease: "v2.6.0",
+			}); err != nil {
+			panic(err)
+		}
 	})
 	p.AddResourceConfigurator("aws_connect_queue", func(r *config.Resource) {
 		r.References["instance_id"] = config.Reference{
@@ -41,6 +49,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["hours_of_operation_id"] = config.Reference{
 			TerraformName: "aws_connect_hours_of_operation",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("hours_of_operation_id",true)`,
+		}
+		r.PreviousVersions = append(r.PreviousVersions, "v1beta1", "v1beta2")
+		if err := r.SetDeprecatedVersion("v1beta2",
+			config.VersionDeprecation{
+				Warning:            "This API version is deprecated.",
+				DeprecationRelease: "v2.6.0",
+			}); err != nil {
+			panic(err)
 		}
 	})
 	p.AddResourceConfigurator("aws_connect_quick_connect", func(r *config.Resource) {

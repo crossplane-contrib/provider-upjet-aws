@@ -115,10 +115,20 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	"aws_glue_catalog_table_optimizer": config.TemplatedStringAsIdentifier("name", "{{ .parameters.catalog_id }}:{{ .parameters.database_name }}:{{ .external_name }}"),
 
+	// guardduty
+	//
+	// GuardDuty Malware Protection Plans can be imported using the malware protection plan ID
+	"aws_guardduty_malware_protection_plan": identifierFromProviderWithDefaultStub("00000000000000000000"),
+
 	// kafka
 	//
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
 	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
+
+	// memorydb
+	//
+	// Use the AWS-generated multi_region_cluster_name
+	"aws_memorydb_multi_region_cluster": config.FrameworkResourceWithComputedIdentifier("multi_region_cluster_name", ""),
 
 	// mq
 	//
@@ -170,8 +180,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
 	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
+	// the S3 bucket ABAC configuration resource should be imported using the bucket
+	"aws_s3_bucket_abac": s3BucketIdentifier(),
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
-	"aws_s3_bucket_lifecycle_configuration": s3LifecycleConfiguration(),
+	"aws_s3_bucket_lifecycle_configuration": s3BucketIdentifier(),
 
 	// s3vectors
 	//
@@ -1176,6 +1188,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_scope": config.IdentifierFromProvider,
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
+	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
+	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
 	"aws_vpc_peering_connection": config.IdentifierFromProvider,
 	// Imported using the peering connection id: pcx-12345678
@@ -3583,7 +3597,7 @@ func rdsInstanceState() config.ExternalName {
 	return e
 }
 
-func s3LifecycleConfiguration() config.ExternalName {
+func s3BucketIdentifier() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["bucket"]

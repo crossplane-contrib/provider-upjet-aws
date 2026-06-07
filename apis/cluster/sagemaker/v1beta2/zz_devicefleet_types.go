@@ -170,6 +170,7 @@ type DeviceFleetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DeviceFleet is the Schema for the DeviceFleets API. Provides a SageMaker AI Device Fleet resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

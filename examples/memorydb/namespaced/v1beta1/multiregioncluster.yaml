@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: memorydb.aws.m.upbound.io/v1beta1
+kind: MultiRegionCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/multiregioncluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplens
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example multi-region cluster
+    engine: valkey
+    multiRegionClusterNameSuffix: examplens
+    nodeType: db.r7g.xlarge
+    region: us-west-1

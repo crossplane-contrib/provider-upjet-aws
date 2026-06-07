@@ -305,6 +305,7 @@ type SigningJobStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SigningJob is the Schema for the SigningJobs API. Creates a Signer Signing Job.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

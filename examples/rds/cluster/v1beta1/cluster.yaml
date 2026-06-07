@@ -5,7 +5,7 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
-  name: example
+  name: exampleuptest
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/cluster
 spec:
@@ -38,12 +38,12 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster
-  name: example-ci-cluster
+  name: example-ci-cluster-uptest
 spec:
   forProvider:
     region: us-west-1
     description: RDS custom cluster parameter group
-    family: aurora-postgresql15
+    family: aurora-postgresql17
     parameter:
       - name: application_name
         value: "example-rds-cluster"
@@ -58,11 +58,11 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster-instance
-  name: example-parametergroup-ci-cluster-instance
+  name: example-parametergroup-ci-cluster-instance-uptest
 spec:
   forProvider:
     region: us-west-1
-    family: aurora-postgresql15
+    family: aurora-postgresql17
     description: example
     parameter:
       - name: application_name

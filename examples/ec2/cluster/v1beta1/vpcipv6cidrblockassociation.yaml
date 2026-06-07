@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCIPv6CidrBlockAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assignGeneratedIpv6CidrBlock: true
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-vpc
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1

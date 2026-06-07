@@ -162,6 +162,15 @@ type ReplicationGroupInitParameters struct {
 	// Create a native Redis cluster. automatic_failover_enabled must be set to true. Cluster Mode documented below. Only 1 cluster_mode block is allowed. Note that configuring this block does not enable cluster mode, i.e., data sharding, this requires using a parameter group that has the parameter cluster-enabled set to true.
 	ClusterMode []ClusterModeInitParameters `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
 
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	// To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
+	ClusterOperationMode *string `json:"clusterOperationMode,omitempty" tf:"cluster_operation_mode,omitempty"`
+
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
@@ -400,6 +409,15 @@ type ReplicationGroupObservation struct {
 	// Create a native Redis cluster. automatic_failover_enabled must be set to true. Cluster Mode documented below. Only 1 cluster_mode block is allowed. Note that configuring this block does not enable cluster mode, i.e., data sharding, this requires using a parameter group that has the parameter cluster-enabled set to true.
 	ClusterMode []ClusterModeObservation `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
 
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	// To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
+	ClusterOperationMode *string `json:"clusterOperationMode,omitempty" tf:"cluster_operation_mode,omitempty"`
+
 	// Address of the replication group configuration endpoint when cluster mode is enabled.
 	ConfigurationEndpointAddress *string `json:"configurationEndpointAddress,omitempty" tf:"configuration_endpoint_address,omitempty"`
 
@@ -589,6 +607,15 @@ type ReplicationGroupParameters struct {
 	// Create a native Redis cluster. automatic_failover_enabled must be set to true. Cluster Mode documented below. Only 1 cluster_mode block is allowed. Note that configuring this block does not enable cluster mode, i.e., data sharding, this requires using a parameter group that has the parameter cluster-enabled set to true.
 	// +kubebuilder:validation:Optional
 	ClusterMode []ClusterModeParameters `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
+
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	// To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
+	ClusterOperationMode *string `json:"clusterOperationMode,omitempty" tf:"cluster_operation_mode,omitempty"`
 
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	// +kubebuilder:validation:Optional

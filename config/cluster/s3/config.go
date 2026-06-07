@@ -135,4 +135,8 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			return diff, nil
 		}
 	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_abac", func(r *config.Resource) {
+		r.AddSingletonListConversion("abac_status", "abacStatus")
+	})
 }

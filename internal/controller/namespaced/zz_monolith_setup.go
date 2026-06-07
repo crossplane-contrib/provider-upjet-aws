@@ -411,6 +411,7 @@ import (
 	vpcipampoolcidrallocation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipampoolcidrallocation"
 	vpcipamscope "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipv4cidrblockassociation"
+	vpcipv6cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipv6cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnectionoptions"
@@ -529,6 +530,7 @@ import (
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspacesamlconfiguration"
 	detector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/filter"
+	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/malwareprotectionplan"
 	memberguardduty "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/member"
 	accesskey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/iam/accesskey"
 	accountalias "github.com/upbound/provider-aws/v2/internal/controller/namespaced/iam/accountalias"
@@ -673,6 +675,7 @@ import (
 	containerpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/mediastore/containerpolicy"
 	acl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/acl"
 	clustermemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/cluster"
+	multiregioncluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/multiregioncluster"
 	parametergroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/snapshot"
 	subnetgroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/subnetgroup"
@@ -810,6 +813,7 @@ import (
 	appmonitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/rum/appmonitor"
 	metricsdestination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/rum/metricsdestination"
 	buckets3 "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucket"
+	bucketabac "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketabac"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketanalyticsconfiguration"
@@ -1430,6 +1434,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.Setup,
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
+		vpcipv6cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
@@ -1548,6 +1553,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.Setup,
 		detector.Setup,
 		filter.Setup,
+		malwareprotectionplan.Setup,
 		memberguardduty.Setup,
 		accesskey.Setup,
 		accountalias.Setup,
@@ -1692,6 +1698,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.Setup,
 		acl.Setup,
 		clustermemorydb.Setup,
+		multiregioncluster.Setup,
 		parametergroupmemorydb.Setup,
 		snapshot.Setup,
 		subnetgroupmemorydb.Setup,
@@ -1829,6 +1836,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.Setup,
 		metricsdestination.Setup,
 		buckets3.Setup,
+		bucketabac.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
@@ -2455,6 +2463,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.SetupGated,
 		vpcipamscope.SetupGated,
 		vpcipv4cidrblockassociation.SetupGated,
+		vpcipv6cidrblockassociation.SetupGated,
 		vpcpeeringconnection.SetupGated,
 		vpcpeeringconnectionaccepter.SetupGated,
 		vpcpeeringconnectionoptions.SetupGated,
@@ -2573,6 +2582,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.SetupGated,
 		detector.SetupGated,
 		filter.SetupGated,
+		malwareprotectionplan.SetupGated,
 		memberguardduty.SetupGated,
 		accesskey.SetupGated,
 		accountalias.SetupGated,
@@ -2717,6 +2727,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.SetupGated,
 		acl.SetupGated,
 		clustermemorydb.SetupGated,
+		multiregioncluster.SetupGated,
 		parametergroupmemorydb.SetupGated,
 		snapshot.SetupGated,
 		subnetgroupmemorydb.SetupGated,
@@ -2854,6 +2865,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.SetupGated,
 		metricsdestination.SetupGated,
 		buckets3.SetupGated,
+		bucketabac.SetupGated,
 		bucketaccelerateconfiguration.SetupGated,
 		bucketacl.SetupGated,
 		bucketanalyticsconfiguration.SetupGated,

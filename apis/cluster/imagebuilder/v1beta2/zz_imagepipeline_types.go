@@ -510,6 +510,7 @@ type ImagePipelineStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ImagePipeline is the Schema for the ImagePipelines API. Manages an Image Builder Image Pipeline
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

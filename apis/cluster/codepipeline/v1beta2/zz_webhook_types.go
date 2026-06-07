@@ -205,6 +205,7 @@ type WebhookStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Webhook is the Schema for the Webhooks API. Provides a CodePipeline Webhook
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

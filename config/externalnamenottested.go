@@ -159,8 +159,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_vpc_ipam_pool_aws_default_network_acl": config.IdentifierFromProvider,
 	// No import
 	"aws_vpc_ipam_preview_next_cidr": config.IdentifierFromProvider,
-	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
-	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 
 	// glue
 	//

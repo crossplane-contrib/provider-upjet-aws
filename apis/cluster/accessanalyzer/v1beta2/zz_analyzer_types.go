@@ -282,6 +282,7 @@ type AnalyzerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Analyzer is the Schema for the Analyzers API. Manages an Access Analyzer Analyzer
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

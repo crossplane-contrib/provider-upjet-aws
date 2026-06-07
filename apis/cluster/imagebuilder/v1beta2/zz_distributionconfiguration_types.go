@@ -655,6 +655,7 @@ type DistributionConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DistributionConfiguration is the Schema for the DistributionConfigurations API. Manage an Image Builder Distribution Configuration
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
