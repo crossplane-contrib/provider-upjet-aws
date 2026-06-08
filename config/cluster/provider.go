@@ -77,6 +77,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/neptune"
 	"github.com/upbound/provider-aws/v2/config/cluster/networkfirewall"
 	"github.com/upbound/provider-aws/v2/config/cluster/networkmanager"
+	"github.com/upbound/provider-aws/v2/config/cluster/networkmonitor"
 	"github.com/upbound/provider-aws/v2/config/cluster/opensearch"
 	"github.com/upbound/provider-aws/v2/config/cluster/opensearchserverless"
 	"github.com/upbound/provider-aws/v2/config/cluster/organization"
@@ -196,6 +197,7 @@ func init() {
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
+	ProviderConfiguration.AddConfig(networkmonitor.Configure)
 	ProviderConfiguration.AddConfig(sagemaker.Configure)
 	ProviderConfiguration.AddConfig(redshiftserverless.Configure)
 	ProviderConfiguration.AddConfig(kendra.Configure)

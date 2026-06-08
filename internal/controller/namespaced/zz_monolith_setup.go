@@ -710,6 +710,8 @@ import (
 	transitgatewayconnectpeerassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/transitgatewayconnectpeerassociation"
 	transitgatewayregistration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/transitgatewayregistration"
 	vpcattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/vpcattachment"
+	monitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/monitor"
+	probe "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/probe"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sink"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domainpolicy"
@@ -1733,6 +1735,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewayconnectpeerassociation.Setup,
 		transitgatewayregistration.Setup,
 		vpcattachment.Setup,
+		monitor.Setup,
+		probe.Setup,
 		sink.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
@@ -2762,6 +2766,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewayconnectpeerassociation.SetupGated,
 		transitgatewayregistration.SetupGated,
 		vpcattachment.SetupGated,
+		monitor.SetupGated,
+		probe.SetupGated,
 		sink.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,

@@ -135,6 +135,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// admin
 	"aws_mq_user": mqUser(),
 
+	// networkmonitor
+	//
+	// import by monitor_name
+	"aws_networkmonitor_monitor": config.ParameterAsIdentifier("monitor_name"),
+	// import by probe_id
+	"aws_networkmonitor_probe": networkmonitorProbe(),
+
 	// opensearchserverless
 	//
 	// AccessPolicy can be imported using the policy name
@@ -3804,5 +3811,36 @@ func ecrRepositoryCreationTemplate() config.ExternalName {
 		}
 		return prefix, nil
 	}
+	return e
+}
+
+func networkmonitorProbe() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// must satisfy regular expression pattern: probe-[a-z0-9A-Z-]{21,64}
+	const placeholderProbeID = "probe-0000000000-xpstub-0000000000"
+	const idSeparator = ","
+	// ID format: monitor_name,probe_id
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find id in tfstate")
+		}
+		idParts := strings.Split(id, idSeparator)
+		if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+			return "", errors.Errorf("unexpected format for ID (%v)", id)
+		}
+		return idParts[1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
+		monitorName, ok := parameters["monitor_name"].(string)
+		if !ok || monitorName == "" {
+			return "", errors.New("parameter monitor_name missing from resource configuration")
+		}
+		if externalName == "" {
+			return fmt.Sprintf("%s,%s", monitorName, placeholderProbeID), nil
+		}
+		return fmt.Sprintf("%s,%s", monitorName, externalName), nil
+	}
+	e.IdentifierFields = []string{"monitor_name"}
 	return e
 }
