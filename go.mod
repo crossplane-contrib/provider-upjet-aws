@@ -20,7 +20,7 @@ require (
 	github.com/aws/smithy-go v1.24.2
 	github.com/crossplane/crossplane-runtime/v2 v2.2.0
 	github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec
-	github.com/crossplane/upjet/v2 v2.2.1-0.20260507165441-14501756888d
+	github.com/crossplane/upjet/v2 v2.2.1-0.20260605135038-20e4a541389e
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.70
@@ -492,5 +492,3 @@ require (
 )
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20260305123303-f7691456b787
-
-replace github.com/crossplane/upjet/v2 => github.com/ulucinar/upbound-upjet/v2 v2.0.0-20260603073540-5680c095eb70
