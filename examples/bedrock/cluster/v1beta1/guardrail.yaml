@@ -1,0 +1,55 @@
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: Guardrail
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/guardrail
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    blockedInputMessaging: Sorry, I cannot answer this question.
+    blockedOutputsMessaging: Sorry, I cannot answer this question.
+    description: Example guardrail managed by Crossplane.
+    name: example
+    region: us-west-1
+    contentPolicyConfig:
+      filtersConfig:
+      - inputStrength: MEDIUM
+        outputStrength: MEDIUM
+        type: HATE
+      tierConfig:
+        tierName: STANDARD
+    sensitiveInformationPolicyConfig:
+      piiEntitiesConfig:
+      - action: BLOCK
+        inputAction: BLOCK
+        inputEnabled: true
+        outputAction: ANONYMIZE
+        outputEnabled: true
+        type: NAME
+      regexesConfig:
+      - action: BLOCK
+        description: example regex
+        inputAction: BLOCK
+        inputEnabled: true
+        name: regex_example
+        outputAction: BLOCK
+        outputEnabled: false
+        pattern: ^\d{3}-\d{2}-\d{4}$
+    topicPolicyConfig:
+      tierConfig:
+        tierName: CLASSIC
+      topicsConfig:
+      - definition: Investment advice refers to inquiries, guidance, or recommendations
+          regarding the management or allocation of funds or assets with the goal of
+          generating returns.
+        examples:
+        - Where should I invest my money?
+        name: investment_topic
+        type: DENY
+    wordPolicyConfig:
+      managedWordListsConfig:
+      - type: PROFANITY
+      wordsConfig:
+      - text: HATE
