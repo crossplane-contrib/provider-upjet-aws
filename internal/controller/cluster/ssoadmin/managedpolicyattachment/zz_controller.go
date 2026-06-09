@@ -42,9 +42,9 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.ManagedPolicyAttachment_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
-	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.ManagedPolicyAttachment_GroupVersionKind)))
-	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ManagedPolicyAttachment_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
+	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.ManagedPolicyAttachment_GroupVersionKind)))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ManagedPolicyAttachment_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
 			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_ssoadmin_managed_policy_attachment"],
