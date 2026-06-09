@@ -69,7 +69,7 @@ override SUBPACKAGES := $(filter-out monolith,$(shell find cmd/provider -type d 
 endif
 GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
-GO_SUBDIRS += cmd internal apis generate
+GO_SUBDIRS += cmd internal apis generate config
 GO111MODULE = on
 
 export SUBPACKAGES := $(SUBPACKAGES)
