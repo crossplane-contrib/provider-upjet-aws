@@ -3847,6 +3847,12 @@ func networkmonitorProbe() config.ExternalName {
 
 func ecsTaskDefinition() config.ExternalName {
 	e := config.IdentifierFromProvider
+	const (
+		arnSections   = 6
+		arnPrefix     = "arn"
+		arnECSService = "ecs"
+	)
+
 	// resourceTaskDefinitionRead uses d.Get("arn") instead of d.Id() to call
 	// DescribeTaskDefinition. On a cold-start observe, "arn" is a computed-only
 	// attribute and is not present in params, so the API call goes out with an
@@ -3854,6 +3860,13 @@ func ecsTaskDefinition() config.ExternalName {
 	// resource does not exist". Seed params["arn"] from the external name so the
 	// read always has a non-empty identifier.
 	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		// only set `arn` if the external name is a full ARN
+		arnParts := strings.SplitN(externalName, ":", arnSections)
+		if len(arnParts) != arnSections ||
+			arnParts[0] != arnPrefix ||
+			arnParts[2] != arnECSService {
+			return
+		}
 		if arn, _ := base["arn"].(string); arn == "" && externalName != "" {
 			base["arn"] = externalName
 		}
