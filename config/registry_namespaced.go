@@ -16,6 +16,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-aws/v2/config/namespaced"
+	"github.com/upbound/provider-aws/v2/config/templates"
 	"github.com/upbound/provider-aws/v2/hack"
 )
 
@@ -72,6 +73,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(defaultResourceOptions...),
+		config.WithControllerTemplate(templates.ControllerTemplate),
 	)
 	pc.BasePackages.ControllerMap["eks/clusterauth"] = "eks"
 

@@ -1,0 +1,167 @@
+{{ .Header }}
+
+{{ .GenStatement }}
+
+package {{ .Package }}
+
+import (
+	"time"
+
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
+	xpfeature "github.com/crossplane/crossplane-runtime/v2/pkg/feature"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
+	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller/handler"
+	"github.com/crossplane/upjet/v2/pkg/metrics"
+	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
+	ctrl "sigs.k8s.io/controller-runtime"
+
+	"github.com/upbound/provider-aws/v2/internal/clients"
+	{{ .Imports }}
+)
+
+// SetupGated adds a controller that reconciles {{ .CRD.Kind }} managed resources.
+func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
+	o.Options.Gate.Register(func() {
+		if err := Setup(mgr, o); err != nil {
+			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", {{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind.String())
+		}
+	}, {{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind)
+	return nil
+}
+
+// Setup adds a controller that reconciles {{ .CRD.Kind }} managed resources.
+func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
+	name := managed.ControllerName({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind.String())
+	var initializers managed.InitializerChain
+	{{- if .Initializers }}
+	for _, i := range o.Provider.Resources["{{ .ResourceType }}"].InitializerFns {
+	    initializers = append(initializers,i(mgr.GetClient()))
+	}
+	{{- end}}
+	{{- if not .DisableNameInitializer }}
+	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
+	{{- end}}
+	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", {{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind)))
+	{{- if .UseAsync }}
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler){{ if or .UseTerraformPluginSDKClient .UseTerraformPluginFrameworkClient }}, tjcontroller.WithStatusUpdates(false){{ end }})
+	{{- end}}
+	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
+	opts := []managed.ReconcilerOption{
+		managed.WithExternalConnecter(
+			{{- if .UseTerraformPluginSDKClient -}}
+              {{- if .UseAsync }}
+              tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["{{ .ResourceType }}"],
+                tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
+                tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
+                tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
+                tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind, mgr, o.PollInterval)),
+                {{if .FeaturesPackageAlias -}}
+                  tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled({{ .FeaturesPackageAlias }}EnableBetaManagementPolicies)),
+                {{- end }}
+                )
+              {{- else -}}
+			  tjcontroller.NewTerraformPluginSDKConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["{{ .ResourceType }}"], o.OperationTrackerStore,
+				tjcontroller.WithTerraformPluginSDKLogger(o.Logger),
+				tjcontroller.WithTerraformPluginSDKMetricRecorder(metrics.NewMetricRecorder({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind, mgr, o.PollInterval)),
+				{{if .FeaturesPackageAlias -}}
+				  tjcontroller.WithTerraformPluginSDKManagementPolicies(o.Features.Enabled({{ .FeaturesPackageAlias }}EnableBetaManagementPolicies)),
+				{{- end }}
+				)
+			  {{- end -}}
+			{{- else if .UseTerraformPluginFrameworkClient -}}
+			  {{- if .UseAsync }}
+          tjcontroller.NewTerraformPluginFrameworkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["{{ .ResourceType }}"],
+          tjcontroller.WithTerraformPluginFrameworkAsyncLogger(o.Logger),
+          tjcontroller.WithTerraformPluginFrameworkAsyncConnectorEventHandler(eventHandler),
+          tjcontroller.WithTerraformPluginFrameworkAsyncCallbackProvider(ac),
+          tjcontroller.WithTerraformPluginFrameworkAsyncMetricRecorder(metrics.NewMetricRecorder({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind, mgr, o.PollInterval)),
+          {{if .FeaturesPackageAlias -}}
+            tjcontroller.WithTerraformPluginFrameworkAsyncManagementPolicies(o.Features.Enabled({{ .FeaturesPackageAlias }}EnableBetaManagementPolicies)),
+          {{- end }}
+          )
+			  {{- else }}
+			  tjcontroller.NewTerraformPluginFrameworkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["{{ .ResourceType }}"], o.OperationTrackerStore,
+				tjcontroller.WithTerraformPluginFrameworkLogger(o.Logger),
+				tjcontroller.WithTerraformPluginFrameworkMetricRecorder(metrics.NewMetricRecorder({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind, mgr, o.PollInterval)),
+				{{if .FeaturesPackageAlias -}}
+				  tjcontroller.WithTerraformPluginFrameworkManagementPolicies(o.Features.Enabled({{ .FeaturesPackageAlias }}EnableBetaManagementPolicies)),
+				{{- end }}
+			  )
+			  {{- end }}
+			{{- else -}}
+			  tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["{{ .ResourceType }}"], tjcontroller.WithLogger(o.Logger), tjcontroller.WithConnectorEventHandler(eventHandler),
+				{{- if .UseAsync }}
+				tjcontroller.WithCallbackProvider(ac),
+				{{- end }}
+			  )
+			{{- end }},
+		),
+		managed.WithLogger(o.Logger.WithValues("controller", name)),
+		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
+		managed.WithFinalizer(
+			reconciliationpolicy.NewFinalizer(
+				tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName)),
+				reconciliationpolicy.WithFinalizerRateLimiter(rl),
+			),
+		),
+		managed.WithTimeout(3*time.Minute),
+		managed.WithInitializers(initializers),
+		managed.WithPollInterval(o.PollInterval),
+	}
+
+	if o.PollJitter != 0 {
+	    opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
+	}
+	{{- if .FeaturesPackageAlias }}
+	if o.Features.Enabled({{ .FeaturesPackageAlias }}EnableBetaManagementPolicies) {
+		opts = append(opts, managed.WithManagementPolicies())
+	}
+	{{- end}}
+	if o.MetricOptions != nil {
+		opts = append(opts, managed.WithMetricRecorder(o.MetricOptions.MRMetrics))
+	}
+	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
+		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
+	}
+
+	// register webhooks for the kind {{ .TypePackageAlias }}{{ .CRD.Kind }} if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr, &{{ .TypePackageAlias }}{{ .CRD.Kind }}{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind {{ .TypePackageAlias }}{{ .CRD.Kind }}")
+		}
+	}
+
+	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {
+		stateMetricsRecorder := statemetrics.NewMRStateRecorder(
+			mgr.GetClient(), o.Logger, o.MetricOptions.MRStateMetrics, &{{ .TypePackageAlias }}{{ .CRD.Kind }}List{}, o.MetricOptions.PollStateMetricInterval,
+		)
+		if err := mgr.Add(stateMetricsRecorder); err != nil {
+			return errors.Wrap(err, "cannot register MR state metrics recorder for kind {{ .TypePackageAlias }}{{ .CRD.Kind }}List")
+		}
+	}
+
+	r := managed.NewReconciler(mgr, xpresource.ManagedKind({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind), opts...)
+	co := o.ForControllerRuntime()
+	co.RateLimiter = rl
+
+	return ctrl.NewControllerManagedBy(mgr).
+		Named(name).
+		WithOptions(co).
+		WithEventFilter(xpresource.DesiredStateChanged()).
+		Watches(&{{ .TypePackageAlias }}{{ .CRD.Kind }}{}, eventHandler).
+		Complete(
+			reconciliationpolicy.NewReconciler(
+				ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
+				mgr,
+				{{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind,
+				reconciliationpolicy.WithRateLimiter(rl),
+				reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
+			),
+		)
+}
