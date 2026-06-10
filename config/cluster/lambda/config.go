@@ -67,14 +67,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		// code_sha256 became Optional+Computed in terraform-provider-aws
 		// v6.27.0. AWS always returns its actual value, so when the spec
-		// leaves it unset the diff would be permanently non-empty and the
-		// resource would reconcile in a loop. Drop it from the diff so it
-		// behaves as a read-only/computed attribute.
+		// leaves it unset the diff tries to overwrite the actual hash with
+		// an empty string, causing a permanent reconcile loop. Ignore only
+		// that case so a user-specified code_sha256 still produces a diff.
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
 				return diff, nil
 			}
-			delete(diff.Attributes, "code_sha256")
+			d, ok := diff.GetAttribute("code_sha256")
+			// ignore diff when code_sha256 is omitted at the spec
+			// i.e. tries to update with an empty string
+			if ok && d.Old != "" && d.New == "" {
+				delete(diff.Attributes, "code_sha256")
+			}
 			return diff, nil
 		}
 		r.MetaResource.ArgumentDocs["source_code_hash"] = "Used to trigger updates. Must be set to " +
