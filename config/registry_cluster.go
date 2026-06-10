@@ -22,6 +22,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 
 	"github.com/upbound/provider-aws/v2/config/cluster"
+	"github.com/upbound/provider-aws/v2/config/templates"
 	"github.com/upbound/provider-aws/v2/hack"
 )
 
@@ -115,6 +116,7 @@ func GetProvider(ctx context.Context, fwProvider fwprovider.Provider, sdkProvide
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(defaultResourceOptions...),
+		config.WithControllerTemplate(templates.ControllerTemplate),
 	)
 	pc.BasePackages.ControllerMap["eks/clusterauth"] = "eks"
 

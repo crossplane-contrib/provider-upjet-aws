@@ -6,6 +6,7 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/apis/configuration/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -142,4 +143,12 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 		return nil, errors.Wrap(err, errTrackUsage)
 	}
 	return effectivePC, nil
+}
+
+func ReconciliationPolicy(ctx context.Context, client client.Client, mg xpresource.Managed) (*v1alpha1.ReconciliationPolicy, error) {
+	pc, err := resolveProviderConfig(ctx, client, mg)
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot resolve the referenced ProviderConfig")
+	}
+	return pc.Spec.ReconciliationPolicy, nil
 }
