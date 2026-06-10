@@ -334,6 +334,7 @@
 "aws_ebs_snapshot_import",
 "aws_ebs_volume",
 "aws_ec2_availability_zone_group",
+"aws_ec2_capacity_block_reservation",
 "aws_ec2_capacity_reservation",
 "aws_ec2_carrier_gateway",
 "aws_ec2_fleet",

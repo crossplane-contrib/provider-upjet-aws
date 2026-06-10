@@ -321,6 +321,7 @@ import (
 	amicopy "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/amicopy"
 	amilaunchpermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/availabilityzonegroup"
+	capacityblockreservation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/capacityblockreservation"
 	capacityreservation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/carriergateway"
 	customergateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/customergateway"
@@ -1346,6 +1347,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.Setup,
 		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
+		capacityblockreservation.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
 		customergateway.Setup,
@@ -2377,6 +2379,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.SetupGated,
 		amilaunchpermission.SetupGated,
 		availabilityzonegroup.SetupGated,
+		capacityblockreservation.SetupGated,
 		capacityreservation.SetupGated,
 		carriergateway.SetupGated,
 		customergateway.SetupGated,
