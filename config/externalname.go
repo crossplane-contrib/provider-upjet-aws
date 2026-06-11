@@ -1270,7 +1270,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ecs_service": config.TemplatedStringAsIdentifier("name", fullARNTemplate("ecs", "service/{{ .parameters.cluster }}/{{ .external_name }}")),
 	// Imported using ARN that has a random substring, revision at the end:
 	// arn:aws:ecs:us-east-1:012345678910:task-definition/mytaskfamily:123
-	"aws_ecs_task_definition": config.IdentifierFromProvider,
+	"aws_ecs_task_definition": ecsTaskDefinition(),
 
 	// efs
 	//
@@ -3842,5 +3842,34 @@ func networkmonitorProbe() config.ExternalName {
 		return fmt.Sprintf("%s,%s", monitorName, externalName), nil
 	}
 	e.IdentifierFields = []string{"monitor_name"}
+	return e
+}
+
+func ecsTaskDefinition() config.ExternalName {
+	e := config.IdentifierFromProvider
+	const (
+		arnSections   = 6
+		arnPrefix     = "arn"
+		arnECSService = "ecs"
+	)
+
+	// resourceTaskDefinitionRead uses d.Get("arn") instead of d.Id() to call
+	// DescribeTaskDefinition. On a cold-start observe, "arn" is a computed-only
+	// attribute and is not present in params, so the API call goes out with an
+	// empty identifier and AWS returns a 400 that upjet surfaces as "external
+	// resource does not exist". Seed params["arn"] from the external name so the
+	// read always has a non-empty identifier.
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		// only set `arn` if the external name is a full ARN
+		arnParts := strings.SplitN(externalName, ":", arnSections)
+		if len(arnParts) != arnSections ||
+			arnParts[0] != arnPrefix ||
+			arnParts[2] != arnECSService {
+			return
+		}
+		if arn, _ := base["arn"].(string); arn == "" && externalName != "" {
+			base["arn"] = externalName
+		}
+	}
 	return e
 }
