@@ -44,9 +44,9 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	for _, i := range o.Provider.Resources["aws_kms_key"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
 	}
-	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.Key_GroupVersionKind)))
-	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.Key_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
+	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.Key_GroupVersionKind)))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.Key_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
 			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_kms_key"],
