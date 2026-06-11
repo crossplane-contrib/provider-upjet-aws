@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: CapacityBlockReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/capacityblockreservation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacityBlockOfferingId: ${data.aws_ec2_capacity_block_offering.test.capacity_block_offering_id}
+    instancePlatform: Linux/UNIX
+    region: us-west-1
+    tags:
+      Environment: dev

@@ -93,6 +93,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// ec2
 	//
+	// EC2 Capacity Block Reservations can be imported using the id: cr-06f69c6d91ca1d710
+	"aws_ec2_capacity_block_reservation": identifierFromProviderWithDefaultStub("cr-06f69c6d91ca1d710"),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983

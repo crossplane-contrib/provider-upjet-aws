@@ -13,6 +13,7 @@ import (
 	amicopy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/amicopy"
 	amilaunchpermission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/availabilityzonegroup"
+	capacityblockreservation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/capacityblockreservation"
 	capacityreservation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/carriergateway"
 	customergateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/customergateway"
@@ -122,6 +123,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.Setup,
 		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
+		capacityblockreservation.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
 		customergateway.Setup,
@@ -237,6 +239,7 @@ func SetupGated_ec2(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.SetupGated,
 		amilaunchpermission.SetupGated,
 		availabilityzonegroup.SetupGated,
+		capacityblockreservation.SetupGated,
 		capacityreservation.SetupGated,
 		carriergateway.SetupGated,
 		customergateway.SetupGated,
