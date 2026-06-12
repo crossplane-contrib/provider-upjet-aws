@@ -3285,30 +3285,47 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 // consistent.
 func vpcEndpointAssociationIdentifier(childKey string) config.ExternalName {
 	e := config.IdentifierFromProvider
+	// External name is the stable import form: vpc_endpoint_id/child_id.
 	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-		vpceID, ok := tfstate["vpc_endpoint_id"].(string)
-		if !ok || vpceID == "" {
-			return "", errors.New("vpc_endpoint_id in tfstate cannot be empty")
-		}
-		childID, ok := tfstate[childKey].(string)
-		if !ok || childID == "" {
-			return "", errors.Errorf("%s in tfstate cannot be empty", childKey)
+		vpceID, childID, err := vpcEndpointAndChild(tfstate, childKey)
+		if err != nil {
+			return "", err
 		}
 		return vpceID + "/" + childID, nil
 	}
+	// Terraform id is a-<vpc_endpoint_id><hashcode(child_id)>, matching
+	// terraform-provider-aws internal/service/ec2.vpcEndpoint*AssociationCreateID.
 	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		vpceID, ok := parameters["vpc_endpoint_id"].(string)
-		if !ok || vpceID == "" {
-			return "", errors.New("vpc_endpoint_id cannot be empty")
+		vpceID, childID, err := vpcEndpointAndChild(parameters, childKey)
+		if err != nil {
+			return "", err
 		}
-		childID, ok := parameters[childKey].(string)
-		if !ok || childID == "" {
-			return "", errors.Errorf("%s cannot be empty", childKey)
-		}
-		// Mirrors terraform-provider-aws internal/service/ec2.vpcEndpoint*AssociationCreateID.
 		return fmt.Sprintf("a-%s%d", vpceID, ec2StringHashcode(childID)), nil
 	}
 	return e
+}
+
+// vpcEndpointAndChild reads the vpc_endpoint_id and the association's child id
+// (childKey, e.g. subnet_id or route_table_id) from a tfstate/parameters map,
+// returning an error if either is missing or empty.
+func vpcEndpointAndChild(fields map[string]interface{}, childKey string) (vpceID, childID string, err error) {
+	if vpceID, err = requiredString(fields, "vpc_endpoint_id"); err != nil {
+		return "", "", err
+	}
+	if childID, err = requiredString(fields, childKey); err != nil {
+		return "", "", err
+	}
+	return vpceID, childID, nil
+}
+
+// requiredString returns fields[key] as a non-empty string, erroring if it is
+// missing, not a string, or empty.
+func requiredString(fields map[string]interface{}, key string) (string, error) {
+	s, ok := fields[key].(string)
+	if !ok || s == "" {
+		return "", errors.Errorf("%s cannot be empty", key)
+	}
+	return s, nil
 }
 
 // ec2StringHashcode mirrors terraform-provider-aws internal/create.StringHashcode,
