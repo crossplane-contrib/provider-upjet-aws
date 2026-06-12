@@ -224,6 +224,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				return nil
 			}),
 		)
+		r.PreviousVersions = append(r.PreviousVersions, "v1beta1", "v1beta2")
+		if err := r.SetDeprecatedVersion("v1beta2",
+			config.VersionDeprecation{
+				Warning:            "This API version is deprecated.",
+				DeprecationRelease: "v2.6.0",
+			}); err != nil {
+			panic(err)
+		}
 	})
 	p.AddResourceConfigurator("aws_msk_scram_secret_association", func(r *config.Resource) {
 		r.References["secret_arn_list"] = config.Reference{
@@ -252,6 +260,21 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_msk_replicator", func(r *config.Resource) {
 		r.References["kafka_cluster.vpc_config.subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",
+		}
+	})
+	p.AddResourceConfigurator("aws_msk_vpc_connection", func(r *config.Resource) {
+		r.References["target_cluster_arn"] = config.Reference{
+			TerraformName: "aws_msk_cluster",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "aws_vpc",
+		}
+		r.References["client_subnets"] = config.Reference{
+			TerraformName: "aws_subnet",
+		}
+		r.References["security_groups"] = config.Reference{
+			TerraformName: "aws_security_group",
 		}
 	})
 }

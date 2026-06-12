@@ -56,6 +56,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/globalaccelerator"
 	"github.com/upbound/provider-aws/v2/config/cluster/glue"
 	"github.com/upbound/provider-aws/v2/config/cluster/grafana"
+	"github.com/upbound/provider-aws/v2/config/cluster/guardduty"
 	"github.com/upbound/provider-aws/v2/config/cluster/iam"
 	"github.com/upbound/provider-aws/v2/config/cluster/identitystore"
 	"github.com/upbound/provider-aws/v2/config/cluster/iot"
@@ -76,6 +77,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/neptune"
 	"github.com/upbound/provider-aws/v2/config/cluster/networkfirewall"
 	"github.com/upbound/provider-aws/v2/config/cluster/networkmanager"
+	"github.com/upbound/provider-aws/v2/config/cluster/networkmonitor"
 	"github.com/upbound/provider-aws/v2/config/cluster/opensearch"
 	"github.com/upbound/provider-aws/v2/config/cluster/opensearchserverless"
 	"github.com/upbound/provider-aws/v2/config/cluster/organization"
@@ -90,6 +92,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/v2/config/cluster/route53resolver"
 	"github.com/upbound/provider-aws/v2/config/cluster/s3"
+	"github.com/upbound/provider-aws/v2/config/cluster/s3vectors"
 	"github.com/upbound/provider-aws/v2/config/cluster/sagemaker"
 	"github.com/upbound/provider-aws/v2/config/cluster/secretsmanager"
 	"github.com/upbound/provider-aws/v2/config/cluster/servicecatalog"
@@ -98,6 +101,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/cluster/sns"
 	"github.com/upbound/provider-aws/v2/config/cluster/sqs"
 	"github.com/upbound/provider-aws/v2/config/cluster/ssoadmin"
+	"github.com/upbound/provider-aws/v2/config/cluster/timestreaminfluxdb"
 	"github.com/upbound/provider-aws/v2/config/cluster/transfer"
 	"github.com/upbound/provider-aws/v2/config/cluster/verifiedaccess"
 	"github.com/upbound/provider-aws/v2/config/cluster/vpclattice"
@@ -149,6 +153,7 @@ func init() {
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
 	ProviderConfiguration.AddConfig(glue.Configure)
 	ProviderConfiguration.AddConfig(grafana.Configure)
+	ProviderConfiguration.AddConfig(guardduty.Configure)
 	ProviderConfiguration.AddConfig(iam.Configure)
 	ProviderConfiguration.AddConfig(kafka.Configure)
 	ProviderConfiguration.AddConfig(kafkaconnect.Configure)
@@ -175,6 +180,7 @@ func init() {
 	ProviderConfiguration.AddConfig(route53resolver.Configure)
 	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
 	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(s3vectors.Configure)
 	ProviderConfiguration.AddConfig(secretsmanager.Configure)
 	ProviderConfiguration.AddConfig(servicecatalog.Configure)
 	ProviderConfiguration.AddConfig(organization.Configure)
@@ -191,6 +197,7 @@ func init() {
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
+	ProviderConfiguration.AddConfig(networkmonitor.Configure)
 	ProviderConfiguration.AddConfig(sagemaker.Configure)
 	ProviderConfiguration.AddConfig(redshiftserverless.Configure)
 	ProviderConfiguration.AddConfig(kendra.Configure)
@@ -202,4 +209,5 @@ func init() {
 	ProviderConfiguration.AddConfig(wafv2.Configure)
 	ProviderConfiguration.AddConfig(verifiedaccess.Configure)
 	ProviderConfiguration.AddConfig(vpclattice.Configure)
+	ProviderConfiguration.AddConfig(timestreaminfluxdb.Configure)
 }

@@ -21,7 +21,7 @@ on:
         required: false
       go-version:
         description: 'Go version to use if building needs to be done'
-        default: '1.23'
+        default: '1.25.11'
         required: false
 
 jobs:

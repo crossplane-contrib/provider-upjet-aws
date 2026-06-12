@@ -1251,6 +1251,7 @@ type LBListenerRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LBListenerRule is the Schema for the LBListenerRules API. Provides a Load Balancer Listener Rule resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: networkmonitor.aws.m.upbound.io/v1beta1
+kind: Monitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmonitor/v1beta1/probe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    aggregationPeriod: 30
+    region: us-west-1

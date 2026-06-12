@@ -207,6 +207,56 @@ func (mg *AvailabilityZoneGroup) SetWriteConnectionSecretToReference(r *xpv1.Sec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this CapacityBlockReservation.
+func (mg *CapacityBlockReservation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this CapacityReservation.
 func (mg *CapacityReservation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -4404,6 +4454,56 @@ func (mg *VPCIPv4CidrBlockAssociation) SetProviderConfigReference(r *xpv1.Refere
 
 // SetWriteConnectionSecretToReference of this VPCIPv4CidrBlockAssociation.
 func (mg *VPCIPv4CidrBlockAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VPCIPv6CidrBlockAssociation.
+func (mg *VPCIPv6CidrBlockAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

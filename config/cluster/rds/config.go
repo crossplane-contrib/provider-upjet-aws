@@ -193,6 +193,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return diff, nil
 		}
+		r.PreviousVersions = append(r.PreviousVersions, "v1beta1", "v1beta2")
+		if err := r.SetDeprecatedVersion("v1beta2",
+			config.VersionDeprecation{
+				Warning:            "This API version is deprecated.",
+				DeprecationRelease: "v2.6.0",
+			}); err != nil {
+			panic(err)
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_global_cluster", func(r *config.Resource) {

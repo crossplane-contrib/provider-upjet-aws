@@ -34,6 +34,15 @@ func (l *AddonList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CapabilityList.
+func (l *CapabilityList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ClusterAuthList.
 func (l *ClusterAuthList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

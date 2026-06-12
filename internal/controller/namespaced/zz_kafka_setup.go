@@ -16,6 +16,7 @@ import (
 	scramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/serverlesscluster"
 	singlescramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/singlescramsecretassociation"
+	vpcconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/vpcconnection"
 )
 
 // Setup_kafka creates all controllers with the supplied logger and adds them to
@@ -29,6 +30,7 @@ func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		singlescramsecretassociation.Setup,
+		vpcconnection.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -48,6 +50,7 @@ func SetupGated_kafka(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.SetupGated,
 		serverlesscluster.SetupGated,
 		singlescramsecretassociation.SetupGated,
+		vpcconnection.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

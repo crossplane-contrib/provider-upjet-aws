@@ -12,6 +12,7 @@ import (
 	accessentry "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accessentry"
 	accesspolicyassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/addon"
+	capability "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/capability"
 	cluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/clusterauth"
 	fargateprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/fargateprofile"
@@ -27,6 +28,7 @@ func Setup_eks(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.Setup,
 		accesspolicyassociation.Setup,
 		addon.Setup,
+		capability.Setup,
 		cluster.Setup,
 		clusterauth.Setup,
 		fargateprofile.Setup,
@@ -48,6 +50,7 @@ func SetupGated_eks(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.SetupGated,
 		accesspolicyassociation.SetupGated,
 		addon.SetupGated,
+		capability.SetupGated,
 		cluster.SetupGated,
 		clusterauth.SetupGated,
 		fargateprofile.SetupGated,

@@ -6,6 +6,7 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/apis/configuration/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -66,7 +67,7 @@ func enrichLocalSecretRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.M
 
 func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpresource.Managed) (*namespacedv1beta1.ClusterProviderConfig, error) {
 	switch managed := mg.(type) {
-	case xpresource.LegacyManaged:
+	case xpresource.LegacyManaged: //nolint:staticcheck // still handling the cluster-scoped MRs
 		return resolveProviderConfigLegacy(ctx, crClient, managed)
 	case xpresource.ModernManaged:
 		return resolveProviderConfigModern(ctx, crClient, managed)
@@ -75,7 +76,7 @@ func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpres
 	}
 }
 
-func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ClusterProviderConfig, error) {
+func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ClusterProviderConfig, error) { //nolint:staticcheck // still handling the cluster-scoped MRs
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
 		return nil, errors.New(errNoProviderConfig)
@@ -142,4 +143,12 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 		return nil, errors.Wrap(err, errTrackUsage)
 	}
 	return effectivePC, nil
+}
+
+func ReconciliationPolicy(ctx context.Context, client client.Client, mg xpresource.Managed) (*v1alpha1.ReconciliationPolicy, error) {
+	pc, err := resolveProviderConfig(ctx, client, mg)
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot resolve the referenced ProviderConfig")
+	}
+	return pc.Spec.ReconciliationPolicy, nil
 }

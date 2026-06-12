@@ -548,6 +548,7 @@ type LustreFileSystemStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LustreFileSystem is the Schema for the LustreFileSystems API. Manages a FSx Lustre File System.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

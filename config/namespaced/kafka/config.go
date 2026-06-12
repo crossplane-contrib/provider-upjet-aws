@@ -64,4 +64,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_subnet",
 		}
 	})
+	p.AddResourceConfigurator("aws_msk_vpc_connection", func(r *config.Resource) {
+		r.References["target_cluster_arn"] = config.Reference{
+			TerraformName: "aws_msk_cluster",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["vpc_id"] = config.Reference{
+			TerraformName: "aws_vpc",
+		}
+		r.References["client_subnets"] = config.Reference{
+			TerraformName: "aws_subnet",
+		}
+		r.References["security_groups"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+	})
 }

@@ -13,6 +13,7 @@ import (
 	amicopy "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/amicopy"
 	amilaunchpermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/availabilityzonegroup"
+	capacityblockreservation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/capacityblockreservation"
 	capacityreservation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/carriergateway"
 	customergateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/customergateway"
@@ -103,6 +104,7 @@ import (
 	vpcipampoolcidrallocation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipampoolcidrallocation"
 	vpcipamscope "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipv4cidrblockassociation"
+	vpcipv6cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcipv6cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/v2/internal/controller/cluster/ec2/vpcpeeringconnectionoptions"
@@ -121,6 +123,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.Setup,
 		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
+		capacityblockreservation.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
 		customergateway.Setup,
@@ -211,6 +214,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.Setup,
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
+		vpcipv6cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
@@ -235,6 +239,7 @@ func SetupGated_ec2(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.SetupGated,
 		amilaunchpermission.SetupGated,
 		availabilityzonegroup.SetupGated,
+		capacityblockreservation.SetupGated,
 		capacityreservation.SetupGated,
 		carriergateway.SetupGated,
 		customergateway.SetupGated,
@@ -325,6 +330,7 @@ func SetupGated_ec2(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.SetupGated,
 		vpcipamscope.SetupGated,
 		vpcipv4cidrblockassociation.SetupGated,
+		vpcipv6cidrblockassociation.SetupGated,
 		vpcpeeringconnection.SetupGated,
 		vpcpeeringconnectionaccepter.SetupGated,
 		vpcpeeringconnectionoptions.SetupGated,

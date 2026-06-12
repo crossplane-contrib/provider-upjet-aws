@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: dynamodb.aws.upbound.io/v1beta2
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta2/table
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    attribute:
+    - name: UserId
+      type: S
+    - name: GameTitle
+      type: S
+    - name: TopScore
+      type: "N"
+    billingMode: PROVISIONED
+    hashKey: UserId
+    rangeKey: GameTitle
+    readCapacity: 20
+    writeCapacity: 20
+    globalSecondaryIndex:
+    - name: GameTitleIndex
+      hashKey: GameTitle
+      rangeKey: TopScore
+      projectionType: INCLUDE
+      nonKeyAttributes:
+      - UserId
+      readCapacity: 10
+      writeCapacity: 10
+    ttl:
+      attributeName: TimeToExist
+      enabled: true
+    tags:
+      Environment: production
+      Name: dynamodb-table-1
+    serverSideEncryption:
+      enabled: true
+      kmsKeyArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: table-with-encryption
+
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta2/table
+  labels:
+    testing.upbound.io/example-name: table-with-encryption
+  name: example-key-table-encryption-uptest
+spec:
+  forProvider:
+    description: Example test key for dynamodb table server-side encryption
+    region: us-west-1
+
+---

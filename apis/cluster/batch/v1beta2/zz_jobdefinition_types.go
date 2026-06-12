@@ -1112,6 +1112,7 @@ type JobDefinitionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // JobDefinition is the Schema for the JobDefinitions API. Provides a Batch Job Definition resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

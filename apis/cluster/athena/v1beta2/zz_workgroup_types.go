@@ -720,6 +720,7 @@ type WorkgroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Workgroup is the Schema for the Workgroups API. Manages an Athena Workgroup.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

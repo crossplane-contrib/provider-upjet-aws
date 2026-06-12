@@ -202,6 +202,7 @@ type ThingGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ThingGroup is the Schema for the ThingGroups API. Manages an AWS IoT Thing Group.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

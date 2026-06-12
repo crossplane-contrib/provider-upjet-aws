@@ -19,6 +19,9 @@ func (tr *AMILaunchPermission) Hub() {}
 func (tr *AvailabilityZoneGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CapacityBlockReservation) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *CapacityReservation) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -257,6 +260,9 @@ func (tr *VPCIpamScope) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VPCIPv4CidrBlockAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCIPv6CidrBlockAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VPNConnectionRoute) Hub() {}

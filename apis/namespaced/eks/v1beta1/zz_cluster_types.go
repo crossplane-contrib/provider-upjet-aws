@@ -74,6 +74,18 @@ type CertificateAuthorityObservation struct {
 type CertificateAuthorityParameters struct {
 }
 
+type ClusterIdentityInitParameters struct {
+}
+
+type ClusterIdentityObservation struct {
+
+	// Nested block containing OpenID Connect identity provider information for the cluster. Detailed below.
+	Oidc []OidcObservation `json:"oidc,omitempty" tf:"oidc,omitempty"`
+}
+
+type ClusterIdentityParameters struct {
+}
+
 type ClusterInitParameters struct {
 
 	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries. Detailed below.
@@ -189,7 +201,7 @@ type ClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Attribute block containing identity provider information for your cluster. Only available on Kubernetes version 1.13 and 1.14 clusters created or upgraded on or after September 3, 2019. Detailed below.
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []ClusterIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
 	KubernetesNetworkConfig *KubernetesNetworkConfigObservation `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
@@ -458,18 +470,6 @@ type EncryptionConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Resources []*string `json:"resources" tf:"resources,omitempty"`
-}
-
-type IdentityInitParameters struct {
-}
-
-type IdentityObservation struct {
-
-	// Nested block containing OpenID Connect identity provider information for the cluster. Detailed below.
-	Oidc []OidcObservation `json:"oidc,omitempty" tf:"oidc,omitempty"`
-}
-
-type IdentityParameters struct {
 }
 
 type KubernetesNetworkConfigInitParameters struct {

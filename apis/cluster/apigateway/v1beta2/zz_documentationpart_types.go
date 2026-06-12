@@ -171,6 +171,7 @@ type DocumentationPartStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DocumentationPart is the Schema for the DocumentationParts API. Provides a settings of an API Gateway Documentation Part.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

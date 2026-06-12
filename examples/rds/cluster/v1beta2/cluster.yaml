@@ -7,7 +7,7 @@ kind: Cluster
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta2/cluster
-  name: example
+  name: exampleuptest
 spec:
   forProvider:
     autoGeneratePassword: true
@@ -38,7 +38,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta2/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster
-  name: example-ci-cluster
+  name: example-ci-cluster-uptest
 spec:
   forProvider:
     description: RDS custom cluster parameter group
@@ -58,7 +58,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta2/cluster
   labels:
     testing.upbound.io/example-name: example-ci-cluster-instance
-  name: example-parametergroup-ci-cluster-instance
+  name: example-parametergroup-ci-cluster-instance-uptest
 spec:
   forProvider:
     description: example

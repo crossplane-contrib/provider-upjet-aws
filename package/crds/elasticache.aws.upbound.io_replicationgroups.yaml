@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.20.1
   name: replicationgroups.elasticache.aws.upbound.io
 spec:
   group: elasticache.aws.upbound.io
@@ -153,6 +153,16 @@ spec:
                           type: number
                       type: object
                     type: array
+                  clusterOperationMode:
+                    description: |-
+                      Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+                      To modify cluster mode from Disabled to Enabled, you must
+                      first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+                      Redis OSS clients to connect using both cluster mode enabled and cluster mode
+                      disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+                      enabled, you can then complete cluster mode configuration and set the cluster
+                      mode to Enabled.
+                    type: string
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -802,6 +812,16 @@ spec:
                           type: number
                       type: object
                     type: array
+                  clusterOperationMode:
+                    description: |-
+                      Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+                      To modify cluster mode from Disabled to Enabled, you must
+                      first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+                      Redis OSS clients to connect using both cluster mode enabled and cluster mode
+                      disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+                      enabled, you can then complete cluster mode configuration and set the cluster
+                      mode to Enabled.
+                    type: string
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -1509,6 +1529,16 @@ spec:
                           type: number
                       type: object
                     type: array
+                  clusterOperationMode:
+                    description: |-
+                      Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+                      To modify cluster mode from Disabled to Enabled, you must
+                      first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+                      Redis OSS clients to connect using both cluster mode enabled and cluster mode
+                      disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+                      enabled, you can then complete cluster mode configuration and set the cluster
+                      mode to Enabled.
+                    type: string
                   configurationEndpointAddress:
                     description: Address of the replication group configuration endpoint
                       when cluster mode is enabled.

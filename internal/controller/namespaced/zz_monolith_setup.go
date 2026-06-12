@@ -321,6 +321,7 @@ import (
 	amicopy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/amicopy"
 	amilaunchpermission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/amilaunchpermission"
 	availabilityzonegroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/availabilityzonegroup"
+	capacityblockreservation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/capacityblockreservation"
 	capacityreservation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/capacityreservation"
 	carriergateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/carriergateway"
 	customergateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/customergateway"
@@ -411,6 +412,7 @@ import (
 	vpcipampoolcidrallocation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipampoolcidrallocation"
 	vpcipamscope "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipamscope"
 	vpcipv4cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipv4cidrblockassociation"
+	vpcipv6cidrblockassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcipv6cidrblockassociation"
 	vpcpeeringconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ec2/vpcpeeringconnectionoptions"
@@ -444,6 +446,7 @@ import (
 	accessentry "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accessentry"
 	accesspolicyassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/addon"
+	capability "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/capability"
 	clustereks "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/clusterauth"
 	fargateprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/eks/fargateprofile"
@@ -528,6 +531,7 @@ import (
 	workspacesamlconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/grafana/workspacesamlconfiguration"
 	detector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/detector"
 	filter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/filter"
+	malwareprotectionplan "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/malwareprotectionplan"
 	memberguardduty "github.com/upbound/provider-aws/v2/internal/controller/namespaced/guardduty/member"
 	accesskey "github.com/upbound/provider-aws/v2/internal/controller/namespaced/iam/accesskey"
 	accountalias "github.com/upbound/provider-aws/v2/internal/controller/namespaced/iam/accountalias"
@@ -591,6 +595,7 @@ import (
 	scramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/serverlesscluster"
 	singlescramsecretassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/singlescramsecretassociation"
+	vpcconnection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafka/vpcconnection"
 	connector "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/connector"
 	customplugin "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/customplugin"
 	workerconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/kafkaconnect/workerconfiguration"
@@ -671,6 +676,7 @@ import (
 	containerpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/mediastore/containerpolicy"
 	acl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/acl"
 	clustermemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/cluster"
+	multiregioncluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/multiregioncluster"
 	parametergroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/snapshot"
 	subnetgroupmemorydb "github.com/upbound/provider-aws/v2/internal/controller/namespaced/memorydb/subnetgroup"
@@ -705,6 +711,8 @@ import (
 	transitgatewayconnectpeerassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/transitgatewayconnectpeerassociation"
 	transitgatewayregistration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/transitgatewayregistration"
 	vpcattachment "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmanager/vpcattachment"
+	monitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/monitor"
+	probe "github.com/upbound/provider-aws/v2/internal/controller/namespaced/networkmonitor/probe"
 	sink "github.com/upbound/provider-aws/v2/internal/controller/namespaced/oam/sink"
 	domainopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearch/domainpolicy"
@@ -808,6 +816,7 @@ import (
 	appmonitor "github.com/upbound/provider-aws/v2/internal/controller/namespaced/rum/appmonitor"
 	metricsdestination "github.com/upbound/provider-aws/v2/internal/controller/namespaced/rum/metricsdestination"
 	buckets3 "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucket"
+	bucketabac "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketabac"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3/bucketanalyticsconfiguration"
@@ -839,6 +848,9 @@ import (
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/objectlambdaaccesspointpolicy"
 	storagelensconfiguration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3control/storagelensconfiguration"
+	indexs3vectors "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/index"
+	vectorbucket "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/vectorbucket"
+	vectorbucketpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/s3vectors/vectorbucketpolicy"
 	appsagemaker "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/v2/internal/controller/namespaced/sagemaker/coderepository"
@@ -949,6 +961,8 @@ import (
 	permissionset "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionset"
 	permissionsetinlinepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/v2/internal/controller/namespaced/swf/domain"
+	dbcluster "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbcluster"
+	dbinstance "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreaminfluxdb/dbinstance"
 	databasetimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/v2/internal/controller/namespaced/timestreamwrite/table"
 	languagemodel "github.com/upbound/provider-aws/v2/internal/controller/namespaced/transcribe/languagemodel"
@@ -1333,6 +1347,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.Setup,
 		amilaunchpermission.Setup,
 		availabilityzonegroup.Setup,
+		capacityblockreservation.Setup,
 		capacityreservation.Setup,
 		carriergateway.Setup,
 		customergateway.Setup,
@@ -1423,6 +1438,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.Setup,
 		vpcipamscope.Setup,
 		vpcipv4cidrblockassociation.Setup,
+		vpcipv6cidrblockassociation.Setup,
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
@@ -1456,6 +1472,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.Setup,
 		accesspolicyassociation.Setup,
 		addon.Setup,
+		capability.Setup,
 		clustereks.Setup,
 		clusterauth.Setup,
 		fargateprofile.Setup,
@@ -1540,6 +1557,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.Setup,
 		detector.Setup,
 		filter.Setup,
+		malwareprotectionplan.Setup,
 		memberguardduty.Setup,
 		accesskey.Setup,
 		accountalias.Setup,
@@ -1603,6 +1621,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		singlescramsecretassociation.Setup,
+		vpcconnection.Setup,
 		connector.Setup,
 		customplugin.Setup,
 		workerconfiguration.Setup,
@@ -1683,6 +1702,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.Setup,
 		acl.Setup,
 		clustermemorydb.Setup,
+		multiregioncluster.Setup,
 		parametergroupmemorydb.Setup,
 		snapshot.Setup,
 		subnetgroupmemorydb.Setup,
@@ -1717,6 +1737,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewayconnectpeerassociation.Setup,
 		transitgatewayregistration.Setup,
 		vpcattachment.Setup,
+		monitor.Setup,
+		probe.Setup,
 		sink.Setup,
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
@@ -1820,6 +1842,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.Setup,
 		metricsdestination.Setup,
 		buckets3.Setup,
+		bucketabac.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
@@ -1851,6 +1874,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
 		storagelensconfiguration.Setup,
+		indexs3vectors.Setup,
+		vectorbucket.Setup,
+		vectorbucketpolicy.Setup,
 		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
@@ -1961,6 +1987,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.Setup,
 		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
+		dbcluster.Setup,
+		dbinstance.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		languagemodel.Setup,
@@ -2351,6 +2379,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		amicopy.SetupGated,
 		amilaunchpermission.SetupGated,
 		availabilityzonegroup.SetupGated,
+		capacityblockreservation.SetupGated,
 		capacityreservation.SetupGated,
 		carriergateway.SetupGated,
 		customergateway.SetupGated,
@@ -2441,6 +2470,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcipampoolcidrallocation.SetupGated,
 		vpcipamscope.SetupGated,
 		vpcipv4cidrblockassociation.SetupGated,
+		vpcipv6cidrblockassociation.SetupGated,
 		vpcpeeringconnection.SetupGated,
 		vpcpeeringconnectionaccepter.SetupGated,
 		vpcpeeringconnectionoptions.SetupGated,
@@ -2474,6 +2504,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accessentry.SetupGated,
 		accesspolicyassociation.SetupGated,
 		addon.SetupGated,
+		capability.SetupGated,
 		clustereks.SetupGated,
 		clusterauth.SetupGated,
 		fargateprofile.SetupGated,
@@ -2558,6 +2589,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesamlconfiguration.SetupGated,
 		detector.SetupGated,
 		filter.SetupGated,
+		malwareprotectionplan.SetupGated,
 		memberguardduty.SetupGated,
 		accesskey.SetupGated,
 		accountalias.SetupGated,
@@ -2621,6 +2653,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		scramsecretassociation.SetupGated,
 		serverlesscluster.SetupGated,
 		singlescramsecretassociation.SetupGated,
+		vpcconnection.SetupGated,
 		connector.SetupGated,
 		customplugin.SetupGated,
 		workerconfiguration.SetupGated,
@@ -2701,6 +2734,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		containerpolicy.SetupGated,
 		acl.SetupGated,
 		clustermemorydb.SetupGated,
+		multiregioncluster.SetupGated,
 		parametergroupmemorydb.SetupGated,
 		snapshot.SetupGated,
 		subnetgroupmemorydb.SetupGated,
@@ -2735,6 +2769,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewayconnectpeerassociation.SetupGated,
 		transitgatewayregistration.SetupGated,
 		vpcattachment.SetupGated,
+		monitor.SetupGated,
+		probe.SetupGated,
 		sink.SetupGated,
 		domainopensearch.SetupGated,
 		domainpolicyopensearch.SetupGated,
@@ -2838,6 +2874,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appmonitor.SetupGated,
 		metricsdestination.SetupGated,
 		buckets3.SetupGated,
+		bucketabac.SetupGated,
 		bucketaccelerateconfiguration.SetupGated,
 		bucketacl.SetupGated,
 		bucketanalyticsconfiguration.SetupGated,
@@ -2869,6 +2906,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		objectlambdaaccesspoint.SetupGated,
 		objectlambdaaccesspointpolicy.SetupGated,
 		storagelensconfiguration.SetupGated,
+		indexs3vectors.SetupGated,
+		vectorbucket.SetupGated,
+		vectorbucketpolicy.SetupGated,
 		appsagemaker.SetupGated,
 		appimageconfig.SetupGated,
 		coderepository.SetupGated,
@@ -2979,6 +3019,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.SetupGated,
 		permissionsetinlinepolicy.SetupGated,
 		domainswf.SetupGated,
+		dbcluster.SetupGated,
+		dbinstance.SetupGated,
 		databasetimestreamwrite.SetupGated,
 		tabletimestreamwrite.SetupGated,
 		languagemodel.SetupGated,

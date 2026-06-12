@@ -69,7 +69,7 @@ override SUBPACKAGES := $(filter-out monolith,$(shell find cmd/provider -type d 
 endif
 GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
-GO_SUBDIRS += cmd internal apis generate
+GO_SUBDIRS += cmd internal apis generate config
 GO111MODULE = on
 
 export SUBPACKAGES := $(SUBPACKAGES)
@@ -83,8 +83,8 @@ KIND_VERSION = v0.30.0
 UPTEST_VERSION = v2.2.0
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
-CROSSPLANE_VERSION = 2.2.0
-CROSSPLANE_CLI_VERSION = v2.2.0
+CROSSPLANE_VERSION = 2.2.1
+CROSSPLANE_CLI_VERSION = v2.2.1
 CRDDIFF_VERSION = v0.12.1
 
 export CROSSPLANE_CLI_VERSION := $(CROSSPLANE_CLI_VERSION)
@@ -301,8 +301,8 @@ family-e2e:
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
 		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
-		    if [[ $${api} == "v1" ]]; then \
-		        $(INFO) v1 is not a valid provider. Skipping...; \
+		    if [[ $${api} == "v1" || $${api} == "protection" ]]; then \
+		        $(INFO) $${api} is not a valid provider. Skipping...; \
 		        continue; \
 		    fi; \
 			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \

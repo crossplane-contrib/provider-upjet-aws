@@ -193,6 +193,107 @@ func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this Table.
+func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Replica); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Replica[i3].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Replica[i3].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.Replica[i3].KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Replica[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.Replica[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Replica[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.ServerSideEncryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArn")
+		}
+		mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ServerSideEncryption.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Replica); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Replica[i3].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Replica[i3].KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.Replica[i3].KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Replica[i3].KMSKeyArn")
+		}
+		mg.Spec.InitProvider.Replica[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Replica[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.ServerSideEncryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArn")
+		}
+		mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ServerSideEncryption.KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this TableItem.
 func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

@@ -20,3 +20,6 @@ func (tr *ScramSecretAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SingleScramSecretAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCConnection) Hub() {}

@@ -426,6 +426,7 @@ type AppImageConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AppImageConfig is the Schema for the AppImageConfigs API. Provides a SageMaker AI App Image Config resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

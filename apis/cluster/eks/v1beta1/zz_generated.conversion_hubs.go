@@ -16,6 +16,9 @@ func (tr *AccessPolicyAssociation) Hub() {}
 func (tr *Addon) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Capability) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *FargateProfile) Hub() {}
 
 // Hub marks this type as a conversion hub.

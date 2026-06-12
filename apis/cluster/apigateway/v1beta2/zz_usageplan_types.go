@@ -325,6 +325,7 @@ type UsagePlanStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // UsagePlan is the Schema for the UsagePlans API. Provides an API Gateway Usage Plan.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -43,6 +43,15 @@ func (l *AvailabilityZoneGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CapacityBlockReservationList.
+func (l *CapacityBlockReservationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this CapacityReservationList.
 func (l *CapacityReservationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -783,6 +792,15 @@ func (l *VPCEndpointSubnetAssociationList) GetItems() []resource.Managed {
 
 // GetItems of this VPCIPv4CidrBlockAssociationList.
 func (l *VPCIPv4CidrBlockAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCIPv6CidrBlockAssociationList.
+func (l *VPCIPv6CidrBlockAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
