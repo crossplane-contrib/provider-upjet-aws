@@ -26,7 +26,7 @@ on:
 
 jobs:
   publish-provider-packages:
-    uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider-family.yml@main
+    uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider-family.yml@451c4dc6ad3691b0a702a997a0ac24e8bbc8bbaa # main
     with:
       subpackages: ${{ github.event.inputs.subpackages }}
       size: ${{ github.event.inputs.size }}
