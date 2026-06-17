@@ -73,3 +73,27 @@ func SetupGated_networkmanager(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_networkmanager registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_networkmanager(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		attachmentaccepter.SetupWebhookWithManager,
+		connectattachment.SetupWebhookWithManager,
+		connection.SetupWebhookWithManager,
+		corenetwork.SetupWebhookWithManager,
+		customergatewayassociation.SetupWebhookWithManager,
+		device.SetupWebhookWithManager,
+		globalnetwork.SetupWebhookWithManager,
+		link.SetupWebhookWithManager,
+		linkassociation.SetupWebhookWithManager,
+		site.SetupWebhookWithManager,
+		transitgatewayconnectpeerassociation.SetupWebhookWithManager,
+		transitgatewayregistration.SetupWebhookWithManager,
+		vpcattachment.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

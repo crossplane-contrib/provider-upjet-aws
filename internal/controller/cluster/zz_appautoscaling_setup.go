@@ -43,3 +43,17 @@ func SetupGated_appautoscaling(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_appautoscaling registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_appautoscaling(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		policy.SetupWebhookWithManager,
+		scheduledaction.SetupWebhookWithManager,
+		target.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

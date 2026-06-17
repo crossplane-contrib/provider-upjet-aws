@@ -58,3 +58,22 @@ func SetupGated_ecr(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ecr registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ecr(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		lifecyclepolicy.SetupWebhookWithManager,
+		pullthroughcacherule.SetupWebhookWithManager,
+		registrypolicy.SetupWebhookWithManager,
+		registryscanningconfiguration.SetupWebhookWithManager,
+		replicationconfiguration.SetupWebhookWithManager,
+		repository.SetupWebhookWithManager,
+		repositorycreationtemplate.SetupWebhookWithManager,
+		repositorypolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

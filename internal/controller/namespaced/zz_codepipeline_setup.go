@@ -43,3 +43,17 @@ func SetupGated_codepipeline(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_codepipeline registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_codepipeline(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		codepipeline.SetupWebhookWithManager,
+		customactiontype.SetupWebhookWithManager,
+		webhook.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -64,3 +64,24 @@ func SetupGated_cognitoidp(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_cognitoidp registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_cognitoidp(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		identityprovider.SetupWebhookWithManager,
+		resourceserver.SetupWebhookWithManager,
+		riskconfiguration.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		usergroup.SetupWebhookWithManager,
+		useringroup.SetupWebhookWithManager,
+		userpool.SetupWebhookWithManager,
+		userpoolclient.SetupWebhookWithManager,
+		userpooldomain.SetupWebhookWithManager,
+		userpooluicustomization.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

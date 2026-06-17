@@ -58,3 +58,22 @@ func SetupGated_elasticache(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_elasticache registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_elasticache(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cluster.SetupWebhookWithManager,
+		globalreplicationgroup.SetupWebhookWithManager,
+		parametergroup.SetupWebhookWithManager,
+		replicationgroup.SetupWebhookWithManager,
+		serverlesscache.SetupWebhookWithManager,
+		subnetgroup.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		usergroup.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

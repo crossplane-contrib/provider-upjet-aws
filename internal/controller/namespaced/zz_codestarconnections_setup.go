@@ -40,3 +40,16 @@ func SetupGated_codestarconnections(mgr ctrl.Manager, o controller.Options) erro
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_codestarconnections registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_codestarconnections(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		connection.SetupWebhookWithManager,
+		host.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

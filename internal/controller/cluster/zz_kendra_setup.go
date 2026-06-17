@@ -49,3 +49,19 @@ func SetupGated_kendra(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_kendra registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_kendra(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		datasource.SetupWebhookWithManager,
+		experience.SetupWebhookWithManager,
+		index.SetupWebhookWithManager,
+		querysuggestionsblocklist.SetupWebhookWithManager,
+		thesaurus.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

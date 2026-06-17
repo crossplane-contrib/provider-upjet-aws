@@ -40,3 +40,16 @@ func SetupGated_glacier(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_glacier registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_glacier(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		vault.SetupWebhookWithManager,
+		vaultlock.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}
