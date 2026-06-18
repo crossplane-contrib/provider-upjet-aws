@@ -68,6 +68,7 @@ linters:
       threshold: 100
 
     goconst:
+      ignore-tests: true
       # minimal length of string constant, 3 by default
       min-len: 3
       # minimal occurrences count to trigger, 3 by default
