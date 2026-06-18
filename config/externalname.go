@@ -7,6 +7,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"hash/crc32"
 	"strings"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
@@ -1180,9 +1181,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// VPC Endpoint connection notifications can be imported using the VPC endpoint service ID and VPC endpoint ID separated by underscore (_)
 	"aws_vpc_endpoint_connection_accepter": config.TemplatedStringAsIdentifier("", "{{ .parameters.vpc_endpoint_service_id }}_{{ .parameters.vpc_endpoint_id }}"),
 	// VPC Endpoint Route Table Associations can be imported using vpc_endpoint_id together with route_table_id
-	"aws_vpc_endpoint_route_table_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "route_table_id"),
+	"aws_vpc_endpoint_route_table_association": vpcEndpointAssociationIdentifier("route_table_id"),
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
-	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
+	"aws_vpc_endpoint_subnet_association": vpcEndpointAssociationIdentifier("subnet_id"),
 	// VPC Endpoint security group Associations can be imported using vpc_endpoint_id together with security_group_id
 	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
 	// IPAMs can be imported using the ipam id
@@ -3268,6 +3269,77 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 		return strings.Join(vals, separator), nil
 	}
 	return e
+}
+
+// vpcEndpointAssociationIdentifier configures the external name for VPC endpoint
+// association resources (subnet, route table) whose Terraform internal ID format
+// differs from the documented import format. The Terraform AWS provider sets the
+// ID to a-<vpc_endpoint_id><hashcode(child_id)> (see
+// internal/service/ec2.vpcEndpoint*AssociationCreateID) while these resources are
+// imported as vpc_endpoint_id/child_id. FormattedIdentifierFromProvider read the
+// "a-" prefixed internal id as the external name (via IdentifierFromProvider's
+// default GetExternalNameFn) but produced the slash-separated form in GetIDFn, so
+// the external-name annotation oscillated every reconciliation, causing perpetual
+// delete/recreate cycles and AWS 429 throttling. Reconstructing both forms
+// deterministically from the named fields keeps GetExternalNameFn and GetIDFn
+// consistent.
+func vpcEndpointAssociationIdentifier(childKey string) config.ExternalName {
+	e := config.IdentifierFromProvider
+	// External name is the stable import form: vpc_endpoint_id/child_id.
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		vpceID, childID, err := vpcEndpointAndChild(tfstate, childKey)
+		if err != nil {
+			return "", err
+		}
+		return vpceID + "/" + childID, nil
+	}
+	// Terraform id is a-<vpc_endpoint_id><hashcode(child_id)>, matching
+	// terraform-provider-aws internal/service/ec2.vpcEndpoint*AssociationCreateID.
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		vpceID, childID, err := vpcEndpointAndChild(parameters, childKey)
+		if err != nil {
+			return "", err
+		}
+		return fmt.Sprintf("a-%s%d", vpceID, ec2StringHashcode(childID)), nil
+	}
+	return e
+}
+
+// vpcEndpointAndChild reads the vpc_endpoint_id and the association's child id
+// (childKey, e.g. subnet_id or route_table_id) from a tfstate/parameters map,
+// returning an error if either is missing or empty.
+func vpcEndpointAndChild(fields map[string]interface{}, childKey string) (vpceID, childID string, err error) {
+	if vpceID, err = requiredString(fields, "vpc_endpoint_id"); err != nil {
+		return "", "", err
+	}
+	if childID, err = requiredString(fields, childKey); err != nil {
+		return "", "", err
+	}
+	return vpceID, childID, nil
+}
+
+// requiredString returns fields[key] as a non-empty string, erroring if it is
+// missing, not a string, or empty.
+func requiredString(fields map[string]interface{}, key string) (string, error) {
+	s, ok := fields[key].(string)
+	if !ok || s == "" {
+		return "", errors.Errorf("%s cannot be empty", key)
+	}
+	return s, nil
+}
+
+// ec2StringHashcode mirrors terraform-provider-aws internal/create.StringHashcode,
+// which the AWS provider uses to build VPC endpoint association Terraform IDs.
+func ec2StringHashcode(s string) int {
+	v := int(crc32.ChecksumIEEE([]byte(s)))
+	if v >= 0 {
+		return v
+	}
+	if -v >= 0 {
+		return -v
+	}
+	// v == math.MinInt
+	return 0
 }
 
 // FormattedIdentifierUserDefinedNameLast is used in cases where the ID is constructed
