@@ -151,7 +151,14 @@ func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, 
 // the downstream aws.CredentialsProvider.Retrieve, and for now, does *not*
 // call the given AccountIDFn because in that case, a separate identity cache
 // should be used to retrieve the caller identity.
-func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
+//
+// extraKey holds additional per-reconcile values that influence the produced
+// AWS credentials but are not captured by the ProviderConfig itself (for
+// example, a SourceIdentity substituted from a managed resource annotation).
+// Each value is appended verbatim to the cache key so that two managed
+// resources sharing a ProviderConfig do not collide in the cache when their
+// effective credentials differ.
+func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn, extraKey ...string) (Credentials, error) {
 	// Only IRSA credentials are cached currently and
 	// only aws.CredentialsCache is supported as the underlying
 	// credential provider.
@@ -190,6 +197,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		return Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
 	}
 	cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
+	cacheKeyParams = append(cacheKeyParams, extraKey...)
 	cacheKey := strings.Join(cacheKeyParams, ":")
 	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.RLock()

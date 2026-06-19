@@ -288,6 +288,64 @@ If you need `sourceIdentity` attribution and your base credential source
 cannot supply it, add a single-entry `assumeRoleChain` that re-assumes
 into a working role (often the same role) with `sourceIdentity` set.
 
+#### Pass-through `sourceIdentity` from the managed resource
+
+When a Composition needs to attribute every Claim with a distinct
+`sourceIdentity` value, templating a per-Claim `ProviderConfig` works but
+creates one `ProviderConfig` per resource per Composition. To avoid that
+fan-out, a single shared `ProviderConfig` can opt in to reading the
+`sourceIdentity` for the current reconcile from an annotation on the
+managed resource.
+
+Two pieces are involved:
+
+1. The `ProviderConfig` marks one or more `assumeRoleChain[i].sourceIdentity`
+   entries with the literal sentinel `<from-mr>`:
+
+```yaml
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: shared-with-passthrough
+spec:
+  credentials:
+    source: ...
+  assumeRoleChain:
+    - roleARN: arn:aws:iam::111111111111:role/composer
+      sourceIdentity: <from-mr>
+```
+
+2. Each managed resource (typically produced by a Composition patch) carries
+   the annotation `aws.upbound.io/source-identity`:
+
+```yaml
+metadata:
+  annotations:
+    aws.upbound.io/source-identity: alice@example.com
+```
+
+At reconcile time the provider substitutes the annotation value into the
+chain entry before calling `sts:AssumeRole`. The substitution is performed
+on a per-reconcile copy of the spec; the on-cluster `ProviderConfig` is
+never mutated.
+
+Behaviour and constraints:
+
+- The annotation value must satisfy the AWS `SourceIdentity` constraint,
+  i.e. match `^[A-Za-z0-9_+=,.@-]{2,64}$`. Invalid or missing values cause
+  the reconcile to fail rather than silently issuing an STS call with the
+  literal sentinel.
+- The angle brackets in `<from-mr>` are deliberately outside the AWS
+  character set, so the sentinel cannot collide with a legitimate literal.
+- Substituted values participate in the provider's credentials cache key,
+  so two managed resources sharing the same `ProviderConfig` but carrying
+  different annotation values receive distinct STS sessions.
+- The IAM requirements for `sts:SetSourceIdentity` discussed above still
+  apply — both the caller's identity policy and the assumed role's trust
+  policy must permit it for every hop where a `sourceIdentity` is set.
+- Entries without the sentinel are unaffected; existing configurations
+  continue to behave as before.
+
 ### EKS Pod Identity
 
 EKS Pod Identity authentication is available when `provider-aws` is running on an EKS cluster and [EKS Pod Identity has been configured for that cluster](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html). Unlike IRSA, EKS Pod Identity eliminates the need for an OIDC provider. Instead, it relies on the built-in `pods.eks.amazonaws.com` service principal and the EKS Pod Identity Agent for managing IAM roles and credentials.
