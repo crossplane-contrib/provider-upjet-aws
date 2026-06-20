@@ -35,7 +35,6 @@ spec:
     budgetType: USAGE
     limitAmount: "10.0"
     limitUnit: dollars
-    region: us-west-1
     timePeriodStart: 2006-01-02_15:04
     timeUnit: MONTHLY
 ---
@@ -53,8 +52,8 @@ spec:
     name: example
     owner: "test testovich"
     provisioningArtifactParameters:
-      - templateUrl: https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/LAMP_Single_Instance.template
-        type: "CLOUD_FORMATION_TEMPLATE"
+      templateUrl: https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/LAMP_Single_Instance.template
+      type: "CLOUD_FORMATION_TEMPLATE"
     region: us-west-1
     tags:
       foo: bar

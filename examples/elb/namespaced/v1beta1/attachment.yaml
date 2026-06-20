@@ -26,11 +26,11 @@ spec:
     connectionDrainingTimeout: 400
     crossZoneLoadBalancing: true
     healthCheck:
-      - healthyThreshold: 2
-        interval: 30
-        target: HTTP:8000/
-        timeout: 3
-        unhealthyThreshold: 2
+      healthyThreshold: 2
+      interval: 30
+      target: HTTP:8000/
+      timeout: 3
+      unhealthyThreshold: 2
     idleTimeout: 400
     listener:
       - instancePort: 8000
@@ -57,7 +57,7 @@ spec:
         networkInterfaceIdRef:
           name: sample-ni
     creditSpecification:
-      - cpuCredits: unlimited
+      cpuCredits: unlimited
 ---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: NetworkInterface

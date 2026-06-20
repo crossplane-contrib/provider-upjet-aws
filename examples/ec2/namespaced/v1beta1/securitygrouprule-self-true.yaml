@@ -26,7 +26,6 @@ metadata:
   name: test-vpc
   namespace: upbound-system
 spec:
-  deletionPolicy: Delete
   forProvider:
     region: us-east-1
     vpcIdRef:
@@ -40,7 +39,6 @@ metadata:
   name: test-vpc-securitygroup
   namespace: upbound-system
 spec:
-  deletionPolicy: Delete
   forProvider:
     fromPort: 22
     protocol: tcp

@@ -36,7 +36,6 @@ spec:
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     backupWindow: 09:46-10:16
-    name: example
     engine: postgres
     engineVersion: "16.6"
     instanceClass: db.t3.micro

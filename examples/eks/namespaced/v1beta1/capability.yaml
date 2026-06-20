@@ -52,7 +52,7 @@ spec:
         ]
       }
 ---
-apiVersion: eks.aws.m.upbound.io/v1beta2
+apiVersion: eks.aws.m.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
@@ -170,7 +170,7 @@ metadata:
 spec:
   replayDeletion: true
   by:
-    apiVersion: eks.aws.upbound.io/v1beta2
+    apiVersion: eks.aws.upbound.io/v1beta1
     kind: Cluster
     resourceRef:
       name: sample-eks-cluster
@@ -193,7 +193,7 @@ metadata:
 spec:
   replayDeletion: true
   by:
-    apiVersion: eks.aws.upbound.io/v1beta2
+    apiVersion: eks.aws.upbound.io/v1beta1
     kind: Cluster
     resourceRef:
       name: sample-eks-cluster

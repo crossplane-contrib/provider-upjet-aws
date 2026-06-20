@@ -29,7 +29,7 @@ metadata:
 spec:
   forProvider:
     description: primary replication group
-    atRestEncryptionEnabled: true
+    atRestEncryptionEnabled: "true"
     # Uncomment lines below if you set 'numCacheClusters' > 1
     #
     # automaticFailoverEnabled: true

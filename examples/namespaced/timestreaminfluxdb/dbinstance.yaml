@@ -10,6 +10,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   name: example
+  namespace: upbound-system
 spec:
   forProvider:
     allocatedStorage: 20
@@ -20,7 +21,6 @@ spec:
     passwordSecretRef:
       key: password
       name: influxdb-password
-      namespace: upbound-system
     port: 8086
     region: us-east-1
     username: admin

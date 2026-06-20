@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    eventSourceArn: ###arn###
+    eventSourceArn: "###arn###"
     functionNameRef:
       name: example
     startingPosition: LATEST

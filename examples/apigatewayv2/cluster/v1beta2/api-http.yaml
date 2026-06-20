@@ -109,11 +109,10 @@ metadata:
     meta.upbound.io/example-id: apigatewayv2/v1beta2/api
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
-  name: example
+  name: example-stage
 spec:
   forProvider:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
-    name: example-stage
     region: us-west-1
