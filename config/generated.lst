@@ -177,6 +177,7 @@
 "aws_cloudwatch_event_permission",
 "aws_cloudwatch_event_rule",
 "aws_cloudwatch_event_target",
+"aws_cloudwatch_log_account_policy",
 "aws_cloudwatch_log_destination",
 "aws_cloudwatch_log_destination_policy",
 "aws_cloudwatch_log_group",

@@ -690,6 +690,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudwatch_log_subscription_filter": config.IdentifierFromProvider,
 	// CloudWatch query definitions can be imported using the query definition ARN.
 	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,
+	// CloudWatch Log Account Policy can be imported using the policy_name and policy_type separated by: "my-account-policy:SUBSCRIPTION_FILTER_POLICY"
+	"aws_cloudwatch_log_account_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.policy_name }}:{{ .parameters.policy_type }}"),
 
 	// codeartifact
 	//
