@@ -52,3 +52,20 @@ func SetupGated_transfer(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_transfer registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_transfer(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		connector.SetupWebhookWithManager,
+		server.SetupWebhookWithManager,
+		sshkey.SetupWebhookWithManager,
+		tag.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		workflow.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -37,3 +37,15 @@ func SetupGated_appintegrations(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_appintegrations registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_appintegrations(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		eventintegration.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

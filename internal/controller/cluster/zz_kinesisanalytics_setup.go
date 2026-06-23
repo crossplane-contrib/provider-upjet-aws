@@ -37,3 +37,15 @@ func SetupGated_kinesisanalytics(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_kinesisanalytics registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_kinesisanalytics(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		application.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

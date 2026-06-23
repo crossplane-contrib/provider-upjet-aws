@@ -49,3 +49,19 @@ func SetupGated_apprunner(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_apprunner registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_apprunner(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		autoscalingconfigurationversion.SetupWebhookWithManager,
+		connection.SetupWebhookWithManager,
+		observabilityconfiguration.SetupWebhookWithManager,
+		service.SetupWebhookWithManager,
+		vpcconnector.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

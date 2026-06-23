@@ -58,3 +58,22 @@ func SetupGated_s3control(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_s3control registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_s3control(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accesspoint.SetupWebhookWithManager,
+		accesspointpolicy.SetupWebhookWithManager,
+		accountpublicaccessblock.SetupWebhookWithManager,
+		multiregionaccesspoint.SetupWebhookWithManager,
+		multiregionaccesspointpolicy.SetupWebhookWithManager,
+		objectlambdaaccesspoint.SetupWebhookWithManager,
+		objectlambdaaccesspointpolicy.SetupWebhookWithManager,
+		storagelensconfiguration.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

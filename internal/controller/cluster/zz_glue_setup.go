@@ -79,3 +79,29 @@ func SetupGated_glue(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_glue registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_glue(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		catalogdatabase.SetupWebhookWithManager,
+		catalogtable.SetupWebhookWithManager,
+		catalogtableoptimizer.SetupWebhookWithManager,
+		classifier.SetupWebhookWithManager,
+		connection.SetupWebhookWithManager,
+		crawler.SetupWebhookWithManager,
+		datacatalogencryptionsettings.SetupWebhookWithManager,
+		job.SetupWebhookWithManager,
+		registry.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
+		schema.SetupWebhookWithManager,
+		securityconfiguration.SetupWebhookWithManager,
+		trigger.SetupWebhookWithManager,
+		userdefinedfunction.SetupWebhookWithManager,
+		workflow.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

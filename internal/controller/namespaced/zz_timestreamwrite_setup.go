@@ -40,3 +40,16 @@ func SetupGated_timestreamwrite(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_timestreamwrite registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_timestreamwrite(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		database.SetupWebhookWithManager,
+		table.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

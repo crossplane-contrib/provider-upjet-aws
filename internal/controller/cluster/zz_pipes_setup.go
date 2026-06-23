@@ -37,3 +37,15 @@ func SetupGated_pipes(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_pipes registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_pipes(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		pipe.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

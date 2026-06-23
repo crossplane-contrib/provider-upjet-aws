@@ -70,3 +70,26 @@ func SetupGated_bedrockagentcore(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_bedrockagentcore registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_bedrockagentcore(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		agentruntime.SetupWebhookWithManager,
+		agentruntimeendpoint.SetupWebhookWithManager,
+		apikeycredentialprovider.SetupWebhookWithManager,
+		browser.SetupWebhookWithManager,
+		codeinterpreter.SetupWebhookWithManager,
+		gateway.SetupWebhookWithManager,
+		gatewaytarget.SetupWebhookWithManager,
+		memory.SetupWebhookWithManager,
+		memorystrategy.SetupWebhookWithManager,
+		oauth2credentialprovider.SetupWebhookWithManager,
+		tokenvaultcmk.SetupWebhookWithManager,
+		workloadidentity.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

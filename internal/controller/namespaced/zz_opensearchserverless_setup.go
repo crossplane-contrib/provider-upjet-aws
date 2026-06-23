@@ -52,3 +52,20 @@ func SetupGated_opensearchserverless(mgr ctrl.Manager, o controller.Options) err
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_opensearchserverless registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_opensearchserverless(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accesspolicy.SetupWebhookWithManager,
+		collection.SetupWebhookWithManager,
+		lifecyclepolicy.SetupWebhookWithManager,
+		securityconfig.SetupWebhookWithManager,
+		securitypolicy.SetupWebhookWithManager,
+		vpcendpoint.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -49,3 +49,19 @@ func SetupGated_grafana(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_grafana registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_grafana(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		licenseassociation.SetupWebhookWithManager,
+		roleassociation.SetupWebhookWithManager,
+		workspace.SetupWebhookWithManager,
+		workspaceapikey.SetupWebhookWithManager,
+		workspacesamlconfiguration.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

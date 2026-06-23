@@ -58,3 +58,22 @@ func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_cloudwatchlogs registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_cloudwatchlogs(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		definition.SetupWebhookWithManager,
+		destination.SetupWebhookWithManager,
+		destinationpolicy.SetupWebhookWithManager,
+		group.SetupWebhookWithManager,
+		metricfilter.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
+		stream.SetupWebhookWithManager,
+		subscriptionfilter.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

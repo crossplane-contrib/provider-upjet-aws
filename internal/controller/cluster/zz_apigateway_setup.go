@@ -106,3 +106,38 @@ func SetupGated_apigateway(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_apigateway registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_apigateway(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		account.SetupWebhookWithManager,
+		apikey.SetupWebhookWithManager,
+		authorizer.SetupWebhookWithManager,
+		basepathmapping.SetupWebhookWithManager,
+		clientcertificate.SetupWebhookWithManager,
+		deployment.SetupWebhookWithManager,
+		documentationpart.SetupWebhookWithManager,
+		documentationversion.SetupWebhookWithManager,
+		domainname.SetupWebhookWithManager,
+		gatewayresponse.SetupWebhookWithManager,
+		integration.SetupWebhookWithManager,
+		integrationresponse.SetupWebhookWithManager,
+		method.SetupWebhookWithManager,
+		methodresponse.SetupWebhookWithManager,
+		methodsettings.SetupWebhookWithManager,
+		model.SetupWebhookWithManager,
+		requestvalidator.SetupWebhookWithManager,
+		resource.SetupWebhookWithManager,
+		restapi.SetupWebhookWithManager,
+		restapipolicy.SetupWebhookWithManager,
+		stage.SetupWebhookWithManager,
+		usageplan.SetupWebhookWithManager,
+		usageplankey.SetupWebhookWithManager,
+		vpclink.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -100,3 +100,36 @@ func SetupGated_rds(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_rds registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_rds(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		cluster.SetupWebhookWithManager,
+		clusteractivitystream.SetupWebhookWithManager,
+		clusterendpoint.SetupWebhookWithManager,
+		clusterinstance.SetupWebhookWithManager,
+		clusterparametergroup.SetupWebhookWithManager,
+		clusterroleassociation.SetupWebhookWithManager,
+		clustersnapshot.SetupWebhookWithManager,
+		dbinstanceautomatedbackupsreplication.SetupWebhookWithManager,
+		dbsnapshotcopy.SetupWebhookWithManager,
+		eventsubscription.SetupWebhookWithManager,
+		globalcluster.SetupWebhookWithManager,
+		instance.SetupWebhookWithManager,
+		instanceroleassociation.SetupWebhookWithManager,
+		instancestate.SetupWebhookWithManager,
+		optiongroup.SetupWebhookWithManager,
+		parametergroup.SetupWebhookWithManager,
+		proxy.SetupWebhookWithManager,
+		proxydefaulttargetgroup.SetupWebhookWithManager,
+		proxyendpoint.SetupWebhookWithManager,
+		proxytarget.SetupWebhookWithManager,
+		snapshot.SetupWebhookWithManager,
+		subnetgroup.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -40,3 +40,16 @@ func SetupGated_budgets(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_budgets registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_budgets(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		budget.SetupWebhookWithManager,
+		budgetaction.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

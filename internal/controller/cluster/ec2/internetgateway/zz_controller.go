@@ -27,6 +27,15 @@ import (
 	features "github.com/upbound/provider-aws/v2/internal/features"
 )
 
+// SetupWebhookWithManager registers the conversion webhook for InternetGateway.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.InternetGateway{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.InternetGateway")
+	}
+	return nil
+}
+
 // SetupGated adds a controller that reconciles InternetGateway managed resources.
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 	o.Options.Gate.Register(func() {
@@ -81,14 +90,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
 		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
-	}
-
-	// register webhooks for the kind v1beta1.InternetGateway if they're enabled.
-	if o.StartWebhooks {
-		if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.InternetGateway{}).
-			Complete(); err != nil {
-			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.InternetGateway")
-		}
 	}
 
 	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {

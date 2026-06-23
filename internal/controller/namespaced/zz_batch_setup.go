@@ -46,3 +46,18 @@ func SetupGated_batch(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_batch registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_batch(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		computeenvironment.SetupWebhookWithManager,
+		jobdefinition.SetupWebhookWithManager,
+		jobqueue.SetupWebhookWithManager,
+		schedulingpolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

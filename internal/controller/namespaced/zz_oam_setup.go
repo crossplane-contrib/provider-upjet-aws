@@ -37,3 +37,15 @@ func SetupGated_oam(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_oam registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_oam(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		sink.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}
