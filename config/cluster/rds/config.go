@@ -52,9 +52,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			if a, ok := attr["master_username"].(string); ok {
 				conn["master_username"] = []byte(a)
+				// Standard key for crossplane-runtime compatibility (e.g., provider-sql)
+				conn["username"] = []byte(a)
 			}
 			if a, ok := attr["port"]; ok {
 				conn["port"] = []byte(fmt.Sprintf("%v", a))
+			}
+			if a, ok := attr["master_password"].(string); ok {
+				// Standard key for crossplane-runtime compatibility (e.g., provider-sql)
+				conn["password"] = []byte(a)
 			}
 			return conn, nil
 		}
