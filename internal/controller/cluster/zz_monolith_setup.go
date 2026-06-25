@@ -3282,6 +3282,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		permissioncloudwatchevents.SetupWebhookWithManager,
 		rule.SetupWebhookWithManager,
 		targetcloudwatchevents.SetupWebhookWithManager,
+		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,

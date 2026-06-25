@@ -65,6 +65,7 @@ func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 // SetupWebhookWithManager_cloudwatchlogs registers conversion webhooks for all resource kinds in the group.
 func SetupWebhookWithManager_cloudwatchlogs(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
+		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,
