@@ -37,6 +37,7 @@ import (
 	documentationpart "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/documentationpart"
 	documentationversion "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/documentationversion"
 	domainname "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/domainname"
+	domainnameaccessassociation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/domainnameaccessassociation"
 	gatewayresponse "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/gatewayresponse"
 	integration "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/integration"
 	integrationresponse "github.com/upbound/provider-aws/v2/internal/controller/namespaced/apigateway/integrationresponse"
@@ -1063,6 +1064,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		documentationpart.Setup,
 		documentationversion.Setup,
 		domainname.Setup,
+		domainnameaccessassociation.Setup,
 		gatewayresponse.Setup,
 		integration.Setup,
 		integrationresponse.Setup,
@@ -2095,6 +2097,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		documentationpart.SetupGated,
 		documentationversion.SetupGated,
 		domainname.SetupGated,
+		domainnameaccessassociation.SetupGated,
 		gatewayresponse.SetupGated,
 		integration.SetupGated,
 		integrationresponse.SetupGated,
@@ -3126,6 +3129,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		documentationpart.SetupWebhookWithManager,
 		documentationversion.SetupWebhookWithManager,
 		domainname.SetupWebhookWithManager,
+		domainnameaccessassociation.SetupWebhookWithManager,
 		gatewayresponse.SetupWebhookWithManager,
 		integration.SetupWebhookWithManager,
 		integrationresponse.SetupWebhookWithManager,
