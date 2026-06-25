@@ -40,6 +40,5 @@ spec:
             }
           ]
         })}
-    policyName: data-protection
     policyType: DATA_PROTECTION_POLICY
     region: us-west-1

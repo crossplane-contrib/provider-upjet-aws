@@ -18,6 +18,9 @@ type AccountPolicyInitParameters struct {
 	// Text of the account policy. Refer to the AWS docs for more information.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// Type of account policy. One of DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY or TRANSFORMER_POLICY. You can have one account policy per type in an account.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
 	// Currently defaults to and only accepts the value: ALL.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -30,9 +33,6 @@ type AccountPolicyObservation struct {
 
 	// Text of the account policy. Refer to the AWS docs for more information.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
-
-	// Name of the account policy.
-	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// Type of account policy. One of DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY or TRANSFORMER_POLICY. You can have one account policy per type in an account.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
@@ -54,13 +54,9 @@ type AccountPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
-	// Name of the account policy.
-	// +kubebuilder:validation:Required
-	PolicyName *string `json:"policyName" tf:"policy_name,omitempty"`
-
 	// Type of account policy. One of DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY or TRANSFORMER_POLICY. You can have one account policy per type in an account.
-	// +kubebuilder:validation:Required
-	PolicyType *string `json:"policyType" tf:"policy_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -113,6 +109,7 @@ type AccountPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument) || (has(self.initProvider) && has(self.initProvider.policyDocument))",message="spec.forProvider.policyDocument is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyType) || (has(self.initProvider) && has(self.initProvider.policyType))",message="spec.forProvider.policyType is a required parameter"
 	Spec   AccountPolicySpec   `json:"spec"`
 	Status AccountPolicyStatus `json:"status,omitempty"`
 }

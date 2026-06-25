@@ -2,25 +2,42 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-
-apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
 kind: AccountPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: cloudwatchlogs/v1beta1/accountpolicy
-    upjet.upbound.io/manual-intervention: This resource needs a JSON inline reference replacement (policyDocument field)
   labels:
-    testing.upbound.io/example-name: data_protection
-  name: subscription-filter-policy
+    testing.upbound.io/example-name: data-protection
+  name: data-protection
   namespace: upbound-system
 spec:
   forProvider:
     region: us-west-1
-    policyName: subscription-filter
-    policyType: SUBSCRIPTION_FILTER_POLICY
+    policyType: DATA_PROTECTION_POLICY
     policyDocument: |
       {
-        "DestinationArn": "arn:aws:lambda:us-west-1:153891904029:function:cloudwatchlogs",
-        "FilterPattern": "test"
+        "Name": "DataProtection",
+        "Version": "2021-06-01",
+        "Statement": [
+          {
+            "Sid": "Audit",
+            "DataIdentifier": ["arn:aws:dataprotection::aws:data-identifier/EmailAddress"],
+            "Operation": {
+              "Audit": {
+                "FindingsDestination": {}
+              }
+            }
+          },
+          {
+            "Sid": "Redact",
+            "DataIdentifier": ["arn:aws:dataprotection::aws:data-identifier/EmailAddress"],
+            "Operation": {
+              "Deidentify": {
+                "MaskConfig": {}
+              }
+            }
+          }
+        ]
       }
-    selectionCriteria: 'LogGroupName NOT IN ["excluded_log_group_name"]'
+

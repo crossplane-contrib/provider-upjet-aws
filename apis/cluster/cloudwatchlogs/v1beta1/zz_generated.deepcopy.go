@@ -48,6 +48,11 @@ func (in *AccountPolicyInitParameters) DeepCopyInto(out *AccountPolicyInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.PolicyType != nil {
+		in, out := &in.PolicyType, &out.PolicyType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope
 		*out = new(string)
@@ -115,11 +120,6 @@ func (in *AccountPolicyObservation) DeepCopyInto(out *AccountPolicyObservation) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.PolicyName != nil {
-		in, out := &in.PolicyName, &out.PolicyName
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyType != nil {
 		in, out := &in.PolicyType, &out.PolicyType
 		*out = new(string)
@@ -157,11 +157,6 @@ func (in *AccountPolicyParameters) DeepCopyInto(out *AccountPolicyParameters) {
 	*out = *in
 	if in.PolicyDocument != nil {
 		in, out := &in.PolicyDocument, &out.PolicyDocument
-		*out = new(string)
-		**out = **in
-	}
-	if in.PolicyName != nil {
-		in, out := &in.PolicyName, &out.PolicyName
 		*out = new(string)
 		**out = **in
 	}
