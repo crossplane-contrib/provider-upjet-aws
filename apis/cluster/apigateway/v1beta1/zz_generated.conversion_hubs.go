@@ -28,6 +28,9 @@ func (tr *Deployment) Hub() {}
 func (tr *DocumentationVersion) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *DomainNameAccessAssociation) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *GatewayResponse) Hub() {}
 
 // Hub marks this type as a conversion hub.

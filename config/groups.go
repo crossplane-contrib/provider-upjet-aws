@@ -73,6 +73,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_api_gateway_documentation_part":                       ReplaceGroupWords("apigateway", 2),
 	"aws_api_gateway_documentation_version":                    ReplaceGroupWords("apigateway", 2),
 	"aws_api_gateway_domain_name":                              ReplaceGroupWords("apigateway", 2),
+	"aws_api_gateway_domain_name_access_association":           ReplaceGroupWords("apigateway", 2),
 	"aws_api_gateway_gateway_response":                         ReplaceGroupWords("apigateway", 2),
 	"aws_api_gateway_integration_response":                     ReplaceGroupWords("apigateway", 2),
 	"aws_api_gateway_integration":                              ReplaceGroupWords("apigateway", 2),
