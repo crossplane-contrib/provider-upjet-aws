@@ -190,6 +190,7 @@ import (
 	permissioncloudwatchevents "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchevents/permission"
 	rule "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchevents/rule"
 	targetcloudwatchevents "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchevents/target"
+	accountpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/accountpolicy"
 	definition "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/definition"
 	destination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destination"
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
@@ -1216,6 +1217,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissioncloudwatchevents.Setup,
 		rule.Setup,
 		targetcloudwatchevents.Setup,
+		accountpolicy.Setup,
 		definition.Setup,
 		destination.Setup,
 		destinationpolicy.Setup,
@@ -2248,6 +2250,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissioncloudwatchevents.SetupGated,
 		rule.SetupGated,
 		targetcloudwatchevents.SetupGated,
+		accountpolicy.SetupGated,
 		definition.SetupGated,
 		destination.SetupGated,
 		destinationpolicy.SetupGated,
@@ -3279,6 +3282,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		permissioncloudwatchevents.SetupWebhookWithManager,
 		rule.SetupWebhookWithManager,
 		targetcloudwatchevents.SetupWebhookWithManager,
+		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,

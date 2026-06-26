@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	accountpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/accountpolicy"
 	definition "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/definition"
 	destination "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destination"
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
@@ -23,6 +24,7 @@ import (
 // the supplied manager.
 func Setup_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accountpolicy.Setup,
 		definition.Setup,
 		destination.Setup,
 		destinationpolicy.Setup,
@@ -43,6 +45,7 @@ func Setup_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accountpolicy.SetupGated,
 		definition.SetupGated,
 		destination.SetupGated,
 		destinationpolicy.SetupGated,
@@ -62,6 +65,7 @@ func SetupGated_cloudwatchlogs(mgr ctrl.Manager, o controller.Options) error {
 // SetupWebhookWithManager_cloudwatchlogs registers conversion webhooks for all resource kinds in the group.
 func SetupWebhookWithManager_cloudwatchlogs(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
+		accountpolicy.SetupWebhookWithManager,
 		definition.SetupWebhookWithManager,
 		destination.SetupWebhookWithManager,
 		destinationpolicy.SetupWebhookWithManager,
