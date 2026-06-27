@@ -452,6 +452,7 @@ func UseUpbound(ctx context.Context, region string, pcs *v1beta1.ProviderConfigS
 func SetAssumeRoleOptions(aro v1beta1.AssumeRoleOptions) func(*stscreds.AssumeRoleOptions) {
 	return func(opt *stscreds.AssumeRoleOptions) {
 		opt.ExternalID = aro.ExternalID
+		opt.SourceIdentity = aro.SourceIdentity
 		for _, t := range aro.Tags {
 			opt.Tags = append(
 				opt.Tags,

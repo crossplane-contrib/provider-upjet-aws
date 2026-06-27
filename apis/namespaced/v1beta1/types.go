@@ -59,6 +59,14 @@ type AssumeRoleOptions struct {
 	// +optional
 	ExternalID *string `json:"externalID,omitempty"`
 
+	// SourceIdentity is the source identity set on the assumed session.
+	// It appears in CloudTrail as userIdentity.sessionContext.sourceIdentity
+	// and is usable as the aws:SourceIdentity IAM condition key. The
+	// sts:SetSourceIdentity action must be permitted on both the caller's
+	// identity policy and the assumed role's trust policy.
+	// +optional
+	SourceIdentity *string `json:"sourceIdentity,omitempty"`
+
 	// Tags is list of session tags that you want to pass. Each session tag consists of a key
 	// name and an associated value. For more information about session tags, see
 	// Tagging STS Sessions

@@ -27,6 +27,11 @@ func (in *AssumeRoleOptions) DeepCopyInto(out *AssumeRoleOptions) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceIdentity != nil {
+		in, out := &in.SourceIdentity, &out.SourceIdentity
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make([]Tag, len(*in))
