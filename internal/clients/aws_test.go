@@ -85,6 +85,28 @@ func TestBuildNoForkAWSConfig(t *testing.T) {
 			},
 			wantStaticCred: true,
 		},
+		"WebIdentityAuthUsesStaticCredentials": {
+			reason: "WebIdentity currently relies on pre-resolved credentials and should keep static fields populated.",
+			pc: &namespacedv1beta1.ClusterProviderConfig{
+				Spec: namespacedv1beta1.ProviderConfigSpec{
+					Credentials: namespacedv1beta1.ProviderCredentials{
+						Source: xpv1.CredentialsSource(authKeyWebIdentity),
+					},
+				},
+			},
+			wantStaticCred: true,
+		},
+		"UpboundAuthUsesStaticCredentials": {
+			reason: "Upbound auth currently relies on pre-resolved credentials and should keep static fields populated.",
+			pc: &namespacedv1beta1.ClusterProviderConfig{
+				Spec: namespacedv1beta1.ProviderConfigSpec{
+					Credentials: namespacedv1beta1.ProviderCredentials{
+						Source: xpv1.CredentialsSource(authKeyUpbound),
+					},
+				},
+			},
+			wantStaticCred: true,
+		},
 		"NilProviderConfigFallsBackToStatic": {
 			reason:         "A nil ProviderConfig should defensively fall back to static credentials.",
 			pc:             nil,
@@ -135,5 +157,37 @@ func TestBuildNoForkAWSConfig(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestUseDynamicNoForkCredentials(t *testing.T) {
+	cases := map[string]struct {
+		source xpv1.CredentialsSource
+		want   bool
+	}{
+		"IRSA":        {source: xpv1.CredentialsSource(authKeyIRSA), want: true},
+		"PodIdentity": {source: xpv1.CredentialsSource(authKeyPodIdentity), want: true},
+		"Secret":      {source: xpv1.CredentialsSourceSecret, want: false},
+		"WebIdentity": {source: xpv1.CredentialsSource(authKeyWebIdentity), want: false},
+		"Upbound":     {source: xpv1.CredentialsSource(authKeyUpbound), want: false},
+	}
+
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			pc := &namespacedv1beta1.ClusterProviderConfig{
+				Spec: namespacedv1beta1.ProviderConfigSpec{
+					Credentials: namespacedv1beta1.ProviderCredentials{
+						Source: tc.source,
+					},
+				},
+			}
+			if got := useDynamicNoForkCredentials(pc); got != tc.want {
+				t.Fatalf("useDynamicNoForkCredentials() = %t, want %t", got, tc.want)
+			}
+		})
+	}
+
+	if got := useDynamicNoForkCredentials(nil); got {
+		t.Fatalf("useDynamicNoForkCredentials(nil) = true, want false")
 	}
 }
