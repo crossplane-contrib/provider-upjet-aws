@@ -115,7 +115,7 @@ func (tr *Memory) GetMergedParameters(shouldMergeInitProvider bool) (map[string]
 // LateInitialize this Memory using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Memory) LateInitialize(attrs []byte) (bool, error) {
-	params := &MemoryParameters{}
+	params := &MemoryParameters_2{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

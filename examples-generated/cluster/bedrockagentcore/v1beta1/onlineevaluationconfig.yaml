@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: OnlineEvaluationConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataSourceConfig:
+    - cloudwatchLogs:
+      - logGroupNamesRefs:
+        - name: example
+        serviceNames:
+        - my_agent_service
+    description: Continuous evaluation of agent performance
+    enableOnCreate: true
+    evaluationExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    evaluator:
+    - evaluatorId: Builtin.Helpfulness
+    - evaluatorId: Builtin.GoalSuccessRate
+    onlineEvaluationConfigName: my_evaluation_config
+    region: us-west-1
+    rule:
+    - samplingConfig:
+      - samplingPercentage: 10
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/onlineevaluationconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [{
+            Effect = "Allow"
+            Action = "sts:AssumeRole"
+            Principal = {
+              Service = "bedrock-agentcore.amazonaws.com"
+            }
+          }]
+        })}
+    region: us-west-1
