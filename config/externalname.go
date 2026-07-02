@@ -57,14 +57,26 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
 	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
 	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
-	"aws_bedrockagentcore_gateway":                     config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
-	"aws_bedrockagentcore_gateway_target":              config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// imported via evaluator_id, must match regex [a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_evaluator":      config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
+	"aws_bedrockagentcore_gateway":        config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_gateway_target": config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// must match regex [a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_harness": config.FrameworkResourceWithComputedIdentifier("harness_id", "xp_stub_harness-0000000000"),
 	// import using ID of memory, must satisfy regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
 	"aws_bedrockagentcore_memory":                     identifierFromProviderWithDefaultStub("stub_memory_placeholder_xp-stub123456"),
 	"aws_bedrockagentcore_memory_strategy":            config.FrameworkResourceWithComputedIdentifier("memory_strategy_id", "STUB123456"),
 	"aws_bedrockagentcore_oauth2_credential_provider": frameworkNameAsIdentifier(),
-	"aws_bedrockagentcore_token_vault_cmk":            bedrockAgentCoreTokenVaultCMK(),
-	"aws_bedrockagentcore_workload_identity":          frameworkNameAsIdentifier(),
+	// must match regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_online_evaluation_config": config.FrameworkResourceWithComputedIdentifier("online_evaluation_config_id", "xp_stub_evalconfig-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy": config.FrameworkResourceWithComputedIdentifier("policy_id", "xp_stub_policy_00000-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy_engine": config.FrameworkResourceWithComputedIdentifier("policy_engine_id", "xp_stub_policy_engine-0000000000"),
+	// import using the resourceArn of the target Gateway or AgentRuntime
+	"aws_bedrockagentcore_resource_policy":   bedrockAgentCoreResourcePolicy(),
+	"aws_bedrockagentcore_token_vault_cmk":   bedrockAgentCoreTokenVaultCMK(),
+	"aws_bedrockagentcore_workload_identity": frameworkNameAsIdentifier(),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
@@ -3847,6 +3859,29 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
 	}
 	e.IdentifierFields = []string{"name", "agent_runtime_id"}
+	return e
+}
+
+func bedrockAgentCoreResourcePolicy() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.OmittedFields = []string{}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["resource_arn"].(string)
+		if !ok {
+			return "", errors.New("resource_arn field missing from tfstate")
+		}
+		return name, nil
+	}
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["resource_arn"] = externalName
+	}
+	e.IdentifierFields = []string{"resource_arn"}
 	return e
 }
 
