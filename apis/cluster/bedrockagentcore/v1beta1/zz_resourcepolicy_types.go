@@ -45,18 +45,8 @@ type ResourcePolicyParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// Amazon Resource Name (ARN) of the resource for which to create or update the resource policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.AgentRuntime
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("agent_runtime_arn",true)
-	// +kubebuilder:validation:Optional
-	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
-
-	// Reference to a AgentRuntime in bedrockagentcore to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
-
-	// Selector for a AgentRuntime in bedrockagentcore to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
 
 // ResourcePolicySpec defines the desired state of ResourcePolicy

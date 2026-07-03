@@ -21,7 +21,7 @@ func (mg *Harness) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Harness
 func (tr *Harness) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"environment_variables": "environmentVariablesSecretRef", "system_prompt[*].text": "systemPrompt[*].textSecretRef", "tool[*].config[*].inline_function[*].input_schema": "tool[*].config[*].inlineFunction[*].inputSchemaSecretRef", "tool[*].config[*].remote_mcp[*].headers": "tool[*].config[*].remoteMcp[*].headersSecretRef", "tool[*].config[*].remote_mcp[*].url": "tool[*].config[*].remoteMcp[*].urlSecretRef"}
+	return map[string]string{"environment_variables": "environmentVariablesSecretRef", "system_prompt[*].text": "systemPrompt[*].textSecretRef", "tool[*].config[*].inline_function[*].input_schema": "tool[*].config.inlineFunction.inputSchemaSecretRef", "tool[*].config[*].remote_mcp[*].headers": "tool[*].config.remoteMcp.headersSecretRef", "tool[*].config[*].remote_mcp[*].url": "tool[*].config.remoteMcp.urlSecretRef"}
 }
 
 // GetObservation of this Harness

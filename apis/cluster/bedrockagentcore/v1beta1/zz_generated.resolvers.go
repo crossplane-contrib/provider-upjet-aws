@@ -263,28 +263,28 @@ func (mg *Evaluator) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.EvaluatorConfig); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig); i5++ {
+	if mg.Spec.ForProvider.EvaluatorConfig != nil {
+		if mg.Spec.ForProvider.EvaluatorConfig.CodeBased != nil {
+			if mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn),
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn),
 						Extract:      resource.ExtractParamPath("arn", true),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnRef,
-						Selector:     mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnSelector,
+						Reference:    mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnRef,
+						Selector:     mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn")
+					return errors.Wrap(err, "mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn")
 				}
-				mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.ForProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnRef = rsp.ResolvedReference
+				mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnRef = rsp.ResolvedReference
 
 			}
 		}
@@ -309,28 +309,28 @@ func (mg *Evaluator) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.EvaluatorConfig); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig); i5++ {
+	if mg.Spec.InitProvider.EvaluatorConfig != nil {
+		if mg.Spec.InitProvider.EvaluatorConfig.CodeBased != nil {
+			if mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn),
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn),
 						Extract:      resource.ExtractParamPath("arn", true),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnRef,
-						Selector:     mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnSelector,
+						Reference:    mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnRef,
+						Selector:     mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn")
+					return errors.Wrap(err, "mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn")
 				}
-				mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.InitProvider.EvaluatorConfig[i3].CodeBased[i4].LambdaConfig[i5].LambdaArnRef = rsp.ResolvedReference
+				mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.EvaluatorConfig.CodeBased.LambdaConfig.LambdaArnRef = rsp.ResolvedReference
 
 			}
 		}
@@ -880,12 +880,36 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Memory != nil {
+		if mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "Memory", "MemoryList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.Arn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.ArnRef,
+					Selector:     mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.ArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.Arn")
+			}
+			mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Memory.AgentcoreMemoryConfiguration.ArnRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
 			Extract:      common.ARNExtractor(),
@@ -900,6 +924,31 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Memory != nil {
+		if mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "Memory", "MemoryList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.Arn),
+					Extract:      common.ARNExtractor(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.ArnRef,
+					Selector:     mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.ArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.Arn")
+			}
+			mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Memory.AgentcoreMemoryConfiguration.ArnRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -1098,27 +1147,27 @@ func (mg *OnlineEvaluationConfig) ResolveReferences(ctx context.Context, c clien
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.DataSourceConfig); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs); i4++ {
+	if mg.Spec.ForProvider.DataSourceConfig != nil {
+		if mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames),
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames),
 					Extract:       reference.ExternalName(),
 					Namespace:     mg.GetNamespace(),
-					References:    mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesRefs,
-					Selector:      mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesSelector,
+					References:    mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesRefs,
+					Selector:      mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesSelector,
 					To:            reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames")
+				return errors.Wrap(err, "mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames")
 			}
-			mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
-			mg.Spec.ForProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesRefs = mrsp.ResolvedReferences
+			mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -1142,27 +1191,27 @@ func (mg *OnlineEvaluationConfig) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.EvaluationExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EvaluationExecutionRoleArnRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataSourceConfig); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs); i4++ {
+	if mg.Spec.InitProvider.DataSourceConfig != nil {
+		if mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs != nil {
 			{
 				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames),
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames),
 					Extract:       reference.ExternalName(),
 					Namespace:     mg.GetNamespace(),
-					References:    mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesRefs,
-					Selector:      mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesSelector,
+					References:    mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesRefs,
+					Selector:      mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesSelector,
 					To:            reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames")
+				return errors.Wrap(err, "mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames")
 			}
-			mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
-			mg.Spec.InitProvider.DataSourceConfig[i3].CloudwatchLogs[i4].LogGroupNamesRefs = mrsp.ResolvedReferences
+			mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.DataSourceConfig.CloudwatchLogs.LogGroupNamesRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -1289,38 +1338,6 @@ func (mg *PolicyEngine) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.InitProvider.EncryptionKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EncryptionKeyArnRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this ResourcePolicy.
-func (mg *ResourcePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "AgentRuntime", "AgentRuntimeList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceArn),
-			Extract:      resource.ExtractParamPath("agent_runtime_arn", true),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceArnRef,
-			Selector:     mg.Spec.ForProvider.ResourceArnSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceArn")
-	}
-	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }

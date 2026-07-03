@@ -20,7 +20,7 @@ type BedrockEvaluatorModelConfigInitParameters struct {
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
 	// Settings that control how the model generates its response. See inference_config below.
-	InferenceConfig []InferenceConfigInitParameters `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
+	InferenceConfig *InferenceConfigInitParameters `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
 
 	// Identifier of the Amazon Bedrock model to use for evaluation.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
@@ -32,7 +32,7 @@ type BedrockEvaluatorModelConfigObservation struct {
 	AdditionalModelRequestFields *string `json:"additionalModelRequestFields,omitempty" tf:"additional_model_request_fields,omitempty"`
 
 	// Settings that control how the model generates its response. See inference_config below.
-	InferenceConfig []InferenceConfigObservation `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
+	InferenceConfig *InferenceConfigObservation `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
 
 	// Identifier of the Amazon Bedrock model to use for evaluation.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
@@ -46,7 +46,7 @@ type BedrockEvaluatorModelConfigParameters struct {
 
 	// Settings that control how the model generates its response. See inference_config below.
 	// +kubebuilder:validation:Optional
-	InferenceConfig []InferenceConfigParameters `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
+	InferenceConfig *InferenceConfigParameters `json:"inferenceConfig,omitempty" tf:"inference_config,omitempty"`
 
 	// Identifier of the Amazon Bedrock model to use for evaluation.
 	// +kubebuilder:validation:Optional
@@ -85,49 +85,49 @@ type CategoricalParameters struct {
 type CodeBasedInitParameters struct {
 
 	// Lambda function configuration. See lambda_config below.
-	LambdaConfig []LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+	LambdaConfig *LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 }
 
 type CodeBasedObservation struct {
 
 	// Lambda function configuration. See lambda_config below.
-	LambdaConfig []LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+	LambdaConfig *LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 }
 
 type CodeBasedParameters struct {
 
 	// Lambda function configuration. See lambda_config below.
 	// +kubebuilder:validation:Optional
-	LambdaConfig []LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+	LambdaConfig *LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 }
 
 type EvaluatorConfigInitParameters struct {
 
 	// Configuration that runs a Lambda function you provide to score the agent. See code_based below.
-	CodeBased []CodeBasedInitParameters `json:"codeBased,omitempty" tf:"code_based,omitempty"`
+	CodeBased *CodeBasedInitParameters `json:"codeBased,omitempty" tf:"code_based,omitempty"`
 
 	// Configuration that uses a Bedrock model to score the agent. See llm_as_a_judge below.
-	LlmAsAJudge []LlmAsAJudgeInitParameters `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
+	LlmAsAJudge *LlmAsAJudgeInitParameters `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
 }
 
 type EvaluatorConfigObservation struct {
 
 	// Configuration that runs a Lambda function you provide to score the agent. See code_based below.
-	CodeBased []CodeBasedObservation `json:"codeBased,omitempty" tf:"code_based,omitempty"`
+	CodeBased *CodeBasedObservation `json:"codeBased,omitempty" tf:"code_based,omitempty"`
 
 	// Configuration that uses a Bedrock model to score the agent. See llm_as_a_judge below.
-	LlmAsAJudge []LlmAsAJudgeObservation `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
+	LlmAsAJudge *LlmAsAJudgeObservation `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
 }
 
 type EvaluatorConfigParameters struct {
 
 	// Configuration that runs a Lambda function you provide to score the agent. See code_based below.
 	// +kubebuilder:validation:Optional
-	CodeBased []CodeBasedParameters `json:"codeBased,omitempty" tf:"code_based,omitempty"`
+	CodeBased *CodeBasedParameters `json:"codeBased,omitempty" tf:"code_based,omitempty"`
 
 	// Configuration that uses a Bedrock model to score the agent. See llm_as_a_judge below.
 	// +kubebuilder:validation:Optional
-	LlmAsAJudge []LlmAsAJudgeParameters `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
+	LlmAsAJudge *LlmAsAJudgeParameters `json:"llmAsAJudge,omitempty" tf:"llm_as_a_judge,omitempty"`
 }
 
 type EvaluatorInitParameters struct {
@@ -136,7 +136,7 @@ type EvaluatorInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration that defines how the evaluator assesses agent performance. See evaluator_config below.
-	EvaluatorConfig []EvaluatorConfigInitParameters `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
+	EvaluatorConfig *EvaluatorConfigInitParameters `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
 
 	// Name of the evaluator. Must match the pattern ^[a-zA-Z][a-zA-Z0-9_]{0,47}$.
 	EvaluatorName *string `json:"evaluatorName,omitempty" tf:"evaluator_name,omitempty"`
@@ -173,7 +173,7 @@ type EvaluatorObservation struct {
 	EvaluatorArn *string `json:"evaluatorArn,omitempty" tf:"evaluator_arn,omitempty"`
 
 	// Configuration that defines how the evaluator assesses agent performance. See evaluator_config below.
-	EvaluatorConfig []EvaluatorConfigObservation `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
+	EvaluatorConfig *EvaluatorConfigObservation `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
 
 	// Unique identifier of the evaluator.
 	EvaluatorID *string `json:"evaluatorId,omitempty" tf:"evaluator_id,omitempty"`
@@ -216,7 +216,7 @@ type EvaluatorParameters struct {
 
 	// Configuration that defines how the evaluator assesses agent performance. See evaluator_config below.
 	// +kubebuilder:validation:Optional
-	EvaluatorConfig []EvaluatorConfigParameters `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
+	EvaluatorConfig *EvaluatorConfigParameters `json:"evaluatorConfig,omitempty" tf:"evaluator_config,omitempty"`
 
 	// Name of the evaluator. Must match the pattern ^[a-zA-Z][a-zA-Z0-9_]{0,47}$.
 	// +kubebuilder:validation:Optional
@@ -354,19 +354,19 @@ type LlmAsAJudgeInitParameters struct {
 	InstructionsSecretRef v1.LocalSecretKeySelector `json:"instructionsSecretRef" tf:"-"`
 
 	// Which Bedrock model to use. See model_config below.
-	ModelConfig []ModelConfigInitParameters `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
+	ModelConfig *ModelConfigInitParameters `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
 
 	// Scale used to score the agent. See rating_scale below.
-	RatingScale []RatingScaleInitParameters `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
+	RatingScale *RatingScaleInitParameters `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
 }
 
 type LlmAsAJudgeObservation struct {
 
 	// Which Bedrock model to use. See model_config below.
-	ModelConfig []ModelConfigObservation `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
+	ModelConfig *ModelConfigObservation `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
 
 	// Scale used to score the agent. See rating_scale below.
-	RatingScale []RatingScaleObservation `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
+	RatingScale *RatingScaleObservation `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
 }
 
 type LlmAsAJudgeParameters struct {
@@ -377,30 +377,30 @@ type LlmAsAJudgeParameters struct {
 
 	// Which Bedrock model to use. See model_config below.
 	// +kubebuilder:validation:Optional
-	ModelConfig []ModelConfigParameters `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
+	ModelConfig *ModelConfigParameters `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
 
 	// Scale used to score the agent. See rating_scale below.
 	// +kubebuilder:validation:Optional
-	RatingScale []RatingScaleParameters `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
+	RatingScale *RatingScaleParameters `json:"ratingScale,omitempty" tf:"rating_scale,omitempty"`
 }
 
 type ModelConfigInitParameters struct {
 
 	// Amazon Bedrock model configuration. See bedrock_evaluator_model_config below.
-	BedrockEvaluatorModelConfig []BedrockEvaluatorModelConfigInitParameters `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
+	BedrockEvaluatorModelConfig *BedrockEvaluatorModelConfigInitParameters `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
 }
 
 type ModelConfigObservation struct {
 
 	// Amazon Bedrock model configuration. See bedrock_evaluator_model_config below.
-	BedrockEvaluatorModelConfig []BedrockEvaluatorModelConfigObservation `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
+	BedrockEvaluatorModelConfig *BedrockEvaluatorModelConfigObservation `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
 }
 
 type ModelConfigParameters struct {
 
 	// Amazon Bedrock model configuration. See bedrock_evaluator_model_config below.
 	// +kubebuilder:validation:Optional
-	BedrockEvaluatorModelConfig []BedrockEvaluatorModelConfigParameters `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
+	BedrockEvaluatorModelConfig *BedrockEvaluatorModelConfigParameters `json:"bedrockEvaluatorModelConfig,omitempty" tf:"bedrock_evaluator_model_config,omitempty"`
 }
 
 type NumericalInitParameters struct {

@@ -36,26 +36,26 @@ type CedarParameters struct {
 type DefinitionInitParameters struct {
 
 	// Inline Cedar policy. See cedar Block for details.
-	Cedar []CedarInitParameters `json:"cedar,omitempty" tf:"cedar,omitempty"`
+	Cedar *CedarInitParameters `json:"cedar,omitempty" tf:"cedar,omitempty"`
 }
 
 type DefinitionObservation struct {
 
 	// Inline Cedar policy. See cedar Block for details.
-	Cedar []CedarObservation `json:"cedar,omitempty" tf:"cedar,omitempty"`
+	Cedar *CedarObservation `json:"cedar,omitempty" tf:"cedar,omitempty"`
 }
 
 type DefinitionParameters struct {
 
 	// Inline Cedar policy. See cedar Block for details.
 	// +kubebuilder:validation:Optional
-	Cedar []CedarParameters `json:"cedar,omitempty" tf:"cedar,omitempty"`
+	Cedar *CedarParameters `json:"cedar,omitempty" tf:"cedar,omitempty"`
 }
 
 type PolicyInitParameters struct {
 
 	// Policy definition. See definition Block for details.
-	Definition []DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
+	Definition *DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Description of the policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -83,7 +83,7 @@ type PolicyInitParameters struct {
 type PolicyObservation struct {
 
 	// Policy definition. See definition Block for details.
-	Definition []DefinitionObservation `json:"definition,omitempty" tf:"definition,omitempty"`
+	Definition *DefinitionObservation `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Description of the policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -114,7 +114,7 @@ type PolicyParameters struct {
 
 	// Policy definition. See definition Block for details.
 	// +kubebuilder:validation:Optional
-	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
+	Definition *DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Description of the policy.
 	// +kubebuilder:validation:Optional

@@ -18,8 +18,8 @@ spec:
         testing.upbound.io/example-name: example
     harnessName: example_harness
     model:
-    - bedrockModelConfig:
-      - modelId: anthropic.claude-sonnet-4-20250514
+      bedrockModelConfig:
+        modelId: anthropic.claude-sonnet-4-20250514
     region: us-west-1
     systemPrompt:
     - textSecretRef:

@@ -14,8 +14,8 @@ metadata:
 spec:
   forProvider:
     dataSourceConfig:
-    - cloudwatchLogs:
-      - logGroupNamesRefs:
+      cloudwatchLogs:
+        logGroupNamesRefs:
         - name: example
         serviceNames:
         - my_agent_service
@@ -30,8 +30,8 @@ spec:
     onlineEvaluationConfigName: my_evaluation_config
     region: us-west-1
     rule:
-    - samplingConfig:
-      - samplingPercentage: 10
+      samplingConfig:
+        samplingPercentage: 10
 
 ---
 

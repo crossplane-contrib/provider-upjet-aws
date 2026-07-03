@@ -75,20 +75,20 @@ type CloudwatchLogsParameters struct {
 type DataSourceConfigInitParameters struct {
 
 	// CloudWatch logs configuration for reading agent traces. See cloudwatch_logs Block below.
-	CloudwatchLogs []CloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+	CloudwatchLogs *CloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 }
 
 type DataSourceConfigObservation struct {
 
 	// CloudWatch logs configuration for reading agent traces. See cloudwatch_logs Block below.
-	CloudwatchLogs []CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+	CloudwatchLogs *CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 }
 
 type DataSourceConfigParameters struct {
 
 	// CloudWatch logs configuration for reading agent traces. See cloudwatch_logs Block below.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogs []CloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+	CloudwatchLogs *CloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
 }
 
 type FilterInitParameters struct {
@@ -100,7 +100,7 @@ type FilterInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Value to compare against. See value Block below.
-	Value []ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+	Value *ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FilterObservation struct {
@@ -112,7 +112,7 @@ type FilterObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Value to compare against. See value Block below.
-	Value []ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+	Value *ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FilterParameters struct {
@@ -127,7 +127,7 @@ type FilterParameters struct {
 
 	// Value to compare against. See value Block below.
 	// +kubebuilder:validation:Optional
-	Value []ValueParameters `json:"value,omitempty" tf:"value,omitempty"`
+	Value *ValueParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type OnlineEvaluationConfigEvaluatorInitParameters struct {
@@ -152,7 +152,7 @@ type OnlineEvaluationConfigEvaluatorParameters struct {
 type OnlineEvaluationConfigInitParameters struct {
 
 	// Data source configuration specifying where to read agent traces. See data_source_config Block below.
-	DataSourceConfig []DataSourceConfigInitParameters `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
+	DataSourceConfig *DataSourceConfigInitParameters `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
 
 	// Description of the online evaluation configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -183,7 +183,7 @@ type OnlineEvaluationConfigInitParameters struct {
 	OnlineEvaluationConfigName *string `json:"onlineEvaluationConfigName,omitempty" tf:"online_evaluation_config_name,omitempty"`
 
 	// Evaluation rule defining sampling configuration, filters, and session detection settings. See rule Block below.
-	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -193,7 +193,7 @@ type OnlineEvaluationConfigInitParameters struct {
 type OnlineEvaluationConfigObservation struct {
 
 	// Data source configuration specifying where to read agent traces. See data_source_config Block below.
-	DataSourceConfig []DataSourceConfigObservation `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
+	DataSourceConfig *DataSourceConfigObservation `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
 
 	// Description of the online evaluation configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -229,7 +229,7 @@ type OnlineEvaluationConfigObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Evaluation rule defining sampling configuration, filters, and session detection settings. See rule Block below.
-	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -244,7 +244,7 @@ type OnlineEvaluationConfigParameters struct {
 
 	// Data source configuration specifying where to read agent traces. See data_source_config Block below.
 	// +kubebuilder:validation:Optional
-	DataSourceConfig []DataSourceConfigParameters `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
+	DataSourceConfig *DataSourceConfigParameters `json:"dataSourceConfig,omitempty" tf:"data_source_config,omitempty"`
 
 	// Description of the online evaluation configuration.
 	// +kubebuilder:validation:Optional
@@ -287,7 +287,7 @@ type OnlineEvaluationConfigParameters struct {
 
 	// Evaluation rule defining sampling configuration, filters, and session detection settings. See rule Block below.
 	// +kubebuilder:validation:Optional
-	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule *RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -313,10 +313,10 @@ type RuleInitParameters struct {
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Sampling configuration determining what percentage of agent traces to evaluate. See sampling_config Block below.
-	SamplingConfig []SamplingConfigInitParameters `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
+	SamplingConfig *SamplingConfigInitParameters `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
 
 	// Session configuration defining timeout settings for detecting when agent sessions are complete. See session_config Block below.
-	SessionConfig []SessionConfigInitParameters `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
+	SessionConfig *SessionConfigInitParameters `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
 }
 
 type RuleObservation struct {
@@ -325,10 +325,10 @@ type RuleObservation struct {
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Sampling configuration determining what percentage of agent traces to evaluate. See sampling_config Block below.
-	SamplingConfig []SamplingConfigObservation `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
+	SamplingConfig *SamplingConfigObservation `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
 
 	// Session configuration defining timeout settings for detecting when agent sessions are complete. See session_config Block below.
-	SessionConfig []SessionConfigObservation `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
+	SessionConfig *SessionConfigObservation `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
 }
 
 type RuleParameters struct {
@@ -339,11 +339,11 @@ type RuleParameters struct {
 
 	// Sampling configuration determining what percentage of agent traces to evaluate. See sampling_config Block below.
 	// +kubebuilder:validation:Optional
-	SamplingConfig []SamplingConfigParameters `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
+	SamplingConfig *SamplingConfigParameters `json:"samplingConfig,omitempty" tf:"sampling_config,omitempty"`
 
 	// Session configuration defining timeout settings for detecting when agent sessions are complete. See session_config Block below.
 	// +kubebuilder:validation:Optional
-	SessionConfig []SessionConfigParameters `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
+	SessionConfig *SessionConfigParameters `json:"sessionConfig,omitempty" tf:"session_config,omitempty"`
 }
 
 type SamplingConfigInitParameters struct {

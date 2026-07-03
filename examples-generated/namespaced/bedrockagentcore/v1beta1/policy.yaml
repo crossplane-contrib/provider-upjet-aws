@@ -15,8 +15,8 @@ metadata:
 spec:
   forProvider:
     definition:
-    - cedar:
-      - statement: |
+      cedar:
+        statement: |
           permit(principal, action == Action::"Read", resource);
     description: Allow read access to example resources
     name: example_policy
