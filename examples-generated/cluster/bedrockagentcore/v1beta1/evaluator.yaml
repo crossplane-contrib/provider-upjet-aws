@@ -15,20 +15,20 @@ spec:
   forProvider:
     description: Rates assistant helpfulness from 1 to 5
     evaluatorConfig:
-    - llmAsAJudge:
-      - instructionsSecretRef:
+      llmAsAJudge:
+        instructionsSecretRef:
           key: example-key
           name: example-secret
           namespace: upbound-system
         modelConfig:
-        - bedrockEvaluatorModelConfig:
-          - inferenceConfig:
-            - maxTokens: 1024
+          bedrockEvaluatorModelConfig:
+            inferenceConfig:
+              maxTokens: 1024
               temperature: 0
               topP: 1
             modelId: us.amazon.nova-2-lite-v1:0
         ratingScale:
-        - numerical:
+          numerical:
           - definition: Not helpful at all.
             label: "1"
             value: 1

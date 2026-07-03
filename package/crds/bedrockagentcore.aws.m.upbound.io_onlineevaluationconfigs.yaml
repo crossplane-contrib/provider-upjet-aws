@@ -62,114 +62,110 @@ spec:
                   dataSourceConfig:
                     description: Data source configuration specifying where to read
                       agent traces. See data_source_config Block below.
-                    items:
-                      properties:
-                        cloudwatchLogs:
-                          description: CloudWatch logs configuration for reading agent
-                            traces. See cloudwatch_logs Block below.
-                          items:
-                            properties:
-                              logGroupNames:
-                                description: List of CloudWatch log group names to
-                                  monitor for agent traces. Maximum 5.
-                                items:
+                    properties:
+                      cloudwatchLogs:
+                        description: CloudWatch logs configuration for reading agent
+                          traces. See cloudwatch_logs Block below.
+                        properties:
+                          logGroupNames:
+                            description: List of CloudWatch log group names to monitor
+                              for agent traces. Maximum 5.
+                            items:
+                              type: string
+                            type: array
+                          logGroupNamesRefs:
+                            description: References to Group in cloudwatchlogs to
+                              populate logGroupNames.
+                            items:
+                              description: A NamespacedReference to a named object.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
                                   type: string
-                                type: array
-                              logGroupNamesRefs:
-                                description: References to Group in cloudwatchlogs
-                                  to populate logGroupNames.
-                                items:
-                                  description: A NamespacedReference to a named object.
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
                                   properties:
-                                    name:
-                                      description: Name of the referenced object.
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    namespace:
-                                      description: Namespace of the referenced object
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
                                       type: string
-                                    policy:
-                                      description: Policies for referencing.
-                                      properties:
-                                        resolution:
-                                          default: Required
-                                          description: |-
-                                            Resolution specifies whether resolution of this reference is required.
-                                            The default is 'Required', which means the reconcile will fail if the
-                                            reference cannot be resolved. 'Optional' means this reference will be
-                                            a no-op if it cannot be resolved.
-                                          enum:
-                                          - Required
-                                          - Optional
-                                          type: string
-                                        resolve:
-                                          description: |-
-                                            Resolve specifies when this reference should be resolved. The default
-                                            is 'IfNotPresent', which will attempt to resolve the reference only when
-                                            the corresponding field is not present. Use 'Always' to resolve the
-                                            reference on every reconcile.
-                                          enum:
-                                          - Always
-                                          - IfNotPresent
-                                          type: string
-                                      type: object
-                                  required:
-                                  - name
                                   type: object
-                                type: array
-                              logGroupNamesSelector:
-                                description: Selector for a list of Group in cloudwatchlogs
-                                  to populate logGroupNames.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
-                                      type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
-                                    type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                              serviceNames:
-                                description: List of service names to filter traces
-                                  within the specified log groups.
-                                items:
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          logGroupNamesSelector:
+                            description: Selector for a list of Group in cloudwatchlogs
+                              to populate logGroupNames.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
                                   type: string
-                                type: array
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              namespace:
+                                description: Namespace for the selector
+                                type: string
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                          serviceNames:
+                            description: List of service names to filter traces within
+                              the specified log groups.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
                   description:
                     description: Description of the online evaluation configuration.
                     type: string
@@ -292,66 +288,57 @@ spec:
                   rule:
                     description: Evaluation rule defining sampling configuration,
                       filters, and session detection settings. See rule Block below.
-                    items:
-                      properties:
-                        filter:
-                          description: List of filters determining which agent traces
-                            to evaluate. Maximum 5. See filter Block below.
-                          items:
-                            properties:
-                              key:
-                                description: Key or field name to filter on within
-                                  the agent trace data.
-                                type: string
-                              operator:
-                                description: 'Comparison operator. Valid values: Equals,
-                                  NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
-                                  LessThanOrEqual, Contains, NotContains.'
-                                type: string
-                              value:
-                                description: Value to compare against. See value Block
-                                  below.
-                                items:
-                                  properties:
-                                    booleanValue:
-                                      description: Boolean value for true/false filtering.
-                                      type: boolean
-                                    doubleValue:
-                                      description: Numeric value for numerical filtering.
-                                      type: number
-                                    stringValue:
-                                      description: String value for text-based filtering.
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        samplingConfig:
-                          description: Sampling configuration determining what percentage
-                            of agent traces to evaluate. See sampling_config Block
-                            below.
-                          items:
-                            properties:
-                              samplingPercentage:
-                                description: Percentage of agent traces to sample
-                                  for evaluation, from 0.01 to 100.
-                                type: number
-                            type: object
-                          type: array
-                        sessionConfig:
-                          description: Session configuration defining timeout settings
-                            for detecting when agent sessions are complete. See session_config
-                            Block below.
-                          items:
-                            properties:
-                              sessionTimeoutMinutes:
-                                description: Minutes of inactivity after which a session
-                                  is considered complete. Between 1 and 60.
-                                type: number
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      filter:
+                        description: List of filters determining which agent traces
+                          to evaluate. Maximum 5. See filter Block below.
+                        items:
+                          properties:
+                            key:
+                              description: Key or field name to filter on within the
+                                agent trace data.
+                              type: string
+                            operator:
+                              description: 'Comparison operator. Valid values: Equals,
+                                NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
+                                LessThanOrEqual, Contains, NotContains.'
+                              type: string
+                            value:
+                              description: Value to compare against. See value Block
+                                below.
+                              properties:
+                                booleanValue:
+                                  description: Boolean value for true/false filtering.
+                                  type: boolean
+                                doubleValue:
+                                  description: Numeric value for numerical filtering.
+                                  type: number
+                                stringValue:
+                                  description: String value for text-based filtering.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      samplingConfig:
+                        description: Sampling configuration determining what percentage
+                          of agent traces to evaluate. See sampling_config Block below.
+                        properties:
+                          samplingPercentage:
+                            description: Percentage of agent traces to sample for
+                              evaluation, from 0.01 to 100.
+                            type: number
+                        type: object
+                      sessionConfig:
+                        description: Session configuration defining timeout settings
+                          for detecting when agent sessions are complete. See session_config
+                          Block below.
+                        properties:
+                          sessionTimeoutMinutes:
+                            description: Minutes of inactivity after which a session
+                              is considered complete. Between 1 and 60.
+                            type: number
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -377,114 +364,110 @@ spec:
                   dataSourceConfig:
                     description: Data source configuration specifying where to read
                       agent traces. See data_source_config Block below.
-                    items:
-                      properties:
-                        cloudwatchLogs:
-                          description: CloudWatch logs configuration for reading agent
-                            traces. See cloudwatch_logs Block below.
-                          items:
-                            properties:
-                              logGroupNames:
-                                description: List of CloudWatch log group names to
-                                  monitor for agent traces. Maximum 5.
-                                items:
+                    properties:
+                      cloudwatchLogs:
+                        description: CloudWatch logs configuration for reading agent
+                          traces. See cloudwatch_logs Block below.
+                        properties:
+                          logGroupNames:
+                            description: List of CloudWatch log group names to monitor
+                              for agent traces. Maximum 5.
+                            items:
+                              type: string
+                            type: array
+                          logGroupNamesRefs:
+                            description: References to Group in cloudwatchlogs to
+                              populate logGroupNames.
+                            items:
+                              description: A NamespacedReference to a named object.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
                                   type: string
-                                type: array
-                              logGroupNamesRefs:
-                                description: References to Group in cloudwatchlogs
-                                  to populate logGroupNames.
-                                items:
-                                  description: A NamespacedReference to a named object.
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
                                   properties:
-                                    name:
-                                      description: Name of the referenced object.
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
                                       type: string
-                                    namespace:
-                                      description: Namespace of the referenced object
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
                                       type: string
-                                    policy:
-                                      description: Policies for referencing.
-                                      properties:
-                                        resolution:
-                                          default: Required
-                                          description: |-
-                                            Resolution specifies whether resolution of this reference is required.
-                                            The default is 'Required', which means the reconcile will fail if the
-                                            reference cannot be resolved. 'Optional' means this reference will be
-                                            a no-op if it cannot be resolved.
-                                          enum:
-                                          - Required
-                                          - Optional
-                                          type: string
-                                        resolve:
-                                          description: |-
-                                            Resolve specifies when this reference should be resolved. The default
-                                            is 'IfNotPresent', which will attempt to resolve the reference only when
-                                            the corresponding field is not present. Use 'Always' to resolve the
-                                            reference on every reconcile.
-                                          enum:
-                                          - Always
-                                          - IfNotPresent
-                                          type: string
-                                      type: object
-                                  required:
-                                  - name
                                   type: object
-                                type: array
-                              logGroupNamesSelector:
-                                description: Selector for a list of Group in cloudwatchlogs
-                                  to populate logGroupNames.
-                                properties:
-                                  matchControllerRef:
-                                    description: |-
-                                      MatchControllerRef ensures an object with the same controller reference
-                                      as the selecting object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
-                                      type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  namespace:
-                                    description: Namespace for the selector
-                                    type: string
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: |-
-                                          Resolution specifies whether resolution of this reference is required.
-                                          The default is 'Required', which means the reconcile will fail if the
-                                          reference cannot be resolved. 'Optional' means this reference will be
-                                          a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: |-
-                                          Resolve specifies when this reference should be resolved. The default
-                                          is 'IfNotPresent', which will attempt to resolve the reference only when
-                                          the corresponding field is not present. Use 'Always' to resolve the
-                                          reference on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
-                              serviceNames:
-                                description: List of service names to filter traces
-                                  within the specified log groups.
-                                items:
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          logGroupNamesSelector:
+                            description: Selector for a list of Group in cloudwatchlogs
+                              to populate logGroupNames.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
                                   type: string
-                                type: array
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              namespace:
+                                description: Namespace for the selector
+                                type: string
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
                             type: object
-                          type: array
-                      type: object
-                    type: array
+                          serviceNames:
+                            description: List of service names to filter traces within
+                              the specified log groups.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
                   description:
                     description: Description of the online evaluation configuration.
                     type: string
@@ -602,66 +585,57 @@ spec:
                   rule:
                     description: Evaluation rule defining sampling configuration,
                       filters, and session detection settings. See rule Block below.
-                    items:
-                      properties:
-                        filter:
-                          description: List of filters determining which agent traces
-                            to evaluate. Maximum 5. See filter Block below.
-                          items:
-                            properties:
-                              key:
-                                description: Key or field name to filter on within
-                                  the agent trace data.
-                                type: string
-                              operator:
-                                description: 'Comparison operator. Valid values: Equals,
-                                  NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
-                                  LessThanOrEqual, Contains, NotContains.'
-                                type: string
-                              value:
-                                description: Value to compare against. See value Block
-                                  below.
-                                items:
-                                  properties:
-                                    booleanValue:
-                                      description: Boolean value for true/false filtering.
-                                      type: boolean
-                                    doubleValue:
-                                      description: Numeric value for numerical filtering.
-                                      type: number
-                                    stringValue:
-                                      description: String value for text-based filtering.
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        samplingConfig:
-                          description: Sampling configuration determining what percentage
-                            of agent traces to evaluate. See sampling_config Block
-                            below.
-                          items:
-                            properties:
-                              samplingPercentage:
-                                description: Percentage of agent traces to sample
-                                  for evaluation, from 0.01 to 100.
-                                type: number
-                            type: object
-                          type: array
-                        sessionConfig:
-                          description: Session configuration defining timeout settings
-                            for detecting when agent sessions are complete. See session_config
-                            Block below.
-                          items:
-                            properties:
-                              sessionTimeoutMinutes:
-                                description: Minutes of inactivity after which a session
-                                  is considered complete. Between 1 and 60.
-                                type: number
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      filter:
+                        description: List of filters determining which agent traces
+                          to evaluate. Maximum 5. See filter Block below.
+                        items:
+                          properties:
+                            key:
+                              description: Key or field name to filter on within the
+                                agent trace data.
+                              type: string
+                            operator:
+                              description: 'Comparison operator. Valid values: Equals,
+                                NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
+                                LessThanOrEqual, Contains, NotContains.'
+                              type: string
+                            value:
+                              description: Value to compare against. See value Block
+                                below.
+                              properties:
+                                booleanValue:
+                                  description: Boolean value for true/false filtering.
+                                  type: boolean
+                                doubleValue:
+                                  description: Numeric value for numerical filtering.
+                                  type: number
+                                stringValue:
+                                  description: String value for text-based filtering.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      samplingConfig:
+                        description: Sampling configuration determining what percentage
+                          of agent traces to evaluate. See sampling_config Block below.
+                        properties:
+                          samplingPercentage:
+                            description: Percentage of agent traces to sample for
+                              evaluation, from 0.01 to 100.
+                            type: number
+                        type: object
+                      sessionConfig:
+                        description: Session configuration defining timeout settings
+                          for detecting when agent sessions are complete. See session_config
+                          Block below.
+                        properties:
+                          sessionTimeoutMinutes:
+                            description: Minutes of inactivity after which a session
+                              is considered complete. Between 1 and 60.
+                            type: number
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -745,29 +719,25 @@ spec:
                   dataSourceConfig:
                     description: Data source configuration specifying where to read
                       agent traces. See data_source_config Block below.
-                    items:
-                      properties:
-                        cloudwatchLogs:
-                          description: CloudWatch logs configuration for reading agent
-                            traces. See cloudwatch_logs Block below.
-                          items:
-                            properties:
-                              logGroupNames:
-                                description: List of CloudWatch log group names to
-                                  monitor for agent traces. Maximum 5.
-                                items:
-                                  type: string
-                                type: array
-                              serviceNames:
-                                description: List of service names to filter traces
-                                  within the specified log groups.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      cloudwatchLogs:
+                        description: CloudWatch logs configuration for reading agent
+                          traces. See cloudwatch_logs Block below.
+                        properties:
+                          logGroupNames:
+                            description: List of CloudWatch log group names to monitor
+                              for agent traces. Maximum 5.
+                            items:
+                              type: string
+                            type: array
+                          serviceNames:
+                            description: List of service names to filter traces within
+                              the specified log groups.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
                   description:
                     description: Description of the online evaluation configuration.
                     type: string
@@ -836,66 +806,57 @@ spec:
                   rule:
                     description: Evaluation rule defining sampling configuration,
                       filters, and session detection settings. See rule Block below.
-                    items:
-                      properties:
-                        filter:
-                          description: List of filters determining which agent traces
-                            to evaluate. Maximum 5. See filter Block below.
-                          items:
-                            properties:
-                              key:
-                                description: Key or field name to filter on within
-                                  the agent trace data.
-                                type: string
-                              operator:
-                                description: 'Comparison operator. Valid values: Equals,
-                                  NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
-                                  LessThanOrEqual, Contains, NotContains.'
-                                type: string
-                              value:
-                                description: Value to compare against. See value Block
-                                  below.
-                                items:
-                                  properties:
-                                    booleanValue:
-                                      description: Boolean value for true/false filtering.
-                                      type: boolean
-                                    doubleValue:
-                                      description: Numeric value for numerical filtering.
-                                      type: number
-                                    stringValue:
-                                      description: String value for text-based filtering.
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        samplingConfig:
-                          description: Sampling configuration determining what percentage
-                            of agent traces to evaluate. See sampling_config Block
-                            below.
-                          items:
-                            properties:
-                              samplingPercentage:
-                                description: Percentage of agent traces to sample
-                                  for evaluation, from 0.01 to 100.
-                                type: number
-                            type: object
-                          type: array
-                        sessionConfig:
-                          description: Session configuration defining timeout settings
-                            for detecting when agent sessions are complete. See session_config
-                            Block below.
-                          items:
-                            properties:
-                              sessionTimeoutMinutes:
-                                description: Minutes of inactivity after which a session
-                                  is considered complete. Between 1 and 60.
-                                type: number
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      filter:
+                        description: List of filters determining which agent traces
+                          to evaluate. Maximum 5. See filter Block below.
+                        items:
+                          properties:
+                            key:
+                              description: Key or field name to filter on within the
+                                agent trace data.
+                              type: string
+                            operator:
+                              description: 'Comparison operator. Valid values: Equals,
+                                NotEquals, GreaterThan, LessThan, GreaterThanOrEqual,
+                                LessThanOrEqual, Contains, NotContains.'
+                              type: string
+                            value:
+                              description: Value to compare against. See value Block
+                                below.
+                              properties:
+                                booleanValue:
+                                  description: Boolean value for true/false filtering.
+                                  type: boolean
+                                doubleValue:
+                                  description: Numeric value for numerical filtering.
+                                  type: number
+                                stringValue:
+                                  description: String value for text-based filtering.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      samplingConfig:
+                        description: Sampling configuration determining what percentage
+                          of agent traces to evaluate. See sampling_config Block below.
+                        properties:
+                          samplingPercentage:
+                            description: Percentage of agent traces to sample for
+                              evaluation, from 0.01 to 100.
+                            type: number
+                        type: object
+                      sessionConfig:
+                        description: Session configuration defining timeout settings
+                          for detecting when agent sessions are complete. See session_config
+                          Block below.
+                        properties:
+                          sessionTimeoutMinutes:
+                            description: Minutes of inactivity after which a session
+                              is considered complete. Between 1 and 60.
+                            type: number
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

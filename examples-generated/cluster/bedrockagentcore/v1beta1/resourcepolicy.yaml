@@ -15,9 +15,7 @@ spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.example.json}
     region: us-west-1
-    resourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    resourceArn: ${aws_bedrockagentcore_agent_runtime.example.agent_runtime_arn}
 
 ---
 

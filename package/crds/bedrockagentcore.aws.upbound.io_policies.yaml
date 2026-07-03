@@ -75,19 +75,15 @@ spec:
                 properties:
                   definition:
                     description: Policy definition. See definition Block for details.
-                    items:
-                      properties:
-                        cedar:
-                          description: Inline Cedar policy. See cedar Block for details.
-                          items:
-                            properties:
-                              statement:
-                                description: Cedar policy statement.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      cedar:
+                        description: Inline Cedar policy. See cedar Block for details.
+                        properties:
+                          statement:
+                            description: Cedar policy statement.
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: Description of the policy.
                     type: string
@@ -204,19 +200,15 @@ spec:
                 properties:
                   definition:
                     description: Policy definition. See definition Block for details.
-                    items:
-                      properties:
-                        cedar:
-                          description: Inline Cedar policy. See cedar Block for details.
-                          items:
-                            properties:
-                              statement:
-                                description: Cedar policy statement.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      cedar:
+                        description: Inline Cedar policy. See cedar Block for details.
+                        properties:
+                          statement:
+                            description: Cedar policy statement.
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: Description of the policy.
                     type: string
@@ -409,19 +401,15 @@ spec:
                 properties:
                   definition:
                     description: Policy definition. See definition Block for details.
-                    items:
-                      properties:
-                        cedar:
-                          description: Inline Cedar policy. See cedar Block for details.
-                          items:
-                            properties:
-                              statement:
-                                description: Cedar policy statement.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                    properties:
+                      cedar:
+                        description: Inline Cedar policy. See cedar Block for details.
+                        properties:
+                          statement:
+                            description: Cedar policy statement.
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: Description of the policy.
                     type: string

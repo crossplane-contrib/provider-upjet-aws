@@ -65,228 +65,209 @@ spec:
                   evaluatorConfig:
                     description: Configuration that defines how the evaluator assesses
                       agent performance. See evaluator_config below.
-                    items:
-                      properties:
-                        codeBased:
-                          description: Configuration that runs a Lambda function you
-                            provide to score the agent. See code_based below.
-                          items:
+                    properties:
+                      codeBased:
+                        description: Configuration that runs a Lambda function you
+                          provide to score the agent. See code_based below.
+                        properties:
+                          lambdaConfig:
+                            description: Lambda function configuration. See lambda_config
+                              below.
                             properties:
-                              lambdaConfig:
-                                description: Lambda function configuration. See lambda_config
-                                  below.
+                              lambdaArn:
+                                description: ARN of the Lambda function that runs
+                                  the evaluation.
+                                type: string
+                              lambdaArnRef:
+                                description: Reference to a Function in lambda to
+                                  populate lambdaArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              lambdaArnSelector:
+                                description: Selector for a Function in lambda to
+                                  populate lambdaArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              lambdaTimeoutInSeconds:
+                                description: Time in seconds to wait for the Lambda
+                                  function before timing out. Defaults to 60. Range
+                                  1–300.
+                                type: number
+                            type: object
+                        type: object
+                      llmAsAJudge:
+                        description: Configuration that uses a Bedrock model to score
+                          the agent. See llm_as_a_judge below.
+                        properties:
+                          instructionsSecretRef:
+                            description: Instructions that tell the model how to score
+                              the agent.
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          modelConfig:
+                            description: Which Bedrock model to use. See model_config
+                              below.
+                            properties:
+                              bedrockEvaluatorModelConfig:
+                                description: Amazon Bedrock model configuration. See
+                                  bedrock_evaluator_model_config below.
+                                properties:
+                                  additionalModelRequestFields:
+                                    description: JSON-encoded model-specific request
+                                      fields, for settings not covered by inference_config.
+                                    type: string
+                                  inferenceConfig:
+                                    description: Settings that control how the model
+                                      generates its response. See inference_config
+                                      below.
+                                    properties:
+                                      maxTokens:
+                                        description: Maximum number of tokens to generate
+                                          in the model response. Must be at least
+                                          1.
+                                        type: number
+                                      stopSequences:
+                                        description: List of sequences that cause
+                                          the model to stop generating tokens.
+                                        items:
+                                          type: string
+                                        type: array
+                                      temperature:
+                                        description: Temperature value that controls
+                                          randomness. Range 0–1.
+                                        type: number
+                                      topP:
+                                        description: Top-p sampling parameter. Range
+                                          0–1.
+                                        type: number
+                                    type: object
+                                  modelId:
+                                    description: Identifier of the Amazon Bedrock
+                                      model to use for evaluation.
+                                    type: string
+                                type: object
+                            type: object
+                          ratingScale:
+                            description: Scale used to score the agent. See rating_scale
+                              below.
+                            properties:
+                              categorical:
+                                description: One or more categorical rating scale
+                                  definitions. See categorical below.
                                 items:
                                   properties:
-                                    lambdaArn:
-                                      description: ARN of the Lambda function that
-                                        runs the evaluation.
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
                                       type: string
-                                    lambdaArnRef:
-                                      description: Reference to a Function in lambda
-                                        to populate lambdaArn.
-                                      properties:
-                                        name:
-                                          description: Name of the referenced object.
-                                          type: string
-                                        namespace:
-                                          description: Namespace of the referenced
-                                            object
-                                          type: string
-                                        policy:
-                                          description: Policies for referencing.
-                                          properties:
-                                            resolution:
-                                              default: Required
-                                              description: |-
-                                                Resolution specifies whether resolution of this reference is required.
-                                                The default is 'Required', which means the reconcile will fail if the
-                                                reference cannot be resolved. 'Optional' means this reference will be
-                                                a no-op if it cannot be resolved.
-                                              enum:
-                                              - Required
-                                              - Optional
-                                              type: string
-                                            resolve:
-                                              description: |-
-                                                Resolve specifies when this reference should be resolved. The default
-                                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                                the corresponding field is not present. Use 'Always' to resolve the
-                                                reference on every reconcile.
-                                              enum:
-                                              - Always
-                                              - IfNotPresent
-                                              type: string
-                                          type: object
-                                      required:
-                                      - name
-                                      type: object
-                                    lambdaArnSelector:
-                                      description: Selector for a Function in lambda
-                                        to populate lambdaArn.
-                                      properties:
-                                        matchControllerRef:
-                                          description: |-
-                                            MatchControllerRef ensures an object with the same controller reference
-                                            as the selecting object is selected.
-                                          type: boolean
-                                        matchLabels:
-                                          additionalProperties:
-                                            type: string
-                                          description: MatchLabels ensures an object
-                                            with matching labels is selected.
-                                          type: object
-                                        namespace:
-                                          description: Namespace for the selector
-                                          type: string
-                                        policy:
-                                          description: Policies for selection.
-                                          properties:
-                                            resolution:
-                                              default: Required
-                                              description: |-
-                                                Resolution specifies whether resolution of this reference is required.
-                                                The default is 'Required', which means the reconcile will fail if the
-                                                reference cannot be resolved. 'Optional' means this reference will be
-                                                a no-op if it cannot be resolved.
-                                              enum:
-                                              - Required
-                                              - Optional
-                                              type: string
-                                            resolve:
-                                              description: |-
-                                                Resolve specifies when this reference should be resolved. The default
-                                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                                the corresponding field is not present. Use 'Always' to resolve the
-                                                reference on every reconcile.
-                                              enum:
-                                              - Always
-                                              - IfNotPresent
-                                              type: string
-                                          type: object
-                                      type: object
-                                    lambdaTimeoutInSeconds:
-                                      description: Time in seconds to wait for the
-                                        Lambda function before timing out. Defaults
-                                        to 60. Range 1–300.
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                  type: object
+                                type: array
+                              numerical:
+                                description: One or more numerical rating scale definitions.
+                                  See numerical below.
+                                items:
+                                  properties:
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
+                                      type: string
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                    value:
+                                      description: Numerical value for this rating
+                                        option. Must be at least 0.
                                       type: number
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                        llmAsAJudge:
-                          description: Configuration that uses a Bedrock model to
-                            score the agent. See llm_as_a_judge below.
-                          items:
-                            properties:
-                              instructionsSecretRef:
-                                description: Instructions that tell the model how
-                                  to score the agent.
-                                properties:
-                                  key:
-                                    type: string
-                                  name:
-                                    description: Name of the secret.
-                                    type: string
-                                required:
-                                - key
-                                - name
-                                type: object
-                              modelConfig:
-                                description: Which Bedrock model to use. See model_config
-                                  below.
-                                items:
-                                  properties:
-                                    bedrockEvaluatorModelConfig:
-                                      description: Amazon Bedrock model configuration.
-                                        See bedrock_evaluator_model_config below.
-                                      items:
-                                        properties:
-                                          additionalModelRequestFields:
-                                            description: JSON-encoded model-specific
-                                              request fields, for settings not covered
-                                              by inference_config.
-                                            type: string
-                                          inferenceConfig:
-                                            description: Settings that control how
-                                              the model generates its response. See
-                                              inference_config below.
-                                            items:
-                                              properties:
-                                                maxTokens:
-                                                  description: Maximum number of tokens
-                                                    to generate in the model response.
-                                                    Must be at least 1.
-                                                  type: number
-                                                stopSequences:
-                                                  description: List of sequences that
-                                                    cause the model to stop generating
-                                                    tokens.
-                                                  items:
-                                                    type: string
-                                                  type: array
-                                                temperature:
-                                                  description: Temperature value that
-                                                    controls randomness. Range 0–1.
-                                                  type: number
-                                                topP:
-                                                  description: Top-p sampling parameter.
-                                                    Range 0–1.
-                                                  type: number
-                                              type: object
-                                            type: array
-                                          modelId:
-                                            description: Identifier of the Amazon
-                                              Bedrock model to use for evaluation.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                              ratingScale:
-                                description: Scale used to score the agent. See rating_scale
-                                  below.
-                                items:
-                                  properties:
-                                    categorical:
-                                      description: One or more categorical rating
-                                        scale definitions. See categorical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    numerical:
-                                      description: One or more numerical rating scale
-                                        definitions. See numerical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                          value:
-                                            description: Numerical value for this
-                                              rating option. Must be at least 0.
-                                            type: number
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                        type: object
+                    type: object
                   evaluatorName:
                     description: Name of the evaluator. Must match the pattern ^[a-zA-Z][a-zA-Z0-9_]{0,47}$.
                     type: string
@@ -412,230 +393,211 @@ spec:
                   evaluatorConfig:
                     description: Configuration that defines how the evaluator assesses
                       agent performance. See evaluator_config below.
-                    items:
-                      properties:
-                        codeBased:
-                          description: Configuration that runs a Lambda function you
-                            provide to score the agent. See code_based below.
-                          items:
+                    properties:
+                      codeBased:
+                        description: Configuration that runs a Lambda function you
+                          provide to score the agent. See code_based below.
+                        properties:
+                          lambdaConfig:
+                            description: Lambda function configuration. See lambda_config
+                              below.
                             properties:
-                              lambdaConfig:
-                                description: Lambda function configuration. See lambda_config
-                                  below.
+                              lambdaArn:
+                                description: ARN of the Lambda function that runs
+                                  the evaluation.
+                                type: string
+                              lambdaArnRef:
+                                description: Reference to a Function in lambda to
+                                  populate lambdaArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              lambdaArnSelector:
+                                description: Selector for a Function in lambda to
+                                  populate lambdaArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              lambdaTimeoutInSeconds:
+                                description: Time in seconds to wait for the Lambda
+                                  function before timing out. Defaults to 60. Range
+                                  1–300.
+                                type: number
+                            type: object
+                        type: object
+                      llmAsAJudge:
+                        description: Configuration that uses a Bedrock model to score
+                          the agent. See llm_as_a_judge below.
+                        properties:
+                          instructionsSecretRef:
+                            description: Instructions that tell the model how to score
+                              the agent.
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          modelConfig:
+                            description: Which Bedrock model to use. See model_config
+                              below.
+                            properties:
+                              bedrockEvaluatorModelConfig:
+                                description: Amazon Bedrock model configuration. See
+                                  bedrock_evaluator_model_config below.
+                                properties:
+                                  additionalModelRequestFields:
+                                    description: JSON-encoded model-specific request
+                                      fields, for settings not covered by inference_config.
+                                    type: string
+                                  inferenceConfig:
+                                    description: Settings that control how the model
+                                      generates its response. See inference_config
+                                      below.
+                                    properties:
+                                      maxTokens:
+                                        description: Maximum number of tokens to generate
+                                          in the model response. Must be at least
+                                          1.
+                                        type: number
+                                      stopSequences:
+                                        description: List of sequences that cause
+                                          the model to stop generating tokens.
+                                        items:
+                                          type: string
+                                        type: array
+                                      temperature:
+                                        description: Temperature value that controls
+                                          randomness. Range 0–1.
+                                        type: number
+                                      topP:
+                                        description: Top-p sampling parameter. Range
+                                          0–1.
+                                        type: number
+                                    type: object
+                                  modelId:
+                                    description: Identifier of the Amazon Bedrock
+                                      model to use for evaluation.
+                                    type: string
+                                type: object
+                            type: object
+                          ratingScale:
+                            description: Scale used to score the agent. See rating_scale
+                              below.
+                            properties:
+                              categorical:
+                                description: One or more categorical rating scale
+                                  definitions. See categorical below.
                                 items:
                                   properties:
-                                    lambdaArn:
-                                      description: ARN of the Lambda function that
-                                        runs the evaluation.
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
                                       type: string
-                                    lambdaArnRef:
-                                      description: Reference to a Function in lambda
-                                        to populate lambdaArn.
-                                      properties:
-                                        name:
-                                          description: Name of the referenced object.
-                                          type: string
-                                        namespace:
-                                          description: Namespace of the referenced
-                                            object
-                                          type: string
-                                        policy:
-                                          description: Policies for referencing.
-                                          properties:
-                                            resolution:
-                                              default: Required
-                                              description: |-
-                                                Resolution specifies whether resolution of this reference is required.
-                                                The default is 'Required', which means the reconcile will fail if the
-                                                reference cannot be resolved. 'Optional' means this reference will be
-                                                a no-op if it cannot be resolved.
-                                              enum:
-                                              - Required
-                                              - Optional
-                                              type: string
-                                            resolve:
-                                              description: |-
-                                                Resolve specifies when this reference should be resolved. The default
-                                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                                the corresponding field is not present. Use 'Always' to resolve the
-                                                reference on every reconcile.
-                                              enum:
-                                              - Always
-                                              - IfNotPresent
-                                              type: string
-                                          type: object
-                                      required:
-                                      - name
-                                      type: object
-                                    lambdaArnSelector:
-                                      description: Selector for a Function in lambda
-                                        to populate lambdaArn.
-                                      properties:
-                                        matchControllerRef:
-                                          description: |-
-                                            MatchControllerRef ensures an object with the same controller reference
-                                            as the selecting object is selected.
-                                          type: boolean
-                                        matchLabels:
-                                          additionalProperties:
-                                            type: string
-                                          description: MatchLabels ensures an object
-                                            with matching labels is selected.
-                                          type: object
-                                        namespace:
-                                          description: Namespace for the selector
-                                          type: string
-                                        policy:
-                                          description: Policies for selection.
-                                          properties:
-                                            resolution:
-                                              default: Required
-                                              description: |-
-                                                Resolution specifies whether resolution of this reference is required.
-                                                The default is 'Required', which means the reconcile will fail if the
-                                                reference cannot be resolved. 'Optional' means this reference will be
-                                                a no-op if it cannot be resolved.
-                                              enum:
-                                              - Required
-                                              - Optional
-                                              type: string
-                                            resolve:
-                                              description: |-
-                                                Resolve specifies when this reference should be resolved. The default
-                                                is 'IfNotPresent', which will attempt to resolve the reference only when
-                                                the corresponding field is not present. Use 'Always' to resolve the
-                                                reference on every reconcile.
-                                              enum:
-                                              - Always
-                                              - IfNotPresent
-                                              type: string
-                                          type: object
-                                      type: object
-                                    lambdaTimeoutInSeconds:
-                                      description: Time in seconds to wait for the
-                                        Lambda function before timing out. Defaults
-                                        to 60. Range 1–300.
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                  type: object
+                                type: array
+                              numerical:
+                                description: One or more numerical rating scale definitions.
+                                  See numerical below.
+                                items:
+                                  properties:
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
+                                      type: string
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                    value:
+                                      description: Numerical value for this rating
+                                        option. Must be at least 0.
                                       type: number
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                        llmAsAJudge:
-                          description: Configuration that uses a Bedrock model to
-                            score the agent. See llm_as_a_judge below.
-                          items:
-                            properties:
-                              instructionsSecretRef:
-                                description: Instructions that tell the model how
-                                  to score the agent.
-                                properties:
-                                  key:
-                                    type: string
-                                  name:
-                                    description: Name of the secret.
-                                    type: string
-                                required:
-                                - key
-                                - name
-                                type: object
-                              modelConfig:
-                                description: Which Bedrock model to use. See model_config
-                                  below.
-                                items:
-                                  properties:
-                                    bedrockEvaluatorModelConfig:
-                                      description: Amazon Bedrock model configuration.
-                                        See bedrock_evaluator_model_config below.
-                                      items:
-                                        properties:
-                                          additionalModelRequestFields:
-                                            description: JSON-encoded model-specific
-                                              request fields, for settings not covered
-                                              by inference_config.
-                                            type: string
-                                          inferenceConfig:
-                                            description: Settings that control how
-                                              the model generates its response. See
-                                              inference_config below.
-                                            items:
-                                              properties:
-                                                maxTokens:
-                                                  description: Maximum number of tokens
-                                                    to generate in the model response.
-                                                    Must be at least 1.
-                                                  type: number
-                                                stopSequences:
-                                                  description: List of sequences that
-                                                    cause the model to stop generating
-                                                    tokens.
-                                                  items:
-                                                    type: string
-                                                  type: array
-                                                temperature:
-                                                  description: Temperature value that
-                                                    controls randomness. Range 0–1.
-                                                  type: number
-                                                topP:
-                                                  description: Top-p sampling parameter.
-                                                    Range 0–1.
-                                                  type: number
-                                              type: object
-                                            type: array
-                                          modelId:
-                                            description: Identifier of the Amazon
-                                              Bedrock model to use for evaluation.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                              ratingScale:
-                                description: Scale used to score the agent. See rating_scale
-                                  below.
-                                items:
-                                  properties:
-                                    categorical:
-                                      description: One or more categorical rating
-                                        scale definitions. See categorical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    numerical:
-                                      description: One or more numerical rating scale
-                                        definitions. See numerical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                          value:
-                                            description: Numerical value for this
-                                              rating option. Must be at least 0.
-                                            type: number
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                            required:
-                            - instructionsSecretRef
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                        required:
+                        - instructionsSecretRef
+                        type: object
+                    type: object
                   evaluatorName:
                     description: Name of the evaluator. Must match the pattern ^[a-zA-Z][a-zA-Z0-9_]{0,47}$.
                     type: string
@@ -819,132 +781,114 @@ spec:
                   evaluatorConfig:
                     description: Configuration that defines how the evaluator assesses
                       agent performance. See evaluator_config below.
-                    items:
-                      properties:
-                        codeBased:
-                          description: Configuration that runs a Lambda function you
-                            provide to score the agent. See code_based below.
-                          items:
+                    properties:
+                      codeBased:
+                        description: Configuration that runs a Lambda function you
+                          provide to score the agent. See code_based below.
+                        properties:
+                          lambdaConfig:
+                            description: Lambda function configuration. See lambda_config
+                              below.
                             properties:
-                              lambdaConfig:
-                                description: Lambda function configuration. See lambda_config
-                                  below.
+                              lambdaArn:
+                                description: ARN of the Lambda function that runs
+                                  the evaluation.
+                                type: string
+                              lambdaTimeoutInSeconds:
+                                description: Time in seconds to wait for the Lambda
+                                  function before timing out. Defaults to 60. Range
+                                  1–300.
+                                type: number
+                            type: object
+                        type: object
+                      llmAsAJudge:
+                        description: Configuration that uses a Bedrock model to score
+                          the agent. See llm_as_a_judge below.
+                        properties:
+                          modelConfig:
+                            description: Which Bedrock model to use. See model_config
+                              below.
+                            properties:
+                              bedrockEvaluatorModelConfig:
+                                description: Amazon Bedrock model configuration. See
+                                  bedrock_evaluator_model_config below.
+                                properties:
+                                  additionalModelRequestFields:
+                                    description: JSON-encoded model-specific request
+                                      fields, for settings not covered by inference_config.
+                                    type: string
+                                  inferenceConfig:
+                                    description: Settings that control how the model
+                                      generates its response. See inference_config
+                                      below.
+                                    properties:
+                                      maxTokens:
+                                        description: Maximum number of tokens to generate
+                                          in the model response. Must be at least
+                                          1.
+                                        type: number
+                                      stopSequences:
+                                        description: List of sequences that cause
+                                          the model to stop generating tokens.
+                                        items:
+                                          type: string
+                                        type: array
+                                      temperature:
+                                        description: Temperature value that controls
+                                          randomness. Range 0–1.
+                                        type: number
+                                      topP:
+                                        description: Top-p sampling parameter. Range
+                                          0–1.
+                                        type: number
+                                    type: object
+                                  modelId:
+                                    description: Identifier of the Amazon Bedrock
+                                      model to use for evaluation.
+                                    type: string
+                                type: object
+                            type: object
+                          ratingScale:
+                            description: Scale used to score the agent. See rating_scale
+                              below.
+                            properties:
+                              categorical:
+                                description: One or more categorical rating scale
+                                  definitions. See categorical below.
                                 items:
                                   properties:
-                                    lambdaArn:
-                                      description: ARN of the Lambda function that
-                                        runs the evaluation.
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
                                       type: string
-                                    lambdaTimeoutInSeconds:
-                                      description: Time in seconds to wait for the
-                                        Lambda function before timing out. Defaults
-                                        to 60. Range 1–300.
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                  type: object
+                                type: array
+                              numerical:
+                                description: One or more numerical rating scale definitions.
+                                  See numerical below.
+                                items:
+                                  properties:
+                                    definition:
+                                      description: Description that explains what
+                                        this numerical rating represents.
+                                      type: string
+                                    label:
+                                      description: Label for this numerical rating
+                                        option. Length 1–100.
+                                      type: string
+                                    value:
+                                      description: Numerical value for this rating
+                                        option. Must be at least 0.
                                       type: number
                                   type: object
                                 type: array
                             type: object
-                          type: array
-                        llmAsAJudge:
-                          description: Configuration that uses a Bedrock model to
-                            score the agent. See llm_as_a_judge below.
-                          items:
-                            properties:
-                              modelConfig:
-                                description: Which Bedrock model to use. See model_config
-                                  below.
-                                items:
-                                  properties:
-                                    bedrockEvaluatorModelConfig:
-                                      description: Amazon Bedrock model configuration.
-                                        See bedrock_evaluator_model_config below.
-                                      items:
-                                        properties:
-                                          additionalModelRequestFields:
-                                            description: JSON-encoded model-specific
-                                              request fields, for settings not covered
-                                              by inference_config.
-                                            type: string
-                                          inferenceConfig:
-                                            description: Settings that control how
-                                              the model generates its response. See
-                                              inference_config below.
-                                            items:
-                                              properties:
-                                                maxTokens:
-                                                  description: Maximum number of tokens
-                                                    to generate in the model response.
-                                                    Must be at least 1.
-                                                  type: number
-                                                stopSequences:
-                                                  description: List of sequences that
-                                                    cause the model to stop generating
-                                                    tokens.
-                                                  items:
-                                                    type: string
-                                                  type: array
-                                                temperature:
-                                                  description: Temperature value that
-                                                    controls randomness. Range 0–1.
-                                                  type: number
-                                                topP:
-                                                  description: Top-p sampling parameter.
-                                                    Range 0–1.
-                                                  type: number
-                                              type: object
-                                            type: array
-                                          modelId:
-                                            description: Identifier of the Amazon
-                                              Bedrock model to use for evaluation.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                              ratingScale:
-                                description: Scale used to score the agent. See rating_scale
-                                  below.
-                                items:
-                                  properties:
-                                    categorical:
-                                      description: One or more categorical rating
-                                        scale definitions. See categorical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    numerical:
-                                      description: One or more numerical rating scale
-                                        definitions. See numerical below.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Description that explains
-                                              what this numerical rating represents.
-                                            type: string
-                                          label:
-                                            description: Label for this numerical
-                                              rating option. Length 1–100.
-                                            type: string
-                                          value:
-                                            description: Numerical value for this
-                                              rating option. Must be at least 0.
-                                            type: number
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
+                        type: object
+                    type: object
                   evaluatorId:
                     description: Unique identifier of the evaluator.
                     type: string

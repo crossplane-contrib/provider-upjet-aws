@@ -57,7 +57,7 @@ type AgentcoreGatewayInitParameters struct {
 	GatewayArn *string `json:"gatewayArn,omitempty" tf:"gateway_arn,omitempty"`
 
 	// Outbound authentication configuration. See outbound_auth below.
-	OutboundAuth []OutboundAuthInitParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
+	OutboundAuth *OutboundAuthInitParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
 }
 
 type AgentcoreGatewayObservation struct {
@@ -66,7 +66,7 @@ type AgentcoreGatewayObservation struct {
 	GatewayArn *string `json:"gatewayArn,omitempty" tf:"gateway_arn,omitempty"`
 
 	// Outbound authentication configuration. See outbound_auth below.
-	OutboundAuth []OutboundAuthObservation `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
+	OutboundAuth *OutboundAuthObservation `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
 }
 
 type AgentcoreGatewayParameters struct {
@@ -77,7 +77,7 @@ type AgentcoreGatewayParameters struct {
 
 	// Outbound authentication configuration. See outbound_auth below.
 	// +kubebuilder:validation:Optional
-	OutboundAuth []OutboundAuthParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
+	OutboundAuth *OutboundAuthParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
 }
 
 type AgentcoreMemoryConfigurationInitParameters struct {
@@ -86,13 +86,23 @@ type AgentcoreMemoryConfigurationInitParameters struct {
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
 	// ARN of the hosting environment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Memory
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Memory in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Memory in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Number of recent messages to keep in the conversation window.
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
 	// Retrieval configuration parameters. See retrieval_config below.
-	RetrievalConfig []RetrievalConfigInitParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
+	RetrievalConfig *RetrievalConfigInitParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
 type AgentcoreMemoryConfigurationObservation struct {
@@ -107,7 +117,7 @@ type AgentcoreMemoryConfigurationObservation struct {
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
 
 	// Retrieval configuration parameters. See retrieval_config below.
-	RetrievalConfig []RetrievalConfigObservation `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
+	RetrievalConfig *RetrievalConfigObservation `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
 type AgentcoreMemoryConfigurationParameters struct {
@@ -117,8 +127,18 @@ type AgentcoreMemoryConfigurationParameters struct {
 	ActorID *string `json:"actorId,omitempty" tf:"actor_id,omitempty"`
 
 	// ARN of the hosting environment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Memory
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Memory in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Memory in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Number of recent messages to keep in the conversation window.
 	// +kubebuilder:validation:Optional
@@ -126,7 +146,7 @@ type AgentcoreMemoryConfigurationParameters struct {
 
 	// Retrieval configuration parameters. See retrieval_config below.
 	// +kubebuilder:validation:Optional
-	RetrievalConfig []RetrievalConfigParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
+	RetrievalConfig *RetrievalConfigParameters `json:"retrievalConfig,omitempty" tf:"retrieval_config,omitempty"`
 }
 
 type AgentcoreRuntimeEnvironmentFilesystemConfigurationInitParameters struct {
@@ -321,7 +341,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationParam
 type AuthorizerConfigurationCustomJwtAuthorizerCustomClaimInitParameters struct {
 
 	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
-	AuthorizingClaimMatchValue []CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueInitParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+	AuthorizingClaimMatchValue *CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueInitParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
 
 	// Name of the custom claim field to check.
 	InboundTokenClaimName *string `json:"inboundTokenClaimName,omitempty" tf:"inbound_token_claim_name,omitempty"`
@@ -333,7 +353,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerCustomClaimInitParameters struct 
 type AuthorizerConfigurationCustomJwtAuthorizerCustomClaimObservation struct {
 
 	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
-	AuthorizingClaimMatchValue []CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueObservation `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+	AuthorizingClaimMatchValue *CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueObservation `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
 
 	// Name of the custom claim field to check.
 	InboundTokenClaimName *string `json:"inboundTokenClaimName,omitempty" tf:"inbound_token_claim_name,omitempty"`
@@ -346,7 +366,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerCustomClaimParameters struct {
 
 	// Configuration block to define the value or values to match for and the relationship of the match. See authorizing_claim_match_value below.
 	// +kubebuilder:validation:Optional
-	AuthorizingClaimMatchValue []CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
+	AuthorizingClaimMatchValue *CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueParameters `json:"authorizingClaimMatchValue,omitempty" tf:"authorizing_claim_match_value,omitempty"`
 
 	// Name of the custom claim field to check.
 	// +kubebuilder:validation:Optional
@@ -360,10 +380,10 @@ type AuthorizerConfigurationCustomJwtAuthorizerCustomClaimParameters struct {
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointInitParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters struct {
@@ -447,10 +467,10 @@ type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResource
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointObservation struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesInitParameters struct {
@@ -459,7 +479,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesInitParam
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Private endpoint configuration. See private_endpoint below.
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesObservation struct {
@@ -468,7 +488,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesObservati
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Private endpoint configuration. See private_endpoint below.
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesParameters struct {
@@ -479,47 +499,47 @@ type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesParameter
 
 	// Private endpoint configuration. See private_endpoint below.
 	// +kubebuilder:validation:Optional
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
 	// +kubebuilder:validation:Optional
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
 	// +kubebuilder:validation:Optional
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
 	// +kubebuilder:validation:Optional
-	ManagedVPCResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
 	// +kubebuilder:validation:Optional
-	SelfManagedLatticeResource []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters struct {
@@ -593,60 +613,60 @@ type BedrockModelConfigParameters struct {
 type ConfigInitParameters struct {
 
 	// AgentCore browser configuration. See agentcore_browser below.
-	AgentcoreBrowser []AgentcoreBrowserInitParameters `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
+	AgentcoreBrowser *AgentcoreBrowserInitParameters `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
 
 	// AgentCore code interpreter configuration. See agentcore_code_interpreter below.
-	AgentcoreCodeInterpreter []AgentcoreCodeInterpreterInitParameters `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
+	AgentcoreCodeInterpreter *AgentcoreCodeInterpreterInitParameters `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
 
 	// AgentCore gateway configuration. See agentcore_gateway below.
-	AgentcoreGateway []AgentcoreGatewayInitParameters `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
+	AgentcoreGateway *AgentcoreGatewayInitParameters `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
 
 	// Inline function configuration. See inline_function below.
-	InlineFunction []InlineFunctionInitParameters `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
+	InlineFunction *InlineFunctionInitParameters `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
 
 	// Remote MCP server configuration. See remote_mcp below.
-	RemoteMcp []RemoteMcpInitParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
+	RemoteMcp *RemoteMcpInitParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
 }
 
 type ConfigObservation struct {
 
 	// AgentCore browser configuration. See agentcore_browser below.
-	AgentcoreBrowser []AgentcoreBrowserObservation `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
+	AgentcoreBrowser *AgentcoreBrowserObservation `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
 
 	// AgentCore code interpreter configuration. See agentcore_code_interpreter below.
-	AgentcoreCodeInterpreter []AgentcoreCodeInterpreterObservation `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
+	AgentcoreCodeInterpreter *AgentcoreCodeInterpreterObservation `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
 
 	// AgentCore gateway configuration. See agentcore_gateway below.
-	AgentcoreGateway []AgentcoreGatewayObservation `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
+	AgentcoreGateway *AgentcoreGatewayObservation `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
 
 	// Inline function configuration. See inline_function below.
-	InlineFunction []InlineFunctionObservation `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
+	InlineFunction *InlineFunctionObservation `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
 
 	// Remote MCP server configuration. See remote_mcp below.
-	RemoteMcp []RemoteMcpParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
+	RemoteMcp *RemoteMcpParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
 }
 
 type ConfigParameters struct {
 
 	// AgentCore browser configuration. See agentcore_browser below.
 	// +kubebuilder:validation:Optional
-	AgentcoreBrowser []AgentcoreBrowserParameters `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
+	AgentcoreBrowser *AgentcoreBrowserParameters `json:"agentcoreBrowser,omitempty" tf:"agentcore_browser,omitempty"`
 
 	// AgentCore code interpreter configuration. See agentcore_code_interpreter below.
 	// +kubebuilder:validation:Optional
-	AgentcoreCodeInterpreter []AgentcoreCodeInterpreterParameters `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
+	AgentcoreCodeInterpreter *AgentcoreCodeInterpreterParameters `json:"agentcoreCodeInterpreter,omitempty" tf:"agentcore_code_interpreter,omitempty"`
 
 	// AgentCore gateway configuration. See agentcore_gateway below.
 	// +kubebuilder:validation:Optional
-	AgentcoreGateway []AgentcoreGatewayParameters `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
+	AgentcoreGateway *AgentcoreGatewayParameters `json:"agentcoreGateway,omitempty" tf:"agentcore_gateway,omitempty"`
 
 	// Inline function configuration. See inline_function below.
 	// +kubebuilder:validation:Optional
-	InlineFunction []InlineFunctionParameters `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
+	InlineFunction *InlineFunctionParameters `json:"inlineFunction,omitempty" tf:"inline_function,omitempty"`
 
 	// Remote MCP server configuration. See remote_mcp below.
 	// +kubebuilder:validation:Optional
-	RemoteMcp []RemoteMcpParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
+	RemoteMcp *RemoteMcpParameters `json:"remoteMcp,omitempty" tf:"remote_mcp,omitempty"`
 }
 
 type CustomClaimAuthorizingClaimMatchValueClaimMatchValueInitParameters struct {
@@ -706,7 +726,7 @@ type CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueInitParameters stru
 	ClaimMatchOperator *string `json:"claimMatchOperator,omitempty" tf:"claim_match_operator,omitempty"`
 
 	// Value or values to match for. See claim_match_value below.
-	ClaimMatchValue []CustomClaimAuthorizingClaimMatchValueClaimMatchValueInitParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+	ClaimMatchValue *CustomClaimAuthorizingClaimMatchValueClaimMatchValueInitParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
 }
 
 type CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueObservation struct {
@@ -715,7 +735,7 @@ type CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueObservation struct 
 	ClaimMatchOperator *string `json:"claimMatchOperator,omitempty" tf:"claim_match_operator,omitempty"`
 
 	// Value or values to match for. See claim_match_value below.
-	ClaimMatchValue []CustomClaimAuthorizingClaimMatchValueClaimMatchValueObservation `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+	ClaimMatchValue *CustomClaimAuthorizingClaimMatchValueClaimMatchValueObservation `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
 }
 
 type CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueParameters struct {
@@ -726,7 +746,7 @@ type CustomJwtAuthorizerCustomClaimAuthorizingClaimMatchValueParameters struct {
 
 	// Value or values to match for. See claim_match_value below.
 	// +kubebuilder:validation:Optional
-	ClaimMatchValue []CustomClaimAuthorizingClaimMatchValueClaimMatchValueParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
+	ClaimMatchValue *CustomClaimAuthorizingClaimMatchValueClaimMatchValueParameters `json:"claimMatchValue,omitempty" tf:"claim_match_value,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters struct {
@@ -848,20 +868,20 @@ type EnvironmentArtifactContainerConfigurationParameters struct {
 type EnvironmentArtifactInitParameters struct {
 
 	// Container configuration. See container_configuration below.
-	ContainerConfiguration []EnvironmentArtifactContainerConfigurationInitParameters `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
+	ContainerConfiguration *EnvironmentArtifactContainerConfigurationInitParameters `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
 }
 
 type EnvironmentArtifactObservation struct {
 
 	// Container configuration. See container_configuration below.
-	ContainerConfiguration []EnvironmentArtifactContainerConfigurationObservation `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
+	ContainerConfiguration *EnvironmentArtifactContainerConfigurationObservation `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
 }
 
 type EnvironmentArtifactParameters struct {
 
 	// Container configuration. See container_configuration below.
 	// +kubebuilder:validation:Optional
-	ContainerConfiguration []EnvironmentArtifactContainerConfigurationParameters `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
+	ContainerConfiguration *EnvironmentArtifactContainerConfigurationParameters `json:"containerConfiguration,omitempty" tf:"container_configuration,omitempty"`
 }
 
 type EnvironmentInitParameters struct {
@@ -1044,7 +1064,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
-	AllowedWorkloadConfiguration []AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []AuthorizerConfigurationCustomJwtAuthorizerCustomClaimInitParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
@@ -1053,7 +1073,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	PrivateEndpointOverrides []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesInitParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
@@ -1074,7 +1094,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerObservation struct {
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
-	AllowedWorkloadConfiguration []AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []AuthorizerConfigurationCustomJwtAuthorizerCustomClaimObservation `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
@@ -1083,7 +1103,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerObservation struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	PrivateEndpointOverrides []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointOverridesObservation `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
@@ -1108,7 +1128,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
 	// +kubebuilder:validation:Optional
-	AllowedWorkloadConfiguration []AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *AuthorizerConfigurationCustomJwtAuthorizerAllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	// +kubebuilder:validation:Optional
@@ -1120,7 +1140,7 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
 	// +kubebuilder:validation:Optional
-	PrivateEndpoint []AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *AuthorizerConfigurationCustomJwtAuthorizerPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	// +kubebuilder:validation:Optional
@@ -1130,20 +1150,20 @@ type HarnessAuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 type HarnessAuthorizerConfigurationInitParameters struct {
 
 	// JWT-based authorization configuration block. See custom_jwt_authorizer below.
-	CustomJwtAuthorizer []HarnessAuthorizerConfigurationCustomJwtAuthorizerInitParameters `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
+	CustomJwtAuthorizer *HarnessAuthorizerConfigurationCustomJwtAuthorizerInitParameters `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
 }
 
 type HarnessAuthorizerConfigurationObservation struct {
 
 	// JWT-based authorization configuration block. See custom_jwt_authorizer below.
-	CustomJwtAuthorizer []HarnessAuthorizerConfigurationCustomJwtAuthorizerObservation `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
+	CustomJwtAuthorizer *HarnessAuthorizerConfigurationCustomJwtAuthorizerObservation `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
 }
 
 type HarnessAuthorizerConfigurationParameters struct {
 
 	// JWT-based authorization configuration block. See custom_jwt_authorizer below.
 	// +kubebuilder:validation:Optional
-	CustomJwtAuthorizer []HarnessAuthorizerConfigurationCustomJwtAuthorizerParameters `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
+	CustomJwtAuthorizer *HarnessAuthorizerConfigurationCustomJwtAuthorizerParameters `json:"customJwtAuthorizer,omitempty" tf:"custom_jwt_authorizer,omitempty"`
 }
 
 type HarnessInitParameters struct {
@@ -1152,13 +1172,13 @@ type HarnessInitParameters struct {
 	AllowedTools []*string `json:"allowedTools,omitempty" tf:"allowed_tools,omitempty"`
 
 	// Authorization configuration for authenticating requests. See authorizer_configuration below.
-	AuthorizerConfiguration []HarnessAuthorizerConfigurationInitParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
+	AuthorizerConfiguration *HarnessAuthorizerConfigurationInitParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
 	// Compute environment configuration. See environment below.
-	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
+	Environment *EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// Environment artifact configuration. See environment_artifact below.
-	EnvironmentArtifact []EnvironmentArtifactInitParameters `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
+	EnvironmentArtifact *EnvironmentArtifactInitParameters `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
 
 	EnvironmentVariables map[string]*string `json:"environmentVariablesSecretRef,omitempty" tf:"-"`
 
@@ -1185,10 +1205,10 @@ type HarnessInitParameters struct {
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Memory configuration. See memory below.
-	Memory []MemoryInitParameters `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory *MemoryInitParameters `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// Model configuration for the harness. See model below.
-	Model []ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
+	Model *ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
 
 	// Skill configurations. See skill below.
 	Skill []SkillInitParameters `json:"skill,omitempty" tf:"skill,omitempty"`
@@ -1207,7 +1227,7 @@ type HarnessInitParameters struct {
 	Tool []ToolInitParameters `json:"tool,omitempty" tf:"tool,omitempty"`
 
 	// Truncation configuration for conversation history. See truncation below.
-	Truncation []TruncationInitParameters `json:"truncation,omitempty" tf:"truncation,omitempty"`
+	Truncation *TruncationInitParameters `json:"truncation,omitempty" tf:"truncation,omitempty"`
 }
 
 type HarnessObservation struct {
@@ -1219,13 +1239,13 @@ type HarnessObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Authorization configuration for authenticating requests. See authorizer_configuration below.
-	AuthorizerConfiguration []HarnessAuthorizerConfigurationObservation `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
+	AuthorizerConfiguration *HarnessAuthorizerConfigurationObservation `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
 	// Compute environment configuration. See environment below.
-	Environment []EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
+	Environment *EnvironmentObservation `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// Environment artifact configuration. See environment_artifact below.
-	EnvironmentArtifact []EnvironmentArtifactObservation `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
+	EnvironmentArtifact *EnvironmentArtifactObservation `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
 
 	// ARN of the IAM role that the harness assumes to access AWS services.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
@@ -1245,10 +1265,10 @@ type HarnessObservation struct {
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
 
 	// Memory configuration. See memory below.
-	Memory []MemoryObservation `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory *MemoryObservation `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// Model configuration for the harness. See model below.
-	Model []ModelObservation `json:"model,omitempty" tf:"model,omitempty"`
+	Model *ModelObservation `json:"model,omitempty" tf:"model,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -1275,7 +1295,7 @@ type HarnessObservation struct {
 	Tool []ToolObservation `json:"tool,omitempty" tf:"tool,omitempty"`
 
 	// Truncation configuration for conversation history. See truncation below.
-	Truncation []TruncationObservation `json:"truncation,omitempty" tf:"truncation,omitempty"`
+	Truncation *TruncationObservation `json:"truncation,omitempty" tf:"truncation,omitempty"`
 }
 
 type HarnessParameters struct {
@@ -1286,15 +1306,15 @@ type HarnessParameters struct {
 
 	// Authorization configuration for authenticating requests. See authorizer_configuration below.
 	// +kubebuilder:validation:Optional
-	AuthorizerConfiguration []HarnessAuthorizerConfigurationParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
+	AuthorizerConfiguration *HarnessAuthorizerConfigurationParameters `json:"authorizerConfiguration,omitempty" tf:"authorizer_configuration,omitempty"`
 
 	// Compute environment configuration. See environment below.
 	// +kubebuilder:validation:Optional
-	Environment []EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
+	Environment *EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// Environment artifact configuration. See environment_artifact below.
 	// +kubebuilder:validation:Optional
-	EnvironmentArtifact []EnvironmentArtifactParameters `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
+	EnvironmentArtifact *EnvironmentArtifactParameters `json:"environmentArtifact,omitempty" tf:"environment_artifact,omitempty"`
 
 	// Map of environment variables.
 	// +kubebuilder:validation:Optional
@@ -1328,11 +1348,11 @@ type HarnessParameters struct {
 
 	// Memory configuration. See memory below.
 	// +kubebuilder:validation:Optional
-	Memory []MemoryParameters `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory *MemoryParameters `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// Model configuration for the harness. See model below.
 	// +kubebuilder:validation:Optional
-	Model []ModelParameters `json:"model,omitempty" tf:"model,omitempty"`
+	Model *ModelParameters `json:"model,omitempty" tf:"model,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -1362,7 +1382,7 @@ type HarnessParameters struct {
 
 	// Truncation configuration for conversation history. See truncation below.
 	// +kubebuilder:validation:Optional
-	Truncation []TruncationParameters `json:"truncation,omitempty" tf:"truncation,omitempty"`
+	Truncation *TruncationParameters `json:"truncation,omitempty" tf:"truncation,omitempty"`
 }
 
 type InlineFunctionInitParameters struct {
@@ -1394,59 +1414,59 @@ type InlineFunctionParameters struct {
 type MemoryInitParameters struct {
 
 	// AgentCore memory configuration. See agentcore_memory_configuration below.
-	AgentcoreMemoryConfiguration []AgentcoreMemoryConfigurationInitParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
+	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationInitParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 }
 
 type MemoryObservation struct {
 
 	// AgentCore memory configuration. See agentcore_memory_configuration below.
-	AgentcoreMemoryConfiguration []AgentcoreMemoryConfigurationObservation `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
+	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationObservation `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 }
 
 type MemoryParameters struct {
 
 	// AgentCore memory configuration. See agentcore_memory_configuration below.
 	// +kubebuilder:validation:Optional
-	AgentcoreMemoryConfiguration []AgentcoreMemoryConfigurationParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
+	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 }
 
 type ModelInitParameters struct {
 
 	// Amazon Bedrock model configuration. See bedrock_model_config below.
-	BedrockModelConfig []BedrockModelConfigInitParameters `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
+	BedrockModelConfig *BedrockModelConfigInitParameters `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
 
 	// Gemini model configuration. See gemini_model_config below.
-	GeminiModelConfig []GeminiModelConfigInitParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
+	GeminiModelConfig *GeminiModelConfigInitParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config below.
-	OpenaiModelConfig []OpenaiModelConfigInitParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
+	OpenaiModelConfig *OpenaiModelConfigInitParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
 }
 
 type ModelObservation struct {
 
 	// Amazon Bedrock model configuration. See bedrock_model_config below.
-	BedrockModelConfig []BedrockModelConfigObservation `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
+	BedrockModelConfig *BedrockModelConfigObservation `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
 
 	// Gemini model configuration. See gemini_model_config below.
-	GeminiModelConfig []GeminiModelConfigObservation `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
+	GeminiModelConfig *GeminiModelConfigObservation `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config below.
-	OpenaiModelConfig []OpenaiModelConfigObservation `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
+	OpenaiModelConfig *OpenaiModelConfigObservation `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
 }
 
 type ModelParameters struct {
 
 	// Amazon Bedrock model configuration. See bedrock_model_config below.
 	// +kubebuilder:validation:Optional
-	BedrockModelConfig []BedrockModelConfigParameters `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
+	BedrockModelConfig *BedrockModelConfigParameters `json:"bedrockModelConfig,omitempty" tf:"bedrock_model_config,omitempty"`
 
 	// Gemini model configuration. See gemini_model_config below.
 	// +kubebuilder:validation:Optional
-	GeminiModelConfig []GeminiModelConfigParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
+	GeminiModelConfig *GeminiModelConfigParameters `json:"geminiModelConfig,omitempty" tf:"gemini_model_config,omitempty"`
 
 	// OpenAI model configuration. See openai_model_config below.
 	// +kubebuilder:validation:Optional
-	OpenaiModelConfig []OpenaiModelConfigParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
+	OpenaiModelConfig *OpenaiModelConfigParameters `json:"openaiModelConfig,omitempty" tf:"openai_model_config,omitempty"`
 }
 
 type NetworkConfigurationNetworkModeConfigInitParameters struct {
@@ -1562,7 +1582,7 @@ type OutboundAuthInitParameters struct {
 	None *bool `json:"none,omitempty" tf:"none,omitempty"`
 
 	// OAuth credential provider configuration. See oauth below.
-	Oauth []OutboundAuthOauthInitParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
+	Oauth *OutboundAuthOauthInitParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type OutboundAuthOauthInitParameters struct {
@@ -1636,7 +1656,7 @@ type OutboundAuthObservation struct {
 	None *bool `json:"none,omitempty" tf:"none,omitempty"`
 
 	// OAuth credential provider configuration. See oauth below.
-	Oauth []OutboundAuthOauthObservation `json:"oauth,omitempty" tf:"oauth,omitempty"`
+	Oauth *OutboundAuthOauthObservation `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type OutboundAuthParameters struct {
@@ -1651,7 +1671,7 @@ type OutboundAuthParameters struct {
 
 	// OAuth credential provider configuration. See oauth below.
 	// +kubebuilder:validation:Optional
-	Oauth []OutboundAuthOauthParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
+	Oauth *OutboundAuthOauthParameters `json:"oauth,omitempty" tf:"oauth,omitempty"`
 }
 
 type RemoteMcpInitParameters struct {
@@ -1820,7 +1840,7 @@ type SystemPromptParameters struct {
 type ToolInitParameters struct {
 
 	// Tool-specific configuration. See tool config below.
-	Config []ConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
+	Config *ConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1832,7 +1852,7 @@ type ToolInitParameters struct {
 type ToolObservation struct {
 
 	// Tool-specific configuration. See tool config below.
-	Config []ConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
+	Config *ConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Name of the tool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1845,7 +1865,7 @@ type ToolParameters struct {
 
 	// Tool-specific configuration. See tool config below.
 	// +kubebuilder:validation:Optional
-	Config []ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
+	Config *ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Name of the tool.
 	// +kubebuilder:validation:Optional

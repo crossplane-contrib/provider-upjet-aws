@@ -21,7 +21,7 @@ func (mg *Evaluator) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Evaluator
 func (tr *Evaluator) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"evaluator_config[*].llm_as_a_judge[*].instructions": "evaluatorConfig[*].llmAsAJudge[*].instructionsSecretRef"}
+	return map[string]string{"evaluator_config[*].llm_as_a_judge[*].instructions": "evaluatorConfig.llmAsAJudge.instructionsSecretRef"}
 }
 
 // GetObservation of this Evaluator
