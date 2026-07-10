@@ -180,6 +180,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -279,6 +282,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -383,6 +389,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                 required:
                 - region
                 type: object
@@ -506,6 +515,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -605,6 +617,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   topic:
                     description: Notification configuration to SNS Topic. See below.
                     items:
@@ -704,6 +719,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                 type: object
               managementPolicies:
                 default:
@@ -832,6 +850,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -857,6 +878,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -887,6 +911,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - id
+                    x-kubernetes-list-type: map
                 type: object
               conditions:
                 description: Conditions of the resource.

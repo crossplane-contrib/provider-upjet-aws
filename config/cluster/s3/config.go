@@ -7,6 +7,7 @@ package s3
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
@@ -93,6 +94,21 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket_notification", func(r *config.Resource) {
 		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
 		delete(r.References, "lambda_function.lambda_function_arn")
+		for _, f := range []string{"queue", "topic", "lambda_function"} {
+			if el, ok := r.TerraformResource.Schema[f].Elem.(*schema.Resource); ok {
+				el.Schema["id"].Optional = false
+				el.Schema["id"].Computed = false
+				el.Schema["id"].Required = true
+			}
+			r.ServerSideApplyMergeStrategies[f] = config.MergeStrategy{
+				ListMergeStrategy: config.ListMergeStrategy{
+					ListMapKeys: config.ListMapKeys{
+						Keys: []string{"id"},
+					},
+					MergeStrategy: config.ListTypeMap,
+				},
+			}
+		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {

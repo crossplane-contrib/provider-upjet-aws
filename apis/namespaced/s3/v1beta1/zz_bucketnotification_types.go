@@ -33,12 +33,18 @@ type BucketNotificationInitParameters struct {
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
 	// Used to configure notifications to a Lambda Function. See below.
+	// +listType=map
+	// +listMapKey=id
 	LambdaFunction []LambdaFunctionInitParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
+	// +listType=map
+	// +listMapKey=id
 	Queue []QueueInitParameters `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Notification configuration to SNS Topic. See below.
+	// +listType=map
+	// +listMapKey=id
 	Topic []TopicInitParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -54,9 +60,13 @@ type BucketNotificationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Used to configure notifications to a Lambda Function. See below.
+	// +listType=map
+	// +listMapKey=id
 	LambdaFunction []LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
+	// +listType=map
+	// +listMapKey=id
 	Queue []QueueObservation `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -64,6 +74,8 @@ type BucketNotificationObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Notification configuration to SNS Topic. See below.
+	// +listType=map
+	// +listMapKey=id
 	Topic []TopicObservation `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -89,10 +101,14 @@ type BucketNotificationParameters struct {
 
 	// Used to configure notifications to a Lambda Function. See below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=id
 	LambdaFunction []LambdaFunctionParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=id
 	Queue []QueueParameters `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -102,6 +118,8 @@ type BucketNotificationParameters struct {
 
 	// Notification configuration to SNS Topic. See below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=id
 	Topic []TopicParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -160,7 +178,7 @@ type LambdaFunctionParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Lambda function ARN.
 	// +kubebuilder:validation:Optional
@@ -232,7 +250,7 @@ type QueueParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// SQS queue ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sqs/v1beta1.Queue
@@ -314,7 +332,7 @@ type TopicParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// SNS topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
