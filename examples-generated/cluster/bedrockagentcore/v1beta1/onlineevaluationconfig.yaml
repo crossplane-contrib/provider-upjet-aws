@@ -25,8 +25,12 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     evaluator:
-    - evaluatorId: Builtin.Helpfulness
-    - evaluatorId: Builtin.GoalSuccessRate
+    - evaluatorIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    - evaluatorIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     onlineEvaluationConfigName: my_evaluation_config
     region: us-west-1
     rule:

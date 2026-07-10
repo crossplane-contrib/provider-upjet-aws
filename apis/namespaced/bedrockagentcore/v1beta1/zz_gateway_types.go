@@ -613,7 +613,17 @@ type McpParameters struct {
 type PolicyEngineConfigurationInitParameters struct {
 
 	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.PolicyEngine
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_engine_arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -631,8 +641,18 @@ type PolicyEngineConfigurationObservation struct {
 type PolicyEngineConfigurationParameters struct {
 
 	// ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.PolicyEngine
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_engine_arn",true)
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
 	// +kubebuilder:validation:Optional

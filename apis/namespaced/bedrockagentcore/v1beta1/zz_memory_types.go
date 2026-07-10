@@ -78,7 +78,17 @@ type KinesisInitParameters struct {
 	ContentConfiguration *ContentConfigurationInitParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v1.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v1.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisObservation struct {
@@ -97,8 +107,18 @@ type KinesisParameters struct {
 	ContentConfiguration *ContentConfigurationParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	DataStreamArn *string `json:"dataStreamArn" tf:"data_stream_arn,omitempty"`
+	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v1.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v1.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
 type MemoryInitParameters_2 struct {

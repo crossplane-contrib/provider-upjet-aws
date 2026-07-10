@@ -20,7 +20,17 @@ type APIGatewayInitParameters struct {
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationInitParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
@@ -45,8 +55,18 @@ type APIGatewayParameters struct {
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	RestAPIID *string `json:"restApiId" tf:"rest_api_id,omitempty"`
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	// +kubebuilder:validation:Optional
@@ -94,7 +114,17 @@ type APIKeyInitParameters struct {
 	CredentialPrefix *string `json:"credentialPrefix,omitempty" tf:"credential_prefix,omitempty"`
 
 	// ARN of the OIDC provider for API key authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.APIKeyCredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type APIKeyObservation struct {
@@ -127,8 +157,18 @@ type APIKeyParameters struct {
 	CredentialPrefix *string `json:"credentialPrefix,omitempty" tf:"credential_prefix,omitempty"`
 
 	// ARN of the OIDC provider for API key authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.APIKeyCredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	// +kubebuilder:validation:Optional
-	ProviderArn *string `json:"providerArn" tf:"provider_arn,omitempty"`
+	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreRuntimeInitParameters struct {
@@ -1059,7 +1099,17 @@ type OauthInitParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the Oauth credential provider for OAuth authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +listType=set
@@ -1106,8 +1156,18 @@ type OauthParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the Oauth credential provider for OAuth authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	// +kubebuilder:validation:Optional
-	ProviderArn *string `json:"providerArn" tf:"provider_arn,omitempty"`
+	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +kubebuilder:validation:Optional

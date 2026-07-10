@@ -133,7 +133,17 @@ type FilterParameters struct {
 type OnlineEvaluationConfigEvaluatorInitParameters struct {
 
 	// Unique identifier of the evaluator. Can reference builtin evaluators (e.g., Builtin.Helpfulness, Builtin.GoalSuccessRate) or custom evaluator IDs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Evaluator
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("evaluator_id",true)
 	EvaluatorID *string `json:"evaluatorId,omitempty" tf:"evaluator_id,omitempty"`
+
+	// Reference to a Evaluator in bedrockagentcore to populate evaluatorId.
+	// +kubebuilder:validation:Optional
+	EvaluatorIDRef *v1.Reference `json:"evaluatorIdRef,omitempty" tf:"-"`
+
+	// Selector for a Evaluator in bedrockagentcore to populate evaluatorId.
+	// +kubebuilder:validation:Optional
+	EvaluatorIDSelector *v1.Selector `json:"evaluatorIdSelector,omitempty" tf:"-"`
 }
 
 type OnlineEvaluationConfigEvaluatorObservation struct {
@@ -145,8 +155,18 @@ type OnlineEvaluationConfigEvaluatorObservation struct {
 type OnlineEvaluationConfigEvaluatorParameters struct {
 
 	// Unique identifier of the evaluator. Can reference builtin evaluators (e.g., Builtin.Helpfulness, Builtin.GoalSuccessRate) or custom evaluator IDs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Evaluator
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("evaluator_id",true)
 	// +kubebuilder:validation:Optional
-	EvaluatorID *string `json:"evaluatorId" tf:"evaluator_id,omitempty"`
+	EvaluatorID *string `json:"evaluatorId,omitempty" tf:"evaluator_id,omitempty"`
+
+	// Reference to a Evaluator in bedrockagentcore to populate evaluatorId.
+	// +kubebuilder:validation:Optional
+	EvaluatorIDRef *v1.Reference `json:"evaluatorIdRef,omitempty" tf:"-"`
+
+	// Selector for a Evaluator in bedrockagentcore to populate evaluatorId.
+	// +kubebuilder:validation:Optional
+	EvaluatorIDSelector *v1.Selector `json:"evaluatorIdSelector,omitempty" tf:"-"`
 }
 
 type OnlineEvaluationConfigInitParameters struct {

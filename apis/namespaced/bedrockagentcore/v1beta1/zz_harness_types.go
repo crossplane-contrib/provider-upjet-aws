@@ -17,7 +17,17 @@ import (
 type AgentcoreBrowserInitParameters struct {
 
 	// ARN of the AgentCore browser resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Browser
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("browser_arn",true)
 	BrowserArn *string `json:"browserArn,omitempty" tf:"browser_arn,omitempty"`
+
+	// Reference to a Browser in bedrockagentcore to populate browserArn.
+	// +kubebuilder:validation:Optional
+	BrowserArnRef *v1.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
+
+	// Selector for a Browser in bedrockagentcore to populate browserArn.
+	// +kubebuilder:validation:Optional
+	BrowserArnSelector *v1.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreBrowserObservation struct {
@@ -29,14 +39,34 @@ type AgentcoreBrowserObservation struct {
 type AgentcoreBrowserParameters struct {
 
 	// ARN of the AgentCore browser resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Browser
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("browser_arn",true)
 	// +kubebuilder:validation:Optional
 	BrowserArn *string `json:"browserArn,omitempty" tf:"browser_arn,omitempty"`
+
+	// Reference to a Browser in bedrockagentcore to populate browserArn.
+	// +kubebuilder:validation:Optional
+	BrowserArnRef *v1.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
+
+	// Selector for a Browser in bedrockagentcore to populate browserArn.
+	// +kubebuilder:validation:Optional
+	BrowserArnSelector *v1.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreCodeInterpreterInitParameters struct {
 
 	// ARN of the AgentCore code interpreter resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.CodeInterpreter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("code_interpreter_arn",true)
 	CodeInterpreterArn *string `json:"codeInterpreterArn,omitempty" tf:"code_interpreter_arn,omitempty"`
+
+	// Reference to a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
+	// +kubebuilder:validation:Optional
+	CodeInterpreterArnRef *v1.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
+
+	// Selector for a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
+	// +kubebuilder:validation:Optional
+	CodeInterpreterArnSelector *v1.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreCodeInterpreterObservation struct {
@@ -48,14 +78,34 @@ type AgentcoreCodeInterpreterObservation struct {
 type AgentcoreCodeInterpreterParameters struct {
 
 	// ARN of the AgentCore code interpreter resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.CodeInterpreter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("code_interpreter_arn",true)
 	// +kubebuilder:validation:Optional
 	CodeInterpreterArn *string `json:"codeInterpreterArn,omitempty" tf:"code_interpreter_arn,omitempty"`
+
+	// Reference to a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
+	// +kubebuilder:validation:Optional
+	CodeInterpreterArnRef *v1.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
+
+	// Selector for a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
+	// +kubebuilder:validation:Optional
+	CodeInterpreterArnSelector *v1.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreGatewayInitParameters struct {
 
 	// ARN of the AgentCore gateway resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("gateway_arn",true)
 	GatewayArn *string `json:"gatewayArn,omitempty" tf:"gateway_arn,omitempty"`
+
+	// Reference to a Gateway in bedrockagentcore to populate gatewayArn.
+	// +kubebuilder:validation:Optional
+	GatewayArnRef *v1.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in bedrockagentcore to populate gatewayArn.
+	// +kubebuilder:validation:Optional
+	GatewayArnSelector *v1.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
 
 	// Outbound authentication configuration. See outbound_auth below.
 	OutboundAuth *OutboundAuthInitParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
@@ -73,8 +123,18 @@ type AgentcoreGatewayObservation struct {
 type AgentcoreGatewayParameters struct {
 
 	// ARN of the AgentCore gateway resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("gateway_arn",true)
 	// +kubebuilder:validation:Optional
-	GatewayArn *string `json:"gatewayArn" tf:"gateway_arn,omitempty"`
+	GatewayArn *string `json:"gatewayArn,omitempty" tf:"gateway_arn,omitempty"`
+
+	// Reference to a Gateway in bedrockagentcore to populate gatewayArn.
+	// +kubebuilder:validation:Optional
+	GatewayArnRef *v1.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in bedrockagentcore to populate gatewayArn.
+	// +kubebuilder:validation:Optional
+	GatewayArnSelector *v1.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
 
 	// Outbound authentication configuration. See outbound_auth below.
 	// +kubebuilder:validation:Optional
@@ -192,7 +252,17 @@ type AgentcoreRuntimeEnvironmentFilesystemConfigurationParameters struct {
 type AgentcoreRuntimeEnvironmentInitParameters struct {
 
 	// ARN of the AgentCore memory resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.AgentRuntime
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("agent_runtime_arn",true)
 	AgentRuntimeArn *string `json:"agentRuntimeArn,omitempty" tf:"agent_runtime_arn"`
+
+	// Reference to a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
+	// +kubebuilder:validation:Optional
+	AgentRuntimeArnRef *v1.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
+
+	// Selector for a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
+	// +kubebuilder:validation:Optional
+	AgentRuntimeArnSelector *v1.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
 
 	AgentRuntimeID *string `json:"agentRuntimeId,omitempty" tf:"agent_runtime_id"`
 
@@ -288,8 +358,18 @@ type AgentcoreRuntimeEnvironmentObservation struct {
 type AgentcoreRuntimeEnvironmentParameters struct {
 
 	// ARN of the AgentCore memory resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.AgentRuntime
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("agent_runtime_arn",true)
 	// +kubebuilder:validation:Optional
 	AgentRuntimeArn *string `json:"agentRuntimeArn,omitempty" tf:"agent_runtime_arn"`
+
+	// Reference to a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
+	// +kubebuilder:validation:Optional
+	AgentRuntimeArnRef *v1.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
+
+	// Selector for a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
+	// +kubebuilder:validation:Optional
+	AgentRuntimeArnSelector *v1.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	AgentRuntimeID *string `json:"agentRuntimeId,omitempty" tf:"agent_runtime_id"`
@@ -578,7 +658,17 @@ type EnvironmentParameters struct {
 type FilesystemConfigurationEFSAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path"`
@@ -596,8 +686,18 @@ type FilesystemConfigurationEFSAccessPointObservation struct {
 type FilesystemConfigurationEFSAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -607,7 +707,17 @@ type FilesystemConfigurationEFSAccessPointParameters struct {
 type FilesystemConfigurationS3FilesAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path"`
@@ -625,8 +735,18 @@ type FilesystemConfigurationS3FilesAccessPointObservation struct {
 type FilesystemConfigurationS3FilesAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -655,7 +775,17 @@ type FilesystemConfigurationSessionStorageParameters struct {
 type GeminiModelConfigInitParameters struct {
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -697,8 +827,18 @@ type GeminiModelConfigObservation struct {
 type GeminiModelConfigParameters struct {
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	APIKeyArn *string `json:"apiKeyArn" tf:"api_key_arn,omitempty"`
+	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -1149,7 +1289,17 @@ type NetworkConfigurationNetworkModeConfigParameters struct {
 type OpenaiModelConfigInitParameters struct {
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1185,8 +1335,18 @@ type OpenaiModelConfigObservation struct {
 type OpenaiModelConfigParameters struct {
 
 	// ARN of the secret containing the API key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	APIKeyArn *string `json:"apiKeyArn" tf:"api_key_arn,omitempty"`
+	APIKeyArn *string `json:"apiKeyArn,omitempty" tf:"api_key_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate apiKeyArn.
+	// +kubebuilder:validation:Optional
+	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -1230,7 +1390,17 @@ type OutboundAuthOauthInitParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the OAuth credential provider.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// List of OAuth scopes.
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
@@ -1271,8 +1441,18 @@ type OutboundAuthOauthParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the OAuth credential provider.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	// +kubebuilder:validation:Optional
-	ProviderArn *string `json:"providerArn" tf:"provider_arn,omitempty"`
+	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// List of OAuth scopes.
 	// +kubebuilder:validation:Optional
@@ -1336,7 +1516,17 @@ type RetrievalConfigInitParameters struct {
 	RelevanceScore *float64 `json:"relevanceScore,omitempty" tf:"relevance_score,omitempty"`
 
 	// ID of the memory strategy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.MemoryStrategy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("memory_strategy_id",true)
 	StrategyID *string `json:"strategyId,omitempty" tf:"strategy_id,omitempty"`
+
+	// Reference to a MemoryStrategy in bedrockagentcore to populate strategyId.
+	// +kubebuilder:validation:Optional
+	StrategyIDRef *v1.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
+
+	// Selector for a MemoryStrategy in bedrockagentcore to populate strategyId.
+	// +kubebuilder:validation:Optional
+	StrategyIDSelector *v1.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
 	// Top-k sampling parameter.
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
@@ -1368,8 +1558,18 @@ type RetrievalConfigParameters struct {
 	RelevanceScore *float64 `json:"relevanceScore,omitempty" tf:"relevance_score,omitempty"`
 
 	// ID of the memory strategy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.MemoryStrategy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("memory_strategy_id",true)
 	// +kubebuilder:validation:Optional
 	StrategyID *string `json:"strategyId,omitempty" tf:"strategy_id,omitempty"`
+
+	// Reference to a MemoryStrategy in bedrockagentcore to populate strategyId.
+	// +kubebuilder:validation:Optional
+	StrategyIDRef *v1.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
+
+	// Selector for a MemoryStrategy in bedrockagentcore to populate strategyId.
+	// +kubebuilder:validation:Optional
+	StrategyIDSelector *v1.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
 	// Top-k sampling parameter.
 	// +kubebuilder:validation:Optional
