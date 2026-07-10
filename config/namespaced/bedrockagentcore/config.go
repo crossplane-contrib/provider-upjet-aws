@@ -12,6 +12,14 @@ import (
 
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_agent_runtime", func(r *config.Resource) {
+		r.References["filesystem_configuration.efs_access_point.access_point_arn"] = config.Reference{
+			TerraformName: "aws_efs_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["filesystem_configuration.s3_files_access_point.access_point_arn"] = config.Reference{
+			TerraformName: "aws_s3_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("agent_runtime_artifact", "agentRuntimeArtifact")
 		r.AddSingletonListConversion("agent_runtime_artifact[*].code_configuration", "agentRuntimeArtifact[*].codeConfiguration")
 		r.AddSingletonListConversion("agent_runtime_artifact[*].code_configuration[*].code", "agentRuntimeArtifact[*].codeConfiguration[*].code")
@@ -45,6 +53,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	// aws_bedrockagentcore_browser
 	p.AddResourceConfigurator("aws_bedrockagentcore_browser", func(r *config.Resource) {
+		r.References["certificate.location.secrets_manager.secret_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("browser_signing", "browserSigning")
 		r.AddSingletonListConversion("certificate[*].location", "certificate[*].location")
 		r.AddSingletonListConversion("certificate[*].location[*].secrets_manager", "certificate[*].location[*].secretsManager")
@@ -58,6 +70,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	// aws_bedrockagentcore_code_interpreter
 	p.AddResourceConfigurator("aws_bedrockagentcore_code_interpreter", func(r *config.Resource) {
+		r.References["certificate.location.secrets_manager.secret_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("certificate[*].location", "certificate[*].location")
 		r.AddSingletonListConversion("certificate[*].location[*].secrets_manager", "certificate[*].location[*].secretsManager")
 		r.AddSingletonListConversion("network_configuration", "networkConfiguration")
@@ -109,6 +125,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["credential_provider_configuration.api_key.provider_arn"] = config.Reference{
 			TerraformName: "aws_bedrockagentcore_api_key_credential_provider",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)`,
+		}
+		r.References["target_configuration.mcp.api_gateway.rest_api_id"] = config.Reference{
+			TerraformName: "aws_api_gateway_rest_api",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()`,
 		}
 		r.AddSingletonListConversion("credential_provider_configuration", "credentialProviderConfiguration")
 		r.AddSingletonListConversion("credential_provider_configuration[*].api_key", "credentialProviderConfiguration[*].apiKey")
@@ -177,6 +197,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_bedrockagentcore_oauth2_credential_provider",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)`,
 		}
+		r.References["environment.agentcore_runtime_environment.filesystem_configuration.efs_access_point.access_point_arn"] = config.Reference{
+			TerraformName: "aws_efs_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["environment.agentcore_runtime_environment.filesystem_configuration.s3_files_access_point.access_point_arn"] = config.Reference{
+			TerraformName: "aws_s3_access_point",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["model.gemini_model_config.api_key_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["model.openai_model_config.api_key_arn"] = config.Reference{
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].allowed_workload_configuration", "authorizerConfiguration[*].customJwtAuthorizer[*].allowedWorkloadConfiguration")
@@ -210,6 +246,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 	// aws_bedrockagentcore_memory
 	p.AddResourceConfigurator("aws_bedrockagentcore_memory", func(r *config.Resource) {
+		r.References["stream_delivery_resources.resource.kinesis.data_stream_arn"] = config.Reference{
+			TerraformName: "aws_kinesis_stream",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.AddSingletonListConversion("stream_delivery_resources", "streamDeliveryResources")
 		r.AddSingletonListConversion("stream_delivery_resources[*].resource", "streamDeliveryResources[*].resource")
 		r.AddSingletonListConversion("stream_delivery_resources[*].resource[*].kinesis", "streamDeliveryResources[*].resource[*].kinesis")
