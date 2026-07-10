@@ -551,7 +551,17 @@ type CustomJwtAuthorizerParameters struct {
 type EFSAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -569,8 +579,18 @@ type EFSAccessPointObservation struct {
 type EFSAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	AccessPointArn *string `json:"accessPointArn" tf:"access_point_arn,omitempty"`
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -1037,7 +1057,17 @@ type RequestHeaderConfigurationParameters struct {
 type S3FilesAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -1055,8 +1085,18 @@ type S3FilesAccessPointObservation struct {
 type S3FilesAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	AccessPointArn *string `json:"accessPointArn" tf:"access_point_arn,omitempty"`
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
