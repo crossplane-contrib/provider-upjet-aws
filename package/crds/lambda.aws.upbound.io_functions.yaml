@@ -3696,6 +3696,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     properties:
@@ -4759,6 +4768,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   vpcConfig:
                     description: Configuration block for VPC. See below.
                     properties:
@@ -5344,6 +5362,15 @@ spec:
                         description: 'X-Ray tracing mode. Valid values: Active, PassThrough.'
                         type: string
                     type: object
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   version:
                     description: Latest published version of your Lambda Function.
                     type: string

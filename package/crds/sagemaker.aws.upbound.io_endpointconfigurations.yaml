@@ -2288,6 +2288,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.
@@ -2502,6 +2520,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.
@@ -2916,6 +2952,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.
@@ -3125,6 +3179,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.
@@ -3478,6 +3550,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.
@@ -3616,6 +3706,24 @@ spec:
                           description: Size of the Elastic Inference (EI) instance
                             to use for the production variant.
                           type: string
+                        capacityReservationConfig:
+                          description: Settings for the capacity reservation for the
+                            compute instances that SageMaker AI reserves for an endpoint.
+                            See capacity_reservation_config below.
+                          properties:
+                            capacityReservationPreference:
+                              description: Capacity reservation preference. Valid
+                                value is capacity-reservations-only. When set to capacity-reservations-only,
+                                SageMaker AI launches instances only into an ML capacity
+                                reservation; if no capacity is available, the instances
+                                fail to launch.
+                              type: string
+                            mlReservationArn:
+                              description: The Amazon Resource Name (ARN) that uniquely
+                                identifies the ML capacity reservation that SageMaker
+                                AI applies when it deploys the endpoint.
+                              type: string
+                          type: object
                         containerStartupHealthCheckTimeoutInSeconds:
                           description: Timeout value, in seconds, for your inference
                             container to pass health check by SageMaker AI Hosting.

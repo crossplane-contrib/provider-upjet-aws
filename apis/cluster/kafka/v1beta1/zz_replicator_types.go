@@ -54,6 +54,9 @@ type AmazonMskClusterParameters struct {
 
 type ConsumerGroupReplicationInitParameters struct {
 
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
+
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +listType=set
 	ConsumerGroupsToExclude []*string `json:"consumerGroupsToExclude,omitempty" tf:"consumer_groups_to_exclude,omitempty"`
@@ -71,6 +74,9 @@ type ConsumerGroupReplicationInitParameters struct {
 
 type ConsumerGroupReplicationObservation struct {
 
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
+
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +listType=set
 	ConsumerGroupsToExclude []*string `json:"consumerGroupsToExclude,omitempty" tf:"consumer_groups_to_exclude,omitempty"`
@@ -87,6 +93,10 @@ type ConsumerGroupReplicationObservation struct {
 }
 
 type ConsumerGroupReplicationParameters struct {
+
+	// Consumer group offset synchronization mode. Valid values are LEGACY and ENHANCED. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster and requires topic_name_configuration.type to be set to IDENTICAL. Defaults to LEGACY. Changing this value will force a new resource.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupOffsetSyncMode *string `json:"consumerGroupOffsetSyncMode,omitempty" tf:"consumer_group_offset_sync_mode,omitempty"`
 
 	// List of regular expression patterns indicating the consumer groups that should not be replicated.
 	// +kubebuilder:validation:Optional

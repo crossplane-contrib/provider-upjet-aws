@@ -819,6 +819,11 @@ func (in *EnvironmentInitParameters) DeepCopyInto(out *EnvironmentInitParameters
 		*out = new(FleetInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.HostKernel != nil {
+		in, out := &in.HostKernel, &out.HostKernel
+		*out = new(string)
+		**out = **in
+	}
 	if in.Image != nil {
 		in, out := &in.Image, &out.Image
 		*out = new(string)
@@ -886,6 +891,11 @@ func (in *EnvironmentObservation) DeepCopyInto(out *EnvironmentObservation) {
 		*out = new(FleetObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.HostKernel != nil {
+		in, out := &in.HostKernel, &out.HostKernel
+		*out = new(string)
+		**out = **in
+	}
 	if in.Image != nil {
 		in, out := &in.Image, &out.Image
 		*out = new(string)
@@ -952,6 +962,11 @@ func (in *EnvironmentParameters) DeepCopyInto(out *EnvironmentParameters) {
 		in, out := &in.Fleet, &out.Fleet
 		*out = new(FleetParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.HostKernel != nil {
+		in, out := &in.HostKernel, &out.HostKernel
+		*out = new(string)
+		**out = **in
 	}
 	if in.Image != nil {
 		in, out := &in.Image, &out.Image

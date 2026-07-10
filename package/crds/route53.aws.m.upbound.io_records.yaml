@@ -986,7 +986,8 @@ spec:
                         type: string
                     type: object
                   fqdn:
-                    description: FQDN built using the zone domain and name.
+                    description: FQDN built using the zone domain and name. Does not
+                      include trailing ..
                     type: string
                   geolocationRoutingPolicy:
                     description: A block indicating a routing policy based on the
