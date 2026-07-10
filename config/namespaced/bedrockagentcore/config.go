@@ -69,6 +69,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 	// aws_bedrockagentcore_gateway
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway", func(r *config.Resource) {
+		r.References["policy_engine_configuration.arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_policy_engine",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("policy_engine_arn",true)`,
+		}
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].custom_claim[*].authorizing_claim_match_value", "authorizerConfiguration[*].customJwtAuthorizer[*].customClaim[*].authorizingClaimMatchValue")
@@ -84,6 +88,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 	// aws_bedrockagentcore_gateway_target
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_target", func(r *config.Resource) {
+		r.References["credential_provider_configuration.oauth.provider_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_oauth2_credential_provider",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)`,
+		}
+		r.References["credential_provider_configuration.api_key.provider_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_api_key_credential_provider",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)`,
+		}
 		r.AddSingletonListConversion("credential_provider_configuration", "credentialProviderConfiguration")
 		r.AddSingletonListConversion("credential_provider_configuration[*].api_key", "credentialProviderConfiguration[*].apiKey")
 		r.AddSingletonListConversion("credential_provider_configuration[*].caller_iam_credentials", "credentialProviderConfiguration[*].callerIamCredentials")
@@ -126,6 +138,30 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["memory.agentcore_memory_configuration.arn"] = config.Reference{
 			TerraformName: "aws_bedrockagentcore_memory",
 			Extractor:     common.PathARNExtractor,
+		}
+		r.References["environment.agentcore_runtime_environment.agent_runtime_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_agent_runtime",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("agent_runtime_arn",true)`,
+		}
+		r.References["memory.agentcore_memory_configuration.retrieval_config.strategy_id"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_memory_strategy",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("memory_strategy_id",true)`,
+		}
+		r.References["tool.config.agentcore_browser.browser_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_browser",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("browser_arn",true)`,
+		}
+		r.References["tool.config.agentcore_code_interpreter.code_interpreter_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_code_interpreter",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("code_interpreter_arn",true)`,
+		}
+		r.References["tool.config.agentcore_gateway.gateway_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_gateway",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("gateway_arn",true)`,
+		}
+		r.References["tool.config.agentcore_gateway.outbound_auth.oauth.provider_arn"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_oauth2_credential_provider",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)`,
 		}
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
@@ -181,6 +217,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 	// aws_bedrockagentcore_online_evaluation_config
 	p.AddResourceConfigurator("aws_bedrockagentcore_online_evaluation_config", func(r *config.Resource) {
+		r.References["evaluator.evaluator_id"] = config.Reference{
+			TerraformName: "aws_bedrockagentcore_evaluator",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("evaluator_id",true)`,
+		}
 		r.AddSingletonListConversion("data_source_config", "dataSourceConfig")
 		r.AddSingletonListConversion("data_source_config[*].cloudwatch_logs", "dataSourceConfig[*].cloudwatchLogs")
 		r.AddSingletonListConversion("rule", "rule")
