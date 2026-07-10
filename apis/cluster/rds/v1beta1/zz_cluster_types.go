@@ -24,6 +24,9 @@ type ClusterInitParameters struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false. See Amazon RDS Documentation for more information.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
@@ -292,6 +295,9 @@ type ClusterObservation struct {
 	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
@@ -529,6 +535,10 @@ type ClusterParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Optional
 	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	// +kubebuilder:validation:Optional
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
