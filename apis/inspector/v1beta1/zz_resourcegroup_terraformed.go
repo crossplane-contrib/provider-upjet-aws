@@ -36,6 +36,7 @@ func (tr *ResourceGroup) GetObservation() (map[string]any, error) {
 
 // SetObservation for this ResourceGroup
 func (tr *ResourceGroup) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
