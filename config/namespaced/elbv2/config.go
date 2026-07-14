@@ -123,6 +123,32 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 
+	p.AddResourceConfigurator("aws_lb_listener_rule", func(r *config.Resource) {
+		r.References = config.References{
+			"listener_arn": {
+				TerraformName: "aws_lb_listener",
+			},
+			"action.target_group_arn": {
+				TerraformName: "aws_lb_target_group",
+			},
+			"action.forward.target_group.arn": {
+				TerraformName: "aws_lb_target_group",
+			},
+		}
+
+		r.ServerSideApplyMergeStrategies["action"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
+	})
+
 	p.AddResourceConfigurator("aws_lb_target_group", func(r *config.Resource) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		if s, ok := r.TerraformResource.Schema["name"]; ok {
