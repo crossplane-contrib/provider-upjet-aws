@@ -64,3 +64,24 @@ func SetupGated_backup(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_backup registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_backup(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		framework.SetupWebhookWithManager,
+		globalsettings.SetupWebhookWithManager,
+		plan.SetupWebhookWithManager,
+		regionsettings.SetupWebhookWithManager,
+		reportplan.SetupWebhookWithManager,
+		selection.SetupWebhookWithManager,
+		vault.SetupWebhookWithManager,
+		vaultlockconfiguration.SetupWebhookWithManager,
+		vaultnotifications.SetupWebhookWithManager,
+		vaultpolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -210,6 +210,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 required:
                 - region
                 type: object
@@ -355,6 +359,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -522,6 +530,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -649,9 +661,11 @@ spec:
                       be destroyed without error. The default value is false.
                     type: boolean
                   kmsKeyId:
-                    description: The GUID for the customer-managed KMS key to use
-                      for encryption. You can also use a Kinesis-owned master key
-                      by specifying the alias alias/aws/kinesis.
+                    description: The identifier for the customer-managed KMS key to
+                      use for encryption. This can be a Key ID (UUID), a Key ARN,
+                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
+                      also use a master key owned by Kinesis Data Streams by specifying
+                      the alias aws/kinesis.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -743,9 +757,11 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: |-
-                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-                      Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+                    description: The number of shards that the stream will use. If
+                      the stream_mode is PROVISIONED, this field is required. Amazon
+                      has guidelines for specifying the Stream size that should be
+                      referenced when creating a Kinesis stream. See Amazon Kinesis
+                      Streams for more.
                     type: number
                   shardLevelMetrics:
                     description: A list of shard-level CloudWatch metrics which can
@@ -771,6 +787,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 required:
                 - region
                 type: object
@@ -797,9 +817,11 @@ spec:
                       be destroyed without error. The default value is false.
                     type: boolean
                   kmsKeyId:
-                    description: The GUID for the customer-managed KMS key to use
-                      for encryption. You can also use a Kinesis-owned master key
-                      by specifying the alias alias/aws/kinesis.
+                    description: The identifier for the customer-managed KMS key to
+                      use for encryption. This can be a Key ID (UUID), a Key ARN,
+                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
+                      also use a master key owned by Kinesis Data Streams by specifying
+                      the alias aws/kinesis.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -886,9 +908,11 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: |-
-                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-                      Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+                    description: The number of shards that the stream will use. If
+                      the stream_mode is PROVISIONED, this field is required. Amazon
+                      has guidelines for specifying the Stream size that should be
+                      referenced when creating a Kinesis stream. See Amazon Kinesis
+                      Streams for more.
                     type: number
                   shardLevelMetrics:
                     description: A list of shard-level CloudWatch metrics which can
@@ -914,6 +938,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -1007,8 +1035,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) specifying the Stream
-                      (same as id)
+                    description: The Amazon Resource Name (ARN) specifying the stream
+                      (same as id).
                     type: string
                   encryptionType:
                     description: The encryption type to use. The only acceptable values
@@ -1020,12 +1048,14 @@ spec:
                       be destroyed without error. The default value is false.
                     type: boolean
                   id:
-                    description: The unique Stream id
+                    description: The unique stream ID.
                     type: string
                   kmsKeyId:
-                    description: The GUID for the customer-managed KMS key to use
-                      for encryption. You can also use a Kinesis-owned master key
-                      by specifying the alias alias/aws/kinesis.
+                    description: The identifier for the customer-managed KMS key to
+                      use for encryption. This can be a Key ID (UUID), a Key ARN,
+                      an Alias Name (prefixed with alias/), or an Alias ARN. You can
+                      also use a master key owned by Kinesis Data Streams by specifying
+                      the alias aws/kinesis.
                     type: string
                   maxRecordSizeInKib:
                     description: The maximum size for a single data record in KiB.
@@ -1043,9 +1073,11 @@ spec:
                       is 24.
                     type: number
                   shardCount:
-                    description: |-
-                      The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
-                      Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+                    description: The number of shards that the stream will use. If
+                      the stream_mode is PROVISIONED, this field is required. Amazon
+                      has guidelines for specifying the Stream size that should be
+                      referenced when creating a Kinesis stream. See Amazon Kinesis
+                      Streams for more.
                     type: number
                   shardLevelMetrics:
                     description: A list of shard-level CloudWatch metrics which can
@@ -1079,6 +1111,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  warmThroughputMibPs:
+                    description: Target warm throughput in MB/s that the stream should
+                      be scaled to handle.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

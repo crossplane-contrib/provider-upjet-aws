@@ -156,6 +156,64 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
@@ -171,6 +229,59 @@ spec:
                     description: Map of environment variables to pass to the container.
                     type: object
                     x-kubernetes-map-type: granular
+                  filesystemConfiguration:
+                    description: List of filesystems to mount into the agent runtime.
+                      Up to 5 entries are supported. Each entry is one of session
+                      storage, Amazon S3 Files access point, or Amazon EFS access
+                      point. See filesystem_configuration below.
+                    items:
+                      properties:
+                        efsAccessPoint:
+                          description: Amazon EFS access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See efs_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        s3FilesAccessPoint:
+                          description: Amazon S3 Files access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See s3_files_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        sessionStorage:
+                          description: Session storage filesystem providing persistent
+                            storage across agent runtime session invocations. Exactly
+                            one of session_storage, s3_files_access_point, or efs_access_point
+                            must be specified. See session_storage below.
+                          properties:
+                            mountPath:
+                              description: Mount path for the session storage filesystem
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                      type: object
+                    type: array
                   lifecycleConfiguration:
                     description: Runtime session and resource lifecycle configuration
                       for the agent runtime. See lifecycle_configuration below.
@@ -214,7 +325,7 @@ spec:
                     properties:
                       serverProtocol:
                         description: 'Server protocol for the agent runtime. Valid
-                          values: HTTP, MCP, A2A.'
+                          values: HTTP, MCP, A2A, AGUI.'
                         type: string
                     type: object
                   region:
@@ -418,6 +529,64 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
@@ -433,6 +602,59 @@ spec:
                     description: Map of environment variables to pass to the container.
                     type: object
                     x-kubernetes-map-type: granular
+                  filesystemConfiguration:
+                    description: List of filesystems to mount into the agent runtime.
+                      Up to 5 entries are supported. Each entry is one of session
+                      storage, Amazon S3 Files access point, or Amazon EFS access
+                      point. See filesystem_configuration below.
+                    items:
+                      properties:
+                        efsAccessPoint:
+                          description: Amazon EFS access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See efs_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        s3FilesAccessPoint:
+                          description: Amazon S3 Files access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See s3_files_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        sessionStorage:
+                          description: Session storage filesystem providing persistent
+                            storage across agent runtime session invocations. Exactly
+                            one of session_storage, s3_files_access_point, or efs_access_point
+                            must be specified. See session_storage below.
+                          properties:
+                            mountPath:
+                              description: Mount path for the session storage filesystem
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                      type: object
+                    type: array
                   lifecycleConfiguration:
                     description: Runtime session and resource lifecycle configuration
                       for the agent runtime. See lifecycle_configuration below.
@@ -476,7 +698,7 @@ spec:
                     properties:
                       serverProtocol:
                         description: 'Server protocol for the agent runtime. Valid
-                          values: HTTP, MCP, A2A.'
+                          values: HTTP, MCP, A2A, AGUI.'
                         type: string
                     type: object
                   requestHeaderConfiguration:
@@ -765,6 +987,64 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedScopes:
+                            description: Set of scopes that are allowed to access
+                              the token.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          customClaim:
+                            description: Repeatable block to define a custom claim
+                              validation name, value, and operation. See custom_claim
+                              below.
+                            items:
+                              properties:
+                                authorizingClaimMatchValue:
+                                  description: Configuration block to define the value
+                                    or values to match for and the relationship of
+                                    the match. See authorizing_claim_match_value below.
+                                  properties:
+                                    claimMatchOperator:
+                                      description: Relationship between the claim
+                                        field value and the value or values to match
+                                        for. Valid values are EQUALS, CONTAINS, and
+                                        CONTAINS_ANY. EQUALS can be used only when
+                                        inbound_token_claim_value_type is STRING.
+                                        CONTAINS or CONTAINS_ANY can be used only
+                                        when inbound_token_claim_value_type is STRING_ARRAY.
+                                      type: string
+                                    claimMatchValue:
+                                      description: Value or values to match for. See
+                                        claim_match_value below.
+                                      properties:
+                                        matchValueString:
+                                          description: String value to match for.
+                                            Must be specified when claim_match_operator
+                                            is EQUALS or CONTAINS. Exactly one of
+                                            match_value_string or match_value_string_list
+                                            must be specified.
+                                          type: string
+                                        matchValueStringList:
+                                          description: List of strings to check for
+                                            a match. Must be specified when claim_match_operator
+                                            is CONTAINS_ANY. Exactly one of match_value_string
+                                            or match_value_string_list must be specified.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                  type: object
+                                inboundTokenClaimName:
+                                  description: Name of the custom claim field to check.
+                                  type: string
+                                inboundTokenClaimValueType:
+                                  description: Data type of the claim value to check
+                                    for. Valid values are STRING and STRING_ARRAY.
+                                  type: string
+                              type: object
+                            type: array
                           discoveryUrl:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
@@ -780,6 +1060,59 @@ spec:
                     description: Map of environment variables to pass to the container.
                     type: object
                     x-kubernetes-map-type: granular
+                  filesystemConfiguration:
+                    description: List of filesystems to mount into the agent runtime.
+                      Up to 5 entries are supported. Each entry is one of session
+                      storage, Amazon S3 Files access point, or Amazon EFS access
+                      point. See filesystem_configuration below.
+                    items:
+                      properties:
+                        efsAccessPoint:
+                          description: Amazon EFS access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See efs_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        s3FilesAccessPoint:
+                          description: Amazon S3 Files access point to mount as shared
+                            file storage. Exactly one of session_storage, s3_files_access_point,
+                            or efs_access_point must be specified. See s3_files_access_point
+                            below.
+                          properties:
+                            accessPointArn:
+                              description: ARN of the Amazon S3 Files access point
+                                to mount into the agent runtime.
+                              type: string
+                            mountPath:
+                              description: Mount path for the S3 Files access point
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                        sessionStorage:
+                          description: Session storage filesystem providing persistent
+                            storage across agent runtime session invocations. Exactly
+                            one of session_storage, s3_files_access_point, or efs_access_point
+                            must be specified. See session_storage below.
+                          properties:
+                            mountPath:
+                              description: Mount path for the session storage filesystem
+                                inside the agent runtime. Must be under /mnt with
+                                exactly one subdirectory level (for example, /mnt/data).
+                              type: string
+                          type: object
+                      type: object
+                    type: array
                   id:
                     type: string
                   lifecycleConfiguration:
@@ -825,7 +1158,7 @@ spec:
                     properties:
                       serverProtocol:
                         description: 'Server protocol for the agent runtime. Valid
-                          values: HTTP, MCP, A2A.'
+                          values: HTTP, MCP, A2A, AGUI.'
                         type: string
                     type: object
                   region:

@@ -55,3 +55,21 @@ func SetupGated_wafv2(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_wafv2 registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_wafv2(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		ipset.SetupWebhookWithManager,
+		regexpatternset.SetupWebhookWithManager,
+		rulegroup.SetupWebhookWithManager,
+		webacl.SetupWebhookWithManager,
+		webaclassociation.SetupWebhookWithManager,
+		webaclloggingconfiguration.SetupWebhookWithManager,
+		webaclrulegroupassociation.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

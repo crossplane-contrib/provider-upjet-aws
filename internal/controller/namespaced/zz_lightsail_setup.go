@@ -82,3 +82,30 @@ func SetupGated_lightsail(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_lightsail registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_lightsail(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bucket.SetupWebhookWithManager,
+		certificate.SetupWebhookWithManager,
+		containerservice.SetupWebhookWithManager,
+		disk.SetupWebhookWithManager,
+		diskattachment.SetupWebhookWithManager,
+		domain.SetupWebhookWithManager,
+		domainentry.SetupWebhookWithManager,
+		instance.SetupWebhookWithManager,
+		instancepublicports.SetupWebhookWithManager,
+		keypair.SetupWebhookWithManager,
+		lb.SetupWebhookWithManager,
+		lbattachment.SetupWebhookWithManager,
+		lbcertificate.SetupWebhookWithManager,
+		lbstickinesspolicy.SetupWebhookWithManager,
+		staticip.SetupWebhookWithManager,
+		staticipattachment.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

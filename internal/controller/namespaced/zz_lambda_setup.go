@@ -67,3 +67,25 @@ func SetupGated_lambda(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_lambda registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_lambda(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		alias.SetupWebhookWithManager,
+		codesigningconfig.SetupWebhookWithManager,
+		eventsourcemapping.SetupWebhookWithManager,
+		function.SetupWebhookWithManager,
+		functioneventinvokeconfig.SetupWebhookWithManager,
+		functionurl.SetupWebhookWithManager,
+		invocation.SetupWebhookWithManager,
+		layerversion.SetupWebhookWithManager,
+		layerversionpermission.SetupWebhookWithManager,
+		permission.SetupWebhookWithManager,
+		provisionedconcurrencyconfig.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

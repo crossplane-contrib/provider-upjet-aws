@@ -46,6 +46,9 @@ type CatalogTableInitParameters struct {
 	// Configuration block of a target table for resource linking. See target_table below.
 	TargetTable []TargetTableInitParameters `json:"targetTable,omitempty" tf:"target_table,omitempty"`
 
+	// A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query. See view_definition below.
+	ViewDefinition []ViewDefinitionInitParameters `json:"viewDefinition,omitempty" tf:"view_definition,omitempty"`
+
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
 
@@ -101,6 +104,9 @@ type CatalogTableObservation struct {
 
 	// Configuration block of a target table for resource linking. See target_table below.
 	TargetTable []TargetTableObservation `json:"targetTable,omitempty" tf:"target_table,omitempty"`
+
+	// A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query. See view_definition below.
+	ViewDefinition []ViewDefinitionObservation `json:"viewDefinition,omitempty" tf:"view_definition,omitempty"`
 
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
@@ -174,6 +180,10 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetTable []TargetTableParameters `json:"targetTable,omitempty" tf:"target_table,omitempty"`
 
+	// A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query. See view_definition below.
+	// +kubebuilder:validation:Optional
+	ViewDefinition []ViewDefinitionParameters `json:"viewDefinition,omitempty" tf:"view_definition,omitempty"`
+
 	// If the table is a view, the expanded text of the view; otherwise null.
 	// +kubebuilder:validation:Optional
 	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
@@ -235,7 +245,59 @@ type ColumnsParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type FieldsInitParameters struct {
+
+	// The unique identifier assigned to this partition field within the Iceberg table's partition specification.
+	FieldID *float64 `json:"fieldId,omitempty" tf:"field_id,omitempty"`
+
+	// Name of the target table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	SourceID *float64 `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	Transform *string `json:"transform,omitempty" tf:"transform,omitempty"`
+}
+
+type FieldsObservation struct {
+
+	// The unique identifier assigned to this partition field within the Iceberg table's partition specification.
+	FieldID *float64 `json:"fieldId,omitempty" tf:"field_id,omitempty"`
+
+	// Name of the target table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	SourceID *float64 `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	Transform *string `json:"transform,omitempty" tf:"transform,omitempty"`
+}
+
+type FieldsParameters struct {
+
+	// The unique identifier assigned to this partition field within the Iceberg table's partition specification.
+	// +kubebuilder:validation:Optional
+	FieldID *float64 `json:"fieldId,omitempty" tf:"field_id,omitempty"`
+
+	// Name of the target table.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	// +kubebuilder:validation:Optional
+	SourceID *float64 `json:"sourceId" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	// +kubebuilder:validation:Optional
+	Transform *string `json:"transform" tf:"transform,omitempty"`
+}
+
 type IcebergInputInitParameters struct {
+
+	// Configuration parameters, including table properties and metadata specifications. See iceberg_table_input below.
+	IcebergTableInput []IcebergTableInputInitParameters `json:"icebergTableInput,omitempty" tf:"iceberg_table_input,omitempty"`
 
 	// A required metadata operation. Can only be set to CREATE.
 	MetadataOperation *string `json:"metadataOperation,omitempty" tf:"metadata_operation,omitempty"`
@@ -246,6 +308,9 @@ type IcebergInputInitParameters struct {
 
 type IcebergInputObservation struct {
 
+	// Configuration parameters, including table properties and metadata specifications. See iceberg_table_input below.
+	IcebergTableInput []IcebergTableInputObservation `json:"icebergTableInput,omitempty" tf:"iceberg_table_input,omitempty"`
+
 	// A required metadata operation. Can only be set to CREATE.
 	MetadataOperation *string `json:"metadataOperation,omitempty" tf:"metadata_operation,omitempty"`
 
@@ -255,6 +320,10 @@ type IcebergInputObservation struct {
 
 type IcebergInputParameters struct {
 
+	// Configuration parameters, including table properties and metadata specifications. See iceberg_table_input below.
+	// +kubebuilder:validation:Optional
+	IcebergTableInput []IcebergTableInputParameters `json:"icebergTableInput,omitempty" tf:"iceberg_table_input,omitempty"`
+
 	// A required metadata operation. Can only be set to CREATE.
 	// +kubebuilder:validation:Optional
 	MetadataOperation *string `json:"metadataOperation" tf:"metadata_operation,omitempty"`
@@ -262,6 +331,68 @@ type IcebergInputParameters struct {
 	// The table version for the Iceberg table. Defaults to 2.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type IcebergTableInputInitParameters struct {
+
+	// The S3 location where the Iceberg table data will be stored. Maximum length of 2056 characters.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The partitioning specification that defines how the Iceberg table data will be organized and partitioned for optimal query performance. See partition_spec below.
+	PartitionSpec []PartitionSpecInitParameters `json:"partitionSpec,omitempty" tf:"partition_spec,omitempty"`
+
+	// Key-value pairs of additional table properties and configuration settings for the Iceberg table.
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// The schema definition that specifies the structure, field types, and metadata for the Iceberg table. See schema below.
+	Schema []IcebergSchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// The sort order specification that defines how data should be ordered within each partition to optimize query performance. See sort_order below.
+	SortOrder []SortOrderInitParameters `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+}
+
+type IcebergTableInputObservation struct {
+
+	// The S3 location where the Iceberg table data will be stored. Maximum length of 2056 characters.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The partitioning specification that defines how the Iceberg table data will be organized and partitioned for optimal query performance. See partition_spec below.
+	PartitionSpec []PartitionSpecObservation `json:"partitionSpec,omitempty" tf:"partition_spec,omitempty"`
+
+	// Key-value pairs of additional table properties and configuration settings for the Iceberg table.
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// The schema definition that specifies the structure, field types, and metadata for the Iceberg table. See schema below.
+	Schema []IcebergSchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// The sort order specification that defines how data should be ordered within each partition to optimize query performance. See sort_order below.
+	SortOrder []SortOrderObservation `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+}
+
+type IcebergTableInputParameters struct {
+
+	// The S3 location where the Iceberg table data will be stored. Maximum length of 2056 characters.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location" tf:"location,omitempty"`
+
+	// The partitioning specification that defines how the Iceberg table data will be organized and partitioned for optimal query performance. See partition_spec below.
+	// +kubebuilder:validation:Optional
+	PartitionSpec []PartitionSpecParameters `json:"partitionSpec,omitempty" tf:"partition_spec,omitempty"`
+
+	// Key-value pairs of additional table properties and configuration settings for the Iceberg table.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// The schema definition that specifies the structure, field types, and metadata for the Iceberg table. See schema below.
+	// +kubebuilder:validation:Optional
+	Schema []IcebergSchemaParameters `json:"schema" tf:"schema,omitempty"`
+
+	// The sort order specification that defines how data should be ordered within each partition to optimize query performance. See sort_order below.
+	// +kubebuilder:validation:Optional
+	SortOrder []SortOrderParameters `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
 }
 
 type OpenTableFormatInputInitParameters struct {
@@ -747,6 +878,417 @@ type TargetTableParameters struct {
 	// Region of the target table.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type PartitionSpecInitParameters struct {
+
+	// The list of partition fields that define how the table data should be partitioned. See fields below.
+	Fields []FieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The unique identifier for this partition specification within the Iceberg table's metadata history.
+	SpecID *float64 `json:"specId,omitempty" tf:"spec_id,omitempty"`
+}
+
+type PartitionSpecObservation struct {
+
+	// The list of partition fields that define how the table data should be partitioned. See fields below.
+	Fields []FieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The unique identifier for this partition specification within the Iceberg table's metadata history.
+	SpecID *float64 `json:"specId,omitempty" tf:"spec_id,omitempty"`
+}
+
+type PartitionSpecParameters struct {
+
+	// The list of partition fields that define how the table data should be partitioned. See fields below.
+	// +kubebuilder:validation:Optional
+	Fields []FieldsParameters `json:"fields" tf:"fields,omitempty"`
+
+	// The unique identifier for this partition specification within the Iceberg table's metadata history.
+	// +kubebuilder:validation:Optional
+	SpecID *float64 `json:"specId,omitempty" tf:"spec_id,omitempty"`
+}
+
+type RepresentationsInitParameters struct {
+
+	// A parameter that specifies the engine type of a specific representation. Valid values are REDSHIFT, ATHENA, and SPARK.
+	Dialect *string `json:"dialect,omitempty" tf:"dialect,omitempty"`
+
+	// A parameter that specifies the version of the engine of a specific representation.
+	DialectVersion *string `json:"dialectVersion,omitempty" tf:"dialect_version,omitempty"`
+
+	// The name of the connection to be used to validate the specific representation of the view.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Connection
+	ValidationConnection *string `json:"validationConnection,omitempty" tf:"validation_connection,omitempty"`
+
+	// Reference to a Connection in glue to populate validationConnection.
+	// +kubebuilder:validation:Optional
+	ValidationConnectionRef *v1.Reference `json:"validationConnectionRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in glue to populate validationConnection.
+	// +kubebuilder:validation:Optional
+	ValidationConnectionSelector *v1.Selector `json:"validationConnectionSelector,omitempty" tf:"-"`
+
+	// A string that represents the SQL query that describes the view with expanded resource ARNs.
+	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
+
+	// A string that represents the original SQL query that describes the view.
+	ViewOriginalText *string `json:"viewOriginalText,omitempty" tf:"view_original_text,omitempty"`
+}
+
+type RepresentationsObservation struct {
+
+	// A parameter that specifies the engine type of a specific representation. Valid values are REDSHIFT, ATHENA, and SPARK.
+	Dialect *string `json:"dialect,omitempty" tf:"dialect,omitempty"`
+
+	// A parameter that specifies the version of the engine of a specific representation.
+	DialectVersion *string `json:"dialectVersion,omitempty" tf:"dialect_version,omitempty"`
+
+	// The name of the connection to be used to validate the specific representation of the view.
+	ValidationConnection *string `json:"validationConnection,omitempty" tf:"validation_connection,omitempty"`
+
+	// A string that represents the SQL query that describes the view with expanded resource ARNs.
+	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
+
+	// A string that represents the original SQL query that describes the view.
+	ViewOriginalText *string `json:"viewOriginalText,omitempty" tf:"view_original_text,omitempty"`
+}
+
+type RepresentationsParameters struct {
+
+	// A parameter that specifies the engine type of a specific representation. Valid values are REDSHIFT, ATHENA, and SPARK.
+	// +kubebuilder:validation:Optional
+	Dialect *string `json:"dialect,omitempty" tf:"dialect,omitempty"`
+
+	// A parameter that specifies the version of the engine of a specific representation.
+	// +kubebuilder:validation:Optional
+	DialectVersion *string `json:"dialectVersion,omitempty" tf:"dialect_version,omitempty"`
+
+	// The name of the connection to be used to validate the specific representation of the view.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/glue/v1beta1.Connection
+	// +kubebuilder:validation:Optional
+	ValidationConnection *string `json:"validationConnection,omitempty" tf:"validation_connection,omitempty"`
+
+	// Reference to a Connection in glue to populate validationConnection.
+	// +kubebuilder:validation:Optional
+	ValidationConnectionRef *v1.Reference `json:"validationConnectionRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in glue to populate validationConnection.
+	// +kubebuilder:validation:Optional
+	ValidationConnectionSelector *v1.Selector `json:"validationConnectionSelector,omitempty" tf:"-"`
+
+	// A string that represents the SQL query that describes the view with expanded resource ARNs.
+	// +kubebuilder:validation:Optional
+	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
+
+	// A string that represents the original SQL query that describes the view.
+	// +kubebuilder:validation:Optional
+	ViewOriginalText *string `json:"viewOriginalText,omitempty" tf:"view_original_text,omitempty"`
+}
+
+type SchemaFieldsInitParameters struct {
+
+	// Optional documentation or description text that provides additional context about the purpose and usage of this field. Length between 0 and 255 characters.
+	Doc *string `json:"doc,omitempty" tf:"doc,omitempty"`
+
+	// The unique identifier assigned to this field within the Iceberg table schema, used for schema evolution and field tracking.
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Default value as JSON used to populate the field's value for all records that were written before the field was added to the schema.
+	InitialDefault *string `json:"initialDefault,omitempty" tf:"initial_default,omitempty"`
+
+	// Name of the target table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this field is required (non-nullable) or optional (nullable) in the table schema.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// The data type definition for this field as a JSON string, specifying the structure and format of the data it contains. Examples: "long", "string", "timestamp", "decimal(10,2)".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Default value as JSON used to populate the field's value for any records written after the field was added to the schema, if the writer does not supply the field's value.
+	WriteDefault *string `json:"writeDefault,omitempty" tf:"write_default,omitempty"`
+}
+
+type SchemaFieldsObservation struct {
+
+	// Optional documentation or description text that provides additional context about the purpose and usage of this field. Length between 0 and 255 characters.
+	Doc *string `json:"doc,omitempty" tf:"doc,omitempty"`
+
+	// The unique identifier assigned to this field within the Iceberg table schema, used for schema evolution and field tracking.
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Default value as JSON used to populate the field's value for all records that were written before the field was added to the schema.
+	InitialDefault *string `json:"initialDefault,omitempty" tf:"initial_default,omitempty"`
+
+	// Name of the target table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this field is required (non-nullable) or optional (nullable) in the table schema.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// The data type definition for this field as a JSON string, specifying the structure and format of the data it contains. Examples: "long", "string", "timestamp", "decimal(10,2)".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Default value as JSON used to populate the field's value for any records written after the field was added to the schema, if the writer does not supply the field's value.
+	WriteDefault *string `json:"writeDefault,omitempty" tf:"write_default,omitempty"`
+}
+
+type SchemaFieldsParameters struct {
+
+	// Optional documentation or description text that provides additional context about the purpose and usage of this field. Length between 0 and 255 characters.
+	// +kubebuilder:validation:Optional
+	Doc *string `json:"doc,omitempty" tf:"doc,omitempty"`
+
+	// The unique identifier assigned to this field within the Iceberg table schema, used for schema evolution and field tracking.
+	// +kubebuilder:validation:Optional
+	ID *float64 `json:"id" tf:"id,omitempty"`
+
+	// Default value as JSON used to populate the field's value for all records that were written before the field was added to the schema.
+	// +kubebuilder:validation:Optional
+	InitialDefault *string `json:"initialDefault,omitempty" tf:"initial_default,omitempty"`
+
+	// Name of the target table.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Indicates whether this field is required (non-nullable) or optional (nullable) in the table schema.
+	// +kubebuilder:validation:Optional
+	Required *bool `json:"required" tf:"required,omitempty"`
+
+	// The data type definition for this field as a JSON string, specifying the structure and format of the data it contains. Examples: "long", "string", "timestamp", "decimal(10,2)".
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// Default value as JSON used to populate the field's value for any records written after the field was added to the schema, if the writer does not supply the field's value.
+	// +kubebuilder:validation:Optional
+	WriteDefault *string `json:"writeDefault,omitempty" tf:"write_default,omitempty"`
+}
+
+type IcebergSchemaInitParameters struct {
+
+	// The list of field definitions that make up the table schema. See fields below.
+	Fields []SchemaFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The list of field identifiers that uniquely identify records in the table, used for row-level operations and deduplication.
+	IdentifierFieldIds []*float64 `json:"identifierFieldIds,omitempty" tf:"identifier_field_ids,omitempty"`
+
+	// The unique identifier for this schema version within the Iceberg table's schema evolution history.
+	SchemaID *float64 `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
+
+	// The root type of the schema structure. Valid value: struct.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IcebergSchemaObservation struct {
+
+	// The list of field definitions that make up the table schema. See fields below.
+	Fields []SchemaFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The list of field identifiers that uniquely identify records in the table, used for row-level operations and deduplication.
+	IdentifierFieldIds []*float64 `json:"identifierFieldIds,omitempty" tf:"identifier_field_ids,omitempty"`
+
+	// The unique identifier for this schema version within the Iceberg table's schema evolution history.
+	SchemaID *float64 `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
+
+	// The root type of the schema structure. Valid value: struct.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IcebergSchemaParameters struct {
+
+	// The list of field definitions that make up the table schema. See fields below.
+	// +kubebuilder:validation:Optional
+	Fields []SchemaFieldsParameters `json:"fields" tf:"fields,omitempty"`
+
+	// The list of field identifiers that uniquely identify records in the table, used for row-level operations and deduplication.
+	// +kubebuilder:validation:Optional
+	IdentifierFieldIds []*float64 `json:"identifierFieldIds,omitempty" tf:"identifier_field_ids,omitempty"`
+
+	// The unique identifier for this schema version within the Iceberg table's schema evolution history.
+	// +kubebuilder:validation:Optional
+	SchemaID *float64 `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
+
+	// The root type of the schema structure. Valid value: struct.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SortOrderFieldsInitParameters struct {
+
+	// The sort direction for this field. Valid values: asc, desc.
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// The ordering behavior for null values in this field. Valid values: nulls-first, nulls-last.
+	NullOrder *string `json:"nullOrder,omitempty" tf:"null_order,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	SourceID *float64 `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	Transform *string `json:"transform,omitempty" tf:"transform,omitempty"`
+}
+
+type SortOrderFieldsObservation struct {
+
+	// The sort direction for this field. Valid values: asc, desc.
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// The ordering behavior for null values in this field. Valid values: nulls-first, nulls-last.
+	NullOrder *string `json:"nullOrder,omitempty" tf:"null_order,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	SourceID *float64 `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	Transform *string `json:"transform,omitempty" tf:"transform,omitempty"`
+}
+
+type SortOrderFieldsParameters struct {
+
+	// The sort direction for this field. Valid values: asc, desc.
+	// +kubebuilder:validation:Optional
+	Direction *string `json:"direction" tf:"direction,omitempty"`
+
+	// The ordering behavior for null values in this field. Valid values: nulls-first, nulls-last.
+	// +kubebuilder:validation:Optional
+	NullOrder *string `json:"nullOrder" tf:"null_order,omitempty"`
+
+	// The identifier of the source field from the table schema that this partition field is based on.
+	// +kubebuilder:validation:Optional
+	SourceID *float64 `json:"sourceId" tf:"source_id,omitempty"`
+
+	// The transformation function applied to the source field to create the partition. Common values: identity, bucket, truncate, year, month, day, hour.
+	// +kubebuilder:validation:Optional
+	Transform *string `json:"transform" tf:"transform,omitempty"`
+}
+
+type SortOrderInitParameters struct {
+
+	// The list of fields and their sort directions that define the ordering criteria for the Iceberg table data. See fields below.
+	Fields []SortOrderFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The unique identifier for this sort order specification within the Iceberg table's metadata.
+	OrderID *float64 `json:"orderId,omitempty" tf:"order_id,omitempty"`
+}
+
+type SortOrderObservation struct {
+
+	// The list of fields and their sort directions that define the ordering criteria for the Iceberg table data. See fields below.
+	Fields []SortOrderFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// The unique identifier for this sort order specification within the Iceberg table's metadata.
+	OrderID *float64 `json:"orderId,omitempty" tf:"order_id,omitempty"`
+}
+
+type SortOrderParameters struct {
+
+	// The list of fields and their sort directions that define the ordering criteria for the Iceberg table data. See fields below.
+	// +kubebuilder:validation:Optional
+	Fields []SortOrderFieldsParameters `json:"fields" tf:"fields,omitempty"`
+
+	// The unique identifier for this sort order specification within the Iceberg table's metadata.
+	// +kubebuilder:validation:Optional
+	OrderID *float64 `json:"orderId" tf:"order_id,omitempty"`
+}
+
+type ViewDefinitionInitParameters struct {
+
+	// The definer of a view in SQL.
+	Definer *string `json:"definer,omitempty" tf:"definer,omitempty"`
+
+	// You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+	IsProtected *bool `json:"isProtected,omitempty" tf:"is_protected,omitempty"`
+
+	// Type of the materialized view's last refresh. Valid values: Full, Incremental.
+	LastRefreshType *string `json:"lastRefreshType,omitempty" tf:"last_refresh_type,omitempty"`
+
+	// Auto refresh interval in seconds for the materialized view.
+	RefreshSeconds *float64 `json:"refreshSeconds,omitempty" tf:"refresh_seconds,omitempty"`
+
+	// A list of structures that contains the dialect of the view, and the query that defines the view. See representations below.
+	Representations []RepresentationsInitParameters `json:"representations,omitempty" tf:"representations,omitempty"`
+
+	// List of the Apache Iceberg table versions referenced by the materialized view.
+	SubObjectVersionIds []*float64 `json:"subObjectVersionIds,omitempty" tf:"sub_object_version_ids,omitempty"`
+
+	// A list of base table ARNs that make up the view.
+	SubObjects []*string `json:"subObjects,omitempty" tf:"sub_objects,omitempty"`
+
+	// ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID.
+	ViewVersionID *float64 `json:"viewVersionId,omitempty" tf:"view_version_id,omitempty"`
+
+	// Version ID of the Apache Iceberg table.
+	ViewVersionToken *string `json:"viewVersionToken,omitempty" tf:"view_version_token,omitempty"`
+}
+
+type ViewDefinitionObservation struct {
+
+	// The definer of a view in SQL.
+	Definer *string `json:"definer,omitempty" tf:"definer,omitempty"`
+
+	// You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+	IsProtected *bool `json:"isProtected,omitempty" tf:"is_protected,omitempty"`
+
+	// Type of the materialized view's last refresh. Valid values: Full, Incremental.
+	LastRefreshType *string `json:"lastRefreshType,omitempty" tf:"last_refresh_type,omitempty"`
+
+	// Auto refresh interval in seconds for the materialized view.
+	RefreshSeconds *float64 `json:"refreshSeconds,omitempty" tf:"refresh_seconds,omitempty"`
+
+	// A list of structures that contains the dialect of the view, and the query that defines the view. See representations below.
+	Representations []RepresentationsObservation `json:"representations,omitempty" tf:"representations,omitempty"`
+
+	// List of the Apache Iceberg table versions referenced by the materialized view.
+	SubObjectVersionIds []*float64 `json:"subObjectVersionIds,omitempty" tf:"sub_object_version_ids,omitempty"`
+
+	// A list of base table ARNs that make up the view.
+	SubObjects []*string `json:"subObjects,omitempty" tf:"sub_objects,omitempty"`
+
+	// ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID.
+	ViewVersionID *float64 `json:"viewVersionId,omitempty" tf:"view_version_id,omitempty"`
+
+	// Version ID of the Apache Iceberg table.
+	ViewVersionToken *string `json:"viewVersionToken,omitempty" tf:"view_version_token,omitempty"`
+}
+
+type ViewDefinitionParameters struct {
+
+	// The definer of a view in SQL.
+	// +kubebuilder:validation:Optional
+	Definer *string `json:"definer,omitempty" tf:"definer,omitempty"`
+
+	// You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.
+	// +kubebuilder:validation:Optional
+	IsProtected *bool `json:"isProtected,omitempty" tf:"is_protected,omitempty"`
+
+	// Type of the materialized view's last refresh. Valid values: Full, Incremental.
+	// +kubebuilder:validation:Optional
+	LastRefreshType *string `json:"lastRefreshType,omitempty" tf:"last_refresh_type,omitempty"`
+
+	// Auto refresh interval in seconds for the materialized view.
+	// +kubebuilder:validation:Optional
+	RefreshSeconds *float64 `json:"refreshSeconds,omitempty" tf:"refresh_seconds,omitempty"`
+
+	// A list of structures that contains the dialect of the view, and the query that defines the view. See representations below.
+	// +kubebuilder:validation:Optional
+	Representations []RepresentationsParameters `json:"representations,omitempty" tf:"representations,omitempty"`
+
+	// List of the Apache Iceberg table versions referenced by the materialized view.
+	// +kubebuilder:validation:Optional
+	SubObjectVersionIds []*float64 `json:"subObjectVersionIds,omitempty" tf:"sub_object_version_ids,omitempty"`
+
+	// A list of base table ARNs that make up the view.
+	// +kubebuilder:validation:Optional
+	SubObjects []*string `json:"subObjects,omitempty" tf:"sub_objects,omitempty"`
+
+	// ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID.
+	// +kubebuilder:validation:Optional
+	ViewVersionID *float64 `json:"viewVersionId,omitempty" tf:"view_version_id,omitempty"`
+
+	// Version ID of the Apache Iceberg table.
+	// +kubebuilder:validation:Optional
+	ViewVersionToken *string `json:"viewVersionToken,omitempty" tf:"view_version_token,omitempty"`
 }
 
 // CatalogTableSpec defines the desired state of CatalogTable

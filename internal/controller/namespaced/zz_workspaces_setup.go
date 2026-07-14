@@ -40,3 +40,16 @@ func SetupGated_workspaces(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_workspaces registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_workspaces(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		directory.SetupWebhookWithManager,
+		ipgroup.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

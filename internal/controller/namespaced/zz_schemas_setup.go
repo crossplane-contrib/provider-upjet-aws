@@ -43,3 +43,17 @@ func SetupGated_schemas(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_schemas registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_schemas(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		discoverer.SetupWebhookWithManager,
+		registry.SetupWebhookWithManager,
+		schema.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

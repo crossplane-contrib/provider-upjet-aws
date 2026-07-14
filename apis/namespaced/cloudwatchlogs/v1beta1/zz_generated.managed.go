@@ -7,6 +7,46 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
+// GetCondition of this AccountPolicy.
+func (mg *AccountPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this AccountPolicy.
+func (mg *AccountPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AccountPolicy.
+func (mg *AccountPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AccountPolicy.
+func (mg *AccountPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AccountPolicy.
+func (mg *AccountPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this AccountPolicy.
+func (mg *AccountPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AccountPolicy.
+func (mg *AccountPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AccountPolicy.
+func (mg *AccountPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Definition.
 func (mg *Definition) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

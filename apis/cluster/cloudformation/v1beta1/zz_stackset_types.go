@@ -15,6 +15,9 @@ import (
 
 type AutoDeploymentInitParameters struct {
 
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
+
 	// Whether or not auto-deployment is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -24,6 +27,9 @@ type AutoDeploymentInitParameters struct {
 
 type AutoDeploymentObservation struct {
 
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
+
 	// Whether or not auto-deployment is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -32,6 +38,10 @@ type AutoDeploymentObservation struct {
 }
 
 type AutoDeploymentParameters struct {
+
+	// A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.
+	// +kubebuilder:validation:Optional
+	DependsOnStackSets []*string `json:"dependsOnStackSets,omitempty" tf:"depends_on_stack_sets,omitempty"`
 
 	// Whether or not auto-deployment is enabled.
 	// +kubebuilder:validation:Optional

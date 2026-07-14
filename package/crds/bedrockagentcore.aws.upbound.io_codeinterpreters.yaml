@@ -73,6 +73,27 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  certificate:
+                    description: Certificates to install in the code interpreter.
+                      Between 1 and 200 blocks are supported. See certificate below.
+                    items:
+                      properties:
+                        location:
+                          description: Location from which to retrieve the certificate.
+                            See certificates.location below.
+                          properties:
+                            secretsManager:
+                              description: AWS Secrets Manager location of the certificate.
+                                See secrets_manager below.
+                              properties:
+                                secretArn:
+                                  description: ARN of the AWS Secrets Manager secret
+                                    containing the certificate.
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   description:
                     description: Description of the code interpreter.
                     type: string
@@ -209,6 +230,27 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  certificate:
+                    description: Certificates to install in the code interpreter.
+                      Between 1 and 200 blocks are supported. See certificate below.
+                    items:
+                      properties:
+                        location:
+                          description: Location from which to retrieve the certificate.
+                            See certificates.location below.
+                          properties:
+                            secretsManager:
+                              description: AWS Secrets Manager location of the certificate.
+                                See secrets_manager below.
+                              properties:
+                                secretArn:
+                                  description: ARN of the AWS Secrets Manager secret
+                                    containing the certificate.
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   description:
                     description: Description of the code interpreter.
                     type: string
@@ -421,6 +463,27 @@ spec:
             properties:
               atProvider:
                 properties:
+                  certificate:
+                    description: Certificates to install in the code interpreter.
+                      Between 1 and 200 blocks are supported. See certificate below.
+                    items:
+                      properties:
+                        location:
+                          description: Location from which to retrieve the certificate.
+                            See certificates.location below.
+                          properties:
+                            secretsManager:
+                              description: AWS Secrets Manager location of the certificate.
+                                See secrets_manager below.
+                              properties:
+                                secretArn:
+                                  description: ARN of the AWS Secrets Manager secret
+                                    containing the certificate.
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   codeInterpreterArn:
                     description: ARN of the Code Interpreter.
                     type: string

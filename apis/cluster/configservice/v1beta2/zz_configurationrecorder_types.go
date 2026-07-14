@@ -36,8 +36,6 @@ type ConfigurationRecorderInitParameters struct {
 }
 
 type ConfigurationRecorderObservation struct {
-
-	// Name of the recorder
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Recording group - see below.

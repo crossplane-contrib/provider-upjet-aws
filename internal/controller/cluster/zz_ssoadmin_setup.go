@@ -55,3 +55,21 @@ func SetupGated_ssoadmin(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ssoadmin registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ssoadmin(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accountassignment.SetupWebhookWithManager,
+		customermanagedpolicyattachment.SetupWebhookWithManager,
+		instanceaccesscontrolattributes.SetupWebhookWithManager,
+		managedpolicyattachment.SetupWebhookWithManager,
+		permissionsboundaryattachment.SetupWebhookWithManager,
+		permissionset.SetupWebhookWithManager,
+		permissionsetinlinepolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

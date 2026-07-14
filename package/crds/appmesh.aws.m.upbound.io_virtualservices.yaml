@@ -157,15 +157,17 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   spec:
-                    description: Virtual service specification to apply.
+                    description: Virtual service specification to apply. See spec
+                      Block for details.
                     properties:
                       provider:
                         description: App Mesh object that is acting as the provider
                           for a virtual service. You can specify a single virtual
-                          node or virtual router.
+                          node or virtual router. See provider Block for details.
                         properties:
                           virtualNode:
                             description: Virtual node associated with a virtual service.
+                              See virtual_node Block for details.
                             properties:
                               virtualNodeName:
                                 description: Name of the virtual node that is acting
@@ -257,7 +259,7 @@ spec:
                             type: object
                           virtualRouter:
                             description: Virtual router associated with a virtual
-                              service.
+                              service. See virtual_router Block for details.
                             properties:
                               virtualRouterName:
                                 description: Name of the virtual router that is acting
@@ -464,15 +466,17 @@ spec:
                       1 and 255 characters in length.
                     type: string
                   spec:
-                    description: Virtual service specification to apply.
+                    description: Virtual service specification to apply. See spec
+                      Block for details.
                     properties:
                       provider:
                         description: App Mesh object that is acting as the provider
                           for a virtual service. You can specify a single virtual
-                          node or virtual router.
+                          node or virtual router. See provider Block for details.
                         properties:
                           virtualNode:
                             description: Virtual node associated with a virtual service.
+                              See virtual_node Block for details.
                             properties:
                               virtualNodeName:
                                 description: Name of the virtual node that is acting
@@ -564,7 +568,7 @@ spec:
                             type: object
                           virtualRouter:
                             description: Virtual router associated with a virtual
-                              service.
+                              service. See virtual_router Block for details.
                             properties:
                               virtualRouterName:
                                 description: Name of the virtual router that is acting
@@ -768,15 +772,17 @@ spec:
                     description: Resource owner's AWS account ID.
                     type: string
                   spec:
-                    description: Virtual service specification to apply.
+                    description: Virtual service specification to apply. See spec
+                      Block for details.
                     properties:
                       provider:
                         description: App Mesh object that is acting as the provider
                           for a virtual service. You can specify a single virtual
-                          node or virtual router.
+                          node or virtual router. See provider Block for details.
                         properties:
                           virtualNode:
                             description: Virtual node associated with a virtual service.
+                              See virtual_node Block for details.
                             properties:
                               virtualNodeName:
                                 description: Name of the virtual node that is acting
@@ -786,7 +792,7 @@ spec:
                             type: object
                           virtualRouter:
                             description: Virtual router associated with a virtual
-                              service.
+                              service. See virtual_router Block for details.
                             properties:
                               virtualRouterName:
                                 description: Name of the virtual router that is acting

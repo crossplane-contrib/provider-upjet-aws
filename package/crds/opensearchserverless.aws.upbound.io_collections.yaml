@@ -34,7 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Collection is the Schema for the Collections API.
+        description: Collection is the Schema for the Collections API. Manages an
+          AWS OpenSearch Serverless Collection.
         properties:
           apiVersion:
             description: |-
@@ -72,11 +73,105 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  collectionGroupName:
+                    description: |-
+                      Name of the collection group to associate with this collection.
+                      Name of the collection group to associate with this collection.
+                    type: string
                   description:
                     description: |-
                       Description of the collection.
                       Description of the collection.
                     type: string
+                  encryptionConfig:
+                    description: Configuration block for direct collection encryption
+                      settings. See encryption_config below for details.
+                    items:
+                      properties:
+                        awsOwnedKey:
+                          description: Whether to use an AWS owned key for collection
+                            encryption.
+                          type: boolean
+                        kmsKeyArn:
+                          description: ARN of the AWS KMS key to use for collection
+                            encryption.
+                          type: string
+                        kmsKeyArnRef:
+                          description: Reference to a Key in kms to populate kmsKeyArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        kmsKeyArnSelector:
+                          description: Selector for a Key in kms to populate kmsKeyArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name of the collection.
@@ -89,7 +184,7 @@ spec:
                     type: string
                   standbyReplicas:
                     description: |-
-                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
                       Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
@@ -103,6 +198,18 @@ spec:
                       Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
                       Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
+                  vectorOptions:
+                    description: Configuration block for vector search options. Only
+                      valid when type is VECTORSEARCH. See vector_options below for
+                      details.
+                    items:
+                      properties:
+                        serverlessVectorAcceleration:
+                          description: Status of serverless vector acceleration for
+                            the collection. One of ENABLED, DISABLED, or ALLOWED.
+                          type: string
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -119,11 +226,105 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  collectionGroupName:
+                    description: |-
+                      Name of the collection group to associate with this collection.
+                      Name of the collection group to associate with this collection.
+                    type: string
                   description:
                     description: |-
                       Description of the collection.
                       Description of the collection.
                     type: string
+                  encryptionConfig:
+                    description: Configuration block for direct collection encryption
+                      settings. See encryption_config below for details.
+                    items:
+                      properties:
+                        awsOwnedKey:
+                          description: Whether to use an AWS owned key for collection
+                            encryption.
+                          type: boolean
+                        kmsKeyArn:
+                          description: ARN of the AWS KMS key to use for collection
+                            encryption.
+                          type: string
+                        kmsKeyArnRef:
+                          description: Reference to a Key in kms to populate kmsKeyArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        kmsKeyArnSelector:
+                          description: Selector for a Key in kms to populate kmsKeyArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name of the collection.
@@ -131,7 +332,7 @@ spec:
                     type: string
                   standbyReplicas:
                     description: |-
-                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
                       Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
@@ -145,6 +346,18 @@ spec:
                       Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
                       Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
+                  vectorOptions:
+                    description: Configuration block for vector search options. Only
+                      valid when type is VECTORSEARCH. See vector_options below for
+                      details.
+                    items:
+                      properties:
+                        serverlessVectorAcceleration:
+                          description: Status of serverless vector acceleration for
+                            the collection. One of ENABLED, DISABLED, or ALLOWED.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -250,6 +463,11 @@ spec:
                       Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
                       Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
                     type: string
+                  collectionGroupName:
+                    description: |-
+                      Name of the collection group to associate with this collection.
+                      Name of the collection group to associate with this collection.
+                    type: string
                   dashboardEndpoint:
                     description: |-
                       Collection-specific endpoint used to access OpenSearch Dashboards.
@@ -260,12 +478,27 @@ spec:
                       Description of the collection.
                       Description of the collection.
                     type: string
+                  encryptionConfig:
+                    description: Configuration block for direct collection encryption
+                      settings. See encryption_config below for details.
+                    items:
+                      properties:
+                        awsOwnedKey:
+                          description: Whether to use an AWS owned key for collection
+                            encryption.
+                          type: boolean
+                        kmsKeyArn:
+                          description: ARN of the AWS KMS key to use for collection
+                            encryption.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: Unique identifier for the collection.
                     type: string
                   kmsKeyArn:
                     description: |-
-                      The ARN of the Amazon Web Services KMS key used to encrypt the collection.
+                      ARN of the Amazon Web Services KMS key used to encrypt the collection.
                       The ARN of the Amazon Web Services KMS key used to encrypt the collection.
                     type: string
                   name:
@@ -280,7 +513,7 @@ spec:
                     type: string
                   standbyReplicas:
                     description: |-
-                      Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+                      Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
                       Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
                     type: string
                   tags:
@@ -292,6 +525,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   type:
@@ -299,6 +534,18 @@ spec:
                       Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
                       Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
                     type: string
+                  vectorOptions:
+                    description: Configuration block for vector search options. Only
+                      valid when type is VECTORSEARCH. See vector_options below for
+                      details.
+                    items:
+                      properties:
+                        serverlessVectorAcceleration:
+                          description: Status of serverless vector acceleration for
+                            the collection. One of ENABLED, DISABLED, or ALLOWED.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

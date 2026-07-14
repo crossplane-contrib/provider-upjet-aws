@@ -3152,6 +3152,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.IdentityProviderType != nil {
 		in, out := &in.IdentityProviderType, &out.IdentityProviderType
 		*out = new(string)
@@ -3365,6 +3370,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.IdentityProviderType != nil {
 		in, out := &in.IdentityProviderType, &out.IdentityProviderType
 		*out = new(string)
@@ -3550,6 +3560,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.HostKeySecretRef != nil {
 		in, out := &in.HostKeySecretRef, &out.HostKeySecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
 		**out = **in
 	}
 	if in.IdentityProviderType != nil {

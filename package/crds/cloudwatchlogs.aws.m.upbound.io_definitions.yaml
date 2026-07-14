@@ -177,6 +177,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The query definition ARN.
+                    type: string
                   id:
                     type: string
                   logGroupNames:

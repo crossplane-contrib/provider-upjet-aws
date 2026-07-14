@@ -46,3 +46,18 @@ func SetupGated_lexmodels(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_lexmodels registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_lexmodels(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		bot.SetupWebhookWithManager,
+		botalias.SetupWebhookWithManager,
+		intent.SetupWebhookWithManager,
+		slottype.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

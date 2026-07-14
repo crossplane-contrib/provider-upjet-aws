@@ -5,6 +5,7 @@
 package providerconfig
 
 import (
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/providerconfig"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
@@ -13,6 +14,15 @@ import (
 
 	"github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 )
+
+// SetupWebhookWithManager registers the conversion webhook for ProviderConfig.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.ProviderConfig{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ProviderConfig")
+	}
+	return nil
+}
 
 // Setup adds a controller that reconciles ProviderConfigs by accounting for
 // their current usage.

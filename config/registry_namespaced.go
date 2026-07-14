@@ -74,6 +74,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(defaultResourceOptions...),
 		config.WithControllerTemplate(templates.ControllerTemplate),
+		config.WithTerraformedTemplate(templates.TerraformedTemplate),
 	)
 	pc.BasePackages.ControllerMap["eks/clusterauth"] = "eks"
 

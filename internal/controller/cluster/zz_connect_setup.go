@@ -79,3 +79,29 @@ func SetupGated_connect(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_connect registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_connect(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		botassociation.SetupWebhookWithManager,
+		contactflow.SetupWebhookWithManager,
+		contactflowmodule.SetupWebhookWithManager,
+		hoursofoperation.SetupWebhookWithManager,
+		instance.SetupWebhookWithManager,
+		instancestorageconfig.SetupWebhookWithManager,
+		lambdafunctionassociation.SetupWebhookWithManager,
+		phonenumber.SetupWebhookWithManager,
+		queue.SetupWebhookWithManager,
+		quickconnect.SetupWebhookWithManager,
+		routingprofile.SetupWebhookWithManager,
+		securityprofile.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		userhierarchystructure.SetupWebhookWithManager,
+		vocabulary.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

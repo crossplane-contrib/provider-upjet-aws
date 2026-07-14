@@ -16,7 +16,7 @@ import (
 
 type ActionWeightedTargetInitParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -28,7 +28,7 @@ type ActionWeightedTargetInitParameters struct {
 
 type ActionWeightedTargetObservation struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -40,7 +40,7 @@ type ActionWeightedTargetObservation struct {
 
 type ActionWeightedTargetParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -55,22 +55,19 @@ type ActionWeightedTargetParameters struct {
 
 type GRPCRouteActionInitParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []WeightedTargetInitParameters `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type GRPCRouteActionObservation struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []WeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type GRPCRouteActionParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Optional
 	WeightedTarget []WeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
 }
@@ -83,7 +80,7 @@ type GRPCRouteMatchInitParameters struct {
 	// Method name to match from the request. If you specify a name, you must also specify a service_name.
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
@@ -101,7 +98,7 @@ type GRPCRouteMatchObservation struct {
 	// Method name to match from the request. If you specify a name, you must also specify a service_name.
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
@@ -121,7 +118,7 @@ type GRPCRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -136,7 +133,7 @@ type GRPCRouteMatchParameters struct {
 
 type HTTPRouteActionWeightedTargetInitParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -158,7 +155,7 @@ type HTTPRouteActionWeightedTargetInitParameters struct {
 
 type HTTPRouteActionWeightedTargetObservation struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -170,7 +167,7 @@ type HTTPRouteActionWeightedTargetObservation struct {
 
 type HTTPRouteActionWeightedTargetParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -198,7 +195,7 @@ type HTTPRouteMatchHeaderInitParameters struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *HTTPRouteMatchHeaderMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -216,7 +213,7 @@ type HTTPRouteMatchHeaderMatchInitParameters struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *MatchHeaderMatchRangeInitParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -234,7 +231,7 @@ type HTTPRouteMatchHeaderMatchObservation struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *MatchHeaderMatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -255,7 +252,7 @@ type HTTPRouteMatchHeaderMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Range *MatchHeaderMatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
@@ -269,7 +266,7 @@ type HTTPRouteMatchHeaderObservation struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *HTTPRouteMatchHeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -282,7 +279,7 @@ type HTTPRouteMatchHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *HTTPRouteMatchHeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -293,7 +290,7 @@ type HTTPRouteMatchHeaderParameters struct {
 
 type HTTPRouteMatchQueryParameterInitParameters struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *HTTPRouteMatchQueryParameterMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -321,7 +318,7 @@ type HTTPRouteMatchQueryParameterMatchParameters struct {
 
 type HTTPRouteMatchQueryParameterObservation struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *HTTPRouteMatchQueryParameterMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -330,7 +327,7 @@ type HTTPRouteMatchQueryParameterObservation struct {
 
 type HTTPRouteMatchQueryParameterParameters struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *HTTPRouteMatchQueryParameterMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -341,8 +338,7 @@ type HTTPRouteMatchQueryParameterParameters struct {
 
 type HTTPRouteRetryPolicyInitParameters struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -359,8 +355,7 @@ type HTTPRouteRetryPolicyInitParameters struct {
 
 type HTTPRouteRetryPolicyObservation struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -377,8 +372,7 @@ type HTTPRouteRetryPolicyObservation struct {
 
 type HTTPRouteRetryPolicyParameters struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
@@ -457,29 +451,29 @@ type HTTPRouteTimeoutIdleParameters struct {
 
 type HTTPRouteTimeoutInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *HTTPRouteTimeoutIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *HTTPRouteTimeoutPerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type HTTPRouteTimeoutObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *HTTPRouteTimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *HTTPRouteTimeoutPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type HTTPRouteTimeoutParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *HTTPRouteTimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *HTTPRouteTimeoutPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -518,7 +512,7 @@ type HeaderMatchRangeInitParameters struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -527,7 +521,7 @@ type HeaderMatchRangeObservation struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -537,7 +531,7 @@ type HeaderMatchRangeParameters struct {
 	// +kubebuilder:validation:Optional
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	// +kubebuilder:validation:Optional
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -547,7 +541,7 @@ type Http2RouteMatchHeaderInitParameters struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *Http2RouteMatchHeaderMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -565,7 +559,7 @@ type Http2RouteMatchHeaderMatchInitParameters struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *HeaderMatchRangeInitParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -583,7 +577,7 @@ type Http2RouteMatchHeaderMatchObservation struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *HeaderMatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -604,7 +598,7 @@ type Http2RouteMatchHeaderMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Range *HeaderMatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
@@ -618,7 +612,7 @@ type Http2RouteMatchHeaderObservation struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *Http2RouteMatchHeaderMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -631,7 +625,7 @@ type Http2RouteMatchHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *Http2RouteMatchHeaderMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -645,7 +639,7 @@ type Http2RouteMatchPathInitParameters struct {
 	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -654,7 +648,7 @@ type Http2RouteMatchPathObservation struct {
 	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -664,14 +658,14 @@ type Http2RouteMatchPathParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type Http2RouteMatchQueryParameterInitParameters struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *Http2RouteMatchQueryParameterMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -699,7 +693,7 @@ type Http2RouteMatchQueryParameterMatchParameters struct {
 
 type Http2RouteMatchQueryParameterObservation struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *Http2RouteMatchQueryParameterMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -708,7 +702,7 @@ type Http2RouteMatchQueryParameterObservation struct {
 
 type Http2RouteMatchQueryParameterParameters struct {
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *Http2RouteMatchQueryParameterMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -719,8 +713,7 @@ type Http2RouteMatchQueryParameterParameters struct {
 
 type Http2RouteRetryPolicyInitParameters struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -737,8 +730,7 @@ type Http2RouteRetryPolicyInitParameters struct {
 
 type Http2RouteRetryPolicyObservation struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -755,8 +747,7 @@ type Http2RouteRetryPolicyObservation struct {
 
 type Http2RouteRetryPolicyParameters struct {
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
@@ -777,29 +768,29 @@ type Http2RouteRetryPolicyParameters struct {
 
 type Http2RouteTimeoutInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TimeoutIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *TimeoutPerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type Http2RouteTimeoutObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *TimeoutPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type Http2RouteTimeoutParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *TimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *TimeoutPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -838,7 +829,7 @@ type MatchHeaderMatchRangeInitParameters struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -847,7 +838,7 @@ type MatchHeaderMatchRangeObservation struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -857,7 +848,7 @@ type MatchHeaderMatchRangeParameters struct {
 	// +kubebuilder:validation:Optional
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	// +kubebuilder:validation:Optional
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -867,7 +858,7 @@ type MetadataInitParameters struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *MetadataMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -885,7 +876,7 @@ type MetadataMatchInitParameters struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *MetadataMatchRangeInitParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -903,7 +894,7 @@ type MetadataMatchObservation struct {
 	// Object that specifies the range of numbers that the value sent by the client must be included in.
 	Range *MetadataMatchRangeObservation `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
 	// Value sent by the client must end with the specified characters. Must be between 1 and 255 characters in length.
@@ -924,7 +915,7 @@ type MetadataMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Range *MetadataMatchRangeParameters `json:"range,omitempty" tf:"range,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 
@@ -938,7 +929,7 @@ type MetadataMatchRangeInitParameters struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -947,7 +938,7 @@ type MetadataMatchRangeObservation struct {
 	// End of the range.
 	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -957,7 +948,7 @@ type MetadataMatchRangeParameters struct {
 	// +kubebuilder:validation:Optional
 	End *float64 `json:"end" tf:"end,omitempty"`
 
-	// (Requited) Start of the range.
+	// Start of the range.
 	// +kubebuilder:validation:Optional
 	Start *float64 `json:"start" tf:"start,omitempty"`
 }
@@ -967,7 +958,7 @@ type MetadataObservation struct {
 	// If true, the match is on the opposite of the match criteria. Default is false.
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *MetadataMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
 	// Name to use for the route. Must be between 1 and 255 characters in length.
@@ -980,7 +971,7 @@ type MetadataParameters struct {
 	// +kubebuilder:validation:Optional
 	Invert *bool `json:"invert,omitempty" tf:"invert,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *MetadataMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
@@ -1049,13 +1040,11 @@ type PerRetryTimeoutParameters struct {
 
 type RetryPolicyInitParameters struct {
 
-	// List of gRPC retry events.
-	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	// List of gRPC retry events. Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
 	// +listType=set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -1072,13 +1061,11 @@ type RetryPolicyInitParameters struct {
 
 type RetryPolicyObservation struct {
 
-	// List of gRPC retry events.
-	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	// List of gRPC retry events. Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
 	// +listType=set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
@@ -1095,14 +1082,12 @@ type RetryPolicyObservation struct {
 
 type RetryPolicyParameters struct {
 
-	// List of gRPC retry events.
-	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	// List of gRPC retry events. Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
-	// List of HTTP retry events.
-	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// List of HTTP retry events. Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
@@ -1292,170 +1277,164 @@ type RouteParameters struct {
 
 type RouteSpecInitParameters struct {
 
-	// GRPC routing information for the route.
+	// GRPC routing information for the route. See grpc_route Block for details.
 	GRPCRoute *SpecGRPCRouteInitParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
-	// HTTP routing information for the route.
+	// HTTP routing information for the route. See http_route Block for details.
 	HTTPRoute *SpecHTTPRouteInitParameters `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
 
-	// HTTP/2 routing information for the route.
+	// HTTP/2 routing information for the route. See http2_route Block for details.
 	Http2Route *SpecHttp2RouteInitParameters `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 
-	// Priority for the route, between 0 and 1000.
-	// Routes are matched based on the specified value, where 0 is the highest priority.
+	// Priority for the route, between 0 and 1000. Routes are matched based on the specified value, where 0 is the highest priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// TCP routing information for the route.
+	// TCP routing information for the route. See tcp_route Block for details.
 	TCPRoute *TCPRouteInitParameters `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
 }
 
 type RouteSpecObservation struct {
 
-	// GRPC routing information for the route.
+	// GRPC routing information for the route. See grpc_route Block for details.
 	GRPCRoute *SpecGRPCRouteObservation `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
-	// HTTP routing information for the route.
+	// HTTP routing information for the route. See http_route Block for details.
 	HTTPRoute *SpecHTTPRouteObservation `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
 
-	// HTTP/2 routing information for the route.
+	// HTTP/2 routing information for the route. See http2_route Block for details.
 	Http2Route *SpecHttp2RouteObservation `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 
-	// Priority for the route, between 0 and 1000.
-	// Routes are matched based on the specified value, where 0 is the highest priority.
+	// Priority for the route, between 0 and 1000. Routes are matched based on the specified value, where 0 is the highest priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// TCP routing information for the route.
+	// TCP routing information for the route. See tcp_route Block for details.
 	TCPRoute *TCPRouteObservation `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
 }
 
 type RouteSpecParameters struct {
 
-	// GRPC routing information for the route.
+	// GRPC routing information for the route. See grpc_route Block for details.
 	// +kubebuilder:validation:Optional
 	GRPCRoute *SpecGRPCRouteParameters `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
 
-	// HTTP routing information for the route.
+	// HTTP routing information for the route. See http_route Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPRoute *SpecHTTPRouteParameters `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
 
-	// HTTP/2 routing information for the route.
+	// HTTP/2 routing information for the route. See http2_route Block for details.
 	// +kubebuilder:validation:Optional
 	Http2Route *SpecHttp2RouteParameters `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 
-	// Priority for the route, between 0 and 1000.
-	// Routes are matched based on the specified value, where 0 is the highest priority.
+	// Priority for the route, between 0 and 1000. Routes are matched based on the specified value, where 0 is the highest priority.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// TCP routing information for the route.
+	// TCP routing information for the route. See tcp_route Block for details.
 	// +kubebuilder:validation:Optional
 	TCPRoute *TCPRouteParameters `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
 }
 
 type SpecGRPCRouteInitParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *GRPCRouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *GRPCRouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *TimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecGRPCRouteObservation struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *GRPCRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *GRPCRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *TimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecGRPCRouteParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *GRPCRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *GRPCRouteMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	// +kubebuilder:validation:Optional
 	RetryPolicy *RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	// +kubebuilder:validation:Optional
 	Timeout *TimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHTTPRouteActionInitParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []HTTPRouteActionWeightedTargetInitParameters `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHTTPRouteActionObservation struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []HTTPRouteActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHTTPRouteActionParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Optional
 	WeightedTarget []HTTPRouteActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
 }
 
 type SpecHTTPRouteInitParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *SpecHTTPRouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *SpecHTTPRouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *HTTPRouteRetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *HTTPRouteTimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHTTPRouteMatchInitParameters struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	Header []HTTPRouteMatchHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	Path *SpecHTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	QueryParameter []HTTPRouteMatchQueryParameterInitParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
 	// Client request header scheme to match on. Valid values: http, https.
@@ -1464,22 +1443,22 @@ type SpecHTTPRouteMatchInitParameters struct {
 
 type SpecHTTPRouteMatchObservation struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	Header []HTTPRouteMatchHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
 	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	Path *SpecHTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	QueryParameter []HTTPRouteMatchQueryParameterObservation `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
 	// Client request header scheme to match on. Valid values: http, https.
@@ -1488,7 +1467,7 @@ type SpecHTTPRouteMatchObservation struct {
 
 type SpecHTTPRouteMatchParameters struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	// +kubebuilder:validation:Optional
 	Header []HTTPRouteMatchHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
@@ -1496,11 +1475,11 @@ type SpecHTTPRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *SpecHTTPRouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -1508,7 +1487,7 @@ type SpecHTTPRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	// +kubebuilder:validation:Optional
 	QueryParameter []HTTPRouteMatchQueryParameterParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
@@ -1522,7 +1501,7 @@ type SpecHTTPRouteMatchPathInitParameters struct {
 	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -1531,7 +1510,7 @@ type SpecHTTPRouteMatchPathObservation struct {
 	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
@@ -1541,100 +1520,97 @@ type SpecHTTPRouteMatchPathParameters struct {
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// The regex used to match the path.
 	// +kubebuilder:validation:Optional
 	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type SpecHTTPRouteObservation struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *SpecHTTPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *SpecHTTPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *HTTPRouteRetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *HTTPRouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHTTPRouteParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *SpecHTTPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *SpecHTTPRouteMatchParameters `json:"match" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	// +kubebuilder:validation:Optional
 	RetryPolicy *HTTPRouteRetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	// +kubebuilder:validation:Optional
 	Timeout *HTTPRouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHttp2RouteActionInitParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []ActionWeightedTargetInitParameters `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHttp2RouteActionObservation struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []ActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type SpecHttp2RouteActionParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Optional
 	WeightedTarget []ActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
 }
 
 type SpecHttp2RouteInitParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *SpecHttp2RouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *SpecHttp2RouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *Http2RouteRetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *Http2RouteTimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHttp2RouteMatchInitParameters struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	Header []Http2RouteMatchHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	Path *Http2RouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	QueryParameter []Http2RouteMatchQueryParameterInitParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
 	// Client request header scheme to match on. Valid values: http, https.
@@ -1643,22 +1619,22 @@ type SpecHttp2RouteMatchInitParameters struct {
 
 type SpecHttp2RouteMatchObservation struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	Header []Http2RouteMatchHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
 	// Client request header method to match on. Valid values: GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	Path *Http2RouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	QueryParameter []Http2RouteMatchQueryParameterObservation `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
 	// Client request header scheme to match on. Valid values: http, https.
@@ -1667,7 +1643,7 @@ type SpecHttp2RouteMatchObservation struct {
 
 type SpecHttp2RouteMatchParameters struct {
 
-	// Client request headers to match on.
+	// Client request headers to match on. See header Block for details.
 	// +kubebuilder:validation:Optional
 	Header []Http2RouteMatchHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
@@ -1675,11 +1651,11 @@ type SpecHttp2RouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// Client request path to match on.
+	// Client request path to match on. See path Block for details.
 	// +kubebuilder:validation:Optional
 	Path *Http2RouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -1687,7 +1663,7 @@ type SpecHttp2RouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Client request query parameters to match on.
+	// Client request query parameters to match on. See query_parameter Block for details.
 	// +kubebuilder:validation:Optional
 	QueryParameter []Http2RouteMatchQueryParameterParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
 
@@ -1698,63 +1674,60 @@ type SpecHttp2RouteMatchParameters struct {
 
 type SpecHttp2RouteObservation struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *SpecHttp2RouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *SpecHttp2RouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	RetryPolicy *Http2RouteRetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *Http2RouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecHttp2RouteParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *SpecHttp2RouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *SpecHttp2RouteMatchParameters `json:"match" tf:"match,omitempty"`
 
-	// Retry policy.
+	// Retry policy. See retry_policy Block for details.
 	// +kubebuilder:validation:Optional
 	RetryPolicy *Http2RouteRetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	// +kubebuilder:validation:Optional
 	Timeout *Http2RouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type TCPRouteActionInitParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []TCPRouteActionWeightedTargetInitParameters `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type TCPRouteActionObservation struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	WeightedTarget []TCPRouteActionWeightedTargetObservation `json:"weightedTarget,omitempty" tf:"weighted_target,omitempty"`
 }
 
 type TCPRouteActionParameters struct {
 
-	// Targets that traffic is routed to when a request matches the route.
-	// You can specify one or more targets and their relative weights with which to distribute traffic.
+	// Targets that traffic is routed to when a request matches the route. You can specify one or more targets and their relative weights with which to distribute traffic.
 	// +kubebuilder:validation:Optional
 	WeightedTarget []TCPRouteActionWeightedTargetParameters `json:"weightedTarget" tf:"weighted_target,omitempty"`
 }
 
 type TCPRouteActionWeightedTargetInitParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -1776,7 +1749,7 @@ type TCPRouteActionWeightedTargetInitParameters struct {
 
 type TCPRouteActionWeightedTargetObservation struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -1788,7 +1761,7 @@ type TCPRouteActionWeightedTargetObservation struct {
 
 type TCPRouteActionWeightedTargetParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -1813,58 +1786,58 @@ type TCPRouteActionWeightedTargetParameters struct {
 
 type TCPRouteInitParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *TCPRouteActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *TCPRouteMatchInitParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *TCPRouteTimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type TCPRouteMatchInitParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteMatchObservation struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteMatchParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteObservation struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	Action *TCPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	Match *TCPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	Timeout *TCPRouteTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type TCPRouteParameters struct {
 
-	// Action to take if a match is determined.
+	// Action to take if a match is determined. See action Block for details.
 	// +kubebuilder:validation:Optional
 	Action *TCPRouteActionParameters `json:"action" tf:"action,omitempty"`
 
-	// Criteria for determining an gRPC request match.
+	// Criteria for determining an gRPC request match. See match Block for details.
 	// +kubebuilder:validation:Optional
 	Match *TCPRouteMatchParameters `json:"match,omitempty" tf:"match,omitempty"`
 
-	// Types of timeouts.
+	// Types of timeouts. See timeout Block for details.
 	// +kubebuilder:validation:Optional
 	Timeout *TCPRouteTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -1900,19 +1873,19 @@ type TCPRouteTimeoutIdleParameters struct {
 
 type TCPRouteTimeoutInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TCPRouteTimeoutIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TCPRouteTimeoutObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TCPRouteTimeoutIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TCPRouteTimeoutParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *TCPRouteTimeoutIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 }
@@ -1948,29 +1921,29 @@ type TimeoutIdleParameters struct {
 
 type TimeoutInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *IdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *PerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *IdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *PerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *IdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *PerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
@@ -2006,7 +1979,7 @@ type TimeoutPerRequestParameters struct {
 
 type WeightedTargetInitParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -2018,7 +1991,7 @@ type WeightedTargetInitParameters struct {
 
 type WeightedTargetObservation struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
@@ -2030,7 +2003,7 @@ type WeightedTargetObservation struct {
 
 type WeightedTargetParameters struct {
 
-	// The port number to match from the request.
+	// The targeted port of the weighted object.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 

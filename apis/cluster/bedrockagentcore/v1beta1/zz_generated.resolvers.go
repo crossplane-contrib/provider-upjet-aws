@@ -405,6 +405,7 @@ func (mg *GatewayTarget) ResolveReferences(ctx context.Context, c client.Reader)
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "Gateway", "GatewayList")
@@ -427,6 +428,128 @@ func (mg *GatewayTarget) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.GatewayIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIdentifierRef = rsp.ResolvedReference
 
+	if mg.Spec.ForProvider.PrivateEndpoint != nil {
+		if mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain),
+					Extract:      resource.ExtractParamPath("dns_name", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainRef,
+					Selector:     mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain")
+			}
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.PrivateEndpoint != nil {
+		if mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.PrivateEndpoint != nil {
+		if mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierRef,
+					Selector:     mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier")
+			}
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.PrivateEndpoint != nil {
+		if mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("vpclattice.aws.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierRef,
+					Selector:     mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier")
+			}
+			mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.TargetConfiguration != nil {
+		if mg.Spec.ForProvider.TargetConfiguration.HTTP != nil {
+			if mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "AgentRuntime", "AgentRuntimeList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn),
+						Extract:      resource.ExtractParamPath("agent_runtime_arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnRef,
+						Selector:     mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn")
+				}
+				mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	if mg.Spec.ForProvider.TargetConfiguration != nil {
 		if mg.Spec.ForProvider.TargetConfiguration.Mcp != nil {
 			if mg.Spec.ForProvider.TargetConfiguration.Mcp.Lambda != nil {
@@ -473,6 +596,128 @@ func (mg *GatewayTarget) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.InitProvider.GatewayIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GatewayIdentifierRef = rsp.ResolvedReference
 
+	if mg.Spec.InitProvider.PrivateEndpoint != nil {
+		if mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain),
+					Extract:      resource.ExtractParamPath("dns_name", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainRef,
+					Selector:     mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain")
+			}
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomain = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.RoutingDomainRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.PrivateEndpoint != nil {
+		if mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.PrivateEndpoint != nil {
+		if mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierRef,
+					Selector:     mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier")
+			}
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateEndpoint.ManagedVPCResource.VPCIdentifierRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.PrivateEndpoint != nil {
+		if mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("vpclattice.aws.upbound.io", "v1beta1", "ResourceConfiguration", "ResourceConfigurationList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierRef,
+					Selector:     mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier")
+			}
+			mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateEndpoint.SelfManagedLatticeResource.ResourceConfigurationIdentifierRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.TargetConfiguration != nil {
+		if mg.Spec.InitProvider.TargetConfiguration.HTTP != nil {
+			if mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime != nil {
+				{
+					m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.upbound.io", "v1beta1", "AgentRuntime", "AgentRuntimeList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn),
+						Extract:      resource.ExtractParamPath("agent_runtime_arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnRef,
+						Selector:     mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn")
+				}
+				mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.TargetConfiguration.HTTP.AgentcoreRuntime.ArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	if mg.Spec.InitProvider.TargetConfiguration != nil {
 		if mg.Spec.InitProvider.TargetConfiguration.Mcp != nil {
 			if mg.Spec.InitProvider.TargetConfiguration.Mcp.Lambda != nil {

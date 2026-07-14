@@ -64,8 +64,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   mlflowVersion:
                     description: The version of MLflow that the tracking server uses.
@@ -204,8 +205,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   mlflowVersion:
                     description: The version of MLflow that the tracking server uses.
@@ -397,8 +399,9 @@ spec:
                       the MLflow Tracking Server artifact store.
                     type: string
                   automaticModelRegistration:
-                    description: A list of Member Definitions that contains objects
-                      that identify the workers that make up the work team.
+                    description: Whether to enable or disable automatic registration
+                      of new MLflow models to the SageMaker Model Registry. Defaults
+                      to false.
                     type: boolean
                   id:
                     description: The name of the MLFlow Tracking Server.

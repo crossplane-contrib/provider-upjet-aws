@@ -128,6 +128,9 @@ type RouteTableRouteObservation_2 struct {
 	// Identifier of an EC2 network interface.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// The Amazon Resource Name (ARN) of an ODB network.
+	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
+
 	// Identifier of an EC2 Transit Gateway.
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 

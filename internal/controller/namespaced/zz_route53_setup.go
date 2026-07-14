@@ -67,3 +67,25 @@ func SetupGated_route53(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_route53 registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_route53(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		delegationset.SetupWebhookWithManager,
+		healthcheck.SetupWebhookWithManager,
+		hostedzonednssec.SetupWebhookWithManager,
+		querylog.SetupWebhookWithManager,
+		record.SetupWebhookWithManager,
+		resolverconfig.SetupWebhookWithManager,
+		trafficpolicy.SetupWebhookWithManager,
+		trafficpolicyinstance.SetupWebhookWithManager,
+		vpcassociationauthorization.SetupWebhookWithManager,
+		zone.SetupWebhookWithManager,
+		zoneassociation.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

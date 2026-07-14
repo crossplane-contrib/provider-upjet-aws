@@ -27,6 +27,15 @@ import (
 	features "github.com/upbound/provider-aws/v2/internal/features"
 )
 
+// SetupWebhookWithManager registers the conversion webhook for VPCIpamPoolCidrAllocation.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.VPCIpamPoolCidrAllocation{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.VPCIpamPoolCidrAllocation")
+	}
+	return nil
+}
+
 // SetupGated adds a controller that reconciles VPCIpamPoolCidrAllocation managed resources.
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 	o.Options.Gate.Register(func() {
@@ -41,6 +50,9 @@ func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind.String())
 	var initializers managed.InitializerChain
+	for _, i := range o.Provider.Resources["aws_vpc_ipam_pool_cidr_allocation"].InitializerFns {
+		initializers = append(initializers, i(mgr.GetClient()))
+	}
 	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
 	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
@@ -78,14 +90,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	if o.Features.Enabled(xpfeature.EnableAlphaChangeLogs) {
 		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
-	}
-
-	// register webhooks for the kind v1beta1.VPCIpamPoolCidrAllocation if they're enabled.
-	if o.StartWebhooks {
-		if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.VPCIpamPoolCidrAllocation{}).
-			Complete(); err != nil {
-			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.VPCIpamPoolCidrAllocation")
-		}
 	}
 
 	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {

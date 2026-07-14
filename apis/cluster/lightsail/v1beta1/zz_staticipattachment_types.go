@@ -17,7 +17,6 @@ type StaticIPAttachmentInitParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
@@ -30,7 +29,7 @@ type StaticIPAttachmentInitParameters struct {
 
 	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.StaticIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 
 	// Reference to a StaticIP in lightsail to populate staticIpName.
@@ -63,7 +62,6 @@ type StaticIPAttachmentParameters struct {
 
 	// Name of the Lightsail instance to attach the IP to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta2.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
@@ -82,7 +80,7 @@ type StaticIPAttachmentParameters struct {
 
 	// Name of the allocated static IP.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lightsail/v1beta1.StaticIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StaticIPName *string `json:"staticIpName,omitempty" tf:"static_ip_name,omitempty"`
 

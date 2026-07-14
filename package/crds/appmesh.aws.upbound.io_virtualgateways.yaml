@@ -1909,26 +1909,30 @@ spec:
                     description: Virtual gateway specification to apply.
                     properties:
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Default client policy for virtual gateway
-                              backends.
+                              backends. See client_policy Block for details.
                             properties:
                               tls:
-                                description: Transport Layer Security (TLS) client
-                                  policy.
+                                description: Transport Layer Security (TLS) properties
+                                  for the listener. See tls Block for details.
                                 properties:
                                   certificate:
-                                    description: Virtual gateway's client's Transport
-                                      Layer Security (TLS) certificate.
+                                    description: Listener's TLS certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
-                                            description: Certificate chain for the
-                                              certificate.
+                                            description: Certificate trust chain for
+                                              a certificate stored on the file system
+                                              of the mesh endpoint that the proxy
+                                              is running on. Must be between 1 and
+                                              255 characters in length.
                                             type: string
                                           privateKey:
                                             description: Private key for a certificate
@@ -1937,7 +1941,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -1984,9 +1989,8 @@ spec:
                                         description: TLS validation context trust.
                                         properties:
                                           acm:
-                                            description: TLS validation context trust
-                                              for an AWS Certificate Manager (ACM)
-                                              certificate.
+                                            description: An AWS Certificate Manager
+                                              (ACM) certificate.
                                             properties:
                                               certificateAuthorityArns:
                                                 description: One or more ACM ARNs.
@@ -1996,16 +2000,21 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
-                                                description: Certificate chain for
-                                                  the certificate.
+                                                description: Certificate trust chain
+                                                  for a certificate stored on the
+                                                  file system of the mesh endpoint
+                                                  that the proxy is running on. Must
+                                                  be between 1 and 255 characters
+                                                  in length.
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -2023,14 +2032,16 @@ spec:
                       listener:
                         description: Listeners that the mesh endpoint is expected
                           to receive inbound traffic from. You can specify one listener.
+                          See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
                                   description: Connection pool information for gRPC
-                                    listeners.
+                                    listeners. See grpc Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -2040,7 +2051,7 @@ spec:
                                   type: object
                                 http:
                                   description: Connection pool information for HTTP
-                                    listeners.
+                                    listeners. See http Block for details.
                                   properties:
                                     maxConnections:
                                       description: Maximum number of outbound TCP
@@ -2056,7 +2067,7 @@ spec:
                                   type: object
                                 http2:
                                   description: Connection pool information for HTTP2
-                                    listeners.
+                                    listeners. See http2 Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -2067,6 +2078,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -2078,10 +2090,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -2102,6 +2113,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -2112,15 +2124,15 @@ spec:
                                   type: string
                               type: object
                             tls:
-                              description: Transport Layer Security (TLS) client policy.
+                              description: Transport Layer Security (TLS) properties
+                                for the listener. See tls Block for details.
                               properties:
                                 certificate:
-                                  description: Virtual gateway's client's Transport
-                                    Layer Security (TLS) certificate.
+                                  description: Listener's TLS certificate.
                                   properties:
                                     acm:
-                                      description: TLS validation context trust for
-                                        an AWS Certificate Manager (ACM) certificate.
+                                      description: An AWS Certificate Manager (ACM)
+                                        certificate.
                                       properties:
                                         certificateArn:
                                           description: ARN for the certificate.
@@ -2204,10 +2216,15 @@ spec:
                                           type: object
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
-                                          description: Certificate chain for the certificate.
+                                          description: Certificate trust chain for
+                                            a certificate stored on the file system
+                                            of the mesh endpoint that the proxy is
+                                            running on. Must be between 1 and 255
+                                            characters in length.
                                           type: string
                                         privateKey:
                                           description: Private key for a certificate
@@ -2216,7 +2233,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -2256,16 +2274,20 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
-                                              description: Certificate chain for the
-                                                certificate.
+                                              description: Certificate trust chain
+                                                for a certificate stored on the file
+                                                system of the mesh endpoint that the
+                                                proxy is running on. Must be between
+                                                1 and 255 characters in length.
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -2282,19 +2304,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual gateway.
+                          for the virtual gateway. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual gateway.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -2316,10 +2342,9 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object
@@ -2363,26 +2388,30 @@ spec:
                     description: Virtual gateway specification to apply.
                     properties:
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Default client policy for virtual gateway
-                              backends.
+                              backends. See client_policy Block for details.
                             properties:
                               tls:
-                                description: Transport Layer Security (TLS) client
-                                  policy.
+                                description: Transport Layer Security (TLS) properties
+                                  for the listener. See tls Block for details.
                                 properties:
                                   certificate:
-                                    description: Virtual gateway's client's Transport
-                                      Layer Security (TLS) certificate.
+                                    description: Listener's TLS certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
-                                            description: Certificate chain for the
-                                              certificate.
+                                            description: Certificate trust chain for
+                                              a certificate stored on the file system
+                                              of the mesh endpoint that the proxy
+                                              is running on. Must be between 1 and
+                                              255 characters in length.
                                             type: string
                                           privateKey:
                                             description: Private key for a certificate
@@ -2391,7 +2420,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -2438,9 +2468,8 @@ spec:
                                         description: TLS validation context trust.
                                         properties:
                                           acm:
-                                            description: TLS validation context trust
-                                              for an AWS Certificate Manager (ACM)
-                                              certificate.
+                                            description: An AWS Certificate Manager
+                                              (ACM) certificate.
                                             properties:
                                               certificateAuthorityArns:
                                                 description: One or more ACM ARNs.
@@ -2450,16 +2479,21 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
-                                                description: Certificate chain for
-                                                  the certificate.
+                                                description: Certificate trust chain
+                                                  for a certificate stored on the
+                                                  file system of the mesh endpoint
+                                                  that the proxy is running on. Must
+                                                  be between 1 and 255 characters
+                                                  in length.
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -2477,14 +2511,16 @@ spec:
                       listener:
                         description: Listeners that the mesh endpoint is expected
                           to receive inbound traffic from. You can specify one listener.
+                          See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
                                   description: Connection pool information for gRPC
-                                    listeners.
+                                    listeners. See grpc Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -2494,7 +2530,7 @@ spec:
                                   type: object
                                 http:
                                   description: Connection pool information for HTTP
-                                    listeners.
+                                    listeners. See http Block for details.
                                   properties:
                                     maxConnections:
                                       description: Maximum number of outbound TCP
@@ -2510,7 +2546,7 @@ spec:
                                   type: object
                                 http2:
                                   description: Connection pool information for HTTP2
-                                    listeners.
+                                    listeners. See http2 Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -2521,6 +2557,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -2532,10 +2569,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -2556,6 +2592,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -2566,15 +2603,15 @@ spec:
                                   type: string
                               type: object
                             tls:
-                              description: Transport Layer Security (TLS) client policy.
+                              description: Transport Layer Security (TLS) properties
+                                for the listener. See tls Block for details.
                               properties:
                                 certificate:
-                                  description: Virtual gateway's client's Transport
-                                    Layer Security (TLS) certificate.
+                                  description: Listener's TLS certificate.
                                   properties:
                                     acm:
-                                      description: TLS validation context trust for
-                                        an AWS Certificate Manager (ACM) certificate.
+                                      description: An AWS Certificate Manager (ACM)
+                                        certificate.
                                       properties:
                                         certificateArn:
                                           description: ARN for the certificate.
@@ -2658,10 +2695,15 @@ spec:
                                           type: object
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
-                                          description: Certificate chain for the certificate.
+                                          description: Certificate trust chain for
+                                            a certificate stored on the file system
+                                            of the mesh endpoint that the proxy is
+                                            running on. Must be between 1 and 255
+                                            characters in length.
                                           type: string
                                         privateKey:
                                           description: Private key for a certificate
@@ -2670,7 +2712,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -2710,16 +2753,20 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
-                                              description: Certificate chain for the
-                                                certificate.
+                                              description: Certificate trust chain
+                                                for a certificate stored on the file
+                                                system of the mesh endpoint that the
+                                                proxy is running on. Must be between
+                                                1 and 255 characters in length.
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -2736,19 +2783,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual gateway.
+                          for the virtual gateway. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual gateway.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -2770,10 +2821,9 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object
@@ -2926,26 +2976,30 @@ spec:
                     description: Virtual gateway specification to apply.
                     properties:
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Default client policy for virtual gateway
-                              backends.
+                              backends. See client_policy Block for details.
                             properties:
                               tls:
-                                description: Transport Layer Security (TLS) client
-                                  policy.
+                                description: Transport Layer Security (TLS) properties
+                                  for the listener. See tls Block for details.
                                 properties:
                                   certificate:
-                                    description: Virtual gateway's client's Transport
-                                      Layer Security (TLS) certificate.
+                                    description: Listener's TLS certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
-                                            description: Certificate chain for the
-                                              certificate.
+                                            description: Certificate trust chain for
+                                              a certificate stored on the file system
+                                              of the mesh endpoint that the proxy
+                                              is running on. Must be between 1 and
+                                              255 characters in length.
                                             type: string
                                           privateKey:
                                             description: Private key for a certificate
@@ -2954,7 +3008,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -3001,9 +3056,8 @@ spec:
                                         description: TLS validation context trust.
                                         properties:
                                           acm:
-                                            description: TLS validation context trust
-                                              for an AWS Certificate Manager (ACM)
-                                              certificate.
+                                            description: An AWS Certificate Manager
+                                              (ACM) certificate.
                                             properties:
                                               certificateAuthorityArns:
                                                 description: One or more ACM ARNs.
@@ -3013,16 +3067,21 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
-                                                description: Certificate chain for
-                                                  the certificate.
+                                                description: Certificate trust chain
+                                                  for a certificate stored on the
+                                                  file system of the mesh endpoint
+                                                  that the proxy is running on. Must
+                                                  be between 1 and 255 characters
+                                                  in length.
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -3040,14 +3099,16 @@ spec:
                       listener:
                         description: Listeners that the mesh endpoint is expected
                           to receive inbound traffic from. You can specify one listener.
+                          See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
                                   description: Connection pool information for gRPC
-                                    listeners.
+                                    listeners. See grpc Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -3057,7 +3118,7 @@ spec:
                                   type: object
                                 http:
                                   description: Connection pool information for HTTP
-                                    listeners.
+                                    listeners. See http Block for details.
                                   properties:
                                     maxConnections:
                                       description: Maximum number of outbound TCP
@@ -3073,7 +3134,7 @@ spec:
                                   type: object
                                 http2:
                                   description: Connection pool information for HTTP2
-                                    listeners.
+                                    listeners. See http2 Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -3084,6 +3145,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -3095,10 +3157,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -3119,6 +3180,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -3129,25 +3191,30 @@ spec:
                                   type: string
                               type: object
                             tls:
-                              description: Transport Layer Security (TLS) client policy.
+                              description: Transport Layer Security (TLS) properties
+                                for the listener. See tls Block for details.
                               properties:
                                 certificate:
-                                  description: Virtual gateway's client's Transport
-                                    Layer Security (TLS) certificate.
+                                  description: Listener's TLS certificate.
                                   properties:
                                     acm:
-                                      description: TLS validation context trust for
-                                        an AWS Certificate Manager (ACM) certificate.
+                                      description: An AWS Certificate Manager (ACM)
+                                        certificate.
                                       properties:
                                         certificateArn:
                                           description: ARN for the certificate.
                                           type: string
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
-                                          description: Certificate chain for the certificate.
+                                          description: Certificate trust chain for
+                                            a certificate stored on the file system
+                                            of the mesh endpoint that the proxy is
+                                            running on. Must be between 1 and 255
+                                            characters in length.
                                           type: string
                                         privateKey:
                                           description: Private key for a certificate
@@ -3156,7 +3223,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -3196,16 +3264,20 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
-                                              description: Certificate chain for the
-                                                certificate.
+                                              description: Certificate trust chain
+                                                for a certificate stored on the file
+                                                system of the mesh endpoint that the
+                                                proxy is running on. Must be between
+                                                1 and 255 characters in length.
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -3222,19 +3294,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual gateway.
+                          for the virtual gateway. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual gateway.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -3256,10 +3332,9 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object

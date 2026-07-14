@@ -37,3 +37,15 @@ func SetupGated_bedrock(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_bedrock registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_bedrock(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		inferenceprofile.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

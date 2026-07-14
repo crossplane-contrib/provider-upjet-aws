@@ -20,8 +20,7 @@ type AwsCloudMapInitParameters struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// Name of the AWS Cloud Map namespace to use.
-	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+	// Name of the AWS Cloud Map namespace to use. Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicediscovery/v1beta1.HTTPNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
@@ -34,7 +33,7 @@ type AwsCloudMapInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
-	// attribute of the dns object to hostname.
+	// Name of the AWS Cloud Map service to use. Use the aws_service_discovery_service resource to configure a Cloud Map service. Must be between 1 and 1024 characters in length.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
@@ -44,11 +43,10 @@ type AwsCloudMapObservation struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// Name of the AWS Cloud Map namespace to use.
-	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+	// Name of the AWS Cloud Map namespace to use. Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
-	// attribute of the dns object to hostname.
+	// Name of the AWS Cloud Map service to use. Use the aws_service_discovery_service resource to configure a Cloud Map service. Must be between 1 and 1024 characters in length.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
@@ -59,8 +57,7 @@ type AwsCloudMapParameters struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// Name of the AWS Cloud Map namespace to use.
-	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+	// Name of the AWS Cloud Map namespace to use. Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/servicediscovery/v1beta1.HTTPNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
@@ -74,7 +71,7 @@ type AwsCloudMapParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
-	// attribute of the dns object to hostname.
+	// Name of the AWS Cloud Map service to use. Use the aws_service_discovery_service resource to configure a Cloud Map service. Must be between 1 and 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
 }
@@ -100,29 +97,29 @@ type BackendDefaultsClientPolicyParameters struct {
 
 type BackendDefaultsClientPolicyTLSCertificateInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ClientPolicyTLSCertificateFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ClientPolicyTLSCertificateSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type BackendDefaultsClientPolicyTLSCertificateObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ClientPolicyTLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ClientPolicyTLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type BackendDefaultsClientPolicyTLSCertificateParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *ClientPolicyTLSCertificateFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *ClientPolicyTLSCertificateSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -261,7 +258,7 @@ type BaseEjectionDurationInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -270,7 +267,7 @@ type BaseEjectionDurationObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -280,7 +277,7 @@ type BaseEjectionDurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -316,29 +313,29 @@ type ClientPolicyTLSCertificateFileParameters struct {
 
 type ClientPolicyTLSCertificateInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TLSCertificateFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TLSCertificateSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ClientPolicyTLSCertificateObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ClientPolicyTLSCertificateParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *TLSCertificateFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *TLSCertificateSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -508,10 +505,10 @@ type ClientPolicyTLSValidationTrustInitParameters struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *ValidationTrustAcmInitParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ClientPolicyTLSValidationTrustFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ClientPolicyTLSValidationTrustSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -520,10 +517,10 @@ type ClientPolicyTLSValidationTrustObservation struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *ValidationTrustAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ClientPolicyTLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ClientPolicyTLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -533,11 +530,11 @@ type ClientPolicyTLSValidationTrustParameters struct {
 	// +kubebuilder:validation:Optional
 	Acm *ValidationTrustAcmParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *ClientPolicyTLSValidationTrustFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *ClientPolicyTLSValidationTrustSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -669,7 +666,7 @@ type DNSParameters struct {
 
 type FileFormatInitParameters struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	JSON []FormatJSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
 
 	// The logging format for text. Must be between 1 and 1000 characters in length.
@@ -678,7 +675,7 @@ type FileFormatInitParameters struct {
 
 type FileFormatObservation struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	JSON []FormatJSONObservation `json:"json,omitempty" tf:"json,omitempty"`
 
 	// The logging format for text. Must be between 1 and 1000 characters in length.
@@ -687,7 +684,7 @@ type FileFormatObservation struct {
 
 type FileFormatParameters struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	// +kubebuilder:validation:Optional
 	JSON []FormatJSONParameters `json:"json,omitempty" tf:"json,omitempty"`
 
@@ -701,7 +698,7 @@ type FormatJSONInitParameters struct {
 	// The specified key for the JSON. Must be between 1 and 100 characters in length.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -710,7 +707,7 @@ type FormatJSONObservation struct {
 	// The specified key for the JSON. Must be between 1 and 100 characters in length.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -720,7 +717,7 @@ type FormatJSONParameters struct {
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -730,7 +727,7 @@ type GRPCIdleInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -739,7 +736,7 @@ type GRPCIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -749,7 +746,7 @@ type GRPCIdleParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -759,7 +756,7 @@ type GRPCPerRequestInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -768,7 +765,7 @@ type GRPCPerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -778,7 +775,7 @@ type GRPCPerRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -788,7 +785,7 @@ type HTTPIdleInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -797,7 +794,7 @@ type HTTPIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -807,7 +804,7 @@ type HTTPIdleParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -817,7 +814,7 @@ type HTTPPerRequestInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -826,7 +823,7 @@ type HTTPPerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -836,7 +833,7 @@ type HTTPPerRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -846,7 +843,7 @@ type Http2IdleInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -855,7 +852,7 @@ type Http2IdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -865,7 +862,7 @@ type Http2IdleParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -875,7 +872,7 @@ type Http2PerRequestInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -884,7 +881,7 @@ type Http2PerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -894,7 +891,7 @@ type Http2PerRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -904,7 +901,7 @@ type IntervalInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -913,7 +910,7 @@ type IntervalObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -923,56 +920,56 @@ type IntervalParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ListenerConnectionPoolInitParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	GRPC *ConnectionPoolGRPCInitParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	HTTP []ConnectionPoolHTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	Http2 []ConnectionPoolHttp2InitParameters `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	TCP []TCPInitParameters `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerConnectionPoolObservation struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	GRPC *ConnectionPoolGRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	HTTP []ConnectionPoolHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	Http2 []ConnectionPoolHttp2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	TCP []TCPObservation `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerConnectionPoolParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	// +kubebuilder:validation:Optional
 	GRPC *ConnectionPoolGRPCParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	// +kubebuilder:validation:Optional
 	HTTP []ConnectionPoolHTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	// +kubebuilder:validation:Optional
 	Http2 []ConnectionPoolHttp2Parameters `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	// +kubebuilder:validation:Optional
 	TCP []TCPParameters `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
@@ -985,7 +982,7 @@ type ListenerHealthCheckInitParameters struct {
 	// Time period in milliseconds between each health check execution.
 	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
@@ -1009,7 +1006,7 @@ type ListenerHealthCheckObservation struct {
 	// Time period in milliseconds between each health check execution.
 	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
@@ -1035,7 +1032,7 @@ type ListenerHealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalMillis *float64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -1119,10 +1116,10 @@ type ListenerTLSCertificateInitParameters struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *TLSCertificateAcmInitParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ListenerTLSCertificateFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ListenerTLSCertificateSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -1131,10 +1128,10 @@ type ListenerTLSCertificateObservation struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *TLSCertificateAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ListenerTLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ListenerTLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -1144,11 +1141,11 @@ type ListenerTLSCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Acm *TLSCertificateAcmParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *ListenerTLSCertificateFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *ListenerTLSCertificateSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -1263,29 +1260,29 @@ type ListenerTLSValidationTrustFileParameters struct {
 
 type ListenerTLSValidationTrustInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ListenerTLSValidationTrustFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ListenerTLSValidationTrustSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ListenerTLSValidationTrustObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ListenerTLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ListenerTLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ListenerTLSValidationTrustParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *ListenerTLSValidationTrustFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *ListenerTLSValidationTrustSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -1311,111 +1308,110 @@ type ListenerTLSValidationTrustSdsParameters struct {
 
 type ListenerTimeoutInitParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	GRPC *TimeoutGRPCInitParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	HTTP *TimeoutHTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	Http2 *TimeoutHttp2InitParameters `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	TCP *TimeoutTCPInitParameters `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerTimeoutObservation struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	GRPC *TimeoutGRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	HTTP *TimeoutHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	Http2 *TimeoutHttp2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	TCP *TimeoutTCPObservation `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerTimeoutParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Timeouts for gRPC listeners. See grpc Block for details.
 	// +kubebuilder:validation:Optional
 	GRPC *TimeoutGRPCParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Timeouts for HTTP listeners. See http Block for details.
 	// +kubebuilder:validation:Optional
 	HTTP *TimeoutHTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Timeouts for HTTP2 listeners. See http2 Block for details.
 	// +kubebuilder:validation:Optional
 	Http2 *TimeoutHttp2Parameters `json:"http2,omitempty" tf:"http2,omitempty"`
 
-	// Connection pool information for TCP listeners.
+	// Timeouts for TCP listeners. See tcp Block for details.
 	// +kubebuilder:validation:Optional
 	TCP *TimeoutTCPParameters `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type LoggingAccessLogFileInitParameters struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	Format *FileFormatInitParameters `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type LoggingAccessLogFileObservation struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	Format *FileFormatObservation `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type LoggingAccessLogFileParameters struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	// +kubebuilder:validation:Optional
 	Format *FileFormatParameters `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type LoggingAccessLogInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *LoggingAccessLogFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type LoggingAccessLogObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *LoggingAccessLogFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type LoggingAccessLogParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *LoggingAccessLogFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type OutlierDetectionInitParameters struct {
 
-	// Base amount of time for which a host is ejected.
+	// Base amount of time for which a host is ejected. See base_ejection_duration Block for details.
 	BaseEjectionDuration *BaseEjectionDurationInitParameters `json:"baseEjectionDuration,omitempty" tf:"base_ejection_duration,omitempty"`
 
-	// Time interval between ejection sweep analysis.
+	// Time interval between ejection sweep analysis. See interval Block for details.
 	Interval *IntervalInitParameters `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-	// Minimum value of 0. Maximum value of 100.
+	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value. Minimum value of 0. Maximum value of 100.
 	MaxEjectionPercent *float64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
 
 	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
@@ -1424,14 +1420,13 @@ type OutlierDetectionInitParameters struct {
 
 type OutlierDetectionObservation struct {
 
-	// Base amount of time for which a host is ejected.
+	// Base amount of time for which a host is ejected. See base_ejection_duration Block for details.
 	BaseEjectionDuration *BaseEjectionDurationObservation `json:"baseEjectionDuration,omitempty" tf:"base_ejection_duration,omitempty"`
 
-	// Time interval between ejection sweep analysis.
+	// Time interval between ejection sweep analysis. See interval Block for details.
 	Interval *IntervalObservation `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-	// Minimum value of 0. Maximum value of 100.
+	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value. Minimum value of 0. Maximum value of 100.
 	MaxEjectionPercent *float64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
 
 	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
@@ -1440,16 +1435,15 @@ type OutlierDetectionObservation struct {
 
 type OutlierDetectionParameters struct {
 
-	// Base amount of time for which a host is ejected.
+	// Base amount of time for which a host is ejected. See base_ejection_duration Block for details.
 	// +kubebuilder:validation:Optional
 	BaseEjectionDuration *BaseEjectionDurationParameters `json:"baseEjectionDuration" tf:"base_ejection_duration,omitempty"`
 
-	// Time interval between ejection sweep analysis.
+	// Time interval between ejection sweep analysis. See interval Block for details.
 	// +kubebuilder:validation:Optional
 	Interval *IntervalParameters `json:"interval" tf:"interval,omitempty"`
 
-	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-	// Minimum value of 0. Maximum value of 100.
+	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value. Minimum value of 0. Maximum value of 100.
 	// +kubebuilder:validation:Optional
 	MaxEjectionPercent *float64 `json:"maxEjectionPercent" tf:"max_ejection_percent,omitempty"`
 
@@ -1479,61 +1473,61 @@ type SpecBackendDefaultsParameters struct {
 
 type SpecListenerInitParameters struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	ConnectionPool *ListenerConnectionPoolInitParameters `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	HealthCheck *ListenerHealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Outlier detection information for the listener.
+	// Outlier detection information for the listener. See outlier_detection Block for details.
 	OutlierDetection *OutlierDetectionInitParameters `json:"outlierDetection,omitempty" tf:"outlier_detection,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *ListenerPortMappingInitParameters `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 
 	// Transport Layer Security (TLS) client policy.
 	TLS *SpecListenerTLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Timeouts for different protocols.
+	// Timeouts for different protocols. See timeout Block for details.
 	Timeout *ListenerTimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecListenerObservation struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	ConnectionPool *ListenerConnectionPoolObservation `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	HealthCheck *ListenerHealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Outlier detection information for the listener.
+	// Outlier detection information for the listener. See outlier_detection Block for details.
 	OutlierDetection *OutlierDetectionObservation `json:"outlierDetection,omitempty" tf:"outlier_detection,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *ListenerPortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 
 	// Transport Layer Security (TLS) client policy.
 	TLS *SpecListenerTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Timeouts for different protocols.
+	// Timeouts for different protocols. See timeout Block for details.
 	Timeout *ListenerTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecListenerParameters struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	// +kubebuilder:validation:Optional
 	ConnectionPool *ListenerConnectionPoolParameters `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	// +kubebuilder:validation:Optional
 	HealthCheck *ListenerHealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Outlier detection information for the listener.
+	// Outlier detection information for the listener. See outlier_detection Block for details.
 	// +kubebuilder:validation:Optional
 	OutlierDetection *OutlierDetectionParameters `json:"outlierDetection,omitempty" tf:"outlier_detection,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	PortMapping *ListenerPortMappingParameters `json:"portMapping" tf:"port_mapping,omitempty"`
 
@@ -1541,7 +1535,7 @@ type SpecListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	TLS *SpecListenerTLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
-	// Timeouts for different protocols.
+	// Timeouts for different protocols. See timeout Block for details.
 	// +kubebuilder:validation:Optional
 	Timeout *ListenerTimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -1587,48 +1581,48 @@ type SpecListenerTLSParameters struct {
 
 type SpecLoggingInitParameters struct {
 
-	// Access log configuration for a virtual node.
+	// Access log configuration for a virtual node. See access_log Block for details.
 	AccessLog *LoggingAccessLogInitParameters `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type SpecLoggingObservation struct {
 
-	// Access log configuration for a virtual node.
+	// Access log configuration for a virtual node. See access_log Block for details.
 	AccessLog *LoggingAccessLogObservation `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type SpecLoggingParameters struct {
 
-	// Access log configuration for a virtual node.
+	// Access log configuration for a virtual node. See access_log Block for details.
 	// +kubebuilder:validation:Optional
 	AccessLog *LoggingAccessLogParameters `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type SpecServiceDiscoveryInitParameters struct {
 
-	// Any AWS Cloud Map information for the virtual node.
+	// Any AWS Cloud Map information for the virtual node. See aws_cloud_map Block for details.
 	AwsCloudMap *AwsCloudMapInitParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
 
-	// DNS service name for the virtual node.
+	// DNS service name for the virtual node. See dns Block for details.
 	DNS *DNSInitParameters `json:"dns,omitempty" tf:"dns,omitempty"`
 }
 
 type SpecServiceDiscoveryObservation struct {
 
-	// Any AWS Cloud Map information for the virtual node.
+	// Any AWS Cloud Map information for the virtual node. See aws_cloud_map Block for details.
 	AwsCloudMap *AwsCloudMapObservation `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
 
-	// DNS service name for the virtual node.
+	// DNS service name for the virtual node. See dns Block for details.
 	DNS *DNSObservation `json:"dns,omitempty" tf:"dns,omitempty"`
 }
 
 type SpecServiceDiscoveryParameters struct {
 
-	// Any AWS Cloud Map information for the virtual node.
+	// Any AWS Cloud Map information for the virtual node. See aws_cloud_map Block for details.
 	// +kubebuilder:validation:Optional
 	AwsCloudMap *AwsCloudMapParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
 
-	// DNS service name for the virtual node.
+	// DNS service name for the virtual node. See dns Block for details.
 	// +kubebuilder:validation:Optional
 	DNS *DNSParameters `json:"dns,omitempty" tf:"dns,omitempty"`
 }
@@ -1638,7 +1632,7 @@ type TCPIdleInitParameters struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1647,7 +1641,7 @@ type TCPIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1657,7 +1651,7 @@ type TCPIdleParameters struct {
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -1813,10 +1807,10 @@ type TLSValidationTrustInitParameters struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *TrustAcmInitParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TLSValidationTrustFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TLSValidationTrustSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -1825,10 +1819,10 @@ type TLSValidationTrustObservation struct {
 	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
 	Acm *TrustAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
@@ -1838,11 +1832,11 @@ type TLSValidationTrustParameters struct {
 	// +kubebuilder:validation:Optional
 	Acm *TrustAcmParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *TLSValidationTrustFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *TLSValidationTrustSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -1868,106 +1862,106 @@ type TLSValidationTrustSdsParameters struct {
 
 type TimeoutGRPCInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *GRPCIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *GRPCPerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutGRPCObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *GRPCIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *GRPCPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutGRPCParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *GRPCIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *GRPCPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHTTPInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *HTTPIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *HTTPPerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHTTPObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *HTTPIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *HTTPPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHTTPParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *HTTPIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *HTTPPerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHttp2InitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *Http2IdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *Http2PerRequestInitParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHttp2Observation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *Http2IdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	PerRequest *Http2PerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHttp2Parameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *Http2IdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 
-	// Per request timeout.
+	// Per request timeout. See per_request Block for details.
 	// +kubebuilder:validation:Optional
 	PerRequest *Http2PerRequestParameters `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutTCPInitParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TCPIdleInitParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TimeoutTCPObservation struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	Idle *TCPIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TimeoutTCPParameters struct {
 
-	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle. See idle Block for details.
 	// +kubebuilder:validation:Optional
 	Idle *TCPIdleParameters `json:"idle,omitempty" tf:"idle,omitempty"`
 }
@@ -2128,59 +2122,59 @@ type VirtualNodeParameters struct {
 
 type VirtualNodeSpecInitParameters struct {
 
-	// Backends to which the virtual node is expected to send outbound traffic.
+	// Backends to which the virtual node is expected to send outbound traffic. See backend Block for details.
 	Backend []BackendInitParameters `json:"backend,omitempty" tf:"backend,omitempty"`
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	BackendDefaults *SpecBackendDefaultsInitParameters `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners from which the virtual node is expected to receive inbound traffic.
+	// Listeners from which the virtual node is expected to receive inbound traffic. See listener Block for details.
 	Listener []SpecListenerInitParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual node.
+	// Inbound and outbound access logging information for the virtual node. See logging Block for details.
 	Logging *SpecLoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Service discovery information for the virtual node.
+	// Service discovery information for the virtual node. See service_discovery Block for details.
 	ServiceDiscovery *SpecServiceDiscoveryInitParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualNodeSpecObservation struct {
 
-	// Backends to which the virtual node is expected to send outbound traffic.
+	// Backends to which the virtual node is expected to send outbound traffic. See backend Block for details.
 	Backend []BackendObservation `json:"backend,omitempty" tf:"backend,omitempty"`
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	BackendDefaults *SpecBackendDefaultsObservation `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners from which the virtual node is expected to receive inbound traffic.
+	// Listeners from which the virtual node is expected to receive inbound traffic. See listener Block for details.
 	Listener []SpecListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual node.
+	// Inbound and outbound access logging information for the virtual node. See logging Block for details.
 	Logging *SpecLoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Service discovery information for the virtual node.
+	// Service discovery information for the virtual node. See service_discovery Block for details.
 	ServiceDiscovery *SpecServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualNodeSpecParameters struct {
 
-	// Backends to which the virtual node is expected to send outbound traffic.
+	// Backends to which the virtual node is expected to send outbound traffic. See backend Block for details.
 	// +kubebuilder:validation:Optional
 	Backend []BackendParameters `json:"backend,omitempty" tf:"backend,omitempty"`
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	// +kubebuilder:validation:Optional
 	BackendDefaults *SpecBackendDefaultsParameters `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners from which the virtual node is expected to receive inbound traffic.
+	// Listeners from which the virtual node is expected to receive inbound traffic. See listener Block for details.
 	// +kubebuilder:validation:Optional
 	Listener []SpecListenerParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual node.
+	// Inbound and outbound access logging information for the virtual node. See logging Block for details.
 	// +kubebuilder:validation:Optional
 	Logging *SpecLoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Service discovery information for the virtual node.
+	// Service discovery information for the virtual node. See service_discovery Block for details.
 	// +kubebuilder:validation:Optional
 	ServiceDiscovery *SpecServiceDiscoveryParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }

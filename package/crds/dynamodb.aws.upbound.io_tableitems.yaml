@@ -381,6 +381,11 @@ spec:
                     description: Hash key to use for lookups and identification of
                       the item
                     type: string
+                  hashKeyValue:
+                    description: Canonical string representation of the hash key value.
+                      Binary values are base64-encoded; numbers and strings are taken
+                      verbatim.
+                    type: string
                   id:
                     type: string
                   item:
@@ -392,6 +397,10 @@ spec:
                   rangeKey:
                     description: Range key to use for lookups and identification of
                       the item. Required if there is range key defined in the table.
+                    type: string
+                  rangeKeyValue:
+                    description: Canonical string representation of the range key
+                      value, when the table has a range key. Same encoding as hash_key_value.
                     type: string
                   region:
                     description: |-

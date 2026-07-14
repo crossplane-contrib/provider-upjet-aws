@@ -34,7 +34,7 @@ spec:
       encryptionAtRestKmsKeyArnSelector:
         matchLabels:
           testing.upbound.io/example-name: kms
-    kafkaVersion: 3.6.0
+    kafkaVersion: 3.9.x
     numberOfBrokerNodes: 2
     openMonitoring:
       prometheus:
@@ -58,7 +58,7 @@ metadata:
 spec:
   forProvider:
     kafkaVersions:
-      - 3.6.0
+      - 3.9.x
     name: ${Rand.RFC1123Subdomain}
     region: us-east-2
     serverProperties: |

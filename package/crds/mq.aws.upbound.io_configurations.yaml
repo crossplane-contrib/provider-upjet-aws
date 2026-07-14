@@ -101,6 +101,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  skipDestroy:
+                    description: Default is false.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -146,6 +149,9 @@ spec:
                   name:
                     description: Name of the configuration.
                     type: string
+                  skipDestroy:
+                    description: Default is false.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -298,6 +304,9 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  skipDestroy:
+                    description: Default is false.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string

@@ -109,6 +109,7 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_cloudwatch_log_stream":                                ReplaceGroupWords("cloudwatchlogs", 2),
 	"aws_cloudwatch_log_subscription_filter":                   ReplaceGroupWords("cloudwatchlogs", 2),
 	"aws_cloudwatch_query_definition":                          ReplaceGroupWords("cloudwatchlogs", 2),
+	"aws_cloudwatch_log_account_policy":                        ReplaceGroupWords("cloudwatchlogs", 2),
 	"aws_codedeploy_app":                                       ReplaceGroupWords("deploy", 1),
 	"aws_codedeploy_deployment_config":                         ReplaceGroupWords("deploy", 1),
 	"aws_codedeploy_deployment_group":                          ReplaceGroupWords("deploy", 1),

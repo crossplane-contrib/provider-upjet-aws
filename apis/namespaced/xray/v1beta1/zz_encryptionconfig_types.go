@@ -16,7 +16,7 @@ import (
 
 type EncryptionConfigInitParameters struct {
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
@@ -29,7 +29,7 @@ type EncryptionConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -38,20 +38,20 @@ type EncryptionConfigObservation struct {
 	// Region name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigParameters struct {
 
-	// An AWS KMS customer master key (CMK) ARN.
+	// AWS KMS customer master key (CMK) ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -70,7 +70,7 @@ type EncryptionConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

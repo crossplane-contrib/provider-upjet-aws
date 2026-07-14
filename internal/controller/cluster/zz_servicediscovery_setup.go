@@ -46,3 +46,18 @@ func SetupGated_servicediscovery(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_servicediscovery registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_servicediscovery(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		httpnamespace.SetupWebhookWithManager,
+		privatednsnamespace.SetupWebhookWithManager,
+		publicdnsnamespace.SetupWebhookWithManager,
+		service.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

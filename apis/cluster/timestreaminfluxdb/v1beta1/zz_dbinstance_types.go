@@ -49,6 +49,10 @@ type DBInstanceInitParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+	// The maintenance schedule for the DB instance.
+	MaintenanceSchedule []DBInstanceMaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -148,6 +152,35 @@ type DBInstanceLogDeliveryConfigurationParameters struct {
 	S3Configuration *LogDeliveryConfigurationS3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
+type DBInstanceMaintenanceScheduleInitParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type DBInstanceMaintenanceScheduleObservation struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type DBInstanceMaintenanceScheduleParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// +kubebuilder:validation:Optional
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// +kubebuilder:validation:Optional
+	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
+}
+
 type DBInstanceObservation struct {
 
 	// Amount of storage in GiB (gibibytes). The minimum value is 20, the maximum value is 16384. This argument is updatable. The argument db_storage_type places restrictions on this argument's minimum value. The following is a list of db_storage_type values and the corresponding minimum value for allocated_storage: "InfluxIOIncludedT1": 20, "InfluxIOIncludedT2" and "InfluxIOIncludedT3": 400`.
@@ -204,6 +237,10 @@ type DBInstanceObservation struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket. This argument is updatable.
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+
+	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+	// The maintenance schedule for the DB instance.
+	MaintenanceSchedule []DBInstanceMaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
@@ -312,6 +349,11 @@ type DBInstanceParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration *DBInstanceLogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
+
+	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+	// The maintenance schedule for the DB instance.
+	// +kubebuilder:validation:Optional
+	MaintenanceSchedule []DBInstanceMaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the

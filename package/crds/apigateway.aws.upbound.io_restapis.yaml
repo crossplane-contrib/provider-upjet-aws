@@ -124,6 +124,12 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
@@ -289,6 +295,13 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -359,6 +372,12 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
@@ -518,6 +537,13 @@ spec:
                       If the argument value is provided and is different than the
                       OpenAPI value, the argument value will override the OpenAPI
                       value.
+                    type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -676,6 +702,12 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
@@ -782,6 +814,13 @@ spec:
                     type: string
                   rootResourceId:
                     description: Resource ID of the REST API's root
+                    type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -961,16 +1000,22 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
                     properties:
                       ipAddressType:
-                        description: 'The IP address types that can invoke an API
-                          (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow
-                          only IPv4 addresses to invoke an API, or use dualstack to
-                          allow both IPv4 and IPv6 addresses to invoke an API. For
-                          the PRIVATE endpoint type, only dualstack is supported.'
+                        description: 'IP address types that can invoke a REST API.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke an API, or use dualstack to allow both
+                          IPv4 and IPv6 addresses to invoke an API. For the PRIVATE
+                          endpoint type, only dualstack is supported.'
                         type: string
                       types:
                         description: 'List of endpoint types. This resource currently
@@ -1075,9 +1120,8 @@ spec:
                         type: object
                     type: object
                   failOnWarnings:
-                    description: Whether warnings while API Gateway is creating or
-                      updating the resource should return an error or not. Defaults
-                      to false
+                    description: Whether to return an error for warnings while API
+                      Gateway is creating or updating the resource. Defaults to false.
                     type: boolean
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
@@ -1110,7 +1154,7 @@ spec:
                   putRestApiMode:
                     description: Mode of the PutRestApi operation when importing an
                       OpenAPI specification via the body argument (create or update
-                      operation). Valid values are merge and overwrite. If unspecificed,
+                      operation). Valid values are merge and overwrite. If not configured,
                       defaults to overwrite (for backwards compatibility). This corresponds
                       to the x-amazon-apigateway-put-integration-method extension.
                       If the argument value is provided and is different than the
@@ -1121,6 +1165,13 @@ spec:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -1192,16 +1243,22 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
                     properties:
                       ipAddressType:
-                        description: 'The IP address types that can invoke an API
-                          (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow
-                          only IPv4 addresses to invoke an API, or use dualstack to
-                          allow both IPv4 and IPv6 addresses to invoke an API. For
-                          the PRIVATE endpoint type, only dualstack is supported.'
+                        description: 'IP address types that can invoke a REST API.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke an API, or use dualstack to allow both
+                          IPv4 and IPv6 addresses to invoke an API. For the PRIVATE
+                          endpoint type, only dualstack is supported.'
                         type: string
                       types:
                         description: 'List of endpoint types. This resource currently
@@ -1306,9 +1363,8 @@ spec:
                         type: object
                     type: object
                   failOnWarnings:
-                    description: Whether warnings while API Gateway is creating or
-                      updating the resource should return an error or not. Defaults
-                      to false
+                    description: Whether to return an error for warnings while API
+                      Gateway is creating or updating the resource. Defaults to false.
                     type: boolean
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
@@ -1341,12 +1397,19 @@ spec:
                   putRestApiMode:
                     description: Mode of the PutRestApi operation when importing an
                       OpenAPI specification via the body argument (create or update
-                      operation). Valid values are merge and overwrite. If unspecificed,
+                      operation). Valid values are merge and overwrite. If not configured,
                       defaults to overwrite (for backwards compatibility). This corresponds
                       to the x-amazon-apigateway-put-integration-method extension.
                       If the argument value is provided and is different than the
                       OpenAPI value, the argument value will override the OpenAPI
                       value.
+                    type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:
@@ -1505,16 +1568,22 @@ spec:
                       value is true and is different than the OpenAPI value, the argument
                       value will override the OpenAPI value.
                     type: boolean
+                  endpointAccessMode:
+                    description: Endpoint access mode for the REST API. Valid values
+                      are BASIC and STRICT. Only available for REST APIs that use
+                      a security_policy value beginning with SecurityPolicy_ and is
+                      required when one of those values is configured.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint configuration
                       including endpoint type. Defined below.
                     properties:
                       ipAddressType:
-                        description: 'The IP address types that can invoke an API
-                          (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow
-                          only IPv4 addresses to invoke an API, or use dualstack to
-                          allow both IPv4 and IPv6 addresses to invoke an API. For
-                          the PRIVATE endpoint type, only dualstack is supported.'
+                        description: 'IP address types that can invoke a REST API.
+                          Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4
+                          addresses to invoke an API, or use dualstack to allow both
+                          IPv4 and IPv6 addresses to invoke an API. For the PRIVATE
+                          endpoint type, only dualstack is supported.'
                         type: string
                       types:
                         description: 'List of endpoint types. This resource currently
@@ -1540,15 +1609,15 @@ spec:
                         x-kubernetes-list-type: set
                     type: object
                   executionArn:
-                    description: |-
-                      Execution ARN part to be used in lambda_permission's source_arn
-                      when allowing API Gateway to invoke a Lambda function,
-                      e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, method and resource path.
+                    description: Execution ARN part to be used in lambda_permission's
+                      source_arn when allowing API Gateway to invoke a Lambda function,
+                      e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j,
+                      which can be concatenated with allowed stage, method and resource
+                      path.
                     type: string
                   failOnWarnings:
-                    description: Whether warnings while API Gateway is creating or
-                      updating the resource should return an error or not. Defaults
-                      to false
+                    description: Whether to return an error for warnings while API
+                      Gateway is creating or updating the resource. Defaults to false.
                     type: boolean
                   id:
                     description: ID of the REST API
@@ -1593,7 +1662,7 @@ spec:
                   putRestApiMode:
                     description: Mode of the PutRestApi operation when importing an
                       OpenAPI specification via the body argument (create or update
-                      operation). Valid values are merge and overwrite. If unspecificed,
+                      operation). Valid values are merge and overwrite. If not configured,
                       defaults to overwrite (for backwards compatibility). This corresponds
                       to the x-amazon-apigateway-put-integration-method extension.
                       If the argument value is provided and is different than the
@@ -1607,6 +1676,13 @@ spec:
                     type: string
                   rootResourceId:
                     description: Resource ID of the REST API's root
+                    type: string
+                  securityPolicy:
+                    description: TLS version + cipher suite for the REST API's default
+                      execute-api endpoint. Must be configured for drift detection.
+                      When set to a value beginning with SecurityPolicy_, endpoint_access_mode
+                      must also be configured. For a list of valid security policies,
+                      see CreateRestApi in the Amazon API Gateway API Reference.
                     type: string
                   tags:
                     additionalProperties:

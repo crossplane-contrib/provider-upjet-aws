@@ -501,6 +501,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -1300,6 +1303,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    type: string
                   routeTableId:
                     description: The ID of the routing table.
                     type: string
@@ -1743,6 +1749,9 @@ spec:
                     type: string
                   networkInterfaceId:
                     description: Identifier of an EC2 network interface.
+                    type: string
+                  odbNetworkArn:
+                    description: The Amazon Resource Name (ARN) of an ODB network.
                     type: string
                   origin:
                     description: How the route was created - CreateRouteTable, CreateRoute

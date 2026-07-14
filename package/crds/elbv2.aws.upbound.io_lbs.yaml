@@ -228,6 +228,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and
@@ -789,6 +794,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and
@@ -1356,6 +1366,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and
@@ -1801,6 +1816,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and
@@ -2352,6 +2372,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and
@@ -2909,6 +2934,11 @@ spec:
                     description: Whether HTTP/2 is enabled in application load balancers.
                       Defaults to true.
                     type: boolean
+                  enablePrefixForIpv6SourceNat:
+                    description: 'Whether to use an IPv6 prefix from each subnet for
+                      source NAT. ip_address_type must be dualstack. Valid values:
+                      on, off.'
+                    type: string
                   enableTlsVersionAndCipherSuiteHeaders:
                     description: Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite),
                       which contain information about the negotiated TLS version and

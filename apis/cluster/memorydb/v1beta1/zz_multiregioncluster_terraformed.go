@@ -36,6 +36,8 @@ func (tr *MultiRegionCluster) GetObservation() (map[string]any, error) {
 
 // SetObservation for this MultiRegionCluster
 func (tr *MultiRegionCluster) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

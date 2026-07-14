@@ -73,3 +73,27 @@ func SetupGated_ses(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_ses registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_ses(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		activereceiptruleset.SetupWebhookWithManager,
+		configurationset.SetupWebhookWithManager,
+		domaindkim.SetupWebhookWithManager,
+		domainidentity.SetupWebhookWithManager,
+		domainmailfrom.SetupWebhookWithManager,
+		emailidentity.SetupWebhookWithManager,
+		eventdestination.SetupWebhookWithManager,
+		identitynotificationtopic.SetupWebhookWithManager,
+		identitypolicy.SetupWebhookWithManager,
+		receiptfilter.SetupWebhookWithManager,
+		receiptrule.SetupWebhookWithManager,
+		receiptruleset.SetupWebhookWithManager,
+		template.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

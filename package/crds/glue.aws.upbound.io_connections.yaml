@@ -90,6 +90,285 @@ spec:
                     - name
                     - namespace
                     type: object
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    items:
+                      properties:
+                        authenticationType:
+                          description: 'Type of authentication. Valid values: BASIC,
+                            CUSTOM, IAM, OAUTH2.'
+                          type: string
+                        basicAuthenticationCredentials:
+                          description: Basic authentication credentials. See basic_authentication_credentials
+                            below.
+                          items:
+                            properties:
+                              passwordSecretRef:
+                                description: Password for authentication.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              username:
+                                description: Username for authentication.
+                                type: string
+                            type: object
+                          type: array
+                        customAuthenticationCredentialsSecretRef:
+                          description: Map of custom authentication credentials.
+                          properties:
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - name
+                          - namespace
+                          type: object
+                        kmsKeyArn:
+                          description: ARN of the KMS key used for encryption.
+                          type: string
+                        oauth2Properties:
+                          description: OAuth2 properties. See oauth2_properties below.
+                          items:
+                            properties:
+                              authorizationCodeProperties:
+                                description: Authorization code properties. See authorization_code_properties
+                                  below.
+                                items:
+                                  properties:
+                                    authorizationCodeSecretRef:
+                                      description: Authorization code.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    redirectUri:
+                                      description: Redirect URI for OAuth2 flow.
+                                      type: string
+                                  type: object
+                                type: array
+                              oauth2ClientApplication:
+                                description: OAuth2 client application details. See
+                                  oauth2_client_application below.
+                                items:
+                                  properties:
+                                    awsManagedClientApplicationReference:
+                                      description: Reference to an AWS-managed client
+                                        application.
+                                      type: string
+                                    userManagedClientApplicationClientId:
+                                      description: Client ID for a user-managed client
+                                        application.
+                                      type: string
+                                  type: object
+                                type: array
+                              oauth2Credentials:
+                                description: OAuth2 credentials. See oauth2_credentials
+                                  below.
+                                items:
+                                  properties:
+                                    accessTokenSecretRef:
+                                      description: OAuth2 access token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    jwtTokenSecretRef:
+                                      description: JWT token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    refreshTokenSecretRef:
+                                      description: OAuth2 refresh token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    userManagedClientApplicationClientSecretSecretRef:
+                                      description: Client secret for user-managed
+                                        client application.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              oauth2GrantType:
+                                description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                                  CLIENT_CREDENTIALS, JWT_BEARER.'
+                                type: string
+                              tokenUrl:
+                                description: Token URL for OAuth2 authentication.
+                                type: string
+                              tokenUrlParametersMapSecretRef:
+                                description: Map of additional parameters for the
+                                  token URL.
+                                properties:
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - name
+                                - namespace
+                                type: object
+                            type: object
+                          type: array
+                        secretArn:
+                          description: ARN of the Secrets Manager secret containing
+                            credentials.
+                          type: string
+                        secretArnRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate secretArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        secretArnSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate secretArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   catalogId:
                     description: ID of the Data Catalog in which to create the connection.
                       If none is supplied, the AWS account ID is used by default.
@@ -403,6 +682,270 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    items:
+                      properties:
+                        authenticationType:
+                          description: 'Type of authentication. Valid values: BASIC,
+                            CUSTOM, IAM, OAUTH2.'
+                          type: string
+                        basicAuthenticationCredentials:
+                          description: Basic authentication credentials. See basic_authentication_credentials
+                            below.
+                          items:
+                            properties:
+                              passwordSecretRef:
+                                description: Password for authentication.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              username:
+                                description: Username for authentication.
+                                type: string
+                            required:
+                            - passwordSecretRef
+                            type: object
+                          type: array
+                        customAuthenticationCredentialsSecretRef:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        kmsKeyArn:
+                          description: ARN of the KMS key used for encryption.
+                          type: string
+                        oauth2Properties:
+                          description: OAuth2 properties. See oauth2_properties below.
+                          items:
+                            properties:
+                              authorizationCodeProperties:
+                                description: Authorization code properties. See authorization_code_properties
+                                  below.
+                                items:
+                                  properties:
+                                    authorizationCodeSecretRef:
+                                      description: Authorization code.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    redirectUri:
+                                      description: Redirect URI for OAuth2 flow.
+                                      type: string
+                                  required:
+                                  - authorizationCodeSecretRef
+                                  type: object
+                                type: array
+                              oauth2ClientApplication:
+                                description: OAuth2 client application details. See
+                                  oauth2_client_application below.
+                                items:
+                                  properties:
+                                    awsManagedClientApplicationReference:
+                                      description: Reference to an AWS-managed client
+                                        application.
+                                      type: string
+                                    userManagedClientApplicationClientId:
+                                      description: Client ID for a user-managed client
+                                        application.
+                                      type: string
+                                  type: object
+                                type: array
+                              oauth2Credentials:
+                                description: OAuth2 credentials. See oauth2_credentials
+                                  below.
+                                items:
+                                  properties:
+                                    accessTokenSecretRef:
+                                      description: OAuth2 access token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    jwtTokenSecretRef:
+                                      description: JWT token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    refreshTokenSecretRef:
+                                      description: OAuth2 refresh token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    userManagedClientApplicationClientSecretSecretRef:
+                                      description: Client secret for user-managed
+                                        client application.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              oauth2GrantType:
+                                description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                                  CLIENT_CREDENTIALS, JWT_BEARER.'
+                                type: string
+                              tokenUrl:
+                                description: Token URL for OAuth2 authentication.
+                                type: string
+                              tokenUrlParametersMapSecretRef:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                            type: object
+                          type: array
+                        secretArn:
+                          description: ARN of the Secrets Manager secret containing
+                            credentials.
+                          type: string
+                        secretArnRef:
+                          description: Reference to a Secret in secretsmanager to
+                            populate secretArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        secretArnSelector:
+                          description: Selector for a Secret in secretsmanager to
+                            populate secretArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   connectionPropertiesSecretRef:
                     additionalProperties:
                       type: string
@@ -771,6 +1314,148 @@ spec:
                   arn:
                     description: ARN of the Glue Connection.
                     type: string
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    items:
+                      properties:
+                        authenticationType:
+                          description: 'Type of authentication. Valid values: BASIC,
+                            CUSTOM, IAM, OAUTH2.'
+                          type: string
+                        basicAuthenticationCredentials:
+                          description: Basic authentication credentials. See basic_authentication_credentials
+                            below.
+                          items:
+                            properties:
+                              username:
+                                description: Username for authentication.
+                                type: string
+                            type: object
+                          type: array
+                        kmsKeyArn:
+                          description: ARN of the KMS key used for encryption.
+                          type: string
+                        oauth2Properties:
+                          description: OAuth2 properties. See oauth2_properties below.
+                          items:
+                            properties:
+                              authorizationCodeProperties:
+                                description: Authorization code properties. See authorization_code_properties
+                                  below.
+                                items:
+                                  properties:
+                                    redirectUri:
+                                      description: Redirect URI for OAuth2 flow.
+                                      type: string
+                                  type: object
+                                type: array
+                              oauth2ClientApplication:
+                                description: OAuth2 client application details. See
+                                  oauth2_client_application below.
+                                items:
+                                  properties:
+                                    awsManagedClientApplicationReference:
+                                      description: Reference to an AWS-managed client
+                                        application.
+                                      type: string
+                                    userManagedClientApplicationClientId:
+                                      description: Client ID for a user-managed client
+                                        application.
+                                      type: string
+                                  type: object
+                                type: array
+                              oauth2Credentials:
+                                description: OAuth2 credentials. See oauth2_credentials
+                                  below.
+                                items:
+                                  properties:
+                                    accessTokenSecretRef:
+                                      description: OAuth2 access token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    jwtTokenSecretRef:
+                                      description: JWT token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    refreshTokenSecretRef:
+                                      description: OAuth2 refresh token.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    userManagedClientApplicationClientSecretSecretRef:
+                                      description: Client secret for user-managed
+                                        client application.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              oauth2GrantType:
+                                description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                                  CLIENT_CREDENTIALS, JWT_BEARER.'
+                                type: string
+                              tokenUrl:
+                                description: Token URL for OAuth2 authentication.
+                                type: string
+                            type: object
+                          type: array
+                        secretArn:
+                          description: ARN of the Secrets Manager secret containing
+                            credentials.
+                          type: string
+                      type: object
+                    type: array
                   catalogId:
                     description: ID of the Data Catalog in which to create the connection.
                       If none is supplied, the AWS account ID is used by default.
@@ -911,8 +1596,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Connection is the Schema for the Connections API. Provides an
-          Glue Connection resource.
+        description: Connection is the Schema for the Connections API. Manages an
+          AWS Glue Connection.
         properties:
           apiVersion:
             description: |-
@@ -964,6 +1649,271 @@ spec:
                     - name
                     - namespace
                     type: object
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    properties:
+                      authenticationType:
+                        description: 'Type of authentication. Valid values: BASIC,
+                          CUSTOM, IAM, OAUTH2.'
+                        type: string
+                      basicAuthenticationCredentials:
+                        description: Basic authentication credentials. See basic_authentication_credentials
+                          below.
+                        properties:
+                          passwordSecretRef:
+                            description: Password for authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          username:
+                            description: Username for authentication.
+                            type: string
+                        type: object
+                      customAuthenticationCredentialsSecretRef:
+                        description: Map of custom authentication credentials.
+                        properties:
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - name
+                        - namespace
+                        type: object
+                      kmsKeyArn:
+                        description: ARN of the KMS key used for encryption.
+                        type: string
+                      oauth2Properties:
+                        description: OAuth2 properties. See oauth2_properties below.
+                        properties:
+                          authorizationCodeProperties:
+                            description: Authorization code properties. See authorization_code_properties
+                              below.
+                            properties:
+                              authorizationCodeSecretRef:
+                                description: Authorization code.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              redirectUri:
+                                description: Redirect URI for OAuth2 flow.
+                                type: string
+                            type: object
+                          oauth2ClientApplication:
+                            description: OAuth2 client application details. See oauth2_client_application
+                              below.
+                            properties:
+                              awsManagedClientApplicationReference:
+                                description: Reference to an AWS-managed client application.
+                                type: string
+                              userManagedClientApplicationClientId:
+                                description: Client ID for a user-managed client application.
+                                type: string
+                            type: object
+                          oauth2Credentials:
+                            description: OAuth2 credentials. See oauth2_credentials
+                              below.
+                            properties:
+                              accessTokenSecretRef:
+                                description: OAuth2 access token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              jwtTokenSecretRef:
+                                description: JWT token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              refreshTokenSecretRef:
+                                description: OAuth2 refresh token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              userManagedClientApplicationClientSecretSecretRef:
+                                description: Client secret for user-managed client
+                                  application.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            type: object
+                          oauth2GrantType:
+                            description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                              CLIENT_CREDENTIALS, JWT_BEARER.'
+                            type: string
+                          tokenUrl:
+                            description: Token URL for OAuth2 authentication.
+                            type: string
+                          tokenUrlParametersMapSecretRef:
+                            description: Map of additional parameters for the token
+                              URL.
+                            properties:
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - name
+                            - namespace
+                            type: object
+                        type: object
+                      secretArn:
+                        description: ARN of the Secrets Manager secret containing
+                          credentials.
+                        type: string
+                      secretArnRef:
+                        description: Reference to a Secret in secretsmanager to populate
+                          secretArn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      secretArnSelector:
+                        description: Selector for a Secret in secretsmanager to populate
+                          secretArn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   catalogId:
                     description: ID of the Data Catalog in which to create the connection.
                       If none is supplied, the AWS account ID is used by default.
@@ -985,7 +1935,10 @@ spec:
                   connectionType:
                     description: 'Type of the connection. Valid values: AZURECOSMOS,
                       AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
-                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some
+                      connection types require the SparkProperties property with a
+                      JSON document that contains the actual connection properties.
+                      For specific examples, refer to Example Usage.'
                     type: string
                   description:
                     description: Description of the connection.
@@ -999,12 +1952,12 @@ spec:
                   physicalConnectionRequirements:
                     description: Map of physical connection requirements, such as
                       VPC and SecurityGroup. See physical_connection_requirements
-                      Block for details.
+                      below.
                     properties:
                       availabilityZone:
-                        description: The availability zone of the connection. This
-                          field is redundant and implied by subnet_id, but is currently
-                          an api requirement.
+                        description: Availability zone of the connection. This field
+                          is redundant and implied by subnet_id, but is currently
+                          an API requirement.
                         type: string
                       availabilityZoneRef:
                         description: Reference to a Subnet in ec2 to populate availabilityZone.
@@ -1081,7 +2034,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIdList:
-                        description: The security group ID list used by the connection.
+                        description: Security group ID list used by the connection.
                         items:
                           type: string
                         type: array
@@ -1166,7 +2119,7 @@ spec:
                             type: object
                         type: object
                       subnetId:
-                        description: The subnet ID used by the connection.
+                        description: Subnet ID used by the connection.
                         type: string
                       subnetIdRef:
                         description: Reference to a Subnet in ec2 to populate subnetId.
@@ -1275,6 +2228,256 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    properties:
+                      authenticationType:
+                        description: 'Type of authentication. Valid values: BASIC,
+                          CUSTOM, IAM, OAUTH2.'
+                        type: string
+                      basicAuthenticationCredentials:
+                        description: Basic authentication credentials. See basic_authentication_credentials
+                          below.
+                        properties:
+                          passwordSecretRef:
+                            description: Password for authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          username:
+                            description: Username for authentication.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      customAuthenticationCredentialsSecretRef:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      kmsKeyArn:
+                        description: ARN of the KMS key used for encryption.
+                        type: string
+                      oauth2Properties:
+                        description: OAuth2 properties. See oauth2_properties below.
+                        properties:
+                          authorizationCodeProperties:
+                            description: Authorization code properties. See authorization_code_properties
+                              below.
+                            properties:
+                              authorizationCodeSecretRef:
+                                description: Authorization code.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              redirectUri:
+                                description: Redirect URI for OAuth2 flow.
+                                type: string
+                            required:
+                            - authorizationCodeSecretRef
+                            type: object
+                          oauth2ClientApplication:
+                            description: OAuth2 client application details. See oauth2_client_application
+                              below.
+                            properties:
+                              awsManagedClientApplicationReference:
+                                description: Reference to an AWS-managed client application.
+                                type: string
+                              userManagedClientApplicationClientId:
+                                description: Client ID for a user-managed client application.
+                                type: string
+                            type: object
+                          oauth2Credentials:
+                            description: OAuth2 credentials. See oauth2_credentials
+                              below.
+                            properties:
+                              accessTokenSecretRef:
+                                description: OAuth2 access token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              jwtTokenSecretRef:
+                                description: JWT token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              refreshTokenSecretRef:
+                                description: OAuth2 refresh token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              userManagedClientApplicationClientSecretSecretRef:
+                                description: Client secret for user-managed client
+                                  application.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            type: object
+                          oauth2GrantType:
+                            description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                              CLIENT_CREDENTIALS, JWT_BEARER.'
+                            type: string
+                          tokenUrl:
+                            description: Token URL for OAuth2 authentication.
+                            type: string
+                          tokenUrlParametersMapSecretRef:
+                            additionalProperties:
+                              type: string
+                            type: object
+                        type: object
+                      secretArn:
+                        description: ARN of the Secrets Manager secret containing
+                          credentials.
+                        type: string
+                      secretArnRef:
+                        description: Reference to a Secret in secretsmanager to populate
+                          secretArn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      secretArnSelector:
+                        description: Selector for a Secret in secretsmanager to populate
+                          secretArn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   connectionPropertiesSecretRef:
                     additionalProperties:
                       type: string
@@ -1282,7 +2485,10 @@ spec:
                   connectionType:
                     description: 'Type of the connection. Valid values: AZURECOSMOS,
                       AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
-                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some
+                      connection types require the SparkProperties property with a
+                      JSON document that contains the actual connection properties.
+                      For specific examples, refer to Example Usage.'
                     type: string
                   description:
                     description: Description of the connection.
@@ -1296,12 +2502,12 @@ spec:
                   physicalConnectionRequirements:
                     description: Map of physical connection requirements, such as
                       VPC and SecurityGroup. See physical_connection_requirements
-                      Block for details.
+                      below.
                     properties:
                       availabilityZone:
-                        description: The availability zone of the connection. This
-                          field is redundant and implied by subnet_id, but is currently
-                          an api requirement.
+                        description: Availability zone of the connection. This field
+                          is redundant and implied by subnet_id, but is currently
+                          an API requirement.
                         type: string
                       availabilityZoneRef:
                         description: Reference to a Subnet in ec2 to populate availabilityZone.
@@ -1378,7 +2584,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIdList:
-                        description: The security group ID list used by the connection.
+                        description: Security group ID list used by the connection.
                         items:
                           type: string
                         type: array
@@ -1463,7 +2669,7 @@ spec:
                             type: object
                         type: object
                       subnetId:
-                        description: The subnet ID used by the connection.
+                        description: Subnet ID used by the connection.
                         type: string
                       subnetIdRef:
                         description: Reference to a Subnet in ec2 to populate subnetId.
@@ -1641,6 +2847,134 @@ spec:
                   arn:
                     description: ARN of the Glue Connection.
                     type: string
+                  authenticationConfiguration:
+                    description: Configuration block for authentication options. See
+                      authentication_configuration below.
+                    properties:
+                      authenticationType:
+                        description: 'Type of authentication. Valid values: BASIC,
+                          CUSTOM, IAM, OAUTH2.'
+                        type: string
+                      basicAuthenticationCredentials:
+                        description: Basic authentication credentials. See basic_authentication_credentials
+                          below.
+                        properties:
+                          username:
+                            description: Username for authentication.
+                            type: string
+                        type: object
+                      kmsKeyArn:
+                        description: ARN of the KMS key used for encryption.
+                        type: string
+                      oauth2Properties:
+                        description: OAuth2 properties. See oauth2_properties below.
+                        properties:
+                          authorizationCodeProperties:
+                            description: Authorization code properties. See authorization_code_properties
+                              below.
+                            properties:
+                              redirectUri:
+                                description: Redirect URI for OAuth2 flow.
+                                type: string
+                            type: object
+                          oauth2ClientApplication:
+                            description: OAuth2 client application details. See oauth2_client_application
+                              below.
+                            properties:
+                              awsManagedClientApplicationReference:
+                                description: Reference to an AWS-managed client application.
+                                type: string
+                              userManagedClientApplicationClientId:
+                                description: Client ID for a user-managed client application.
+                                type: string
+                            type: object
+                          oauth2Credentials:
+                            description: OAuth2 credentials. See oauth2_credentials
+                              below.
+                            properties:
+                              accessTokenSecretRef:
+                                description: OAuth2 access token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              jwtTokenSecretRef:
+                                description: JWT token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              refreshTokenSecretRef:
+                                description: OAuth2 refresh token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              userManagedClientApplicationClientSecretSecretRef:
+                                description: Client secret for user-managed client
+                                  application.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            type: object
+                          oauth2GrantType:
+                            description: 'OAuth2 grant type. Valid values: AUTHORIZATION_CODE,
+                              CLIENT_CREDENTIALS, JWT_BEARER.'
+                            type: string
+                          tokenUrl:
+                            description: Token URL for OAuth2 authentication.
+                            type: string
+                        type: object
+                      secretArn:
+                        description: ARN of the Secrets Manager secret containing
+                          credentials.
+                        type: string
+                    type: object
                   catalogId:
                     description: ID of the Data Catalog in which to create the connection.
                       If none is supplied, the AWS account ID is used by default.
@@ -1648,7 +2982,10 @@ spec:
                   connectionType:
                     description: 'Type of the connection. Valid values: AZURECOSMOS,
                       AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE,
-                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
+                      MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some
+                      connection types require the SparkProperties property with a
+                      JSON document that contains the actual connection properties.
+                      For specific examples, refer to Example Usage.'
                     type: string
                   description:
                     description: Description of the connection.
@@ -1665,21 +3002,21 @@ spec:
                   physicalConnectionRequirements:
                     description: Map of physical connection requirements, such as
                       VPC and SecurityGroup. See physical_connection_requirements
-                      Block for details.
+                      below.
                     properties:
                       availabilityZone:
-                        description: The availability zone of the connection. This
-                          field is redundant and implied by subnet_id, but is currently
-                          an api requirement.
+                        description: Availability zone of the connection. This field
+                          is redundant and implied by subnet_id, but is currently
+                          an API requirement.
                         type: string
                       securityGroupIdList:
-                        description: The security group ID list used by the connection.
+                        description: Security group ID list used by the connection.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       subnetId:
-                        description: The subnet ID used by the connection.
+                        description: Subnet ID used by the connection.
                         type: string
                     type: object
                   region:
@@ -1696,9 +3033,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

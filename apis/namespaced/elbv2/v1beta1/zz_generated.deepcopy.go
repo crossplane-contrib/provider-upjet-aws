@@ -3600,6 +3600,11 @@ func (in *LBInitParameters) DeepCopyInto(out *LBInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrefixForIPv6SourceNAT != nil {
+		in, out := &in.EnablePrefixForIPv6SourceNAT, &out.EnablePrefixForIPv6SourceNAT
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableTLSVersionAndCipherSuiteHeaders != nil {
 		in, out := &in.EnableTLSVersionAndCipherSuiteHeaders, &out.EnableTLSVersionAndCipherSuiteHeaders
 		*out = new(bool)
@@ -5090,6 +5095,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrefixForIPv6SourceNAT != nil {
+		in, out := &in.EnablePrefixForIPv6SourceNAT, &out.EnablePrefixForIPv6SourceNAT
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableTLSVersionAndCipherSuiteHeaders != nil {
 		in, out := &in.EnableTLSVersionAndCipherSuiteHeaders, &out.EnableTLSVersionAndCipherSuiteHeaders
 		*out = new(bool)
@@ -5314,6 +5324,11 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 	if in.EnableHttp2 != nil {
 		in, out := &in.EnableHttp2, &out.EnableHttp2
 		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrefixForIPv6SourceNAT != nil {
+		in, out := &in.EnablePrefixForIPv6SourceNAT, &out.EnablePrefixForIPv6SourceNAT
+		*out = new(string)
 		**out = **in
 	}
 	if in.EnableTLSVersionAndCipherSuiteHeaders != nil {

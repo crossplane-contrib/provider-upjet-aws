@@ -151,6 +151,17 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      destinationDataSharing:
+                        description: |-
+                          Enables destination data sharing.
+                          See destination_data_sharing below.
+                        properties:
+                          destinationDataSharingType:
+                            description: |-
+                              Data sharing type.
+                              Only Organization is supported.
+                            type: string
+                        type: object
                       kmsKeyArn:
                         description: ARN of an encryption key for a destination in
                           Amazon S3.
@@ -350,6 +361,17 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      destinationDataSharing:
+                        description: |-
+                          Enables destination data sharing.
+                          See destination_data_sharing below.
+                        properties:
+                          destinationDataSharingType:
+                            description: |-
+                              Data sharing type.
+                              Only Organization is supported.
+                            type: string
+                        type: object
                       kmsKeyArn:
                         description: ARN of an encryption key for a destination in
                           Amazon S3.
@@ -445,6 +467,17 @@ spec:
                         description: Name of S3 bucket where the aggregated data is
                           stored.
                         type: string
+                      destinationDataSharing:
+                        description: |-
+                          Enables destination data sharing.
+                          See destination_data_sharing below.
+                        properties:
+                          destinationDataSharingType:
+                            description: |-
+                              Data sharing type.
+                              Only Organization is supported.
+                            type: string
+                        type: object
                       kmsKeyArn:
                         description: ARN of an encryption key for a destination in
                           Amazon S3.

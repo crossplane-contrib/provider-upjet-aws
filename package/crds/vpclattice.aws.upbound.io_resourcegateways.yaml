@@ -91,6 +91,12 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
+                    type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -373,6 +379,12 @@ spec:
                     type: number
                   name:
                     description: Name of the resource gateway.
+                    type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -748,6 +760,12 @@ spec:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
+                    type: string
+                  resourceConfigDnsResolution:
+                    description: Indicates how DNS is resolved for resource configurations
+                      associated to this resource gateway. Valid values are IN_VPC
+                      and PUBLIC. Defaults to PUBLIC. Changing this value will trigger
+                      a resource replacement.
                     type: string
                   securityGroupIds:
                     description: Security group IDs associated with the resource gateway.

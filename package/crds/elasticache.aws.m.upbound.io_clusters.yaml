@@ -86,7 +86,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached, redis and valkey.
+                      cluster. Valid values are memcached, redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -145,7 +145,7 @@ spec:
                   nodeType:
                     description: |-
                       The instance class used.
-                      See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+                      See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
                       See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
                       For Memcached, changing this value will re-create the resource.
                     type: string
@@ -583,9 +583,9 @@ spec:
                     x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Enable encryption in-transit. Supported with Memcached
-                      versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions
-                      3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache
-                      in-transit encryption documentation for more details.
+                      versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10
+                      and later, running in a VPC. See the ElastiCache in-transit
+                      encryption documentation for more details.
                     type: boolean
                 required:
                 - region
@@ -630,7 +630,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached, redis and valkey.
+                      cluster. Valid values are memcached, redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -689,7 +689,7 @@ spec:
                   nodeType:
                     description: |-
                       The instance class used.
-                      See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+                      See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
                       See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
                       For Memcached, changing this value will re-create the resource.
                     type: string
@@ -1122,9 +1122,9 @@ spec:
                     x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Enable encryption in-transit. Supported with Memcached
-                      versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions
-                      3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache
-                      in-transit encryption documentation for more details.
+                      versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10
+                      and later, running in a VPC. See the ElastiCache in-transit
+                      encryption documentation for more details.
                     type: boolean
                 type: object
               managementPolicies:
@@ -1255,7 +1255,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached, redis and valkey.
+                      cluster. Valid values are memcached, redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -1321,7 +1321,7 @@ spec:
                   nodeType:
                     description: |-
                       The instance class used.
-                      See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+                      See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
                       See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
                       For Memcached, changing this value will re-create the resource.
                     type: string
@@ -1436,9 +1436,9 @@ spec:
                     x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Enable encryption in-transit. Supported with Memcached
-                      versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions
-                      3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache
-                      in-transit encryption documentation for more details.
+                      versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10
+                      and later, running in a VPC. See the ElastiCache in-transit
+                      encryption documentation for more details.
                     type: boolean
                 type: object
               conditions:

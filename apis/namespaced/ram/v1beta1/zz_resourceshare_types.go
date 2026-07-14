@@ -14,6 +14,25 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type ResourceShareConfigurationInitParameters struct {
+
+	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
+}
+
+type ResourceShareConfigurationObservation struct {
+
+	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
+}
+
+type ResourceShareConfigurationParameters struct {
+
+	// Specifies whether consumer account retains access to resource share after leaving AWS organization.
+	// +kubebuilder:validation:Optional
+	RetainSharingOnAccountLeaveOrganization *bool `json:"retainSharingOnAccountLeaveOrganization,omitempty" tf:"retain_sharing_on_account_leave_organization,omitempty"`
+}
+
 type ResourceShareInitParameters struct {
 
 	// Indicates whether principals outside your organization can be associated with a resource share.
@@ -25,6 +44,9 @@ type ResourceShareInitParameters struct {
 	// Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
 	// +listType=set
 	PermissionArns []*string `json:"permissionArns,omitempty" tf:"permission_arns,omitempty"`
+
+	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	ResourceShareConfiguration *ResourceShareConfigurationInitParameters `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -52,6 +74,9 @@ type ResourceShareObservation struct {
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	ResourceShareConfiguration *ResourceShareConfigurationObservation `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -81,6 +106,10 @@ type ResourceShareParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// A block that specifies the configuration of the resource share. See resource_share_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	ResourceShareConfiguration *ResourceShareConfigurationParameters `json:"resourceShareConfiguration,omitempty" tf:"resource_share_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

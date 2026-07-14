@@ -15,19 +15,19 @@ import (
 
 type BucketInventoryDestinationInitParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *DestinationBucketInitParameters `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationObservation struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *DestinationBucketObservation `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +kubebuilder:validation:Optional
 	Bucket *DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
@@ -53,7 +53,7 @@ type BucketInventoryFilterParameters struct {
 
 type BucketInventoryInitParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -91,7 +91,7 @@ type BucketInventoryInitParameters struct {
 
 type BucketInventoryObservation struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Contains information about where to publish the inventory results (documented below).
@@ -125,7 +125,7 @@ type BucketInventoryObservation struct {
 
 type BucketInventoryParameters struct {
 
-	// Name of the source bucket that inventory lists the objects for.
+	// Name of the source bucket that inventory lists the objects for. Both general purpose and directory buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -179,7 +179,7 @@ type DestinationBucketInitParameters struct {
 	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
@@ -207,7 +207,7 @@ type DestinationBucketObservation struct {
 	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
@@ -226,7 +226,7 @@ type DestinationBucketParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Amazon S3 bucket ARN of the destination.
+	// Amazon S3 bucket ARN of the destination. Only general purpose buckets are supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

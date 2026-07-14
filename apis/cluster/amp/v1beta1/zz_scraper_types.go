@@ -73,7 +73,7 @@ type DestinationParameters struct {
 
 type EksInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the new scraper.
+	// The Amazon Resource Name (ARN) of the source EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -115,7 +115,7 @@ type EksInitParameters struct {
 
 type EksObservation struct {
 
-	// The Amazon Resource Name (ARN) of the new scraper.
+	// The Amazon Resource Name (ARN) of the source EKS cluster.
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
@@ -129,7 +129,7 @@ type EksObservation struct {
 
 type EksParameters struct {
 
-	// The Amazon Resource Name (ARN) of the new scraper.
+	// The Amazon Resource Name (ARN) of the source EKS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/eks/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -314,12 +314,18 @@ type SourceInitParameters struct {
 
 	// Configuration block for an EKS cluster source. See eks.
 	Eks []EksInitParameters `json:"eks,omitempty" tf:"eks,omitempty"`
+
+	// Configuration block for a VPC source. See vpc.
+	VPC []VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SourceObservation struct {
 
 	// Configuration block for an EKS cluster source. See eks.
 	Eks []EksObservation `json:"eks,omitempty" tf:"eks,omitempty"`
+
+	// Configuration block for a VPC source. See vpc.
+	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type SourceParameters struct {
@@ -327,6 +333,85 @@ type SourceParameters struct {
 	// Configuration block for an EKS cluster source. See eks.
 	// +kubebuilder:validation:Optional
 	Eks []EksParameters `json:"eks,omitempty" tf:"eks,omitempty"`
+
+	// Configuration block for a VPC source. See vpc.
+	// +kubebuilder:validation:Optional
+	VPC []VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
+}
+
+type VPCInitParameters struct {
+
+	// List of security group IDs for the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// List of subnet IDs. Must be in at least two different availability zones.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+}
+
+type VPCObservation struct {
+
+	// List of security group IDs for the VPC configuration.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// List of subnet IDs. Must be in at least two different availability zones.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type VPCParameters struct {
+
+	// List of security group IDs for the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// List of subnet IDs. Must be in at least two different availability zones.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ScraperSpec defines the desired state of Scraper

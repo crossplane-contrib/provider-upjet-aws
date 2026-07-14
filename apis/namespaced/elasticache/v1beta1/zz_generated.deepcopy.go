@@ -2460,6 +2460,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
+		*out = new(string)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -2904,6 +2909,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
+		*out = new(string)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)
@@ -3213,6 +3223,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.Durability != nil {
+		in, out := &in.Durability, &out.Durability
 		*out = new(string)
 		**out = **in
 	}
@@ -3577,6 +3592,11 @@ func (in *ServerlessCacheInitParameters) DeepCopyInto(out *ServerlessCacheInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
 		*out = make([]v1.NamespacedReference, len(*in))
@@ -3766,6 +3786,11 @@ func (in *ServerlessCacheObservation) DeepCopyInto(out *ServerlessCacheObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReaderEndpoint != nil {
 		in, out := &in.ReaderEndpoint, &out.ReaderEndpoint
 		*out = make([]ReaderEndpointObservation, len(*in))
@@ -3912,6 +3937,11 @@ func (in *ServerlessCacheParameters) DeepCopyInto(out *ServerlessCacheParameters
 	}
 	if in.MajorEngineVersion != nil {
 		in, out := &in.MajorEngineVersion, &out.MajorEngineVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -4706,6 +4736,16 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
+	if in.PasswordsWoSecretRef != nil {
+		in, out := &in.PasswordsWoSecretRef, &out.PasswordsWoSecretRef
+		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -4804,6 +4844,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -4889,6 +4934,16 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 			*out = make([]v1.LocalSecretKeySelector, len(*in))
 			copy(*out, *in)
 		}
+	}
+	if in.PasswordsWoSecretRef != nil {
+		in, out := &in.PasswordsWoSecretRef, &out.PasswordsWoSecretRef
+		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordsWoVersion != nil {
+		in, out := &in.PasswordsWoVersion, &out.PasswordsWoVersion
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

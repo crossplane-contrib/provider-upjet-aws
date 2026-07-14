@@ -3726,8 +3726,8 @@ spec:
                           as CLOB.
                         type: boolean
                       mapLongVarcharAs:
-                        description: Optional When true, DMS migrates LONG values
-                          as VARCHAR.
+                        description: Specifies how DMS maps LONG VARCHAR values. Valid
+                          values are wstring, clob, and nclob.
                         type: string
                       maxFileSize:
                         description: Specifies the maximum size (in KB) of any .csv
@@ -4726,8 +4726,8 @@ spec:
                           as CLOB.
                         type: boolean
                       mapLongVarcharAs:
-                        description: Optional When true, DMS migrates LONG values
-                          as VARCHAR.
+                        description: Specifies how DMS maps LONG VARCHAR values. Valid
+                          values are wstring, clob, and nclob.
                         type: string
                       maxFileSize:
                         description: Specifies the maximum size (in KB) of any .csv
@@ -5645,8 +5645,8 @@ spec:
                           as CLOB.
                         type: boolean
                       mapLongVarcharAs:
-                        description: Optional When true, DMS migrates LONG values
-                          as VARCHAR.
+                        description: Specifies how DMS maps LONG VARCHAR values. Valid
+                          values are wstring, clob, and nclob.
                         type: string
                       maxFileSize:
                         description: Specifies the maximum size (in KB) of any .csv

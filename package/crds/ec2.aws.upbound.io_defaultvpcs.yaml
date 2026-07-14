@@ -93,12 +93,14 @@ spec:
                   ipv6CidrBlockNetworkBorderGroup:
                     type: string
                   ipv6IpamPoolId:
+                    description: (String) VPC ID.
                     type: string
                   ipv6NetmaskLength:
                     type: number
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      (String) AWS Region for this resource.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -141,6 +143,7 @@ spec:
                   ipv6CidrBlockNetworkBorderGroup:
                     type: string
                   ipv6IpamPoolId:
+                    description: (String) VPC ID.
                     type: string
                   ipv6NetmaskLength:
                     type: number
@@ -250,12 +253,16 @@ spec:
                     description: and instance_tenancy arguments become computed attributes
                     type: string
                   defaultNetworkAclId:
+                    description: (String) VPC ID.
                     type: string
                   defaultRouteTableId:
+                    description: (String) VPC ID.
                     type: string
                   defaultSecurityGroupId:
+                    description: (String) VPC ID.
                     type: string
                   dhcpOptionsId:
+                    description: (String) VPC ID.
                     type: string
                   enableDnsHostnames:
                     description: is true
@@ -271,12 +278,14 @@ spec:
                       VPC. Default: false'
                     type: boolean
                   id:
+                    description: (String) VPC ID.
                     type: string
                   instanceTenancy:
                     description: The allowed tenancy of instances launched into the
                       VPC
                     type: string
                   ipv6AssociationId:
+                    description: (String) VPC ID.
                     type: string
                   ipv6CidrBlock:
                     description: and instance_tenancy arguments become computed attributes
@@ -284,16 +293,20 @@ spec:
                   ipv6CidrBlockNetworkBorderGroup:
                     type: string
                   ipv6IpamPoolId:
+                    description: (String) VPC ID.
                     type: string
                   ipv6NetmaskLength:
                     type: number
                   mainRouteTableId:
+                    description: (String) VPC ID.
                     type: string
                   ownerId:
+                    description: (String) VPC ID.
                     type: string
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      (String) AWS Region for this resource.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:

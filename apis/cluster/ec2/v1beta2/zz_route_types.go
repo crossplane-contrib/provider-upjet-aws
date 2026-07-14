@@ -91,6 +91,9 @@ type RouteInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// The Amazon Resource Name (ARN) of an ODB network.
+	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
+
 	// The ID of the routing table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
@@ -180,6 +183,9 @@ type RouteObservation struct {
 
 	// Identifier of an EC2 network interface.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of an ODB network.
+	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 
 	// How the route was created - CreateRouteTable, CreateRoute or EnableVgwRoutePropagation.
 	Origin *string `json:"origin,omitempty" tf:"origin,omitempty"`
@@ -291,6 +297,10 @@ type RouteParameters struct {
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of an ODB network.
+	// +kubebuilder:validation:Optional
+	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

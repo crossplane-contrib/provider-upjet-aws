@@ -173,8 +173,8 @@ spec:
                       row groups. Default is true.
                     type: boolean
                   encodingType:
-                    description: Type of encoding to use. Value values are rle_dictionary,
-                      plain, and plain_dictionary. (AWS default is rle_dictionary.)
+                    description: Type of encoding to use. Value values are rle-dictionary,
+                      plain, and plain-dictionary. (AWS default is rle-dictionary.)
                     type: string
                   encryptionMode:
                     description: Server-side encryption mode that you want to encrypt
@@ -654,8 +654,8 @@ spec:
                       row groups. Default is true.
                     type: boolean
                   encodingType:
-                    description: Type of encoding to use. Value values are rle_dictionary,
-                      plain, and plain_dictionary. (AWS default is rle_dictionary.)
+                    description: Type of encoding to use. Value values are rle-dictionary,
+                      plain, and plain-dictionary. (AWS default is rle-dictionary.)
                     type: string
                   encryptionMode:
                     description: Server-side encryption mode that you want to encrypt
@@ -1187,8 +1187,8 @@ spec:
                       row groups. Default is true.
                     type: boolean
                   encodingType:
-                    description: Type of encoding to use. Value values are rle_dictionary,
-                      plain, and plain_dictionary. (AWS default is rle_dictionary.)
+                    description: Type of encoding to use. Value values are rle-dictionary,
+                      plain, and plain-dictionary. (AWS default is rle-dictionary.)
                     type: string
                   encryptionMode:
                     description: Server-side encryption mode that you want to encrypt

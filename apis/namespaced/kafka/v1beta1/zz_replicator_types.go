@@ -137,6 +137,25 @@ type KafkaClusterParameters struct {
 	VPCConfig *VPCConfigParameters `json:"vpcConfig" tf:"vpc_config,omitempty"`
 }
 
+type LogDeliveryInitParameters struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	ReplicatorLogDelivery *ReplicatorLogDeliveryInitParameters `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
+type LogDeliveryObservation struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	ReplicatorLogDelivery *ReplicatorLogDeliveryObservation `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
+type LogDeliveryParameters struct {
+
+	// Configuration block for replicator log delivery. Detailed below.
+	// +kubebuilder:validation:Optional
+	ReplicatorLogDelivery *ReplicatorLogDeliveryParameters `json:"replicatorLogDelivery,omitempty" tf:"replicator_log_delivery,omitempty"`
+}
+
 type ReplicationInfoListInitParameters struct {
 
 	// Configuration relating to consumer group replication.
@@ -248,6 +267,9 @@ type ReplicatorInitParameters struct {
 	// A list of Kafka clusters which are targets of the replicator.
 	KafkaCluster []KafkaClusterInitParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
 
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	LogDelivery *LogDeliveryInitParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
+
 	// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
 	ReplicationInfoList *ReplicationInfoListInitParameters `json:"replicationInfoList,omitempty" tf:"replication_info_list,omitempty"`
 
@@ -272,6 +294,142 @@ type ReplicatorInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ReplicatorLogDeliveryCloudwatchLogsInitParameters struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryCloudwatchLogsObservation struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryCloudwatchLogsParameters struct {
+
+	// Boolean whether to enable log delivery to CloudWatch Logs.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Name of CloudWatch Logs log group. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseInitParameters struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseObservation struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryFirehoseParameters struct {
+
+	// Name of the Firehose delivery stream. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Boolean whether to enable log delivery to Firehose.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+}
+
+type ReplicatorLogDeliveryInitParameters struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	Firehose *ReplicatorLogDeliveryFirehoseInitParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	S3 *ReplicatorLogDeliveryS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryObservation struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	Firehose *ReplicatorLogDeliveryFirehoseObservation `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	S3 *ReplicatorLogDeliveryS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryParameters struct {
+
+	// Configuration block for replicator log delivery to Amazon CloudWatch Logs. Detailed below.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogs *ReplicatorLogDeliveryCloudwatchLogsParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon Data Firehose. Detailed below.
+	// +kubebuilder:validation:Optional
+	Firehose *ReplicatorLogDeliveryFirehoseParameters `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	// Configuration block for replicator log delivery to Amazon S3. Detailed below.
+	// +kubebuilder:validation:Optional
+	S3 *ReplicatorLogDeliveryS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3InitParameters struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3Observation struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ReplicatorLogDeliveryS3Parameters struct {
+
+	// Name of the S3 bucket. Required if enabled is true. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean whether to enable log delivery to S3.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Prefix to use when storing replicator logs in S3. If enabled is false, this value must not be set.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type ReplicatorObservation struct {
 
 	// ARN of the Replicator.
@@ -286,6 +444,9 @@ type ReplicatorObservation struct {
 
 	// A list of Kafka clusters which are targets of the replicator.
 	KafkaCluster []KafkaClusterObservation `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
+
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	LogDelivery *LogDeliveryObservation `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -318,6 +479,10 @@ type ReplicatorParameters struct {
 	// A list of Kafka clusters which are targets of the replicator.
 	// +kubebuilder:validation:Optional
 	KafkaCluster []KafkaClusterParameters `json:"kafkaCluster,omitempty" tf:"kafka_cluster,omitempty"`
+
+	// Configuration block for delivering replicator logs to customer destinations. Detailed below.
+	// +kubebuilder:validation:Optional
+	LogDelivery *LogDeliveryParameters `json:"logDelivery,omitempty" tf:"log_delivery,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

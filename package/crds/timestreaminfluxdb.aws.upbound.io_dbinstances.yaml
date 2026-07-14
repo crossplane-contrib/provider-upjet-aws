@@ -204,6 +204,24 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: Preferred maintenance window in the format
+                            ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed,
+                            Thu, Fri, Sat, or Sun. Provide an empty string to let
+                            the system choose a window.
+                          type: string
+                        timezone:
+                          description: IANA timezone identifier for the maintenance
+                            window. For example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -600,6 +618,24 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: Preferred maintenance window in the format
+                            ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed,
+                            Thu, Fri, Sat, or Sun. Provide an empty string to let
+                            the system choose a window.
+                          type: string
+                        timezone:
+                          description: IANA timezone identifier for the maintenance
+                            window. For example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -1047,6 +1083,24 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
+                      The maintenance schedule for the DB instance.
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: Preferred maintenance window in the format
+                            ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed,
+                            Thu, Fri, Sat, or Sun. Provide an empty string to let
+                            the system choose a window.
+                          type: string
+                        timezone:
+                          description: IANA timezone identifier for the maintenance
+                            window. For example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.

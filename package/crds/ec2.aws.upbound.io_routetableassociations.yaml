@@ -664,7 +664,7 @@ spec:
                       with subnet_id.
                     type: string
                   id:
-                    description: The ID of the association
+                    description: ID of the association
                     type: string
                   region:
                     description: |-

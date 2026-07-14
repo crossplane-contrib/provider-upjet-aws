@@ -76,3 +76,28 @@ func SetupGated_vpclattice(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_vpclattice registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_vpclattice(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		accesslogsubscription.SetupWebhookWithManager,
+		authpolicy.SetupWebhookWithManager,
+		listener.SetupWebhookWithManager,
+		listenerrule.SetupWebhookWithManager,
+		resourceconfiguration.SetupWebhookWithManager,
+		resourcegateway.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
+		service.SetupWebhookWithManager,
+		servicenetwork.SetupWebhookWithManager,
+		servicenetworkresourceassociation.SetupWebhookWithManager,
+		servicenetworkserviceassociation.SetupWebhookWithManager,
+		servicenetworkvpcassociation.SetupWebhookWithManager,
+		targetgroup.SetupWebhookWithManager,
+		targetgroupattachment.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}
