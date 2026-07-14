@@ -18,19 +18,31 @@ type ResourcePolicyInitParameters struct {
 
 	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+
+	// ARN of the CloudWatch Logs resource to which the resource policy is attached. Exactly one of policy_name or resource_arn must be specified and this argument is required for resource-scoped policies. Only one policy can be attached per log group resource ARN.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type ResourcePolicyObservation struct {
 
-	// The name of the CloudWatch log resource policy
+	// The name of the CloudWatch log resource policy when resource_arn is not specified, or the ARN of the CloudWatch log group when resource_arn is specified.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
+	// Scope of the resource policy (ACCOUNT or RESOURCE).
+	PolicyScope *string `json:"policyScope,omitempty" tf:"policy_scope,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// ARN of the CloudWatch Logs resource to which the resource policy is attached. Exactly one of policy_name or resource_arn must be specified and this argument is required for resource-scoped policies. Only one policy can be attached per log group resource ARN.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Revision ID of the resource policy. Only populated for resource-scoped policies.
+	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 }
 
 type ResourcePolicyParameters struct {
@@ -43,6 +55,10 @@ type ResourcePolicyParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// ARN of the CloudWatch Logs resource to which the resource policy is attached. Exactly one of policy_name or resource_arn must be specified and this argument is required for resource-scoped policies. Only one policy can be attached per log group resource ARN.
+	// +kubebuilder:validation:Optional
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 // ResourcePolicySpec defines the desired state of ResourcePolicy

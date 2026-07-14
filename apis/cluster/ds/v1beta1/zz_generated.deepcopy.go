@@ -494,6 +494,11 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableDirectoryDataAccess != nil {
+		in, out := &in.EnableDirectoryDataAccess, &out.EnableDirectoryDataAccess
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnableSso != nil {
 		in, out := &in.EnableSso, &out.EnableSso
 		*out = new(bool)
@@ -633,6 +638,11 @@ func (in *DirectoryObservation) DeepCopyInto(out *DirectoryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnableDirectoryDataAccess != nil {
+		in, out := &in.EnableDirectoryDataAccess, &out.EnableDirectoryDataAccess
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnableSso != nil {
 		in, out := &in.EnableSso, &out.EnableSso
 		*out = new(bool)
@@ -752,6 +762,11 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 	if in.Edition != nil {
 		in, out := &in.Edition, &out.Edition
 		*out = new(string)
+		**out = **in
+	}
+	if in.EnableDirectoryDataAccess != nil {
+		in, out := &in.EnableDirectoryDataAccess, &out.EnableDirectoryDataAccess
+		*out = new(bool)
 		**out = **in
 	}
 	if in.EnableSso != nil {

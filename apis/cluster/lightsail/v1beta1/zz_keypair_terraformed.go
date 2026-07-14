@@ -21,7 +21,7 @@ func (mg *KeyPair) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this KeyPair
 func (tr *KeyPair) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"private_key": "status.atProvider.privateKey"}
 }
 
 // GetObservation of this KeyPair
@@ -36,6 +36,8 @@ func (tr *KeyPair) GetObservation() (map[string]any, error) {
 
 // SetObservation for this KeyPair
 func (tr *KeyPair) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

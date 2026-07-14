@@ -46,3 +46,18 @@ func SetupGated_medialive(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_medialive registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_medialive(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		channel.SetupWebhookWithManager,
+		input.SetupWebhookWithManager,
+		inputsecuritygroup.SetupWebhookWithManager,
+		multiplex.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -36,8 +36,11 @@ type AddonInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
+	// Custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
+
+	// Namespace configuration for the add-on. See namespace_config below for details.
+	NamespaceConfig *NamespaceConfigInitParameters `json:"namespaceConfig,omitempty" tf:"namespace_config,omitempty"`
 
 	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
 	PodIdentityAssociation []PodIdentityAssociationInitParameters `json:"podIdentityAssociation,omitempty" tf:"pod_identity_association,omitempty"`
@@ -90,7 +93,7 @@ type AddonObservation struct {
 	// Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
+	// Custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
 
 	// Date and time in RFC3339 format that the EKS add-on was created.
@@ -101,6 +104,9 @@ type AddonObservation struct {
 
 	// Date and time in RFC3339 format that the EKS add-on was updated.
 	ModifiedAt *string `json:"modifiedAt,omitempty" tf:"modified_at,omitempty"`
+
+	// Namespace configuration for the add-on. See namespace_config below for details.
+	NamespaceConfig *NamespaceConfigObservation `json:"namespaceConfig,omitempty" tf:"namespace_config,omitempty"`
 
 	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
 	PodIdentityAssociation []PodIdentityAssociationObservation `json:"podIdentityAssociation,omitempty" tf:"pod_identity_association,omitempty"`
@@ -160,9 +166,13 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
+	// Custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	// +kubebuilder:validation:Optional
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
+
+	// Namespace configuration for the add-on. See namespace_config below for details.
+	// +kubebuilder:validation:Optional
+	NamespaceConfig *NamespaceConfigParameters `json:"namespaceConfig,omitempty" tf:"namespace_config,omitempty"`
 
 	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
 	// +kubebuilder:validation:Optional
@@ -208,6 +218,25 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type NamespaceConfigInitParameters struct {
+
+	// Name of the Kubernetes namespace to install the add-on in. Once you install an add-on in a specific namespace, you must remove and re-create the add-on to change its namespace. For more details see the Custom namespace for add-ons.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type NamespaceConfigObservation struct {
+
+	// Name of the Kubernetes namespace to install the add-on in. Once you install an add-on in a specific namespace, you must remove and re-create the add-on to change its namespace. For more details see the Custom namespace for add-ons.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type NamespaceConfigParameters struct {
+
+	// Name of the Kubernetes namespace to install the add-on in. Once you install an add-on in a specific namespace, you must remove and re-create the add-on to change its namespace. For more details see the Custom namespace for add-ons.
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type PodIdentityAssociationInitParameters struct {

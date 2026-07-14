@@ -17,5 +17,3 @@ spec:
     capacityBlockOfferingId: ${data.aws_ec2_capacity_block_offering.test.capacity_block_offering_id}
     instancePlatform: Linux/UNIX
     region: us-west-1
-    tags:
-      Environment: dev

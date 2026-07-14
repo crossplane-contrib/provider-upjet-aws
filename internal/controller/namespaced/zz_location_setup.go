@@ -49,3 +49,19 @@ func SetupGated_location(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_location registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_location(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		geofencecollection.SetupWebhookWithManager,
+		placeindex.SetupWebhookWithManager,
+		routecalculator.SetupWebhookWithManager,
+		tracker.SetupWebhookWithManager,
+		trackerassociation.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

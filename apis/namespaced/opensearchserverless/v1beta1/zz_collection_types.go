@@ -16,15 +16,22 @@ import (
 
 type CollectionInitParameters struct {
 
+	// Name of the collection group to associate with this collection.
+	// Name of the collection group to associate with this collection.
+	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
 	// Description of the collection.
 	// Description of the collection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block for direct collection encryption settings. See encryption_config below for details.
+	EncryptionConfig []EncryptionConfigInitParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Name of the collection.
 	// Name of the collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
 	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
 
@@ -35,6 +42,9 @@ type CollectionInitParameters struct {
 	// Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
 	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
+	VectorOptions []VectorOptionsInitParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
 }
 
 type CollectionObservation struct {
@@ -46,6 +56,10 @@ type CollectionObservation struct {
 	// Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
 
+	// Name of the collection group to associate with this collection.
+	// Name of the collection group to associate with this collection.
+	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
 	// Collection-specific endpoint used to access OpenSearch Dashboards.
 	// Collection-specific endpoint used to access OpenSearch Dashboards.
 	DashboardEndpoint *string `json:"dashboardEndpoint,omitempty" tf:"dashboard_endpoint,omitempty"`
@@ -54,10 +68,13 @@ type CollectionObservation struct {
 	// Description of the collection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configuration block for direct collection encryption settings. See encryption_config below for details.
+	EncryptionConfig []EncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+
 	// Unique identifier for the collection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the Amazon Web Services KMS key used to encrypt the collection.
+	// ARN of the Amazon Web Services KMS key used to encrypt the collection.
 	// The ARN of the Amazon Web Services KMS key used to encrypt the collection.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -69,7 +86,7 @@ type CollectionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
 	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
 
@@ -77,20 +94,33 @@ type CollectionObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of collection. One of SEARCH, TIMESERIES, or VECTORSEARCH. Defaults to TIMESERIES.
 	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
+	VectorOptions []VectorOptionsObservation `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
 }
 
 type CollectionParameters struct {
+
+	// Name of the collection group to associate with this collection.
+	// Name of the collection group to associate with this collection.
+	// +kubebuilder:validation:Optional
+	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
 
 	// Description of the collection.
 	// Description of the collection.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block for direct collection encryption settings. See encryption_config below for details.
+	// +kubebuilder:validation:Optional
+	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Name of the collection.
 	// Name of the collection.
@@ -102,7 +132,7 @@ type CollectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Indicates whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
+	// Whether standby replicas should be used for a collection. One of ENABLED or DISABLED. Defaults to ENABLED.
 	// Indicates whether standby replicas should be used for a collection. One of `ENABLED` or `DISABLED`. Defaults to `ENABLED`.
 	// +kubebuilder:validation:Optional
 	StandbyReplicas *string `json:"standbyReplicas,omitempty" tf:"standby_replicas,omitempty"`
@@ -116,6 +146,78 @@ type CollectionParameters struct {
 	// Type of collection. One of `SEARCH`, `TIMESERIES`, or `VECTORSEARCH`. Defaults to `TIMESERIES`.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
+	// +kubebuilder:validation:Optional
+	VectorOptions []VectorOptionsParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
+}
+
+type EncryptionConfigInitParameters struct {
+
+	// Whether to use an AWS owned key for collection encryption.
+	AwsOwnedKey *bool `json:"awsOwnedKey,omitempty" tf:"aws_owned_key"`
+
+	// ARN of the AWS KMS key to use for collection encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+}
+
+type EncryptionConfigObservation struct {
+
+	// Whether to use an AWS owned key for collection encryption.
+	AwsOwnedKey *bool `json:"awsOwnedKey,omitempty" tf:"aws_owned_key,omitempty"`
+
+	// ARN of the AWS KMS key to use for collection encryption.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+}
+
+type EncryptionConfigParameters struct {
+
+	// Whether to use an AWS owned key for collection encryption.
+	// +kubebuilder:validation:Optional
+	AwsOwnedKey *bool `json:"awsOwnedKey,omitempty" tf:"aws_owned_key"`
+
+	// ARN of the AWS KMS key to use for collection encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+}
+
+type VectorOptionsInitParameters struct {
+
+	// Status of serverless vector acceleration for the collection. One of ENABLED, DISABLED, or ALLOWED.
+	ServerlessVectorAcceleration *string `json:"serverlessVectorAcceleration,omitempty" tf:"serverless_vector_acceleration"`
+}
+
+type VectorOptionsObservation struct {
+
+	// Status of serverless vector acceleration for the collection. One of ENABLED, DISABLED, or ALLOWED.
+	ServerlessVectorAcceleration *string `json:"serverlessVectorAcceleration,omitempty" tf:"serverless_vector_acceleration,omitempty"`
+}
+
+type VectorOptionsParameters struct {
+
+	// Status of serverless vector acceleration for the collection. One of ENABLED, DISABLED, or ALLOWED.
+	// +kubebuilder:validation:Optional
+	ServerlessVectorAcceleration *string `json:"serverlessVectorAcceleration,omitempty" tf:"serverless_vector_acceleration"`
 }
 
 // CollectionSpec defines the desired state of Collection
@@ -145,7 +247,7 @@ type CollectionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Collection is the Schema for the Collections API.
+// Collection is the Schema for the Collections API. Manages an AWS OpenSearch Serverless Collection.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

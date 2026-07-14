@@ -417,7 +417,7 @@ type InstancesObservation struct {
 	// URL of the ActiveMQ Web Console or the RabbitMQ Management UI depending on engine_type.
 	ConsoleURL *string `json:"consoleUrl,omitempty" tf:"console_url,omitempty"`
 
-	// Broker's wire-level protocol endpoints in the following order & format referenceable e.g., as instances.0.endpoints.0 (SSL):
+	// Broker's wire-level protocol endpoints referenceable e.g., as instances.0.endpoints.0. Known endpoints are returned in the deterministic order below, based on protocol prefix and port number; any additional endpoint types introduced in the future are appended afterward in the order returned by the API.
 	Endpoints []*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// IP Address of the broker.
@@ -710,7 +710,6 @@ type Broker struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineType) || (has(self.initProvider) && has(self.initProvider.engineType))",message="spec.forProvider.engineType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineVersion) || (has(self.initProvider) && has(self.initProvider.engineVersion))",message="spec.forProvider.engineVersion is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostInstanceType) || (has(self.initProvider) && has(self.initProvider.hostInstanceType))",message="spec.forProvider.hostInstanceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.user) || (has(self.initProvider) && has(self.initProvider.user))",message="spec.forProvider.user is a required parameter"
 	Spec   BrokerSpec   `json:"spec"`
 	Status BrokerStatus `json:"status,omitempty"`
 }

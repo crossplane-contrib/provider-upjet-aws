@@ -325,6 +325,55 @@ type RuntimePlatformParameters struct {
 	OperatingSystemFamily *string `json:"operatingSystemFamily,omitempty" tf:"operating_system_family,omitempty"`
 }
 
+type S3FilesVolumeConfigurationInitParameters struct {
+
+	// Full ARN of the S3 Files access point to use. If configured, root_directory must either be omitted or set to "/".
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Full ARN of the S3 Files file system to mount.
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
+
+	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
+}
+
+type S3FilesVolumeConfigurationObservation struct {
+
+	// Full ARN of the S3 Files access point to use. If configured, root_directory must either be omitted or set to "/".
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Full ARN of the S3 Files file system to mount.
+	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
+
+	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
+
+	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
+}
+
+type S3FilesVolumeConfigurationParameters struct {
+
+	// Full ARN of the S3 Files access point to use. If configured, root_directory must either be omitted or set to "/".
+	// +kubebuilder:validation:Optional
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Full ARN of the S3 Files file system to mount.
+	// +kubebuilder:validation:Optional
+	FileSystemArn *string `json:"fileSystemArn" tf:"file_system_arn,omitempty"`
+
+	// Directory within the Amazon S3 Files file system to mount as the root directory.
+	// +kubebuilder:validation:Optional
+	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
+
+	// Port to use for sending encrypted data between the ECS host and the S3 Files file system.
+	// +kubebuilder:validation:Optional
+	TransitEncryptionPort *float64 `json:"transitEncryptionPort,omitempty" tf:"transit_encryption_port,omitempty"`
+}
+
 type TaskDefinitionInitParameters struct {
 
 	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
@@ -623,6 +672,9 @@ type VolumeInitParameters struct {
 	// Name of the volume. This name is referenced in the sourceVolume
 	// parameter of container definition in the mountPoints section.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for an S3 Files volume. Detailed below.
+	S3FilesVolumeConfiguration *S3FilesVolumeConfigurationInitParameters `json:"s3filesVolumeConfiguration,omitempty" tf:"s3files_volume_configuration,omitempty"`
 }
 
 type VolumeObservation struct {
@@ -645,6 +697,9 @@ type VolumeObservation struct {
 	// Name of the volume. This name is referenced in the sourceVolume
 	// parameter of container definition in the mountPoints section.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for an S3 Files volume. Detailed below.
+	S3FilesVolumeConfiguration *S3FilesVolumeConfigurationObservation `json:"s3filesVolumeConfiguration,omitempty" tf:"s3files_volume_configuration,omitempty"`
 }
 
 type VolumeParameters struct {
@@ -673,6 +728,10 @@ type VolumeParameters struct {
 	// parameter of container definition in the mountPoints section.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Configuration block for an S3 Files volume. Detailed below.
+	// +kubebuilder:validation:Optional
+	S3FilesVolumeConfiguration *S3FilesVolumeConfigurationParameters `json:"s3filesVolumeConfiguration,omitempty" tf:"s3files_volume_configuration,omitempty"`
 }
 
 // TaskDefinitionSpec defines the desired state of TaskDefinition

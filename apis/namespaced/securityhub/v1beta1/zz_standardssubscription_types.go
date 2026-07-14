@@ -23,6 +23,8 @@ type StandardsSubscriptionInitParameters struct {
 type StandardsSubscriptionObservation struct {
 
 	// The ARN of a resource that represents your subscription to a supported standard.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

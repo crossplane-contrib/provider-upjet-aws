@@ -588,6 +588,9 @@ type TableInitParameters struct {
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []TableReplicaInitParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
+	// ARN of backup to restore.
+	RestoreBackupArn *string `json:"restoreBackupArn,omitempty" tf:"restore_backup_arn,omitempty"`
+
 	// Time of the point-in-time recovery point to restore.
 	RestoreDateTime *string `json:"restoreDateTime,omitempty" tf:"restore_date_time,omitempty"`
 
@@ -680,6 +683,9 @@ type TableObservation struct {
 
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []TableReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
+
+	// ARN of backup to restore.
+	RestoreBackupArn *string `json:"restoreBackupArn,omitempty" tf:"restore_backup_arn,omitempty"`
 
 	// Time of the point-in-time recovery point to restore.
 	RestoreDateTime *string `json:"restoreDateTime,omitempty" tf:"restore_date_time,omitempty"`
@@ -820,6 +826,10 @@ type TableParameters struct {
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	// +kubebuilder:validation:Optional
 	Replica []TableReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
+
+	// ARN of backup to restore.
+	// +kubebuilder:validation:Optional
+	RestoreBackupArn *string `json:"restoreBackupArn,omitempty" tf:"restore_backup_arn,omitempty"`
 
 	// Time of the point-in-time recovery point to restore.
 	// +kubebuilder:validation:Optional

@@ -54,6 +54,8 @@ type CapacityBlockReservationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The number of instances for which to reserve capacity.
+	// This value will not be set until the Capacity Block Reservation is active.
+	// The requested instance count is set in the tag aws:ec2capacityreservation:incrementalRequestedQuantity.
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The type of operating system for which to reserve capacity. Valid options are Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard or Windows with SQL Server Web.

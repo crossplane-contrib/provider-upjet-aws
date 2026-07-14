@@ -43,3 +43,17 @@ func SetupGated_inspector(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_inspector registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_inspector(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		assessmenttarget.SetupWebhookWithManager,
+		assessmenttemplate.SetupWebhookWithManager,
+		resourcegroup.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

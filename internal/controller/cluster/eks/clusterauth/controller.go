@@ -37,6 +37,15 @@ const (
 	errStatusUpdate    = "cannot update status of ClusterAuth"
 )
 
+// SetupWebhookWithManager registers the conversion webhook for ClusterAuth.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.ClusterAuth{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ClusterAuth")
+	}
+	return nil
+}
+
 // Setup adds a controller that reconciles ClusterAuth.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.ClusterAuth_GroupKind)

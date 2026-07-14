@@ -156,9 +156,11 @@ spec:
             properties:
               atProvider:
                 properties:
-                  id:
+                  arn:
                     description: The ARN of a resource that represents your subscription
                       to a supported standard.
+                    type: string
+                  id:
                     type: string
                   region:
                     description: |-

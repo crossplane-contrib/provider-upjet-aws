@@ -157,14 +157,19 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   spec:
-                    description: Virtual router specification to apply.
+                    description: Virtual router specification to apply. See spec Block
+                      for details.
                     properties:
                       listener:
-                        description: configuration block to the spec argument.
+                        description: Listeners that the virtual router is expected
+                          to receive inbound traffic from. Currently only one listener
+                          is supported per virtual router. See listener Block for
+                          details.
                         items:
                           properties:
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -292,14 +297,19 @@ spec:
                       1 and 255 characters in length.
                     type: string
                   spec:
-                    description: Virtual router specification to apply.
+                    description: Virtual router specification to apply. See spec Block
+                      for details.
                     properties:
                       listener:
-                        description: configuration block to the spec argument.
+                        description: Listeners that the virtual router is expected
+                          to receive inbound traffic from. Currently only one listener
+                          is supported per virtual router. See listener Block for
+                          details.
                         items:
                           properties:
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -424,14 +434,19 @@ spec:
                     description: Resource owner's AWS account ID.
                     type: string
                   spec:
-                    description: Virtual router specification to apply.
+                    description: Virtual router specification to apply. See spec Block
+                      for details.
                     properties:
                       listener:
-                        description: configuration block to the spec argument.
+                        description: Listeners that the virtual router is expected
+                          to receive inbound traffic from. Currently only one listener
+                          is supported per virtual router. See listener Block for
+                          details.
                         items:
                           properties:
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.

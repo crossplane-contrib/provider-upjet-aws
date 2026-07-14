@@ -30,6 +30,10 @@ type FunctionInitParameters struct {
 
 	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FunctionObservation struct {
@@ -60,6 +64,14 @@ type FunctionObservation struct {
 
 	// Status of the function. Can be UNPUBLISHED, UNASSOCIATED or ASSOCIATED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type FunctionParameters struct {
@@ -84,6 +96,11 @@ type FunctionParameters struct {
 	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // FunctionSpec defines the desired state of Function

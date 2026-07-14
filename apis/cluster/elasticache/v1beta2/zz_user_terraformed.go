@@ -21,7 +21,7 @@ func (mg *User) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this User
 func (tr *User) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authentication_mode[*].passwords[*]": "authenticationMode.passwordsSecretRef[*]", "passwords[*]": "passwordsSecretRef[*]"}
+	return map[string]string{"authentication_mode[*].passwords[*]": "authenticationMode.passwordsSecretRef[*]", "passwords[*]": "passwordsSecretRef[*]", "passwords_wo": "passwordsWoSecretRef"}
 }
 
 // GetObservation of this User
@@ -36,6 +36,8 @@ func (tr *User) GetObservation() (map[string]any, error) {
 
 // SetObservation for this User
 func (tr *User) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

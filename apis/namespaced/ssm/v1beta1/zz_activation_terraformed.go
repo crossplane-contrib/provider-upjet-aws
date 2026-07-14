@@ -36,6 +36,8 @@ func (tr *Activation) GetObservation() (map[string]any, error) {
 
 // SetObservation for this Activation
 func (tr *Activation) SetObservation(obs map[string]any) error {
+	tr.Status.AtProvider.Tags = nil
+	tr.Status.AtProvider.TagsAll = nil
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err

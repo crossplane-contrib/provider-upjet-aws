@@ -41,8 +41,6 @@ type DeliveryChannelInitParameters struct {
 }
 
 type DeliveryChannelObservation struct {
-
-	// The name of the delivery channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

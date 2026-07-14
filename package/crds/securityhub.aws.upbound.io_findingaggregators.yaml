@@ -221,6 +221,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: Amazon Resource Name (ARN) of the Security Hub finding
+                      aggregator.
+                    type: string
                   id:
                     type: string
                   linkingMode:

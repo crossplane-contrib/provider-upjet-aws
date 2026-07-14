@@ -60,7 +60,8 @@ spec:
               forProvider:
                 properties:
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.
@@ -93,7 +94,8 @@ spec:
                   autoscaler.
                 properties:
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.
@@ -191,7 +193,8 @@ spec:
                     description: Unique ID of the anomaly monitor. Same as arn.
                     type: string
                   monitorDimension:
-                    description: 'The dimensions to evaluate. Valid values: SERVICE.'
+                    description: 'The dimensions to evaluate. Valid values: COST_CATEGORY,
+                      LINKED_ACCOUNT, SERVICE, TAG.'
                     type: string
                   monitorSpecification:
                     description: A valid JSON representation for the Expression object.

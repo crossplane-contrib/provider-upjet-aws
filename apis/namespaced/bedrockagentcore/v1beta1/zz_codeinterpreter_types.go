@@ -14,7 +14,48 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type CertificateLocationInitParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *LocationSecretsManagerInitParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CertificateLocationObservation struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *LocationSecretsManagerObservation `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CertificateLocationParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	// +kubebuilder:validation:Optional
+	SecretsManager *LocationSecretsManagerParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type CodeInterpreterCertificateInitParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *CertificateLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CodeInterpreterCertificateObservation struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *CertificateLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CodeInterpreterCertificateParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	// +kubebuilder:validation:Optional
+	Location *CertificateLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type CodeInterpreterInitParameters struct {
+
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	Certificate []CodeInterpreterCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Description of the code interpreter.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -74,6 +115,9 @@ type CodeInterpreterNetworkConfigurationParameters struct {
 
 type CodeInterpreterObservation struct {
 
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	Certificate []CodeInterpreterCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// ARN of the Code Interpreter.
 	CodeInterpreterArn *string `json:"codeInterpreterArn,omitempty" tf:"code_interpreter_arn,omitempty"`
 
@@ -108,6 +152,10 @@ type CodeInterpreterObservation struct {
 }
 
 type CodeInterpreterParameters struct {
+
+	// Certificates to install in the code interpreter. Between 1 and 200 blocks are supported. See certificate below.
+	// +kubebuilder:validation:Optional
+	Certificate []CodeInterpreterCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Description of the code interpreter.
 	// +kubebuilder:validation:Optional
@@ -144,6 +192,25 @@ type CodeInterpreterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type LocationSecretsManagerInitParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type LocationSecretsManagerObservation struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type LocationSecretsManagerParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn" tf:"secret_arn,omitempty"`
 }
 
 type NetworkConfigurationVPCConfigInitParameters struct {

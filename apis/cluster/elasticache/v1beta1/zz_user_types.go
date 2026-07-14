@@ -54,6 +54,12 @@ type UserInitParameters struct {
 
 	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
+	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. See Write-Only Arguments for more information.11+.
+	PasswordsWoSecretRef *v1.SecretKeySelector `json:"passwordsWoSecretRef,omitempty" tf:"-"`
+
+	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -80,6 +86,9 @@ type UserObservation struct {
 
 	// Indicates a password is not required for this user.
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
+
+	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,6 +126,14 @@ type UserParameters struct {
 	// Passwords used for this user. You can create up to two passwords for each user.
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
+
+	// Write-only password for this user. This argument is not stored in state. Conflicts with passwords and authentication_mode. See Write-Only Arguments for more information.11+.
+	// +kubebuilder:validation:Optional
+	PasswordsWoSecretRef *v1.SecretKeySelector `json:"passwordsWoSecretRef,omitempty" tf:"-"`
+
+	// Version number for passwords_wo. Increment this value to trigger a password update. Required when using passwords_wo.
+	// +kubebuilder:validation:Optional
+	PasswordsWoVersion *float64 `json:"passwordsWoVersion,omitempty" tf:"passwords_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

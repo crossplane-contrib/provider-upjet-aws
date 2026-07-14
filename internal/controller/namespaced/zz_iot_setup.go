@@ -82,3 +82,30 @@ func SetupGated_iot(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_iot registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_iot(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		authorizer.SetupWebhookWithManager,
+		certificate.SetupWebhookWithManager,
+		domainconfiguration.SetupWebhookWithManager,
+		indexingconfiguration.SetupWebhookWithManager,
+		loggingoptions.SetupWebhookWithManager,
+		policy.SetupWebhookWithManager,
+		policyattachment.SetupWebhookWithManager,
+		provisioningtemplate.SetupWebhookWithManager,
+		rolealias.SetupWebhookWithManager,
+		thing.SetupWebhookWithManager,
+		thinggroup.SetupWebhookWithManager,
+		thinggroupmembership.SetupWebhookWithManager,
+		thingprincipalattachment.SetupWebhookWithManager,
+		thingtype.SetupWebhookWithManager,
+		topicrule.SetupWebhookWithManager,
+		topicruledestination.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

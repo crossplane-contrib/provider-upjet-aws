@@ -16,7 +16,7 @@ import (
 
 type AnomalyMonitorInitParameters struct {
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 
 	// A valid JSON representation for the Expression object.
@@ -41,7 +41,7 @@ type AnomalyMonitorObservation struct {
 	// Unique ID of the anomaly monitor. Same as arn.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 
 	// A valid JSON representation for the Expression object.
@@ -64,7 +64,7 @@ type AnomalyMonitorObservation struct {
 
 type AnomalyMonitorParameters struct {
 
-	// The dimensions to evaluate. Valid values: SERVICE.
+	// The dimensions to evaluate. Valid values: COST_CATEGORY, LINKED_ACCOUNT, SERVICE, TAG.
 	// +kubebuilder:validation:Optional
 	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
 

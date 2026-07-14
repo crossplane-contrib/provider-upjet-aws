@@ -48,18 +48,21 @@ type SecretVersionInitParameters struct {
 
 type SecretVersionObservation struct {
 
-	// The ARN of the secret.
+	// (Deprecated) The ARN of the secret.
+	// Use secret_arn instead.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
 	HasSecretStringWo *bool `json:"hasSecretStringWo,omitempty" tf:"has_secret_string_wo,omitempty"`
 
-	// A pipe delimited combination of secret ID and version ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The ARN of the secret.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`

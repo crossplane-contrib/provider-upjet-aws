@@ -26,6 +26,10 @@ type DefinitionInitParameters struct {
 }
 
 type DefinitionObservation struct {
+
+	// The query definition ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specific log groups to use with the query.

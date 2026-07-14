@@ -1264,6 +1264,17 @@ func (in *BudgetInitParameters) DeepCopyInto(out *BudgetInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Metrics != nil {
+		in, out := &in.Metrics, &out.Metrics
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Notification != nil {
 		in, out := &in.Notification, &out.Notification
 		*out = make([]NotificationInitParameters, len(*in))
@@ -1413,6 +1424,17 @@ func (in *BudgetObservation) DeepCopyInto(out *BudgetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Metrics != nil {
+		in, out := &in.Metrics, &out.Metrics
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Notification != nil {
 		in, out := &in.Notification, &out.Notification
 		*out = make([]NotificationObservation, len(*in))
@@ -1535,6 +1557,17 @@ func (in *BudgetParameters) DeepCopyInto(out *BudgetParameters) {
 		in, out := &in.LimitUnit, &out.LimitUnit
 		*out = new(string)
 		**out = **in
+	}
+	if in.Metrics != nil {
+		in, out := &in.Metrics, &out.Metrics
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Notification != nil {
 		in, out := &in.Notification, &out.Notification

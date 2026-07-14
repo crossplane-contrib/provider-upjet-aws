@@ -46,3 +46,18 @@ func SetupGated_sqs(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_sqs registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_sqs(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		queue.SetupWebhookWithManager,
+		queuepolicy.SetupWebhookWithManager,
+		queueredriveallowpolicy.SetupWebhookWithManager,
+		queueredrivepolicy.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

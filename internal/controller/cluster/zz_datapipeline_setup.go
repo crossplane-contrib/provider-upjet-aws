@@ -37,3 +37,15 @@ func SetupGated_datapipeline(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_datapipeline registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_datapipeline(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		pipeline.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

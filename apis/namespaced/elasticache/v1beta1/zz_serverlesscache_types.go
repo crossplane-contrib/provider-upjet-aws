@@ -171,6 +171,9 @@ type ServerlessCacheInitParameters struct {
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
+	// IP protocol version used by the serverless cache. Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported with IPv6-only subnets. If not specified, defaults to ipv4, unless all provided subnets are IPv6-only, in which case it defaults to ipv6.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -250,6 +253,9 @@ type ServerlessCacheObservation struct {
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
+	// IP protocol version used by the serverless cache. Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported with IPv6-only subnets. If not specified, defaults to ipv4, unless all provided subnets are IPv6-only, in which case it defaults to ipv6.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Represents the information required for client programs to connect to a cache node. See reader_endpoint Block for details.
 	ReaderEndpoint []ReaderEndpointObservation `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
@@ -320,6 +326,10 @@ type ServerlessCacheParameters struct {
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	// +kubebuilder:validation:Optional
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
+
+	// IP protocol version used by the serverless cache. Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported with IPv6-only subnets. If not specified, defaults to ipv4, unless all provided subnets are IPv6-only, in which case it defaults to ipv6.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

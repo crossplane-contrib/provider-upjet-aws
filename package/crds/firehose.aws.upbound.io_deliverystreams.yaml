@@ -16140,7 +16140,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:
@@ -21525,7 +21526,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:
@@ -25930,7 +25932,8 @@ spec:
                         type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
-                          sends your data.
+                          sends your data. Refer to the target vendor's documentation
+                          for the correct intake URL (for example, New Relic or Datadog).
                         type: string
                     type: object
                   icebergConfiguration:

@@ -216,6 +216,29 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+                      Specifies the maintenance schedule for the DB cluster, including the preferred
+                      maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+                      (when using an InfluxDB V3 db parameter group).
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: |-
+                            Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+                            The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                            Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+                            string to let the system choose a window.
+                          type: string
+                        timezone:
+                          description: |-
+                            IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+                            The IANA timezone identifier for the maintenance window. For
+                            example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -628,6 +651,29 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+                      Specifies the maintenance schedule for the DB cluster, including the preferred
+                      maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+                      (when using an InfluxDB V3 db parameter group).
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: |-
+                            Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+                            The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                            Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+                            string to let the system choose a window.
+                          type: string
+                        timezone:
+                          description: |-
+                            IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+                            The IANA timezone identifier for the maintenance window. For
+                            example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
@@ -1070,6 +1116,29 @@ spec:
                             type: boolean
                         type: object
                     type: object
+                  maintenanceSchedule:
+                    description: |-
+                      Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+                      Specifies the maintenance schedule for the DB cluster, including the preferred
+                      maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+                      (when using an InfluxDB V3 db parameter group).
+                    items:
+                      properties:
+                        preferredMaintenanceWindow:
+                          description: |-
+                            Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+                            The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+                            Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+                            string to let the system choose a window.
+                          type: string
+                        timezone:
+                          description: |-
+                            IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+                            The IANA timezone identifier for the maintenance window. For
+                            example, America/New_York or UTC.
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.

@@ -941,7 +941,8 @@ spec:
                 properties:
                   bucket:
                     description: Name of the source bucket that inventory lists the
-                      objects for.
+                      objects for. Both general purpose and directory buckets are
+                      supported.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -1023,7 +1024,8 @@ spec:
                     properties:
                       bucket:
                         description: Name of the source bucket that inventory lists
-                          the objects for.
+                          the objects for. Both general purpose and directory buckets
+                          are supported.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1032,6 +1034,7 @@ spec:
                             type: string
                           bucketArn:
                             description: Amazon S3 bucket ARN of the destination.
+                              Only general purpose buckets are supported.
                             type: string
                           bucketArnRef:
                             description: Reference to a Bucket in s3 to populate bucketArn.
@@ -1198,7 +1201,8 @@ spec:
                 properties:
                   bucket:
                     description: Name of the source bucket that inventory lists the
-                      objects for.
+                      objects for. Both general purpose and directory buckets are
+                      supported.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -1280,7 +1284,8 @@ spec:
                     properties:
                       bucket:
                         description: Name of the source bucket that inventory lists
-                          the objects for.
+                          the objects for. Both general purpose and directory buckets
+                          are supported.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1289,6 +1294,7 @@ spec:
                             type: string
                           bucketArn:
                             description: Amazon S3 bucket ARN of the destination.
+                              Only general purpose buckets are supported.
                             type: string
                           bucketArnRef:
                             description: Reference to a Bucket in s3 to populate bucketArn.
@@ -1543,7 +1549,8 @@ spec:
                 properties:
                   bucket:
                     description: Name of the source bucket that inventory lists the
-                      objects for.
+                      objects for. Both general purpose and directory buckets are
+                      supported.
                     type: string
                   destination:
                     description: Contains information about where to publish the inventory
@@ -1551,7 +1558,8 @@ spec:
                     properties:
                       bucket:
                         description: Name of the source bucket that inventory lists
-                          the objects for.
+                          the objects for. Both general purpose and directory buckets
+                          are supported.
                         properties:
                           accountId:
                             description: ID of the account that owns the destination
@@ -1560,6 +1568,7 @@ spec:
                             type: string
                           bucketArn:
                             description: Amazon S3 bucket ARN of the destination.
+                              Only general purpose buckets are supported.
                             type: string
                           encryption:
                             description: Contains the type of server-side encryption

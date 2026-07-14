@@ -299,6 +299,9 @@ type BudgetInitParameters struct {
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
 
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
+
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	Notification []NotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
@@ -353,6 +356,9 @@ type BudgetObservation struct {
 
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
@@ -415,6 +421,10 @@ type BudgetParameters struct {
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	// +kubebuilder:validation:Optional
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	// +kubebuilder:validation:Optional
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	// +kubebuilder:validation:Optional

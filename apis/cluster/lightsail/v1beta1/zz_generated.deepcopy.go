@@ -2827,11 +2827,6 @@ func (in *KeyPairObservation) DeepCopyInto(out *KeyPairObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PrivateKey != nil {
-		in, out := &in.PrivateKey, &out.PrivateKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.PublicKey != nil {
 		in, out := &in.PublicKey, &out.PublicKey
 		*out = new(string)

@@ -1159,6 +1159,11 @@ func (in *SecretVersionObservation) DeepCopyInto(out *SecretVersionObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretArn != nil {
+		in, out := &in.SecretArn, &out.SecretArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecretID != nil {
 		in, out := &in.SecretID, &out.SecretID
 		*out = new(string)

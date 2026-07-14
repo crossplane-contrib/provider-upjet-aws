@@ -606,6 +606,9 @@ spec:
                       is created and stored as an attribute of the user object in
                       the identity store. The limit is 128 characters.
                     type: string
+                  userStatus:
+                    description: The current status of the user account.
+                    type: string
                   userType:
                     description: The user type.
                     type: string
@@ -1230,6 +1233,9 @@ spec:
                       and punctuation. This value is specified at the time the user
                       is created and stored as an attribute of the user object in
                       the identity store. The limit is 128 characters.
+                    type: string
+                  userStatus:
+                    description: The current status of the user account.
                     type: string
                   userType:
                     description: The user type.

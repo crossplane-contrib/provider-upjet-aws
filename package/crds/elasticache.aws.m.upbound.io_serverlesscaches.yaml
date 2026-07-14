@@ -207,6 +207,13 @@ spec:
                       The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
                     type: string
+                  networkType:
+                    description: IP protocol version used by the serverless cache.
+                      Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported
+                      with IPv6-only subnets. If not specified, defaults to ipv4,
+                      unless all provided subnets are IPv6-only, in which case it
+                      defaults to ipv6.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -587,6 +594,13 @@ spec:
                       The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
                     type: string
+                  networkType:
+                    description: IP protocol version used by the serverless cache.
+                      Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported
+                      with IPv6-only subnets. If not specified, defaults to ipv4,
+                      unless all provided subnets are IPv6-only, in which case it
+                      defaults to ipv6.
+                    type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -961,6 +975,13 @@ spec:
                     description: |-
                       The version of the cache engine that will be used to create the serverless cache.
                       See Describe Cache Engine Versions in the AWS Documentation for supported versions.
+                    type: string
+                  networkType:
+                    description: IP protocol version used by the serverless cache.
+                      Valid values are ipv4, ipv6, or dual_stack. ipv6 is only supported
+                      with IPv6-only subnets. If not specified, defaults to ipv4,
+                      unless all provided subnets are IPv6-only, in which case it
+                      defaults to ipv6.
                     type: string
                   readerEndpoint:
                     description: Represents the information required for client programs

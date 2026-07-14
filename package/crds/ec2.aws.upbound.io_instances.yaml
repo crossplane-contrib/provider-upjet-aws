@@ -3497,8 +3497,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -4559,8 +4561,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -5632,8 +5636,10 @@ spec:
                     properties:
                       marketType:
                         description: Type of market for the instance. Valid values
-                          are spot and capacity-block. Defaults to spot. Required
-                          if spot_options is specified.
+                          are spot, capacity-block, and interruptible-capacity-reservation.
+                          Use interruptible-capacity-reservation to launch instances
+                          into interruptible Capacity Reservations. Defaults to spot.
+                          Required if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.

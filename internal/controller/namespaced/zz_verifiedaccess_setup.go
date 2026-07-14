@@ -52,3 +52,20 @@ func SetupGated_verifiedaccess(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_verifiedaccess registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_verifiedaccess(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		endpoint.SetupWebhookWithManager,
+		group.SetupWebhookWithManager,
+		instance.SetupWebhookWithManager,
+		instanceloggingconfiguration.SetupWebhookWithManager,
+		instancetrustproviderattachment.SetupWebhookWithManager,
+		trustprovider.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -783,6 +783,11 @@ func (in *ConfigurationInitParameters_2) DeepCopyInto(out *ConfigurationInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -921,6 +926,11 @@ func (in *ConfigurationObservation_2) DeepCopyInto(out *ConfigurationObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1036,6 +1046,11 @@ func (in *ConfigurationParameters_2) DeepCopyInto(out *ConfigurationParameters_2
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {

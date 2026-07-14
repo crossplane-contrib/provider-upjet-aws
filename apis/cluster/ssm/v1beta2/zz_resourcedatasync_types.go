@@ -13,6 +13,28 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type DestinationDataSharingInitParameters struct {
+
+	// Data sharing type.
+	// Only Organization is supported.
+	DestinationDataSharingType *string `json:"destinationDataSharingType,omitempty" tf:"destination_data_sharing_type,omitempty"`
+}
+
+type DestinationDataSharingObservation struct {
+
+	// Data sharing type.
+	// Only Organization is supported.
+	DestinationDataSharingType *string `json:"destinationDataSharingType,omitempty" tf:"destination_data_sharing_type,omitempty"`
+}
+
+type DestinationDataSharingParameters struct {
+
+	// Data sharing type.
+	// Only Organization is supported.
+	// +kubebuilder:validation:Optional
+	DestinationDataSharingType *string `json:"destinationDataSharingType,omitempty" tf:"destination_data_sharing_type,omitempty"`
+}
+
 type ResourceDataSyncInitParameters struct {
 
 	// Amazon S3 configuration details for the sync.
@@ -56,6 +78,10 @@ type S3DestinationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
+	// Enables destination data sharing.
+	// See destination_data_sharing below.
+	DestinationDataSharing *DestinationDataSharingInitParameters `json:"destinationDataSharing,omitempty" tf:"destination_data_sharing,omitempty"`
+
 	// ARN of an encryption key for a destination in Amazon S3.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -70,6 +96,10 @@ type S3DestinationObservation struct {
 
 	// Name of S3 bucket where the aggregated data is stored.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Enables destination data sharing.
+	// See destination_data_sharing below.
+	DestinationDataSharing *DestinationDataSharingObservation `json:"destinationDataSharing,omitempty" tf:"destination_data_sharing,omitempty"`
 
 	// ARN of an encryption key for a destination in Amazon S3.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -98,6 +128,11 @@ type S3DestinationParameters struct {
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+
+	// Enables destination data sharing.
+	// See destination_data_sharing below.
+	// +kubebuilder:validation:Optional
+	DestinationDataSharing *DestinationDataSharingParameters `json:"destinationDataSharing,omitempty" tf:"destination_data_sharing,omitempty"`
 
 	// ARN of an encryption key for a destination in Amazon S3.
 	// +kubebuilder:validation:Optional

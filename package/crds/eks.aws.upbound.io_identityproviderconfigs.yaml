@@ -444,6 +444,9 @@ spec:
                     description: EKS Cluster name and EKS Identity Provider Configuration
                       name separated by a colon (:).
                     type: string
+                  identityProviderConfigName:
+                    description: (String) Name of the identity provider config.
+                    type: string
                   oidc:
                     description: Nested attribute containing OpenID Connect identity
                       provider information for the cluster. Detailed below.
@@ -980,6 +983,9 @@ spec:
                   id:
                     description: EKS Cluster name and EKS Identity Provider Configuration
                       name separated by a colon (:).
+                    type: string
+                  identityProviderConfigName:
+                    description: (String) Name of the identity provider config.
                     type: string
                   oidc:
                     description: Nested attribute containing OpenID Connect identity

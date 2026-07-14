@@ -55,3 +55,21 @@ func SetupGated_imagebuilder(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_imagebuilder registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_imagebuilder(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		component.SetupWebhookWithManager,
+		containerrecipe.SetupWebhookWithManager,
+		distributionconfiguration.SetupWebhookWithManager,
+		image.SetupWebhookWithManager,
+		imagepipeline.SetupWebhookWithManager,
+		imagerecipe.SetupWebhookWithManager,
+		infrastructureconfiguration.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

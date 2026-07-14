@@ -14,6 +14,25 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type EvaluationCriteriaInitParameters struct {
+
+	// The PromQL criteria for the alarm evaluation.
+	PromqlCriteria *PromqlCriteriaInitParameters `json:"promqlCriteria,omitempty" tf:"promql_criteria,omitempty"`
+}
+
+type EvaluationCriteriaObservation struct {
+
+	// The PromQL criteria for the alarm evaluation.
+	PromqlCriteria *PromqlCriteriaObservation `json:"promqlCriteria,omitempty" tf:"promql_criteria,omitempty"`
+}
+
+type EvaluationCriteriaParameters struct {
+
+	// The PromQL criteria for the alarm evaluation.
+	// +kubebuilder:validation:Optional
+	PromqlCriteria *PromqlCriteriaParameters `json:"promqlCriteria" tf:"promql_criteria,omitempty"`
+}
+
 type MetricAlarmInitParameters struct {
 
 	// Indicates whether or not actions should be executed during any changes to the alarm's state. Defaults to true.
@@ -52,7 +71,13 @@ type MetricAlarmInitParameters struct {
 	// The following values are supported: ignore, and evaluate.
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
-	// The number of periods over which data is compared to the specified threshold.
+	// The evaluation criteria for PromQL alarms. Cannot be used with traditional metric alarm parameters.
+	EvaluationCriteria *EvaluationCriteriaInitParameters `json:"evaluationCriteria,omitempty" tf:"evaluation_criteria,omitempty"`
+
+	// The frequency, in seconds, at which the alarm is evaluated. Valid values are 10, 20, 30, and any multiple of 60. Required when using evaluation_criteria.
+	EvaluationInterval *float64 `json:"evaluationInterval,omitempty" tf:"evaluation_interval,omitempty"`
+
+	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
@@ -143,7 +168,13 @@ type MetricAlarmObservation struct {
 	// The following values are supported: ignore, and evaluate.
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
-	// The number of periods over which data is compared to the specified threshold.
+	// The evaluation criteria for PromQL alarms. Cannot be used with traditional metric alarm parameters.
+	EvaluationCriteria *EvaluationCriteriaObservation `json:"evaluationCriteria,omitempty" tf:"evaluation_criteria,omitempty"`
+
+	// The frequency, in seconds, at which the alarm is evaluated. Valid values are 10, 20, 30, and any multiple of 60. Required when using evaluation_criteria.
+	EvaluationInterval *float64 `json:"evaluationInterval,omitempty" tf:"evaluation_interval,omitempty"`
+
+	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
@@ -249,7 +280,15 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
-	// The number of periods over which data is compared to the specified threshold.
+	// The evaluation criteria for PromQL alarms. Cannot be used with traditional metric alarm parameters.
+	// +kubebuilder:validation:Optional
+	EvaluationCriteria *EvaluationCriteriaParameters `json:"evaluationCriteria,omitempty" tf:"evaluation_criteria,omitempty"`
+
+	// The frequency, in seconds, at which the alarm is evaluated. Valid values are 10, 20, 30, and any multiple of 60. Required when using evaluation_criteria.
+	// +kubebuilder:validation:Optional
+	EvaluationInterval *float64 `json:"evaluationInterval,omitempty" tf:"evaluation_interval,omitempty"`
+
+	// The number of periods over which data is compared to the specified threshold. Required for traditional metric alarms.
 	// +kubebuilder:validation:Optional
 	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
@@ -506,6 +545,45 @@ type MetricQueryParameters struct {
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
+type PromqlCriteriaInitParameters struct {
+
+	// The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ALARM state. Valid range: 0-86400.
+	PendingPeriod *float64 `json:"pendingPeriod,omitempty" tf:"pending_period,omitempty"`
+
+	// The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the OK state. Valid range: 0-86400.
+	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
+}
+
+type PromqlCriteriaObservation struct {
+
+	// The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ALARM state. Valid range: 0-86400.
+	PendingPeriod *float64 `json:"pendingPeriod,omitempty" tf:"pending_period,omitempty"`
+
+	// The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the OK state. Valid range: 0-86400.
+	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
+}
+
+type PromqlCriteriaParameters struct {
+
+	// The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ALARM state. Valid range: 0-86400.
+	// +kubebuilder:validation:Optional
+	PendingPeriod *float64 `json:"pendingPeriod,omitempty" tf:"pending_period,omitempty"`
+
+	// The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.
+	// +kubebuilder:validation:Optional
+	Query *string `json:"query" tf:"query,omitempty"`
+
+	// The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the OK state. Valid range: 0-86400.
+	// +kubebuilder:validation:Optional
+	RecoveryPeriod *float64 `json:"recoveryPeriod,omitempty" tf:"recovery_period,omitempty"`
+}
+
 // MetricAlarmSpec defines the desired state of MetricAlarm
 type MetricAlarmSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
@@ -542,10 +620,8 @@ type MetricAlarmStatus struct {
 type MetricAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.comparisonOperator) || (has(self.initProvider) && has(self.initProvider.comparisonOperator))",message="spec.forProvider.comparisonOperator is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.evaluationPeriods) || (has(self.initProvider) && has(self.initProvider.evaluationPeriods))",message="spec.forProvider.evaluationPeriods is a required parameter"
-	Spec   MetricAlarmSpec   `json:"spec"`
-	Status MetricAlarmStatus `json:"status,omitempty"`
+	Spec              MetricAlarmSpec   `json:"spec"`
+	Status            MetricAlarmStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -52,3 +52,20 @@ func SetupGated_organizations(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager_organizations registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager_organizations(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		account.SetupWebhookWithManager,
+		delegatedadministrator.SetupWebhookWithManager,
+		organization.SetupWebhookWithManager,
+		organizationalunit.SetupWebhookWithManager,
+		policy.SetupWebhookWithManager,
+		policyattachment.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

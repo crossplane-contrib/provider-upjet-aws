@@ -16,7 +16,7 @@ import (
 
 type RestAPIEndpointConfigurationInitParameters struct {
 
-	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a REST API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
@@ -39,7 +39,7 @@ type RestAPIEndpointConfigurationInitParameters struct {
 
 type RestAPIEndpointConfigurationObservation struct {
 
-	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a REST API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
@@ -52,7 +52,7 @@ type RestAPIEndpointConfigurationObservation struct {
 
 type RestAPIEndpointConfigurationParameters struct {
 
-	// The IP address types that can invoke an API (RestApi). Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a REST API. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke an API, or use dualstack to allow both IPv4 and IPv6 addresses to invoke an API. For the PRIVATE endpoint type, only dualstack is supported.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
@@ -93,10 +93,13 @@ type RestAPIInitParameters struct {
 	// Whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	EndpointConfiguration *RestAPIEndpointConfigurationInitParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
-	// Whether warnings while API Gateway is creating or updating the resource should return an error or not. Defaults to false
+	// Whether to return an error for warnings while API Gateway is creating or updating the resource. Defaults to false.
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
 	// Minimum response size to compress for the REST API. String containing an integer value between -1 and 10485760 (10MB). -1 will disable an existing compression configuration, and all other values will enable compression with the configured size. New resources can simply omit this argument to disable compression, rather than setting the value to -1. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-minimum-compression-size extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
@@ -109,8 +112,11 @@ type RestAPIInitParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If not configured, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
+
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -140,15 +146,16 @@ type RestAPIObservation struct {
 	// Whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	EndpointConfiguration *RestAPIEndpointConfigurationObservation `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
-	// Execution ARN part to be used in lambda_permission's source_arn
-	// when allowing API Gateway to invoke a Lambda function,
-	// e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, method and resource path.
+	// Execution ARN part to be used in lambda_permission's source_arn when allowing API Gateway to invoke a Lambda function, e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, method and resource path.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
-	// Whether warnings while API Gateway is creating or updating the resource should return an error or not. Defaults to false
+	// Whether to return an error for warnings while API Gateway is creating or updating the resource. Defaults to false.
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
 	// ID of the REST API
@@ -167,7 +174,7 @@ type RestAPIObservation struct {
 	// JSON formatted policy document that controls access to the API Gateway. We recommend using the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If not configured, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -176,6 +183,9 @@ type RestAPIObservation struct {
 
 	// Resource ID of the REST API's root
 	RootResourceID *string `json:"rootResourceId,omitempty" tf:"root_resource_id,omitempty"`
+
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -208,11 +218,15 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
+	// Endpoint access mode for the REST API. Valid values are BASIC and STRICT. Only available for REST APIs that use a security_policy value beginning with SecurityPolicy_ and is required when one of those values is configured.
+	// +kubebuilder:validation:Optional
+	EndpointAccessMode *string `json:"endpointAccessMode,omitempty" tf:"endpoint_access_mode,omitempty"`
+
 	// Configuration block defining API endpoint configuration including endpoint type. Defined below.
 	// +kubebuilder:validation:Optional
 	EndpointConfiguration *RestAPIEndpointConfigurationParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
 
-	// Whether warnings while API Gateway is creating or updating the resource should return an error or not. Defaults to false
+	// Whether to return an error for warnings while API Gateway is creating or updating the resource. Defaults to false.
 	// +kubebuilder:validation:Optional
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
@@ -229,7 +243,7 @@ type RestAPIParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If not configured, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +kubebuilder:validation:Optional
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
 
@@ -237,6 +251,10 @@ type RestAPIParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// TLS version + cipher suite for the REST API's default execute-api endpoint. Must be configured for drift detection. When set to a value beginning with SecurityPolicy_, endpoint_access_mode must also be configured. For a list of valid security policies, see CreateRestApi in the Amazon API Gateway API Reference.
+	// +kubebuilder:validation:Optional
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

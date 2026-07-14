@@ -420,6 +420,28 @@ spec:
                             Name of the volume. This name is referenced in the sourceVolume
                             parameter of container definition in the mountPoints section.
                           type: string
+                        s3filesVolumeConfiguration:
+                          description: Configuration block for an S3 Files volume.
+                            Detailed below.
+                          properties:
+                            accessPointArn:
+                              description: Full ARN of the S3 Files access point to
+                                use. If configured, root_directory must either be
+                                omitted or set to "/".
+                              type: string
+                            fileSystemArn:
+                              description: Full ARN of the S3 Files file system to
+                                mount.
+                              type: string
+                            rootDirectory:
+                              description: Directory within the Amazon S3 Files file
+                                system to mount as the root directory.
+                              type: string
+                            transitEncryptionPort:
+                              description: Port to use for sending encrypted data
+                                between the ECS host and the S3 Files file system.
+                              type: number
+                          type: object
                       type: object
                     type: array
                 required:
@@ -794,6 +816,28 @@ spec:
                             Name of the volume. This name is referenced in the sourceVolume
                             parameter of container definition in the mountPoints section.
                           type: string
+                        s3filesVolumeConfiguration:
+                          description: Configuration block for an S3 Files volume.
+                            Detailed below.
+                          properties:
+                            accessPointArn:
+                              description: Full ARN of the S3 Files access point to
+                                use. If configured, root_directory must either be
+                                omitted or set to "/".
+                              type: string
+                            fileSystemArn:
+                              description: Full ARN of the S3 Files file system to
+                                mount.
+                              type: string
+                            rootDirectory:
+                              description: Directory within the Amazon S3 Files file
+                                system to mount as the root directory.
+                              type: string
+                            transitEncryptionPort:
+                              description: Port to use for sending encrypted data
+                                between the ECS host and the S3 Files file system.
+                              type: number
+                          type: object
                       type: object
                     type: array
                 type: object
@@ -1173,6 +1217,28 @@ spec:
                             Name of the volume. This name is referenced in the sourceVolume
                             parameter of container definition in the mountPoints section.
                           type: string
+                        s3filesVolumeConfiguration:
+                          description: Configuration block for an S3 Files volume.
+                            Detailed below.
+                          properties:
+                            accessPointArn:
+                              description: Full ARN of the S3 Files access point to
+                                use. If configured, root_directory must either be
+                                omitted or set to "/".
+                              type: string
+                            fileSystemArn:
+                              description: Full ARN of the S3 Files file system to
+                                mount.
+                              type: string
+                            rootDirectory:
+                              description: Directory within the Amazon S3 Files file
+                                system to mount as the root directory.
+                              type: string
+                            transitEncryptionPort:
+                              description: Port to use for sending encrypted data
+                                between the ECS host and the S3 Files file system.
+                              type: number
+                          type: object
                       type: object
                     type: array
                 type: object
