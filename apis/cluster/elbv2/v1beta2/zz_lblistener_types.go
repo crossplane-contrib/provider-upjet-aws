@@ -324,7 +324,6 @@ type DefaultActionObservation struct {
 	Forward *ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
 	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:=default
 	Index *string `json:"index,omitempty" tf:"-"`
 
 	// Configuration block for creating a JWT validation action. Required if type is jwt-validation.
@@ -617,8 +616,6 @@ type LBListenerObservation struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. See below.
-	// +listType=map
-	// +listMapKey=index
 	DefaultAction []DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
