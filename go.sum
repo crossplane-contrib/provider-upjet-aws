@@ -625,8 +625,6 @@ github.com/crossplane/crossplane-runtime/v2 v2.2.0 h1:jLoQm9D5buk9lBqwRtQ40ueaFo
 github.com/crossplane/crossplane-runtime/v2 v2.2.0/go.mod h1:8I+x4w5bG4x8aO8ifF/QC8GZoNCN6v21NHzgoYPNYAQ=
 github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec h1:+51Et4UW8XrvGne8RAqn9qEIfhoqPXYqIp/kQvpMaAo=
 github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec/go.mod h1:8etxwmP4cZwJDwen4+PQlnc1tggltAhEfyyigmdHulQ=
-github.com/crossplane/upjet/v2 v2.3.1-0.20260703134037-c73cc3a2d247 h1:Llb4TFiXYa6gUbM0nAzKyNAJKemLZPCnX21KNOtTjNQ=
-github.com/crossplane/upjet/v2 v2.3.1-0.20260703134037-c73cc3a2d247/go.mod h1:5eAaUqFKfA0LAlkywhQVj3jBAvepqb4pJAb9EsdWsuM=
 github.com/cyphar/filepath-securejoin v0.4.1 h1:JyxxyPEaktOD+GAnqIqTf9A8tHyAG22rowi7HkoSU1s=
 github.com/cyphar/filepath-securejoin v0.4.1/go.mod h1:Sdj7gXlvMcPZsbhwhQ33GguGLDGQL7h7bg04C/+u9jI=
 github.com/dave/jennifer v1.7.1 h1:B4jJJDHelWcDhlRQxWeo0Npa/pYKBLrirAQoTN45txo=
@@ -639,6 +637,8 @@ github.com/emicklei/go-restful/v3 v3.13.0 h1:C4Bl2xDndpU6nJ4bc1jXd+uTmYPVUwkD6bF
 github.com/emicklei/go-restful/v3 v3.13.0/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/emirpasic/gods v1.18.1 h1:FXtiHYKDGKCW2KzwZKx0iC0PQmdlorYgdFG9jPXJ1Bc=
 github.com/emirpasic/gods v1.18.1/go.mod h1:8tpGGwCnJ5H4r6BWwaV6OrWmMoPhUl5jm/FMNAnJvWQ=
+github.com/erhancagirici/upjet/v2 v2.0.0-20260716094745-a0929222dcb2 h1:jJPCmPln6Czct6DPD21BVCV6b/M/SnZlcI637yvQxA4=
+github.com/erhancagirici/upjet/v2 v2.0.0-20260716094745-a0929222dcb2/go.mod h1:tGIJ6MRJV0BylwCI2u7WKjW6G5lh99Gl+fFCXuyD9Jo=
 github.com/evanphx/json-patch v5.9.11+incompatible h1:ixHHqfcGvxhWkniF1tWxBHA0yb4Z+d1UQi45df52xW8=
 github.com/evanphx/json-patch v5.9.11+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/evanphx/json-patch/v5 v5.9.11 h1:/8HVnzMq13/3x9TPvjG08wUGqBTmZBsCWzjTM0wiaDU=

@@ -8,6 +8,8 @@ go 1.26.4
 
 tool golang.org/x/tools/cmd/goimports
 
+replace github.com/crossplane/upjet/v2 => github.com/erhancagirici/upjet/v2 v2.0.0-20260716094745-a0929222dcb2
+
 require (
 	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
