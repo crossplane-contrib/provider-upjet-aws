@@ -89,7 +89,7 @@ type BrokerNodeGroupInfoInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupsSelector *v1.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below.
+	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
 	StorageInfo *StorageInfoInitParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
@@ -112,7 +112,7 @@ type BrokerNodeGroupInfoObservation struct {
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below.
+	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
 	StorageInfo *StorageInfoObservation `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
@@ -158,7 +158,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupsSelector *v1.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
-	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below.
+	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
 	// +kubebuilder:validation:Optional
 	StorageInfo *StorageInfoParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
@@ -403,6 +403,9 @@ type ClusterObservation struct {
 	// Current version of the MSK Cluster used for updates, e.g., K13V1IB3VIYZZH
 	CurrentVersion *string `json:"currentVersion,omitempty" tf:"current_version,omitempty"`
 
+	// Status indicating whether Amazon MSK requires customer action for the cluster. Valid values are NONE, ACTION_RECOMMENDED, and CRITICAL_ACTION_REQUIRED.
+	CustomerActionStatus *string `json:"customerActionStatus,omitempty" tf:"customer_action_status,omitempty"`
+
 	// Configuration block for specifying encryption. See encryption_info Argument Reference below.
 	EncryptionInfo *EncryptionInfoObservation `json:"encryptionInfo,omitempty" tf:"encryption_info,omitempty"`
 
@@ -560,6 +563,9 @@ type ConfigurationInfoParameters struct {
 
 type ConnectivityInfoInitParameters struct {
 
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess *PublicAccessInitParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
@@ -569,6 +575,9 @@ type ConnectivityInfoInitParameters struct {
 
 type ConnectivityInfoObservation struct {
 
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess *PublicAccessObservation `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
@@ -577,6 +586,10 @@ type ConnectivityInfoObservation struct {
 }
 
 type ConnectivityInfoParameters struct {
+
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	// +kubebuilder:validation:Optional

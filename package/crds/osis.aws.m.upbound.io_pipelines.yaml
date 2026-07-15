@@ -538,7 +538,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: Unique identifier for the pipeline.
+                    description: (Deprecated) Name of the pipeline.
                     type: string
                   ingestEndpointUrls:
                     description: The list of ingestion endpoints for the pipeline,

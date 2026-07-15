@@ -558,6 +558,32 @@ spec:
                           - name
                           - namespace
                           type: object
+                        passwordWoSecretRef:
+                          description: The password for the service account on your
+                            self-managed AD domain that Amazon FSx will use to join
+                            to your AD domain. This is a write-only argument which
+                            is not persisted to state. Conflicts with domain_join_service_account_secret
+                            and password. Required with password_wo_version.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        passwordWoVersion:
+                          description: Version of the password. Required with password_wo.
+                            Update this argument when the value of password_wo has
+                            changed to trigger an update to the remote password.
+                          type: number
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
@@ -1174,6 +1200,32 @@ spec:
                           - name
                           - namespace
                           type: object
+                        passwordWoSecretRef:
+                          description: The password for the service account on your
+                            self-managed AD domain that Amazon FSx will use to join
+                            to your AD domain. This is a write-only argument which
+                            is not persisted to state. Conflicts with domain_join_service_account_secret
+                            and password. Required with password_wo_version.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        passwordWoVersion:
+                          description: Version of the password. Required with password_wo.
+                            Update this argument when the value of password_wo has
+                            changed to trigger an update to the remote password.
+                          type: number
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
@@ -1585,6 +1637,11 @@ spec:
                             of your self-managed AD directory. To learn more, see
                             RFC 2253.
                           type: string
+                        passwordWoVersion:
+                          description: Version of the password. Required with password_wo.
+                            Update this argument when the value of password_wo has
+                            changed to trigger an update to the remote password.
+                          type: number
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
@@ -2218,7 +2275,8 @@ spec:
                       passwordSecretRef:
                         description: The password for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain. Conflicts with domain_join_service_account_secret.
+                          to your AD domain. Conflicts with domain_join_service_account_secret
+                          and password_wo.
                         properties:
                           key:
                             description: The key to select.
@@ -2234,6 +2292,32 @@ spec:
                         - name
                         - namespace
                         type: object
+                      passwordWoSecretRef:
+                        description: The password for the service account on your
+                          self-managed AD domain that Amazon FSx will use to join
+                          to your AD domain. This is a write-only argument which is
+                          not persisted to state. Conflicts with domain_join_service_account_secret
+                          and password. Required with password_wo_version.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      passwordWoVersion:
+                        description: Version of the password. Required with password_wo.
+                          Update this argument when the value of password_wo has changed
+                          to trigger an update to the remote password.
+                        type: number
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
@@ -2826,7 +2910,8 @@ spec:
                       passwordSecretRef:
                         description: The password for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
-                          to your AD domain. Conflicts with domain_join_service_account_secret.
+                          to your AD domain. Conflicts with domain_join_service_account_secret
+                          and password_wo.
                         properties:
                           key:
                             description: The key to select.
@@ -2842,6 +2927,32 @@ spec:
                         - name
                         - namespace
                         type: object
+                      passwordWoSecretRef:
+                        description: The password for the service account on your
+                          self-managed AD domain that Amazon FSx will use to join
+                          to your AD domain. This is a write-only argument which is
+                          not persisted to state. Conflicts with domain_join_service_account_secret
+                          and password. Required with password_wo_version.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      passwordWoVersion:
+                        description: Version of the password. Required with password_wo.
+                          Update this argument when the value of password_wo has changed
+                          to trigger an update to the remote password.
+                        type: number
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join
@@ -3245,6 +3356,11 @@ spec:
                           the FSx file system is created in the default location of
                           your self-managed AD directory. To learn more, see RFC 2253.
                         type: string
+                      passwordWoVersion:
+                        description: Version of the password. Required with password_wo.
+                          Update this argument when the value of password_wo has changed
+                          to trigger an update to the remote password.
+                        type: number
                       username:
                         description: The user name for the service account on your
                           self-managed AD domain that Amazon FSx will use to join

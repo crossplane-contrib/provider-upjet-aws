@@ -34,7 +34,7 @@ type EgressFilterParameters struct {
 
 type MeshInitParameters struct {
 
-	// Service mesh specification to apply.
+	// Service mesh specification to apply. See spec Block for details.
 	Spec *MeshSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -66,7 +66,7 @@ type MeshObservation struct {
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// Service mesh specification to apply.
+	// Service mesh specification to apply. See spec Block for details.
 	Spec *MeshSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
@@ -85,7 +85,7 @@ type MeshParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Service mesh specification to apply.
+	// Service mesh specification to apply. See spec Block for details.
 	// +kubebuilder:validation:Optional
 	Spec *MeshSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
@@ -97,29 +97,29 @@ type MeshParameters struct {
 
 type MeshSpecInitParameters struct {
 
-	// Egress filter rules for the service mesh.
+	// Egress filter rules for the service mesh. See egress_filter Block for details.
 	EgressFilter *EgressFilterInitParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
 
-	// The service discovery information for the service mesh.
+	// The service discovery information for the service mesh. See service_discovery Block for details.
 	ServiceDiscovery *ServiceDiscoveryInitParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type MeshSpecObservation struct {
 
-	// Egress filter rules for the service mesh.
+	// Egress filter rules for the service mesh. See egress_filter Block for details.
 	EgressFilter *EgressFilterObservation `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
 
-	// The service discovery information for the service mesh.
+	// The service discovery information for the service mesh. See service_discovery Block for details.
 	ServiceDiscovery *ServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type MeshSpecParameters struct {
 
-	// Egress filter rules for the service mesh.
+	// Egress filter rules for the service mesh. See egress_filter Block for details.
 	// +kubebuilder:validation:Optional
 	EgressFilter *EgressFilterParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
 
-	// The service discovery information for the service mesh.
+	// The service discovery information for the service mesh. See service_discovery Block for details.
 	// +kubebuilder:validation:Optional
 	ServiceDiscovery *ServiceDiscoveryParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }

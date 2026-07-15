@@ -3588,6 +3588,11 @@ func (in *ResourceGatewayInitParameters) DeepCopyInto(out *ResourceGatewayInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceConfigDNSResolution != nil {
+		in, out := &in.ResourceConfigDNSResolution, &out.ResourceConfigDNSResolution
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroupIDRefs != nil {
 		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
 		*out = make([]v1.Reference, len(*in))
@@ -3742,6 +3747,11 @@ func (in *ResourceGatewayObservation) DeepCopyInto(out *ResourceGatewayObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceConfigDNSResolution != nil {
+		in, out := &in.ResourceConfigDNSResolution, &out.ResourceConfigDNSResolution
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -3838,6 +3848,11 @@ func (in *ResourceGatewayParameters) DeepCopyInto(out *ResourceGatewayParameters
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceConfigDNSResolution != nil {
+		in, out := &in.ResourceConfigDNSResolution, &out.ResourceConfigDNSResolution
 		*out = new(string)
 		**out = **in
 	}

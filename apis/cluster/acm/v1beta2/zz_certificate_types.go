@@ -49,8 +49,14 @@ type CertificateInitParameters struct {
 	// Configuration block used to set certificate options. Detailed below.
 	Options *OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// Certificate's PEM-formatted private key
+	// Certificate's PEM-formatted private key. Conflicts with private_key_wo.
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate.
 	// +listType=set
@@ -113,6 +119,12 @@ type CertificateObservation struct {
 
 	// true if a Private certificate eligible for managed renewal is within the early_renewal_duration period.
 	PendingRenewal *bool `json:"pendingRenewal,omitempty" tf:"pending_renewal,omitempty"`
+
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -195,9 +207,17 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Options *OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
-	// Certificate's PEM-formatted private key
+	// Certificate's PEM-formatted private key. Conflicts with private_key_wo.
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+
+	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
+	// +kubebuilder:validation:Optional
+	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
+
+	// Used together with private_key_wo to trigger an update. Increment this value when an update to private_key_wo is required.
+	// +kubebuilder:validation:Optional
+	PrivateKeyWoVersion *float64 `json:"privateKeyWoVersion,omitempty" tf:"private_key_wo_version,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

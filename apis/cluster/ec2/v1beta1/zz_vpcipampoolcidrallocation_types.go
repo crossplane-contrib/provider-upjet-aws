@@ -40,6 +40,10 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VPCIpamPoolCidrAllocationObservation struct {
@@ -78,6 +82,14 @@ type VPCIpamPoolCidrAllocationObservation struct {
 
 	// The type of the resource.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VPCIpamPoolCidrAllocationParameters struct {
@@ -117,6 +129,11 @@ type VPCIpamPoolCidrAllocationParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // VPCIpamPoolCidrAllocationSpec defines the desired state of VPCIpamPoolCidrAllocation

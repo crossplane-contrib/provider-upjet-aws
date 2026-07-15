@@ -42,6 +42,9 @@ type ApplyServerSideEncryptionByDefaultParameters struct {
 
 type BucketInitParameters struct {
 
+	// Namespace for the bucket. Determines bucket naming scope. Valid values: account-regional, global. Defaults to global (AWS).
+	BucketNamespace *string `json:"bucketNamespace,omitempty" tf:"bucket_namespace,omitempty"`
+
 	// Boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the bucket or destroying the bucket, this flag will not work.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -67,6 +70,9 @@ type BucketObservation struct {
 
 	// Bucket domain name. Will be of format bucketname.s3.amazonaws.com.
 	BucketDomainName *string `json:"bucketDomainName,omitempty" tf:"bucket_domain_name,omitempty"`
+
+	// Namespace for the bucket. Determines bucket naming scope. Valid values: account-regional, global. Defaults to global (AWS).
+	BucketNamespace *string `json:"bucketNamespace,omitempty" tf:"bucket_namespace,omitempty"`
 
 	// AWS region this bucket resides in.
 	BucketRegion *string `json:"bucketRegion,omitempty" tf:"bucket_region,omitempty"`
@@ -149,6 +155,10 @@ type BucketObservation struct {
 }
 
 type BucketParameters struct {
+
+	// Namespace for the bucket. Determines bucket naming scope. Valid values: account-regional, global. Defaults to global (AWS).
+	// +kubebuilder:validation:Optional
+	BucketNamespace *string `json:"bucketNamespace,omitempty" tf:"bucket_namespace,omitempty"`
 
 	// Boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true. If setting this field in the same operation that would require replacing the bucket or destroying the bucket, this flag will not work.
 	// +kubebuilder:validation:Optional

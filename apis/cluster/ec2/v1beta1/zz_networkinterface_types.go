@@ -34,10 +34,61 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 }
 
+type EnaSrdSpecificationEnaSrdUDPSpecificationInitParameters struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdSpecificationEnaSrdUDPSpecificationObservation struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type EnaSrdSpecificationEnaSrdUDPSpecificationParameters struct {
+
+	// Indicates whether UDP traffic uses ENA Express. Requires ena_srd_enabled to be true.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPEnabled *bool `json:"enaSrdUdpEnabled,omitempty" tf:"ena_srd_udp_enabled,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationInitParameters struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationInitParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationObservation struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationObservation `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
+type NetworkInterfaceEnaSrdSpecificationParameters struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	// +kubebuilder:validation:Optional
+	EnaSrdEnabled *bool `json:"enaSrdEnabled,omitempty" tf:"ena_srd_enabled,omitempty"`
+
+	// Configures ENA Express for UDP network traffic. See ENA SRD UDP Specification below for more details.
+	// +kubebuilder:validation:Optional
+	EnaSrdUDPSpecification *EnaSrdSpecificationEnaSrdUDPSpecificationParameters `json:"enaSrdUdpSpecification,omitempty" tf:"ena_srd_udp_specification,omitempty"`
+}
+
 type NetworkInterfaceInitParameters_2 struct {
 
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
@@ -133,6 +184,9 @@ type NetworkInterfaceObservation_2 struct {
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
+
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
 
@@ -224,6 +278,10 @@ type NetworkInterfaceParameters_2 struct {
 	// Description for the network interface.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configures ENA Express for the network interface. The ENI must be attached to an instance to configure ENA Express. See ENA SRD Specification below for more details.
+	// +kubebuilder:validation:Optional
+	EnaSrdSpecification *NetworkInterfaceEnaSrdSpecificationParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
 	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
 	// +kubebuilder:validation:Optional

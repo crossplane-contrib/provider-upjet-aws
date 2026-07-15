@@ -24,7 +24,7 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    runtime: nodejs20.x
+    runtime: nodejs24.x
     tags:
       Application: example
       Environment: production

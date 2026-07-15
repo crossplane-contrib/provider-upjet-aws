@@ -129,10 +129,13 @@ spec:
                       TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
                     type: string
                   fileSystemTypeVersion:
-                    description: Sets the Lustre version for the file system that
-                      you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2
-                      and PERSISTENT_1 deployment types. Valid values for 2.12 include
-                      all deployment types.
+                    description: Sets the Lustre version for the file system. Valid
+                      values are 2.10, 2.12, and 2.15. When creating a file system,
+                      2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment
+                      types; 2.12 and 2.15 are valid for all deployment types. Changing
+                      this value to a higher version triggers an in-place upgrade.
+                      Changing to a lower version forces resource replacement (destroy
+                      and recreate).
                     type: string
                   finalBackupTags:
                     additionalProperties:
@@ -630,10 +633,13 @@ spec:
                       TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
                     type: string
                   fileSystemTypeVersion:
-                    description: Sets the Lustre version for the file system that
-                      you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2
-                      and PERSISTENT_1 deployment types. Valid values for 2.12 include
-                      all deployment types.
+                    description: Sets the Lustre version for the file system. Valid
+                      values are 2.10, 2.12, and 2.15. When creating a file system,
+                      2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment
+                      types; 2.12 and 2.15 are valid for all deployment types. Changing
+                      this value to a higher version triggers an in-place upgrade.
+                      Changing to a lower version forces resource replacement (destroy
+                      and recreate).
                     type: string
                   finalBackupTags:
                     additionalProperties:
@@ -1180,10 +1186,13 @@ spec:
                       TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
                     type: string
                   fileSystemTypeVersion:
-                    description: Sets the Lustre version for the file system that
-                      you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2
-                      and PERSISTENT_1 deployment types. Valid values for 2.12 include
-                      all deployment types.
+                    description: Sets the Lustre version for the file system. Valid
+                      values are 2.10, 2.12, and 2.15. When creating a file system,
+                      2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment
+                      types; 2.12 and 2.15 are valid for all deployment types. Changing
+                      this value to a higher version triggers an in-place upgrade.
+                      Changing to a lower version forces resource replacement (destroy
+                      and recreate).
                     type: string
                   finalBackupTags:
                     additionalProperties:

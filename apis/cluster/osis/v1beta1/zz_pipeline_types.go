@@ -148,7 +148,7 @@ type PipelineObservation struct {
 	// Key-value pairs to configure encryption for data that is written to a persistent buffer. See encryption_at_rest_options below.
 	EncryptionAtRestOptions []EncryptionAtRestOptionsObservation `json:"encryptionAtRestOptions,omitempty" tf:"encryption_at_rest_options,omitempty"`
 
-	// Unique identifier for the pipeline.
+	// (Deprecated) Name of the pipeline.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The list of ingestion endpoints for the pipeline, which you can send data to.

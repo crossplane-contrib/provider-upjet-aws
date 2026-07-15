@@ -52,9 +52,6 @@ type KeyPairObservation struct {
 	// PGP key to encrypt the resulting private key material. Only used when creating a new key pair.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
-	// Private key, base64 encoded. This is only populated when creating a new key, and when no pgp_key is provided.
-	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
-
 	// Public key material. This public key will be imported into Lightsail.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 

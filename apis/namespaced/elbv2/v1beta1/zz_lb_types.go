@@ -200,6 +200,9 @@ type LBInitParameters struct {
 	// Whether HTTP/2 is enabled in application load balancers. Defaults to true.
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
+	// Whether to use an IPv6 prefix from each subnet for source NAT. ip_address_type must be dualstack. Valid values: on, off.
+	EnablePrefixForIPv6SourceNAT *string `json:"enablePrefixForIpv6SourceNat,omitempty" tf:"enable_prefix_for_ipv6_source_nat,omitempty"`
+
 	// Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
 	EnableTLSVersionAndCipherSuiteHeaders *bool `json:"enableTlsVersionAndCipherSuiteHeaders,omitempty" tf:"enable_tls_version_and_cipher_suite_headers,omitempty"`
 
@@ -327,6 +330,9 @@ type LBObservation struct {
 	// Whether HTTP/2 is enabled in application load balancers. Defaults to true.
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
+	// Whether to use an IPv6 prefix from each subnet for source NAT. ip_address_type must be dualstack. Valid values: on, off.
+	EnablePrefixForIPv6SourceNAT *string `json:"enablePrefixForIpv6SourceNat,omitempty" tf:"enable_prefix_for_ipv6_source_nat,omitempty"`
+
 	// Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
 	EnableTLSVersionAndCipherSuiteHeaders *bool `json:"enableTlsVersionAndCipherSuiteHeaders,omitempty" tf:"enable_tls_version_and_cipher_suite_headers,omitempty"`
 
@@ -447,6 +453,10 @@ type LBParameters struct {
 	// Whether HTTP/2 is enabled in application load balancers. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+
+	// Whether to use an IPv6 prefix from each subnet for source NAT. ip_address_type must be dualstack. Valid values: on, off.
+	// +kubebuilder:validation:Optional
+	EnablePrefixForIPv6SourceNAT *string `json:"enablePrefixForIpv6SourceNat,omitempty" tf:"enable_prefix_for_ipv6_source_nat,omitempty"`
 
 	// Whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
 	// +kubebuilder:validation:Optional

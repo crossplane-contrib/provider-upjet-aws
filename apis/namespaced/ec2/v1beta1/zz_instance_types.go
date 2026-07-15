@@ -517,7 +517,7 @@ type InstanceInitParameters struct {
 
 type InstanceMarketOptionsInitParameters struct {
 
-	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot, capacity-block, and interruptible-capacity-reservation. Use interruptible-capacity-reservation to launch instances into interruptible Capacity Reservations. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -526,7 +526,7 @@ type InstanceMarketOptionsInitParameters struct {
 
 type InstanceMarketOptionsObservation struct {
 
-	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot, capacity-block, and interruptible-capacity-reservation. Use interruptible-capacity-reservation to launch instances into interruptible Capacity Reservations. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -535,7 +535,7 @@ type InstanceMarketOptionsObservation struct {
 
 type InstanceMarketOptionsParameters struct {
 
-	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot, capacity-block, and interruptible-capacity-reservation. Use interruptible-capacity-reservation to launch instances into interruptible Capacity Reservations. Defaults to spot. Required if spot_options is specified.
 	// +kubebuilder:validation:Optional
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 

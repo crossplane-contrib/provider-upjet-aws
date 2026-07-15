@@ -5093,7 +5093,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -6413,7 +6413,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -7165,7 +7165,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19, FLINK-1_20, FLINK-2_2.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to

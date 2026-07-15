@@ -82,6 +82,9 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 
 type FirewallPolicyFirewallPolicyInitParameters struct {
 
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
+
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	PolicyVariables *PolicyVariablesInitParameters `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
 
@@ -117,6 +120,9 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 type FirewallPolicyFirewallPolicyObservation struct {
 
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
+
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	PolicyVariables *PolicyVariablesObservation `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
 
@@ -151,6 +157,10 @@ type FirewallPolicyFirewallPolicyObservation struct {
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
+
+	// Boolean indicating whether to prevent TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. If true, tls_inspection_configuration_arn is required. Default value: false.
+	// +kubebuilder:validation:Optional
+	EnableTLSSessionHolding *bool `json:"enableTlsSessionHolding,omitempty" tf:"enable_tls_session_holding,omitempty"`
 
 	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
 	// +kubebuilder:validation:Optional

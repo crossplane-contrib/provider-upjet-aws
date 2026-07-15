@@ -102,16 +102,17 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   analyticsConfiguration:
-                    description: Configuration block for Amazon Pinpoint analytics
+                    description: Configuration block for AWS End User Messaging analytics
                       that collects metrics for this user pool. See details below.
                     items:
                       properties:
                         applicationArn:
-                          description: Application ARN for an Amazon Pinpoint application.
-                            Conflicts with external_id and role_arn.
+                          description: Application ARN for an AWS End User Messaging
+                            application. Conflicts with external_id and role_arn.
                           type: string
                         applicationId:
-                          description: Application ID for an Amazon Pinpoint application.
+                          description: Application ID for an AWS End User Messaging
+                            application.
                           type: string
                         applicationIdRef:
                           description: Reference to a App in pinpoint to populate
@@ -195,8 +196,8 @@ spec:
                           type: string
                         roleArn:
                           description: ARN of an IAM role that authorizes Amazon Cognito
-                            to publish events to Amazon Pinpoint analytics. Conflicts
-                            with application_arn.
+                            to publish events to AWS End User Messaging analytics.
+                            Conflicts with application_arn.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -274,7 +275,7 @@ spec:
                           type: object
                         userDataShared:
                           description: If set to true, Amazon Cognito will include
-                            user data in the events it publishes to Amazon Pinpoint
+                            user data in the events it publishes to AWS End User Messaging
                             analytics.
                           type: boolean
                       type: object
@@ -533,16 +534,17 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   analyticsConfiguration:
-                    description: Configuration block for Amazon Pinpoint analytics
+                    description: Configuration block for AWS End User Messaging analytics
                       that collects metrics for this user pool. See details below.
                     items:
                       properties:
                         applicationArn:
-                          description: Application ARN for an Amazon Pinpoint application.
-                            Conflicts with external_id and role_arn.
+                          description: Application ARN for an AWS End User Messaging
+                            application. Conflicts with external_id and role_arn.
                           type: string
                         applicationId:
-                          description: Application ID for an Amazon Pinpoint application.
+                          description: Application ID for an AWS End User Messaging
+                            application.
                           type: string
                         applicationIdRef:
                           description: Reference to a App in pinpoint to populate
@@ -626,8 +628,8 @@ spec:
                           type: string
                         roleArn:
                           description: ARN of an IAM role that authorizes Amazon Cognito
-                            to publish events to Amazon Pinpoint analytics. Conflicts
-                            with application_arn.
+                            to publish events to AWS End User Messaging analytics.
+                            Conflicts with application_arn.
                           type: string
                         roleArnRef:
                           description: Reference to a Role in iam to populate roleArn.
@@ -705,7 +707,7 @@ spec:
                           type: object
                         userDataShared:
                           description: If set to true, Amazon Cognito will include
-                            user data in the events it publishes to Amazon Pinpoint
+                            user data in the events it publishes to AWS End User Messaging
                             analytics.
                           type: boolean
                       type: object
@@ -1040,16 +1042,17 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   analyticsConfiguration:
-                    description: Configuration block for Amazon Pinpoint analytics
+                    description: Configuration block for AWS End User Messaging analytics
                       that collects metrics for this user pool. See details below.
                     items:
                       properties:
                         applicationArn:
-                          description: Application ARN for an Amazon Pinpoint application.
-                            Conflicts with external_id and role_arn.
+                          description: Application ARN for an AWS End User Messaging
+                            application. Conflicts with external_id and role_arn.
                           type: string
                         applicationId:
-                          description: Application ID for an Amazon Pinpoint application.
+                          description: Application ID for an AWS End User Messaging
+                            application.
                           type: string
                         externalId:
                           description: ID for the Analytics Configuration. Conflicts
@@ -1057,12 +1060,12 @@ spec:
                           type: string
                         roleArn:
                           description: ARN of an IAM role that authorizes Amazon Cognito
-                            to publish events to Amazon Pinpoint analytics. Conflicts
-                            with application_arn.
+                            to publish events to AWS End User Messaging analytics.
+                            Conflicts with application_arn.
                           type: string
                         userDataShared:
                           description: If set to true, Amazon Cognito will include
-                            user data in the events it publishes to Amazon Pinpoint
+                            user data in the events it publishes to AWS End User Messaging
                             analytics.
                           type: boolean
                       type: object

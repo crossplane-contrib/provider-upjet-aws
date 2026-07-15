@@ -2199,14 +2199,17 @@ spec:
                     description: Gateway route specification to apply.
                     properties:
                       grpcRoute:
-                        description: Specification of a gRPC gateway route.
+                        description: Specification of a gRPC gateway route. See grpc_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -2216,6 +2219,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2227,6 +2231,7 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               port:
                                 description: The port number that corresponds to the
@@ -2241,16 +2246,20 @@ spec:
                             type: object
                         type: object
                       http2Route:
-                        description: Specification of an HTTP/2 gateway route.
+                        description: Specification of an HTTP/2 gateway route. See
+                          http2_route Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -2258,7 +2267,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2267,7 +2277,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2282,7 +2292,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -2292,6 +2303,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2303,9 +2315,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2315,7 +2329,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2323,7 +2337,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -2334,13 +2348,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2354,7 +2367,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2365,14 +2379,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -2383,15 +2397,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2407,16 +2422,20 @@ spec:
                             type: object
                         type: object
                       httpRoute:
-                        description: Specification of an HTTP gateway route.
+                        description: Specification of an HTTP gateway route. See http_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -2424,7 +2443,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2433,7 +2453,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2448,7 +2468,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -2458,6 +2479,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2545,9 +2567,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2557,7 +2581,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2565,7 +2589,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -2576,13 +2600,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2596,7 +2619,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2607,14 +2631,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -2625,15 +2649,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2771,14 +2796,17 @@ spec:
                     description: Gateway route specification to apply.
                     properties:
                       grpcRoute:
-                        description: Specification of a gRPC gateway route.
+                        description: Specification of a gRPC gateway route. See grpc_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -2788,6 +2816,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2799,6 +2828,7 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               port:
                                 description: The port number that corresponds to the
@@ -2813,16 +2843,20 @@ spec:
                             type: object
                         type: object
                       http2Route:
-                        description: Specification of an HTTP/2 gateway route.
+                        description: Specification of an HTTP/2 gateway route. See
+                          http2_route Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -2830,7 +2864,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2839,7 +2874,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2854,7 +2889,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -2864,6 +2900,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2875,9 +2912,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2887,7 +2926,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2895,7 +2934,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -2906,13 +2945,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2926,7 +2964,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2937,14 +2976,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -2955,15 +2994,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2979,16 +3019,20 @@ spec:
                             type: object
                         type: object
                       httpRoute:
-                        description: Specification of an HTTP gateway route.
+                        description: Specification of an HTTP gateway route. See http_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -2996,7 +3040,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3005,7 +3050,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3020,7 +3065,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -3030,6 +3076,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3117,9 +3164,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3129,7 +3178,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3137,7 +3186,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -3148,13 +3197,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3168,7 +3216,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3179,14 +3228,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -3197,15 +3246,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3452,14 +3502,17 @@ spec:
                     description: Gateway route specification to apply.
                     properties:
                       grpcRoute:
-                        description: Specification of a gRPC gateway route.
+                        description: Specification of a gRPC gateway route. See grpc_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -3469,6 +3522,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3480,6 +3534,7 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               port:
                                 description: The port number that corresponds to the
@@ -3494,16 +3549,20 @@ spec:
                             type: object
                         type: object
                       http2Route:
-                        description: Specification of an HTTP/2 gateway route.
+                        description: Specification of an HTTP/2 gateway route. See
+                          http2_route Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -3511,7 +3570,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3520,7 +3580,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3535,7 +3595,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -3545,6 +3606,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3556,9 +3618,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3568,7 +3632,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3576,7 +3640,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -3587,13 +3651,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3607,7 +3670,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3618,14 +3682,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -3636,15 +3700,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3660,16 +3725,20 @@ spec:
                             type: object
                         type: object
                       httpRoute:
-                        description: Specification of an HTTP gateway route.
+                        description: Specification of an HTTP gateway route. See http_route
+                          Block for details.
                         properties:
                           action:
                             description: Action to take if a match is determined.
+                              See action Block for details.
                             properties:
                               rewrite:
-                                description: Gateway route action to rewrite.
+                                description: Gateway route action to rewrite. See
+                                  rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to rewrite.
+                                    description: Host name to match on. See hostname
+                                      Block for details.
                                     properties:
                                       defaultTargetHostname:
                                         description: 'Default target host name to
@@ -3677,7 +3746,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite.
+                                    description: Exact path to rewrite. See path Block
+                                      for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3686,7 +3756,7 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite.
+                                      rewrite. See prefix Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3701,7 +3771,8 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route.
+                                  a request matches the gateway route. See target
+                                  Block for details.
                                 properties:
                                   port:
                                     description: The port number that corresponds
@@ -3711,6 +3782,7 @@ spec:
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
+                                      See virtual_service Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3722,9 +3794,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
+                              See match Block for details.
                             properties:
                               header:
-                                description: Client request headers to match on.
+                                description: Client request headers to match on. See
+                                  header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3734,7 +3808,7 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3742,7 +3816,7 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite.
+                                            to rewrite. See prefix Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
@@ -3753,13 +3827,12 @@ spec:
                                               description: End of the range.
                                               type: number
                                             start:
-                                              description: (Requited) Start of the
-                                                range.
+                                              description: Start of the range.
                                               type: number
                                           type: object
                                         regex:
-                                          description: Header value sent by the client
-                                            must include the specified characters.
+                                          description: The regex used to match the
+                                            path.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3773,7 +3846,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to rewrite.
+                                description: Host name to match on. See hostname Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3784,14 +3858,14 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite.
+                                description: Exact path to rewrite. See path Block
+                                  for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: Header value sent by the client must
-                                      include the specified characters.
+                                    description: The regex used to match the path.
                                     type: string
                                 type: object
                               port:
@@ -3802,15 +3876,16 @@ spec:
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
+                                  See prefix Block for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on.
+                                  on. See query_parameter Block for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match.
+                                        match. See match Block for details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched

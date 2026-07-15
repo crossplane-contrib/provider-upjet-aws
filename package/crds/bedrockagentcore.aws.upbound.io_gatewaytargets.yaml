@@ -99,8 +99,40 @@ spec:
                             description: ARN of the OIDC provider for API key authentication.
                             type: string
                         type: object
+                      callerIamCredentials:
+                        description: Caller IAM credentials-based authentication configuration.
+                          See caller_iam_credentials below.
+                        properties:
+                          region:
+                            description: Region where this resource will be managed.
+                              Defaults to the Region set in the provider configuration.
+                            type: string
+                          service:
+                            description: The target AWS service name used for SigV4
+                              signing of upstream requests. Required when calling
+                              SigV4-protected endpoints such as another Bedrock AgentCore
+                              Runtime (use bedrock-agentcore). Omit for non-SigV4
+                              IAM-role-based authentication, in which case the block
+                              can be empty (gateway_iam_role {}).
+                            type: string
+                        type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
+                          See gateway_iam_role below.
+                        properties:
+                          region:
+                            description: |-
+                              Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                              AWS Region used for SigV4 signing of upstream requests. Defaults to the gateway's Region when omitted. Only meaningful when `service` is set.
+                            type: string
+                          service:
+                            description: |-
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
+                            type: string
+                        type: object
+                      jwtPassthrough:
+                        description: JWT passthrough-based authentication configuration.
                           This is an empty configuration block.
                         type: object
                       oauth:
@@ -252,19 +284,545 @@ spec:
                   name:
                     description: Name of the gateway target.
                     type: string
+                  privateEndpoint:
+                    description: Configuration for private connectivity from AgentCore
+                      Gateway to a resource inside your VPC. Traffic is routed through
+                      Amazon VPC Lattice and never traverses the public internet.
+                      See private_endpoint below.
+                    properties:
+                      managedVpcResource:
+                        description: AWS creates and manages the VPC Lattice resource
+                          gateway and resource configuration on your behalf using
+                          a service-linked role. See managed_vpc_resource below.
+                        properties:
+                          endpointIpAddressType:
+                            description: 'IP address type for the resource configuration
+                              endpoint. Valid values: IPV4, IPV6.'
+                            type: string
+                          routingDomain:
+                            description: Intermediate domain (e.g. a VPCE or ALB DNS
+                              name) to use instead of the actual target domain. Useful
+                              when the MCP server uses a private TLS certificate —
+                              place an ALB with a public ACM cert in front and set
+                              this to the ALB DNS name.
+                            type: string
+                          routingDomainRef:
+                            description: Reference to a LB in elbv2 to populate routingDomain.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          routingDomainSelector:
+                            description: Selector for a LB in elbv2 to populate routingDomain.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          securityGroupIds:
+                            description: Set of security group IDs (up to 5) to associate
+                              with the Lattice resource gateway. Defaults to the VPC
+                              default security group.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          securityGroupIdsRefs:
+                            description: References to SecurityGroup in ec2 to populate
+                              securityGroupIds.
+                            items:
+                              description: A Reference to a named object.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          securityGroupIdsSelector:
+                            description: Selector for a list of SecurityGroup in ec2
+                              to populate securityGroupIds.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          subnetIds:
+                            description: Set of subnet IDs inside the VPC where Lattice
+                              ENIs are placed.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Map of tags to apply to the managed Lattice
+                              resource gateway.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          vpcIdentifier:
+                            description: ID of the VPC that contains the private resource.
+                            type: string
+                          vpcIdentifierRef:
+                            description: Reference to a VPC in ec2 to populate vpcIdentifier.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          vpcIdentifierSelector:
+                            description: Selector for a VPC in ec2 to populate vpcIdentifier.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                        type: object
+                      selfManagedLatticeResource:
+                        description: Use an existing VPC Lattice resource configuration
+                          that you manage yourself. Useful for cross-account setups
+                          or advanced Lattice configurations. See self_managed_lattice_resource
+                          below.
+                        properties:
+                          resourceConfigurationIdentifier:
+                            description: ARN or ID of the VPC Lattice resource configuration.
+                            type: string
+                          resourceConfigurationIdentifierRef:
+                            description: Reference to a ResourceConfiguration in vpclattice
+                              to populate resourceConfigurationIdentifier.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          resourceConfigurationIdentifierSelector:
+                            description: Selector for a ResourceConfiguration in vpclattice
+                              to populate resourceConfigurationIdentifier.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                        type: object
+                    type: object
                   region:
                     description: |-
-                      AWS region where the resource will be created. If not provided, the region from the provider configuration will be used.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
                       below.
                     properties:
+                      http:
+                        description: HTTP target configuration for routing requests
+                          directly to an AgentCore Runtime agent. See http below.
+                        properties:
+                          agentcoreRuntime:
+                            description: AgentCore Runtime target configuration. See
+                              agentcore_runtime below.
+                            properties:
+                              arn:
+                                description: ARN of the AgentCore Runtime agent that
+                                  the gateway routes requests to.
+                                type: string
+                              arnRef:
+                                description: Reference to a AgentRuntime in bedrockagentcore
+                                  to populate arn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              arnSelector:
+                                description: Selector for a AgentRuntime in bedrockagentcore
+                                  to populate arn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              qualifier:
+                                description: Runtime qualifier identifying a specific
+                                  endpoint version. Defaults to DEFAULT when not set.
+                                type: string
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp below.
                         properties:
+                          apiGateway:
+                            description: API Gateway target configuration. See api_gateway
+                              below.
+                            properties:
+                              apiGatewayToolConfiguration:
+                                description: Configuration for API Gateway tools.
+                                  See api_gateway_tool_configuration below.
+                                properties:
+                                  toolFilter:
+                                    description: Repeatable block of path and method
+                                      patterns to expose as tools. See tool_filter
+                                      below.
+                                    items:
+                                      properties:
+                                        filterPath:
+                                          description: Resource path to match in the
+                                            REST API. Supports exact paths (for example,
+                                            /pets) or wildcard paths (for example,
+                                            /pets/* to match all paths under /pets).
+                                            Must match existing paths in the REST
+                                            API.
+                                          type: string
+                                        methods:
+                                          description: 'List of HTTP methods to filter
+                                            for. Valid values: GET, DELETE, HEAD,
+                                            OPTIONS, PATCH, PUT and POST.'
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                    type: array
+                                  toolOverride:
+                                    description: Repeatable block of explicit tool
+                                      definitions with optional custom names and descriptions.
+                                      See tool_override below.
+                                    items:
+                                      properties:
+                                        description:
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
+                                          type: string
+                                        method:
+                                          description: 'HTTP method to expose for
+                                            the specified path. Valid values: GET,
+                                            DELETE, HEAD, OPTIONS, PATCH, PUT and
+                                            POST.'
+                                          type: string
+                                        name:
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
+                                          type: string
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              restApiId:
+                                description: ID of the API Gateway REST API to invoke.
+                                type: string
+                              stage:
+                                description: Stage name of the REST API to add as
+                                  a target.
+                                type: string
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda below.
@@ -358,24 +916,32 @@ spec:
                                     items:
                                       properties:
                                         description:
-                                          description: Description of what the tool
-                                            does.
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -383,7 +949,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -413,7 +983,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -423,7 +997,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -459,8 +1035,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -469,7 +1049,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -478,7 +1062,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -514,7 +1104,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -526,7 +1122,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -558,7 +1156,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -569,7 +1169,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -579,8 +1184,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -621,23 +1227,30 @@ spec:
                                               type: string
                                           type: object
                                         name:
-                                          description: Name of the tool.
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -645,7 +1258,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -675,7 +1292,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -685,7 +1306,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -721,8 +1344,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -731,7 +1358,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -740,7 +1371,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -776,7 +1413,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -788,7 +1431,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -820,7 +1465,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -831,7 +1478,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -841,8 +1493,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -904,6 +1557,13 @@ spec:
                             properties:
                               endpoint:
                                 description: Endpoint for the MCP server target configuration.
+                                type: string
+                              listingMode:
+                                description: Listing mode for the MCP server target.
+                                  Valid values are DEFAULT and DYNAMIC. MCP resources
+                                  for DEFAULT targets are cached at the control plane
+                                  for faster access, while resources for DYNAMIC targets
+                                  are retrieved dynamically when listing tools.
                                 type: string
                             type: object
                           openApiSchema:
@@ -996,8 +1656,31 @@ spec:
                             description: ARN of the OIDC provider for API key authentication.
                             type: string
                         type: object
+                      callerIamCredentials:
+                        description: Caller IAM credentials-based authentication configuration.
+                          See caller_iam_credentials below.
+                        properties:
+                          service:
+                            description: The target AWS service name used for SigV4
+                              signing of upstream requests. Required when calling
+                              SigV4-protected endpoints such as another Bedrock AgentCore
+                              Runtime (use bedrock-agentcore). Omit for non-SigV4
+                              IAM-role-based authentication, in which case the block
+                              can be empty (gateway_iam_role {}).
+                            type: string
+                        type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
+                          See gateway_iam_role below.
+                        properties:
+                          service:
+                            description: |-
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
+                            type: string
+                        type: object
+                      jwtPassthrough:
+                        description: JWT passthrough-based authentication configuration.
                           This is an empty configuration block.
                         type: object
                       oauth:
@@ -1149,14 +1832,540 @@ spec:
                   name:
                     description: Name of the gateway target.
                     type: string
+                  privateEndpoint:
+                    description: Configuration for private connectivity from AgentCore
+                      Gateway to a resource inside your VPC. Traffic is routed through
+                      Amazon VPC Lattice and never traverses the public internet.
+                      See private_endpoint below.
+                    properties:
+                      managedVpcResource:
+                        description: AWS creates and manages the VPC Lattice resource
+                          gateway and resource configuration on your behalf using
+                          a service-linked role. See managed_vpc_resource below.
+                        properties:
+                          endpointIpAddressType:
+                            description: 'IP address type for the resource configuration
+                              endpoint. Valid values: IPV4, IPV6.'
+                            type: string
+                          routingDomain:
+                            description: Intermediate domain (e.g. a VPCE or ALB DNS
+                              name) to use instead of the actual target domain. Useful
+                              when the MCP server uses a private TLS certificate —
+                              place an ALB with a public ACM cert in front and set
+                              this to the ALB DNS name.
+                            type: string
+                          routingDomainRef:
+                            description: Reference to a LB in elbv2 to populate routingDomain.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          routingDomainSelector:
+                            description: Selector for a LB in elbv2 to populate routingDomain.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          securityGroupIds:
+                            description: Set of security group IDs (up to 5) to associate
+                              with the Lattice resource gateway. Defaults to the VPC
+                              default security group.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          securityGroupIdsRefs:
+                            description: References to SecurityGroup in ec2 to populate
+                              securityGroupIds.
+                            items:
+                              description: A Reference to a named object.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            type: array
+                          securityGroupIdsSelector:
+                            description: Selector for a list of SecurityGroup in ec2
+                              to populate securityGroupIds.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          subnetIds:
+                            description: Set of subnet IDs inside the VPC where Lattice
+                              ENIs are placed.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Map of tags to apply to the managed Lattice
+                              resource gateway.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          vpcIdentifier:
+                            description: ID of the VPC that contains the private resource.
+                            type: string
+                          vpcIdentifierRef:
+                            description: Reference to a VPC in ec2 to populate vpcIdentifier.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          vpcIdentifierSelector:
+                            description: Selector for a VPC in ec2 to populate vpcIdentifier.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                        type: object
+                      selfManagedLatticeResource:
+                        description: Use an existing VPC Lattice resource configuration
+                          that you manage yourself. Useful for cross-account setups
+                          or advanced Lattice configurations. See self_managed_lattice_resource
+                          below.
+                        properties:
+                          resourceConfigurationIdentifier:
+                            description: ARN or ID of the VPC Lattice resource configuration.
+                            type: string
+                          resourceConfigurationIdentifierRef:
+                            description: Reference to a ResourceConfiguration in vpclattice
+                              to populate resourceConfigurationIdentifier.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          resourceConfigurationIdentifierSelector:
+                            description: Selector for a ResourceConfiguration in vpclattice
+                              to populate resourceConfigurationIdentifier.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                        type: object
+                    type: object
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
                       below.
                     properties:
+                      http:
+                        description: HTTP target configuration for routing requests
+                          directly to an AgentCore Runtime agent. See http below.
+                        properties:
+                          agentcoreRuntime:
+                            description: AgentCore Runtime target configuration. See
+                              agentcore_runtime below.
+                            properties:
+                              arn:
+                                description: ARN of the AgentCore Runtime agent that
+                                  the gateway routes requests to.
+                                type: string
+                              arnRef:
+                                description: Reference to a AgentRuntime in bedrockagentcore
+                                  to populate arn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              arnSelector:
+                                description: Selector for a AgentRuntime in bedrockagentcore
+                                  to populate arn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              qualifier:
+                                description: Runtime qualifier identifying a specific
+                                  endpoint version. Defaults to DEFAULT when not set.
+                                type: string
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp below.
                         properties:
+                          apiGateway:
+                            description: API Gateway target configuration. See api_gateway
+                              below.
+                            properties:
+                              apiGatewayToolConfiguration:
+                                description: Configuration for API Gateway tools.
+                                  See api_gateway_tool_configuration below.
+                                properties:
+                                  toolFilter:
+                                    description: Repeatable block of path and method
+                                      patterns to expose as tools. See tool_filter
+                                      below.
+                                    items:
+                                      properties:
+                                        filterPath:
+                                          description: Resource path to match in the
+                                            REST API. Supports exact paths (for example,
+                                            /pets) or wildcard paths (for example,
+                                            /pets/* to match all paths under /pets).
+                                            Must match existing paths in the REST
+                                            API.
+                                          type: string
+                                        methods:
+                                          description: 'List of HTTP methods to filter
+                                            for. Valid values: GET, DELETE, HEAD,
+                                            OPTIONS, PATCH, PUT and POST.'
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                    type: array
+                                  toolOverride:
+                                    description: Repeatable block of explicit tool
+                                      definitions with optional custom names and descriptions.
+                                      See tool_override below.
+                                    items:
+                                      properties:
+                                        description:
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
+                                          type: string
+                                        method:
+                                          description: 'HTTP method to expose for
+                                            the specified path. Valid values: GET,
+                                            DELETE, HEAD, OPTIONS, PATCH, PUT and
+                                            POST.'
+                                          type: string
+                                        name:
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
+                                          type: string
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              restApiId:
+                                description: ID of the API Gateway REST API to invoke.
+                                type: string
+                              stage:
+                                description: Stage name of the REST API to add as
+                                  a target.
+                                type: string
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda below.
@@ -1250,24 +2459,32 @@ spec:
                                     items:
                                       properties:
                                         description:
-                                          description: Description of what the tool
-                                            does.
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -1275,7 +2492,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -1305,7 +2526,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -1315,7 +2540,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -1351,8 +2578,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -1361,7 +2592,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -1370,7 +2605,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -1406,7 +2647,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -1418,7 +2665,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -1450,7 +2699,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -1461,7 +2712,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -1471,8 +2727,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -1513,23 +2770,30 @@ spec:
                                               type: string
                                           type: object
                                         name:
-                                          description: Name of the tool.
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -1537,7 +2801,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -1567,7 +2835,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -1577,7 +2849,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -1613,8 +2887,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -1623,7 +2901,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -1632,7 +2914,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -1668,7 +2956,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -1680,7 +2974,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -1712,7 +3008,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -1723,7 +3021,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -1733,8 +3036,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -1796,6 +3100,13 @@ spec:
                             properties:
                               endpoint:
                                 description: Endpoint for the MCP server target configuration.
+                                type: string
+                              listingMode:
+                                description: Listing mode for the MCP server target.
+                                  Valid values are DEFAULT and DYNAMIC. MCP resources
+                                  for DEFAULT targets are cached at the control plane
+                                  for faster access, while resources for DYNAMIC targets
+                                  are retrieved dynamically when listing tools.
                                 type: string
                             type: object
                           openApiSchema:
@@ -1969,8 +3280,40 @@ spec:
                             description: ARN of the OIDC provider for API key authentication.
                             type: string
                         type: object
+                      callerIamCredentials:
+                        description: Caller IAM credentials-based authentication configuration.
+                          See caller_iam_credentials below.
+                        properties:
+                          region:
+                            description: Region where this resource will be managed.
+                              Defaults to the Region set in the provider configuration.
+                            type: string
+                          service:
+                            description: The target AWS service name used for SigV4
+                              signing of upstream requests. Required when calling
+                              SigV4-protected endpoints such as another Bedrock AgentCore
+                              Runtime (use bedrock-agentcore). Omit for non-SigV4
+                              IAM-role-based authentication, in which case the block
+                              can be empty (gateway_iam_role {}).
+                            type: string
+                        type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
+                          See gateway_iam_role below.
+                        properties:
+                          region:
+                            description: |-
+                              Region where this resource will be managed. Defaults to the Region set in the provider configuration.
+                              AWS Region used for SigV4 signing of upstream requests. Defaults to the gateway's Region when omitted. Only meaningful when `service` is set.
+                            type: string
+                          service:
+                            description: |-
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
+                            type: string
+                        type: object
+                      jwtPassthrough:
+                        description: JWT passthrough-based authentication configuration.
                           This is an empty configuration block.
                         type: object
                       oauth:
@@ -2048,19 +3391,166 @@ spec:
                   name:
                     description: Name of the gateway target.
                     type: string
+                  privateEndpoint:
+                    description: Configuration for private connectivity from AgentCore
+                      Gateway to a resource inside your VPC. Traffic is routed through
+                      Amazon VPC Lattice and never traverses the public internet.
+                      See private_endpoint below.
+                    properties:
+                      managedVpcResource:
+                        description: AWS creates and manages the VPC Lattice resource
+                          gateway and resource configuration on your behalf using
+                          a service-linked role. See managed_vpc_resource below.
+                        properties:
+                          endpointIpAddressType:
+                            description: 'IP address type for the resource configuration
+                              endpoint. Valid values: IPV4, IPV6.'
+                            type: string
+                          routingDomain:
+                            description: Intermediate domain (e.g. a VPCE or ALB DNS
+                              name) to use instead of the actual target domain. Useful
+                              when the MCP server uses a private TLS certificate —
+                              place an ALB with a public ACM cert in front and set
+                              this to the ALB DNS name.
+                            type: string
+                          securityGroupIds:
+                            description: Set of security group IDs (up to 5) to associate
+                              with the Lattice resource gateway. Defaults to the VPC
+                              default security group.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetIds:
+                            description: Set of subnet IDs inside the VPC where Lattice
+                              ENIs are placed.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          tags:
+                            additionalProperties:
+                              type: string
+                            description: Map of tags to apply to the managed Lattice
+                              resource gateway.
+                            type: object
+                            x-kubernetes-map-type: granular
+                          vpcIdentifier:
+                            description: ID of the VPC that contains the private resource.
+                            type: string
+                        type: object
+                      selfManagedLatticeResource:
+                        description: Use an existing VPC Lattice resource configuration
+                          that you manage yourself. Useful for cross-account setups
+                          or advanced Lattice configurations. See self_managed_lattice_resource
+                          below.
+                        properties:
+                          resourceConfigurationIdentifier:
+                            description: ARN or ID of the VPC Lattice resource configuration.
+                            type: string
+                        type: object
+                    type: object
                   region:
                     description: |-
-                      AWS region where the resource will be created. If not provided, the region from the provider configuration will be used.
+                      Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
                       below.
                     properties:
+                      http:
+                        description: HTTP target configuration for routing requests
+                          directly to an AgentCore Runtime agent. See http below.
+                        properties:
+                          agentcoreRuntime:
+                            description: AgentCore Runtime target configuration. See
+                              agentcore_runtime below.
+                            properties:
+                              arn:
+                                description: ARN of the AgentCore Runtime agent that
+                                  the gateway routes requests to.
+                                type: string
+                              qualifier:
+                                description: Runtime qualifier identifying a specific
+                                  endpoint version. Defaults to DEFAULT when not set.
+                                type: string
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp below.
                         properties:
+                          apiGateway:
+                            description: API Gateway target configuration. See api_gateway
+                              below.
+                            properties:
+                              apiGatewayToolConfiguration:
+                                description: Configuration for API Gateway tools.
+                                  See api_gateway_tool_configuration below.
+                                properties:
+                                  toolFilter:
+                                    description: Repeatable block of path and method
+                                      patterns to expose as tools. See tool_filter
+                                      below.
+                                    items:
+                                      properties:
+                                        filterPath:
+                                          description: Resource path to match in the
+                                            REST API. Supports exact paths (for example,
+                                            /pets) or wildcard paths (for example,
+                                            /pets/* to match all paths under /pets).
+                                            Must match existing paths in the REST
+                                            API.
+                                          type: string
+                                        methods:
+                                          description: 'List of HTTP methods to filter
+                                            for. Valid values: GET, DELETE, HEAD,
+                                            OPTIONS, PATCH, PUT and POST.'
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                      type: object
+                                    type: array
+                                  toolOverride:
+                                    description: Repeatable block of explicit tool
+                                      definitions with optional custom names and descriptions.
+                                      See tool_override below.
+                                    items:
+                                      properties:
+                                        description:
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
+                                          type: string
+                                        method:
+                                          description: 'HTTP method to expose for
+                                            the specified path. Valid values: GET,
+                                            DELETE, HEAD, OPTIONS, PATCH, PUT and
+                                            POST.'
+                                          type: string
+                                        name:
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
+                                          type: string
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              restApiId:
+                                description: ID of the API Gateway REST API to invoke.
+                                type: string
+                              stage:
+                                description: Stage name of the REST API to add as
+                                  a target.
+                                type: string
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda below.
@@ -2078,24 +3568,32 @@ spec:
                                     items:
                                       properties:
                                         description:
-                                          description: Description of what the tool
-                                            does.
+                                          description: Description of the tool. Provides
+                                            information about the purpose and usage
+                                            of the tool. If not provided, uses the
+                                            description from the API's OpenAPI specification.
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -2103,7 +3601,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -2133,7 +3635,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -2143,7 +3649,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -2179,8 +3687,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -2189,7 +3701,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -2198,7 +3714,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -2234,7 +3756,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -2246,7 +3774,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -2278,7 +3808,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -2289,7 +3821,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -2299,8 +3836,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -2341,23 +3879,30 @@ spec:
                                               type: string
                                           type: object
                                         name:
-                                          description: Name of the tool.
+                                          description: Name of tool. Identifies the
+                                            tool in the Model Context Protocol.
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
                                             See schema_definition below.
                                           properties:
                                             description:
-                                              description: Description of what the
-                                                tool does.
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
                                               type: string
                                             items:
                                               description: Items definition for array
                                                 properties. See items above.
                                               properties:
                                                 description:
-                                                  description: Description of what
-                                                    the tool does.
+                                                  description: Description of the
+                                                    tool. Provides information about
+                                                    the purpose and usage of the tool.
+                                                    If not provided, uses the description
+                                                    from the API's OpenAPI specification.
                                                   type: string
                                                 items:
                                                   description: Items definition for
@@ -2365,7 +3910,11 @@ spec:
                                                   properties:
                                                     description:
                                                       description: Description of
-                                                        what the tool does.
+                                                        the tool. Provides information
+                                                        about the purpose and usage
+                                                        of the tool. If not provided,
+                                                        uses the description from
+                                                        the API's OpenAPI specification.
                                                       type: string
                                                     itemsJson:
                                                       description: JSON-encoded schema
@@ -2395,7 +3944,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       itemsJson:
                                                         description: JSON-encoded
@@ -2405,7 +3958,9 @@ spec:
                                                           be used with properties_json.
                                                         type: string
                                                       name:
-                                                        description: Name of the tool.
+                                                        description: Name of tool.
+                                                          Identifies the tool in the
+                                                          Model Context Protocol.
                                                         type: string
                                                       propertiesJson:
                                                         description: JSON-encoded
@@ -2441,8 +3996,12 @@ spec:
                                               items:
                                                 properties:
                                                   description:
-                                                    description: Description of what
-                                                      the tool does.
+                                                    description: Description of the
+                                                      tool. Provides information about
+                                                      the purpose and usage of the
+                                                      tool. If not provided, uses
+                                                      the description from the API's
+                                                      OpenAPI specification.
                                                     type: string
                                                   items:
                                                     description: Items definition
@@ -2451,7 +4010,11 @@ spec:
                                                     properties:
                                                       description:
                                                         description: Description of
-                                                          what the tool does.
+                                                          the tool. Provides information
+                                                          about the purpose and usage
+                                                          of the tool. If not provided,
+                                                          uses the description from
+                                                          the API's OpenAPI specification.
                                                         type: string
                                                       items:
                                                         description: Items definition
@@ -2460,7 +4023,13 @@ spec:
                                                         properties:
                                                           description:
                                                             description: Description
-                                                              of what the tool does.
+                                                              of the tool. Provides
+                                                              information about the
+                                                              purpose and usage of
+                                                              the tool. If not provided,
+                                                              uses the description
+                                                              from the API's OpenAPI
+                                                              specification.
                                                             type: string
                                                           itemsJson:
                                                             description: JSON-encoded
@@ -2496,7 +4065,13 @@ spec:
                                                           properties:
                                                             description:
                                                               description: Description
-                                                                of what the tool does.
+                                                                of the tool. Provides
+                                                                information about
+                                                                the purpose and usage
+                                                                of the tool. If not
+                                                                provided, uses the
+                                                                description from the
+                                                                API's OpenAPI specification.
                                                               type: string
                                                             itemsJson:
                                                               description: JSON-encoded
@@ -2508,7 +4083,9 @@ spec:
                                                               type: string
                                                             name:
                                                               description: Name of
-                                                                the tool.
+                                                                tool. Identifies the
+                                                                tool in the Model
+                                                                Context Protocol.
                                                               type: string
                                                             propertiesJson:
                                                               description: JSON-encoded
@@ -2540,7 +4117,9 @@ spec:
                                                         type: string
                                                     type: object
                                                   name:
-                                                    description: Name of the tool.
+                                                    description: Name of tool. Identifies
+                                                      the tool in the Model Context
+                                                      Protocol.
                                                     type: string
                                                   property:
                                                     description: Set of property definitions
@@ -2551,7 +4130,12 @@ spec:
                                                       properties:
                                                         description:
                                                           description: Description
-                                                            of what the tool does.
+                                                            of the tool. Provides
+                                                            information about the
+                                                            purpose and usage of the
+                                                            tool. If not provided,
+                                                            uses the description from
+                                                            the API's OpenAPI specification.
                                                           type: string
                                                         itemsJson:
                                                           description: JSON-encoded
@@ -2561,8 +4145,9 @@ spec:
                                                             Cannot be used with properties_json.
                                                           type: string
                                                         name:
-                                                          description: Name of the
-                                                            tool.
+                                                          description: Name of tool.
+                                                            Identifies the tool in
+                                                            the Model Context Protocol.
                                                           type: string
                                                         propertiesJson:
                                                           description: JSON-encoded
@@ -2624,6 +4209,13 @@ spec:
                             properties:
                               endpoint:
                                 description: Endpoint for the MCP server target configuration.
+                                type: string
+                              listingMode:
+                                description: Listing mode for the MCP server target.
+                                  Valid values are DEFAULT and DYNAMIC. MCP resources
+                                  for DEFAULT targets are cached at the control plane
+                                  for faster access, while resources for DYNAMIC targets
+                                  are retrieved dynamically when listing tools.
                                 type: string
                             type: object
                           openApiSchema:

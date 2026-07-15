@@ -21,7 +21,7 @@ type ConfigurationInitParameters struct {
 	// Extraction configuration for identifying and extracting relevant information. See extraction below. Cannot be used with type set to SUMMARY_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
 	Extraction *ExtractionInitParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
 
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this forces a new resource.
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -33,7 +33,7 @@ type ConfigurationObservation struct {
 	// Extraction configuration for identifying and extracting relevant information. See extraction below. Cannot be used with type set to SUMMARY_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
 	Extraction *ExtractionObservation `json:"extraction,omitempty" tf:"extraction,omitempty"`
 
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this forces a new resource.
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -47,7 +47,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Extraction *ExtractionParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
 
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this forces a new resource.
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -150,7 +150,7 @@ type MemoryStrategyInitParameters struct {
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
-	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per memory.
+	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -183,7 +183,7 @@ type MemoryStrategyObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per memory.
+	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -238,7 +238,7 @@ type MemoryStrategyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per memory.
+	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

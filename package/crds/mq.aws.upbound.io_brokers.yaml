@@ -2904,10 +2904,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hostInstanceType)
                 || (has(self.initProvider) && has(self.initProvider.hostInstanceType))'
-            - message: spec.forProvider.user is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.user)
-                || (has(self.initProvider) && has(self.initProvider.user))'
           status:
             description: BrokerStatus defines the observed state of Broker.
             properties:
@@ -2997,9 +2993,12 @@ spec:
                             Management UI depending on engine_type.
                           type: string
                         endpoints:
-                          description: 'Broker''s wire-level protocol endpoints in
-                            the following order & format referenceable e.g., as instances.0.endpoints.0
-                            (SSL):'
+                          description: Broker's wire-level protocol endpoints referenceable
+                            e.g., as instances.0.endpoints.0. Known endpoints are
+                            returned in the deterministic order below, based on protocol
+                            prefix and port number; any additional endpoint types
+                            introduced in the future are appended afterward in the
+                            order returned by the API.
                           items:
                             type: string
                           type: array

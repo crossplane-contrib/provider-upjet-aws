@@ -16,7 +16,7 @@ spec:
   forProvider:
     description: Example Description
     eventFilter:
-      source: aws.partner/examplepartner.com
+      source: aws.partner/example.com
     eventbridgeBus: default
     region: us-west-1
     tags:

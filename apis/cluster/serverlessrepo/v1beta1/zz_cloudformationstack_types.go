@@ -15,21 +15,21 @@ import (
 
 type CloudFormationStackInitParameters struct {
 
-	// The ARN of the application from the Serverless Application Repository.
+	// ARN of the application from the Serverless Application Repository.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// A list of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND
+	// List of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND. If the application contains IAM resources, IAM resources with custom names, resource-based policies, or nested applications, the corresponding capability must be specified. If omitted, the value applied by AWS is tracked in state.
 	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
-	// The name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
+	// Name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A map of Parameter structures that specify input parameters for the stack.
+	// Map of Parameter structures that specify input parameters for the stack.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The version of the application to deploy. If not supplied, deploys the latest version.
+	// Version of the application to deploy. If not supplied, deploys the latest version.
 	SemanticVersion *string `json:"semanticVersion,omitempty" tf:"semantic_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -39,24 +39,24 @@ type CloudFormationStackInitParameters struct {
 
 type CloudFormationStackObservation struct {
 
-	// The ARN of the application from the Serverless Application Repository.
+	// ARN of the application from the Serverless Application Repository.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// A list of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND
+	// List of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND. If the application contains IAM resources, IAM resources with custom names, resource-based policies, or nested applications, the corresponding capability must be specified. If omitted, the value applied by AWS is tracked in state.
 	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
-	// A unique identifier of the stack.
+	// Unique identifier of the stack.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
+	// Name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A map of outputs from the stack.
+	// Map of outputs from the stack.
 	// +mapType=granular
 	Outputs map[string]*string `json:"outputs,omitempty" tf:"outputs,omitempty"`
 
-	// A map of Parameter structures that specify input parameters for the stack.
+	// Map of Parameter structures that specify input parameters for the stack.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -64,34 +64,34 @@ type CloudFormationStackObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The version of the application to deploy. If not supplied, deploys the latest version.
+	// Version of the application to deploy. If not supplied, deploys the latest version.
 	SemanticVersion *string `json:"semanticVersion,omitempty" tf:"semantic_version,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CloudFormationStackParameters struct {
 
-	// The ARN of the application from the Serverless Application Repository.
+	// ARN of the application from the Serverless Application Repository.
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// A list of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND
+	// List of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND. If the application contains IAM resources, IAM resources with custom names, resource-based policies, or nested applications, the corresponding capability must be specified. If omitted, the value applied by AWS is tracked in state.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
-	// The name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
+	// Name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A map of Parameter structures that specify input parameters for the stack.
+	// Map of Parameter structures that specify input parameters for the stack.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
@@ -101,7 +101,7 @@ type CloudFormationStackParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The version of the application to deploy. If not supplied, deploys the latest version.
+	// Version of the application to deploy. If not supplied, deploys the latest version.
 	// +kubebuilder:validation:Optional
 	SemanticVersion *string `json:"semanticVersion,omitempty" tf:"semantic_version,omitempty"`
 
@@ -138,7 +138,7 @@ type CloudFormationStackStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CloudFormationStack is the Schema for the CloudFormationStacks API. Deploys an Application CloudFormation Stack from the Serverless Application Repository.
+// CloudFormationStack is the Schema for the CloudFormationStacks API. Manages an Application CloudFormation Stack from the Serverless Application Repository.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -148,7 +148,6 @@ type CloudFormationStack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.applicationId) || (has(self.initProvider) && has(self.initProvider.applicationId))",message="spec.forProvider.applicationId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.capabilities) || (has(self.initProvider) && has(self.initProvider.capabilities))",message="spec.forProvider.capabilities is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   CloudFormationStackSpec   `json:"spec"`
 	Status CloudFormationStackStatus `json:"status,omitempty"`

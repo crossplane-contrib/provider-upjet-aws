@@ -70,6 +70,16 @@ spec:
                     description: ID of the Anycast static IP list that is associated
                       with the distribution.
                     type: string
+                  cacheTagConfig:
+                    description: Cache tag configuration block for cache tag extraction
+                      from origin responses (maximum one). See the AWS documentation
+                      for more information about cache tags.
+                    properties:
+                      headerName:
+                        description: Name of the HTTP header to extract cache tags.
+                          The header value must contain comma-separated tag values.
+                        type: string
+                    type: object
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -746,6 +756,17 @@ spec:
                                 By default, AWS enforces an upper limit of 60. But
                                 you can request an increase. Defaults to 5.
                               type: number
+                            originMtlsConfig:
+                              description: The origin mTLS configuration for mutual
+                                TLS authentication between CloudFront and your origin.
+                              properties:
+                                clientCertificateArn:
+                                  description: ARN of the ACM certificate to use for
+                                    mutual TLS authentication with the origin. The
+                                    certificate must have Extended Key Usage set to
+                                    TLS Client Authentication.
+                                  type: string
+                              type: object
                             originProtocolPolicy:
                               description: Origin protocol policy to apply to your
                                 origin. One of http-only, https-only, or match-viewer.
@@ -1186,6 +1207,16 @@ spec:
                     description: ID of the Anycast static IP list that is associated
                       with the distribution.
                     type: string
+                  cacheTagConfig:
+                    description: Cache tag configuration block for cache tag extraction
+                      from origin responses (maximum one). See the AWS documentation
+                      for more information about cache tags.
+                    properties:
+                      headerName:
+                        description: Name of the HTTP header to extract cache tags.
+                          The header value must contain comma-separated tag values.
+                        type: string
+                    type: object
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -1862,6 +1893,17 @@ spec:
                                 By default, AWS enforces an upper limit of 60. But
                                 you can request an increase. Defaults to 5.
                               type: number
+                            originMtlsConfig:
+                              description: The origin mTLS configuration for mutual
+                                TLS authentication between CloudFront and your origin.
+                              properties:
+                                clientCertificateArn:
+                                  description: ARN of the ACM certificate to use for
+                                    mutual TLS authentication with the origin. The
+                                    certificate must have Extended Key Usage set to
+                                    TLS Client Authentication.
+                                  type: string
+                              type: object
                             originProtocolPolicy:
                               description: Origin protocol policy to apply to your
                                 origin. One of http-only, https-only, or match-viewer.
@@ -2377,6 +2419,16 @@ spec:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
                     type: string
+                  cacheTagConfig:
+                    description: Cache tag configuration block for cache tag extraction
+                      from origin responses (maximum one). See the AWS documentation
+                      for more information about cache tags.
+                    properties:
+                      headerName:
+                        description: Name of the HTTP header to extract cache tags.
+                          The header value must contain comma-separated tag values.
+                        type: string
+                    type: object
                   callerReference:
                     description: Internal value used by CloudFront to allow future
                       updates to the distribution configuration.
@@ -2919,6 +2971,17 @@ spec:
                                 By default, AWS enforces an upper limit of 60. But
                                 you can request an increase. Defaults to 5.
                               type: number
+                            originMtlsConfig:
+                              description: The origin mTLS configuration for mutual
+                                TLS authentication between CloudFront and your origin.
+                              properties:
+                                clientCertificateArn:
+                                  description: ARN of the ACM certificate to use for
+                                    mutual TLS authentication with the origin. The
+                                    certificate must have Extended Key Usage set to
+                                    TLS Client Authentication.
+                                  type: string
+                              type: object
                             originProtocolPolicy:
                               description: Origin protocol policy to apply to your
                                 origin. One of http-only, https-only, or match-viewer.

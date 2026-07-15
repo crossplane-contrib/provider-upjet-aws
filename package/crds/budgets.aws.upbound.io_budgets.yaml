@@ -1763,6 +1763,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.
@@ -3542,6 +3548,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.
@@ -5428,6 +5440,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.
@@ -5729,7 +5747,7 @@ spec:
                     type: object
                   filterExpression:
                     description: Object containing Filter Expression to apply to budget.
-                      Conflicts with cost_filter.
+                      Conflicts with cost_filter and requires metrics.
                     properties:
                       and:
                         description: A list of filter expressions to combine with
@@ -7118,6 +7136,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.
@@ -7309,7 +7333,7 @@ spec:
                     type: object
                   filterExpression:
                     description: Object containing Filter Expression to apply to budget.
-                      Conflicts with cost_filter.
+                      Conflicts with cost_filter and requires metrics.
                     properties:
                       and:
                         description: A list of filter expressions to combine with
@@ -8698,6 +8722,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.
@@ -8993,7 +9023,7 @@ spec:
                     type: object
                   filterExpression:
                     description: Object containing Filter Expression to apply to budget.
-                      Conflicts with cost_filter.
+                      Conflicts with cost_filter and requires metrics.
                     properties:
                       and:
                         description: A list of filter expressions to combine with
@@ -10385,6 +10415,12 @@ spec:
                       actual spend, or budget threshold, such as dollars or GB. See
                       Spend documentation.
                     type: string
+                  metrics:
+                    description: List containing definition for how the budget data
+                      is aggregated. Conflicts with cost_types and requires filter_expression.
+                    items:
+                      type: string
+                    type: array
                   notification:
                     description: Object containing Budget Notifications. Can be used
                       multiple times to define more than one budget notification.

@@ -1311,7 +1311,7 @@ type PostgresSettingsInitParameters struct {
 	// Optional When true, DMS migrates JSONB values as CLOB.
 	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
 
-	// Optional When true, DMS migrates LONG values as VARCHAR.
+	// Specifies how DMS maps LONG VARCHAR values. Valid values are wstring, clob, and nclob.
 	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
@@ -1368,7 +1368,7 @@ type PostgresSettingsObservation struct {
 	// Optional When true, DMS migrates JSONB values as CLOB.
 	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
 
-	// Optional When true, DMS migrates LONG values as VARCHAR.
+	// Specifies how DMS maps LONG VARCHAR values. Valid values are wstring, clob, and nclob.
 	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
@@ -1438,7 +1438,7 @@ type PostgresSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
 
-	// Optional When true, DMS migrates LONG values as VARCHAR.
+	// Specifies how DMS maps LONG VARCHAR values. Valid values are wstring, clob, and nclob.
 	// +kubebuilder:validation:Optional
 	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
 

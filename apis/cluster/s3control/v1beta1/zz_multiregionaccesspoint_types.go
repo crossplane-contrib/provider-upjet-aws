@@ -78,6 +78,9 @@ type MultiRegionAccessPointObservation struct {
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the Multi-Region Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`

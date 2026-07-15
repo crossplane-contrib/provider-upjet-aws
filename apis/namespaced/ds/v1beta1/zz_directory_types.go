@@ -131,6 +131,9 @@ type DirectoryInitParameters struct {
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
 
+	// Enables access to directory data via the Directory Service Data API for the specified directory. For more information, see Directory Service Data API Reference.
+	EnableDirectoryDataAccess *bool `json:"enableDirectoryDataAccess,omitempty" tf:"enable_directory_data_access,omitempty"`
+
 	// Whether to enable single-sign on for the directory. Requires alias. Defaults to false.
 	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
 
@@ -180,6 +183,9 @@ type DirectoryObservation struct {
 
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// Enables access to directory data via the Directory Service Data API for the specified directory. For more information, see Directory Service Data API Reference.
+	EnableDirectoryDataAccess *bool `json:"enableDirectoryDataAccess,omitempty" tf:"enable_directory_data_access,omitempty"`
 
 	// Whether to enable single-sign on for the directory. Requires alias. Defaults to false.
 	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
@@ -239,6 +245,10 @@ type DirectoryParameters struct {
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	// +kubebuilder:validation:Optional
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// Enables access to directory data via the Directory Service Data API for the specified directory. For more information, see Directory Service Data API Reference.
+	// +kubebuilder:validation:Optional
+	EnableDirectoryDataAccess *bool `json:"enableDirectoryDataAccess,omitempty" tf:"enable_directory_data_access,omitempty"`
 
 	// Whether to enable single-sign on for the directory. Requires alias. Defaults to false.
 	// +kubebuilder:validation:Optional

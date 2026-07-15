@@ -42,6 +42,35 @@ type AwsAccountIDParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type AwsAccountNameInitParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type AwsAccountNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type AwsAccountNameParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	// +kubebuilder:validation:Optional
+	Comparison *string `json:"comparison" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type CompanyNameInitParameters struct {
 
 	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
@@ -61,6 +90,122 @@ type CompanyNameObservation struct {
 }
 
 type CompanyNameParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	// +kubebuilder:validation:Optional
+	Comparison *string `json:"comparison" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type ComplianceAssociatedStandardsIDInitParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceAssociatedStandardsIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceAssociatedStandardsIDParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	// +kubebuilder:validation:Optional
+	Comparison *string `json:"comparison" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlIDInitParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlIDObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlIDParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	// +kubebuilder:validation:Optional
+	Comparison *string `json:"comparison" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersNameInitParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersNameObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersNameParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	// +kubebuilder:validation:Optional
+	Comparison *string `json:"comparison" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersValueInitParameters struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersValueObservation struct {
+
+	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
+	Comparison *string `json:"comparison,omitempty" tf:"comparison,omitempty"`
+
+	// A value for the keyword.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ComplianceSecurityControlParametersValueParameters struct {
 
 	// The condition to apply to a string value when querying for findings. Valid values include: EQUALS and NOT_EQUALS.
 	// +kubebuilder:validation:Optional
@@ -280,8 +425,23 @@ type FiltersInitParameters struct {
 	// AWS account ID that a finding is generated in. See String_Filter below for more details.
 	AwsAccountID []AwsAccountIDInitParameters `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
+	// The name of the AWS account in which a finding is generated. See String_Filter below for more details.
+	AwsAccountName []AwsAccountNameInitParameters `json:"awsAccountName,omitempty" tf:"aws_account_name,omitempty"`
+
 	// The name of the findings provider (company) that owns the solution (product) that generates findings. See String_Filter below for more details.
 	CompanyName []CompanyNameInitParameters `json:"companyName,omitempty" tf:"company_name,omitempty"`
+
+	// The unique identifier of a standard in which a control is enabled. See String_Filter below for more details.
+	ComplianceAssociatedStandardsID []ComplianceAssociatedStandardsIDInitParameters `json:"complianceAssociatedStandardsId,omitempty" tf:"compliance_associated_standards_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	ComplianceSecurityControlID []ComplianceSecurityControlIDInitParameters `json:"complianceSecurityControlId,omitempty" tf:"compliance_security_control_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	ComplianceSecurityControlParametersName []ComplianceSecurityControlParametersNameInitParameters `json:"complianceSecurityControlParametersName,omitempty" tf:"compliance_security_control_parameters_name,omitempty"`
+
+	// The current value of a security control parameter. See String_Filter below for more details.
+	ComplianceSecurityControlParametersValue []ComplianceSecurityControlParametersValueInitParameters `json:"complianceSecurityControlParametersValue,omitempty" tf:"compliance_security_control_parameters_value,omitempty"`
 
 	// Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details. See String Filter below for more details.
 	ComplianceStatus []ComplianceStatusInitParameters `json:"complianceStatus,omitempty" tf:"compliance_status,omitempty"`
@@ -547,8 +707,23 @@ type FiltersObservation struct {
 	// AWS account ID that a finding is generated in. See String_Filter below for more details.
 	AwsAccountID []AwsAccountIDObservation `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
+	// The name of the AWS account in which a finding is generated. See String_Filter below for more details.
+	AwsAccountName []AwsAccountNameObservation `json:"awsAccountName,omitempty" tf:"aws_account_name,omitempty"`
+
 	// The name of the findings provider (company) that owns the solution (product) that generates findings. See String_Filter below for more details.
 	CompanyName []CompanyNameObservation `json:"companyName,omitempty" tf:"company_name,omitempty"`
+
+	// The unique identifier of a standard in which a control is enabled. See String_Filter below for more details.
+	ComplianceAssociatedStandardsID []ComplianceAssociatedStandardsIDObservation `json:"complianceAssociatedStandardsId,omitempty" tf:"compliance_associated_standards_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	ComplianceSecurityControlID []ComplianceSecurityControlIDObservation `json:"complianceSecurityControlId,omitempty" tf:"compliance_security_control_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	ComplianceSecurityControlParametersName []ComplianceSecurityControlParametersNameObservation `json:"complianceSecurityControlParametersName,omitempty" tf:"compliance_security_control_parameters_name,omitempty"`
+
+	// The current value of a security control parameter. See String_Filter below for more details.
+	ComplianceSecurityControlParametersValue []ComplianceSecurityControlParametersValueObservation `json:"complianceSecurityControlParametersValue,omitempty" tf:"compliance_security_control_parameters_value,omitempty"`
 
 	// Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details. See String Filter below for more details.
 	ComplianceStatus []ComplianceStatusObservation `json:"complianceStatus,omitempty" tf:"compliance_status,omitempty"`
@@ -815,9 +990,29 @@ type FiltersParameters struct {
 	// +kubebuilder:validation:Optional
 	AwsAccountID []AwsAccountIDParameters `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
+	// The name of the AWS account in which a finding is generated. See String_Filter below for more details.
+	// +kubebuilder:validation:Optional
+	AwsAccountName []AwsAccountNameParameters `json:"awsAccountName,omitempty" tf:"aws_account_name,omitempty"`
+
 	// The name of the findings provider (company) that owns the solution (product) that generates findings. See String_Filter below for more details.
 	// +kubebuilder:validation:Optional
 	CompanyName []CompanyNameParameters `json:"companyName,omitempty" tf:"company_name,omitempty"`
+
+	// The unique identifier of a standard in which a control is enabled. See String_Filter below for more details.
+	// +kubebuilder:validation:Optional
+	ComplianceAssociatedStandardsID []ComplianceAssociatedStandardsIDParameters `json:"complianceAssociatedStandardsId,omitempty" tf:"compliance_associated_standards_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	// +kubebuilder:validation:Optional
+	ComplianceSecurityControlID []ComplianceSecurityControlIDParameters `json:"complianceSecurityControlId,omitempty" tf:"compliance_security_control_id,omitempty"`
+
+	// The unique identifier of a control across standards. See String_Filter below for more details.
+	// +kubebuilder:validation:Optional
+	ComplianceSecurityControlParametersName []ComplianceSecurityControlParametersNameParameters `json:"complianceSecurityControlParametersName,omitempty" tf:"compliance_security_control_parameters_name,omitempty"`
+
+	// The current value of a security control parameter. See String_Filter below for more details.
+	// +kubebuilder:validation:Optional
+	ComplianceSecurityControlParametersValue []ComplianceSecurityControlParametersValueParameters `json:"complianceSecurityControlParametersValue,omitempty" tf:"compliance_security_control_parameters_value,omitempty"`
 
 	// Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details. See String Filter below for more details.
 	// +kubebuilder:validation:Optional

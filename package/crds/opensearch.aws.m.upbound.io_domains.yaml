@@ -88,9 +88,19 @@ spec:
                           enabled:
                             description: Whether JWT authentication is enabled.
                             type: boolean
+                          jwksUrl:
+                            description: URL endpoint that hosts the JSON Web Key
+                              Set (JWKS) containing public keys used to verify JWT
+                              signatures. This argument can be specified only with
+                              OpenSearch versions 3.3 and later. At least one of jwks_url
+                              or public_key must be specified when enabled is set
+                              to true.
+                            type: string
                           publicKey:
                             description: PEM-encoded public key used to verify JWT
-                              signatures.
+                              signatures. At least one of jwks_url or public_key must
+                              be specified when enabled is set to true. If both jwks_url
+                              and public_key are specified, public_key is ignored.
                             type: string
                           rolesKey:
                             description: Element of the JWT assertion to use for roles.
@@ -324,6 +334,15 @@ spec:
                         description: ID of the Cognito User Pool to use.
                         type: string
                     type: object
+                  deploymentStrategyOptions:
+                    description: Configuration block for the deployment strategy options
+                      of the domain. Detailed below.
+                    properties:
+                      deploymentStrategy:
+                        description: 'Deployment strategy for the domain. Valid values:
+                          Default and CapacityOptimized.'
+                        type: string
+                    type: object
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -476,7 +495,10 @@ spec:
                         type: object
                     type: object
                   engineVersion:
-                    description: while Elasticsearch has elasticsearch_version
+                    description: |-
+                      Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+                      See Creating and managing Amazon OpenSearch Service domains.
+                      Defaults to the lastest version of OpenSearch.
                     type: string
                   identityCenterOptions:
                     description: Configuration block for enabling and managing IAM
@@ -907,9 +929,19 @@ spec:
                           enabled:
                             description: Whether JWT authentication is enabled.
                             type: boolean
+                          jwksUrl:
+                            description: URL endpoint that hosts the JSON Web Key
+                              Set (JWKS) containing public keys used to verify JWT
+                              signatures. This argument can be specified only with
+                              OpenSearch versions 3.3 and later. At least one of jwks_url
+                              or public_key must be specified when enabled is set
+                              to true.
+                            type: string
                           publicKey:
                             description: PEM-encoded public key used to verify JWT
-                              signatures.
+                              signatures. At least one of jwks_url or public_key must
+                              be specified when enabled is set to true. If both jwks_url
+                              and public_key are specified, public_key is ignored.
                             type: string
                           rolesKey:
                             description: Element of the JWT assertion to use for roles.
@@ -1143,6 +1175,15 @@ spec:
                         description: ID of the Cognito User Pool to use.
                         type: string
                     type: object
+                  deploymentStrategyOptions:
+                    description: Configuration block for the deployment strategy options
+                      of the domain. Detailed below.
+                    properties:
+                      deploymentStrategy:
+                        description: 'Deployment strategy for the domain. Valid values:
+                          Default and CapacityOptimized.'
+                        type: string
+                    type: object
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -1295,7 +1336,10 @@ spec:
                         type: object
                     type: object
                   engineVersion:
-                    description: while Elasticsearch has elasticsearch_version
+                    description: |-
+                      Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+                      See Creating and managing Amazon OpenSearch Service domains.
+                      Defaults to the lastest version of OpenSearch.
                     type: string
                   identityCenterOptions:
                     description: Configuration block for enabling and managing IAM
@@ -1745,7 +1789,8 @@ spec:
               atProvider:
                 properties:
                   accessPolicies:
-                    description: ', are prefaced with es: for both.'
+                    description: IAM policy document specifying the access policies
+                      for the domain.
                     type: string
                   advancedOptions:
                     additionalProperties:
@@ -1777,9 +1822,19 @@ spec:
                           enabled:
                             description: Whether JWT authentication is enabled.
                             type: boolean
+                          jwksUrl:
+                            description: URL endpoint that hosts the JSON Web Key
+                              Set (JWKS) containing public keys used to verify JWT
+                              signatures. This argument can be specified only with
+                              OpenSearch versions 3.3 and later. At least one of jwks_url
+                              or public_key must be specified when enabled is set
+                              to true.
+                            type: string
                           publicKey:
                             description: PEM-encoded public key used to verify JWT
-                              signatures.
+                              signatures. At least one of jwks_url or public_key must
+                              be specified when enabled is set to true. If both jwks_url
+                              and public_key are specified, public_key is ignored.
                             type: string
                           rolesKey:
                             description: Element of the JWT assertion to use for roles.
@@ -2009,6 +2064,15 @@ spec:
                     description: V2 domain endpoint for Dashboard that works with
                       both IPv4 and IPv6 addresses, without https scheme.
                     type: string
+                  deploymentStrategyOptions:
+                    description: Configuration block for the deployment strategy options
+                      of the domain. Detailed below.
+                    properties:
+                      deploymentStrategy:
+                        description: 'Deployment strategy for the domain. Valid values:
+                          Default and CapacityOptimized.'
+                        type: string
+                    type: object
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -2096,7 +2160,10 @@ spec:
                       requests.
                     type: string
                   engineVersion:
-                    description: while Elasticsearch has elasticsearch_version
+                    description: |-
+                      Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+                      See Creating and managing Amazon OpenSearch Service domains.
+                      Defaults to the lastest version of OpenSearch.
                     type: string
                   id:
                     type: string

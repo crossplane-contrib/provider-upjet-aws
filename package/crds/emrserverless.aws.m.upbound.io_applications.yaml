@@ -142,6 +142,13 @@ spec:
                           EMR Studio to run interactive workloads in a notebook.
                         type: boolean
                     type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -408,6 +415,13 @@ spec:
                       studioEnabled:
                         description: Enables you to connect an application to Amazon
                           EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
                         type: boolean
                     type: object
                   maximumCapacity:
@@ -738,6 +752,13 @@ spec:
                       studioEnabled:
                         description: Enables you to connect an application to Amazon
                           EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
+                  jobLevelCostAllocationConfiguration:
+                    properties:
+                      enabled:
+                        description: Enables the application to automatically start
+                          on job submission. Defaults to true.
                         type: boolean
                     type: object
                   maximumCapacity:

@@ -155,7 +155,7 @@ type VPCEndpointInitParameters_2 struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false.
+	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// The ARN of a Resource Configuration to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
@@ -260,7 +260,7 @@ type VPCEndpointObservation_2 struct {
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
 	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false.
+	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -335,7 +335,7 @@ type VPCEndpointParameters_2 struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-	// Defaults to false.
+	// Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 

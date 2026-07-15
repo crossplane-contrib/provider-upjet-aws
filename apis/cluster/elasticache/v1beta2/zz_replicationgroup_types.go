@@ -76,7 +76,7 @@ type NodeGroupConfigurationInitParameters struct {
 	// List of availability zones for the replica nodes.
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
 	// List of ARNs of the Outposts for the replica nodes.
@@ -100,7 +100,7 @@ type NodeGroupConfigurationObservation struct {
 	// List of availability zones for the replica nodes.
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
 	// List of ARNs of the Outposts for the replica nodes.
@@ -128,7 +128,7 @@ type NodeGroupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaAvailabilityZones []*string `json:"replicaAvailabilityZones,omitempty" tf:"replica_availability_zones,omitempty"`
 
-	// Number of replica nodes in this node group.
+	// Number of replica nodes in this node group. Default AWS limit is 5. Higher values may be available with a quota increase.
 	// +kubebuilder:validation:Optional
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
@@ -174,6 +174,9 @@ type ReplicationGroupInitParameters struct {
 
 	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
@@ -264,7 +267,7 @@ type ReplicationGroupInitParameters struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
@@ -372,6 +375,9 @@ type ReplicationGroupObservation struct {
 	// User-created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
+
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
 	// Default is redis.
@@ -462,7 +468,7 @@ type ReplicationGroupObservation struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
@@ -563,6 +569,10 @@ type ReplicationGroupParameters struct {
 	// User-created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	// +kubebuilder:validation:Optional
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group.
 	// Valid values are redis or valkey.
@@ -676,7 +686,7 @@ type ReplicationGroupParameters struct {
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	// Valid values are 0 to 5.
+	// Default AWS limit is 5. Higher values may be available with a quota increase.
 	// Conflicts with num_cache_clusters.
 	// Can only be set if num_node_groups is set.
 	// +kubebuilder:validation:Optional

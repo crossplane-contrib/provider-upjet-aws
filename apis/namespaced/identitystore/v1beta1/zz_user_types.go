@@ -358,6 +358,9 @@ type UserObservation struct {
 	// A unique string used to identify the user. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. The limit is 128 characters.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
+	// The current status of the user account.
+	UserStatus *string `json:"userStatus,omitempty" tf:"user_status,omitempty"`
+
 	// The user type.
 	UserType *string `json:"userType,omitempty" tf:"user_type,omitempty"`
 }

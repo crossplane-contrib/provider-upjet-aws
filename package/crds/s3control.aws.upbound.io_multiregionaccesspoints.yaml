@@ -493,6 +493,9 @@ spec:
                     description: The AWS account ID and access point name separated
                       by a colon (:).
                     type: string
+                  name:
+                    description: Name of the Multi-Region Access Point.
+                    type: string
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -938,7 +941,7 @@ spec:
                       which you want to create a Multi-Region Access Point.
                     type: string
                   alias:
-                    description: The alias for the Multi-Region Access Point.
+                    description: Alias for the Multi-Region Access Point.
                     type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the Multi-Region Access
@@ -1011,14 +1014,17 @@ spec:
                         type: array
                     type: object
                   domainName:
-                    description: The DNS domain name of the S3 Multi-Region Access
-                      Point in the format alias.accesspoint.s3-global.amazonaws.com.
-                      For more information, see the documentation on Multi-Region
-                      Access Point Requests.
+                    description: DNS domain name of the S3 Multi-Region Access Point
+                      in the format alias.accesspoint.s3-global.amazonaws.com. For
+                      more information, see the documentation on Multi-Region Access
+                      Point Requests.
                     type: string
                   id:
-                    description: The AWS account ID and access point name separated
-                      by a colon (:).
+                    description: AWS account ID and access point name separated by
+                      a colon (:).
+                    type: string
+                  name:
+                    description: Name of the Multi-Region Access Point.
                     type: string
                   region:
                     description: |-
@@ -1026,9 +1032,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   status:
-                    description: 'The current status of the Multi-Region Access Point.
-                      One of: READY, INCONSISTENT_ACROSS_REGIONS, CREATING, PARTIALLY_CREATED,
-                      PARTIALLY_DELETED, DELETING.'
+                    description: 'Region Access Point. One of: READY, INCONSISTENT_ACROSS_REGIONS,
+                      CREATING, PARTIALLY_CREATED, PARTIALLY_DELETED, DELETING.'
                     type: string
                 type: object
               conditions:

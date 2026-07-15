@@ -15,48 +15,48 @@ import (
 
 type AccessLogFileInitParameters struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	Format *FormatInitParameters `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type AccessLogFileObservation struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	Format *FormatObservation `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type AccessLogFileParameters struct {
 
-	// The specified format for the logs.
+	// The specified format for the logs. See format Block for details.
 	// +kubebuilder:validation:Optional
 	Format *FormatParameters `json:"format,omitempty" tf:"format,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type AccessLogInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *AccessLogFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type AccessLogObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *AccessLogFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type AccessLogParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *AccessLogFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 }
@@ -85,19 +85,19 @@ type AcmParameters struct {
 
 type BackendDefaultsInitParameters struct {
 
-	// Default client policy for virtual gateway backends.
+	// Default client policy for virtual gateway backends. See client_policy Block for details.
 	ClientPolicy *ClientPolicyInitParameters `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
 }
 
 type BackendDefaultsObservation struct {
 
-	// Default client policy for virtual gateway backends.
+	// Default client policy for virtual gateway backends. See client_policy Block for details.
 	ClientPolicy *ClientPolicyObservation `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
 }
 
 type BackendDefaultsParameters struct {
 
-	// Default client policy for virtual gateway backends.
+	// Default client policy for virtual gateway backends. See client_policy Block for details.
 	// +kubebuilder:validation:Optional
 	ClientPolicy *ClientPolicyParameters `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
 }
@@ -143,7 +143,7 @@ type CertificateAcmParameters struct {
 
 type CertificateFileInitParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
@@ -152,7 +152,7 @@ type CertificateFileInitParameters struct {
 
 type CertificateFileObservation struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
@@ -161,7 +161,7 @@ type CertificateFileObservation struct {
 
 type CertificateFileParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
 
@@ -172,29 +172,29 @@ type CertificateFileParameters struct {
 
 type CertificateInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *SdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type CertificateObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *FileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *SdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type CertificateParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *FileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *SdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -220,65 +220,65 @@ type CertificateSdsParameters struct {
 
 type ClientPolicyInitParameters struct {
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	TLS *TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientPolicyObservation struct {
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	TLS *TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ClientPolicyParameters struct {
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	// +kubebuilder:validation:Optional
 	TLS *TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ConnectionPoolInitParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Connection pool information for gRPC listeners. See grpc Block for details.
 	GRPC *GRPCInitParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Connection pool information for HTTP listeners. See http Block for details.
 	HTTP *HTTPInitParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Connection pool information for HTTP2 listeners. See http2 Block for details.
 	Http2 *Http2InitParameters `json:"http2,omitempty" tf:"http2,omitempty"`
 }
 
 type ConnectionPoolObservation struct {
 
-	// Connection pool information for gRPC listeners.
+	// Connection pool information for gRPC listeners. See grpc Block for details.
 	GRPC *GRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Connection pool information for HTTP listeners. See http Block for details.
 	HTTP *HTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Connection pool information for HTTP2 listeners. See http2 Block for details.
 	Http2 *Http2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
 }
 
 type ConnectionPoolParameters struct {
 
-	// Connection pool information for gRPC listeners.
+	// Connection pool information for gRPC listeners. See grpc Block for details.
 	// +kubebuilder:validation:Optional
 	GRPC *GRPCParameters `json:"grpc,omitempty" tf:"grpc,omitempty"`
 
-	// Connection pool information for HTTP listeners.
+	// Connection pool information for HTTP listeners. See http Block for details.
 	// +kubebuilder:validation:Optional
 	HTTP *HTTPParameters `json:"http,omitempty" tf:"http,omitempty"`
 
-	// Connection pool information for HTTP2 listeners.
+	// Connection pool information for HTTP2 listeners. See http2 Block for details.
 	// +kubebuilder:validation:Optional
 	Http2 *Http2Parameters `json:"http2,omitempty" tf:"http2,omitempty"`
 }
 
 type FileInitParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
@@ -287,7 +287,7 @@ type FileInitParameters struct {
 
 type FileObservation struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
@@ -296,7 +296,7 @@ type FileObservation struct {
 
 type FileParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
 
@@ -307,7 +307,7 @@ type FileParameters struct {
 
 type FormatInitParameters struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	JSON []JSONInitParameters `json:"json,omitempty" tf:"json,omitempty"`
 
 	// The logging format for text. Must be between 1 and 1000 characters in length.
@@ -316,7 +316,7 @@ type FormatInitParameters struct {
 
 type FormatObservation struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	JSON []JSONObservation `json:"json,omitempty" tf:"json,omitempty"`
 
 	// The logging format for text. Must be between 1 and 1000 characters in length.
@@ -325,7 +325,7 @@ type FormatObservation struct {
 
 type FormatParameters struct {
 
-	// The logging format for JSON.
+	// The logging format for JSON. See json Block for details.
 	// +kubebuilder:validation:Optional
 	JSON []JSONParameters `json:"json,omitempty" tf:"json,omitempty"`
 
@@ -390,7 +390,7 @@ type HealthCheckInitParameters struct {
 	// Time period in milliseconds between each health check execution.
 	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
@@ -414,7 +414,7 @@ type HealthCheckObservation struct {
 	// Time period in milliseconds between each health check execution.
 	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
@@ -440,7 +440,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalMillis *float64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
 
-	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	// Destination path for the health check request. This is only required if the specified protocol is http or http2.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
@@ -511,56 +511,56 @@ type JSONParameters struct {
 
 type ListenerInitParameters struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	ConnectionPool *ConnectionPoolInitParameters `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	HealthCheck *HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *PortMappingInitParameters `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	TLS *ListenerTLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ListenerObservation struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	ConnectionPool *ConnectionPoolObservation `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	HealthCheck *HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	PortMapping *PortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	TLS *ListenerTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ListenerParameters struct {
 
-	// Connection pool information for the listener.
+	// Connection pool information for the listener. See connection_pool Block for details.
 	// +kubebuilder:validation:Optional
 	ConnectionPool *ConnectionPoolParameters `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
 
-	// Health check information for the listener.
+	// Health check information for the listener. See health_check Block for details.
 	// +kubebuilder:validation:Optional
 	HealthCheck *HealthCheckParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
-	// Port mapping information for the listener.
+	// Port mapping information for the listener. See port_mapping Block for details.
 	// +kubebuilder:validation:Optional
 	PortMapping *PortMappingParameters `json:"portMapping" tf:"port_mapping,omitempty"`
 
-	// Transport Layer Security (TLS) client policy.
+	// Transport Layer Security (TLS) properties for the listener. See tls Block for details.
 	// +kubebuilder:validation:Optional
 	TLS *ListenerTLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type ListenerTLSInitParameters struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	Certificate *TLSCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Listener's TLS mode. Valid values: DISABLED, PERMISSIVE, STRICT.
@@ -572,7 +572,7 @@ type ListenerTLSInitParameters struct {
 
 type ListenerTLSObservation struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	Certificate *TLSCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Listener's TLS mode. Valid values: DISABLED, PERMISSIVE, STRICT.
@@ -584,7 +584,7 @@ type ListenerTLSObservation struct {
 
 type ListenerTLSParameters struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	// +kubebuilder:validation:Optional
 	Certificate *TLSCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
@@ -599,19 +599,19 @@ type ListenerTLSParameters struct {
 
 type LoggingInitParameters struct {
 
-	// Access log configuration for a virtual gateway.
+	// Access log configuration for a virtual gateway. See access_log Block for details.
 	AccessLog *AccessLogInitParameters `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type LoggingObservation struct {
 
-	// Access log configuration for a virtual gateway.
+	// Access log configuration for a virtual gateway. See access_log Block for details.
 	AccessLog *AccessLogObservation `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type LoggingParameters struct {
 
-	// Access log configuration for a virtual gateway.
+	// Access log configuration for a virtual gateway. See access_log Block for details.
 	// +kubebuilder:validation:Optional
 	AccessLog *AccessLogParameters `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
@@ -707,46 +707,46 @@ type SubjectAlternativeNamesParameters struct {
 
 type TLSCertificateInitParameters struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	Acm *CertificateAcmInitParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *CertificateFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *CertificateSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TLSCertificateObservation struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	Acm *CertificateAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *CertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *CertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TLSCertificateParameters struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	// +kubebuilder:validation:Optional
 	Acm *CertificateAcmParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *CertificateFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *CertificateSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TLSInitParameters struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	Certificate *CertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Whether the policy is enforced. Default is true.
@@ -762,7 +762,7 @@ type TLSInitParameters struct {
 
 type TLSObservation struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	Certificate *CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Whether the policy is enforced. Default is true.
@@ -778,7 +778,7 @@ type TLSObservation struct {
 
 type TLSParameters struct {
 
-	// Virtual gateway's client's Transport Layer Security (TLS) certificate.
+	// Listener's TLS certificate.
 	// +kubebuilder:validation:Optional
 	Certificate *CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
@@ -827,58 +827,58 @@ type TLSValidationParameters struct {
 
 type TrustFileInitParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type TrustFileObservation struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type TrustFileParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
 }
 
 type TrustInitParameters struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	Acm *AcmInitParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TrustFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TrustSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TrustObservation struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	Acm *AcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *TrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *TrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TrustParameters struct {
 
-	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	// An AWS Certificate Manager (ACM) certificate.
 	// +kubebuilder:validation:Optional
 	Acm *AcmParameters `json:"acm,omitempty" tf:"acm,omitempty"`
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *TrustFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *TrustSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -974,48 +974,48 @@ type ValidationSubjectAlternativeNamesParameters struct {
 
 type ValidationTrustFileInitParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type ValidationTrustFileObservation struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type ValidationTrustFileParameters struct {
 
-	// Certificate chain for the certificate.
+	// Certificate trust chain for a certificate stored on the file system of the mesh endpoint that the proxy is running on. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
 	CertificateChain *string `json:"certificateChain" tf:"certificate_chain,omitempty"`
 }
 
 type ValidationTrustInitParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ValidationTrustFileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ValidationTrustSdsInitParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ValidationTrustObservation struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	File *ValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	Sds *ValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ValidationTrustParameters struct {
 
-	// Local file certificate.
+	// TLS validation context trust for a local file certificate.
 	// +kubebuilder:validation:Optional
 	File *ValidationTrustFileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
-	// A Secret Discovery Service certificate.
+	// TLS validation context trust for a Secret Discovery Service certificate.
 	// +kubebuilder:validation:Optional
 	Sds *ValidationTrustSdsParameters `json:"sds,omitempty" tf:"sds,omitempty"`
 }
@@ -1131,39 +1131,39 @@ type VirtualGatewayParameters struct {
 
 type VirtualGatewaySpecInitParameters struct {
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	BackendDefaults *BackendDefaultsInitParameters `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener.
+	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener. See listener Block for details.
 	Listener []ListenerInitParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual gateway.
+	// Inbound and outbound access logging information for the virtual gateway. See logging Block for details.
 	Logging *LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type VirtualGatewaySpecObservation struct {
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	BackendDefaults *BackendDefaultsObservation `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener.
+	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener. See listener Block for details.
 	Listener []ListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual gateway.
+	// Inbound and outbound access logging information for the virtual gateway. See logging Block for details.
 	Logging *LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type VirtualGatewaySpecParameters struct {
 
-	// Defaults for backends.
+	// Defaults for backends. See backend_defaults Block for details.
 	// +kubebuilder:validation:Optional
 	BackendDefaults *BackendDefaultsParameters `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
 
-	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener.
+	// Listeners that the mesh endpoint is expected to receive inbound traffic from. You can specify one listener. See listener Block for details.
 	// +kubebuilder:validation:Optional
 	Listener []ListenerParameters `json:"listener" tf:"listener,omitempty"`
 
-	// Inbound and outbound access logging information for the virtual gateway.
+	// Inbound and outbound access logging information for the virtual gateway. See logging Block for details.
 	// +kubebuilder:validation:Optional
 	Logging *LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 }

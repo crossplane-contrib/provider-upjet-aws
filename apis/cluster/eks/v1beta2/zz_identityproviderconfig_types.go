@@ -46,6 +46,9 @@ type IdentityProviderConfigObservation struct {
 	// EKS Cluster name and EKS Identity Provider Configuration name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) Name of the identity provider config.
+	IdentityProviderConfigName *string `json:"identityProviderConfigName,omitempty" tf:"identity_provider_config_name,omitempty"`
+
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	Oidc *IdentityProviderConfigOidcObservation `json:"oidc,omitempty" tf:"oidc,omitempty"`
 

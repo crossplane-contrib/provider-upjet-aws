@@ -346,6 +346,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -974,6 +1031,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   replicationInfoList:
                     description: A list of replication configurations, where each
                       configuration targets a given source cluster to target cluster
@@ -1459,6 +1573,63 @@ spec:
                           type: object
                       type: object
                     type: array
+                  logDelivery:
+                    description: Configuration block for delivering replicator logs
+                      to customer destinations. Detailed below.
+                    properties:
+                      replicatorLogDelivery:
+                        description: Configuration block for replicator log delivery.
+                          Detailed below.
+                        properties:
+                          cloudwatchLogs:
+                            description: Configuration block for replicator log delivery
+                              to Amazon CloudWatch Logs. Detailed below.
+                            properties:
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to CloudWatch Logs.
+                                type: boolean
+                              logGroup:
+                                description: Name of CloudWatch Logs log group. Required
+                                  if enabled is true. If enabled is false, this value
+                                  must not be set.
+                                type: string
+                            type: object
+                          firehose:
+                            description: Configuration block for replicator log delivery
+                              to Amazon Data Firehose. Detailed below.
+                            properties:
+                              deliveryStream:
+                                description: Name of the Firehose delivery stream.
+                                  Required if enabled is true. If enabled is false,
+                                  this value must not be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to Firehose.
+                                type: boolean
+                            type: object
+                          s3:
+                            description: Configuration block for replicator log delivery
+                              to Amazon S3. Detailed below.
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket. Required if enabled
+                                  is true. If enabled is false, this value must not
+                                  be set.
+                                type: string
+                              enabled:
+                                description: Boolean whether to enable log delivery
+                                  to S3.
+                                type: boolean
+                              prefix:
+                                description: Prefix to use when storing replicator
+                                  logs in S3. If enabled is false, this value must
+                                  not be set.
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
