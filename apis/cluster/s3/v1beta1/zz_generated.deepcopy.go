@@ -10156,6 +10156,11 @@ func (in *LambdaFunctionInitParameters) DeepCopyInto(out *LambdaFunctionInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.LambdaFunctionArn != nil {
 		in, out := &in.LambdaFunctionArn, &out.LambdaFunctionArn
 		*out = new(string)
@@ -10202,6 +10207,11 @@ func (in *LambdaFunctionObservation) DeepCopyInto(out *LambdaFunctionObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.LambdaFunctionArn != nil {
 		in, out := &in.LambdaFunctionArn, &out.LambdaFunctionArn
 		*out = new(string)
@@ -10245,6 +10255,11 @@ func (in *LambdaFunctionParameters) DeepCopyInto(out *LambdaFunctionParameters) 
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
 		*out = new(string)
 		**out = **in
 	}
@@ -12831,6 +12846,11 @@ func (in *QueueInitParameters) DeepCopyInto(out *QueueInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.QueueArn != nil {
 		in, out := &in.QueueArn, &out.QueueArn
 		*out = new(string)
@@ -12887,6 +12907,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.QueueArn != nil {
 		in, out := &in.QueueArn, &out.QueueArn
 		*out = new(string)
@@ -12930,6 +12955,11 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
 		*out = new(string)
 		**out = **in
 	}
@@ -15683,6 +15713,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicArn != nil {
 		in, out := &in.TopicArn, &out.TopicArn
 		*out = new(string)
@@ -15739,6 +15774,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
+		*out = new(string)
+		**out = **in
+	}
 	if in.TopicArn != nil {
 		in, out := &in.TopicArn, &out.TopicArn
 		*out = new(string)
@@ -15782,6 +15822,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Index != nil {
+		in, out := &in.Index, &out.Index
 		*out = new(string)
 		**out = **in
 	}

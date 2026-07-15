@@ -33,17 +33,17 @@ type BucketNotificationInitParameters struct {
 
 	// Used to configure notifications to a Lambda Function. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	LambdaFunction []LambdaFunctionInitParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Queue []QueueInitParameters `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Notification configuration to SNS Topic. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Topic []TopicInitParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -60,12 +60,12 @@ type BucketNotificationObservation struct {
 
 	// Used to configure notifications to a Lambda Function. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	LambdaFunction []LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Queue []QueueObservation `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -74,7 +74,7 @@ type BucketNotificationObservation struct {
 
 	// Notification configuration to SNS Topic. See below.
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Topic []TopicObservation `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -101,13 +101,13 @@ type BucketNotificationParameters struct {
 	// Used to configure notifications to a Lambda Function. See below.
 	// +kubebuilder:validation:Optional
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	LambdaFunction []LambdaFunctionParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
 	// +kubebuilder:validation:Optional
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Queue []QueueParameters `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -118,7 +118,7 @@ type BucketNotificationParameters struct {
 	// Notification configuration to SNS Topic. See below.
 	// +kubebuilder:validation:Optional
 	// +listType=map
-	// +listMapKey=id
+	// +listMapKey=index
 	Topic []TopicParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -136,6 +136,10 @@ type LambdaFunctionInitParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
 
 	// Lambda function ARN.
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
@@ -155,6 +159,10 @@ type LambdaFunctionObservation struct {
 
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
 
 	// Lambda function ARN.
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
@@ -177,7 +185,12 @@ type LambdaFunctionParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:="0"
+	Index *string `json:"index" tf:"-"`
 
 	// Lambda function ARN.
 	// +kubebuilder:validation:Optional
@@ -198,6 +211,10 @@ type QueueInitParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
 
 	// SQS queue ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
@@ -228,6 +245,10 @@ type QueueObservation struct {
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// SQS queue ARN.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 }
@@ -249,7 +270,12 @@ type QueueParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:="0"
+	Index *string `json:"index" tf:"-"`
 
 	// SQS queue ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sqs/v1beta1.Queue
@@ -281,6 +307,10 @@ type TopicInitParameters struct {
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// SNS topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
@@ -310,6 +340,10 @@ type TopicObservation struct {
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:="0"
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// SNS topic ARN.
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
@@ -331,7 +365,12 @@ type TopicParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:="0"
+	Index *string `json:"index" tf:"-"`
 
 	// SNS topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
