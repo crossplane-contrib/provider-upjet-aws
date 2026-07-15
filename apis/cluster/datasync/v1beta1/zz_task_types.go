@@ -322,12 +322,18 @@ type ScheduleInitParameters struct {
 
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// Whether to enable or disable your task schedule. Valid values: ENABLED, DISABLED. Default: ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ScheduleObservation struct {
 
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// Whether to enable or disable your task schedule. Valid values: ENABLED, DISABLED. Default: ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -335,6 +341,10 @@ type ScheduleParameters struct {
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression" tf:"schedule_expression,omitempty"`
+
+	// Whether to enable or disable your task schedule. Valid values: ENABLED, DISABLED. Default: ENABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TaskInitParameters struct {

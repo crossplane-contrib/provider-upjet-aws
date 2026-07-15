@@ -93,6 +93,16 @@ func (in *CertificateInitParameters) DeepCopyInto(out *CertificateInitParameters
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.PrivateKeyWo != nil {
+		in, out := &in.PrivateKeyWo, &out.PrivateKeyWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateKeyWoVersion != nil {
+		in, out := &in.PrivateKeyWoVersion, &out.PrivateKeyWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SubjectAlternativeNames != nil {
 		in, out := &in.SubjectAlternativeNames, &out.SubjectAlternativeNames
 		*out = make([]*string, len(*in))
@@ -244,6 +254,16 @@ func (in *CertificateObservation) DeepCopyInto(out *CertificateObservation) {
 	if in.PendingRenewal != nil {
 		in, out := &in.PendingRenewal, &out.PendingRenewal
 		*out = new(bool)
+		**out = **in
+	}
+	if in.PrivateKeyWo != nil {
+		in, out := &in.PrivateKeyWo, &out.PrivateKeyWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateKeyWoVersion != nil {
+		in, out := &in.PrivateKeyWoVersion, &out.PrivateKeyWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -402,6 +422,16 @@ func (in *CertificateParameters) DeepCopyInto(out *CertificateParameters) {
 	if in.PrivateKeySecretRef != nil {
 		in, out := &in.PrivateKeySecretRef, &out.PrivateKeySecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PrivateKeyWo != nil {
+		in, out := &in.PrivateKeyWo, &out.PrivateKeyWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateKeyWoVersion != nil {
+		in, out := &in.PrivateKeyWoVersion, &out.PrivateKeyWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {

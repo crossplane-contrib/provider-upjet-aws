@@ -50,6 +50,9 @@ func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind.String())
 	var initializers managed.InitializerChain
+	for _, i := range o.Provider.Resources["aws_vpc_ipam_pool_cidr_allocation"].InitializerFns {
+		initializers = append(initializers, i(mgr.GetClient()))
+	}
 	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
 	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind)))
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.VPCIpamPoolCidrAllocation_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))

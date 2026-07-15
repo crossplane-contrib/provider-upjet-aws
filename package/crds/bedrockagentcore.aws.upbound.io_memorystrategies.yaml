@@ -109,8 +109,8 @@ spec:
                         type: object
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this
-                          forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
+                          Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
@@ -289,10 +289,10 @@ spec:
                     type: string
                   type:
                     description: 'Type of memory strategy. Valid values: SEMANTIC,
-                      SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces
-                      a new resource. Note that only one strategy of each built-in
-                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per
-                      memory.'
+                      SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this
+                      forces a new resource. Note that only one strategy of each built-in
+                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can
+                      exist per memory.'
                     type: string
                 required:
                 - region
@@ -346,8 +346,8 @@ spec:
                         type: object
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this
-                          forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
+                          Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
@@ -521,10 +521,10 @@ spec:
                     x-kubernetes-list-type: set
                   type:
                     description: 'Type of memory strategy. Valid values: SEMANTIC,
-                      SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces
-                      a new resource. Note that only one strategy of each built-in
-                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per
-                      memory.'
+                      SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this
+                      forces a new resource. Note that only one strategy of each built-in
+                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can
+                      exist per memory.'
                     type: string
                 type: object
               managementPolicies:
@@ -667,8 +667,8 @@ spec:
                         type: object
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE. Changing this
-                          forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
+                          Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
@@ -704,10 +704,10 @@ spec:
                     type: string
                   type:
                     description: 'Type of memory strategy. Valid values: SEMANTIC,
-                      SUMMARIZATION, USER_PREFERENCE, CUSTOM. Changing this forces
-                      a new resource. Note that only one strategy of each built-in
-                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE) can exist per
-                      memory.'
+                      SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this
+                      forces a new resource. Note that only one strategy of each built-in
+                      type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can
+                      exist per memory.'
                     type: string
                 type: object
               conditions:

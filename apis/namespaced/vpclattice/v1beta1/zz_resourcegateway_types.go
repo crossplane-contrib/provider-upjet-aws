@@ -25,6 +25,9 @@ type ResourceGatewayInitParameters struct {
 	// Name of the resource gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -93,6 +96,9 @@ type ResourceGatewayObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
+
 	// Security group IDs associated with the resource gateway. The security groups must be in the same VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -134,6 +140,10 @@ type ResourceGatewayParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Indicates how DNS is resolved for resource configurations associated to this resource gateway. Valid values are IN_VPC and PUBLIC. Defaults to PUBLIC. Changing this value will trigger a resource replacement.
+	// +kubebuilder:validation:Optional
+	ResourceConfigDNSResolution *string `json:"resourceConfigDnsResolution,omitempty" tf:"resource_config_dns_resolution,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional

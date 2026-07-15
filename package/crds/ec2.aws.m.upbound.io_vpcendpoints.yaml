@@ -116,7 +116,7 @@ spec:
                   privateDnsEnabled:
                     description: |-
                       Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false.
+                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
                     type: boolean
                   region:
                     description: |-
@@ -660,7 +660,7 @@ spec:
                   privateDnsEnabled:
                     description: |-
                       Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false.
+                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
                     type: boolean
                   resourceConfigurationArn:
                     description: The ARN of a Resource Configuration to connect this
@@ -1286,7 +1286,7 @@ spec:
                   privateDnsEnabled:
                     description: |-
                       Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
-                      Defaults to false.
+                      Defaults to false. If vpc_endpoint_type is anything other than Interface, changing this value forces a new resource to be created.
                     type: boolean
                   region:
                     description: |-

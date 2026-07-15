@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CacheTagConfigInitParameters struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+}
+
+type CacheTagConfigObservation struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+}
+
+type CacheTagConfigParameters struct {
+
+	// Name of the HTTP header to extract cache tags. The header value must contain comma-separated tag values.
+	// +kubebuilder:validation:Optional
+	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
+}
+
 type ConnectionFunctionAssociationInitParameters struct {
 
 	// Identifier of the connection function to associate with the distribution.
@@ -116,6 +135,9 @@ type CustomOriginConfigInitParameters struct {
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	OriginMtlsConfig []OriginMtlsConfigInitParameters `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
+
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
@@ -140,6 +162,9 @@ type CustomOriginConfigObservation struct {
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	OriginMtlsConfig []OriginMtlsConfigObservation `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
@@ -169,6 +194,10 @@ type CustomOriginConfigParameters struct {
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	// +kubebuilder:validation:Optional
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The origin mTLS configuration for mutual TLS authentication between CloudFront and your origin.
+	// +kubebuilder:validation:Optional
+	OriginMtlsConfig []OriginMtlsConfigParameters `json:"originMtlsConfig,omitempty" tf:"origin_mtls_config,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	// +kubebuilder:validation:Optional
@@ -408,6 +437,9 @@ type DistributionInitParameters struct {
 	// ID of the Anycast static IP list that is associated with the distribution.
 	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
 
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	CacheTagConfig []CacheTagConfigInitParameters `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
+
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -487,6 +519,9 @@ type DistributionObservation struct {
 
 	// ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	CacheTagConfig []CacheTagConfigObservation `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
 
 	// Internal value used by CloudFront to allow future updates to the distribution configuration.
 	CallerReference *string `json:"callerReference,omitempty" tf:"caller_reference,omitempty"`
@@ -603,6 +638,10 @@ type DistributionParameters struct {
 	// ID of the Anycast static IP list that is associated with the distribution.
 	// +kubebuilder:validation:Optional
 	AnycastIPListID *string `json:"anycastIpListId,omitempty" tf:"anycast_ip_list_id,omitempty"`
+
+	// Cache tag configuration block for cache tag extraction from origin responses (maximum one). See the AWS documentation for more information about cache tags.
+	// +kubebuilder:validation:Optional
+	CacheTagConfig []CacheTagConfigParameters `json:"cacheTagConfig,omitempty" tf:"cache_tag_config,omitempty"`
 
 	// Any comments you want to include about the distribution.
 	// +kubebuilder:validation:Optional
@@ -1515,6 +1554,25 @@ type OriginInitParameters struct {
 
 	// The VPC origin configuration.
 	VPCOriginConfig []VPCOriginConfigInitParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
+}
+
+type OriginMtlsConfigInitParameters struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	ClientCertificateArn *string `json:"clientCertificateArn,omitempty" tf:"client_certificate_arn,omitempty"`
+}
+
+type OriginMtlsConfigObservation struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	ClientCertificateArn *string `json:"clientCertificateArn,omitempty" tf:"client_certificate_arn,omitempty"`
+}
+
+type OriginMtlsConfigParameters struct {
+
+	// ARN of the ACM certificate to use for mutual TLS authentication with the origin. The certificate must have Extended Key Usage set to TLS Client Authentication.
+	// +kubebuilder:validation:Optional
+	ClientCertificateArn *string `json:"clientCertificateArn" tf:"client_certificate_arn,omitempty"`
 }
 
 type OriginObservation struct {

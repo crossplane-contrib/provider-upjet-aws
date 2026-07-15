@@ -367,6 +367,25 @@ type ColdStorageOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
+type DeploymentStrategyOptionsInitParameters struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	DeploymentStrategy *string `json:"deploymentStrategy,omitempty" tf:"deployment_strategy,omitempty"`
+}
+
+type DeploymentStrategyOptionsObservation struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	DeploymentStrategy *string `json:"deploymentStrategy,omitempty" tf:"deployment_strategy,omitempty"`
+}
+
+type DeploymentStrategyOptionsParameters struct {
+
+	// Deployment strategy for the domain. Valid values: Default and CapacityOptimized.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategy *string `json:"deploymentStrategy" tf:"deployment_strategy,omitempty"`
+}
+
 type DomainEndpointOptionsInitParameters struct {
 
 	// Fully qualified domain for your custom endpoint.
@@ -447,6 +466,9 @@ type DomainInitParameters struct {
 	// Configuration block for authenticating dashboard with Cognito. Detailed below.
 	CognitoOptions *CognitoOptionsInitParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsInitParameters `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions *DomainEndpointOptionsInitParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
@@ -459,7 +481,9 @@ type DomainInitParameters struct {
 	// Configuration block for encrypt at rest options. Only available for certain instance types. Detailed below.
 	EncryptAtRest *EncryptAtRestInitParameters `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
@@ -493,7 +517,7 @@ type DomainInitParameters struct {
 
 type DomainObservation struct {
 
-	// , are prefaced with es: for both.
+	// IAM policy document specifying the access policies for the domain.
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Key-value string pairs to specify advanced configuration options.
@@ -524,6 +548,9 @@ type DomainObservation struct {
 	// V2 domain endpoint for Dashboard that works with both IPv4 and IPv6 addresses, without https scheme.
 	DashboardEndpointV2 *string `json:"dashboardEndpointV2,omitempty" tf:"dashboard_endpoint_v2,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	DeploymentStrategyOptions *DeploymentStrategyOptionsObservation `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions *DomainEndpointOptionsObservation `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
@@ -548,7 +575,9 @@ type DomainObservation struct {
 	// V2 domain endpoint that works with both IPv4 and IPv6 addresses, used to submit index, search, and data upload requests.
 	EndpointV2 *string `json:"endpointV2,omitempty" tf:"endpoint_v2,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -617,6 +646,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	CognitoOptions *CognitoOptionsParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
+	// Configuration block for the deployment strategy options of the domain. Detailed below.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategyOptions *DeploymentStrategyOptionsParameters `json:"deploymentStrategyOptions,omitempty" tf:"deployment_strategy_options,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	// +kubebuilder:validation:Optional
 	DomainEndpointOptions *DomainEndpointOptionsParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
@@ -633,7 +666,9 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptAtRest *EncryptAtRestParameters `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
 
-	// while Elasticsearch has elasticsearch_version
+	// Either Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9.
+	// See Creating and managing Amazon OpenSearch Service domains.
+	// Defaults to the lastest version of OpenSearch.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -871,7 +906,10 @@ type JwtOptionsInitParameters struct {
 	// Whether JWT authentication is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Element of the JWT assertion to use for roles. Default is roles.
@@ -886,7 +924,10 @@ type JwtOptionsObservation struct {
 	// Whether JWT authentication is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Element of the JWT assertion to use for roles. Default is roles.
@@ -902,7 +943,11 @@ type JwtOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// PEM-encoded public key used to verify JWT signatures.
+	// URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys used to verify JWT signatures. This argument can be specified only with OpenSearch versions 3.3 and later. At least one of jwks_url or public_key must be specified when enabled is set to true.
+	// +kubebuilder:validation:Optional
+	JwksURL *string `json:"jwksUrl,omitempty" tf:"jwks_url,omitempty"`
+
+	// PEM-encoded public key used to verify JWT signatures. At least one of jwks_url or public_key must be specified when enabled is set to true. If both jwks_url and public_key are specified, public_key is ignored.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 

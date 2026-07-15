@@ -1019,7 +1019,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
                     items:
                       type: string
                     type: array
@@ -1028,7 +1028,7 @@ spec:
                     type: string
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
-                      new workspace. Supported values are 8.4, 9.4 and 10.4. If not
+                      new workspace. Supported values are 9.4, 10.4 and 12.4. If not
                       specified, defaults to the latest version.
                     type: string
                   kmsKeyId:
@@ -1305,7 +1305,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
                     items:
                       type: string
                     type: array
@@ -1314,7 +1314,7 @@ spec:
                     type: string
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
-                      new workspace. Supported values are 8.4, 9.4 and 10.4. If not
+                      new workspace. Supported values are 9.4, 10.4 and 12.4. If not
                       specified, defaults to the latest version.
                     type: string
                   kmsKeyId:
@@ -1678,7 +1678,7 @@ spec:
                   dataSources:
                     description: The data sources for the workspace. Valid values
                       are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
-                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY`
+                      REDSHIFT, SITEWISE, TIMESTREAM, TWINMAKER, XRAY
                     items:
                       type: string
                     type: array
@@ -1690,7 +1690,7 @@ spec:
                     type: string
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
-                      new workspace. Supported values are 8.4, 9.4 and 10.4. If not
+                      new workspace. Supported values are 9.4, 10.4 and 12.4. If not
                       specified, defaults to the latest version.
                     type: string
                   id:

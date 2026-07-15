@@ -177,6 +177,9 @@ type ReplicationGroupInitParameters struct {
 	// created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
+
 	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -427,6 +430,9 @@ type ReplicationGroupObservation struct {
 	// created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
+
 	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -624,6 +630,10 @@ type ReplicationGroupParameters struct {
 	// created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the durability mode for the replication group. Valid values are default, async, sync, or disabled. Requires cluster mode enabled and Valkey 9.0 or higher.
+	// +kubebuilder:validation:Optional
+	Durability *string `json:"durability,omitempty" tf:"durability,omitempty"`
 
 	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
 	// +kubebuilder:validation:Optional

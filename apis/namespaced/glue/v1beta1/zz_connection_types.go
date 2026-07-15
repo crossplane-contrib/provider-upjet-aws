@@ -14,12 +14,152 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type AuthenticationConfigurationInitParameters struct {
+
+	// Type of authentication. Valid values: BASIC, CUSTOM, IAM, OAUTH2.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Basic authentication credentials. See basic_authentication_credentials below.
+	BasicAuthenticationCredentials *BasicAuthenticationCredentialsInitParameters `json:"basicAuthenticationCredentials,omitempty" tf:"basic_authentication_credentials,omitempty"`
+
+	CustomAuthenticationCredentials map[string]*string `json:"customAuthenticationCredentialsSecretRef,omitempty" tf:"-"`
+
+	// ARN of the KMS key used for encryption.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// OAuth2 properties. See oauth2_properties below.
+	Oauth2Properties *Oauth2PropertiesInitParameters `json:"oauth2Properties,omitempty" tf:"oauth2_properties,omitempty"`
+
+	// ARN of the Secrets Manager secret containing credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+}
+
+type AuthenticationConfigurationObservation struct {
+
+	// Type of authentication. Valid values: BASIC, CUSTOM, IAM, OAUTH2.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Basic authentication credentials. See basic_authentication_credentials below.
+	BasicAuthenticationCredentials *BasicAuthenticationCredentialsObservation `json:"basicAuthenticationCredentials,omitempty" tf:"basic_authentication_credentials,omitempty"`
+
+	// ARN of the KMS key used for encryption.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// OAuth2 properties. See oauth2_properties below.
+	Oauth2Properties *Oauth2PropertiesObservation `json:"oauth2Properties,omitempty" tf:"oauth2_properties,omitempty"`
+
+	// ARN of the Secrets Manager secret containing credentials.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type AuthenticationConfigurationParameters struct {
+
+	// Type of authentication. Valid values: BASIC, CUSTOM, IAM, OAUTH2.
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+
+	// Basic authentication credentials. See basic_authentication_credentials below.
+	// +kubebuilder:validation:Optional
+	BasicAuthenticationCredentials *BasicAuthenticationCredentialsParameters `json:"basicAuthenticationCredentials,omitempty" tf:"basic_authentication_credentials,omitempty"`
+
+	// Map of custom authentication credentials.
+	// +kubebuilder:validation:Optional
+	CustomAuthenticationCredentialsSecretRef *v1.LocalSecretReference `json:"customAuthenticationCredentialsSecretRef,omitempty" tf:"-"`
+
+	// ARN of the KMS key used for encryption.
+	// +kubebuilder:validation:Optional
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// OAuth2 properties. See oauth2_properties below.
+	// +kubebuilder:validation:Optional
+	Oauth2Properties *Oauth2PropertiesParameters `json:"oauth2Properties,omitempty" tf:"oauth2_properties,omitempty"`
+
+	// ARN of the Secrets Manager secret containing credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
+}
+
+type AuthorizationCodePropertiesInitParameters struct {
+
+	// Authorization code.
+	AuthorizationCodeSecretRef v1.LocalSecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
+
+	// Redirect URI for OAuth2 flow.
+	RedirectURI *string `json:"redirectUri,omitempty" tf:"redirect_uri,omitempty"`
+}
+
+type AuthorizationCodePropertiesObservation struct {
+
+	// Redirect URI for OAuth2 flow.
+	RedirectURI *string `json:"redirectUri,omitempty" tf:"redirect_uri,omitempty"`
+}
+
+type AuthorizationCodePropertiesParameters struct {
+
+	// Authorization code.
+	// +kubebuilder:validation:Optional
+	AuthorizationCodeSecretRef v1.LocalSecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
+
+	// Redirect URI for OAuth2 flow.
+	// +kubebuilder:validation:Optional
+	RedirectURI *string `json:"redirectUri" tf:"redirect_uri,omitempty"`
+}
+
+type BasicAuthenticationCredentialsInitParameters struct {
+
+	// Password for authentication.
+	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Username for authentication.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type BasicAuthenticationCredentialsObservation struct {
+
+	// Username for authentication.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type BasicAuthenticationCredentialsParameters struct {
+
+	// Password for authentication.
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Username for authentication.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username" tf:"username,omitempty"`
+}
+
 type ConnectionInitParameters struct {
 	AthenaProperties map[string]*string `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
 
+	// Configuration block for authentication options. See authentication_configuration below.
+	AuthenticationConfiguration *AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
 	ConnectionProperties map[string]*string `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some connection types require the SparkProperties property with a JSON document that contains the actual connection properties. For specific examples, refer to Example Usage.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// Description of the connection.
@@ -28,7 +168,7 @@ type ConnectionInitParameters struct {
 	// List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements below.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsInitParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
@@ -41,10 +181,13 @@ type ConnectionObservation struct {
 	// ARN of the Glue Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Configuration block for authentication options. See authentication_configuration below.
+	AuthenticationConfiguration *AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
 	// ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some connection types require the SparkProperties property with a JSON document that contains the actual connection properties. For specific examples, refer to Example Usage.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// Description of the connection.
@@ -56,7 +199,7 @@ type ConnectionObservation struct {
 	// List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements below.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -67,7 +210,7 @@ type ConnectionObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -78,6 +221,10 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AthenaPropertiesSecretRef *v1.LocalSecretReference `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
 
+	// Configuration block for authentication options. See authentication_configuration below.
+	// +kubebuilder:validation:Optional
+	AuthenticationConfiguration *AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
 	// ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
@@ -86,7 +233,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionPropertiesSecretRef *v1.LocalSecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
+	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC. Some connection types require the SparkProperties property with a JSON document that contains the actual connection properties. For specific examples, refer to Example Usage.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
@@ -98,7 +245,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements below.
 	// +kubebuilder:validation:Optional
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
@@ -113,9 +260,140 @@ type ConnectionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type Oauth2ClientApplicationInitParameters struct {
+
+	// Reference to an AWS-managed client application.
+	AwsManagedClientApplicationReference *string `json:"awsManagedClientApplicationReference,omitempty" tf:"aws_managed_client_application_reference,omitempty"`
+
+	// Client ID for a user-managed client application.
+	UserManagedClientApplicationClientID *string `json:"userManagedClientApplicationClientId,omitempty" tf:"user_managed_client_application_client_id,omitempty"`
+}
+
+type Oauth2ClientApplicationObservation struct {
+
+	// Reference to an AWS-managed client application.
+	AwsManagedClientApplicationReference *string `json:"awsManagedClientApplicationReference,omitempty" tf:"aws_managed_client_application_reference,omitempty"`
+
+	// Client ID for a user-managed client application.
+	UserManagedClientApplicationClientID *string `json:"userManagedClientApplicationClientId,omitempty" tf:"user_managed_client_application_client_id,omitempty"`
+}
+
+type Oauth2ClientApplicationParameters struct {
+
+	// Reference to an AWS-managed client application.
+	// +kubebuilder:validation:Optional
+	AwsManagedClientApplicationReference *string `json:"awsManagedClientApplicationReference,omitempty" tf:"aws_managed_client_application_reference,omitempty"`
+
+	// Client ID for a user-managed client application.
+	// +kubebuilder:validation:Optional
+	UserManagedClientApplicationClientID *string `json:"userManagedClientApplicationClientId,omitempty" tf:"user_managed_client_application_client_id,omitempty"`
+}
+
+type Oauth2CredentialsInitParameters struct {
+
+	// OAuth2 access token.
+	AccessTokenSecretRef *v1.LocalSecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+
+	// JWT token.
+	JwtTokenSecretRef *v1.LocalSecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
+
+	// OAuth2 refresh token.
+	RefreshTokenSecretRef *v1.LocalSecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
+
+	// Client secret for user-managed client application.
+	UserManagedClientApplicationClientSecretSecretRef *v1.LocalSecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
+}
+
+type Oauth2CredentialsObservation struct {
+}
+
+type Oauth2CredentialsParameters struct {
+
+	// OAuth2 access token.
+	// +kubebuilder:validation:Optional
+	AccessTokenSecretRef *v1.LocalSecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+
+	// JWT token.
+	// +kubebuilder:validation:Optional
+	JwtTokenSecretRef *v1.LocalSecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
+
+	// OAuth2 refresh token.
+	// +kubebuilder:validation:Optional
+	RefreshTokenSecretRef *v1.LocalSecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
+
+	// Client secret for user-managed client application.
+	// +kubebuilder:validation:Optional
+	UserManagedClientApplicationClientSecretSecretRef *v1.LocalSecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
+}
+
+type Oauth2PropertiesInitParameters struct {
+
+	// Authorization code properties. See authorization_code_properties below.
+	AuthorizationCodeProperties *AuthorizationCodePropertiesInitParameters `json:"authorizationCodeProperties,omitempty" tf:"authorization_code_properties,omitempty"`
+
+	// OAuth2 client application details. See oauth2_client_application below.
+	Oauth2ClientApplication *Oauth2ClientApplicationInitParameters `json:"oauth2ClientApplication,omitempty" tf:"oauth2_client_application,omitempty"`
+
+	// OAuth2 credentials. See oauth2_credentials below.
+	Oauth2Credentials *Oauth2CredentialsInitParameters `json:"oauth2Credentials,omitempty" tf:"oauth2_credentials,omitempty"`
+
+	// OAuth2 grant type. Valid values: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER.
+	Oauth2GrantType *string `json:"oauth2GrantType,omitempty" tf:"oauth2_grant_type,omitempty"`
+
+	// Token URL for OAuth2 authentication.
+	TokenURL *string `json:"tokenUrl,omitempty" tf:"token_url,omitempty"`
+
+	TokenURLParametersMap map[string]*string `json:"tokenUrlParametersMapSecretRef,omitempty" tf:"-"`
+}
+
+type Oauth2PropertiesObservation struct {
+
+	// Authorization code properties. See authorization_code_properties below.
+	AuthorizationCodeProperties *AuthorizationCodePropertiesObservation `json:"authorizationCodeProperties,omitempty" tf:"authorization_code_properties,omitempty"`
+
+	// OAuth2 client application details. See oauth2_client_application below.
+	Oauth2ClientApplication *Oauth2ClientApplicationObservation `json:"oauth2ClientApplication,omitempty" tf:"oauth2_client_application,omitempty"`
+
+	// OAuth2 credentials. See oauth2_credentials below.
+	Oauth2Credentials *Oauth2CredentialsParameters `json:"oauth2Credentials,omitempty" tf:"oauth2_credentials,omitempty"`
+
+	// OAuth2 grant type. Valid values: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER.
+	Oauth2GrantType *string `json:"oauth2GrantType,omitempty" tf:"oauth2_grant_type,omitempty"`
+
+	// Token URL for OAuth2 authentication.
+	TokenURL *string `json:"tokenUrl,omitempty" tf:"token_url,omitempty"`
+}
+
+type Oauth2PropertiesParameters struct {
+
+	// Authorization code properties. See authorization_code_properties below.
+	// +kubebuilder:validation:Optional
+	AuthorizationCodeProperties *AuthorizationCodePropertiesParameters `json:"authorizationCodeProperties,omitempty" tf:"authorization_code_properties,omitempty"`
+
+	// OAuth2 client application details. See oauth2_client_application below.
+	// +kubebuilder:validation:Optional
+	Oauth2ClientApplication *Oauth2ClientApplicationParameters `json:"oauth2ClientApplication,omitempty" tf:"oauth2_client_application,omitempty"`
+
+	// OAuth2 credentials. See oauth2_credentials below.
+	// +kubebuilder:validation:Optional
+	Oauth2Credentials *Oauth2CredentialsParameters `json:"oauth2Credentials,omitempty" tf:"oauth2_credentials,omitempty"`
+
+	// OAuth2 grant type. Valid values: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER.
+	// +kubebuilder:validation:Optional
+	Oauth2GrantType *string `json:"oauth2GrantType,omitempty" tf:"oauth2_grant_type,omitempty"`
+
+	// Token URL for OAuth2 authentication.
+	// +kubebuilder:validation:Optional
+	TokenURL *string `json:"tokenUrl,omitempty" tf:"token_url,omitempty"`
+
+	// Map of additional parameters for the token URL.
+	// +kubebuilder:validation:Optional
+	TokenURLParametersMapSecretRef *v1.LocalSecretReference `json:"tokenUrlParametersMapSecretRef,omitempty" tf:"-"`
+}
+
 type PhysicalConnectionRequirementsInitParameters struct {
 
-	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
+	// Availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an API requirement.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("availability_zone",false)
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -128,7 +406,7 @@ type PhysicalConnectionRequirementsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneSelector *v1.NamespacedSelector `json:"availabilityZoneSelector,omitempty" tf:"-"`
 
-	// The security group ID list used by the connection.
+	// Security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
@@ -142,7 +420,7 @@ type PhysicalConnectionRequirementsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDListSelector *v1.NamespacedSelector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
 
-	// The subnet ID used by the connection.
+	// Subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -158,20 +436,20 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 type PhysicalConnectionRequirementsObservation struct {
 
-	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
+	// Availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an API requirement.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The security group ID list used by the connection.
+	// Security group ID list used by the connection.
 	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
-	// The subnet ID used by the connection.
+	// Subnet ID used by the connection.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type PhysicalConnectionRequirementsParameters struct {
 
-	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
+	// Availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an API requirement.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("availability_zone",false)
 	// +kubebuilder:validation:Optional
@@ -185,7 +463,7 @@ type PhysicalConnectionRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneSelector *v1.NamespacedSelector `json:"availabilityZoneSelector,omitempty" tf:"-"`
 
-	// The security group ID list used by the connection.
+	// Security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -200,7 +478,7 @@ type PhysicalConnectionRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDListSelector *v1.NamespacedSelector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
 
-	// The subnet ID used by the connection.
+	// Subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -242,7 +520,7 @@ type ConnectionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Connection is the Schema for the Connections API. Provides an Glue Connection resource.
+// Connection is the Schema for the Connections API. Manages an AWS Glue Connection.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

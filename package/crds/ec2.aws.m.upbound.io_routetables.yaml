@@ -387,6 +387,9 @@ spec:
                         networkInterfaceId:
                           description: Identifier of an EC2 network interface.
                           type: string
+                        odbNetworkArn:
+                          description: The Amazon Resource Name (ARN) of an ODB network.
+                          type: string
                         transitGatewayId:
                           description: Identifier of an EC2 Transit Gateway.
                           type: string

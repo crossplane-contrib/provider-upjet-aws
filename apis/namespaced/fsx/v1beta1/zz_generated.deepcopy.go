@@ -3904,6 +3904,16 @@ func (in *SelfManagedActiveDirectoryInitParameters) DeepCopyInto(out *SelfManage
 		*out = new(v1.LocalSecretKeySelector)
 		**out = **in
 	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3953,6 +3963,11 @@ func (in *SelfManagedActiveDirectoryObservation) DeepCopyInto(out *SelfManagedAc
 	if in.OrganizationalUnitDistinguishedName != nil {
 		in, out := &in.OrganizationalUnitDistinguishedName, &out.OrganizationalUnitDistinguishedName
 		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Username != nil {
@@ -4019,6 +4034,16 @@ func (in *SelfManagedActiveDirectoryParameters) DeepCopyInto(out *SelfManagedAct
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
 		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoSecretRef != nil {
+		in, out := &in.PasswordWoSecretRef, &out.PasswordWoSecretRef
+		*out = new(v1.LocalSecretKeySelector)
+		**out = **in
+	}
+	if in.PasswordWoVersion != nil {
+		in, out := &in.PasswordWoVersion, &out.PasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Username != nil {

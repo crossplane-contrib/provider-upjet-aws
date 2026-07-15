@@ -9,18 +9,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ssm/v1beta2/resourcedatasync
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
     s3Destination:
       bucketNameSelector:
         matchLabels:
-          testing.upbound.io/example-name: hoge
+          testing.upbound.io/example-name: example
       regionSelector:
         matchLabels:
-          testing.upbound.io/example-name: hoge
+          testing.upbound.io/example-name: example
 
 ---
 
@@ -31,8 +31,8 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     meta.upbound.io/example-id: ssm/v1beta2/resourcedatasync
   labels:
-    testing.upbound.io/example-name: hoge
-  name: hoge
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
@@ -45,12 +45,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ssm/v1beta2/resourcedatasync
   labels:
-    testing.upbound.io/example-name: hoge
-  name: hoge
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: hoge
-    policy: ${data.aws_iam_policy_document.hoge.json}
+        testing.upbound.io/example-name: example
+    policy: ${data.aws_iam_policy_document.example.json}
     region: us-west-1

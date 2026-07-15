@@ -91,7 +91,7 @@ type S3EndpointInitParameters struct {
 	// Whether to enable statistics for Parquet pages and row groups. Default is true.
 	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
 
-	// Type of encoding to use. Value values are rle_dictionary, plain, and plain_dictionary. (AWS default is rle_dictionary.)
+	// Type of encoding to use. Value values are rle-dictionary, plain, and plain-dictionary. (AWS default is rle-dictionary.)
 	EncodingType *string `json:"encodingType,omitempty" tf:"encoding_type,omitempty"`
 
 	// Server-side encryption mode that you want to encrypt your .csv or .parquet object files copied to S3. Valid values are SSE_S3 and SSE_KMS. (AWS default is SSE_S3.) (Ignored for source endpoints -- only SSE_S3 is valid.)
@@ -265,7 +265,7 @@ type S3EndpointObservation struct {
 	// Whether to enable statistics for Parquet pages and row groups. Default is true.
 	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
 
-	// Type of encoding to use. Value values are rle_dictionary, plain, and plain_dictionary. (AWS default is rle_dictionary.)
+	// Type of encoding to use. Value values are rle-dictionary, plain, and plain-dictionary. (AWS default is rle-dictionary.)
 	EncodingType *string `json:"encodingType,omitempty" tf:"encoding_type,omitempty"`
 
 	// Server-side encryption mode that you want to encrypt your .csv or .parquet object files copied to S3. Valid values are SSE_S3 and SSE_KMS. (AWS default is SSE_S3.) (Ignored for source endpoints -- only SSE_S3 is valid.)
@@ -457,7 +457,7 @@ type S3EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
 
-	// Type of encoding to use. Value values are rle_dictionary, plain, and plain_dictionary. (AWS default is rle_dictionary.)
+	// Type of encoding to use. Value values are rle-dictionary, plain, and plain-dictionary. (AWS default is rle-dictionary.)
 	// +kubebuilder:validation:Optional
 	EncodingType *string `json:"encodingType,omitempty" tf:"encoding_type,omitempty"`
 

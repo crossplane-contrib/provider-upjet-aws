@@ -50,7 +50,7 @@ type ClusterInitParameters struct {
 	// Whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region. Valid values for this parameter are single-az or cross-az, default is single-az. If you want to choose cross-az, num_cache_nodes must be greater than 1.
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used.
@@ -81,7 +81,7 @@ type ClusterInitParameters struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -172,7 +172,7 @@ type ClusterInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -204,7 +204,7 @@ type ClusterObservation struct {
 	// (Memcached only) Configuration endpoint to allow host discovery.
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used.
@@ -240,7 +240,7 @@ type ClusterObservation struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -300,7 +300,7 @@ type ClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
@@ -324,7 +324,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis and valkey.
+	// Name of the cache engine to be used for this cache cluster. Valid values are memcached, redis.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -362,7 +362,7 @@ type ClusterParameters struct {
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The instance class used.
-	// See AWS documentation for information on supported node types for Valkey or Redis OSS and guidance on selecting node types for Valkey or Redis OSS.
+	// See AWS documentation for information on supported node types for Redis OSS and guidance on selecting node types for Redis OSS.
 	// See AWS documentation for information on supported node types for Memcached and guidance on selecting node types for Memcached.
 	// For Memcached, changing this value will re-create the resource.
 	// +kubebuilder:validation:Optional
@@ -474,7 +474,7 @@ type ClusterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Valkey 7.2 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// Enable encryption in-transit. Supported with Memcached versions 1.6.12 and later, Redis OSS versions 3.2.6, 4.0.10 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }

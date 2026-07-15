@@ -1075,7 +1075,7 @@ type HTTPEndpointConfigurationInitParameters struct {
 	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
 	SecretsManagerConfiguration *SecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
+	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -1114,7 +1114,7 @@ type HTTPEndpointConfigurationObservation struct {
 	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
 	SecretsManagerConfiguration *SecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
+	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -1178,7 +1178,7 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretsManagerConfiguration *SecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
-	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
+	// The HTTP endpoint URL to which Kinesis Firehose sends your data. Refer to the target vendor's documentation for the correct intake URL (for example, New Relic or Datadog).
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url" tf:"url,omitempty"`
 }

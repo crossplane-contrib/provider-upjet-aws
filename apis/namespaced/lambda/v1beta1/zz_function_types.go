@@ -144,7 +144,7 @@ type EphemeralStorageParameters struct {
 
 type FileSystemConfigInitParameters struct {
 
-	// ARN of the Amazon EFS Access Point.
+	// ARN of the Amazon EFS Access Point, or the Amazon S3 Files access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -163,7 +163,7 @@ type FileSystemConfigInitParameters struct {
 
 type FileSystemConfigObservation struct {
 
-	// ARN of the Amazon EFS Access Point.
+	// ARN of the Amazon EFS Access Point, or the Amazon S3 Files access point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Path where the function can access the file system. Must start with /mnt/.
@@ -172,7 +172,7 @@ type FileSystemConfigObservation struct {
 
 type FileSystemConfigParameters struct {
 
-	// ARN of the Amazon EFS Access Point.
+	// ARN of the Amazon EFS Access Point, or the Amazon S3 Files access point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/efs/v1beta1.AccessPoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -220,7 +220,7 @@ type FunctionInitParameters struct {
 	// Amount of ephemeral storage (/tmp) to allocate for the Lambda Function. See below.
 	EphemeralStorage *EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block for EFS file system. See below.
+	// Configuration block for EFS or S3 Files file system. See below.
 	FileSystemConfig *FileSystemConfigInitParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
 	// Function entry point in your code. Required if package_type is Zip.
@@ -388,7 +388,7 @@ type FunctionObservation struct {
 	// Amount of ephemeral storage (/tmp) to allocate for the Lambda Function. See below.
 	EphemeralStorage *EphemeralStorageObservation `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block for EFS file system. See below.
+	// Configuration block for EFS or S3 Files file system. See below.
 	FileSystemConfig *FileSystemConfigObservation `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
 	// Function entry point in your code. Required if package_type is Zip.
@@ -550,7 +550,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	EphemeralStorage *EphemeralStorageParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// Configuration block for EFS file system. See below.
+	// Configuration block for EFS or S3 Files file system. See below.
 	// +kubebuilder:validation:Optional
 	FileSystemConfig *FileSystemConfigParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 

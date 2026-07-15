@@ -444,10 +444,12 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   spec:
-                    description: Service mesh specification to apply.
+                    description: Service mesh specification to apply. See spec Block
+                      for details.
                     properties:
                       egressFilter:
-                        description: Egress filter rules for the service mesh.
+                        description: Egress filter rules for the service mesh. See
+                          egress_filter Block for details.
                         properties:
                           type:
                             description: Egress filter type. By default, the type
@@ -456,7 +458,7 @@ spec:
                         type: object
                       serviceDiscovery:
                         description: The service discovery information for the service
-                          mesh.
+                          mesh. See service_discovery Block for details.
                         properties:
                           ipPreference:
                             description: The IP version to use to control traffic
@@ -488,10 +490,12 @@ spec:
                   autoscaler.
                 properties:
                   spec:
-                    description: Service mesh specification to apply.
+                    description: Service mesh specification to apply. See spec Block
+                      for details.
                     properties:
                       egressFilter:
-                        description: Egress filter rules for the service mesh.
+                        description: Egress filter rules for the service mesh. See
+                          egress_filter Block for details.
                         properties:
                           type:
                             description: Egress filter type. By default, the type
@@ -500,7 +504,7 @@ spec:
                         type: object
                       serviceDiscovery:
                         description: The service discovery information for the service
-                          mesh.
+                          mesh. See service_discovery Block for details.
                         properties:
                           ipPreference:
                             description: The IP version to use to control traffic
@@ -631,10 +635,12 @@ spec:
                     description: Resource owner's AWS account ID.
                     type: string
                   spec:
-                    description: Service mesh specification to apply.
+                    description: Service mesh specification to apply. See spec Block
+                      for details.
                     properties:
                       egressFilter:
-                        description: Egress filter rules for the service mesh.
+                        description: Egress filter rules for the service mesh. See
+                          egress_filter Block for details.
                         properties:
                           type:
                             description: Egress filter type. By default, the type
@@ -643,7 +649,7 @@ spec:
                         type: object
                       serviceDiscovery:
                         description: The service discovery information for the service
-                          mesh.
+                          mesh. See service_discovery Block for details.
                         properties:
                           ipPreference:
                             description: The IP version to use to control traffic

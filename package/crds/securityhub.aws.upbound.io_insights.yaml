@@ -99,9 +99,85 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        awsAccountName:
+                          description: The name of the AWS account in which a finding
+                            is generated. See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
                         companyName:
                           description: The name of the findings provider (company)
                             that owns the solution (product) that generates findings.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceAssociatedStandardsId:
+                          description: The unique identifier of a standard in which
+                            a control is enabled. See String_Filter below for more
+                            details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlId:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersName:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersValue:
+                          description: The current value of a security control parameter.
                             See String_Filter below for more details.
                           items:
                             properties:
@@ -1723,9 +1799,85 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        awsAccountName:
+                          description: The name of the AWS account in which a finding
+                            is generated. See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
                         companyName:
                           description: The name of the findings provider (company)
                             that owns the solution (product) that generates findings.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceAssociatedStandardsId:
+                          description: The unique identifier of a standard in which
+                            a control is enabled. See String_Filter below for more
+                            details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlId:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersName:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersValue:
+                          description: The current value of a security control parameter.
                             See String_Filter below for more details.
                           items:
                             properties:
@@ -3434,9 +3586,85 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        awsAccountName:
+                          description: The name of the AWS account in which a finding
+                            is generated. See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
                         companyName:
                           description: The name of the findings provider (company)
                             that owns the solution (product) that generates findings.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceAssociatedStandardsId:
+                          description: The unique identifier of a standard in which
+                            a control is enabled. See String_Filter below for more
+                            details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlId:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersName:
+                          description: The unique identifier of a control across standards.
+                            See String_Filter below for more details.
+                          items:
+                            properties:
+                              comparison:
+                                description: 'The condition to apply to a string value
+                                  when querying for findings. Valid values include:
+                                  EQUALS and NOT_EQUALS.'
+                                type: string
+                              value:
+                                description: A value for the keyword.
+                                type: string
+                            type: object
+                          type: array
+                        complianceSecurityControlParametersValue:
+                          description: The current value of a security control parameter.
                             See String_Filter below for more details.
                           items:
                             properties:
@@ -5161,10 +5389,85 @@ spec:
                               type: string
                           type: object
                         type: array
+                      awsAccountName:
+                        description: The name of the AWS account in which a finding
+                          is generated. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
                       companyName:
                         description: The name of the findings provider (company) that
                           owns the solution (product) that generates findings. See
                           String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceAssociatedStandardsId:
+                        description: The unique identifier of a standard in which
+                          a control is enabled. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlId:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersName:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersValue:
+                        description: The current value of a security control parameter.
+                          See String_Filter below for more details.
                         items:
                           properties:
                             comparison:
@@ -6750,10 +7053,85 @@ spec:
                               type: string
                           type: object
                         type: array
+                      awsAccountName:
+                        description: The name of the AWS account in which a finding
+                          is generated. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
                       companyName:
                         description: The name of the findings provider (company) that
                           owns the solution (product) that generates findings. See
                           String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceAssociatedStandardsId:
+                        description: The unique identifier of a standard in which
+                          a control is enabled. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlId:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersName:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersValue:
+                        description: The current value of a security control parameter.
+                          See String_Filter below for more details.
                         items:
                           properties:
                             comparison:
@@ -8426,10 +8804,85 @@ spec:
                               type: string
                           type: object
                         type: array
+                      awsAccountName:
+                        description: The name of the AWS account in which a finding
+                          is generated. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
                       companyName:
                         description: The name of the findings provider (company) that
                           owns the solution (product) that generates findings. See
                           String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceAssociatedStandardsId:
+                        description: The unique identifier of a standard in which
+                          a control is enabled. See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlId:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersName:
+                        description: The unique identifier of a control across standards.
+                          See String_Filter below for more details.
+                        items:
+                          properties:
+                            comparison:
+                              description: 'The condition to apply to a string value
+                                when querying for findings. Valid values include:
+                                EQUALS and NOT_EQUALS.'
+                              type: string
+                            value:
+                              description: A value for the keyword.
+                              type: string
+                          type: object
+                        type: array
+                      complianceSecurityControlParametersValue:
+                        description: The current value of a security control parameter.
+                          See String_Filter below for more details.
                         items:
                           properties:
                             comparison:

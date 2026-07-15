@@ -60,6 +60,12 @@ type DBClusterInitParameters struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	MaintenanceSchedule []MaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -209,6 +215,12 @@ type DBClusterObservation struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	MaintenanceSchedule []MaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -331,6 +343,13 @@ type DBClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration *LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
+	// Maintenance schedule for the DB cluster, including the preferred maintenance window and timezone. This argument is updatable. This field is only supported for InfluxDB V3 clusters (when using an InfluxDB V3 db parameter group).
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
+	// (when using an InfluxDB V3 db parameter group).
+	// +kubebuilder:validation:Optional
+	MaintenanceSchedule []MaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
@@ -447,6 +466,50 @@ type LogDeliveryConfigurationParameters struct {
 	// Configuration for S3 bucket log delivery.
 	// +kubebuilder:validation:Optional
 	S3Configuration *S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type MaintenanceScheduleInitParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type MaintenanceScheduleObservation struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+}
+
+type MaintenanceScheduleParameters struct {
+
+	// Preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM. Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty string to let the system choose a window.
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM.
+	// Day must be one of Mon, Tue, Wed, Thu, Fri, Sat, or Sun. Provide an empty
+	// string to let the system choose a window.
+	// +kubebuilder:validation:Optional
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow" tf:"preferred_maintenance_window,omitempty"`
+
+	// IANA timezone identifier for the maintenance window. For example, America/New_York or UTC.
+	// The IANA timezone identifier for the maintenance window. For
+	// example, America/New_York or UTC.
+	// +kubebuilder:validation:Optional
+	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
 }
 
 type S3ConfigurationInitParameters struct {

@@ -6833,6 +6833,11 @@ func (in *RestAPIInitParameters) DeepCopyInto(out *RestAPIInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndpointAccessMode != nil {
+		in, out := &in.EndpointAccessMode, &out.EndpointAccessMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.EndpointConfiguration != nil {
 		in, out := &in.EndpointConfiguration, &out.EndpointConfiguration
 		*out = new(RestAPIEndpointConfigurationInitParameters)
@@ -6871,6 +6876,11 @@ func (in *RestAPIInitParameters) DeepCopyInto(out *RestAPIInitParameters) {
 	}
 	if in.PutRestAPIMode != nil {
 		in, out := &in.PutRestAPIMode, &out.PutRestAPIMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityPolicy != nil {
+		in, out := &in.SecurityPolicy, &out.SecurityPolicy
 		*out = new(string)
 		**out = **in
 	}
@@ -6978,6 +6988,11 @@ func (in *RestAPIObservation) DeepCopyInto(out *RestAPIObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndpointAccessMode != nil {
+		in, out := &in.EndpointAccessMode, &out.EndpointAccessMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.EndpointConfiguration != nil {
 		in, out := &in.EndpointConfiguration, &out.EndpointConfiguration
 		*out = new(RestAPIEndpointConfigurationObservation)
@@ -7041,6 +7056,11 @@ func (in *RestAPIObservation) DeepCopyInto(out *RestAPIObservation) {
 	}
 	if in.RootResourceID != nil {
 		in, out := &in.RootResourceID, &out.RootResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityPolicy != nil {
+		in, out := &in.SecurityPolicy, &out.SecurityPolicy
 		*out = new(string)
 		**out = **in
 	}
@@ -7122,6 +7142,11 @@ func (in *RestAPIParameters) DeepCopyInto(out *RestAPIParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndpointAccessMode != nil {
+		in, out := &in.EndpointAccessMode, &out.EndpointAccessMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.EndpointConfiguration != nil {
 		in, out := &in.EndpointConfiguration, &out.EndpointConfiguration
 		*out = new(RestAPIEndpointConfigurationParameters)
@@ -7165,6 +7190,11 @@ func (in *RestAPIParameters) DeepCopyInto(out *RestAPIParameters) {
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityPolicy != nil {
+		in, out := &in.SecurityPolicy, &out.SecurityPolicy
 		*out = new(string)
 		**out = **in
 	}

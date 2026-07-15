@@ -56,7 +56,7 @@ type DomainNameInitParameters struct {
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// A stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
+	// Stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when a regional domain name is desired. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
@@ -115,7 +115,7 @@ type DomainNameObservation struct {
 	// Fully-qualified domain name to register.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The identifier for the domain name resource. Supported only for private custom domain names.
+	// Identifier for the domain name resource. Supported only for private custom domain names.
 	DomainNameID *string `json:"domainNameId,omitempty" tf:"domain_name_id,omitempty"`
 
 	// Endpoint access mode of the DomainName. Only available for domain names that use security policies that start with SecurityPolicy_. Valid values: BASIC, STRICT.
@@ -133,7 +133,7 @@ type DomainNameObservation struct {
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// A stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
+	// Stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -219,7 +219,7 @@ type DomainNameParameters struct {
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
-	// A stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
+	// Stringified JSON policy document that applies to the execute-api service for this DomainName regardless of the caller and Method configuration. Supported only for private custom domain names.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -262,29 +262,29 @@ type DomainNameParameters struct {
 
 type EndpointConfigurationInitParameters struct {
 
-	// The IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// A list of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
+	// List of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
 
 type EndpointConfigurationObservation struct {
 
-	// The IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// A list of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
+	// List of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
 
 type EndpointConfigurationParameters struct {
 
-	// The IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
+	// IP address types that can invoke a DomainName. Valid values: ipv4, dualstack. Use ipv4 to allow only IPv4 addresses to invoke a DomainName, or use dualstack to allow both IPv4 and IPv6 addresses to invoke a DomainName. For the PRIVATE endpoint type, only dualstack is supported.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
-	// A list of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
+	// List of endpoint types of an API or its custom domain name. For an edge-optimized API and its custom domain name, the endpoint type is EDGE. For a regional API and its custom domain name, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
 	// +kubebuilder:validation:Optional
 	Types []*string `json:"types" tf:"types,omitempty"`
 }

@@ -76,6 +76,25 @@ spec:
                   description:
                     description: Description for the network interface.
                     type: string
+                  enaSrdSpecification:
+                    description: Configures ENA Express for the network interface.
+                      The ENI must be attached to an instance to configure ENA Express.
+                      See ENA SRD Specification below for more details.
+                    properties:
+                      enaSrdEnabled:
+                        description: Indicates whether ENA Express is enabled for
+                          the network interface.
+                        type: boolean
+                      enaSrdUdpSpecification:
+                        description: Configures ENA Express for UDP network traffic.
+                          See ENA SRD UDP Specification below for more details.
+                        properties:
+                          enaSrdUdpEnabled:
+                            description: Indicates whether UDP traffic uses ENA Express.
+                              Requires ena_srd_enabled to be true.
+                            type: boolean
+                        type: object
+                    type: object
                   enablePrimaryIpv6:
                     description: Enables assigning a primary IPv6 Global Unicast Address
                       (GUA) to the network interface (ENI) in dual-stack or IPv6-only
@@ -359,6 +378,25 @@ spec:
                   description:
                     description: Description for the network interface.
                     type: string
+                  enaSrdSpecification:
+                    description: Configures ENA Express for the network interface.
+                      The ENI must be attached to an instance to configure ENA Express.
+                      See ENA SRD Specification below for more details.
+                    properties:
+                      enaSrdEnabled:
+                        description: Indicates whether ENA Express is enabled for
+                          the network interface.
+                        type: boolean
+                      enaSrdUdpSpecification:
+                        description: Configures ENA Express for UDP network traffic.
+                          See ENA SRD UDP Specification below for more details.
+                        properties:
+                          enaSrdUdpEnabled:
+                            description: Indicates whether UDP traffic uses ENA Express.
+                              Requires ena_srd_enabled to be true.
+                            type: boolean
+                        type: object
+                    type: object
                   enablePrimaryIpv6:
                     description: Enables assigning a primary IPv6 Global Unicast Address
                       (GUA) to the network interface (ENI) in dual-stack or IPv6-only
@@ -737,6 +775,25 @@ spec:
                   description:
                     description: Description for the network interface.
                     type: string
+                  enaSrdSpecification:
+                    description: Configures ENA Express for the network interface.
+                      The ENI must be attached to an instance to configure ENA Express.
+                      See ENA SRD Specification below for more details.
+                    properties:
+                      enaSrdEnabled:
+                        description: Indicates whether ENA Express is enabled for
+                          the network interface.
+                        type: boolean
+                      enaSrdUdpSpecification:
+                        description: Configures ENA Express for UDP network traffic.
+                          See ENA SRD UDP Specification below for more details.
+                        properties:
+                          enaSrdUdpEnabled:
+                            description: Indicates whether UDP traffic uses ENA Express.
+                              Requires ena_srd_enabled to be true.
+                            type: boolean
+                        type: object
+                    type: object
                   enablePrimaryIpv6:
                     description: Enables assigning a primary IPv6 Global Unicast Address
                       (GUA) to the network interface (ENI) in dual-stack or IPv6-only

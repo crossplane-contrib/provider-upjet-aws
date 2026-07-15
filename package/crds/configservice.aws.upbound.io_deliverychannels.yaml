@@ -860,7 +860,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The name of the delivery channel.
                     type: string
                   region:
                     description: |-

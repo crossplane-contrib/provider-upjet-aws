@@ -185,9 +185,39 @@ spec:
                       If you specify evaluate or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available.
                       The following values are supported: ignore, and evaluate.
                     type: string
+                  evaluationCriteria:
+                    description: The evaluation criteria for PromQL alarms. Cannot
+                      be used with traditional metric alarm parameters.
+                    properties:
+                      promqlCriteria:
+                        description: The PromQL criteria for the alarm evaluation.
+                        properties:
+                          pendingPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must be continuously breaching before it transitions
+                              to the ALARM state. Valid range: 0-86400.'
+                            type: number
+                          query:
+                            description: The PromQL query that the alarm evaluates.
+                              The query must return a result of vector type. Each
+                              entry in the vector result represents an alarm contributor.
+                            type: string
+                          recoveryPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must continuously not be breaching before it transitions
+                              back to the OK state. Valid range: 0-86400.'
+                            type: number
+                        type: object
+                    type: object
+                  evaluationInterval:
+                    description: The frequency, in seconds, at which the alarm is
+                      evaluated. Valid values are 10, 20, 30, and any multiple of
+                      60. Required when using evaluation_criteria.
+                    type: number
                   evaluationPeriods:
                     description: The number of periods over which data is compared
-                      to the specified threshold.
+                      to the specified threshold. Required for traditional metric
+                      alarms.
                     type: number
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
@@ -563,9 +593,39 @@ spec:
                       If you specify evaluate or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available.
                       The following values are supported: ignore, and evaluate.
                     type: string
+                  evaluationCriteria:
+                    description: The evaluation criteria for PromQL alarms. Cannot
+                      be used with traditional metric alarm parameters.
+                    properties:
+                      promqlCriteria:
+                        description: The PromQL criteria for the alarm evaluation.
+                        properties:
+                          pendingPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must be continuously breaching before it transitions
+                              to the ALARM state. Valid range: 0-86400.'
+                            type: number
+                          query:
+                            description: The PromQL query that the alarm evaluates.
+                              The query must return a result of vector type. Each
+                              entry in the vector result represents an alarm contributor.
+                            type: string
+                          recoveryPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must continuously not be breaching before it transitions
+                              back to the OK state. Valid range: 0-86400.'
+                            type: number
+                        type: object
+                    type: object
+                  evaluationInterval:
+                    description: The frequency, in seconds, at which the alarm is
+                      evaluated. Valid values are 10, 20, 30, and any multiple of
+                      60. Required when using evaluation_criteria.
+                    type: number
                   evaluationPeriods:
                     description: The number of periods over which data is compared
-                      to the specified threshold.
+                      to the specified threshold. Required for traditional metric
+                      alarms.
                     type: number
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
@@ -853,15 +913,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.comparisonOperator is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.comparisonOperator)
-                || (has(self.initProvider) && has(self.initProvider.comparisonOperator))'
-            - message: spec.forProvider.evaluationPeriods is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluationPeriods)
-                || (has(self.initProvider) && has(self.initProvider.evaluationPeriods))'
           status:
             description: MetricAlarmStatus defines the observed state of MetricAlarm.
             properties:
@@ -912,9 +963,39 @@ spec:
                       If you specify evaluate or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available.
                       The following values are supported: ignore, and evaluate.
                     type: string
+                  evaluationCriteria:
+                    description: The evaluation criteria for PromQL alarms. Cannot
+                      be used with traditional metric alarm parameters.
+                    properties:
+                      promqlCriteria:
+                        description: The PromQL criteria for the alarm evaluation.
+                        properties:
+                          pendingPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must be continuously breaching before it transitions
+                              to the ALARM state. Valid range: 0-86400.'
+                            type: number
+                          query:
+                            description: The PromQL query that the alarm evaluates.
+                              The query must return a result of vector type. Each
+                              entry in the vector result represents an alarm contributor.
+                            type: string
+                          recoveryPeriod:
+                            description: 'The duration, in seconds, that a contributor
+                              must continuously not be breaching before it transitions
+                              back to the OK state. Valid range: 0-86400.'
+                            type: number
+                        type: object
+                    type: object
+                  evaluationInterval:
+                    description: The frequency, in seconds, at which the alarm is
+                      evaluated. Valid values are 10, 20, 30, and any multiple of
+                      60. Required when using evaluation_criteria.
+                    type: number
                   evaluationPeriods:
                     description: The number of periods over which data is compared
-                      to the specified threshold.
+                      to the specified threshold. Required for traditional metric
+                      alarms.
                     type: number
                   extendedStatistic:
                     description: The percentile statistic for the metric associated

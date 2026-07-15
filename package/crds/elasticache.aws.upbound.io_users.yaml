@@ -142,6 +142,29 @@ spec:
                       - namespace
                       type: object
                     type: array
+                  passwordsWoSecretRef:
+                    description: Write-only password for this user. This argument
+                      is not stored in state. Conflicts with passwords and authentication_mode.
+                      See Write-Only Arguments for more information.11+.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -202,6 +225,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  passwordsWoSecretRef:
+                    description: Write-only password for this user. This argument
+                      is not stored in state. Conflicts with passwords and authentication_mode.
+                      See Write-Only Arguments for more information.11+.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -345,6 +391,10 @@ spec:
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
                     type: boolean
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -545,6 +595,29 @@ spec:
                       - namespace
                       type: object
                     type: array
+                  passwordsWoSecretRef:
+                    description: Write-only password for this user. This argument
+                      is not stored in state. Conflicts with passwords and authentication_mode.
+                      See Write-Only Arguments for more information.11+.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -603,6 +676,29 @@ spec:
                     items:
                       type: string
                     type: array
+                  passwordsWoSecretRef:
+                    description: Write-only password for this user. This argument
+                      is not stored in state. Conflicts with passwords and authentication_mode.
+                      See Write-Only Arguments for more information.11+.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -744,6 +840,10 @@ spec:
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
                     type: boolean
+                  passwordsWoVersion:
+                    description: Version number for passwords_wo. Increment this value
+                      to trigger a password update. Required when using passwords_wo.
+                    type: number
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

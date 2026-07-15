@@ -3156,6 +3156,7 @@ spec:
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -4196,7 +4197,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:
@@ -4324,6 +4325,7 @@ spec:
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -5359,7 +5361,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:
@@ -5571,6 +5573,7 @@ spec:
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
                       We recommend specifying 3 AZs or using the  if necessary.
                       A maximum of 3 AZs can be configured.
+                      Note: Multi-AZ DB clusters require exactly 3 Availability Zones in the DB subnet group. Aurora DB clusters can operate with fewer AZs, but RDS will still automatically assign 3 AZs as described above.
                     items:
                       type: string
                     type: array
@@ -6022,7 +6025,7 @@ spec:
                       DB clusters, storage_type modifications can be done in-place.
                       For Multi-AZ DB Clusters, the iops argument must also be set.
                       Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1,
-                      io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
+                      io2, gp3 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters);
                       io1 (Multi-AZ DB Clusters).'
                     type: string
                   tags:

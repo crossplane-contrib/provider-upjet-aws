@@ -402,6 +402,9 @@ type ClusterObservation struct {
 	// Current version of the MSK Cluster used for updates, e.g., K13V1IB3VIYZZH
 	CurrentVersion *string `json:"currentVersion,omitempty" tf:"current_version,omitempty"`
 
+	// Status indicating whether Amazon MSK requires customer action for the cluster. Valid values are NONE, ACTION_RECOMMENDED, and CRITICAL_ACTION_REQUIRED.
+	CustomerActionStatus *string `json:"customerActionStatus,omitempty" tf:"customer_action_status,omitempty"`
+
 	// Configuration block for specifying encryption. See below.
 	EncryptionInfo []EncryptionInfoObservation `json:"encryptionInfo,omitempty" tf:"encryption_info,omitempty"`
 
@@ -559,6 +562,9 @@ type ConfigurationInfoParameters struct {
 
 type ConnectivityInfoInitParameters struct {
 
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess []PublicAccessInitParameters `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
@@ -568,6 +574,9 @@ type ConnectivityInfoInitParameters struct {
 
 type ConnectivityInfoObservation struct {
 
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	PublicAccess []PublicAccessObservation `json:"publicAccess,omitempty" tf:"public_access,omitempty"`
 
@@ -576,6 +585,10 @@ type ConnectivityInfoObservation struct {
 }
 
 type ConnectivityInfoParameters struct {
+
+	// Network type of the cluster. Valid values are: IPV4 or DUAL. Default value: IPV4. Only updating from IPV4 to DUAL is allowed.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Access control settings for brokers. See connectivity_info public_access Argument Reference below.
 	// +kubebuilder:validation:Optional

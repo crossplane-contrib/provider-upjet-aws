@@ -11617,6 +11617,11 @@ func (in *RouteInitParameters) DeepCopyInto(out *RouteInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.OdbNetworkArn != nil {
+		in, out := &in.OdbNetworkArn, &out.OdbNetworkArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.RouteTableID != nil {
 		in, out := &in.RouteTableID, &out.RouteTableID
 		*out = new(string)
@@ -11789,6 +11794,11 @@ func (in *RouteObservation) DeepCopyInto(out *RouteObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OdbNetworkArn != nil {
+		in, out := &in.OdbNetworkArn, &out.OdbNetworkArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Origin != nil {
 		in, out := &in.Origin, &out.Origin
 		*out = new(string)
@@ -11938,6 +11948,11 @@ func (in *RouteParameters) DeepCopyInto(out *RouteParameters) {
 		in, out := &in.NetworkInterfaceIDSelector, &out.NetworkInterfaceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.OdbNetworkArn != nil {
+		in, out := &in.OdbNetworkArn, &out.OdbNetworkArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

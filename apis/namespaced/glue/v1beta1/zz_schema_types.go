@@ -14,7 +14,7 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type SchemaInitParameters struct {
+type SchemaInitParameters_2 struct {
 
 	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
 	Compatibility *string `json:"compatibility,omitempty" tf:"compatibility,omitempty"`
@@ -49,7 +49,7 @@ type SchemaInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SchemaObservation struct {
+type SchemaObservation_2 struct {
 
 	// Amazon Resource Name (ARN) of the schema.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -100,7 +100,7 @@ type SchemaObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type SchemaParameters struct {
+type SchemaParameters_2 struct {
 
 	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
 	// +kubebuilder:validation:Optional
@@ -150,7 +150,7 @@ type SchemaParameters struct {
 // SchemaSpec defines the desired state of Schema
 type SchemaSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
-	ForProvider            SchemaParameters `json:"forProvider"`
+	ForProvider            SchemaParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -161,13 +161,13 @@ type SchemaSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider SchemaInitParameters `json:"initProvider,omitempty"`
+	InitProvider SchemaInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // SchemaStatus defines the observed state of Schema.
 type SchemaStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SchemaObservation `json:"atProvider,omitempty"`
+	AtProvider        SchemaObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -121,6 +121,11 @@ spec:
                     description: User-created description for the replication group.
                       Must not be empty.
                     type: string
+                  durability:
+                    description: Specifies the durability mode for the replication
+                      group. Valid values are default, async, sync, or disabled. Requires
+                      cluster mode enabled and Valkey 9.0 or higher.
+                    type: string
                   engine:
                     description: |-
                       Name of the cache engine to be used for the clusters in this replication group.
@@ -388,6 +393,8 @@ spec:
                           type: array
                         replicaCount:
                           description: Number of replica nodes in this node group.
+                            Default AWS limit is 5. Higher values may be available
+                            with a quota increase.
                           type: number
                         replicaOutpostArns:
                           description: List of ARNs of the Outposts for the replica
@@ -451,7 +458,7 @@ spec:
                     description: |-
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
-                      Valid values are 0 to 5.
+                      Default AWS limit is 5. Higher values may be available with a quota increase.
                       Conflicts with num_cache_clusters.
                       Can only be set if num_node_groups is set.
                     type: number
@@ -773,6 +780,11 @@ spec:
                     description: User-created description for the replication group.
                       Must not be empty.
                     type: string
+                  durability:
+                    description: Specifies the durability mode for the replication
+                      group. Valid values are default, async, sync, or disabled. Requires
+                      cluster mode enabled and Valkey 9.0 or higher.
+                    type: string
                   engine:
                     description: |-
                       Name of the cache engine to be used for the clusters in this replication group.
@@ -1040,6 +1052,8 @@ spec:
                           type: array
                         replicaCount:
                           description: Number of replica nodes in this node group.
+                            Default AWS limit is 5. Higher values may be available
+                            with a quota increase.
                           type: number
                         replicaOutpostArns:
                           description: List of ARNs of the Outposts for the replica
@@ -1098,7 +1112,7 @@ spec:
                     description: |-
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
-                      Valid values are 0 to 5.
+                      Default AWS limit is 5. Higher values may be available with a quota increase.
                       Conflicts with num_cache_clusters.
                       Can only be set if num_node_groups is set.
                     type: number
@@ -1469,6 +1483,11 @@ spec:
                     description: User-created description for the replication group.
                       Must not be empty.
                     type: string
+                  durability:
+                    description: Specifies the durability mode for the replication
+                      group. Valid values are default, async, sync, or disabled. Requires
+                      cluster mode enabled and Valkey 9.0 or higher.
+                    type: string
                   engine:
                     description: |-
                       Name of the cache engine to be used for the clusters in this replication group.
@@ -1589,6 +1608,8 @@ spec:
                           type: array
                         replicaCount:
                           description: Number of replica nodes in this node group.
+                            Default AWS limit is 5. Higher values may be available
+                            with a quota increase.
                           type: number
                         replicaOutpostArns:
                           description: List of ARNs of the Outposts for the replica
@@ -1660,7 +1681,7 @@ spec:
                     description: |-
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
-                      Valid values are 0 to 5.
+                      Default AWS limit is 5. Higher values may be available with a quota increase.
                       Conflicts with num_cache_clusters.
                       Can only be set if num_node_groups is set.
                     type: number

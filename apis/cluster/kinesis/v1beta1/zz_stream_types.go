@@ -53,6 +53,9 @@ type StreamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamModeDetailsInitParameters struct {
@@ -119,6 +122,9 @@ type StreamObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 type StreamParameters struct {
@@ -175,6 +181,10 @@ type StreamParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Target warm throughput in MB/s that the stream should be scaled to handle.
+	// +kubebuilder:validation:Optional
+	WarmThroughputMibPs *float64 `json:"warmThroughputMibPs,omitempty" tf:"warm_throughput_mib_ps,omitempty"`
 }
 
 // StreamSpec defines the desired state of Stream

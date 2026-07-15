@@ -68,17 +68,21 @@ metadata:
 spec:
   forProvider:
     brokerNodeGroupInfo:
-      - clientSubnetsRefs:
-          - name: source-subnet-1
-          - name: source-subnet-2
-        instanceType: kafka.t3.small
-        securityGroupsRefs:
-          - name: source-sg
-        storageInfo:
-          - ebsStorageInfo:
-              - volumeSize: 1000
+      clientSubnetsRefs:
+        - name: source-subnet-1
+        - name: source-subnet-2
+      # https://docs.aws.amazon.com/msk/latest/developerguide/msk-replicator-supported-configs.html#msk-replicator-supported-cluster-types
+      instanceType: kafka.m7g.large
+      securityGroupsRefs:
+        - name: source-sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
+    clientAuthentication:
+      sasl:
+        iam: true
     clusterName: ${Rand.RFC1123Subdomain}
-    kafkaVersion: 3.2.0
+    kafkaVersion: 3.9.x
     numberOfBrokerNodes: 2
     region: us-east-2
 ---
@@ -94,18 +98,21 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    clientAuthentication:
+      sasl:
+        iam: true
     brokerNodeGroupInfo:
-      - clientSubnetsRefs:
-          - name: target-subnet-1
-          - name: target-subnet-2
-        instanceType: kafka.t3.small
-        securityGroupsRefs:
-          - name: target-sg
-        storageInfo:
-          - ebsStorageInfo:
-              - volumeSize: 1000
+      clientSubnetsRefs:
+        - name: target-subnet-1
+        - name: target-subnet-2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+        - name: target-sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
     clusterName: ${Rand.RFC1123Subdomain}
-    kafkaVersion: 3.2.0
+    kafkaVersion: 3.9.x
     numberOfBrokerNodes: 2
     region: us-east-2
 ---

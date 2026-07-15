@@ -59,7 +59,7 @@ type RouteTableAssociationObservation struct {
 	// The gateway ID to create an association. Conflicts with subnet_id.
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// The ID of the association
+	// ID of the association
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

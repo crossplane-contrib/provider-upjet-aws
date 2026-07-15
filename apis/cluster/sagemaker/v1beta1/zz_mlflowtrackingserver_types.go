@@ -18,7 +18,7 @@ type MlflowTrackingServerInitParameters struct {
 	// The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact store.
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 
 	// The version of MLflow that the tracking server uses. To see which MLflow versions are available to use, see How it works.
@@ -56,7 +56,7 @@ type MlflowTrackingServerObservation struct {
 	// The S3 URI for a general purpose bucket to use as the MLflow Tracking Server artifact store.
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 
 	// The name of the MLFlow Tracking Server.
@@ -96,7 +96,7 @@ type MlflowTrackingServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ArtifactStoreURI *string `json:"artifactStoreUri,omitempty" tf:"artifact_store_uri,omitempty"`
 
-	// A list of Member Definitions that contains objects that identify the workers that make up the work team.
+	// Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutomaticModelRegistration *bool `json:"automaticModelRegistration,omitempty" tf:"automatic_model_registration,omitempty"`
 

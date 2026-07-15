@@ -33,6 +33,7 @@ type DefaultVPCInitParameters struct {
 
 	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
 
+	// (String) VPC ID.
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
@@ -50,12 +51,16 @@ type DefaultVPCObservation struct {
 	// and instance_tenancy arguments become computed attributes
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
+	// (String) VPC ID.
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
 
+	// (String) VPC ID.
 	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
 
+	// (String) VPC ID.
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
+	// (String) VPC ID.
 	DefaultSecurityGroupID *string `json:"defaultSecurityGroupId,omitempty" tf:"default_security_group_id,omitempty"`
 
 	// is true
@@ -70,8 +75,10 @@ type DefaultVPCObservation struct {
 	// Whether destroying the resource deletes the default VPC. Default: false
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
+	// (String) VPC ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) VPC ID.
 	IPv6AssociationID *string `json:"ipv6AssociationId,omitempty" tf:"ipv6_association_id,omitempty"`
 
 	// and instance_tenancy arguments become computed attributes
@@ -79,6 +86,7 @@ type DefaultVPCObservation struct {
 
 	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
 
+	// (String) VPC ID.
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
@@ -86,10 +94,13 @@ type DefaultVPCObservation struct {
 	// The allowed tenancy of instances launched into the VPC
 	InstanceTenancy *string `json:"instanceTenancy,omitempty" tf:"instance_tenancy,omitempty"`
 
+	// (String) VPC ID.
 	MainRouteTableID *string `json:"mainRouteTableId,omitempty" tf:"main_route_table_id,omitempty"`
 
+	// (String) VPC ID.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// (String) AWS Region for this resource.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -127,12 +138,14 @@ type DefaultVPCParameters struct {
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
 
+	// (String) VPC ID.
 	// +kubebuilder:validation:Optional
 	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
+	// (String) AWS Region for this resource.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`

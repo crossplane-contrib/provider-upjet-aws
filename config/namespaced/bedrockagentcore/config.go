@@ -17,6 +17,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("agent_runtime_artifact[*].container_configuration", "agentRuntimeArtifact[*].containerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
+		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].custom_claim[*].authorizing_claim_match_value", "authorizerConfiguration[*].customJwtAuthorizer[*].customClaim[*].authorizingClaimMatchValue")
+		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].custom_claim[*].authorizing_claim_match_value[*].claim_match_value", "authorizerConfiguration[*].customJwtAuthorizer[*].customClaim[*].authorizingClaimMatchValue[*].claimMatchValue")
+		r.AddSingletonListConversion("filesystem_configuration[*].efs_access_point", "filesystemConfiguration[*].efsAccessPoint")
+		r.AddSingletonListConversion("filesystem_configuration[*].s3_files_access_point", "filesystemConfiguration[*].s3FilesAccessPoint")
+		r.AddSingletonListConversion("filesystem_configuration[*].session_storage", "filesystemConfiguration[*].sessionStorage")
 		r.AddSingletonListConversion("lifecycle_configuration", "lifecycleConfiguration")
 		r.AddSingletonListConversion("network_configuration", "networkConfiguration")
 		r.AddSingletonListConversion("network_configuration[*].network_mode_config", "networkConfiguration[*].networkModeConfig")
@@ -31,6 +36,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	// aws_bedrockagentcore_browser
 	p.AddResourceConfigurator("aws_bedrockagentcore_browser", func(r *config.Resource) {
+		r.AddSingletonListConversion("browser_signing", "browserSigning")
+		r.AddSingletonListConversion("certificate[*].location", "certificate[*].location")
+		r.AddSingletonListConversion("certificate[*].location[*].secrets_manager", "certificate[*].location[*].secretsManager")
+		r.AddSingletonListConversion("enterprise_policy[*].location", "enterprisePolicy[*].location")
+		r.AddSingletonListConversion("enterprise_policy[*].location[*].s3", "enterprisePolicy[*].location[*].s3")
 		r.AddSingletonListConversion("network_configuration", "networkConfiguration")
 		r.AddSingletonListConversion("network_configuration[*].vpc_config", "networkConfiguration[*].vpcConfig")
 		r.AddSingletonListConversion("recording", "recording")
@@ -39,6 +49,8 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	// aws_bedrockagentcore_code_interpreter
 	p.AddResourceConfigurator("aws_bedrockagentcore_code_interpreter", func(r *config.Resource) {
+		r.AddSingletonListConversion("certificate[*].location", "certificate[*].location")
+		r.AddSingletonListConversion("certificate[*].location[*].secrets_manager", "certificate[*].location[*].secretsManager")
 		r.AddSingletonListConversion("network_configuration", "networkConfiguration")
 		r.AddSingletonListConversion("network_configuration[*].vpc_config", "networkConfiguration[*].vpcConfig")
 	})
@@ -46,21 +58,35 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway", func(r *config.Resource) {
 		r.AddSingletonListConversion("authorizer_configuration", "authorizerConfiguration")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer", "authorizerConfiguration[*].customJwtAuthorizer")
+		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].custom_claim[*].authorizing_claim_match_value", "authorizerConfiguration[*].customJwtAuthorizer[*].customClaim[*].authorizingClaimMatchValue")
+		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].custom_claim[*].authorizing_claim_match_value[*].claim_match_value", "authorizerConfiguration[*].customJwtAuthorizer[*].customClaim[*].authorizingClaimMatchValue[*].claimMatchValue")
 		r.AddSingletonListConversion("interceptor_configuration[*].input_configuration", "interceptorConfiguration[*].inputConfiguration")
 		r.AddSingletonListConversion("interceptor_configuration[*].interceptor", "interceptorConfiguration[*].interceptor")
 		r.AddSingletonListConversion("interceptor_configuration[*].interceptor[*].lambda", "interceptorConfiguration[*].interceptor[*].lambda")
+		r.AddSingletonListConversion("policy_engine_configuration", "policyEngineConfiguration")
 		r.AddSingletonListConversion("protocol_configuration", "protocolConfiguration")
 		r.AddSingletonListConversion("protocol_configuration[*].mcp", "protocolConfiguration[*].mcp")
+		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].session_configuration", "protocolConfiguration[*].mcp[*].sessionConfiguration")
+		r.AddSingletonListConversion("protocol_configuration[*].mcp[*].streaming_configuration", "protocolConfiguration[*].mcp[*].streamingConfiguration")
 	})
 	// aws_bedrockagentcore_gateway_target
 	p.AddResourceConfigurator("aws_bedrockagentcore_gateway_target", func(r *config.Resource) {
 		r.AddSingletonListConversion("credential_provider_configuration", "credentialProviderConfiguration")
 		r.AddSingletonListConversion("credential_provider_configuration[*].api_key", "credentialProviderConfiguration[*].apiKey")
+		r.AddSingletonListConversion("credential_provider_configuration[*].caller_iam_credentials", "credentialProviderConfiguration[*].callerIamCredentials")
 		r.AddSingletonListConversion("credential_provider_configuration[*].gateway_iam_role", "credentialProviderConfiguration[*].gatewayIamRole")
+		r.AddSingletonListConversion("credential_provider_configuration[*].jwt_passthrough", "credentialProviderConfiguration[*].jwtPassthrough")
 		r.AddSingletonListConversion("credential_provider_configuration[*].oauth", "credentialProviderConfiguration[*].oauth")
 		r.AddSingletonListConversion("metadata_configuration", "metadataConfiguration")
+		r.AddSingletonListConversion("private_endpoint", "privateEndpoint")
+		r.AddSingletonListConversion("private_endpoint[*].managed_vpc_resource", "privateEndpoint[*].managedVpcResource")
+		r.AddSingletonListConversion("private_endpoint[*].self_managed_lattice_resource", "privateEndpoint[*].selfManagedLatticeResource")
 		r.AddSingletonListConversion("target_configuration", "targetConfiguration")
+		r.AddSingletonListConversion("target_configuration[*].http", "targetConfiguration[*].http")
+		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime", "targetConfiguration[*].http[*].agentcoreRuntime")
 		r.AddSingletonListConversion("target_configuration[*].mcp", "targetConfiguration[*].mcp")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].api_gateway", "targetConfiguration[*].mcp[*].apiGateway")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].api_gateway[*].api_gateway_tool_configuration", "targetConfiguration[*].mcp[*].apiGateway[*].apiGatewayToolConfiguration")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda", "targetConfiguration[*].mcp[*].lambda")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema", "targetConfiguration[*].mcp[*].lambda[*].toolSchema")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema[*].inline_payload[*].input_schema", "targetConfiguration[*].mcp[*].lambda[*].toolSchema[*].inlinePayload[*].inputSchema")
@@ -81,6 +107,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].smithy_model", "targetConfiguration[*].mcp[*].smithyModel")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].smithy_model[*].inline_payload", "targetConfiguration[*].mcp[*].smithyModel[*].inlinePayload")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].smithy_model[*].s3", "targetConfiguration[*].mcp[*].smithyModel[*].s3")
+	})
+	// aws_bedrockagentcore_memory
+	p.AddResourceConfigurator("aws_bedrockagentcore_memory", func(r *config.Resource) {
+		r.AddSingletonListConversion("stream_delivery_resources", "streamDeliveryResources")
+		r.AddSingletonListConversion("stream_delivery_resources[*].resource", "streamDeliveryResources[*].resource")
+		r.AddSingletonListConversion("stream_delivery_resources[*].resource[*].kinesis", "streamDeliveryResources[*].resource[*].kinesis")
+		r.AddSingletonListConversion("stream_delivery_resources[*].resource[*].kinesis[*].content_configuration", "streamDeliveryResources[*].resource[*].kinesis[*].contentConfiguration")
 	})
 	// aws_bedrockagentcore_memory_strategy
 	p.AddResourceConfigurator("aws_bedrockagentcore_memory_strategy", func(r *config.Resource) {

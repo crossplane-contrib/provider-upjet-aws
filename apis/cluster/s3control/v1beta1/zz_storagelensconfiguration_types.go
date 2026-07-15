@@ -43,6 +43,9 @@ type AccountLevelInitParameters struct {
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	AdvancedDataProtectionMetrics []AdvancedDataProtectionMetricsInitParameters `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
 
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	AdvancedPerformanceMetrics []AdvancedPerformanceMetricsInitParameters `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
+
 	// level configuration. See Bucket Level below for more details.
 	BucketLevel []BucketLevelInitParameters `json:"bucketLevel,omitempty" tf:"bucket_level,omitempty"`
 
@@ -60,6 +63,9 @@ type AccountLevelObservation struct {
 
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	AdvancedDataProtectionMetrics []AdvancedDataProtectionMetricsObservation `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
+
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	AdvancedPerformanceMetrics []AdvancedPerformanceMetricsObservation `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
 
 	// level configuration. See Bucket Level below for more details.
 	BucketLevel []BucketLevelObservation `json:"bucketLevel,omitempty" tf:"bucket_level,omitempty"`
@@ -81,6 +87,10 @@ type AccountLevelParameters struct {
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	// +kubebuilder:validation:Optional
 	AdvancedDataProtectionMetrics []AdvancedDataProtectionMetricsParameters `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
+
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	// +kubebuilder:validation:Optional
+	AdvancedPerformanceMetrics []AdvancedPerformanceMetricsParameters `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
 
 	// level configuration. See Bucket Level below for more details.
 	// +kubebuilder:validation:Optional
@@ -144,6 +154,25 @@ type AdvancedDataProtectionMetricsObservation struct {
 type AdvancedDataProtectionMetricsParameters struct {
 
 	// Whether the S3 Storage Lens configuration is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type AdvancedPerformanceMetricsInitParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type AdvancedPerformanceMetricsObservation struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type AdvancedPerformanceMetricsParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -224,6 +253,25 @@ type BucketLevelAdvancedDataProtectionMetricsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
+type BucketLevelAdvancedPerformanceMetricsInitParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BucketLevelAdvancedPerformanceMetricsObservation struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BucketLevelAdvancedPerformanceMetricsParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type BucketLevelInitParameters struct {
 
 	// S3 Storage Lens activity metrics. See Activity Metrics below for more details.
@@ -234,6 +282,9 @@ type BucketLevelInitParameters struct {
 
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	AdvancedDataProtectionMetrics []BucketLevelAdvancedDataProtectionMetricsInitParameters `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
+
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	AdvancedPerformanceMetrics []BucketLevelAdvancedPerformanceMetricsInitParameters `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
 
 	// Detailed status code metrics for S3 Storage Lens. See Detailed Status Code Metrics below for more details.
 	DetailedStatusCodeMetrics []DetailedStatusCodeMetricsInitParameters `json:"detailedStatusCodeMetrics,omitempty" tf:"detailed_status_code_metrics,omitempty"`
@@ -252,6 +303,9 @@ type BucketLevelObservation struct {
 
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	AdvancedDataProtectionMetrics []BucketLevelAdvancedDataProtectionMetricsObservation `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
+
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	AdvancedPerformanceMetrics []BucketLevelAdvancedPerformanceMetricsObservation `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
 
 	// Detailed status code metrics for S3 Storage Lens. See Detailed Status Code Metrics below for more details.
 	DetailedStatusCodeMetrics []DetailedStatusCodeMetricsObservation `json:"detailedStatusCodeMetrics,omitempty" tf:"detailed_status_code_metrics,omitempty"`
@@ -273,6 +327,10 @@ type BucketLevelParameters struct {
 	// protection metrics for S3 Storage Lens. See Advanced Data-Protection Metrics below for more details.
 	// +kubebuilder:validation:Optional
 	AdvancedDataProtectionMetrics []BucketLevelAdvancedDataProtectionMetricsParameters `json:"advancedDataProtectionMetrics,omitempty" tf:"advanced_data_protection_metrics,omitempty"`
+
+	// Advanced performance metrics for S3 Storage Lens. See Advanced Performance Metrics below for more details.
+	// +kubebuilder:validation:Optional
+	AdvancedPerformanceMetrics []BucketLevelAdvancedPerformanceMetricsParameters `json:"advancedPerformanceMetrics,omitempty" tf:"advanced_performance_metrics,omitempty"`
 
 	// Detailed status code metrics for S3 Storage Lens. See Detailed Status Code Metrics below for more details.
 	// +kubebuilder:validation:Optional
@@ -309,6 +367,9 @@ type DataExportInitParameters struct {
 
 	// The bucket where the S3 Storage Lens metrics export will be located. See S3 Bucket Destination below for more details.
 	S3BucketDestination []S3BucketDestinationInitParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	StorageLensTableDestination []StorageLensTableDestinationInitParameters `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
 }
 
 type DataExportObservation struct {
@@ -318,6 +379,9 @@ type DataExportObservation struct {
 
 	// The bucket where the S3 Storage Lens metrics export will be located. See S3 Bucket Destination below for more details.
 	S3BucketDestination []S3BucketDestinationObservation `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	StorageLensTableDestination []StorageLensTableDestinationObservation `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
 }
 
 type DataExportParameters struct {
@@ -329,6 +393,10 @@ type DataExportParameters struct {
 	// The bucket where the S3 Storage Lens metrics export will be located. See S3 Bucket Destination below for more details.
 	// +kubebuilder:validation:Optional
 	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	// +kubebuilder:validation:Optional
+	StorageLensTableDestination []StorageLensTableDestinationParameters `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
 }
 
 type DetailedStatusCodeMetricsInitParameters struct {
@@ -377,6 +445,34 @@ type EncryptionParameters struct {
 	// S3 encryption. An empty configuration block {} should be used.
 	// +kubebuilder:validation:Optional
 	SseS3 []SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type EncryptionSseKMSInitParameters struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type EncryptionSseKMSObservation struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type EncryptionSseKMSParameters struct {
+
+	// KMS key ARN.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+}
+
+type EncryptionSseS3InitParameters struct {
+}
+
+type EncryptionSseS3Observation struct {
+}
+
+type EncryptionSseS3Parameters struct {
 }
 
 type ExcludeInitParameters struct {
@@ -434,6 +530,162 @@ type ExcludeParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
+type ExpandedPrefixesDataExportInitParameters struct {
+
+	// The bucket where the S3 Storage Lens expanded prefix metrics export will be located. See S3 Bucket Destination below for more details.
+	S3BucketDestination []ExpandedPrefixesDataExportS3BucketDestinationInitParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	StorageLensTableDestination []ExpandedPrefixesDataExportStorageLensTableDestinationInitParameters `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
+}
+
+type ExpandedPrefixesDataExportObservation struct {
+
+	// The bucket where the S3 Storage Lens expanded prefix metrics export will be located. See S3 Bucket Destination below for more details.
+	S3BucketDestination []ExpandedPrefixesDataExportS3BucketDestinationObservation `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	StorageLensTableDestination []ExpandedPrefixesDataExportStorageLensTableDestinationObservation `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
+}
+
+type ExpandedPrefixesDataExportParameters struct {
+
+	// The bucket where the S3 Storage Lens expanded prefix metrics export will be located. See S3 Bucket Destination below for more details.
+	// +kubebuilder:validation:Optional
+	S3BucketDestination []ExpandedPrefixesDataExportS3BucketDestinationParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+
+	// S3 table bucket where the S3 Storage Lens expanded prefix metrics export will be located. See Storage Lens Table Destination below for more details.
+	// +kubebuilder:validation:Optional
+	StorageLensTableDestination []ExpandedPrefixesDataExportStorageLensTableDestinationParameters `json:"storageLensTableDestination,omitempty" tf:"storage_lens_table_destination,omitempty"`
+}
+
+type ExpandedPrefixesDataExportS3BucketDestinationInitParameters struct {
+
+	// The account ID of the owner of the S3 Storage Lens metrics export bucket.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the bucket.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []S3BucketDestinationEncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// The export format. Valid values: CSV, Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The schema version of the export file. Valid values: V_1.
+	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
+
+	// The prefix of the destination bucket where the metrics export will be delivered.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ExpandedPrefixesDataExportS3BucketDestinationObservation struct {
+
+	// The account ID of the owner of the S3 Storage Lens metrics export bucket.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the bucket.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []S3BucketDestinationEncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// The export format. Valid values: CSV, Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The schema version of the export file. Valid values: V_1.
+	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
+
+	// The prefix of the destination bucket where the metrics export will be delivered.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ExpandedPrefixesDataExportS3BucketDestinationParameters struct {
+
+	// The account ID of the owner of the S3 Storage Lens metrics export bucket.
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the bucket.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn" tf:"arn,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	// +kubebuilder:validation:Optional
+	Encryption []S3BucketDestinationEncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// The export format. Valid values: CSV, Parquet.
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format" tf:"format,omitempty"`
+
+	// The schema version of the export file. Valid values: V_1.
+	// +kubebuilder:validation:Optional
+	OutputSchemaVersion *string `json:"outputSchemaVersion" tf:"output_schema_version,omitempty"`
+
+	// The prefix of the destination bucket where the metrics export will be delivered.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionInitParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []StorageLensTableDestinationEncryptionSseKMSInitParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []StorageLensTableDestinationEncryptionSseS3InitParameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionObservation struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []StorageLensTableDestinationEncryptionSseKMSObservation `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []StorageLensTableDestinationEncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	// +kubebuilder:validation:Optional
+	SseKMS []StorageLensTableDestinationEncryptionSseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	// +kubebuilder:validation:Optional
+	SseS3 []StorageLensTableDestinationEncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationInitParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationObservation struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+}
+
+type ExpandedPrefixesDataExportStorageLensTableDestinationParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	// +kubebuilder:validation:Optional
+	Encryption []ExpandedPrefixesDataExportStorageLensTableDestinationEncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+}
+
 type IncludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
@@ -486,6 +738,63 @@ type PrefixLevelParameters struct {
 	// level storage metrics for S3 Storage Lens. See Prefix Level Storage Metrics below for more details.
 	// +kubebuilder:validation:Optional
 	StorageMetrics []StorageMetricsParameters `json:"storageMetrics" tf:"storage_metrics,omitempty"`
+}
+
+type S3BucketDestinationEncryptionInitParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []S3BucketDestinationEncryptionSseKMSInitParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []S3BucketDestinationEncryptionSseS3InitParameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type S3BucketDestinationEncryptionObservation struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []S3BucketDestinationEncryptionSseKMSObservation `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []S3BucketDestinationEncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type S3BucketDestinationEncryptionParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	// +kubebuilder:validation:Optional
+	SseKMS []S3BucketDestinationEncryptionSseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	// +kubebuilder:validation:Optional
+	SseS3 []S3BucketDestinationEncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type S3BucketDestinationEncryptionSseKMSInitParameters struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type S3BucketDestinationEncryptionSseKMSObservation struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type S3BucketDestinationEncryptionSseKMSParameters struct {
+
+	// KMS key ARN.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+}
+
+type S3BucketDestinationEncryptionSseS3InitParameters struct {
+}
+
+type S3BucketDestinationEncryptionSseS3Observation struct {
+}
+
+type S3BucketDestinationEncryptionSseS3Parameters struct {
 }
 
 type S3BucketDestinationInitParameters struct {
@@ -731,8 +1040,14 @@ type StorageLensConfigurationStorageLensConfigurationInitParameters struct {
 	// What is excluded in this configuration. Conflicts with include. See Exclude below for more details.
 	Exclude []ExcludeInitParameters `json:"exclude,omitempty" tf:"exclude,omitempty"`
 
+	// Configuration for the S3 Storage Lens expanded prefix metrics report. See Expanded Prefixes Data Export below for more details.
+	ExpandedPrefixesDataExport []ExpandedPrefixesDataExportInitParameters `json:"expandedPrefixesDataExport,omitempty" tf:"expanded_prefixes_data_export,omitempty"`
+
 	// What is included in this configuration. Conflicts with exclude. See Include below for more details.
 	Include []IncludeInitParameters `json:"include,omitempty" tf:"include,omitempty"`
+
+	// Prefix delimiter used for object keys in this S3 Storage Lens configuration.
+	PrefixDelimiter *string `json:"prefixDelimiter,omitempty" tf:"prefix_delimiter,omitempty"`
 }
 
 type StorageLensConfigurationStorageLensConfigurationObservation struct {
@@ -752,8 +1067,14 @@ type StorageLensConfigurationStorageLensConfigurationObservation struct {
 	// What is excluded in this configuration. Conflicts with include. See Exclude below for more details.
 	Exclude []ExcludeObservation `json:"exclude,omitempty" tf:"exclude,omitempty"`
 
+	// Configuration for the S3 Storage Lens expanded prefix metrics report. See Expanded Prefixes Data Export below for more details.
+	ExpandedPrefixesDataExport []ExpandedPrefixesDataExportObservation `json:"expandedPrefixesDataExport,omitempty" tf:"expanded_prefixes_data_export,omitempty"`
+
 	// What is included in this configuration. Conflicts with exclude. See Include below for more details.
 	Include []IncludeObservation `json:"include,omitempty" tf:"include,omitempty"`
+
+	// Prefix delimiter used for object keys in this S3 Storage Lens configuration.
+	PrefixDelimiter *string `json:"prefixDelimiter,omitempty" tf:"prefix_delimiter,omitempty"`
 }
 
 type StorageLensConfigurationStorageLensConfigurationParameters struct {
@@ -778,9 +1099,103 @@ type StorageLensConfigurationStorageLensConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Exclude []ExcludeParameters `json:"exclude,omitempty" tf:"exclude,omitempty"`
 
+	// Configuration for the S3 Storage Lens expanded prefix metrics report. See Expanded Prefixes Data Export below for more details.
+	// +kubebuilder:validation:Optional
+	ExpandedPrefixesDataExport []ExpandedPrefixesDataExportParameters `json:"expandedPrefixesDataExport,omitempty" tf:"expanded_prefixes_data_export,omitempty"`
+
 	// What is included in this configuration. Conflicts with exclude. See Include below for more details.
 	// +kubebuilder:validation:Optional
 	Include []IncludeParameters `json:"include,omitempty" tf:"include,omitempty"`
+
+	// Prefix delimiter used for object keys in this S3 Storage Lens configuration.
+	// +kubebuilder:validation:Optional
+	PrefixDelimiter *string `json:"prefixDelimiter,omitempty" tf:"prefix_delimiter,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionInitParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []EncryptionSseKMSInitParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []EncryptionSseS3InitParameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionObservation struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	SseKMS []EncryptionSseKMSObservation `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	SseS3 []EncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionParameters struct {
+
+	// KMS encryption. See SSE KMS below for more details.
+	// +kubebuilder:validation:Optional
+	SseKMS []EncryptionSseKMSParameters `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// S3 encryption. An empty configuration block {} should be used.
+	// +kubebuilder:validation:Optional
+	SseS3 []EncryptionSseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionSseKMSInitParameters struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionSseKMSObservation struct {
+
+	// KMS key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionSseKMSParameters struct {
+
+	// KMS key ARN.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+}
+
+type StorageLensTableDestinationEncryptionSseS3InitParameters struct {
+}
+
+type StorageLensTableDestinationEncryptionSseS3Observation struct {
+}
+
+type StorageLensTableDestinationEncryptionSseS3Parameters struct {
+}
+
+type StorageLensTableDestinationInitParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []StorageLensTableDestinationEncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+}
+
+type StorageLensTableDestinationObservation struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	Encryption []StorageLensTableDestinationEncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+}
+
+type StorageLensTableDestinationParameters struct {
+
+	// Whether S3 Storage Lens export to S3 tables is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
+	// +kubebuilder:validation:Optional
+	Encryption []StorageLensTableDestinationEncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 }
 
 type StorageMetricsInitParameters struct {

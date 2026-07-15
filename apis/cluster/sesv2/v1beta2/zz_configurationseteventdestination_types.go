@@ -46,10 +46,10 @@ type ConfigurationSetEventDestinationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// A name that identifies the event destination within the configuration set.
+	// An object that defines the event destination. See event_destination Block for details.
 	EventDestination *EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// A name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 }
 
@@ -58,10 +58,10 @@ type ConfigurationSetEventDestinationObservation struct {
 	// The name of the configuration set.
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
-	// A name that identifies the event destination within the configuration set.
+	// An object that defines the event destination. See event_destination Block for details.
 	EventDestination *EventDestinationObservation `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// A name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
 	// A pipe-delimited string combining configuration_set_name and event_destination_name.
@@ -87,11 +87,11 @@ type ConfigurationSetEventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// A name that identifies the event destination within the configuration set.
+	// An object that defines the event destination. See event_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventDestination *EventDestinationParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// A name that identifies the event destination within the configuration set.
 	// +kubebuilder:validation:Optional
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
@@ -177,7 +177,7 @@ type EventDestinationInitParameters struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationInitParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
 	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
@@ -202,7 +202,7 @@ type EventDestinationObservation struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationObservation `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
 	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
@@ -232,7 +232,7 @@ type EventDestinationParameters struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination Block for details.
+	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	// +kubebuilder:validation:Optional
 	PinpointDestination *PinpointDestinationParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 

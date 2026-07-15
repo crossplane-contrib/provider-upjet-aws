@@ -174,6 +174,198 @@ spec:
                             See iceberg_input below.
                           items:
                             properties:
+                              icebergTableInput:
+                                description: Configuration parameters, including table
+                                  properties and metadata specifications. See iceberg_table_input
+                                  below.
+                                items:
+                                  properties:
+                                    location:
+                                      description: The S3 location where the Iceberg
+                                        table data will be stored. Maximum length
+                                        of 2056 characters.
+                                      type: string
+                                    partitionSpec:
+                                      description: The partitioning specification
+                                        that defines how the Iceberg table data will
+                                        be organized and partitioned for optimal query
+                                        performance. See partition_spec below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of partition fields
+                                              that define how the table data should
+                                              be partitioned. See fields below.
+                                            items:
+                                              properties:
+                                                fieldId:
+                                                  description: The unique identifier
+                                                    assigned to this partition field
+                                                    within the Iceberg table's partition
+                                                    specification.
+                                                  type: number
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          specId:
+                                            description: The unique identifier for
+                                              this partition specification within
+                                              the Iceberg table's metadata history.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    properties:
+                                      additionalProperties:
+                                        type: string
+                                      description: Key-value pairs of additional table
+                                        properties and configuration settings for
+                                        the Iceberg table.
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    schema:
+                                      description: The schema definition that specifies
+                                        the structure, field types, and metadata for
+                                        the Iceberg table. See schema below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of field definitions
+                                              that make up the table schema. See fields
+                                              below.
+                                            items:
+                                              properties:
+                                                doc:
+                                                  description: Optional documentation
+                                                    or description text that provides
+                                                    additional context about the purpose
+                                                    and usage of this field. Length
+                                                    between 0 and 255 characters.
+                                                  type: string
+                                                id:
+                                                  description: The unique identifier
+                                                    assigned to this field within
+                                                    the Iceberg table schema, used
+                                                    for schema evolution and field
+                                                    tracking.
+                                                  type: number
+                                                initialDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for all records that were written
+                                                    before the field was added to
+                                                    the schema.
+                                                  type: string
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                required:
+                                                  description: Indicates whether this
+                                                    field is required (non-nullable)
+                                                    or optional (nullable) in the
+                                                    table schema.
+                                                  type: boolean
+                                                type:
+                                                  description: 'The data type definition
+                                                    for this field as a JSON string,
+                                                    specifying the structure and format
+                                                    of the data it contains. Examples:
+                                                    "long", "string", "timestamp",
+                                                    "decimal(10,2)".'
+                                                  type: string
+                                                writeDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for any records written after
+                                                    the field was added to the schema,
+                                                    if the writer does not supply
+                                                    the field's value.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          identifierFieldIds:
+                                            description: The list of field identifiers
+                                              that uniquely identify records in the
+                                              table, used for row-level operations
+                                              and deduplication.
+                                            items:
+                                              type: number
+                                            type: array
+                                          schemaId:
+                                            description: The unique identifier for
+                                              this schema version within the Iceberg
+                                              table's schema evolution history.
+                                            type: number
+                                          type:
+                                            description: 'The root type of the schema
+                                              structure. Valid value: struct.'
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sortOrder:
+                                      description: The sort order specification that
+                                        defines how data should be ordered within
+                                        each partition to optimize query performance.
+                                        See sort_order below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of fields and their
+                                              sort directions that define the ordering
+                                              criteria for the Iceberg table data.
+                                              See fields below.
+                                            items:
+                                              properties:
+                                                direction:
+                                                  description: 'The sort direction
+                                                    for this field. Valid values:
+                                                    asc, desc.'
+                                                  type: string
+                                                nullOrder:
+                                                  description: 'The ordering behavior
+                                                    for null values in this field.
+                                                    Valid values: nulls-first, nulls-last.'
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          orderId:
+                                            description: The unique identifier for
+                                              this sort order specification within
+                                              the Iceberg table's metadata.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               metadataOperation:
                                 description: A required metadata operation. Can only
                                   be set to CREATE.
@@ -443,6 +635,158 @@ spec:
                       - databaseName
                       type: object
                     type: array
+                  viewDefinition:
+                    description: A structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    items:
+                      properties:
+                        definer:
+                          description: The definer of a view in SQL.
+                          type: string
+                        isProtected:
+                          description: You can set this flag as true to instruct the
+                            engine not to push user-provided operations into the logical
+                            plan of the view during query planning. However, setting
+                            this flag does not guarantee that the engine will comply.
+                            Refer to the engine's documentation to understand the
+                            guarantees provided, if any.
+                          type: boolean
+                        lastRefreshType:
+                          description: 'Type of the materialized view''s last refresh.
+                            Valid values: Full, Incremental.'
+                          type: string
+                        refreshSeconds:
+                          description: Auto refresh interval in seconds for the materialized
+                            view.
+                          type: number
+                        representations:
+                          description: A list of structures that contains the dialect
+                            of the view, and the query that defines the view. See
+                            representations below.
+                          items:
+                            properties:
+                              dialect:
+                                description: A parameter that specifies the engine
+                                  type of a specific representation. Valid values
+                                  are REDSHIFT, ATHENA, and SPARK.
+                                type: string
+                              dialectVersion:
+                                description: A parameter that specifies the version
+                                  of the engine of a specific representation.
+                                type: string
+                              validationConnection:
+                                description: The name of the connection to be used
+                                  to validate the specific representation of the view.
+                                type: string
+                              validationConnectionRef:
+                                description: Reference to a Connection in glue to
+                                  populate validationConnection.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              validationConnectionSelector:
+                                description: Selector for a Connection in glue to
+                                  populate validationConnection.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              viewExpandedText:
+                                description: A string that represents the SQL query
+                                  that describes the view with expanded resource ARNs.
+                                type: string
+                              viewOriginalText:
+                                description: A string that represents the original
+                                  SQL query that describes the view.
+                                type: string
+                            type: object
+                          type: array
+                        subObjectVersionIds:
+                          description: List of the Apache Iceberg table versions referenced
+                            by the materialized view.
+                          items:
+                            type: number
+                          type: array
+                        subObjects:
+                          description: A list of base table ARNs that make up the
+                            view.
+                          items:
+                            type: string
+                          type: array
+                        viewVersionId:
+                          description: ID value that identifies this view's version.
+                            For materialized views, the version ID is the Apache Iceberg
+                            table's snapshot ID.
+                          type: number
+                        viewVersionToken:
+                          description: Version ID of the Apache Iceberg table.
+                          type: string
+                      type: object
+                    type: array
                   viewExpandedText:
                     description: If the table is a view, the expanded text of the
                       view; otherwise null.
@@ -481,6 +825,198 @@ spec:
                             See iceberg_input below.
                           items:
                             properties:
+                              icebergTableInput:
+                                description: Configuration parameters, including table
+                                  properties and metadata specifications. See iceberg_table_input
+                                  below.
+                                items:
+                                  properties:
+                                    location:
+                                      description: The S3 location where the Iceberg
+                                        table data will be stored. Maximum length
+                                        of 2056 characters.
+                                      type: string
+                                    partitionSpec:
+                                      description: The partitioning specification
+                                        that defines how the Iceberg table data will
+                                        be organized and partitioned for optimal query
+                                        performance. See partition_spec below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of partition fields
+                                              that define how the table data should
+                                              be partitioned. See fields below.
+                                            items:
+                                              properties:
+                                                fieldId:
+                                                  description: The unique identifier
+                                                    assigned to this partition field
+                                                    within the Iceberg table's partition
+                                                    specification.
+                                                  type: number
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          specId:
+                                            description: The unique identifier for
+                                              this partition specification within
+                                              the Iceberg table's metadata history.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    properties:
+                                      additionalProperties:
+                                        type: string
+                                      description: Key-value pairs of additional table
+                                        properties and configuration settings for
+                                        the Iceberg table.
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    schema:
+                                      description: The schema definition that specifies
+                                        the structure, field types, and metadata for
+                                        the Iceberg table. See schema below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of field definitions
+                                              that make up the table schema. See fields
+                                              below.
+                                            items:
+                                              properties:
+                                                doc:
+                                                  description: Optional documentation
+                                                    or description text that provides
+                                                    additional context about the purpose
+                                                    and usage of this field. Length
+                                                    between 0 and 255 characters.
+                                                  type: string
+                                                id:
+                                                  description: The unique identifier
+                                                    assigned to this field within
+                                                    the Iceberg table schema, used
+                                                    for schema evolution and field
+                                                    tracking.
+                                                  type: number
+                                                initialDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for all records that were written
+                                                    before the field was added to
+                                                    the schema.
+                                                  type: string
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                required:
+                                                  description: Indicates whether this
+                                                    field is required (non-nullable)
+                                                    or optional (nullable) in the
+                                                    table schema.
+                                                  type: boolean
+                                                type:
+                                                  description: 'The data type definition
+                                                    for this field as a JSON string,
+                                                    specifying the structure and format
+                                                    of the data it contains. Examples:
+                                                    "long", "string", "timestamp",
+                                                    "decimal(10,2)".'
+                                                  type: string
+                                                writeDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for any records written after
+                                                    the field was added to the schema,
+                                                    if the writer does not supply
+                                                    the field's value.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          identifierFieldIds:
+                                            description: The list of field identifiers
+                                              that uniquely identify records in the
+                                              table, used for row-level operations
+                                              and deduplication.
+                                            items:
+                                              type: number
+                                            type: array
+                                          schemaId:
+                                            description: The unique identifier for
+                                              this schema version within the Iceberg
+                                              table's schema evolution history.
+                                            type: number
+                                          type:
+                                            description: 'The root type of the schema
+                                              structure. Valid value: struct.'
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sortOrder:
+                                      description: The sort order specification that
+                                        defines how data should be ordered within
+                                        each partition to optimize query performance.
+                                        See sort_order below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of fields and their
+                                              sort directions that define the ordering
+                                              criteria for the Iceberg table data.
+                                              See fields below.
+                                            items:
+                                              properties:
+                                                direction:
+                                                  description: 'The sort direction
+                                                    for this field. Valid values:
+                                                    asc, desc.'
+                                                  type: string
+                                                nullOrder:
+                                                  description: 'The ordering behavior
+                                                    for null values in this field.
+                                                    Valid values: nulls-first, nulls-last.'
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          orderId:
+                                            description: The unique identifier for
+                                              this sort order specification within
+                                              the Iceberg table's metadata.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               metadataOperation:
                                 description: A required metadata operation. Can only
                                   be set to CREATE.
@@ -732,6 +1268,158 @@ spec:
                           type: string
                       type: object
                     type: array
+                  viewDefinition:
+                    description: A structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    items:
+                      properties:
+                        definer:
+                          description: The definer of a view in SQL.
+                          type: string
+                        isProtected:
+                          description: You can set this flag as true to instruct the
+                            engine not to push user-provided operations into the logical
+                            plan of the view during query planning. However, setting
+                            this flag does not guarantee that the engine will comply.
+                            Refer to the engine's documentation to understand the
+                            guarantees provided, if any.
+                          type: boolean
+                        lastRefreshType:
+                          description: 'Type of the materialized view''s last refresh.
+                            Valid values: Full, Incremental.'
+                          type: string
+                        refreshSeconds:
+                          description: Auto refresh interval in seconds for the materialized
+                            view.
+                          type: number
+                        representations:
+                          description: A list of structures that contains the dialect
+                            of the view, and the query that defines the view. See
+                            representations below.
+                          items:
+                            properties:
+                              dialect:
+                                description: A parameter that specifies the engine
+                                  type of a specific representation. Valid values
+                                  are REDSHIFT, ATHENA, and SPARK.
+                                type: string
+                              dialectVersion:
+                                description: A parameter that specifies the version
+                                  of the engine of a specific representation.
+                                type: string
+                              validationConnection:
+                                description: The name of the connection to be used
+                                  to validate the specific representation of the view.
+                                type: string
+                              validationConnectionRef:
+                                description: Reference to a Connection in glue to
+                                  populate validationConnection.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              validationConnectionSelector:
+                                description: Selector for a Connection in glue to
+                                  populate validationConnection.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              viewExpandedText:
+                                description: A string that represents the SQL query
+                                  that describes the view with expanded resource ARNs.
+                                type: string
+                              viewOriginalText:
+                                description: A string that represents the original
+                                  SQL query that describes the view.
+                                type: string
+                            type: object
+                          type: array
+                        subObjectVersionIds:
+                          description: List of the Apache Iceberg table versions referenced
+                            by the materialized view.
+                          items:
+                            type: number
+                          type: array
+                        subObjects:
+                          description: A list of base table ARNs that make up the
+                            view.
+                          items:
+                            type: string
+                          type: array
+                        viewVersionId:
+                          description: ID value that identifies this view's version.
+                            For materialized views, the version ID is the Apache Iceberg
+                            table's snapshot ID.
+                          type: number
+                        viewVersionToken:
+                          description: Version ID of the Apache Iceberg table.
+                          type: string
+                      type: object
+                    type: array
                   viewExpandedText:
                     description: If the table is a view, the expanded text of the
                       view; otherwise null.
@@ -860,6 +1548,198 @@ spec:
                             See iceberg_input below.
                           items:
                             properties:
+                              icebergTableInput:
+                                description: Configuration parameters, including table
+                                  properties and metadata specifications. See iceberg_table_input
+                                  below.
+                                items:
+                                  properties:
+                                    location:
+                                      description: The S3 location where the Iceberg
+                                        table data will be stored. Maximum length
+                                        of 2056 characters.
+                                      type: string
+                                    partitionSpec:
+                                      description: The partitioning specification
+                                        that defines how the Iceberg table data will
+                                        be organized and partitioned for optimal query
+                                        performance. See partition_spec below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of partition fields
+                                              that define how the table data should
+                                              be partitioned. See fields below.
+                                            items:
+                                              properties:
+                                                fieldId:
+                                                  description: The unique identifier
+                                                    assigned to this partition field
+                                                    within the Iceberg table's partition
+                                                    specification.
+                                                  type: number
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          specId:
+                                            description: The unique identifier for
+                                              this partition specification within
+                                              the Iceberg table's metadata history.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    properties:
+                                      additionalProperties:
+                                        type: string
+                                      description: Key-value pairs of additional table
+                                        properties and configuration settings for
+                                        the Iceberg table.
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    schema:
+                                      description: The schema definition that specifies
+                                        the structure, field types, and metadata for
+                                        the Iceberg table. See schema below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of field definitions
+                                              that make up the table schema. See fields
+                                              below.
+                                            items:
+                                              properties:
+                                                doc:
+                                                  description: Optional documentation
+                                                    or description text that provides
+                                                    additional context about the purpose
+                                                    and usage of this field. Length
+                                                    between 0 and 255 characters.
+                                                  type: string
+                                                id:
+                                                  description: The unique identifier
+                                                    assigned to this field within
+                                                    the Iceberg table schema, used
+                                                    for schema evolution and field
+                                                    tracking.
+                                                  type: number
+                                                initialDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for all records that were written
+                                                    before the field was added to
+                                                    the schema.
+                                                  type: string
+                                                name:
+                                                  description: Name of the target
+                                                    table.
+                                                  type: string
+                                                required:
+                                                  description: Indicates whether this
+                                                    field is required (non-nullable)
+                                                    or optional (nullable) in the
+                                                    table schema.
+                                                  type: boolean
+                                                type:
+                                                  description: 'The data type definition
+                                                    for this field as a JSON string,
+                                                    specifying the structure and format
+                                                    of the data it contains. Examples:
+                                                    "long", "string", "timestamp",
+                                                    "decimal(10,2)".'
+                                                  type: string
+                                                writeDefault:
+                                                  description: Default value as JSON
+                                                    used to populate the field's value
+                                                    for any records written after
+                                                    the field was added to the schema,
+                                                    if the writer does not supply
+                                                    the field's value.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          identifierFieldIds:
+                                            description: The list of field identifiers
+                                              that uniquely identify records in the
+                                              table, used for row-level operations
+                                              and deduplication.
+                                            items:
+                                              type: number
+                                            type: array
+                                          schemaId:
+                                            description: The unique identifier for
+                                              this schema version within the Iceberg
+                                              table's schema evolution history.
+                                            type: number
+                                          type:
+                                            description: 'The root type of the schema
+                                              structure. Valid value: struct.'
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sortOrder:
+                                      description: The sort order specification that
+                                        defines how data should be ordered within
+                                        each partition to optimize query performance.
+                                        See sort_order below.
+                                      items:
+                                        properties:
+                                          fields:
+                                            description: The list of fields and their
+                                              sort directions that define the ordering
+                                              criteria for the Iceberg table data.
+                                              See fields below.
+                                            items:
+                                              properties:
+                                                direction:
+                                                  description: 'The sort direction
+                                                    for this field. Valid values:
+                                                    asc, desc.'
+                                                  type: string
+                                                nullOrder:
+                                                  description: 'The ordering behavior
+                                                    for null values in this field.
+                                                    Valid values: nulls-first, nulls-last.'
+                                                  type: string
+                                                sourceId:
+                                                  description: The identifier of the
+                                                    source field from the table schema
+                                                    that this partition field is based
+                                                    on.
+                                                  type: number
+                                                transform:
+                                                  description: 'The transformation
+                                                    function applied to the source
+                                                    field to create the partition.
+                                                    Common values: identity, bucket,
+                                                    truncate, year, month, day, hour.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          orderId:
+                                            description: The unique identifier for
+                                              this sort order specification within
+                                              the Iceberg table's metadata.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               metadataOperation:
                                 description: A required metadata operation. Can only
                                   be set to CREATE.
@@ -1128,6 +2008,82 @@ spec:
                           type: string
                       type: object
                     type: array
+                  viewDefinition:
+                    description: A structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    items:
+                      properties:
+                        definer:
+                          description: The definer of a view in SQL.
+                          type: string
+                        isProtected:
+                          description: You can set this flag as true to instruct the
+                            engine not to push user-provided operations into the logical
+                            plan of the view during query planning. However, setting
+                            this flag does not guarantee that the engine will comply.
+                            Refer to the engine's documentation to understand the
+                            guarantees provided, if any.
+                          type: boolean
+                        lastRefreshType:
+                          description: 'Type of the materialized view''s last refresh.
+                            Valid values: Full, Incremental.'
+                          type: string
+                        refreshSeconds:
+                          description: Auto refresh interval in seconds for the materialized
+                            view.
+                          type: number
+                        representations:
+                          description: A list of structures that contains the dialect
+                            of the view, and the query that defines the view. See
+                            representations below.
+                          items:
+                            properties:
+                              dialect:
+                                description: A parameter that specifies the engine
+                                  type of a specific representation. Valid values
+                                  are REDSHIFT, ATHENA, and SPARK.
+                                type: string
+                              dialectVersion:
+                                description: A parameter that specifies the version
+                                  of the engine of a specific representation.
+                                type: string
+                              validationConnection:
+                                description: The name of the connection to be used
+                                  to validate the specific representation of the view.
+                                type: string
+                              viewExpandedText:
+                                description: A string that represents the SQL query
+                                  that describes the view with expanded resource ARNs.
+                                type: string
+                              viewOriginalText:
+                                description: A string that represents the original
+                                  SQL query that describes the view.
+                                type: string
+                            type: object
+                          type: array
+                        subObjectVersionIds:
+                          description: List of the Apache Iceberg table versions referenced
+                            by the materialized view.
+                          items:
+                            type: number
+                          type: array
+                        subObjects:
+                          description: A list of base table ARNs that make up the
+                            view.
+                          items:
+                            type: string
+                          type: array
+                        viewVersionId:
+                          description: ID value that identifies this view's version.
+                            For materialized views, the version ID is the Apache Iceberg
+                            table's snapshot ID.
+                          type: number
+                        viewVersionToken:
+                          description: Version ID of the Apache Iceberg table.
+                          type: string
+                      type: object
+                    type: array
                   viewExpandedText:
                     description: If the table is a view, the expanded text of the
                       view; otherwise null.
@@ -1349,13 +2305,175 @@ spec:
                         description: Configuration block for iceberg table config.
                           See iceberg_input below.
                         properties:
+                          icebergTableInput:
+                            description: Configuration parameters, including table
+                              properties and metadata specifications. See iceberg_table_input
+                              below.
+                            properties:
+                              location:
+                                description: Physical location of the table. By default
+                                  this takes the form of the warehouse location, followed
+                                  by the database location in the warehouse, followed
+                                  by the table name.
+                                type: string
+                              partitionSpec:
+                                description: Partitioning specification that defines
+                                  how the Iceberg table data will be organized and
+                                  partitioned for optimal query performance. See partition_spec
+                                  below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        fieldId:
+                                          description: Unique identifier assigned
+                                            to this partition field within the Iceberg
+                                            table's partition specification.
+                                          type: number
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  specId:
+                                    description: Unique identifier for this partition
+                                      specification within the Iceberg table's metadata
+                                      history.
+                                    type: number
+                                type: object
+                              properties:
+                                additionalProperties:
+                                  type: string
+                                description: Key-value pairs of additional table properties
+                                  and configuration settings for the Iceberg table.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              schema:
+                                description: Schema definition that specifies the
+                                  structure, field types, and metadata for the Iceberg
+                                  table. See schema below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        doc:
+                                          description: Documentation or description
+                                            text that provides additional context
+                                            about the purpose and usage of this field.
+                                            Length between 0 and 255 characters.
+                                          type: string
+                                        id:
+                                          description: Unique identifier assigned
+                                            to this field within the Iceberg table
+                                            schema, used for schema evolution and
+                                            field tracking.
+                                          type: number
+                                        initialDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for all
+                                            records that were written before the field
+                                            was added to the schema.
+                                          type: string
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        required:
+                                          description: Whether this field is required
+                                            (non-nullable) or optional (nullable)
+                                            in the table schema.
+                                          type: boolean
+                                        type:
+                                          description: 'Root type of the schema structure.
+                                            Valid value: struct.'
+                                          type: string
+                                        writeDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for any
+                                            records written after the field was added
+                                            to the schema, if the writer does not
+                                            supply the field's value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  identifierFieldIds:
+                                    description: List of field identifiers that uniquely
+                                      identify records in the table, used for row-level
+                                      operations and deduplication.
+                                    items:
+                                      type: number
+                                    type: array
+                                  schemaId:
+                                    description: Unique identifier for this schema
+                                      version within the Iceberg table's schema evolution
+                                      history.
+                                    type: number
+                                  type:
+                                    description: 'Root type of the schema structure.
+                                      Valid value: struct.'
+                                    type: string
+                                type: object
+                              sortOrder:
+                                description: Whether the column is sorted in ascending
+                                  (1) or descending order (0).
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        direction:
+                                          description: 'Sort direction for this field.
+                                            Valid values: asc, desc.'
+                                          type: string
+                                        nullOrder:
+                                          description: 'Ordering behavior for null
+                                            values in this field. Valid values: nulls-first,
+                                            nulls-last.'
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  orderId:
+                                    description: Unique identifier for this sort order
+                                      specification within the Iceberg table's metadata.
+                                    type: number
+                                type: object
+                            type: object
                           metadataOperation:
-                            description: A required metadata operation. Can only be
+                            description: Required metadata operation. Can only be
                               set to CREATE.
                             type: string
                           version:
-                            description: The table version for the Iceberg table.
-                              Defaults to 2.
+                            description: Table version for the Iceberg table. Defaults
+                              to 2.
                             type: string
                         type: object
                     type: object
@@ -1365,8 +2483,8 @@ spec:
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Properties associated with this table, as a list
-                      of key-value pairs.
+                    description: Properties associated with this table, as a map of
+                      key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   partitionIndex:
@@ -1441,17 +2559,17 @@ spec:
                               description: Free-form text comment.
                               type: string
                             name:
-                              description: Name of the Column.
+                              description: Name of the target table.
                               type: string
                             parameters:
                               additionalProperties:
                                 type: string
-                              description: Key-value pairs defining properties associated
-                                with the column.
+                              description: User-supplied properties in key-value form.
                               type: object
                               x-kubernetes-map-type: granular
                             type:
-                              description: Datatype of data in the Column.
+                              description: 'Root type of the schema structure. Valid
+                                value: struct.'
                               type: string
                           type: object
                         type: array
@@ -1489,9 +2607,8 @@ spec:
                           use a schema reference. See Schema Reference below.
                         properties:
                           schemaId:
-                            description: Configuration block that contains schema
-                              identity fields. Either this or the schema_version_id
-                              has to be provided. See schema_id below.
+                            description: Unique identifier for this schema version
+                              within the Iceberg table's schema evolution history.
                             properties:
                               registryName:
                                 description: Name of the schema registry that contains
@@ -1520,13 +2637,12 @@ spec:
                           ("SerDe") information. See ser_de_info below.
                         properties:
                           name:
-                            description: Name of the SerDe.
+                            description: Name of the target table.
                             type: string
                           parameters:
                             additionalProperties:
                               type: string
-                            description: Map of initialization parameters for the
-                              SerDe, in key-value form.
+                            description: User-supplied properties in key-value form.
                             type: object
                             x-kubernetes-map-type: granular
                           serializationLibrary:
@@ -1603,6 +2719,155 @@ spec:
                     - catalogId
                     - databaseName
                     type: object
+                  viewDefinition:
+                    description: Structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    properties:
+                      definer:
+                        description: Definer of a view in SQL.
+                        type: string
+                      isProtected:
+                        description: You can set this flag as true to instruct the
+                          engine not to push user-provided operations into the logical
+                          plan of the view during query planning. However, setting
+                          this flag does not guarantee that the engine will comply.
+                          Refer to the engine's documentation to understand the guarantees
+                          provided, if any.
+                        type: boolean
+                      lastRefreshType:
+                        description: 'Type of the materialized view''s last refresh.
+                          Valid values: Full, Incremental.'
+                        type: string
+                      refreshSeconds:
+                        description: Auto refresh interval in seconds for the materialized
+                          view.
+                        type: number
+                      representations:
+                        description: List of structures that contains the dialect
+                          of the view, and the query that defines the view. See representations
+                          below.
+                        items:
+                          properties:
+                            dialect:
+                              description: Parameter that specifies the engine type
+                                of a specific representation. Valid values are REDSHIFT,
+                                ATHENA, and SPARK.
+                              type: string
+                            dialectVersion:
+                              description: Parameter that specifies the version of
+                                the engine of a specific representation.
+                              type: string
+                            validationConnection:
+                              description: Name of the connection to be used to validate
+                                the specific representation of the view.
+                              type: string
+                            validationConnectionRef:
+                              description: Reference to a Connection in glue to populate
+                                validationConnection.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            validationConnectionSelector:
+                              description: Selector for a Connection in glue to populate
+                                validationConnection.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                            viewExpandedText:
+                              description: If the table is a view, the expanded text
+                                of the view; otherwise null.
+                              type: string
+                            viewOriginalText:
+                              description: If the table is a view, the original text
+                                of the view; otherwise null.
+                              type: string
+                          type: object
+                        type: array
+                      subObjectVersionIds:
+                        description: List of the Apache Iceberg table versions referenced
+                          by the materialized view.
+                        items:
+                          type: number
+                        type: array
+                      subObjects:
+                        description: List of base table ARNs that make up the view.
+                        items:
+                          type: string
+                        type: array
+                      viewVersionId:
+                        description: ID value that identifies this view's version.
+                          For materialized views, the version ID is the Apache Iceberg
+                          table's snapshot ID.
+                        type: number
+                      viewVersionToken:
+                        description: Version ID of the Apache Iceberg table.
+                        type: string
+                    type: object
                   viewExpandedText:
                     description: If the table is a view, the expanded text of the
                       view; otherwise null.
@@ -1639,13 +2904,175 @@ spec:
                         description: Configuration block for iceberg table config.
                           See iceberg_input below.
                         properties:
+                          icebergTableInput:
+                            description: Configuration parameters, including table
+                              properties and metadata specifications. See iceberg_table_input
+                              below.
+                            properties:
+                              location:
+                                description: Physical location of the table. By default
+                                  this takes the form of the warehouse location, followed
+                                  by the database location in the warehouse, followed
+                                  by the table name.
+                                type: string
+                              partitionSpec:
+                                description: Partitioning specification that defines
+                                  how the Iceberg table data will be organized and
+                                  partitioned for optimal query performance. See partition_spec
+                                  below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        fieldId:
+                                          description: Unique identifier assigned
+                                            to this partition field within the Iceberg
+                                            table's partition specification.
+                                          type: number
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  specId:
+                                    description: Unique identifier for this partition
+                                      specification within the Iceberg table's metadata
+                                      history.
+                                    type: number
+                                type: object
+                              properties:
+                                additionalProperties:
+                                  type: string
+                                description: Key-value pairs of additional table properties
+                                  and configuration settings for the Iceberg table.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              schema:
+                                description: Schema definition that specifies the
+                                  structure, field types, and metadata for the Iceberg
+                                  table. See schema below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        doc:
+                                          description: Documentation or description
+                                            text that provides additional context
+                                            about the purpose and usage of this field.
+                                            Length between 0 and 255 characters.
+                                          type: string
+                                        id:
+                                          description: Unique identifier assigned
+                                            to this field within the Iceberg table
+                                            schema, used for schema evolution and
+                                            field tracking.
+                                          type: number
+                                        initialDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for all
+                                            records that were written before the field
+                                            was added to the schema.
+                                          type: string
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        required:
+                                          description: Whether this field is required
+                                            (non-nullable) or optional (nullable)
+                                            in the table schema.
+                                          type: boolean
+                                        type:
+                                          description: 'Root type of the schema structure.
+                                            Valid value: struct.'
+                                          type: string
+                                        writeDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for any
+                                            records written after the field was added
+                                            to the schema, if the writer does not
+                                            supply the field's value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  identifierFieldIds:
+                                    description: List of field identifiers that uniquely
+                                      identify records in the table, used for row-level
+                                      operations and deduplication.
+                                    items:
+                                      type: number
+                                    type: array
+                                  schemaId:
+                                    description: Unique identifier for this schema
+                                      version within the Iceberg table's schema evolution
+                                      history.
+                                    type: number
+                                  type:
+                                    description: 'Root type of the schema structure.
+                                      Valid value: struct.'
+                                    type: string
+                                type: object
+                              sortOrder:
+                                description: Whether the column is sorted in ascending
+                                  (1) or descending order (0).
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        direction:
+                                          description: 'Sort direction for this field.
+                                            Valid values: asc, desc.'
+                                          type: string
+                                        nullOrder:
+                                          description: 'Ordering behavior for null
+                                            values in this field. Valid values: nulls-first,
+                                            nulls-last.'
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  orderId:
+                                    description: Unique identifier for this sort order
+                                      specification within the Iceberg table's metadata.
+                                    type: number
+                                type: object
+                            type: object
                           metadataOperation:
-                            description: A required metadata operation. Can only be
+                            description: Required metadata operation. Can only be
                               set to CREATE.
                             type: string
                           version:
-                            description: The table version for the Iceberg table.
-                              Defaults to 2.
+                            description: Table version for the Iceberg table. Defaults
+                              to 2.
                             type: string
                         type: object
                     type: object
@@ -1655,8 +3082,8 @@ spec:
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Properties associated with this table, as a list
-                      of key-value pairs.
+                    description: Properties associated with this table, as a map of
+                      key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   partitionIndex:
@@ -1726,17 +3153,17 @@ spec:
                               description: Free-form text comment.
                               type: string
                             name:
-                              description: Name of the Column.
+                              description: Name of the target table.
                               type: string
                             parameters:
                               additionalProperties:
                                 type: string
-                              description: Key-value pairs defining properties associated
-                                with the column.
+                              description: User-supplied properties in key-value form.
                               type: object
                               x-kubernetes-map-type: granular
                             type:
-                              description: Datatype of data in the Column.
+                              description: 'Root type of the schema structure. Valid
+                                value: struct.'
                               type: string
                           type: object
                         type: array
@@ -1774,9 +3201,8 @@ spec:
                           use a schema reference. See Schema Reference below.
                         properties:
                           schemaId:
-                            description: Configuration block that contains schema
-                              identity fields. Either this or the schema_version_id
-                              has to be provided. See schema_id below.
+                            description: Unique identifier for this schema version
+                              within the Iceberg table's schema evolution history.
                             properties:
                               registryName:
                                 description: Name of the schema registry that contains
@@ -1805,13 +3231,12 @@ spec:
                           ("SerDe") information. See ser_de_info below.
                         properties:
                           name:
-                            description: Name of the SerDe.
+                            description: Name of the target table.
                             type: string
                           parameters:
                             additionalProperties:
                               type: string
-                            description: Map of initialization parameters for the
-                              SerDe, in key-value form.
+                            description: User-supplied properties in key-value form.
                             type: object
                             x-kubernetes-map-type: granular
                           serializationLibrary:
@@ -1873,6 +3298,155 @@ spec:
                     properties:
                       name:
                         description: Name of the target table.
+                        type: string
+                    type: object
+                  viewDefinition:
+                    description: Structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    properties:
+                      definer:
+                        description: Definer of a view in SQL.
+                        type: string
+                      isProtected:
+                        description: You can set this flag as true to instruct the
+                          engine not to push user-provided operations into the logical
+                          plan of the view during query planning. However, setting
+                          this flag does not guarantee that the engine will comply.
+                          Refer to the engine's documentation to understand the guarantees
+                          provided, if any.
+                        type: boolean
+                      lastRefreshType:
+                        description: 'Type of the materialized view''s last refresh.
+                          Valid values: Full, Incremental.'
+                        type: string
+                      refreshSeconds:
+                        description: Auto refresh interval in seconds for the materialized
+                          view.
+                        type: number
+                      representations:
+                        description: List of structures that contains the dialect
+                          of the view, and the query that defines the view. See representations
+                          below.
+                        items:
+                          properties:
+                            dialect:
+                              description: Parameter that specifies the engine type
+                                of a specific representation. Valid values are REDSHIFT,
+                                ATHENA, and SPARK.
+                              type: string
+                            dialectVersion:
+                              description: Parameter that specifies the version of
+                                the engine of a specific representation.
+                              type: string
+                            validationConnection:
+                              description: Name of the connection to be used to validate
+                                the specific representation of the view.
+                              type: string
+                            validationConnectionRef:
+                              description: Reference to a Connection in glue to populate
+                                validationConnection.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            validationConnectionSelector:
+                              description: Selector for a Connection in glue to populate
+                                validationConnection.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                            viewExpandedText:
+                              description: If the table is a view, the expanded text
+                                of the view; otherwise null.
+                              type: string
+                            viewOriginalText:
+                              description: If the table is a view, the original text
+                                of the view; otherwise null.
+                              type: string
+                          type: object
+                        type: array
+                      subObjectVersionIds:
+                        description: List of the Apache Iceberg table versions referenced
+                          by the materialized view.
+                        items:
+                          type: number
+                        type: array
+                      subObjects:
+                        description: List of base table ARNs that make up the view.
+                        items:
+                          type: string
+                        type: array
+                      viewVersionId:
+                        description: ID value that identifies this view's version.
+                          For materialized views, the version ID is the Apache Iceberg
+                          table's snapshot ID.
+                        type: number
+                      viewVersionToken:
+                        description: Version ID of the Apache Iceberg table.
                         type: string
                     type: object
                   viewExpandedText:
@@ -1976,7 +3550,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Glue Table.
+                    description: ARN of the Glue Table.
                     type: string
                   catalogId:
                     description: ID of the Glue Catalog and database to create the
@@ -1991,7 +3565,8 @@ spec:
                     description: Description of the table.
                     type: string
                   id:
-                    description: Catalog ID, Database name and of the name table.
+                    description: Unique identifier assigned to this field within the
+                      Iceberg table schema, used for schema evolution and field tracking.
                     type: string
                   openTableFormatInput:
                     description: Configuration block for open table formats. See open_table_format_input
@@ -2001,13 +3576,175 @@ spec:
                         description: Configuration block for iceberg table config.
                           See iceberg_input below.
                         properties:
+                          icebergTableInput:
+                            description: Configuration parameters, including table
+                              properties and metadata specifications. See iceberg_table_input
+                              below.
+                            properties:
+                              location:
+                                description: Physical location of the table. By default
+                                  this takes the form of the warehouse location, followed
+                                  by the database location in the warehouse, followed
+                                  by the table name.
+                                type: string
+                              partitionSpec:
+                                description: Partitioning specification that defines
+                                  how the Iceberg table data will be organized and
+                                  partitioned for optimal query performance. See partition_spec
+                                  below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        fieldId:
+                                          description: Unique identifier assigned
+                                            to this partition field within the Iceberg
+                                            table's partition specification.
+                                          type: number
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  specId:
+                                    description: Unique identifier for this partition
+                                      specification within the Iceberg table's metadata
+                                      history.
+                                    type: number
+                                type: object
+                              properties:
+                                additionalProperties:
+                                  type: string
+                                description: Key-value pairs of additional table properties
+                                  and configuration settings for the Iceberg table.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              schema:
+                                description: Schema definition that specifies the
+                                  structure, field types, and metadata for the Iceberg
+                                  table. See schema below.
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        doc:
+                                          description: Documentation or description
+                                            text that provides additional context
+                                            about the purpose and usage of this field.
+                                            Length between 0 and 255 characters.
+                                          type: string
+                                        id:
+                                          description: Unique identifier assigned
+                                            to this field within the Iceberg table
+                                            schema, used for schema evolution and
+                                            field tracking.
+                                          type: number
+                                        initialDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for all
+                                            records that were written before the field
+                                            was added to the schema.
+                                          type: string
+                                        name:
+                                          description: Name of the target table.
+                                          type: string
+                                        required:
+                                          description: Whether this field is required
+                                            (non-nullable) or optional (nullable)
+                                            in the table schema.
+                                          type: boolean
+                                        type:
+                                          description: 'Root type of the schema structure.
+                                            Valid value: struct.'
+                                          type: string
+                                        writeDefault:
+                                          description: Default value as JSON used
+                                            to populate the field's value for any
+                                            records written after the field was added
+                                            to the schema, if the writer does not
+                                            supply the field's value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  identifierFieldIds:
+                                    description: List of field identifiers that uniquely
+                                      identify records in the table, used for row-level
+                                      operations and deduplication.
+                                    items:
+                                      type: number
+                                    type: array
+                                  schemaId:
+                                    description: Unique identifier for this schema
+                                      version within the Iceberg table's schema evolution
+                                      history.
+                                    type: number
+                                  type:
+                                    description: 'Root type of the schema structure.
+                                      Valid value: struct.'
+                                    type: string
+                                type: object
+                              sortOrder:
+                                description: Whether the column is sorted in ascending
+                                  (1) or descending order (0).
+                                properties:
+                                  fields:
+                                    description: List of partition fields that define
+                                      how the table data should be partitioned. See
+                                      partition_spec.fields below.
+                                    items:
+                                      properties:
+                                        direction:
+                                          description: 'Sort direction for this field.
+                                            Valid values: asc, desc.'
+                                          type: string
+                                        nullOrder:
+                                          description: 'Ordering behavior for null
+                                            values in this field. Valid values: nulls-first,
+                                            nulls-last.'
+                                          type: string
+                                        sourceId:
+                                          description: Identifier of the source field
+                                            from the table schema that this partition
+                                            field is based on.
+                                          type: number
+                                        transform:
+                                          description: 'Transformation function applied
+                                            to the source field to create the partition.
+                                            Common values: identity, bucket, truncate,
+                                            year, month, day, hour.'
+                                          type: string
+                                      type: object
+                                    type: array
+                                  orderId:
+                                    description: Unique identifier for this sort order
+                                      specification within the Iceberg table's metadata.
+                                    type: number
+                                type: object
+                            type: object
                           metadataOperation:
-                            description: A required metadata operation. Can only be
+                            description: Required metadata operation. Can only be
                               set to CREATE.
                             type: string
                           version:
-                            description: The table version for the Iceberg table.
-                              Defaults to 2.
+                            description: Table version for the Iceberg table. Defaults
+                              to 2.
                             type: string
                         type: object
                     type: object
@@ -2017,8 +3754,8 @@ spec:
                   parameters:
                     additionalProperties:
                       type: string
-                    description: Properties associated with this table, as a list
-                      of key-value pairs.
+                    description: Properties associated with this table, as a map of
+                      key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   partitionIndex:
@@ -2030,6 +3767,7 @@ spec:
                           description: Name of the partition index.
                           type: string
                         indexStatus:
+                          description: Status of the partition index.
                           type: string
                         keys:
                           description: Keys for the partition index.
@@ -2095,17 +3833,17 @@ spec:
                               description: Free-form text comment.
                               type: string
                             name:
-                              description: Name of the Column.
+                              description: Name of the target table.
                               type: string
                             parameters:
                               additionalProperties:
                                 type: string
-                              description: Key-value pairs defining properties associated
-                                with the column.
+                              description: User-supplied properties in key-value form.
                               type: object
                               x-kubernetes-map-type: granular
                             type:
-                              description: Datatype of data in the Column.
+                              description: 'Root type of the schema structure. Valid
+                                value: struct.'
                               type: string
                           type: object
                         type: array
@@ -2143,9 +3881,8 @@ spec:
                           use a schema reference. See Schema Reference below.
                         properties:
                           schemaId:
-                            description: Configuration block that contains schema
-                              identity fields. Either this or the schema_version_id
-                              has to be provided. See schema_id below.
+                            description: Unique identifier for this schema version
+                              within the Iceberg table's schema evolution history.
                             properties:
                               registryName:
                                 description: Name of the schema registry that contains
@@ -2174,13 +3911,12 @@ spec:
                           ("SerDe") information. See ser_de_info below.
                         properties:
                           name:
-                            description: Name of the SerDe.
+                            description: Name of the target table.
                             type: string
                           parameters:
                             additionalProperties:
                               type: string
-                            description: Map of initialization parameters for the
-                              SerDe, in key-value form.
+                            description: User-supplied properties in key-value form.
                             type: object
                             x-kubernetes-map-type: granular
                           serializationLibrary:
@@ -2252,6 +3988,79 @@ spec:
                         type: string
                       region:
                         description: Region of the target table.
+                        type: string
+                    type: object
+                  viewDefinition:
+                    description: Structure that contains all the information that
+                      defines the view, including the dialect or dialects for the
+                      view, and the query. See view_definition below.
+                    properties:
+                      definer:
+                        description: Definer of a view in SQL.
+                        type: string
+                      isProtected:
+                        description: You can set this flag as true to instruct the
+                          engine not to push user-provided operations into the logical
+                          plan of the view during query planning. However, setting
+                          this flag does not guarantee that the engine will comply.
+                          Refer to the engine's documentation to understand the guarantees
+                          provided, if any.
+                        type: boolean
+                      lastRefreshType:
+                        description: 'Type of the materialized view''s last refresh.
+                          Valid values: Full, Incremental.'
+                        type: string
+                      refreshSeconds:
+                        description: Auto refresh interval in seconds for the materialized
+                          view.
+                        type: number
+                      representations:
+                        description: List of structures that contains the dialect
+                          of the view, and the query that defines the view. See representations
+                          below.
+                        items:
+                          properties:
+                            dialect:
+                              description: Parameter that specifies the engine type
+                                of a specific representation. Valid values are REDSHIFT,
+                                ATHENA, and SPARK.
+                              type: string
+                            dialectVersion:
+                              description: Parameter that specifies the version of
+                                the engine of a specific representation.
+                              type: string
+                            validationConnection:
+                              description: Name of the connection to be used to validate
+                                the specific representation of the view.
+                              type: string
+                            viewExpandedText:
+                              description: If the table is a view, the expanded text
+                                of the view; otherwise null.
+                              type: string
+                            viewOriginalText:
+                              description: If the table is a view, the original text
+                                of the view; otherwise null.
+                              type: string
+                          type: object
+                        type: array
+                      subObjectVersionIds:
+                        description: List of the Apache Iceberg table versions referenced
+                          by the materialized view.
+                        items:
+                          type: number
+                        type: array
+                      subObjects:
+                        description: List of base table ARNs that make up the view.
+                        items:
+                          type: string
+                        type: array
+                      viewVersionId:
+                        description: ID value that identifies this view's version.
+                          For materialized views, the version ID is the Apache Iceberg
+                          table's snapshot ID.
+                        type: number
+                      viewVersionToken:
+                        description: Version ID of the Apache Iceberg table.
                         type: string
                     type: object
                   viewExpandedText:

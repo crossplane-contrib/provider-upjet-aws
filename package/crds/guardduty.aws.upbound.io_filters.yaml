@@ -746,19 +746,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as
@@ -838,19 +842,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as
@@ -1020,19 +1028,23 @@ spec:
                               type: string
                             greaterThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             greaterThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThan:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             lessThanOrEqual:
                               description: A value to be evaluated. Accepts either
-                                an integer or a date in RFC 3339 format.
+                                an integer given as a string (i.e., enclosed in quotations)
+                                or a date in RFC 3339 format.
                               type: string
                             matches:
                               description: List of string values to be evaluated as

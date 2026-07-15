@@ -16,8 +16,17 @@ import (
 
 type BrowserInitParameters struct {
 
+	// Browser signing configuration that enables cryptographic agent identification using HTTP message signatures. See browser_signing below.
+	BrowserSigning *BrowserSigningInitParameters `json:"browserSigning,omitempty" tf:"browser_signing,omitempty"`
+
+	// Certificates to install in the browser. See certificate below.
+	Certificate []CertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// Description of the browser.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enterprise policy files to apply to the browser. See enterprise_policy below.
+	EnterprisePolicy []EnterprisePolicyInitParameters `json:"enterprisePolicy,omitempty" tf:"enterprise_policy,omitempty"`
 
 	// ARN of the IAM role that the browser assumes for execution.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -83,8 +92,17 @@ type BrowserObservation struct {
 	// Unique identifier of the Browser.
 	BrowserID *string `json:"browserId,omitempty" tf:"browser_id,omitempty"`
 
+	// Browser signing configuration that enables cryptographic agent identification using HTTP message signatures. See browser_signing below.
+	BrowserSigning *BrowserSigningObservation `json:"browserSigning,omitempty" tf:"browser_signing,omitempty"`
+
+	// Certificates to install in the browser. See certificate below.
+	Certificate []CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// Description of the browser.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enterprise policy files to apply to the browser. See enterprise_policy below.
+	EnterprisePolicy []EnterprisePolicyObservation `json:"enterprisePolicy,omitempty" tf:"enterprise_policy,omitempty"`
 
 	// ARN of the IAM role that the browser assumes for execution.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
@@ -115,9 +133,21 @@ type BrowserObservation struct {
 
 type BrowserParameters struct {
 
+	// Browser signing configuration that enables cryptographic agent identification using HTTP message signatures. See browser_signing below.
+	// +kubebuilder:validation:Optional
+	BrowserSigning *BrowserSigningParameters `json:"browserSigning,omitempty" tf:"browser_signing,omitempty"`
+
+	// Certificates to install in the browser. See certificate below.
+	// +kubebuilder:validation:Optional
+	Certificate []CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
 	// Description of the browser.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enterprise policy files to apply to the browser. See enterprise_policy below.
+	// +kubebuilder:validation:Optional
+	EnterprisePolicy []EnterprisePolicyParameters `json:"enterprisePolicy,omitempty" tf:"enterprise_policy,omitempty"`
 
 	// ARN of the IAM role that the browser assumes for execution.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -154,6 +184,150 @@ type BrowserParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type BrowserSigningInitParameters struct {
+
+	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BrowserSigningObservation struct {
+
+	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BrowserSigningParameters struct {
+
+	// Whether browser signing is enabled. When enabled, the browser cryptographically signs HTTP requests to identify itself as an AI agent to bot control vendors.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+}
+
+type CertificateInitParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CertificateObservation struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	Location *LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type CertificateParameters struct {
+
+	// Location from which to retrieve the certificate. See certificates.location below.
+	// +kubebuilder:validation:Optional
+	Location *LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
+}
+
+type EnterprisePolicyInitParameters struct {
+
+	// Location of the enterprise policy file. See location below.
+	Location *EnterprisePolicyLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Type of browser enterprise policy. Valid values: MANAGED, RECOMMENDED.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type EnterprisePolicyLocationInitParameters struct {
+
+	// S3 location of the enterprise policy file. See s3 below.
+	S3 *LocationS3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type EnterprisePolicyLocationObservation struct {
+
+	// S3 location of the enterprise policy file. See s3 below.
+	S3 *LocationS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type EnterprisePolicyLocationParameters struct {
+
+	// S3 location of the enterprise policy file. See s3 below.
+	// +kubebuilder:validation:Optional
+	S3 *LocationS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type EnterprisePolicyObservation struct {
+
+	// Location of the enterprise policy file. See location below.
+	Location *EnterprisePolicyLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Type of browser enterprise policy. Valid values: MANAGED, RECOMMENDED.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type EnterprisePolicyParameters struct {
+
+	// Location of the enterprise policy file. See location below.
+	// +kubebuilder:validation:Optional
+	Location *EnterprisePolicyLocationParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Type of browser enterprise policy. Valid values: MANAGED, RECOMMENDED.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LocationInitParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *SecretsManagerInitParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type LocationObservation struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	SecretsManager *SecretsManagerObservation `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type LocationParameters struct {
+
+	// AWS Secrets Manager location of the certificate. See secrets_manager below.
+	// +kubebuilder:validation:Optional
+	SecretsManager *SecretsManagerParameters `json:"secretsManager,omitempty" tf:"secrets_manager,omitempty"`
+}
+
+type LocationS3InitParameters struct {
+
+	// Name of the S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Prefix for objects in the S3 bucket.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Version ID of the S3 object. If not specified, the latest version is used.
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+}
+
+type LocationS3Observation struct {
+
+	// Name of the S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Prefix for objects in the S3 bucket.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Version ID of the S3 object. If not specified, the latest version is used.
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+}
+
+type LocationS3Parameters struct {
+
+	// Name of the S3 bucket.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+
+	// Prefix for objects in the S3 bucket.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+
+	// Version ID of the S3 object. If not specified, the latest version is used.
+	// +kubebuilder:validation:Optional
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type RecordingInitParameters struct {
@@ -230,6 +404,25 @@ type S3LocationParameters struct {
 	// S3 key prefix for recording files.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+}
+
+type SecretsManagerInitParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SecretsManagerObservation struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SecretsManagerParameters struct {
+
+	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn" tf:"secret_arn,omitempty"`
 }
 
 type VPCConfigInitParameters struct {

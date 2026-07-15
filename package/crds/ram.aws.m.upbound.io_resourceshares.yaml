@@ -82,6 +82,15 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  resourceShareConfiguration:
+                    description: A block that specifies the configuration of the resource
+                      share. See resource_share_configuration Block for details.
+                    properties:
+                      retainSharingOnAccountLeaveOrganization:
+                        description: Specifies whether consumer account retains access
+                          to resource share after leaving AWS organization.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -122,6 +131,15 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  resourceShareConfiguration:
+                    description: A block that specifies the configuration of the resource
+                      share. See resource_share_configuration Block for details.
+                    properties:
+                      retainSharingOnAccountLeaveOrganization:
+                        description: Specifies whether consumer account retains access
+                          to resource share after leaving AWS organization.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -226,6 +244,15 @@ spec:
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
+                  resourceShareConfiguration:
+                    description: A block that specifies the configuration of the resource
+                      share. See resource_share_configuration Block for details.
+                    properties:
+                      retainSharingOnAccountLeaveOrganization:
+                        description: Specifies whether consumer account retains access
+                          to resource share after leaving AWS organization.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

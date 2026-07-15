@@ -291,7 +291,7 @@ type BudgetInitParameters struct {
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes *CostTypesInitParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
-	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter and requires metrics.
 	FilterExpression *FilterExpressionInitParameters `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// The amount of cost or usage being measured for a budget.
@@ -299,6 +299,9 @@ type BudgetInitParameters struct {
 
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	Notification []NotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
@@ -343,7 +346,7 @@ type BudgetObservation struct {
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes *CostTypesObservation `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
-	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter and requires metrics.
 	FilterExpression *FilterExpressionObservation `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// id of resource.
@@ -354,6 +357,9 @@ type BudgetObservation struct {
 
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
@@ -405,7 +411,7 @@ type BudgetParameters struct {
 	// +kubebuilder:validation:Optional
 	CostTypes *CostTypesParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
-	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter.
+	// Object containing Filter Expression to apply to budget. Conflicts with cost_filter and requires metrics.
 	// +kubebuilder:validation:Optional
 	FilterExpression *FilterExpressionParameters `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
@@ -416,6 +422,10 @@ type BudgetParameters struct {
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	// +kubebuilder:validation:Optional
 	LimitUnit *string `json:"limitUnit,omitempty" tf:"limit_unit,omitempty"`
+
+	// List containing definition for how the budget data is aggregated. Conflicts with cost_types and requires filter_expression.
+	// +kubebuilder:validation:Optional
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Object containing Budget Notifications. Can be used multiple times to define more than one budget notification.
 	// +kubebuilder:validation:Optional

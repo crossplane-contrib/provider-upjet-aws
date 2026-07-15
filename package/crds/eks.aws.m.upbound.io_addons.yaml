@@ -152,10 +152,21 @@ spec:
                         type: object
                     type: object
                   configurationValues:
-                    description: custom configuration values for addons with single
+                    description: Custom configuration values for addons with single
                       JSON string. This JSON string value must match the JSON schema
                       derived from describe-addon-configuration.
                     type: string
+                  namespaceConfig:
+                    description: Namespace configuration for the add-on. See namespace_config
+                      below for details.
+                    properties:
+                      namespace:
+                        description: Name of the Kubernetes namespace to install the
+                          add-on in. Once you install an add-on in a specific namespace,
+                          you must remove and re-create the add-on to change its namespace.
+                          For more details see the Custom namespace for add-ons.
+                        type: string
+                    type: object
                   podIdentityAssociation:
                     description: Configuration block with EKS Pod Identity association
                       settings. See pod_identity_association below for details.
@@ -399,10 +410,21 @@ spec:
                         type: object
                     type: object
                   configurationValues:
-                    description: custom configuration values for addons with single
+                    description: Custom configuration values for addons with single
                       JSON string. This JSON string value must match the JSON schema
                       derived from describe-addon-configuration.
                     type: string
+                  namespaceConfig:
+                    description: Namespace configuration for the add-on. See namespace_config
+                      below for details.
+                    properties:
+                      namespace:
+                        description: Name of the Kubernetes namespace to install the
+                          add-on in. Once you install an add-on in a specific namespace,
+                          you must remove and re-create the add-on to change its namespace.
+                          For more details see the Custom namespace for add-ons.
+                        type: string
+                    type: object
                   podIdentityAssociation:
                     description: Configuration block with EKS Pod Identity association
                       settings. See pod_identity_association below for details.
@@ -617,7 +639,7 @@ spec:
                     description: Name of the EKS Cluster.
                     type: string
                   configurationValues:
-                    description: custom configuration values for addons with single
+                    description: Custom configuration values for addons with single
                       JSON string. This JSON string value must match the JSON schema
                       derived from describe-addon-configuration.
                     type: string
@@ -633,6 +655,17 @@ spec:
                     description: Date and time in RFC3339 format that the EKS add-on
                       was updated.
                     type: string
+                  namespaceConfig:
+                    description: Namespace configuration for the add-on. See namespace_config
+                      below for details.
+                    properties:
+                      namespace:
+                        description: Name of the Kubernetes namespace to install the
+                          add-on in. Once you install an add-on in a specific namespace,
+                          you must remove and re-create the add-on to change its namespace.
+                          For more details see the Custom namespace for add-ons.
+                        type: string
+                    type: object
                   podIdentityAssociation:
                     description: Configuration block with EKS Pod Identity association
                       settings. See pod_identity_association below for details.

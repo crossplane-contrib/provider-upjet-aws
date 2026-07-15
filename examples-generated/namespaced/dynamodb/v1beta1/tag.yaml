@@ -18,7 +18,7 @@ spec:
     provider: ${aws.replica}
     region: us-west-1
     resourceArn: ${replace(aws_dynamodb_table.example.arn, data.aws_region.current.region,
-      data.aws_region.replica.name)}
+      data.aws_region.replica.region)}
     value: testvalue
 
 ---
@@ -36,4 +36,4 @@ spec:
   forProvider:
     region: us-west-1
     replica:
-    - regionName: ${data.aws_region.replica.name}
+    - regionName: ${data.aws_region.replica.region}

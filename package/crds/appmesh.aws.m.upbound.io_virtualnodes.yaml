@@ -161,7 +161,7 @@ spec:
                     properties:
                       backend:
                         description: Backends to which the virtual node is expected
-                          to send outbound traffic.
+                          to send outbound traffic. See backend Block for details.
                         items:
                           properties:
                             virtualService:
@@ -180,7 +180,8 @@ spec:
                                             Layer Security (TLS) certificate.
                                           properties:
                                             file:
-                                              description: Local file certificate.
+                                              description: TLS validation context
+                                                trust for a local file certificate.
                                               properties:
                                                 certificateChain:
                                                   description: Certificate chain for
@@ -194,7 +195,8 @@ spec:
                                                   type: string
                                               type: object
                                             sds:
-                                              description: A Secret Discovery Service
+                                              description: TLS validation context
+                                                trust for a Secret Discovery Service
                                                 certificate.
                                               properties:
                                                 secretName:
@@ -257,7 +259,8 @@ spec:
                                                       x-kubernetes-list-type: set
                                                   type: object
                                                 file:
-                                                  description: Local file certificate.
+                                                  description: TLS validation context
+                                                    trust for a local file certificate.
                                                   properties:
                                                     certificateChain:
                                                       description: Certificate chain
@@ -265,8 +268,9 @@ spec:
                                                       type: string
                                                   type: object
                                                 sds:
-                                                  description: A Secret Discovery
-                                                    Service certificate.
+                                                  description: TLS validation context
+                                                    trust for a Secret Discovery Service
+                                                    certificate.
                                                   properties:
                                                     secretName:
                                                       description: Name of the secret
@@ -291,7 +295,8 @@ spec:
                           type: object
                         type: array
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Client policy for the backend.
@@ -305,7 +310,8 @@ spec:
                                       Layer Security (TLS) certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
                                             description: Certificate chain for the
@@ -318,7 +324,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -375,7 +382,8 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
                                                 description: Certificate chain for
@@ -383,8 +391,8 @@ spec:
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -401,15 +409,16 @@ spec:
                         type: object
                       listener:
                         description: Listeners from which the virtual node is expected
-                          to receive inbound traffic.
+                          to receive inbound traffic. See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -418,8 +427,8 @@ spec:
                                       type: number
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -436,8 +445,8 @@ spec:
                                     type: object
                                   type: array
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   items:
                                     properties:
                                       maxRequests:
@@ -448,8 +457,8 @@ spec:
                                     type: object
                                   type: array
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -463,6 +472,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -474,10 +484,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -498,37 +507,41 @@ spec:
                               type: object
                             outlierDetection:
                               description: Outlier detection information for the listener.
+                                See outlier_detection Block for details.
                               properties:
                                 baseEjectionDuration:
                                   description: Base amount of time for which a host
-                                    is ejected.
+                                    is ejected. See base_ejection_duration Block for
+                                    details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 interval:
                                   description: Time interval between ejection sweep
-                                    analysis.
+                                    analysis. See interval Block for details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 maxEjectionPercent:
-                                  description: |-
-                                    Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-                                    Minimum value of 0. Maximum value of 100.
+                                  description: Maximum percentage of hosts in load
+                                    balancing pool for upstream service that can be
+                                    ejected. Will eject at least one host regardless
+                                    of the value. Minimum value of 0. Maximum value
+                                    of 100.
                                   type: number
                                 maxServerErrors:
                                   description: Number of consecutive 5xx errors required
@@ -537,6 +550,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -547,124 +561,121 @@ spec:
                                   type: string
                               type: object
                             timeout:
-                              description: Timeouts for different protocols.
+                              description: Timeouts for different protocols. See timeout
+                                Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
@@ -685,7 +696,8 @@ spec:
                                           type: string
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
                                           description: Certificate chain for the certificate.
@@ -697,7 +709,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -735,7 +748,8 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
                                               description: Certificate chain for the
@@ -743,8 +757,8 @@ spec:
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -761,19 +775,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual node.
+                          for the virtual node. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual node.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -782,9 +800,8 @@ spec:
                                                 in length.
                                               type: string
                                             value:
-                                              description: The specified value for
-                                                the JSON. Must be between 1 and 100
-                                                characters in length.
+                                              description: Number of time units. Minimum
+                                                value of 0.
                                               type: string
                                           type: object
                                         type: array
@@ -795,21 +812,20 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object
                         type: object
                       serviceDiscovery:
                         description: Service discovery information for the virtual
-                          node.
+                          node. See service_discovery Block for details.
                         properties:
                           awsCloudMap:
                             description: Any AWS Cloud Map information for the virtual
-                              node.
+                              node. See aws_cloud_map Block for details.
                             properties:
                               attributes:
                                 additionalProperties:
@@ -822,9 +838,10 @@ spec:
                                 type: object
                                 x-kubernetes-map-type: granular
                               namespaceName:
-                                description: |-
-                                  Name of the AWS Cloud Map namespace to use.
-                                  Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+                                description: Name of the AWS Cloud Map namespace to
+                                  use. Use the aws_service_discovery_http_namespace
+                                  resource to configure a Cloud Map namespace. Must
+                                  be between 1 and 1024 characters in length.
                                 type: string
                               namespaceNameRef:
                                 description: Reference to a HTTPNamespace in servicediscovery
@@ -909,11 +926,15 @@ spec:
                                     type: object
                                 type: object
                               serviceName:
-                                description: attribute of the dns object to hostname.
+                                description: Name of the AWS Cloud Map service to
+                                  use. Use the aws_service_discovery_service resource
+                                  to configure a Cloud Map service. Must be between
+                                  1 and 1024 characters in length.
                                 type: string
                             type: object
                           dns:
-                            description: DNS service name for the virtual node.
+                            description: DNS service name for the virtual node. See
+                              dns Block for details.
                             properties:
                               hostname:
                                 description: DNS host name for your virtual node.
@@ -1049,7 +1070,7 @@ spec:
                     properties:
                       backend:
                         description: Backends to which the virtual node is expected
-                          to send outbound traffic.
+                          to send outbound traffic. See backend Block for details.
                         items:
                           properties:
                             virtualService:
@@ -1068,7 +1089,8 @@ spec:
                                             Layer Security (TLS) certificate.
                                           properties:
                                             file:
-                                              description: Local file certificate.
+                                              description: TLS validation context
+                                                trust for a local file certificate.
                                               properties:
                                                 certificateChain:
                                                   description: Certificate chain for
@@ -1082,7 +1104,8 @@ spec:
                                                   type: string
                                               type: object
                                             sds:
-                                              description: A Secret Discovery Service
+                                              description: TLS validation context
+                                                trust for a Secret Discovery Service
                                                 certificate.
                                               properties:
                                                 secretName:
@@ -1145,7 +1168,8 @@ spec:
                                                       x-kubernetes-list-type: set
                                                   type: object
                                                 file:
-                                                  description: Local file certificate.
+                                                  description: TLS validation context
+                                                    trust for a local file certificate.
                                                   properties:
                                                     certificateChain:
                                                       description: Certificate chain
@@ -1153,8 +1177,9 @@ spec:
                                                       type: string
                                                   type: object
                                                 sds:
-                                                  description: A Secret Discovery
-                                                    Service certificate.
+                                                  description: TLS validation context
+                                                    trust for a Secret Discovery Service
+                                                    certificate.
                                                   properties:
                                                     secretName:
                                                       description: Name of the secret
@@ -1179,7 +1204,8 @@ spec:
                           type: object
                         type: array
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Client policy for the backend.
@@ -1193,7 +1219,8 @@ spec:
                                       Layer Security (TLS) certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
                                             description: Certificate chain for the
@@ -1206,7 +1233,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -1263,7 +1291,8 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
                                                 description: Certificate chain for
@@ -1271,8 +1300,8 @@ spec:
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -1289,15 +1318,16 @@ spec:
                         type: object
                       listener:
                         description: Listeners from which the virtual node is expected
-                          to receive inbound traffic.
+                          to receive inbound traffic. See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -1306,8 +1336,8 @@ spec:
                                       type: number
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -1324,8 +1354,8 @@ spec:
                                     type: object
                                   type: array
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   items:
                                     properties:
                                       maxRequests:
@@ -1336,8 +1366,8 @@ spec:
                                     type: object
                                   type: array
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -1351,6 +1381,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -1362,10 +1393,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -1386,37 +1416,41 @@ spec:
                               type: object
                             outlierDetection:
                               description: Outlier detection information for the listener.
+                                See outlier_detection Block for details.
                               properties:
                                 baseEjectionDuration:
                                   description: Base amount of time for which a host
-                                    is ejected.
+                                    is ejected. See base_ejection_duration Block for
+                                    details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 interval:
                                   description: Time interval between ejection sweep
-                                    analysis.
+                                    analysis. See interval Block for details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 maxEjectionPercent:
-                                  description: |-
-                                    Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-                                    Minimum value of 0. Maximum value of 100.
+                                  description: Maximum percentage of hosts in load
+                                    balancing pool for upstream service that can be
+                                    ejected. Will eject at least one host regardless
+                                    of the value. Minimum value of 0. Maximum value
+                                    of 100.
                                   type: number
                                 maxServerErrors:
                                   description: Number of consecutive 5xx errors required
@@ -1425,6 +1459,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -1435,124 +1470,121 @@ spec:
                                   type: string
                               type: object
                             timeout:
-                              description: Timeouts for different protocols.
+                              description: Timeouts for different protocols. See timeout
+                                Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
@@ -1573,7 +1605,8 @@ spec:
                                           type: string
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
                                           description: Certificate chain for the certificate.
@@ -1585,7 +1618,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -1623,7 +1657,8 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
                                               description: Certificate chain for the
@@ -1631,8 +1666,8 @@ spec:
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -1649,19 +1684,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual node.
+                          for the virtual node. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual node.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -1670,9 +1709,8 @@ spec:
                                                 in length.
                                               type: string
                                             value:
-                                              description: The specified value for
-                                                the JSON. Must be between 1 and 100
-                                                characters in length.
+                                              description: Number of time units. Minimum
+                                                value of 0.
                                               type: string
                                           type: object
                                         type: array
@@ -1683,21 +1721,20 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object
                         type: object
                       serviceDiscovery:
                         description: Service discovery information for the virtual
-                          node.
+                          node. See service_discovery Block for details.
                         properties:
                           awsCloudMap:
                             description: Any AWS Cloud Map information for the virtual
-                              node.
+                              node. See aws_cloud_map Block for details.
                             properties:
                               attributes:
                                 additionalProperties:
@@ -1710,9 +1747,10 @@ spec:
                                 type: object
                                 x-kubernetes-map-type: granular
                               namespaceName:
-                                description: |-
-                                  Name of the AWS Cloud Map namespace to use.
-                                  Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+                                description: Name of the AWS Cloud Map namespace to
+                                  use. Use the aws_service_discovery_http_namespace
+                                  resource to configure a Cloud Map namespace. Must
+                                  be between 1 and 1024 characters in length.
                                 type: string
                               namespaceNameRef:
                                 description: Reference to a HTTPNamespace in servicediscovery
@@ -1797,11 +1835,15 @@ spec:
                                     type: object
                                 type: object
                               serviceName:
-                                description: attribute of the dns object to hostname.
+                                description: Name of the AWS Cloud Map service to
+                                  use. Use the aws_service_discovery_service resource
+                                  to configure a Cloud Map service. Must be between
+                                  1 and 1024 characters in length.
                                 type: string
                             type: object
                           dns:
-                            description: DNS service name for the virtual node.
+                            description: DNS service name for the virtual node. See
+                              dns Block for details.
                             properties:
                               hostname:
                                 description: DNS host name for your virtual node.
@@ -1934,7 +1976,7 @@ spec:
                     properties:
                       backend:
                         description: Backends to which the virtual node is expected
-                          to send outbound traffic.
+                          to send outbound traffic. See backend Block for details.
                         items:
                           properties:
                             virtualService:
@@ -1953,7 +1995,8 @@ spec:
                                             Layer Security (TLS) certificate.
                                           properties:
                                             file:
-                                              description: Local file certificate.
+                                              description: TLS validation context
+                                                trust for a local file certificate.
                                               properties:
                                                 certificateChain:
                                                   description: Certificate chain for
@@ -1967,7 +2010,8 @@ spec:
                                                   type: string
                                               type: object
                                             sds:
-                                              description: A Secret Discovery Service
+                                              description: TLS validation context
+                                                trust for a Secret Discovery Service
                                                 certificate.
                                               properties:
                                                 secretName:
@@ -2030,7 +2074,8 @@ spec:
                                                       x-kubernetes-list-type: set
                                                   type: object
                                                 file:
-                                                  description: Local file certificate.
+                                                  description: TLS validation context
+                                                    trust for a local file certificate.
                                                   properties:
                                                     certificateChain:
                                                       description: Certificate chain
@@ -2038,8 +2083,9 @@ spec:
                                                       type: string
                                                   type: object
                                                 sds:
-                                                  description: A Secret Discovery
-                                                    Service certificate.
+                                                  description: TLS validation context
+                                                    trust for a Secret Discovery Service
+                                                    certificate.
                                                   properties:
                                                     secretName:
                                                       description: Name of the secret
@@ -2064,7 +2110,8 @@ spec:
                           type: object
                         type: array
                       backendDefaults:
-                        description: Defaults for backends.
+                        description: Defaults for backends. See backend_defaults Block
+                          for details.
                         properties:
                           clientPolicy:
                             description: Client policy for the backend.
@@ -2078,7 +2125,8 @@ spec:
                                       Layer Security (TLS) certificate.
                                     properties:
                                       file:
-                                        description: Local file certificate.
+                                        description: TLS validation context trust
+                                          for a local file certificate.
                                         properties:
                                           certificateChain:
                                             description: Certificate chain for the
@@ -2091,7 +2139,8 @@ spec:
                                             type: string
                                         type: object
                                       sds:
-                                        description: A Secret Discovery Service certificate.
+                                        description: TLS validation context trust
+                                          for a Secret Discovery Service certificate.
                                         properties:
                                           secretName:
                                             description: Name of the secret secret
@@ -2148,7 +2197,8 @@ spec:
                                                 x-kubernetes-list-type: set
                                             type: object
                                           file:
-                                            description: Local file certificate.
+                                            description: TLS validation context trust
+                                              for a local file certificate.
                                             properties:
                                               certificateChain:
                                                 description: Certificate chain for
@@ -2156,8 +2206,8 @@ spec:
                                                 type: string
                                             type: object
                                           sds:
-                                            description: A Secret Discovery Service
-                                              certificate.
+                                            description: TLS validation context trust
+                                              for a Secret Discovery Service certificate.
                                             properties:
                                               secretName:
                                                 description: Name of the secret secret
@@ -2174,15 +2224,16 @@ spec:
                         type: object
                       listener:
                         description: Listeners from which the virtual node is expected
-                          to receive inbound traffic.
+                          to receive inbound traffic. See listener Block for details.
                         items:
                           properties:
                             connectionPool:
                               description: Connection pool information for the listener.
+                                See connection_pool Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     maxRequests:
                                       description: Maximum number of inflight requests
@@ -2191,8 +2242,8 @@ spec:
                                       type: number
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -2209,8 +2260,8 @@ spec:
                                     type: object
                                   type: array
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   items:
                                     properties:
                                       maxRequests:
@@ -2221,8 +2272,8 @@ spec:
                                     type: object
                                   type: array
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   items:
                                     properties:
                                       maxConnections:
@@ -2236,6 +2287,7 @@ spec:
                               type: object
                             healthCheck:
                               description: Health check information for the listener.
+                                See health_check Block for details.
                               properties:
                                 healthyThreshold:
                                   description: Number of consecutive successful health
@@ -2247,10 +2299,9 @@ spec:
                                     each health check execution.
                                   type: number
                                 path:
-                                  description: File path to write access logs to.
-                                    You can use /dev/stdout to send access logs to
-                                    standard out. Must be between 1 and 255 characters
-                                    in length.
+                                  description: Destination path for the health check
+                                    request. This is only required if the specified
+                                    protocol is http or http2.
                                   type: string
                                 port:
                                   description: Port used for the port mapping.
@@ -2271,37 +2322,41 @@ spec:
                               type: object
                             outlierDetection:
                               description: Outlier detection information for the listener.
+                                See outlier_detection Block for details.
                               properties:
                                 baseEjectionDuration:
                                   description: Base amount of time for which a host
-                                    is ejected.
+                                    is ejected. See base_ejection_duration Block for
+                                    details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 interval:
                                   description: Time interval between ejection sweep
-                                    analysis.
+                                    analysis. See interval Block for details.
                                   properties:
                                     unit:
                                       description: 'Unit of time. Valid values: ms,
                                         s.'
                                       type: string
                                     value:
-                                      description: The specified value for the JSON.
-                                        Must be between 1 and 100 characters in length.
+                                      description: Number of time units. Minimum value
+                                        of 0.
                                       type: number
                                   type: object
                                 maxEjectionPercent:
-                                  description: |-
-                                    Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
-                                    Minimum value of 0. Maximum value of 100.
+                                  description: Maximum percentage of hosts in load
+                                    balancing pool for upstream service that can be
+                                    ejected. Will eject at least one host regardless
+                                    of the value. Minimum value of 0. Maximum value
+                                    of 100.
                                   type: number
                                 maxServerErrors:
                                   description: Number of consecutive 5xx errors required
@@ -2310,6 +2365,7 @@ spec:
                               type: object
                             portMapping:
                               description: Port mapping information for the listener.
+                                See port_mapping Block for details.
                               properties:
                                 port:
                                   description: Port used for the port mapping.
@@ -2320,124 +2376,121 @@ spec:
                                   type: string
                               type: object
                             timeout:
-                              description: Timeouts for different protocols.
+                              description: Timeouts for different protocols. See timeout
+                                Block for details.
                               properties:
                                 grpc:
-                                  description: Connection pool information for gRPC
-                                    listeners.
+                                  description: Timeouts for gRPC listeners. See grpc
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http:
-                                  description: Connection pool information for HTTP
-                                    listeners.
+                                  description: Timeouts for HTTP listeners. See http
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 http2:
-                                  description: Connection pool information for HTTP2
-                                    listeners.
+                                  description: Timeouts for HTTP2 listeners. See http2
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                     perRequest:
-                                      description: Per request timeout.
+                                      description: Per request timeout. See per_request
+                                        Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
                                 tcp:
-                                  description: Connection pool information for TCP
-                                    listeners.
+                                  description: Timeouts for TCP listeners. See tcp
+                                    Block for details.
                                   properties:
                                     idle:
                                       description: Idle timeout. An idle timeout bounds
                                         the amount of time that a connection may be
-                                        idle.
+                                        idle. See idle Block for details.
                                       properties:
                                         unit:
                                           description: 'Unit of time. Valid values:
                                             ms, s.'
                                           type: string
                                         value:
-                                          description: The specified value for the
-                                            JSON. Must be between 1 and 100 characters
-                                            in length.
+                                          description: Number of time units. Minimum
+                                            value of 0.
                                           type: number
                                       type: object
                                   type: object
@@ -2458,7 +2511,8 @@ spec:
                                           type: string
                                       type: object
                                     file:
-                                      description: Local file certificate.
+                                      description: TLS validation context trust for
+                                        a local file certificate.
                                       properties:
                                         certificateChain:
                                           description: Certificate chain for the certificate.
@@ -2470,7 +2524,8 @@ spec:
                                           type: string
                                       type: object
                                     sds:
-                                      description: A Secret Discovery Service certificate.
+                                      description: TLS validation context trust for
+                                        a Secret Discovery Service certificate.
                                       properties:
                                         secretName:
                                           description: Name of the secret secret requested
@@ -2508,7 +2563,8 @@ spec:
                                       description: TLS validation context trust.
                                       properties:
                                         file:
-                                          description: Local file certificate.
+                                          description: TLS validation context trust
+                                            for a local file certificate.
                                           properties:
                                             certificateChain:
                                               description: Certificate chain for the
@@ -2516,8 +2572,8 @@ spec:
                                               type: string
                                           type: object
                                         sds:
-                                          description: A Secret Discovery Service
-                                            certificate.
+                                          description: TLS validation context trust
+                                            for a Secret Discovery Service certificate.
                                           properties:
                                             secretName:
                                               description: Name of the secret secret
@@ -2534,19 +2590,23 @@ spec:
                         type: array
                       logging:
                         description: Inbound and outbound access logging information
-                          for the virtual node.
+                          for the virtual node. See logging Block for details.
                         properties:
                           accessLog:
                             description: Access log configuration for a virtual node.
+                              See access_log Block for details.
                             properties:
                               file:
-                                description: Local file certificate.
+                                description: TLS validation context trust for a local
+                                  file certificate.
                                 properties:
                                   format:
                                     description: The specified format for the logs.
+                                      See format Block for details.
                                     properties:
                                       json:
                                         description: The logging format for JSON.
+                                          See json Block for details.
                                         items:
                                           properties:
                                             key:
@@ -2555,9 +2615,8 @@ spec:
                                                 in length.
                                               type: string
                                             value:
-                                              description: The specified value for
-                                                the JSON. Must be between 1 and 100
-                                                characters in length.
+                                              description: Number of time units. Minimum
+                                                value of 0.
                                               type: string
                                           type: object
                                         type: array
@@ -2568,21 +2627,20 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: File path to write access logs to.
-                                      You can use /dev/stdout to send access logs
-                                      to standard out. Must be between 1 and 255 characters
-                                      in length.
+                                    description: Destination path for the health check
+                                      request. This is only required if the specified
+                                      protocol is http or http2.
                                     type: string
                                 type: object
                             type: object
                         type: object
                       serviceDiscovery:
                         description: Service discovery information for the virtual
-                          node.
+                          node. See service_discovery Block for details.
                         properties:
                           awsCloudMap:
                             description: Any AWS Cloud Map information for the virtual
-                              node.
+                              node. See aws_cloud_map Block for details.
                             properties:
                               attributes:
                                 additionalProperties:
@@ -2595,16 +2653,21 @@ spec:
                                 type: object
                                 x-kubernetes-map-type: granular
                               namespaceName:
-                                description: |-
-                                  Name of the AWS Cloud Map namespace to use.
-                                  Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+                                description: Name of the AWS Cloud Map namespace to
+                                  use. Use the aws_service_discovery_http_namespace
+                                  resource to configure a Cloud Map namespace. Must
+                                  be between 1 and 1024 characters in length.
                                 type: string
                               serviceName:
-                                description: attribute of the dns object to hostname.
+                                description: Name of the AWS Cloud Map service to
+                                  use. Use the aws_service_discovery_service resource
+                                  to configure a Cloud Map service. Must be between
+                                  1 and 1024 characters in length.
                                 type: string
                             type: object
                           dns:
-                            description: DNS service name for the virtual node.
+                            description: DNS service name for the virtual node. See
+                              dns Block for details.
                             properties:
                               hostname:
                                 description: DNS host name for your virtual node.

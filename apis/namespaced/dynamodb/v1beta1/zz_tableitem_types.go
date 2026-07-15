@@ -43,6 +43,9 @@ type TableItemObservation struct {
 	// Hash key to use for lookups and identification of the item
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
+	// Canonical string representation of the hash key value. Binary values are base64-encoded; numbers and strings are taken verbatim.
+	HashKeyValue *string `json:"hashKeyValue,omitempty" tf:"hash_key_value,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// JSON representation of a map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required; you can optionally provide other attribute name-value pairs for the item.
@@ -50,6 +53,9 @@ type TableItemObservation struct {
 
 	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
+
+	// Canonical string representation of the range key value, when the table has a range key. Same encoding as hash_key_value.
+	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

@@ -106,7 +106,7 @@ type LustreFileSystemInitParameters struct {
 	// S3 URI (with optional prefix) where the root of your Amazon FSx file system is exported. Can only be specified with import_path argument and the path must use the same Amazon S3 bucket as specified in import_path. Set equal to import_path to overwrite files on export. Defaults to s3://{IMPORT BUCKET}/FSxLustre{CREATION TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
 	ExportPath *string `json:"exportPath,omitempty" tf:"export_path,omitempty"`
 
-	// Sets the Lustre version for the file system that you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2 and PERSISTENT_1 deployment types. Valid values for 2.12 include all deployment types.
+	// Sets the Lustre version for the file system. Valid values are 2.10, 2.12, and 2.15. When creating a file system, 2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment types; 2.12 and 2.15 are valid for all deployment types. Changing this value to a higher version triggers an in-place upgrade. Changing to a lower version forces resource replacement (destroy and recreate).
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
 	// A map of tags to apply to the file system's final backup.
@@ -232,7 +232,7 @@ type LustreFileSystemObservation struct {
 	// S3 URI (with optional prefix) where the root of your Amazon FSx file system is exported. Can only be specified with import_path argument and the path must use the same Amazon S3 bucket as specified in import_path. Set equal to import_path to overwrite files on export. Defaults to s3://{IMPORT BUCKET}/FSxLustre{CREATION TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
 	ExportPath *string `json:"exportPath,omitempty" tf:"export_path,omitempty"`
 
-	// Sets the Lustre version for the file system that you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2 and PERSISTENT_1 deployment types. Valid values for 2.12 include all deployment types.
+	// Sets the Lustre version for the file system. Valid values are 2.10, 2.12, and 2.15. When creating a file system, 2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment types; 2.12 and 2.15 are valid for all deployment types. Changing this value to a higher version triggers an in-place upgrade. Changing to a lower version forces resource replacement (destroy and recreate).
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
 	// A map of tags to apply to the file system's final backup.
@@ -355,7 +355,7 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	ExportPath *string `json:"exportPath,omitempty" tf:"export_path,omitempty"`
 
-	// Sets the Lustre version for the file system that you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2 and PERSISTENT_1 deployment types. Valid values for 2.12 include all deployment types.
+	// Sets the Lustre version for the file system. Valid values are 2.10, 2.12, and 2.15. When creating a file system, 2.10 is valid for SCRATCH_1, SCRATCH_2, and PERSISTENT_1 deployment types; 2.12 and 2.15 are valid for all deployment types. Changing this value to a higher version triggers an in-place upgrade. Changing to a lower version forces resource replacement (destroy and recreate).
 	// +kubebuilder:validation:Optional
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 

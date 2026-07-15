@@ -2243,6 +2243,11 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.RestoreBackupArn != nil {
+		in, out := &in.RestoreBackupArn, &out.RestoreBackupArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestoreDateTime != nil {
 		in, out := &in.RestoreDateTime, &out.RestoreDateTime
 		*out = new(string)
@@ -2438,6 +2443,11 @@ func (in *TableItemObservation) DeepCopyInto(out *TableItemObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HashKeyValue != nil {
+		in, out := &in.HashKeyValue, &out.HashKeyValue
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -2450,6 +2460,11 @@ func (in *TableItemObservation) DeepCopyInto(out *TableItemObservation) {
 	}
 	if in.RangeKey != nil {
 		in, out := &in.RangeKey, &out.RangeKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.RangeKeyValue != nil {
+		in, out := &in.RangeKeyValue, &out.RangeKeyValue
 		*out = new(string)
 		**out = **in
 	}
@@ -2682,6 +2697,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.RestoreBackupArn != nil {
+		in, out := &in.RestoreBackupArn, &out.RestoreBackupArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.RestoreDateTime != nil {
 		in, out := &in.RestoreDateTime, &out.RestoreDateTime
@@ -2947,6 +2967,11 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.RestoreBackupArn != nil {
+		in, out := &in.RestoreBackupArn, &out.RestoreBackupArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.RestoreDateTime != nil {
 		in, out := &in.RestoreDateTime, &out.RestoreDateTime
