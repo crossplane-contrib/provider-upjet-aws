@@ -122,10 +122,56 @@ func (tr *LBListenerRule) LateInitialize(attrs []byte) (bool, error) {
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 
 	li := resource.NewGenericLateInitializer(opts...)
-	return li.LateInitialize(&tr.Spec.ForProvider, params)
+	changed, err := li.LateInitialize(&tr.Spec.ForProvider, params)
+	if err != nil {
+		return false, err
+	}
+	forcedChanged, err := lbListenerRuleForcedLateInitAction(&tr.Spec.ForProvider, params)
+	if err != nil {
+		return false, err
+	}
+	return changed || forcedChanged, nil
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *LBListenerRule) GetTerraformSchemaVersion() int {
 	return 0
+}
+
+// lbListenerRuleForcedLateInitAction forces late-initialization of nil fields
+// within each element of the action slice. The generic late-initializer skips
+// the entire action slice once it is non-nil (i.e. the user set any action
+// field), so auto-assigned fields like order are never written back to spec,
+// causing a perpetual reconcile loop. This function re-runs late-init at the
+// individual action-element level so that all remaining nil fields are
+// populated from the observed Terraform state.
+//
+// It also recurses into a partially filled Forward block so that nil
+// sub-fields (e.g. Stickiness) are populated as well.
+func lbListenerRuleForcedLateInitAction(spec, observed *LBListenerRuleParameters) (bool, error) {
+	if len(spec.Action) == 0 || len(spec.Action) != len(observed.Action) {
+		return false, nil
+	}
+	li := resource.NewGenericLateInitializer(resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard))
+	changed := false
+	for i := range spec.Action {
+		c, err := li.LateInitialize(&spec.Action[i], &observed.Action[i])
+		if err != nil {
+			return false, err
+		}
+		changed = changed || c
+		if observed.Action[i].Forward != nil {
+			if spec.Action[i].Forward == nil {
+				spec.Action[i].Forward = observed.Action[i].Forward
+				changed = true
+			} else {
+				c, err = li.LateInitialize(spec.Action[i].Forward, observed.Action[i].Forward)
+				if err != nil {
+					return false, err
+				}
+				changed = changed || c
+			}
+		}
+	}
+	return changed, nil
 }
