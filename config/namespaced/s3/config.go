@@ -7,7 +7,11 @@ package s3
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry"
+	awspolicy "github.com/hashicorp/awspolicyequivalence"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
+
+	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
 // Configure adds configurations for the s3 group.
@@ -52,6 +56,32 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				params["force_destroy"] = false
 			}
 			return nil
+		}
+	})
+
+	p.AddResourceConfigurator("aws_s3_bucket_policy", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Attributes["policy"] == nil || diff.Attributes["policy"].Old == "" || diff.Attributes["policy"].New == "" {
+				return diff, nil
+			}
+
+			vOld, err := common.RemovePolicyVersion(diff.Attributes["policy"].Old)
+			if err != nil {
+				return nil, errors.Wrap(err, "failed to remove Version from the old AWS policy document")
+			}
+			vNew, err := common.RemovePolicyVersion(diff.Attributes["policy"].New)
+			if err != nil {
+				return nil, errors.Wrap(err, "failed to remove Version from the new AWS policy document")
+			}
+
+			ok, err := awspolicy.PoliciesAreEquivalent(vOld, vNew)
+			if err != nil {
+				return nil, errors.Wrap(err, "failed to compare the old and the new AWS policy documents")
+			}
+			if ok {
+				delete(diff.Attributes, "policy")
+			}
+			return diff, nil
 		}
 	})
 
