@@ -6,6 +6,7 @@ package common
 
 import (
 	"context"
+	"sort"
 
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/fieldpath"
@@ -151,6 +152,64 @@ func RemovePolicyVersion(p string) (string, error) {
 	delete(m, "Version")
 	r, err := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(m)
 	return string(r), errors.Wrap(err, "failed to marshal the policy map as JSON")
+}
+
+// jsonStringNormalizationConversion normalizes JSON string fields to produce
+// deterministic output by sorting arrays recursively, preventing spurious
+// status updates caused by non-deterministic ordering from the AWS API.
+type jsonStringNormalizationConversion struct {
+	fieldPath string
+}
+
+// NewJSONStringNormalizationConversion returns a TerraformConversion that
+// normalizes a JSON string at the given field path by sorting all arrays
+// recursively, producing a canonical string representation.
+func NewJSONStringNormalizationConversion(fieldPath string) config.TerraformConversion {
+	return &jsonStringNormalizationConversion{fieldPath: fieldPath}
+}
+
+func (p *jsonStringNormalizationConversion) Convert(params map[string]any, _ *config.Resource, mode config.Mode) (map[string]any, error) {
+	if mode != config.FromTerraform {
+		return params, nil
+	}
+	raw, ok := params[p.fieldPath]
+	if !ok {
+		return params, nil
+	}
+	s, ok := raw.(string)
+	if !ok || s == "" {
+		return params, nil
+	}
+
+	var policy any
+	if err := jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal([]byte(s), &policy); err != nil {
+		return params, nil
+	}
+	sortJSONValue(policy)
+	normalized, err := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(policy)
+	if err != nil {
+		return params, nil
+	}
+	params[p.fieldPath] = string(normalized)
+	return params, nil
+}
+
+func sortJSONValue(v any) {
+	switch val := v.(type) {
+	case map[string]any:
+		for _, v := range val {
+			sortJSONValue(v)
+		}
+	case []any:
+		for _, elem := range val {
+			sortJSONValue(elem)
+		}
+		sort.SliceStable(val, func(i, j int) bool {
+			si, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(val[i])
+			sj, _ := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(val[j])
+			return string(si) < string(sj)
+		})
+	}
 }
 
 // RemoveDiffIfEmpty removes supplied keys from Terraform diffs, if old and new

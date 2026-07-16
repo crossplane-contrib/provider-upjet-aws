@@ -60,6 +60,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_policy", func(r *config.Resource) {
+		// Normalize JSON arrays in observed state before writing to status.atProvider,
+		// preventing spurious status updates caused by non-deterministic ordering from the AWS API.
+		r.TerraformConversions = append(r.TerraformConversions, common.NewJSONStringNormalizationConversion("policy"))
+		// Suppress plan diffs when the desired and observed policies are semantically equivalent
+		// but differ in formatting or array ordering, preventing unnecessary Update calls to AWS.
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff == nil || diff.Attributes["policy"] == nil || diff.Attributes["policy"].Old == "" || diff.Attributes["policy"].New == "" {
 				return diff, nil
