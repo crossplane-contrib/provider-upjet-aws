@@ -1857,10 +1857,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerInitParameters) DeepCopyInto
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -1876,10 +1874,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerInitParameters) DeepCopyInto
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -1938,10 +1934,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerObservation) DeepCopyInto(ou
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]CustomJwtAuthorizerAllowedWorkloadConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerAllowedWorkloadConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -1957,10 +1951,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerObservation) DeepCopyInto(ou
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -2019,10 +2011,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerParameters) DeepCopyInto(out
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]CustomJwtAuthorizerAllowedWorkloadConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerAllowedWorkloadConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -2038,10 +2028,8 @@ func (in *AuthorizerConfigurationCustomJwtAuthorizerParameters) DeepCopyInto(out
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -4582,10 +4570,8 @@ func (in *CustomJwtAuthorizerInitParameters) DeepCopyInto(out *CustomJwtAuthoriz
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]AllowedWorkloadConfigurationInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AllowedWorkloadConfigurationInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -4601,10 +4587,8 @@ func (in *CustomJwtAuthorizerInitParameters) DeepCopyInto(out *CustomJwtAuthoriz
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -4663,10 +4647,8 @@ func (in *CustomJwtAuthorizerObservation) DeepCopyInto(out *CustomJwtAuthorizerO
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]AllowedWorkloadConfigurationObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AllowedWorkloadConfigurationObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -4682,10 +4664,8 @@ func (in *CustomJwtAuthorizerObservation) DeepCopyInto(out *CustomJwtAuthorizerO
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -4744,10 +4724,8 @@ func (in *CustomJwtAuthorizerParameters) DeepCopyInto(out *CustomJwtAuthorizerPa
 	}
 	if in.AllowedWorkloadConfiguration != nil {
 		in, out := &in.AllowedWorkloadConfiguration, &out.AllowedWorkloadConfiguration
-		*out = make([]AllowedWorkloadConfigurationParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AllowedWorkloadConfigurationParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomClaim != nil {
 		in, out := &in.CustomClaim, &out.CustomClaim
@@ -4763,10 +4741,8 @@ func (in *CustomJwtAuthorizerParameters) DeepCopyInto(out *CustomJwtAuthorizerPa
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateEndpointOverrides != nil {
 		in, out := &in.PrivateEndpointOverrides, &out.PrivateEndpointOverrides
@@ -4792,17 +4768,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointInitParameters) DeepCopyInto(out *Cu
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5025,17 +4997,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointObservation) DeepCopyInto(out *Custo
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5059,10 +5027,8 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesInitParameters) DeepCopyInt
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5086,10 +5052,8 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesObservation) DeepCopyInto(o
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5113,10 +5077,8 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesParameters) DeepCopyInto(ou
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5135,17 +5097,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParamete
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5164,17 +5122,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation)
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5193,17 +5147,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters) 
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5222,17 +5172,13 @@ func (in *CustomJwtAuthorizerPrivateEndpointParameters) DeepCopyInto(out *Custom
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13154,17 +13100,13 @@ func (in *PrivateEndpointInitParameters) DeepCopyInto(out *PrivateEndpointInitPa
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]ManagedVPCResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ManagedVPCResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]SelfManagedLatticeResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SelfManagedLatticeResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13387,17 +13329,13 @@ func (in *PrivateEndpointObservation) DeepCopyInto(out *PrivateEndpointObservati
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]ManagedVPCResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ManagedVPCResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]SelfManagedLatticeResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SelfManagedLatticeResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13421,10 +13359,8 @@ func (in *PrivateEndpointOverridesInitParameters) DeepCopyInto(out *PrivateEndpo
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointOverridesPrivateEndpointInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13448,10 +13384,8 @@ func (in *PrivateEndpointOverridesObservation) DeepCopyInto(out *PrivateEndpoint
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointOverridesPrivateEndpointObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13475,10 +13409,8 @@ func (in *PrivateEndpointOverridesParameters) DeepCopyInto(out *PrivateEndpointO
 	}
 	if in.PrivateEndpoint != nil {
 		in, out := &in.PrivateEndpoint, &out.PrivateEndpoint
-		*out = make([]PrivateEndpointOverridesPrivateEndpointParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointOverridesPrivateEndpointParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13497,17 +13429,13 @@ func (in *PrivateEndpointOverridesPrivateEndpointInitParameters) DeepCopyInto(ou
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointManagedVPCResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointManagedVPCResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointSelfManagedLatticeResourceInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointSelfManagedLatticeResourceInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13730,17 +13658,13 @@ func (in *PrivateEndpointOverridesPrivateEndpointObservation) DeepCopyInto(out *
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointManagedVPCResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointManagedVPCResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointSelfManagedLatticeResourceObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointSelfManagedLatticeResourceObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13759,17 +13683,13 @@ func (in *PrivateEndpointOverridesPrivateEndpointParameters) DeepCopyInto(out *P
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]PrivateEndpointManagedVPCResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointManagedVPCResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]PrivateEndpointSelfManagedLatticeResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PrivateEndpointSelfManagedLatticeResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -13848,17 +13768,13 @@ func (in *PrivateEndpointParameters) DeepCopyInto(out *PrivateEndpointParameters
 	*out = *in
 	if in.ManagedVPCResource != nil {
 		in, out := &in.ManagedVPCResource, &out.ManagedVPCResource
-		*out = make([]ManagedVPCResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ManagedVPCResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SelfManagedLatticeResource != nil {
 		in, out := &in.SelfManagedLatticeResource, &out.SelfManagedLatticeResource
-		*out = make([]SelfManagedLatticeResourceParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SelfManagedLatticeResourceParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

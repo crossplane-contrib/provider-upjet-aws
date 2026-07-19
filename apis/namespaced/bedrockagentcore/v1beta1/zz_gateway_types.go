@@ -48,7 +48,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
-	AllowedWorkloadConfiguration []CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []CustomJwtAuthorizerCustomClaimInitParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
@@ -57,7 +57,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerInitParameters struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	PrivateEndpointOverrides []CustomJwtAuthorizerPrivateEndpointOverridesInitParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
@@ -78,7 +78,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerObservation struct {
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
-	AllowedWorkloadConfiguration []CustomJwtAuthorizerAllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []CustomJwtAuthorizerCustomClaimObservation `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
@@ -87,7 +87,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerObservation struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	PrivateEndpointOverrides []CustomJwtAuthorizerPrivateEndpointOverridesObservation `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
@@ -112,7 +112,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 
 	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
 	// +kubebuilder:validation:Optional
-	AllowedWorkloadConfiguration []CustomJwtAuthorizerAllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+	AllowedWorkloadConfiguration *CustomJwtAuthorizerAllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
 
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	// +kubebuilder:validation:Optional
@@ -124,7 +124,7 @@ type AuthorizerConfigurationCustomJwtAuthorizerParameters struct {
 
 	// Private endpoint used to reach the authorization server. See private_endpoint below.
 	// +kubebuilder:validation:Optional
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
 	// +kubebuilder:validation:Optional
@@ -263,10 +263,10 @@ type CustomJwtAuthorizerCustomClaimParameters struct {
 type CustomJwtAuthorizerPrivateEndpointInitParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointManagedVPCResourceInitParameters struct {
@@ -350,10 +350,10 @@ type CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters struct {
 type CustomJwtAuthorizerPrivateEndpointObservation struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesInitParameters struct {
@@ -362,7 +362,7 @@ type CustomJwtAuthorizerPrivateEndpointOverridesInitParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Private endpoint configuration. See private_endpoint below.
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesObservation struct {
@@ -371,7 +371,7 @@ type CustomJwtAuthorizerPrivateEndpointOverridesObservation struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Private endpoint configuration. See private_endpoint below.
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesParameters struct {
@@ -382,47 +382,47 @@ type CustomJwtAuthorizerPrivateEndpointOverridesParameters struct {
 
 	// Private endpoint configuration. See private_endpoint below.
 	// +kubebuilder:validation:Optional
-	PrivateEndpoint []CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointInitParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointObservation struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
-	ManagedVPCResource []PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource []PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointOverridesPrivateEndpointParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
 	// +kubebuilder:validation:Optional
-	ManagedVPCResource []PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *PrivateEndpointOverridesPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
 	// +kubebuilder:validation:Optional
-	SelfManagedLatticeResource []PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *PrivateEndpointOverridesPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointParameters struct {
 
 	// Managed VPC resource configuration. See managed_vpc_resource below.
 	// +kubebuilder:validation:Optional
-	ManagedVPCResource []CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+	ManagedVPCResource *CustomJwtAuthorizerPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
 
 	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
 	// +kubebuilder:validation:Optional
-	SelfManagedLatticeResource []CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+	SelfManagedLatticeResource *CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
 }
 
 type CustomJwtAuthorizerPrivateEndpointSelfManagedLatticeResourceInitParameters struct {
