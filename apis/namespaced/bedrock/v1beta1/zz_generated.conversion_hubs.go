@@ -7,4 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Guardrail) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *InferenceProfile) Hub() {}

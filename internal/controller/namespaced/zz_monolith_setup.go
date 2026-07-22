@@ -130,6 +130,7 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/schedulingpolicy"
+	guardrail "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/guardrail"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agent"
 	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/agentruntime"
@@ -1157,6 +1158,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		guardrail.Setup,
 		inferenceprofile.Setup,
 		agent.Setup,
 		agentruntime.Setup,
@@ -2190,6 +2192,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.SetupGated,
 		jobqueue.SetupGated,
 		schedulingpolicy.SetupGated,
+		guardrail.SetupGated,
 		inferenceprofile.SetupGated,
 		agent.SetupGated,
 		agentruntime.SetupGated,
@@ -3222,6 +3225,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		jobdefinition.SetupWebhookWithManager,
 		jobqueue.SetupWebhookWithManager,
 		schedulingpolicy.SetupWebhookWithManager,
+		guardrail.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
 		agent.SetupWebhookWithManager,
 		agentruntime.SetupWebhookWithManager,
