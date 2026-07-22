@@ -41,6 +41,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// bedrock
 	//
+	// Bedrock Guardrail can be imported using the composite ID: guardrail_id,version
+	"aws_bedrock_guardrail": bedrockGuardrail(),
 	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
 	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
 
@@ -3767,6 +3769,54 @@ func wafv2WebACLRuleGroupAssociation() config.ExternalName {
 		}
 
 		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
+	}
+	return e
+}
+
+// bedrockGuardrail configures the external name for aws_bedrock_guardrail, a
+//
+//	. Its Terraform identity is the composite
+//
+// "guardrail_id,version" where both parts are computed by AWS: guardrail_id is
+// the AWS-assigned identifier and version is computed (defaults to "DRAFT").
+// The external name is therefore the joined "guardrail_id,version" string and
+// no user-supplied name is involved.
+func bedrockGuardrail() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
+	const (
+		sep             = ","
+		stubGuardrailID = "xpstubguardrail0"
+		stubVersion     = "DRAFT"
+	)
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["guardrail_id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find \"guardrail_id\" in tfstate")
+		}
+		version, ok := tfstate["version"].(string)
+		if !ok || version == "" {
+			return "", errors.New("cannot find \"version\" in tfstate")
+		}
+		return id + sep + version, nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		guardrailID, version := stubGuardrailID, stubVersion
+		if externalName != "" {
+			parts := strings.SplitN(externalName, sep, 2)
+			if len(parts) != 2 {
+				return
+			}
+			guardrailID, version = parts[0], parts[1]
+		}
+		if v, ok := base["guardrail_id"].(string); !ok || v == "" || v == stubGuardrailID {
+			base["guardrail_id"] = guardrailID
+		}
+		if v, ok := base["version"].(string); !ok || v == "" || v == stubVersion {
+			base["version"] = version
+		}
+	}
+	e.TFPluginFrameworkOptions = config.TFPluginFrameworkOptions{
+		ComputedIdentifierAttributes: []string{"guardrail_id", "version"},
 	}
 	return e
 }
