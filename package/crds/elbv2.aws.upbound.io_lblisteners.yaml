@@ -3742,7 +3742,6 @@ spec:
                               type: array
                           type: object
                         index:
-                          default: default
                           description: This is an injected field with a default value
                             for being able to merge items of the parent object list.
                           type: string
@@ -3834,9 +3833,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   id:
                     type: string
                   loadBalancerArn:
