@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: opensearchserverless.aws.upbound.io/v1beta1
+kind: CollectionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/collectiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacityLimits:
+    - maxIndexingCapacityInOcu: 10
+      maxSearchCapacityInOcu: 10
+      minIndexingCapacityInOcu: 0
+      minSearchCapacityInOcu: 0
+    description: Scale-to-zero collection group
+    generation: NEXTGEN
+    name: example-group
+    region: us-west-1
+    standbyReplicas: ENABLED
