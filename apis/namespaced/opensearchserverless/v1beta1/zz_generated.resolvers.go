@@ -24,6 +24,26 @@ func (mg *Collection) ResolveReferences( // ResolveReferences of this Collection
 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.m.upbound.io", "v1beta1", "CollectionGroup", "CollectionGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CollectionGroupName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CollectionGroupNameRef,
+			Selector:     mg.Spec.ForProvider.CollectionGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CollectionGroupName")
+	}
+	mg.Spec.ForProvider.CollectionGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CollectionGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.EncryptionConfig != nil {
 		{
@@ -47,6 +67,26 @@ func (mg *Collection) ResolveReferences( // ResolveReferences of this Collection
 		mg.Spec.ForProvider.EncryptionConfig.KMSKeyArnRef = rsp.ResolvedReference
 
 	}
+	{
+		m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.m.upbound.io", "v1beta1", "CollectionGroup", "CollectionGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CollectionGroupName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CollectionGroupNameRef,
+			Selector:     mg.Spec.InitProvider.CollectionGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CollectionGroupName")
+	}
+	mg.Spec.InitProvider.CollectionGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CollectionGroupNameRef = rsp.ResolvedReference
+
 	if mg.Spec.InitProvider.EncryptionConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("kms.aws.m.upbound.io", "v1beta1", "Key", "KeyList")

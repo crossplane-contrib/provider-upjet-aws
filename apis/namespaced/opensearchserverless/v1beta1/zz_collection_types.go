@@ -17,7 +17,17 @@ type CollectionInitParameters struct {
 
 	// Name of the collection group to associate with this collection.
 	// Name of the collection group to associate with this collection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/opensearchserverless/v1beta1.CollectionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
+	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameRef *v1.NamespacedReference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameSelector *v1.NamespacedSelector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.
@@ -109,8 +119,18 @@ type CollectionParameters struct {
 
 	// Name of the collection group to associate with this collection.
 	// Name of the collection group to associate with this collection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/opensearchserverless/v1beta1.CollectionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
+	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameRef *v1.NamespacedReference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameSelector *v1.NamespacedSelector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.

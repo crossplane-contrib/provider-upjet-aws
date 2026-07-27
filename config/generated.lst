@@ -686,6 +686,7 @@
 "aws_opensearch_domain_saml_options",
 "aws_opensearchserverless_access_policy",
 "aws_opensearchserverless_collection",
+"aws_opensearchserverless_collection_group",
 "aws_opensearchserverless_lifecycle_policy",
 "aws_opensearchserverless_security_config",
 "aws_opensearchserverless_security_policy",
