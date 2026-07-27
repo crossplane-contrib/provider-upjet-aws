@@ -183,7 +183,9 @@ jobs:
         run: make vendor vendor.check
 
       - name: Run Unit Tests
-        run: make -j2 test
+        # API conversion roundtrip tests might exceed
+        # the default 10m timeout
+        run: make -j2 GO_TEST_FLAGS="-timeout 15m" test
 
   local-deploy:
     runs-on: ubuntu-latest
