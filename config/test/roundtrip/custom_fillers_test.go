@@ -2,8 +2,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-//nolint:typecheck // due to buildtagger constraints
-
 package roundtrip
 
 import (
