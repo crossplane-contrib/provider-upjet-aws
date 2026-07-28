@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: RuntimeManagementConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/runtimemanagementconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    functionName: example
+    updateRuntimeOn: FunctionUpdate

@@ -128,6 +128,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
 	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
 
+	// lambda
+	//
+	// Lambda Runtime Management Config can be imported using function_name and qualifier, separated by a comma (,)
+	"aws_lambda_runtime_management_config": lambdaRuntimeManagementConfig(),
+
 	// memorydb
 	//
 	// Use the AWS-generated multi_region_cluster_name
@@ -3692,6 +3697,34 @@ func s3BucketIdentifier() config.ExternalName {
 			return "", errors.New("bucket field must be a string")
 		}
 		return idStr, nil
+	}
+	return e
+}
+
+// lambdaRuntimeManagementConfig handles the external-name of the
+// aws_lambda_runtime_management_config resource. It is a
+// terraform-plugin-framework resource without an "id" attribute, imported
+// using "function_name,qualifier" (qualifier defaults to "$LATEST" when
+// omitted). function_name and qualifier stay regular spec fields so that the
+// function_name reference resolves and an explicit qualifier reaches
+// Terraform; only the external-name computation is customized here.
+func lambdaRuntimeManagementConfig() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// The resource has no monolithic "id" attribute, so do not push one into
+	// the Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		functionName, ok := tfstate["function_name"].(string)
+		if !ok || functionName == "" {
+			return "", errors.New("function_name field missing from tfstate")
+		}
+		qualifier, _ := tfstate["qualifier"].(string)
+		if qualifier == "" {
+			qualifier = "$LATEST"
+		}
+		return fmt.Sprintf("%s,%s", functionName, qualifier), nil
 	}
 	return e
 }
