@@ -20,6 +20,7 @@ import (
 	layerversionpermission "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/layerversionpermission"
 	permission "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/provisionedconcurrencyconfig"
+	runtimemanagementconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/lambda/runtimemanagementconfig"
 )
 
 // Setup_lambda creates all controllers with the supplied logger and adds them to
@@ -37,6 +38,7 @@ func Setup_lambda(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.Setup,
 		permission.Setup,
 		provisionedconcurrencyconfig.Setup,
+		runtimemanagementconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -60,6 +62,7 @@ func SetupGated_lambda(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.SetupGated,
 		permission.SetupGated,
 		provisionedconcurrencyconfig.SetupGated,
+		runtimemanagementconfig.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -82,6 +85,7 @@ func SetupWebhookWithManager_lambda(mgr ctrl.Manager) error {
 		layerversionpermission.SetupWebhookWithManager,
 		permission.SetupWebhookWithManager,
 		provisionedconcurrencyconfig.SetupWebhookWithManager,
+		runtimemanagementconfig.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

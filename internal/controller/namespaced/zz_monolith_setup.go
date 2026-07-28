@@ -634,6 +634,7 @@ import (
 	layerversionpermission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/layerversionpermission"
 	permissionlambda "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/provisionedconcurrencyconfig"
+	runtimemanagementconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/runtimemanagementconfig"
 	bot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/botalias"
 	intent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/intent"
@@ -1661,6 +1662,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.Setup,
 		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
+		runtimemanagementconfig.Setup,
 		bot.Setup,
 		botalias.Setup,
 		intent.Setup,
@@ -2694,6 +2696,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.SetupGated,
 		permissionlambda.SetupGated,
 		provisionedconcurrencyconfig.SetupGated,
+		runtimemanagementconfig.SetupGated,
 		bot.SetupGated,
 		botalias.SetupGated,
 		intent.SetupGated,
@@ -3726,6 +3729,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		layerversionpermission.SetupWebhookWithManager,
 		permissionlambda.SetupWebhookWithManager,
 		provisionedconcurrencyconfig.SetupWebhookWithManager,
+		runtimemanagementconfig.SetupWebhookWithManager,
 		bot.SetupWebhookWithManager,
 		botalias.SetupWebhookWithManager,
 		intent.SetupWebhookWithManager,

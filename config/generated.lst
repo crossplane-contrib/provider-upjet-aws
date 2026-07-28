@@ -560,6 +560,7 @@
 "aws_lambda_layer_version_permission",
 "aws_lambda_permission",
 "aws_lambda_provisioned_concurrency_config",
+"aws_lambda_runtime_management_config",
 "aws_launch_configuration",
 "aws_launch_template",
 "aws_lb",
