@@ -31,7 +31,8 @@ spec:
       - name: SOME_KEY2
         type: PARAMETER_STORE
         value: SOME_VALUE2
-      image: aws/codebuild/amazonlinux2-x86_64-standard:4.0
+      hostKernel: LINUX_KERNEL_6
+      image: aws/codebuild/amazonlinux-x86_64-standard:6.0
       imagePullCredentialsType: CODEBUILD
       type: LINUX_CONTAINER
     logsConfig:

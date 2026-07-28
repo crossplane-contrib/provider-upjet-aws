@@ -11,14 +11,15 @@ import (
 // Configure adds configurations for the opensearchserverless group.
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearchserverless_security_config", func(r *config.Resource) {
-		r.RemoveSingletonListConversion("saml_options")
-		// set the path saml_options as an embedded object to honor
-		// its single nested block schema. We need to have it converted
-		// into an embedded object but there's no need for
-		// the Terraform conversion (it already needs to be treated
-		// as an object at the Terraform layer and in the current MR API,
-		// it's already an embedded object).
-		r.SchemaElementOptions.SetEmbeddedObject("saml_options")
+		// In upstream TF AWS provider 5.x, this was a single-nested block.
+		// In XP side, this was handled with an embedded object in CRD with
+		// runtime TF conversions removed (TF layer expected an object)
+		// At 6.x, https://github.com/hashicorp/terraform-provider-aws/pull/42270
+		// switched this to list-nested block, with max 1 elements.
+		// Now handle this with a regular singleton-list conversion.
+		// No CRD API change: still an embedded object in CRD,
+		// with runtime TF conversions to list with 1 element.
+		r.AddSingletonListConversion("saml_options", "samlOptions")
 	})
 	p.AddResourceConfigurator("aws_opensearchserverless_security_policy", func(r *config.Resource) {
 		r.TerraformConfigurationInjector = config.CanonicalizeJSONParameters("policy")
@@ -28,5 +29,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 	p.AddResourceConfigurator("aws_opensearchserverless_access_policy", func(r *config.Resource) {
 		r.TerraformConfigurationInjector = config.CanonicalizeJSONParameters("policy")
+	})
+	p.AddResourceConfigurator("aws_opensearchserverless_collection", func(r *config.Resource) {
+		r.AddSingletonListConversion("encryption_config", "encryptionConfig")
+		r.AddSingletonListConversion("vector_options", "vectorOptions")
 	})
 }

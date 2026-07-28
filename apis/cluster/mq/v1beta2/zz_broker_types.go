@@ -73,6 +73,10 @@ type BrokerInitParameters struct {
 	// Whether to enable connections from applications outside of the VPC that hosts the broker's subnets.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
@@ -180,9 +184,16 @@ type BrokerObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
+
 	// List of security group IDs assigned to the broker.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// List of resources shared with the broker via resource_share_arns. Only populated for engine_type of RabbitMQ.
+	SharedResources []SharedResourcesObservation `json:"sharedResources,omitempty" tf:"shared_resources,omitempty"`
 
 	// Storage type of the broker. For engine_type ActiveMQ, valid values are efs and ebs (AWS-default is efs). For engine_type RabbitMQ, only ebs is supported. When using ebs, only the mq.m5 broker instance type family is supported.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
@@ -283,6 +294,11 @@ type BrokerParameters struct {
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Set of AWS RAM resource share ARNs that grant the broker access to shared resources for private networking. Applies to engine_type of RabbitMQ only. Because Amazon MQ applies resource shares during a reboot, set apply_immediately to true for changes to take effect without waiting for the next maintenance window.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ResourceShareArns []*string `json:"resourceShareArns,omitempty" tf:"resource_share_arns,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
@@ -608,6 +624,27 @@ type MaintenanceWindowStartTimeParameters struct {
 	// Time zone in either the Country/City format or the UTC offset format, e.g., CET.
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
+}
+
+type SharedResourcesInitParameters struct {
+}
+
+type SharedResourcesObservation struct {
+
+	// DNS names through which the broker reaches the shared resource.
+	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
+
+	// ARN of the shared resource.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Status of the shared resource.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Type of the shared resource, either RESOURCE_SHARE or RESOURCE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SharedResourcesParameters struct {
 }
 
 type UserInitParameters struct {

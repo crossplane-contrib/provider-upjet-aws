@@ -118,6 +118,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -642,6 +647,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -1068,6 +1078,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.AutoGeneratePassword != nil {
 		in, out := &in.AutoGeneratePassword, &out.AutoGeneratePassword
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(bool)
 		**out = **in
 	}

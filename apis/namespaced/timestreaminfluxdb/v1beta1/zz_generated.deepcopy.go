@@ -85,10 +85,8 @@ func (in *DBClusterInitParameters) DeepCopyInto(out *DBClusterInitParameters) {
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]MaintenanceScheduleInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceScheduleInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -301,10 +299,8 @@ func (in *DBClusterObservation) DeepCopyInto(out *DBClusterObservation) {
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]MaintenanceScheduleObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceScheduleObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -457,10 +453,8 @@ func (in *DBClusterParameters) DeepCopyInto(out *DBClusterParameters) {
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]MaintenanceScheduleParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(MaintenanceScheduleParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -678,10 +672,8 @@ func (in *DBInstanceInitParameters) DeepCopyInto(out *DBInstanceInitParameters) 
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]DBInstanceMaintenanceScheduleInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceMaintenanceScheduleInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1020,10 +1012,8 @@ func (in *DBInstanceObservation) DeepCopyInto(out *DBInstanceObservation) {
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]DBInstanceMaintenanceScheduleObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceMaintenanceScheduleObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1171,10 +1161,8 @@ func (in *DBInstanceParameters) DeepCopyInto(out *DBInstanceParameters) {
 	}
 	if in.MaintenanceSchedule != nil {
 		in, out := &in.MaintenanceSchedule, &out.MaintenanceSchedule
-		*out = make([]DBInstanceMaintenanceScheduleParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(DBInstanceMaintenanceScheduleParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

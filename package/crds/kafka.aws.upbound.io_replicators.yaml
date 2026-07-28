@@ -417,6 +417,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
@@ -1097,6 +1109,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
@@ -1644,6 +1668,18 @@ spec:
                         description: Configuration relating to consumer group replication.
                         items:
                           properties:
+                            consumerGroupOffsetSyncMode:
+                              description: Consumer group offset synchronization mode.
+                                Valid values are LEGACY and ENHANCED. With LEGACY,
+                                offsets are synchronized when producers write to the
+                                source cluster. With ENHANCED, consumer offsets are
+                                synchronized regardless of producer location. ENHANCED
+                                requires a corresponding replicator that replicates
+                                data from the target cluster to the source cluster
+                                and requires topic_name_configuration.type to be set
+                                to IDENTICAL. Defaults to LEGACY. Changing this value
+                                will force a new resource.
+                              type: string
                             consumerGroupsToExclude:
                               description: List of regular expression patterns indicating
                                 the consumer groups that should not be replicated.
