@@ -259,10 +259,8 @@ func (in *CollectionInitParameters) DeepCopyInto(out *CollectionInitParameters) 
 	}
 	if in.EncryptionConfig != nil {
 		in, out := &in.EncryptionConfig, &out.EncryptionConfig
-		*out = make([]EncryptionConfigInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -297,10 +295,8 @@ func (in *CollectionInitParameters) DeepCopyInto(out *CollectionInitParameters) 
 	}
 	if in.VectorOptions != nil {
 		in, out := &in.VectorOptions, &out.VectorOptions
-		*out = make([]VectorOptionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorOptionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -376,10 +372,8 @@ func (in *CollectionObservation) DeepCopyInto(out *CollectionObservation) {
 	}
 	if in.EncryptionConfig != nil {
 		in, out := &in.EncryptionConfig, &out.EncryptionConfig
-		*out = make([]EncryptionConfigObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -445,10 +439,8 @@ func (in *CollectionObservation) DeepCopyInto(out *CollectionObservation) {
 	}
 	if in.VectorOptions != nil {
 		in, out := &in.VectorOptions, &out.VectorOptions
-		*out = make([]VectorOptionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorOptionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -477,10 +469,8 @@ func (in *CollectionParameters) DeepCopyInto(out *CollectionParameters) {
 	}
 	if in.EncryptionConfig != nil {
 		in, out := &in.EncryptionConfig, &out.EncryptionConfig
-		*out = make([]EncryptionConfigParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionConfigParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -520,10 +510,8 @@ func (in *CollectionParameters) DeepCopyInto(out *CollectionParameters) {
 	}
 	if in.VectorOptions != nil {
 		in, out := &in.VectorOptions, &out.VectorOptions
-		*out = make([]VectorOptionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(VectorOptionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

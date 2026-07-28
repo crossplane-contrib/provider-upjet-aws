@@ -77,6 +77,11 @@ spec:
                       stored in the Secret referenced by the masterPasswordSecretRef
                       field.
                     type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
@@ -1289,6 +1294,11 @@ spec:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
                       is false. See Amazon RDS Documentation for more information.
+                    type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
                     type: boolean
                   availabilityZones:
                     description: |-
@@ -2554,6 +2564,11 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of cluster
                     type: string
+                  autoMinorVersionUpgrade:
+                    description: Whether to apply minor engine upgrades automatically
+                      to the DB cluster during the maintenance window. Defaults to
+                      true.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.

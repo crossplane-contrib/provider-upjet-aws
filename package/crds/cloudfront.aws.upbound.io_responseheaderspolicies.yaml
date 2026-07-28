@@ -1158,7 +1158,7 @@ spec:
                   corsConfig:
                     description: A configuration for a set of HTTP response headers
                       that are used for Cross-Origin Resource Sharing (CORS). See
-                      Cors Config for more information.
+                      CORS Config for more information.
                     properties:
                       accessControlAllowCredentials:
                         description: A Boolean value that CloudFront uses as the value
@@ -1416,7 +1416,7 @@ spec:
                   corsConfig:
                     description: A configuration for a set of HTTP response headers
                       that are used for Cross-Origin Resource Sharing (CORS). See
-                      Cors Config for more information.
+                      CORS Config for more information.
                     properties:
                       accessControlAllowCredentials:
                         description: A Boolean value that CloudFront uses as the value
@@ -1761,7 +1761,7 @@ spec:
                   corsConfig:
                     description: A configuration for a set of HTTP response headers
                       that are used for Cross-Origin Resource Sharing (CORS). See
-                      Cors Config for more information.
+                      CORS Config for more information.
                     properties:
                       accessControlAllowCredentials:
                         description: A Boolean value that CloudFront uses as the value

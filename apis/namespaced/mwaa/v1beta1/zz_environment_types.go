@@ -142,7 +142,7 @@ type EnvironmentInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default) and PUBLIC_ONLY.
+	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 
 	// Specifies the start date for the weekly maintenance window.
@@ -245,7 +245,7 @@ type EnvironmentObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default) and PUBLIC_ONLY.
+	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 
 	// The webserver URL of the MWAA Environment
@@ -386,7 +386,7 @@ type EnvironmentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default) and PUBLIC_ONLY.
+	// Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.
 	// +kubebuilder:validation:Optional
 	WebserverAccessMode *string `json:"webserverAccessMode,omitempty" tf:"webserver_access_mode,omitempty"`
 

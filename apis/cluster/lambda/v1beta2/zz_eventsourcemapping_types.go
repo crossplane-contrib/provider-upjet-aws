@@ -233,6 +233,9 @@ type EventSourceMappingInitParameters struct {
 
 	// Duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type EventSourceMappingObservation struct {
@@ -351,6 +354,9 @@ type EventSourceMappingObservation struct {
 
 	// UUID of the created event source mapping.
 	UUID *string `json:"uuid,omitempty" tf:"uuid,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type EventSourceMappingParameters struct {
@@ -489,6 +495,10 @@ type EventSourceMappingParameters struct {
 	// Duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	// +kubebuilder:validation:Optional
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	// +kubebuilder:validation:Optional
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 }
 
 type FilterCriteriaInitParameters struct {

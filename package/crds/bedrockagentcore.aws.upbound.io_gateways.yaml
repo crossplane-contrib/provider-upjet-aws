@@ -102,6 +102,33 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -157,6 +184,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
@@ -565,6 +702,33 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -620,6 +784,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
@@ -1108,6 +1382,33 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the policy engine. The policy
+                                        engine contains Cedar policies that define
+                                        fine-grained authorization rules specifying
+                                        who can perform what actions on which resources
+                                        as agents interact through the gateway.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -1163,6 +1464,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   authorizerType:
