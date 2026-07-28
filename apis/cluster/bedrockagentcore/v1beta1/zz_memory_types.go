@@ -77,7 +77,17 @@ type KinesisInitParameters struct {
 	ContentConfiguration *ContentConfigurationInitParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v1.Reference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v1.Selector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisObservation struct {
@@ -96,11 +106,21 @@ type KinesisParameters struct {
 	ContentConfiguration *ContentConfigurationParameters `json:"contentConfiguration,omitempty" tf:"content_configuration,omitempty"`
 
 	// ARN of the Kinesis Data Stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kinesis/v1beta2.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	DataStreamArn *string `json:"dataStreamArn" tf:"data_stream_arn,omitempty"`
+	DataStreamArn *string `json:"dataStreamArn,omitempty" tf:"data_stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnRef *v1.Reference `json:"dataStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate dataStreamArn.
+	// +kubebuilder:validation:Optional
+	DataStreamArnSelector *v1.Selector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
-type MemoryInitParameters struct {
+type MemoryInitParameters_2 struct {
 
 	// Description of the memory.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -148,7 +168,7 @@ type MemoryInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type MemoryObservation struct {
+type MemoryObservation_2 struct {
 
 	// ARN of the Memory.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -190,7 +210,7 @@ type MemoryObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type MemoryParameters struct {
+type MemoryParameters_2 struct {
 
 	// Description of the memory.
 	// +kubebuilder:validation:Optional
@@ -292,7 +312,7 @@ type StreamDeliveryResourcesParameters struct {
 // MemorySpec defines the desired state of Memory
 type MemorySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MemoryParameters `json:"forProvider"`
+	ForProvider     MemoryParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -303,13 +323,13 @@ type MemorySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MemoryInitParameters `json:"initProvider,omitempty"`
+	InitProvider MemoryInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // MemoryStatus defines the observed state of Memory.
 type MemoryStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemoryObservation `json:"atProvider,omitempty"`
+	AtProvider        MemoryObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

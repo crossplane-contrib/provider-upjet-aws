@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Resource Policy Example
+# Attaches a resource-based policy to a Bedrock AgentCore Agent Runtime,
+# controlling which principals can invoke it. The resource ARN is resolved from
+# the referenced Agent Runtime. Includes the Agent Runtime and its IAM role.
+
+apiVersion: bedrockagentcore.aws.m.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/resourcepolicy
+    upjet.upbound.io/manual-intervention: >
+      requires a Gateway or AgentRuntime resourceArn.
+      Both has provider-assigned identifiers.
+      resourceArn does not support Reference/Selector fields,
+      due to multiple types.
+  labels:
+    testing.upbound.io/example-name: resourcepolicy
+  name: resourcepolicy
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    resourceArn: "arn:aws:bedrock-agentcore:us-west-2:${data.aws_account_id}:runtime/example_agent_runtime-qaaXoEF5i2"
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "AllowInvokeFromVPC",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": ["bedrock-agentcore:InvokeAgentRuntime"],
+            "Resource": "arn:aws:bedrock-agentcore:us-west-2:${data.aws_account_id}:runtime/example_agent_runtime-qaaXoEF5i2",
+            "Condition": {
+              "StringEquals": {"aws:SourceVpc": "vpc-1a2b3c4d"}
+            }
+          }
+        ]
+      }
+---

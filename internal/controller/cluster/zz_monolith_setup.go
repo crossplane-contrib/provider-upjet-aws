@@ -138,11 +138,17 @@ import (
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/apikeycredentialprovider"
 	browser "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/browser"
 	codeinterpreter "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/codeinterpreter"
+	evaluator "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/evaluator"
 	gateway "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/gateway"
 	gatewaytarget "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/gatewaytarget"
+	harness "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/harness"
 	memory "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/memory"
 	memorystrategy "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/memorystrategy"
 	oauth2credentialprovider "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/oauth2credentialprovider"
+	onlineevaluationconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/onlineevaluationconfig"
+	policybedrockagentcore "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/policy"
+	policyengine "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/policyengine"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/resourcepolicy"
 	tokenvaultcmk "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/tokenvaultcmk"
 	workloadidentity "github.com/upbound/provider-aws/v2/internal/controller/cluster/bedrockagentcore/workloadidentity"
 	budget "github.com/upbound/provider-aws/v2/internal/controller/cluster/budgets/budget"
@@ -197,7 +203,7 @@ import (
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/group"
 	metricfilter "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/metricfilter"
-	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/resourcepolicy"
+	resourcepolicycloudwatchlogs "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/resourcepolicy"
 	stream "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/stream"
 	subscriptionfilter "github.com/upbound/provider-aws/v2/internal/controller/cluster/cloudwatchlogs/subscriptionfilter"
 	domaincodeartifact "github.com/upbound/provider-aws/v2/internal/controller/cluster/codeartifact/domain"
@@ -1166,11 +1172,17 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.Setup,
 		browser.Setup,
 		codeinterpreter.Setup,
+		evaluator.Setup,
 		gateway.Setup,
 		gatewaytarget.Setup,
+		harness.Setup,
 		memory.Setup,
 		memorystrategy.Setup,
 		oauth2credentialprovider.Setup,
+		onlineevaluationconfig.Setup,
+		policybedrockagentcore.Setup,
+		policyengine.Setup,
+		resourcepolicy.Setup,
 		tokenvaultcmk.Setup,
 		workloadidentity.Setup,
 		budget.Setup,
@@ -1225,7 +1237,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		destinationpolicy.Setup,
 		group.Setup,
 		metricfilter.Setup,
-		resourcepolicy.Setup,
+		resourcepolicycloudwatchlogs.Setup,
 		stream.Setup,
 		subscriptionfilter.Setup,
 		domaincodeartifact.Setup,
@@ -2200,11 +2212,17 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.SetupGated,
 		browser.SetupGated,
 		codeinterpreter.SetupGated,
+		evaluator.SetupGated,
 		gateway.SetupGated,
 		gatewaytarget.SetupGated,
+		harness.SetupGated,
 		memory.SetupGated,
 		memorystrategy.SetupGated,
 		oauth2credentialprovider.SetupGated,
+		onlineevaluationconfig.SetupGated,
+		policybedrockagentcore.SetupGated,
+		policyengine.SetupGated,
+		resourcepolicy.SetupGated,
 		tokenvaultcmk.SetupGated,
 		workloadidentity.SetupGated,
 		budget.SetupGated,
@@ -2259,7 +2277,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		destinationpolicy.SetupGated,
 		group.SetupGated,
 		metricfilter.SetupGated,
-		resourcepolicy.SetupGated,
+		resourcepolicycloudwatchlogs.SetupGated,
 		stream.SetupGated,
 		subscriptionfilter.SetupGated,
 		domaincodeartifact.SetupGated,
@@ -3233,11 +3251,17 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		apikeycredentialprovider.SetupWebhookWithManager,
 		browser.SetupWebhookWithManager,
 		codeinterpreter.SetupWebhookWithManager,
+		evaluator.SetupWebhookWithManager,
 		gateway.SetupWebhookWithManager,
 		gatewaytarget.SetupWebhookWithManager,
+		harness.SetupWebhookWithManager,
 		memory.SetupWebhookWithManager,
 		memorystrategy.SetupWebhookWithManager,
 		oauth2credentialprovider.SetupWebhookWithManager,
+		onlineevaluationconfig.SetupWebhookWithManager,
+		policybedrockagentcore.SetupWebhookWithManager,
+		policyengine.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
 		tokenvaultcmk.SetupWebhookWithManager,
 		workloadidentity.SetupWebhookWithManager,
 		budget.SetupWebhookWithManager,
@@ -3292,7 +3316,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		destinationpolicy.SetupWebhookWithManager,
 		group.SetupWebhookWithManager,
 		metricfilter.SetupWebhookWithManager,
-		resourcepolicy.SetupWebhookWithManager,
+		resourcepolicycloudwatchlogs.SetupWebhookWithManager,
 		stream.SetupWebhookWithManager,
 		subscriptionfilter.SetupWebhookWithManager,
 		domaincodeartifact.SetupWebhookWithManager,

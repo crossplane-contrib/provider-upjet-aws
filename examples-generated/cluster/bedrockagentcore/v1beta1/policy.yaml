@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    definition:
+      cedar:
+        statement: |
+          permit(principal, action == Action::"Read", resource);
+    description: Allow read access to example resources
+    name: example_policy
+    policyEngineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

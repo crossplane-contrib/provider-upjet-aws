@@ -14,11 +14,17 @@ import (
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/apikeycredentialprovider"
 	browser "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/browser"
 	codeinterpreter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/codeinterpreter"
+	evaluator "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/evaluator"
 	gateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gateway"
 	gatewaytarget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gatewaytarget"
+	harness "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/harness"
 	memory "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memory"
 	memorystrategy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memorystrategy"
 	oauth2credentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/oauth2credentialprovider"
+	onlineevaluationconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/onlineevaluationconfig"
+	policy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/policy"
+	policyengine "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/policyengine"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/resourcepolicy"
 	tokenvaultcmk "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/tokenvaultcmk"
 	workloadidentity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/workloadidentity"
 )
@@ -32,11 +38,17 @@ func Setup_bedrockagentcore(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.Setup,
 		browser.Setup,
 		codeinterpreter.Setup,
+		evaluator.Setup,
 		gateway.Setup,
 		gatewaytarget.Setup,
+		harness.Setup,
 		memory.Setup,
 		memorystrategy.Setup,
 		oauth2credentialprovider.Setup,
+		onlineevaluationconfig.Setup,
+		policy.Setup,
+		policyengine.Setup,
+		resourcepolicy.Setup,
 		tokenvaultcmk.Setup,
 		workloadidentity.Setup,
 	} {
@@ -56,11 +68,17 @@ func SetupGated_bedrockagentcore(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.SetupGated,
 		browser.SetupGated,
 		codeinterpreter.SetupGated,
+		evaluator.SetupGated,
 		gateway.SetupGated,
 		gatewaytarget.SetupGated,
+		harness.SetupGated,
 		memory.SetupGated,
 		memorystrategy.SetupGated,
 		oauth2credentialprovider.SetupGated,
+		onlineevaluationconfig.SetupGated,
+		policy.SetupGated,
+		policyengine.SetupGated,
+		resourcepolicy.SetupGated,
 		tokenvaultcmk.SetupGated,
 		workloadidentity.SetupGated,
 	} {
@@ -79,11 +97,17 @@ func SetupWebhookWithManager_bedrockagentcore(mgr ctrl.Manager) error {
 		apikeycredentialprovider.SetupWebhookWithManager,
 		browser.SetupWebhookWithManager,
 		codeinterpreter.SetupWebhookWithManager,
+		evaluator.SetupWebhookWithManager,
 		gateway.SetupWebhookWithManager,
 		gatewaytarget.SetupWebhookWithManager,
+		harness.SetupWebhookWithManager,
 		memory.SetupWebhookWithManager,
 		memorystrategy.SetupWebhookWithManager,
 		oauth2credentialprovider.SetupWebhookWithManager,
+		onlineevaluationconfig.SetupWebhookWithManager,
+		policy.SetupWebhookWithManager,
+		policyengine.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
 		tokenvaultcmk.SetupWebhookWithManager,
 		workloadidentity.SetupWebhookWithManager,
 	} {
