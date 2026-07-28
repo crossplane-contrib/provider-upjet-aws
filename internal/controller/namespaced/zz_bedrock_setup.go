@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	guardrail "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/guardrail"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/inferenceprofile"
 )
 
@@ -16,6 +17,7 @@ import (
 // the supplied manager.
 func Setup_bedrock(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		guardrail.Setup,
 		inferenceprofile.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -29,6 +31,7 @@ func Setup_bedrock(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_bedrock(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		guardrail.SetupGated,
 		inferenceprofile.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -41,6 +44,7 @@ func SetupGated_bedrock(mgr ctrl.Manager, o controller.Options) error {
 // SetupWebhookWithManager_bedrock registers conversion webhooks for all resource kinds in the group.
 func SetupWebhookWithManager_bedrock(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
+		guardrail.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {

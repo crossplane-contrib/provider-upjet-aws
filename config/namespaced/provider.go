@@ -16,6 +16,7 @@ import (
 	"github.com/upbound/provider-aws/v2/config/namespaced/autoscaling"
 	"github.com/upbound/provider-aws/v2/config/namespaced/backup"
 	"github.com/upbound/provider-aws/v2/config/namespaced/batch"
+	"github.com/upbound/provider-aws/v2/config/namespaced/bedrock"
 	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagent"
 	"github.com/upbound/provider-aws/v2/config/namespaced/bedrockagentcore"
 	"github.com/upbound/provider-aws/v2/config/namespaced/budgets"
@@ -120,6 +121,7 @@ func init() {
 	ProviderConfiguration.AddConfig(autoscaling.Configure)
 	ProviderConfiguration.AddConfig(backup.Configure)
 	ProviderConfiguration.AddConfig(batch.Configure)
+	ProviderConfiguration.AddConfig(bedrock.Configure)
 	ProviderConfiguration.AddConfig(bedrockagent.Configure)
 	ProviderConfiguration.AddConfig(bedrockagentcore.Configure)
 	ProviderConfiguration.AddConfig(cloudfront.Configure)
