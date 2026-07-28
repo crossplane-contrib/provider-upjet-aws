@@ -34,7 +34,7 @@ spec:
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     backupWindow: 09:46-10:16
-    name: example
+    dbName: example
     engine: postgres
     instanceClass: db.t3.micro
     kmsKeyIdSelector:
