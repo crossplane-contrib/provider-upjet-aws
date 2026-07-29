@@ -596,8 +596,8 @@ func TestJSONStringNormalizationConversion(t *testing.T) {
 			reason: "Should recursively sort arrays nested inside objects.",
 			args: args{
 				fieldPath: "policy",
-				params: map[string]any{"policy": `{"Statement":[{"Effect":"Allow","Principal":{"AWS":["arn:b","arn:a"]}},{"Effect":"Deny","Principal":{"AWS":["arn:d","arn:c"]}}]}`},
-				mode: config.FromTerraform,
+				params:    map[string]any{"policy": `{"Statement":[{"Effect":"Allow","Principal":{"AWS":["arn:b","arn:a"]}},{"Effect":"Deny","Principal":{"AWS":["arn:d","arn:c"]}}]}`},
+				mode:      config.FromTerraform,
 			},
 			want: want{
 				params: map[string]any{"policy": `{"Statement":[{"Effect":"Allow","Principal":{"AWS":["arn:a","arn:b"]}},{"Effect":"Deny","Principal":{"AWS":["arn:c","arn:d"]}}]}`},
