@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FileSystemPolicyInitParameters struct {
@@ -25,11 +24,11 @@ type FileSystemPolicyInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -67,11 +66,11 @@ type FileSystemPolicyParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
 	// +kubebuilder:validation:Optional
@@ -102,8 +101,8 @@ type FileSystemPolicySpec struct {
 
 // FileSystemPolicyStatus defines the observed state of FileSystemPolicy.
 type FileSystemPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FileSystemPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FileSystemPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

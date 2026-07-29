@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationInitParameters struct {
@@ -29,11 +29,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// Integration input's connectionType. Valid values are INTERNET (default for connections through the public routable internet), and VPC_LINK (for private connections between API Gateway and a network load balancer in a VPC).
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
@@ -52,11 +52,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// Integration HTTP method
 	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
@@ -72,11 +72,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a LB in elbv2 to populate integrationTarget.
 	// +kubebuilder:validation:Optional
-	IntegrationTargetRef *v1.Reference `json:"integrationTargetRef,omitempty" tf:"-"`
+	IntegrationTargetRef *v2.Reference `json:"integrationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate integrationTarget.
 	// +kubebuilder:validation:Optional
-	IntegrationTargetSelector *v1.Selector `json:"integrationTargetSelector,omitempty" tf:"-"`
+	IntegrationTargetSelector *v2.Selector `json:"integrationTargetSelector,omitempty" tf:"-"`
 
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
@@ -97,11 +97,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
 	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
@@ -114,11 +114,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// TLS configuration. See below.
 	TLSConfig *TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
@@ -138,11 +138,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
-	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
+	URIRef *v2.Reference `json:"uriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
-	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
+	URISelector *v2.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
 type IntegrationObservation struct {
@@ -242,11 +242,11 @@ type IntegrationParameters struct {
 
 	// Reference to a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCLink in apigateway to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// Integration input's connectionType. Valid values are INTERNET (default for connections through the public routable internet), and VPC_LINK (for private connections between API Gateway and a network load balancer in a VPC).
 	// +kubebuilder:validation:Optional
@@ -269,11 +269,11 @@ type IntegrationParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// Integration HTTP method
 	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
@@ -291,11 +291,11 @@ type IntegrationParameters struct {
 
 	// Reference to a LB in elbv2 to populate integrationTarget.
 	// +kubebuilder:validation:Optional
-	IntegrationTargetRef *v1.Reference `json:"integrationTargetRef,omitempty" tf:"-"`
+	IntegrationTargetRef *v2.Reference `json:"integrationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate integrationTarget.
 	// +kubebuilder:validation:Optional
-	IntegrationTargetSelector *v1.Selector `json:"integrationTargetSelector,omitempty" tf:"-"`
+	IntegrationTargetSelector *v2.Selector `json:"integrationTargetSelector,omitempty" tf:"-"`
 
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	// +kubebuilder:validation:Optional
@@ -325,11 +325,11 @@ type IntegrationParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
 	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
@@ -344,11 +344,11 @@ type IntegrationParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// TLS configuration. See below.
 	// +kubebuilder:validation:Optional
@@ -372,11 +372,11 @@ type IntegrationParameters struct {
 
 	// Reference to a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
-	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
+	URIRef *v2.Reference `json:"uriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate uri.
 	// +kubebuilder:validation:Optional
-	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
+	URISelector *v2.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
 type TLSConfigInitParameters struct {
@@ -400,8 +400,8 @@ type TLSConfigParameters struct {
 
 // IntegrationSpec defines the desired state of Integration
 type IntegrationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IntegrationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IntegrationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -417,8 +417,8 @@ type IntegrationSpec struct {
 
 // IntegrationStatus defines the observed state of Integration.
 type IntegrationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

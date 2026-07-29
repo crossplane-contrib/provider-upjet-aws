@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyEngineInitParameters struct {
@@ -25,11 +25,11 @@ type PolicyEngineInitParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the policy engine. Must start with a letter and contain only letters, numbers, and underscores. Maximum length of 48 characters.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -85,11 +85,11 @@ type PolicyEngineParameters struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.Reference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.Selector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the policy engine. Must start with a letter and contain only letters, numbers, and underscores. Maximum length of 48 characters.
 	// +kubebuilder:validation:Optional
@@ -108,8 +108,8 @@ type PolicyEngineParameters struct {
 
 // PolicyEngineSpec defines the desired state of PolicyEngine
 type PolicyEngineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyEngineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyEngineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type PolicyEngineSpec struct {
 
 // PolicyEngineStatus defines the observed state of PolicyEngine.
 type PolicyEngineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyEngineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyEngineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

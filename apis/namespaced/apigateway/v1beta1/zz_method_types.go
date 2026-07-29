@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MethodInitParameters struct {
@@ -33,11 +32,11 @@ type MethodInitParameters struct {
 
 	// Reference to a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDRef *v1.NamespacedReference `json:"authorizerIdRef,omitempty" tf:"-"`
+	AuthorizerIDRef *v2.NamespacedReference `json:"authorizerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDSelector *v1.NamespacedSelector `json:"authorizerIdSelector,omitempty" tf:"-"`
+	AuthorizerIDSelector *v2.NamespacedSelector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -66,11 +65,11 @@ type MethodInitParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
@@ -79,11 +78,11 @@ type MethodInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 type MethodObservation struct {
@@ -157,11 +156,11 @@ type MethodParameters struct {
 
 	// Reference to a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDRef *v1.NamespacedReference `json:"authorizerIdRef,omitempty" tf:"-"`
+	AuthorizerIDRef *v2.NamespacedReference `json:"authorizerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Authorizer in apigateway to populate authorizerId.
 	// +kubebuilder:validation:Optional
-	AuthorizerIDSelector *v1.NamespacedSelector `json:"authorizerIdSelector,omitempty" tf:"-"`
+	AuthorizerIDSelector *v2.NamespacedSelector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	// +kubebuilder:validation:Optional
@@ -201,11 +200,11 @@ type MethodParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
@@ -215,11 +214,11 @@ type MethodParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 // MethodSpec defines the desired state of Method
@@ -241,8 +240,8 @@ type MethodSpec struct {
 
 // MethodStatus defines the observed state of Method.
 type MethodStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MethodObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MethodObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

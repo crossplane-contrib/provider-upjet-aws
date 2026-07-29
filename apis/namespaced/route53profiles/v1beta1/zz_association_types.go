@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssociationInitParameters struct {
@@ -26,11 +25,11 @@ type AssociationInitParameters struct {
 
 	// Reference to a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Resource ID of the VPC the profile to be associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -39,11 +38,11 @@ type AssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -101,11 +100,11 @@ type AssociationParameters struct {
 
 	// Reference to a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -120,11 +119,11 @@ type AssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -151,8 +150,8 @@ type AssociationSpec struct {
 
 // AssociationStatus defines the observed state of Association.
 type AssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

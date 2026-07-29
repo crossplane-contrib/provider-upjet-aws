@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationResponseInitParameters struct {
@@ -26,11 +25,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.NamespacedReference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.NamespacedReference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.Resource
@@ -39,11 +38,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
 	// +mapType=granular
@@ -60,11 +59,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Regular expression pattern used to choose an integration response based on the response from the backend. Omit configuring this to make the integration the default one. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
 	SelectionPattern *string `json:"selectionPattern,omitempty" tf:"selection_pattern,omitempty"`
@@ -76,11 +75,11 @@ type IntegrationResponseInitParameters struct {
 
 	// Reference to a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
-	StatusCodeRef *v1.NamespacedReference `json:"statusCodeRef,omitempty" tf:"-"`
+	StatusCodeRef *v2.NamespacedReference `json:"statusCodeRef,omitempty" tf:"-"`
 
 	// Selector for a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
-	StatusCodeSelector *v1.NamespacedSelector `json:"statusCodeSelector,omitempty" tf:"-"`
+	StatusCodeSelector *v2.NamespacedSelector `json:"statusCodeSelector,omitempty" tf:"-"`
 }
 
 type IntegrationResponseObservation struct {
@@ -132,11 +131,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.NamespacedReference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.NamespacedReference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.NamespacedSelector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -151,11 +150,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
 	// +kubebuilder:validation:Optional
@@ -175,11 +174,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Regular expression pattern used to choose an integration response based on the response from the backend. Omit configuring this to make the integration the default one. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
 	// +kubebuilder:validation:Optional
@@ -193,11 +192,11 @@ type IntegrationResponseParameters struct {
 
 	// Reference to a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
-	StatusCodeRef *v1.NamespacedReference `json:"statusCodeRef,omitempty" tf:"-"`
+	StatusCodeRef *v2.NamespacedReference `json:"statusCodeRef,omitempty" tf:"-"`
 
 	// Selector for a MethodResponse in apigateway to populate statusCode.
 	// +kubebuilder:validation:Optional
-	StatusCodeSelector *v1.NamespacedSelector `json:"statusCodeSelector,omitempty" tf:"-"`
+	StatusCodeSelector *v2.NamespacedSelector `json:"statusCodeSelector,omitempty" tf:"-"`
 }
 
 // IntegrationResponseSpec defines the desired state of IntegrationResponse
@@ -219,8 +218,8 @@ type IntegrationResponseSpec struct {
 
 // IntegrationResponseStatus defines the observed state of IntegrationResponse.
 type IntegrationResponseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationResponseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationResponseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

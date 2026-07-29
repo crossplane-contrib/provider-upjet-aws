@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationVersionInitParameters struct {
@@ -26,11 +25,11 @@ type ApplicationVersionInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Short description of the Application Version.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -45,11 +44,11 @@ type ApplicationVersionInitParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
 
 	// Pre-processes and validates the environment manifest (env.yaml ) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment. You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional. It validates Elastic Beanstalk configuration files. It doesn’t validate your application’s configuration files, like proxy server or Docker configuration.
 	Process *bool `json:"process,omitempty" tf:"process,omitempty"`
@@ -111,11 +110,11 @@ type ApplicationVersionParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Short description of the Application Version.
 	// +kubebuilder:validation:Optional
@@ -133,11 +132,11 @@ type ApplicationVersionParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
 
 	// Pre-processes and validates the environment manifest (env.yaml ) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment. You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional. It validates Elastic Beanstalk configuration files. It doesn’t validate your application’s configuration files, like proxy server or Docker configuration.
 	// +kubebuilder:validation:Optional
@@ -173,8 +172,8 @@ type ApplicationVersionSpec struct {
 
 // ApplicationVersionStatus defines the observed state of ApplicationVersion.
 type ApplicationVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

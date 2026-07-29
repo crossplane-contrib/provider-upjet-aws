@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DBInstanceInitParameters struct {
@@ -76,7 +76,7 @@ type DBInstanceInitParameters struct {
 	// allow you to access the InfluxDB UI to perform various administrative tasks and
 	// also use the InfluxDB CLI to create an operator token. These attributes will be
 	// stored in a Secret created in AWS SecretManager in your account.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
@@ -108,11 +108,11 @@ type DBInstanceInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsRefs []v1.Reference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIdsRefs []v2.Reference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsSelector *v1.Selector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIdsSelector *v2.Selector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC subnet IDs to associate with the DB instance. Provide at least two VPC subnet IDs in different availability zones when deploying with a Multi-AZ standby.
 	// A list of VPC subnet IDs to associate with the DB instance. Provide at least
@@ -123,11 +123,11 @@ type DBInstanceInitParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type DBInstanceLogDeliveryConfigurationInitParameters struct {
@@ -382,7 +382,7 @@ type DBInstanceParameters struct {
 	// also use the InfluxDB CLI to create an operator token. These attributes will be
 	// stored in a Secret created in AWS SecretManager in your account.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// (Default 8086) The port on which the instance accepts connections. Valid values: 1024-65535. Cannot be 2375-2376, 7788-7799, 8090, or 51678-51680. This argument is updatable.
 	// The port number on which InfluxDB accepts connections.
@@ -424,11 +424,11 @@ type DBInstanceParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsRefs []v1.Reference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIdsRefs []v2.Reference `json:"vpcSecurityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIdsSelector *v1.Selector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIdsSelector *v2.Selector `json:"vpcSecurityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of VPC subnet IDs to associate with the DB instance. Provide at least two VPC subnet IDs in different availability zones when deploying with a Multi-AZ standby.
 	// A list of VPC subnet IDs to associate with the DB instance. Provide at least
@@ -440,11 +440,11 @@ type DBInstanceParameters struct {
 
 	// References to Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsRefs []v1.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+	VPCSubnetIdsRefs []v2.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
 	// +kubebuilder:validation:Optional
-	VPCSubnetIdsSelector *v1.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
+	VPCSubnetIdsSelector *v2.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type LogDeliveryConfigurationS3ConfigurationInitParameters struct {
@@ -456,11 +456,11 @@ type LogDeliveryConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
@@ -488,11 +488,11 @@ type LogDeliveryConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Indicates whether log delivery to the S3 bucket is enabled.
 	// Indicates whether log delivery to the S3 bucket is enabled.
@@ -502,8 +502,8 @@ type LogDeliveryConfigurationS3ConfigurationParameters struct {
 
 // DBInstanceSpec defines the desired state of DBInstance
 type DBInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DBInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DBInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -519,8 +519,8 @@ type DBInstanceSpec struct {
 
 // DBInstanceStatus defines the observed state of DBInstance.
 type DBInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DBInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DBInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

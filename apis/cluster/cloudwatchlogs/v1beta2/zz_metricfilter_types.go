@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MetricFilterInitParameters struct {
@@ -24,11 +24,11 @@ type MetricFilterInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+	LogGroupNameRef *v2.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+	LogGroupNameSelector *v2.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	MetricTransformation *MetricTransformationInitParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
@@ -74,11 +74,11 @@ type MetricFilterParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+	LogGroupNameRef *v2.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroupName.
 	// +kubebuilder:validation:Optional
-	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+	LogGroupNameSelector *v2.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	// +kubebuilder:validation:Optional
@@ -169,8 +169,8 @@ type MetricTransformationParameters struct {
 
 // MetricFilterSpec defines the desired state of MetricFilter
 type MetricFilterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MetricFilterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MetricFilterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -186,8 +186,8 @@ type MetricFilterSpec struct {
 
 // MetricFilterStatus defines the observed state of MetricFilter.
 type MetricFilterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MetricFilterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MetricFilterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

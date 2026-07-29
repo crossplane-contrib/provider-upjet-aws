@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizerConfigInitParameters struct {
@@ -64,11 +64,11 @@ type DomainConfigurationInitParameters struct {
 
 	// References to Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsRefs []v1.Reference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
+	ServerCertificateArnsRefs []v2.Reference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsSelector *v1.Selector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
+	ServerCertificateArnsSelector *v2.Selector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
 
 	// The type of service delivered by the endpoint. Note: Amazon Web Services IoT Core currently supports only the DATA service type.
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
@@ -171,11 +171,11 @@ type DomainConfigurationParameters struct {
 
 	// References to Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsRefs []v1.Reference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
+	ServerCertificateArnsRefs []v2.Reference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsSelector *v1.Selector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
+	ServerCertificateArnsSelector *v2.Selector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
 
 	// The type of service delivered by the endpoint. Note: Amazon Web Services IoT Core currently supports only the DATA service type.
 	// +kubebuilder:validation:Optional
@@ -220,8 +220,8 @@ type TLSConfigParameters struct {
 
 // DomainConfigurationSpec defines the desired state of DomainConfiguration
 type DomainConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -237,8 +237,8 @@ type DomainConfigurationSpec struct {
 
 // DomainConfigurationStatus defines the observed state of DomainConfiguration.
 type DomainConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuditLogConfigurationInitParameters struct {
@@ -65,11 +65,11 @@ type SelfManagedActiveDirectoryInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
 	// +kubebuilder:validation:Optional
-	DomainJoinServiceAccountSecretRef *v1.Reference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
+	DomainJoinServiceAccountSecretRef *v2.Reference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
 	// +kubebuilder:validation:Optional
-	DomainJoinServiceAccountSecretSelector *v1.Selector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
+	DomainJoinServiceAccountSecretSelector *v2.Selector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
@@ -81,10 +81,10 @@ type SelfManagedActiveDirectoryInitParameters struct {
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
@@ -133,11 +133,11 @@ type SelfManagedActiveDirectoryParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
 	// +kubebuilder:validation:Optional
-	DomainJoinServiceAccountSecretRef *v1.Reference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
+	DomainJoinServiceAccountSecretRef *v2.Reference `json:"domainJoinServiceAccountSecretRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate domainJoinServiceAccountSecret.
 	// +kubebuilder:validation:Optional
-	DomainJoinServiceAccountSecretSelector *v1.Selector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
+	DomainJoinServiceAccountSecretSelector *v2.Selector `json:"domainJoinServiceAccountSecretSelector,omitempty" tf:"-"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	// +kubebuilder:validation:Optional
@@ -153,11 +153,11 @@ type SelfManagedActiveDirectoryParameters struct {
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. Conflicts with domain_join_service_account_secret and password_wo.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This is a write-only argument which is not persisted to state. Conflicts with domain_join_service_account_secret and password. Required with password_wo_version.
 	// +kubebuilder:validation:Optional
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Version of the password. Required with password_wo. Update this argument when the value of password_wo has changed to trigger an update to the remote password.
 	// +kubebuilder:validation:Optional
@@ -206,11 +206,11 @@ type WindowsFileSystemInitParameters struct {
 
 	// Reference to a Directory in ds to populate activeDirectoryId.
 	// +kubebuilder:validation:Optional
-	ActiveDirectoryIDRef *v1.Reference `json:"activeDirectoryIdRef,omitempty" tf:"-"`
+	ActiveDirectoryIDRef *v2.Reference `json:"activeDirectoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate activeDirectoryId.
 	// +kubebuilder:validation:Optional
-	ActiveDirectoryIDSelector *v1.Selector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
+	ActiveDirectoryIDSelector *v2.Selector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +listType=set
@@ -248,22 +248,22 @@ type WindowsFileSystemInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -286,11 +286,11 @@ type WindowsFileSystemInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -422,11 +422,11 @@ type WindowsFileSystemParameters struct {
 
 	// Reference to a Directory in ds to populate activeDirectoryId.
 	// +kubebuilder:validation:Optional
-	ActiveDirectoryIDRef *v1.Reference `json:"activeDirectoryIdRef,omitempty" tf:"-"`
+	ActiveDirectoryIDRef *v2.Reference `json:"activeDirectoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate activeDirectoryId.
 	// +kubebuilder:validation:Optional
-	ActiveDirectoryIDSelector *v1.Selector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
+	ActiveDirectoryIDSelector *v2.Selector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +kubebuilder:validation:Optional
@@ -474,11 +474,11 @@ type WindowsFileSystemParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	// +kubebuilder:validation:Optional
@@ -491,11 +491,11 @@ type WindowsFileSystemParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -523,11 +523,11 @@ type WindowsFileSystemParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -552,8 +552,8 @@ type WindowsFileSystemParameters struct {
 
 // WindowsFileSystemSpec defines the desired state of WindowsFileSystem
 type WindowsFileSystemSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WindowsFileSystemParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WindowsFileSystemParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -569,8 +569,8 @@ type WindowsFileSystemSpec struct {
 
 // WindowsFileSystemStatus defines the observed state of WindowsFileSystem.
 type WindowsFileSystemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WindowsFileSystemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WindowsFileSystemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

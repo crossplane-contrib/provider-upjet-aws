@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type S3EndpointInitParameters struct {
@@ -120,11 +120,11 @@ type S3EndpointInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
 	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
@@ -154,11 +154,11 @@ type S3EndpointInitParameters struct {
 
 	// Reference to a Key in kms to populate serverSideEncryptionKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionKMSKeyIDRef *v1.Reference `json:"serverSideEncryptionKmsKeyIdRef,omitempty" tf:"-"`
+	ServerSideEncryptionKMSKeyIDRef *v2.Reference `json:"serverSideEncryptionKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate serverSideEncryptionKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionKMSKeyIDSelector *v1.Selector `json:"serverSideEncryptionKmsKeyIdSelector,omitempty" tf:"-"`
+	ServerSideEncryptionKMSKeyIDSelector *v2.Selector `json:"serverSideEncryptionKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// ARN of the IAM role with permissions to the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -167,11 +167,11 @@ type S3EndpointInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleArnRef *v1.Reference `json:"serviceAccessRoleArnRef,omitempty" tf:"-"`
+	ServiceAccessRoleArnRef *v2.Reference `json:"serviceAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleArnSelector *v1.Selector `json:"serviceAccessRoleArnSelector,omitempty" tf:"-"`
+	ServiceAccessRoleArnSelector *v2.Selector `json:"serviceAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -495,11 +495,11 @@ type S3EndpointParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
 	// +kubebuilder:validation:Optional
@@ -542,11 +542,11 @@ type S3EndpointParameters struct {
 
 	// Reference to a Key in kms to populate serverSideEncryptionKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionKMSKeyIDRef *v1.Reference `json:"serverSideEncryptionKmsKeyIdRef,omitempty" tf:"-"`
+	ServerSideEncryptionKMSKeyIDRef *v2.Reference `json:"serverSideEncryptionKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate serverSideEncryptionKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ServerSideEncryptionKMSKeyIDSelector *v1.Selector `json:"serverSideEncryptionKmsKeyIdSelector,omitempty" tf:"-"`
+	ServerSideEncryptionKMSKeyIDSelector *v2.Selector `json:"serverSideEncryptionKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// ARN of the IAM role with permissions to the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -556,11 +556,11 @@ type S3EndpointParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleArnRef *v1.Reference `json:"serviceAccessRoleArnRef,omitempty" tf:"-"`
+	ServiceAccessRoleArnRef *v2.Reference `json:"serviceAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleArnSelector *v1.Selector `json:"serviceAccessRoleArnSelector,omitempty" tf:"-"`
+	ServiceAccessRoleArnSelector *v2.Selector `json:"serviceAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -582,8 +582,8 @@ type S3EndpointParameters struct {
 
 // S3EndpointSpec defines the desired state of S3Endpoint
 type S3EndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     S3EndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   S3EndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -599,8 +599,8 @@ type S3EndpointSpec struct {
 
 // S3EndpointStatus defines the observed state of S3Endpoint.
 type S3EndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        S3EndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               S3EndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

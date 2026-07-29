@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppCookieStickinessPolicyInitParameters struct {
@@ -62,11 +61,11 @@ type AppCookieStickinessPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.NamespacedReference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.NamespacedSelector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -93,8 +92,8 @@ type AppCookieStickinessPolicySpec struct {
 
 // AppCookieStickinessPolicyStatus defines the observed state of AppCookieStickinessPolicy.
 type AppCookieStickinessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppCookieStickinessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppCookieStickinessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

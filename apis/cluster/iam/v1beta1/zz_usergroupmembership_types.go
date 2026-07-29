@@ -10,18 +10,18 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserGroupMembershipInitParameters struct {
 
 	// References to Group in iam to populate groups.
 	// +kubebuilder:validation:Optional
-	GroupRefs []v1.Reference `json:"groupRefs,omitempty" tf:"-"`
+	GroupRefs []v2.Reference `json:"groupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in iam to populate groups.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// A list of IAM Groups to add the user to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Group
@@ -36,11 +36,11 @@ type UserGroupMembershipInitParameters struct {
 
 	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.Reference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type UserGroupMembershipObservation struct {
@@ -59,11 +59,11 @@ type UserGroupMembershipParameters struct {
 
 	// References to Group in iam to populate groups.
 	// +kubebuilder:validation:Optional
-	GroupRefs []v1.Reference `json:"groupRefs,omitempty" tf:"-"`
+	GroupRefs []v2.Reference `json:"groupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in iam to populate groups.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// A list of IAM Groups to add the user to
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Group
@@ -80,17 +80,17 @@ type UserGroupMembershipParameters struct {
 
 	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.Reference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 // UserGroupMembershipSpec defines the desired state of UserGroupMembership
 type UserGroupMembershipSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserGroupMembershipParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserGroupMembershipParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,8 +106,8 @@ type UserGroupMembershipSpec struct {
 
 // UserGroupMembershipStatus defines the observed state of UserGroupMembership.
 type UserGroupMembershipStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserGroupMembershipObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserGroupMembershipObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

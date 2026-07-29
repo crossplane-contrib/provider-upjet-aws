@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InviteAccepterInitParameters struct {
@@ -23,11 +22,11 @@ type InviteAccepterInitParameters struct {
 
 	// Reference to a Member in securityhub to populate masterId.
 	// +kubebuilder:validation:Optional
-	MasterIDRef *v1.NamespacedReference `json:"masterIdRef,omitempty" tf:"-"`
+	MasterIDRef *v2.NamespacedReference `json:"masterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Member in securityhub to populate masterId.
 	// +kubebuilder:validation:Optional
-	MasterIDSelector *v1.NamespacedSelector `json:"masterIdSelector,omitempty" tf:"-"`
+	MasterIDSelector *v2.NamespacedSelector `json:"masterIdSelector,omitempty" tf:"-"`
 }
 
 type InviteAccepterObservation struct {
@@ -54,11 +53,11 @@ type InviteAccepterParameters struct {
 
 	// Reference to a Member in securityhub to populate masterId.
 	// +kubebuilder:validation:Optional
-	MasterIDRef *v1.NamespacedReference `json:"masterIdRef,omitempty" tf:"-"`
+	MasterIDRef *v2.NamespacedReference `json:"masterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Member in securityhub to populate masterId.
 	// +kubebuilder:validation:Optional
-	MasterIDSelector *v1.NamespacedSelector `json:"masterIdSelector,omitempty" tf:"-"`
+	MasterIDSelector *v2.NamespacedSelector `json:"masterIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -85,8 +84,8 @@ type InviteAccepterSpec struct {
 
 // InviteAccepterStatus defines the observed state of InviteAccepter.
 type InviteAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InviteAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InviteAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

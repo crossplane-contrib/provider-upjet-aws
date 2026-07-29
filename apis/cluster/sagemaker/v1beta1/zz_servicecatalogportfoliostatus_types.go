@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServicecatalogPortfolioStatusInitParameters struct {
@@ -46,8 +46,8 @@ type ServicecatalogPortfolioStatusParameters struct {
 
 // ServicecatalogPortfolioStatusSpec defines the desired state of ServicecatalogPortfolioStatus
 type ServicecatalogPortfolioStatusSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServicecatalogPortfolioStatusParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServicecatalogPortfolioStatusParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -63,8 +63,8 @@ type ServicecatalogPortfolioStatusSpec struct {
 
 // ServicecatalogPortfolioStatusStatus defines the observed state of ServicecatalogPortfolioStatus.
 type ServicecatalogPortfolioStatusStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServicecatalogPortfolioStatusObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServicecatalogPortfolioStatusObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

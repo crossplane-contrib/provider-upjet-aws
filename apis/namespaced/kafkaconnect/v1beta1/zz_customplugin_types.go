@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomPluginInitParameters_2 struct {
@@ -125,11 +124,11 @@ type LocationS3InitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for an object in an S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -138,11 +137,11 @@ type LocationS3InitParameters struct {
 
 	// Reference to a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeyRef *v1.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
+	FileKeyRef *v2.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeySelector *v1.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
+	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
 	// The version of an object in an S3 bucket.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
@@ -170,11 +169,11 @@ type LocationS3Parameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for an object in an S3 bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -184,11 +183,11 @@ type LocationS3Parameters struct {
 
 	// Reference to a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeyRef *v1.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
+	FileKeyRef *v2.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeySelector *v1.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
+	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
 	// The version of an object in an S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -214,8 +213,8 @@ type CustomPluginSpec struct {
 
 // CustomPluginStatus defines the observed state of CustomPlugin.
 type CustomPluginStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomPluginObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomPluginObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

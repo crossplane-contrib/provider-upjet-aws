@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCDHCPOptionsAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type VPCDHCPOptionsAssociationInitParameters struct {
 
 	// Reference to a VPCDHCPOptions in ec2 to populate dhcpOptionsId.
 	// +kubebuilder:validation:Optional
-	DHCPOptionsIDRef *v1.NamespacedReference `json:"dhcpOptionsIdRef,omitempty" tf:"-"`
+	DHCPOptionsIDRef *v2.NamespacedReference `json:"dhcpOptionsIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCDHCPOptions in ec2 to populate dhcpOptionsId.
 	// +kubebuilder:validation:Optional
-	DHCPOptionsIDSelector *v1.NamespacedSelector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
+	DHCPOptionsIDSelector *v2.NamespacedSelector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC to which we would like to associate a DHCP Options Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -35,11 +34,11 @@ type VPCDHCPOptionsAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCDHCPOptionsAssociationObservation struct {
@@ -68,11 +67,11 @@ type VPCDHCPOptionsAssociationParameters struct {
 
 	// Reference to a VPCDHCPOptions in ec2 to populate dhcpOptionsId.
 	// +kubebuilder:validation:Optional
-	DHCPOptionsIDRef *v1.NamespacedReference `json:"dhcpOptionsIdRef,omitempty" tf:"-"`
+	DHCPOptionsIDRef *v2.NamespacedReference `json:"dhcpOptionsIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCDHCPOptions in ec2 to populate dhcpOptionsId.
 	// +kubebuilder:validation:Optional
-	DHCPOptionsIDSelector *v1.NamespacedSelector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
+	DHCPOptionsIDSelector *v2.NamespacedSelector `json:"dhcpOptionsIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -86,11 +85,11 @@ type VPCDHCPOptionsAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCDHCPOptionsAssociationSpec defines the desired state of VPCDHCPOptionsAssociation
@@ -112,8 +111,8 @@ type VPCDHCPOptionsAssociationSpec struct {
 
 // VPCDHCPOptionsAssociationStatus defines the observed state of VPCDHCPOptionsAssociation.
 type VPCDHCPOptionsAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCDHCPOptionsAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCDHCPOptionsAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

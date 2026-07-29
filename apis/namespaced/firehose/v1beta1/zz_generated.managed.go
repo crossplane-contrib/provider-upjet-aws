@@ -5,44 +5,44 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this DeliveryStream.
-func (mg *DeliveryStream) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *DeliveryStream) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this DeliveryStream.
-func (mg *DeliveryStream) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *DeliveryStream) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DeliveryStream.
-func (mg *DeliveryStream) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *DeliveryStream) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this DeliveryStream.
-func (mg *DeliveryStream) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *DeliveryStream) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this DeliveryStream.
-func (mg *DeliveryStream) SetConditions(c ...xpv1.Condition) {
+func (mg *DeliveryStream) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this DeliveryStream.
-func (mg *DeliveryStream) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *DeliveryStream) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DeliveryStream.
-func (mg *DeliveryStream) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *DeliveryStream) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this DeliveryStream.
-func (mg *DeliveryStream) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *DeliveryStream) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

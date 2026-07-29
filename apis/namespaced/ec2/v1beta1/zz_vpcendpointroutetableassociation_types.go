@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointRouteTableAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type VPCEndpointRouteTableAssociationInitParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the VPC Endpoint with which the EC2 Route Table will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -36,11 +35,11 @@ type VPCEndpointRouteTableAssociationInitParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointRouteTableAssociationObservation struct {
@@ -74,11 +73,11 @@ type VPCEndpointRouteTableAssociationParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the VPC Endpoint with which the EC2 Route Table will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPCEndpoint
@@ -88,11 +87,11 @@ type VPCEndpointRouteTableAssociationParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.NamespacedReference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.NamespacedSelector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointRouteTableAssociationSpec defines the desired state of VPCEndpointRouteTableAssociation
@@ -114,8 +113,8 @@ type VPCEndpointRouteTableAssociationSpec struct {
 
 // VPCEndpointRouteTableAssociationStatus defines the observed state of VPCEndpointRouteTableAssociation.
 type VPCEndpointRouteTableAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointRouteTableAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointRouteTableAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

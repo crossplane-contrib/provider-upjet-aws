@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PlatformApplicationInitParameters struct {
@@ -41,20 +40,20 @@ type PlatformApplicationInitParameters struct {
 
 	// Reference to a Role in iam to populate failureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FailureFeedbackRoleArnRef *v1.NamespacedReference `json:"failureFeedbackRoleArnRef,omitempty" tf:"-"`
+	FailureFeedbackRoleArnRef *v2.NamespacedReference `json:"failureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate failureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FailureFeedbackRoleArnSelector *v1.NamespacedSelector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FailureFeedbackRoleArnSelector *v2.NamespacedSelector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The platform that the app is registered with. See Platform for supported platforms.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Application Platform credential. See Credential for type of credential required for platform.
-	PlatformCredentialSecretRef v1.LocalSecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
+	PlatformCredentialSecretRef v2.LocalSecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
 
 	// Application Platform principal. See Principal for type of principal required for platform.
-	PlatformPrincipalSecretRef *v1.LocalSecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
+	PlatformPrincipalSecretRef *v2.LocalSecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
 
 	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -63,11 +62,11 @@ type PlatformApplicationInitParameters struct {
 
 	// Reference to a Role in iam to populate successFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SuccessFeedbackRoleArnRef *v1.NamespacedReference `json:"successFeedbackRoleArnRef,omitempty" tf:"-"`
+	SuccessFeedbackRoleArnRef *v2.NamespacedReference `json:"successFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate successFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SuccessFeedbackRoleArnSelector *v1.NamespacedSelector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SuccessFeedbackRoleArnSelector *v2.NamespacedSelector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The sample rate percentage (0-100) of successfully delivered messages.
 	SuccessFeedbackSampleRate *string `json:"successFeedbackSampleRate,omitempty" tf:"success_feedback_sample_rate,omitempty"`
@@ -150,11 +149,11 @@ type PlatformApplicationParameters struct {
 
 	// Reference to a Role in iam to populate failureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FailureFeedbackRoleArnRef *v1.NamespacedReference `json:"failureFeedbackRoleArnRef,omitempty" tf:"-"`
+	FailureFeedbackRoleArnRef *v2.NamespacedReference `json:"failureFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate failureFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	FailureFeedbackRoleArnSelector *v1.NamespacedSelector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
+	FailureFeedbackRoleArnSelector *v2.NamespacedSelector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The platform that the app is registered with. See Platform for supported platforms.
 	// +kubebuilder:validation:Optional
@@ -162,11 +161,11 @@ type PlatformApplicationParameters struct {
 
 	// Application Platform credential. See Credential for type of credential required for platform.
 	// +kubebuilder:validation:Optional
-	PlatformCredentialSecretRef v1.LocalSecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
+	PlatformCredentialSecretRef v2.LocalSecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
 
 	// Application Platform principal. See Principal for type of principal required for platform.
 	// +kubebuilder:validation:Optional
-	PlatformPrincipalSecretRef *v1.LocalSecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
+	PlatformPrincipalSecretRef *v2.LocalSecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -181,11 +180,11 @@ type PlatformApplicationParameters struct {
 
 	// Reference to a Role in iam to populate successFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SuccessFeedbackRoleArnRef *v1.NamespacedReference `json:"successFeedbackRoleArnRef,omitempty" tf:"-"`
+	SuccessFeedbackRoleArnRef *v2.NamespacedReference `json:"successFeedbackRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate successFeedbackRoleArn.
 	// +kubebuilder:validation:Optional
-	SuccessFeedbackRoleArnSelector *v1.NamespacedSelector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
+	SuccessFeedbackRoleArnSelector *v2.NamespacedSelector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The sample rate percentage (0-100) of successfully delivered messages.
 	// +kubebuilder:validation:Optional
@@ -211,8 +210,8 @@ type PlatformApplicationSpec struct {
 
 // PlatformApplicationStatus defines the observed state of PlatformApplication.
 type PlatformApplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PlatformApplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PlatformApplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

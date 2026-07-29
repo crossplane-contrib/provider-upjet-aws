@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitVirtualInterfaceInitParameters struct {
@@ -34,11 +34,11 @@ type TransitVirtualInterfaceInitParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
@@ -50,11 +50,11 @@ type TransitVirtualInterfaceInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual transit interface can be either 1500 or 8500 (jumbo frames). Default is 1500.
@@ -163,11 +163,11 @@ type TransitVirtualInterfaceParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	// +kubebuilder:validation:Optional
@@ -181,11 +181,11 @@ type TransitVirtualInterfaceParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual transit interface can be either 1500 or 8500 (jumbo frames). Default is 1500.
@@ -217,8 +217,8 @@ type TransitVirtualInterfaceParameters struct {
 
 // TransitVirtualInterfaceSpec defines the desired state of TransitVirtualInterface
 type TransitVirtualInterfaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitVirtualInterfaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitVirtualInterfaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -234,8 +234,8 @@ type TransitVirtualInterfaceSpec struct {
 
 // TransitVirtualInterfaceStatus defines the observed state of TransitVirtualInterface.
 type TransitVirtualInterfaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitVirtualInterfaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitVirtualInterfaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

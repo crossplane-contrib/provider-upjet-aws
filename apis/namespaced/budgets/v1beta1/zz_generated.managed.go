@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Budget.
-func (mg *Budget) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Budget) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Budget.
-func (mg *Budget) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Budget) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Budget.
-func (mg *Budget) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Budget) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Budget.
-func (mg *Budget) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Budget) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Budget.
-func (mg *Budget) SetConditions(c ...xpv1.Condition) {
+func (mg *Budget) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Budget.
-func (mg *Budget) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Budget) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Budget.
-func (mg *Budget) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Budget) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Budget.
-func (mg *Budget) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Budget) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BudgetAction.
-func (mg *BudgetAction) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BudgetAction) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BudgetAction.
-func (mg *BudgetAction) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BudgetAction) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BudgetAction.
-func (mg *BudgetAction) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BudgetAction) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BudgetAction.
-func (mg *BudgetAction) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BudgetAction) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BudgetAction.
-func (mg *BudgetAction) SetConditions(c ...xpv1.Condition) {
+func (mg *BudgetAction) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BudgetAction.
-func (mg *BudgetAction) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BudgetAction) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BudgetAction.
-func (mg *BudgetAction) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BudgetAction) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BudgetAction.
-func (mg *BudgetAction) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BudgetAction) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

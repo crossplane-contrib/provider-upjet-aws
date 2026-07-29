@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotScheduleAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type SnapshotScheduleAssociationInitParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The snapshot schedule identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/redshift/v1beta1.SnapshotSchedule
@@ -36,11 +35,11 @@ type SnapshotScheduleAssociationInitParameters struct {
 
 	// Reference to a SnapshotSchedule in redshift to populate scheduleIdentifier.
 	// +kubebuilder:validation:Optional
-	ScheduleIdentifierRef *v1.NamespacedReference `json:"scheduleIdentifierRef,omitempty" tf:"-"`
+	ScheduleIdentifierRef *v2.NamespacedReference `json:"scheduleIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a SnapshotSchedule in redshift to populate scheduleIdentifier.
 	// +kubebuilder:validation:Optional
-	ScheduleIdentifierSelector *v1.NamespacedSelector `json:"scheduleIdentifierSelector,omitempty" tf:"-"`
+	ScheduleIdentifierSelector *v2.NamespacedSelector `json:"scheduleIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SnapshotScheduleAssociationObservation struct {
@@ -68,11 +67,11 @@ type SnapshotScheduleAssociationParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -87,11 +86,11 @@ type SnapshotScheduleAssociationParameters struct {
 
 	// Reference to a SnapshotSchedule in redshift to populate scheduleIdentifier.
 	// +kubebuilder:validation:Optional
-	ScheduleIdentifierRef *v1.NamespacedReference `json:"scheduleIdentifierRef,omitempty" tf:"-"`
+	ScheduleIdentifierRef *v2.NamespacedReference `json:"scheduleIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a SnapshotSchedule in redshift to populate scheduleIdentifier.
 	// +kubebuilder:validation:Optional
-	ScheduleIdentifierSelector *v1.NamespacedSelector `json:"scheduleIdentifierSelector,omitempty" tf:"-"`
+	ScheduleIdentifierSelector *v2.NamespacedSelector `json:"scheduleIdentifierSelector,omitempty" tf:"-"`
 }
 
 // SnapshotScheduleAssociationSpec defines the desired state of SnapshotScheduleAssociation
@@ -113,8 +112,8 @@ type SnapshotScheduleAssociationSpec struct {
 
 // SnapshotScheduleAssociationStatus defines the observed state of SnapshotScheduleAssociation.
 type SnapshotScheduleAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotScheduleAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotScheduleAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

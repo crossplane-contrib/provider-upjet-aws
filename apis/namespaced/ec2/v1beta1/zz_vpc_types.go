@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCInitParameters_2 struct {
@@ -38,11 +37,11 @@ type VPCInitParameters_2 struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDRef *v1.NamespacedReference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+	IPv4IpamPoolIDRef *v2.NamespacedReference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDSelector *v1.NamespacedSelector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv4IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
@@ -177,11 +176,11 @@ type VPCParameters_2 struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDRef *v1.NamespacedReference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+	IPv4IpamPoolIDRef *v2.NamespacedReference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDSelector *v1.NamespacedSelector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv4IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the IPv4 CIDR you want to allocate to this VPC. Requires specifying a ipv4_ipam_pool_id.
 	// +kubebuilder:validation:Optional
@@ -237,8 +236,8 @@ type VPCSpec struct {
 
 // VPCStatus defines the observed state of VPC.
 type VPCStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

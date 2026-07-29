@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketMetricFilterInitParameters struct {
@@ -23,11 +22,11 @@ type BucketMetricFilterInitParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPoint.
 	// +kubebuilder:validation:Optional
-	AccessPointRef *v1.NamespacedReference `json:"accessPointRef,omitempty" tf:"-"`
+	AccessPointRef *v2.NamespacedReference `json:"accessPointRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPoint.
 	// +kubebuilder:validation:Optional
-	AccessPointSelector *v1.NamespacedSelector `json:"accessPointSelector,omitempty" tf:"-"`
+	AccessPointSelector *v2.NamespacedSelector `json:"accessPointSelector,omitempty" tf:"-"`
 
 	// Object prefix for filtering (singular).
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -60,11 +59,11 @@ type BucketMetricFilterParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPoint.
 	// +kubebuilder:validation:Optional
-	AccessPointRef *v1.NamespacedReference `json:"accessPointRef,omitempty" tf:"-"`
+	AccessPointRef *v2.NamespacedReference `json:"accessPointRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPoint.
 	// +kubebuilder:validation:Optional
-	AccessPointSelector *v1.NamespacedSelector `json:"accessPointSelector,omitempty" tf:"-"`
+	AccessPointSelector *v2.NamespacedSelector `json:"accessPointSelector,omitempty" tf:"-"`
 
 	// Object prefix for filtering (singular).
 	// +kubebuilder:validation:Optional
@@ -85,11 +84,11 @@ type BucketMetricInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	Filter *BucketMetricFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -126,11 +125,11 @@ type BucketMetricParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	// +kubebuilder:validation:Optional
@@ -165,8 +164,8 @@ type BucketMetricSpec struct {
 
 // BucketMetricStatus defines the observed state of BucketMetric.
 type BucketMetricStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketMetricObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketMetricObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RegexMatchSetInitParameters struct {
@@ -101,11 +101,11 @@ type RegexMatchTupleInitParameters struct {
 
 	// Reference to a RegexPatternSet in waf to populate regexPatternSetId.
 	// +kubebuilder:validation:Optional
-	RegexPatternSetIDRef *v1.Reference `json:"regexPatternSetIdRef,omitempty" tf:"-"`
+	RegexPatternSetIDRef *v2.Reference `json:"regexPatternSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a RegexPatternSet in waf to populate regexPatternSetId.
 	// +kubebuilder:validation:Optional
-	RegexPatternSetIDSelector *v1.Selector `json:"regexPatternSetIdSelector,omitempty" tf:"-"`
+	RegexPatternSetIDSelector *v2.Selector `json:"regexPatternSetIdSelector,omitempty" tf:"-"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
@@ -143,11 +143,11 @@ type RegexMatchTupleParameters struct {
 
 	// Reference to a RegexPatternSet in waf to populate regexPatternSetId.
 	// +kubebuilder:validation:Optional
-	RegexPatternSetIDRef *v1.Reference `json:"regexPatternSetIdRef,omitempty" tf:"-"`
+	RegexPatternSetIDRef *v2.Reference `json:"regexPatternSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a RegexPatternSet in waf to populate regexPatternSetId.
 	// +kubebuilder:validation:Optional
-	RegexPatternSetIDSelector *v1.Selector `json:"regexPatternSetIdSelector,omitempty" tf:"-"`
+	RegexPatternSetIDSelector *v2.Selector `json:"regexPatternSetIdSelector,omitempty" tf:"-"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
@@ -159,8 +159,8 @@ type RegexMatchTupleParameters struct {
 
 // RegexMatchSetSpec defines the desired state of RegexMatchSet
 type RegexMatchSetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RegexMatchSetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RegexMatchSetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -176,8 +176,8 @@ type RegexMatchSetSpec struct {
 
 // RegexMatchSetStatus defines the observed state of RegexMatchSet.
 type RegexMatchSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RegexMatchSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RegexMatchSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HealthCheckInitParameters struct {
@@ -26,11 +26,11 @@ type HealthCheckInitParameters struct {
 
 	// References to HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksRefs []v1.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+	ChildHealthchecksRefs []v2.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksSelector *v1.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
+	ChildHealthchecksSelector *v2.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatch/v1beta2.MetricAlarm
@@ -38,11 +38,11 @@ type HealthCheckInitParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameRef *v1.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
+	CloudwatchAlarmNameRef *v2.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
+	CloudwatchAlarmNameSelector *v2.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The region that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
@@ -205,11 +205,11 @@ type HealthCheckParameters struct {
 
 	// References to HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksRefs []v1.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+	ChildHealthchecksRefs []v2.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
 	// +kubebuilder:validation:Optional
-	ChildHealthchecksSelector *v1.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
+	ChildHealthchecksSelector *v2.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudwatch/v1beta2.MetricAlarm
@@ -218,11 +218,11 @@ type HealthCheckParameters struct {
 
 	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameRef *v1.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
+	CloudwatchAlarmNameRef *v2.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
 
 	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
 	// +kubebuilder:validation:Optional
-	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
+	CloudwatchAlarmNameSelector *v2.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The region that the CloudWatch alarm was created in.
 	// +kubebuilder:validation:Optional
@@ -307,8 +307,8 @@ type HealthCheckParameters struct {
 
 // HealthCheckSpec defines the desired state of HealthCheck
 type HealthCheckSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HealthCheckParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HealthCheckParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -324,8 +324,8 @@ type HealthCheckSpec struct {
 
 // HealthCheckStatus defines the observed state of HealthCheck.
 type HealthCheckStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HealthCheckObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HealthCheckObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

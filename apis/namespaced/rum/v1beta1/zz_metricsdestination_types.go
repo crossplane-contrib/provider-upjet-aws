@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MetricsDestinationInitParameters struct {
@@ -22,11 +21,11 @@ type MetricsDestinationInitParameters struct {
 
 	// Reference to a AppMonitor in rum to populate appMonitorName.
 	// +kubebuilder:validation:Optional
-	AppMonitorNameRef *v1.NamespacedReference `json:"appMonitorNameRef,omitempty" tf:"-"`
+	AppMonitorNameRef *v2.NamespacedReference `json:"appMonitorNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppMonitor in rum to populate appMonitorName.
 	// +kubebuilder:validation:Optional
-	AppMonitorNameSelector *v1.NamespacedSelector `json:"appMonitorNameSelector,omitempty" tf:"-"`
+	AppMonitorNameSelector *v2.NamespacedSelector `json:"appMonitorNameSelector,omitempty" tf:"-"`
 
 	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -41,11 +40,11 @@ type MetricsDestinationInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
 type MetricsDestinationObservation struct {
@@ -79,11 +78,11 @@ type MetricsDestinationParameters struct {
 
 	// Reference to a AppMonitor in rum to populate appMonitorName.
 	// +kubebuilder:validation:Optional
-	AppMonitorNameRef *v1.NamespacedReference `json:"appMonitorNameRef,omitempty" tf:"-"`
+	AppMonitorNameRef *v2.NamespacedReference `json:"appMonitorNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppMonitor in rum to populate appMonitorName.
 	// +kubebuilder:validation:Optional
-	AppMonitorNameSelector *v1.NamespacedSelector `json:"appMonitorNameSelector,omitempty" tf:"-"`
+	AppMonitorNameSelector *v2.NamespacedSelector `json:"appMonitorNameSelector,omitempty" tf:"-"`
 
 	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
 	// +kubebuilder:validation:Optional
@@ -101,11 +100,11 @@ type MetricsDestinationParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.NamespacedReference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.NamespacedSelector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -132,8 +131,8 @@ type MetricsDestinationSpec struct {
 
 // MetricsDestinationStatus defines the observed state of MetricsDestination.
 type MetricsDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MetricsDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MetricsDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountInitParameters struct {
@@ -23,11 +22,11 @@ type AccountInitParameters struct {
 
 	// Reference to a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchRoleArnRef *v1.NamespacedReference `json:"cloudwatchRoleArnRef,omitempty" tf:"-"`
+	CloudwatchRoleArnRef *v2.NamespacedReference `json:"cloudwatchRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchRoleArnSelector *v1.NamespacedSelector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
+	CloudwatchRoleArnSelector *v2.NamespacedSelector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
 }
 
 type AccountObservation struct {
@@ -62,11 +61,11 @@ type AccountParameters struct {
 
 	// Reference to a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchRoleArnRef *v1.NamespacedReference `json:"cloudwatchRoleArnRef,omitempty" tf:"-"`
+	CloudwatchRoleArnRef *v2.NamespacedReference `json:"cloudwatchRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudwatchRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchRoleArnSelector *v1.NamespacedSelector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
+	CloudwatchRoleArnSelector *v2.NamespacedSelector `json:"cloudwatchRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -108,8 +107,8 @@ type AccountSpec struct {
 
 // AccountStatus defines the observed state of Account.
 type AccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

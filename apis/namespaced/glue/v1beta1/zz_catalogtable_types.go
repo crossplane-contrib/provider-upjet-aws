@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CatalogTableInitParameters struct {
@@ -129,11 +128,11 @@ type CatalogTableParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Description of the table.
 	// +kubebuilder:validation:Optional
@@ -542,11 +541,11 @@ type RepresentationsInitParameters struct {
 
 	// Reference to a Connection in glue to populate validationConnection.
 	// +kubebuilder:validation:Optional
-	ValidationConnectionRef *v1.NamespacedReference `json:"validationConnectionRef,omitempty" tf:"-"`
+	ValidationConnectionRef *v2.NamespacedReference `json:"validationConnectionRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate validationConnection.
 	// +kubebuilder:validation:Optional
-	ValidationConnectionSelector *v1.NamespacedSelector `json:"validationConnectionSelector,omitempty" tf:"-"`
+	ValidationConnectionSelector *v2.NamespacedSelector `json:"validationConnectionSelector,omitempty" tf:"-"`
 
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
@@ -590,11 +589,11 @@ type RepresentationsParameters struct {
 
 	// Reference to a Connection in glue to populate validationConnection.
 	// +kubebuilder:validation:Optional
-	ValidationConnectionRef *v1.NamespacedReference `json:"validationConnectionRef,omitempty" tf:"-"`
+	ValidationConnectionRef *v2.NamespacedReference `json:"validationConnectionRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate validationConnection.
 	// +kubebuilder:validation:Optional
-	ValidationConnectionSelector *v1.NamespacedSelector `json:"validationConnectionSelector,omitempty" tf:"-"`
+	ValidationConnectionSelector *v2.NamespacedSelector `json:"validationConnectionSelector,omitempty" tf:"-"`
 
 	// If the table is a view, the expanded text of the view; otherwise null.
 	// +kubebuilder:validation:Optional
@@ -1312,8 +1311,8 @@ type CatalogTableSpec struct {
 
 // CatalogTableStatus defines the observed state of CatalogTable.
 type CatalogTableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CatalogTableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CatalogTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

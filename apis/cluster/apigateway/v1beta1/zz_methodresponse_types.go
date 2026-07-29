@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MethodResponseInitParameters struct {
@@ -22,11 +22,11 @@ type MethodResponseInitParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// The Resource identifier for the method resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Resource
@@ -35,11 +35,11 @@ type MethodResponseInitParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// A map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
 	// +mapType=granular
@@ -56,11 +56,11 @@ type MethodResponseInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// The method response's status code.
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -105,11 +105,11 @@ type MethodResponseParameters struct {
 
 	// Reference to a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+	HTTPMethodRef *v2.Reference `json:"httpMethodRef,omitempty" tf:"-"`
 
 	// Selector for a Method in apigateway to populate httpMethod.
 	// +kubebuilder:validation:Optional
-	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -124,11 +124,11 @@ type MethodResponseParameters struct {
 
 	// Reference to a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Resource in apigateway to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// A map specifying the model resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a Model name as the value.
 	// +kubebuilder:validation:Optional
@@ -148,11 +148,11 @@ type MethodResponseParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.Reference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// The method response's status code.
 	// +kubebuilder:validation:Optional
@@ -161,8 +161,8 @@ type MethodResponseParameters struct {
 
 // MethodResponseSpec defines the desired state of MethodResponse
 type MethodResponseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MethodResponseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MethodResponseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -178,8 +178,8 @@ type MethodResponseSpec struct {
 
 // MethodResponseStatus defines the observed state of MethodResponse.
 type MethodResponseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MethodResponseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MethodResponseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

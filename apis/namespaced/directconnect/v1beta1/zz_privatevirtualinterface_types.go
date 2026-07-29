@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateVirtualInterfaceInitParameters struct {
@@ -34,11 +33,11 @@ type PrivateVirtualInterfaceInitParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
@@ -66,11 +65,11 @@ type PrivateVirtualInterfaceInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The VLAN ID.
 	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
@@ -167,11 +166,11 @@ type PrivateVirtualInterfaceParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	// +kubebuilder:validation:Optional
@@ -211,11 +210,11 @@ type PrivateVirtualInterfaceParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The VLAN ID.
 	// +kubebuilder:validation:Optional
@@ -241,8 +240,8 @@ type PrivateVirtualInterfaceSpec struct {
 
 // PrivateVirtualInterfaceStatus defines the observed state of PrivateVirtualInterface.
 type PrivateVirtualInterfaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateVirtualInterfaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateVirtualInterfaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

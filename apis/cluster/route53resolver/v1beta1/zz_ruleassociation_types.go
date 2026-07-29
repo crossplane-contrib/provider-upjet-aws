@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleAssociationInitParameters struct {
@@ -25,11 +25,11 @@ type RuleAssociationInitParameters struct {
 
 	// Reference to a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
-	ResolverRuleIDRef *v1.Reference `json:"resolverRuleIdRef,omitempty" tf:"-"`
+	ResolverRuleIDRef *v2.Reference `json:"resolverRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
-	ResolverRuleIDSelector *v1.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
+	ResolverRuleIDSelector *v2.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC that you want to associate the resolver rule with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -37,11 +37,11 @@ type RuleAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type RuleAssociationObservation struct {
@@ -82,11 +82,11 @@ type RuleAssociationParameters struct {
 
 	// Reference to a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
-	ResolverRuleIDRef *v1.Reference `json:"resolverRuleIdRef,omitempty" tf:"-"`
+	ResolverRuleIDRef *v2.Reference `json:"resolverRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in route53resolver to populate resolverRuleId.
 	// +kubebuilder:validation:Optional
-	ResolverRuleIDSelector *v1.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
+	ResolverRuleIDSelector *v2.Selector `json:"resolverRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC that you want to associate the resolver rule with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -95,17 +95,17 @@ type RuleAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // RuleAssociationSpec defines the desired state of RuleAssociation
 type RuleAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RuleAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RuleAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -121,8 +121,8 @@ type RuleAssociationSpec struct {
 
 // RuleAssociationStatus defines the observed state of RuleAssociation.
 type RuleAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

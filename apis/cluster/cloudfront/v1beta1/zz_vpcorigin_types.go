@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OriginSSLProtocolsInitParameters struct {
@@ -48,11 +48,11 @@ type VPCOriginEndpointConfigInitParameters struct {
 
 	// Reference to a LB in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The HTTP port for the CloudFront VPC origin endpoint configuration.
 	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
@@ -101,11 +101,11 @@ type VPCOriginEndpointConfigParameters struct {
 
 	// Reference to a LB in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The HTTP port for the CloudFront VPC origin endpoint configuration.
 	// +kubebuilder:validation:Optional
@@ -175,8 +175,8 @@ type VPCOriginParameters struct {
 
 // VPCOriginSpec defines the desired state of VPCOrigin
 type VPCOriginSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCOriginParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCOriginParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -192,8 +192,8 @@ type VPCOriginSpec struct {
 
 // VPCOriginStatus defines the observed state of VPCOrigin.
 type VPCOriginStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCOriginObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCOriginObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

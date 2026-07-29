@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationDataSharingInitParameters struct {
@@ -72,11 +72,11 @@ type S3DestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Enables destination data sharing.
 	// See destination_data_sharing below.
@@ -123,11 +123,11 @@ type S3DestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Enables destination data sharing.
 	// See destination_data_sharing below.
@@ -150,11 +150,11 @@ type S3DestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate region.
 	// +kubebuilder:validation:Optional
-	RegionRef *v1.Reference `json:"regionRef,omitempty" tf:"-"`
+	RegionRef *v2.Reference `json:"regionRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate region.
 	// +kubebuilder:validation:Optional
-	RegionSelector *v1.Selector `json:"regionSelector,omitempty" tf:"-"`
+	RegionSelector *v2.Selector `json:"regionSelector,omitempty" tf:"-"`
 
 	// A supported sync format. Only JsonSerDe is currently supported. Defaults to JsonSerDe.
 	// +kubebuilder:validation:Optional
@@ -163,8 +163,8 @@ type S3DestinationParameters struct {
 
 // ResourceDataSyncSpec defines the desired state of ResourceDataSync
 type ResourceDataSyncSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceDataSyncParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourceDataSyncParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -180,8 +180,8 @@ type ResourceDataSyncSpec struct {
 
 // ResourceDataSyncStatus defines the observed state of ResourceDataSync.
 type ResourceDataSyncStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceDataSyncObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceDataSyncObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentInitParameters struct {
@@ -105,11 +104,11 @@ type FirewallInitParameters struct {
 
 	// Reference to a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyArnRef *v1.NamespacedReference `json:"firewallPolicyArnRef,omitempty" tf:"-"`
+	FirewallPolicyArnRef *v2.NamespacedReference `json:"firewallPolicyArnRef,omitempty" tf:"-"`
 
 	// Selector for a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyArnSelector *v1.NamespacedSelector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
+	FirewallPolicyArnSelector *v2.NamespacedSelector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
 
 	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
@@ -134,11 +133,11 @@ type FirewallInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Required when creating a VPC attached firewall. The unique identifier of the VPC where AWS Network Firewall should create the firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -146,11 +145,11 @@ type FirewallInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallObservation struct {
@@ -258,11 +257,11 @@ type FirewallParameters struct {
 
 	// Reference to a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyArnRef *v1.NamespacedReference `json:"firewallPolicyArnRef,omitempty" tf:"-"`
+	FirewallPolicyArnRef *v2.NamespacedReference `json:"firewallPolicyArnRef,omitempty" tf:"-"`
 
 	// Selector for a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyArnSelector *v1.NamespacedSelector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
+	FirewallPolicyArnSelector *v2.NamespacedSelector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
 
 	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -298,11 +297,11 @@ type FirewallParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Required when creating a VPC attached firewall. The unique identifier of the VPC where AWS Network Firewall should create the firewall.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
@@ -311,11 +310,11 @@ type FirewallParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallStatusInitParameters struct {
@@ -345,11 +344,11 @@ type SubnetMappingInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetMappingObservation struct {
@@ -375,11 +374,11 @@ type SubnetMappingParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SyncStatesInitParameters struct {
@@ -428,8 +427,8 @@ type FirewallSpec struct {
 
 // FirewallStatus defines the observed state of Firewall.
 type FirewallStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleConfigInitParameters struct {
@@ -61,11 +61,11 @@ type SafetyRuleInitParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate assertedControls.
 	// +kubebuilder:validation:Optional
-	AssertedControlsRefs []v1.Reference `json:"assertedControlsRefs,omitempty" tf:"-"`
+	AssertedControlsRefs []v2.Reference `json:"assertedControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate assertedControls.
 	// +kubebuilder:validation:Optional
-	AssertedControlsSelector *v1.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
+	AssertedControlsSelector *v2.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this safety rule will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
@@ -74,11 +74,11 @@ type SafetyRuleInitParameters struct {
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnRef *v1.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
+	ControlPanelArnRef *v2.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
 
 	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+	ControlPanelArnSelector *v2.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl
@@ -87,11 +87,11 @@ type SafetyRuleInitParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate gatingControls.
 	// +kubebuilder:validation:Optional
-	GatingControlsRefs []v1.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
+	GatingControlsRefs []v2.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate gatingControls.
 	// +kubebuilder:validation:Optional
-	GatingControlsSelector *v1.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
+	GatingControlsSelector *v2.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
 
 	// Name describing the safety rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -110,11 +110,11 @@ type SafetyRuleInitParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate targetControls.
 	// +kubebuilder:validation:Optional
-	TargetControlsRefs []v1.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
+	TargetControlsRefs []v2.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate targetControls.
 	// +kubebuilder:validation:Optional
-	TargetControlsSelector *v1.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
+	TargetControlsSelector *v2.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
 	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
@@ -170,11 +170,11 @@ type SafetyRuleParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate assertedControls.
 	// +kubebuilder:validation:Optional
-	AssertedControlsRefs []v1.Reference `json:"assertedControlsRefs,omitempty" tf:"-"`
+	AssertedControlsRefs []v2.Reference `json:"assertedControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate assertedControls.
 	// +kubebuilder:validation:Optional
-	AssertedControlsSelector *v1.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
+	AssertedControlsSelector *v2.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this safety rule will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.ControlPanel
@@ -184,11 +184,11 @@ type SafetyRuleParameters struct {
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnRef *v1.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
+	ControlPanelArnRef *v2.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
 
 	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+	ControlPanelArnSelector *v2.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/route53recoverycontrolconfig/v1beta1.RoutingControl
@@ -198,11 +198,11 @@ type SafetyRuleParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate gatingControls.
 	// +kubebuilder:validation:Optional
-	GatingControlsRefs []v1.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
+	GatingControlsRefs []v2.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate gatingControls.
 	// +kubebuilder:validation:Optional
-	GatingControlsSelector *v1.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
+	GatingControlsSelector *v2.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
 
 	// Name describing the safety rule.
 	// +kubebuilder:validation:Optional
@@ -225,11 +225,11 @@ type SafetyRuleParameters struct {
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate targetControls.
 	// +kubebuilder:validation:Optional
-	TargetControlsRefs []v1.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
+	TargetControlsRefs []v2.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate targetControls.
 	// +kubebuilder:validation:Optional
-	TargetControlsSelector *v1.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
+	TargetControlsSelector *v2.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
 	// +kubebuilder:validation:Optional
@@ -238,8 +238,8 @@ type SafetyRuleParameters struct {
 
 // SafetyRuleSpec defines the desired state of SafetyRule
 type SafetyRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SafetyRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SafetyRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -255,8 +255,8 @@ type SafetyRuleSpec struct {
 
 // SafetyRuleStatus defines the observed state of SafetyRule.
 type SafetyRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SafetyRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SafetyRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

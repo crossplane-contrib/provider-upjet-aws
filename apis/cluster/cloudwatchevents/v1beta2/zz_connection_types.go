@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIKeyInitParameters struct {
@@ -19,7 +19,7 @@ type APIKeyInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type APIKeyObservation struct {
@@ -36,7 +36,7 @@ type APIKeyParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type AuthParametersInitParameters struct {
@@ -101,7 +101,7 @@ type AuthParametersParameters struct {
 type BasicInitParameters struct {
 
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// A username for the authorization.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -117,7 +117,7 @@ type BasicParameters struct {
 
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// A username for the authorization.
 	// +kubebuilder:validation:Optional
@@ -133,7 +133,7 @@ type BodyInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type BodyObservation struct {
@@ -157,7 +157,7 @@ type BodyParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ClientParametersInitParameters struct {
@@ -166,7 +166,7 @@ type ClientParametersInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type ClientParametersObservation struct {
@@ -183,7 +183,7 @@ type ClientParametersParameters struct {
 
 	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type ConnectionInitParameters struct {
@@ -207,11 +207,11 @@ type ConnectionInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
 type ConnectionObservation struct {
@@ -270,11 +270,11 @@ type ConnectionParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -310,7 +310,7 @@ type HeaderInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type HeaderObservation struct {
@@ -334,7 +334,7 @@ type HeaderParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type InvocationConnectivityParametersInitParameters struct {
@@ -426,7 +426,7 @@ type OauthHTTPParametersBodyInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersBodyObservation struct {
@@ -450,7 +450,7 @@ type OauthHTTPParametersBodyParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersHeaderInitParameters struct {
@@ -462,7 +462,7 @@ type OauthHTTPParametersHeaderInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersHeaderObservation struct {
@@ -486,7 +486,7 @@ type OauthHTTPParametersHeaderParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersInitParameters struct {
@@ -537,7 +537,7 @@ type OauthHTTPParametersQueryStringInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersQueryStringObservation struct {
@@ -561,7 +561,7 @@ type OauthHTTPParametersQueryStringParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthInitParameters struct {
@@ -622,7 +622,7 @@ type QueryStringInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type QueryStringObservation struct {
@@ -646,7 +646,7 @@ type QueryStringParameters struct {
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ResourceParametersInitParameters struct {
@@ -673,8 +673,8 @@ type ResourceParametersParameters struct {
 
 // ConnectionSpec defines the desired state of Connection
 type ConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -690,8 +690,8 @@ type ConnectionSpec struct {
 
 // ConnectionStatus defines the observed state of Connection.
 type ConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

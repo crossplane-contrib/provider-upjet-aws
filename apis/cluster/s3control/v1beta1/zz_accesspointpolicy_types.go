@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessPointPolicyInitParameters struct {
@@ -22,11 +22,11 @@ type AccessPointPolicyInitParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// The policy that you want to apply to the specified access point.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -61,11 +61,11 @@ type AccessPointPolicyParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// The policy that you want to apply to the specified access point.
 	// +kubebuilder:validation:Optional
@@ -79,8 +79,8 @@ type AccessPointPolicyParameters struct {
 
 // AccessPointPolicySpec defines the desired state of AccessPointPolicy
 type AccessPointPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccessPointPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccessPointPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -96,8 +96,8 @@ type AccessPointPolicySpec struct {
 
 // AccessPointPolicyStatus defines the observed state of AccessPointPolicy.
 type AccessPointPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessPointPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessPointPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

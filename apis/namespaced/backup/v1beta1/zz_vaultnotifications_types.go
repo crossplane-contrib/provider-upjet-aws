@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultNotificationsInitParameters struct {
@@ -26,11 +25,11 @@ type VaultNotificationsInitParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
@@ -39,11 +38,11 @@ type VaultNotificationsInitParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 }
 
 type VaultNotificationsObservation struct {
@@ -83,11 +82,11 @@ type VaultNotificationsParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -102,11 +101,11 @@ type VaultNotificationsParameters struct {
 
 	// Reference to a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnRef *v1.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
+	SnsTopicArnRef *v2.NamespacedReference `json:"snsTopicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate snsTopicArn.
 	// +kubebuilder:validation:Optional
-	SnsTopicArnSelector *v1.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+	SnsTopicArnSelector *v2.NamespacedSelector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 }
 
 // VaultNotificationsSpec defines the desired state of VaultNotifications
@@ -128,8 +127,8 @@ type VaultNotificationsSpec struct {
 
 // VaultNotificationsStatus defines the observed state of VaultNotifications.
 type VaultNotificationsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultNotificationsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultNotificationsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

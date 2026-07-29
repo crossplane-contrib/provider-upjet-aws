@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActiveDirectoryConfigInitParameters struct {
@@ -25,11 +25,11 @@ type ActiveDirectoryConfigInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate serviceAccountSecretArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountSecretArnRef *v1.Reference `json:"serviceAccountSecretArnRef,omitempty" tf:"-"`
+	ServiceAccountSecretArnRef *v2.Reference `json:"serviceAccountSecretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate serviceAccountSecretArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountSecretArnSelector *v1.Selector `json:"serviceAccountSecretArnSelector,omitempty" tf:"-"`
+	ServiceAccountSecretArnSelector *v2.Selector `json:"serviceAccountSecretArnSelector,omitempty" tf:"-"`
 }
 
 type ActiveDirectoryConfigObservation struct {
@@ -55,11 +55,11 @@ type ActiveDirectoryConfigParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate serviceAccountSecretArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountSecretArnRef *v1.Reference `json:"serviceAccountSecretArnRef,omitempty" tf:"-"`
+	ServiceAccountSecretArnRef *v2.Reference `json:"serviceAccountSecretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate serviceAccountSecretArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountSecretArnSelector *v1.Selector `json:"serviceAccountSecretArnSelector,omitempty" tf:"-"`
+	ServiceAccountSecretArnSelector *v2.Selector `json:"serviceAccountSecretArnSelector,omitempty" tf:"-"`
 }
 
 type CertificateBasedAuthPropertiesInitParameters struct {
@@ -106,11 +106,11 @@ type DirectoryInitParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/workspaces/v1beta1.IPGroup
@@ -120,11 +120,11 @@ type DirectoryInitParameters struct {
 
 	// References to IPGroup in workspaces to populate ipGroupIds.
 	// +kubebuilder:validation:Optional
-	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+	IPGroupIdsRefs []v2.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
 	// +kubebuilder:validation:Optional
-	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
+	IPGroupIdsSelector *v2.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
 
 	// Configuration of SAML authentication integration. Defined below.
 	SAMLProperties *SAMLPropertiesInitParameters `json:"samlProperties,omitempty" tf:"saml_properties,omitempty"`
@@ -134,11 +134,11 @@ type DirectoryInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the subnets where the directory resides.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -278,11 +278,11 @@ type DirectoryParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/workspaces/v1beta1.IPGroup
@@ -293,11 +293,11 @@ type DirectoryParameters struct {
 
 	// References to IPGroup in workspaces to populate ipGroupIds.
 	// +kubebuilder:validation:Optional
-	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+	IPGroupIdsRefs []v2.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
 	// +kubebuilder:validation:Optional
-	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
+	IPGroupIdsSelector *v2.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -314,11 +314,11 @@ type DirectoryParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the subnets where the directory resides.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -558,11 +558,11 @@ type WorkspaceCreationPropertiesInitParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate customSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	CustomSecurityGroupIDRef *v1.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
+	CustomSecurityGroupIDRef *v2.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate customSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
+	CustomSecurityGroupIDSelector *v2.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
 	DefaultOu *string `json:"defaultOu,omitempty" tf:"default_ou,omitempty"`
@@ -605,11 +605,11 @@ type WorkspaceCreationPropertiesParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate customSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	CustomSecurityGroupIDRef *v1.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
+	CustomSecurityGroupIDRef *v2.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate customSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
+	CustomSecurityGroupIDSelector *v2.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
 	// +kubebuilder:validation:Optional
@@ -630,8 +630,8 @@ type WorkspaceCreationPropertiesParameters struct {
 
 // DirectorySpec defines the desired state of Directory
 type DirectorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DirectoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DirectoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -647,8 +647,8 @@ type DirectorySpec struct {
 
 // DirectoryStatus defines the observed state of Directory.
 type DirectoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DirectoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DirectoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

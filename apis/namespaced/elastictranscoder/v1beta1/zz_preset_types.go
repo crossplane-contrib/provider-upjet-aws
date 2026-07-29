@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AudioCodecOptionsInitParameters struct {
@@ -602,8 +601,8 @@ type PresetSpec struct {
 
 // PresetStatus defines the observed state of Preset.
 type PresetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PresetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PresetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

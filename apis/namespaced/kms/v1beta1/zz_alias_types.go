@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AliasInitParameters struct {
@@ -22,11 +21,11 @@ type AliasInitParameters struct {
 
 	// Reference to a Key in kms to populate targetKeyId.
 	// +kubebuilder:validation:Optional
-	TargetKeyIDRef *v1.NamespacedReference `json:"targetKeyIdRef,omitempty" tf:"-"`
+	TargetKeyIDRef *v2.NamespacedReference `json:"targetKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate targetKeyId.
 	// +kubebuilder:validation:Optional
-	TargetKeyIDSelector *v1.NamespacedSelector `json:"targetKeyIdSelector,omitempty" tf:"-"`
+	TargetKeyIDSelector *v2.NamespacedSelector `json:"targetKeyIdSelector,omitempty" tf:"-"`
 }
 
 type AliasObservation struct {
@@ -61,11 +60,11 @@ type AliasParameters struct {
 
 	// Reference to a Key in kms to populate targetKeyId.
 	// +kubebuilder:validation:Optional
-	TargetKeyIDRef *v1.NamespacedReference `json:"targetKeyIdRef,omitempty" tf:"-"`
+	TargetKeyIDRef *v2.NamespacedReference `json:"targetKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate targetKeyId.
 	// +kubebuilder:validation:Optional
-	TargetKeyIDSelector *v1.NamespacedSelector `json:"targetKeyIdSelector,omitempty" tf:"-"`
+	TargetKeyIDSelector *v2.NamespacedSelector `json:"targetKeyIdSelector,omitempty" tf:"-"`
 }
 
 // AliasSpec defines the desired state of Alias
@@ -87,8 +86,8 @@ type AliasSpec struct {
 
 // AliasStatus defines the observed state of Alias.
 type AliasStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AliasObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AliasObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

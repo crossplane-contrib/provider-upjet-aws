@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SMSPreferencesInitParameters struct {
@@ -29,11 +28,11 @@ type SMSPreferencesInitParameters struct {
 
 	// Reference to a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnRef *v1.NamespacedReference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnRef *v2.NamespacedReference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnSelector *v1.NamespacedSelector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnSelector *v2.NamespacedSelector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
 	DeliveryStatusSuccessSamplingRate *string `json:"deliveryStatusSuccessSamplingRate,omitempty" tf:"delivery_status_success_sampling_rate,omitempty"`
@@ -90,11 +89,11 @@ type SMSPreferencesParameters struct {
 
 	// Reference to a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnRef *v1.NamespacedReference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnRef *v2.NamespacedReference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnSelector *v1.NamespacedSelector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnSelector *v2.NamespacedSelector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -133,8 +132,8 @@ type SMSPreferencesSpec struct {
 
 // SMSPreferencesStatus defines the observed state of SMSPreferences.
 type SMSPreferencesStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SMSPreferencesObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SMSPreferencesObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

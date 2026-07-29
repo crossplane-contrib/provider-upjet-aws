@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedEventSelectorInitParameters struct {
@@ -236,11 +236,11 @@ type TrailInitParameters struct {
 
 	// Reference to a Role in iam to populate cloudWatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudWatchLogsRoleArnRef *v1.Reference `json:"cloudWatchLogsRoleArnRef,omitempty" tf:"-"`
+	CloudWatchLogsRoleArnRef *v2.Reference `json:"cloudWatchLogsRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudWatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudWatchLogsRoleArnSelector *v1.Selector `json:"cloudWatchLogsRoleArnSelector,omitempty" tf:"-"`
+	CloudWatchLogsRoleArnSelector *v2.Selector `json:"cloudWatchLogsRoleArnSelector,omitempty" tf:"-"`
 
 	// Whether log file integrity validation is enabled. Defaults to false.
 	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
@@ -269,11 +269,11 @@ type TrailInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Name of the S3 bucket designated for publishing log files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
@@ -282,11 +282,11 @@ type TrailInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
@@ -386,11 +386,11 @@ type TrailParameters struct {
 
 	// Reference to a Role in iam to populate cloudWatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudWatchLogsRoleArnRef *v1.Reference `json:"cloudWatchLogsRoleArnRef,omitempty" tf:"-"`
+	CloudWatchLogsRoleArnRef *v2.Reference `json:"cloudWatchLogsRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate cloudWatchLogsRoleArn.
 	// +kubebuilder:validation:Optional
-	CloudWatchLogsRoleArnSelector *v1.Selector `json:"cloudWatchLogsRoleArnSelector,omitempty" tf:"-"`
+	CloudWatchLogsRoleArnSelector *v2.Selector `json:"cloudWatchLogsRoleArnSelector,omitempty" tf:"-"`
 
 	// Whether log file integrity validation is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -427,11 +427,11 @@ type TrailParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -446,11 +446,11 @@ type TrailParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	// +kubebuilder:validation:Optional
@@ -468,8 +468,8 @@ type TrailParameters struct {
 
 // TrailSpec defines the desired state of Trail
 type TrailSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TrailParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TrailParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -485,8 +485,8 @@ type TrailSpec struct {
 
 // TrailStatus defines the observed state of Trail.
 type TrailStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrailObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrailObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

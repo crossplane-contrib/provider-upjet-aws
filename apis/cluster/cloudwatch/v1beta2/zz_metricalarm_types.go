@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EvaluationCriteriaInitParameters struct {
@@ -45,11 +45,11 @@ type MetricAlarmInitParameters struct {
 
 	// References to Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
@@ -105,11 +105,11 @@ type MetricAlarmInitParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.Reference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 20, 30, or any multiple of 60.
@@ -249,11 +249,11 @@ type MetricAlarmParameters struct {
 
 	// References to Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	// +kubebuilder:validation:Optional
@@ -323,11 +323,11 @@ type MetricAlarmParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.Reference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 20, 30, or any multiple of 60.
@@ -585,8 +585,8 @@ type PromqlCriteriaParameters struct {
 
 // MetricAlarmSpec defines the desired state of MetricAlarm
 type MetricAlarmSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MetricAlarmParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MetricAlarmParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -602,8 +602,8 @@ type MetricAlarmSpec struct {
 
 // MetricAlarmStatus defines the observed state of MetricAlarm.
 type MetricAlarmStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MetricAlarmObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MetricAlarmObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

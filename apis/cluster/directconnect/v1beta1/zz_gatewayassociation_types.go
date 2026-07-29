@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GatewayAssociationInitParameters struct {
@@ -27,11 +27,11 @@ type GatewayAssociationInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the AWS account that owns the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// Used for cross-account Direct Connect gateway associations.
@@ -44,11 +44,11 @@ type GatewayAssociationInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
@@ -111,11 +111,11 @@ type GatewayAssociationParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the AWS account that owns the VGW or transit gateway with which to associate the Direct Connect gateway.
 	// Used for cross-account Direct Connect gateway associations.
@@ -130,11 +130,11 @@ type GatewayAssociationParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect gateway association proposal.
 	// Used for cross-account Direct Connect gateway associations.
@@ -149,8 +149,8 @@ type GatewayAssociationParameters struct {
 
 // GatewayAssociationSpec defines the desired state of GatewayAssociation
 type GatewayAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GatewayAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -166,8 +166,8 @@ type GatewayAssociationSpec struct {
 
 // GatewayAssociationStatus defines the observed state of GatewayAssociation.
 type GatewayAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PodIdentityAssociationInitParameters_2 struct {
@@ -21,11 +21,11 @@ type PodIdentityAssociationInitParameters_2 struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Disable the tags that are automatically added to role session by Amazon EKS.
 	DisableSessionTags *bool `json:"disableSessionTags,omitempty" tf:"disable_session_tags,omitempty"`
@@ -40,11 +40,11 @@ type PodIdentityAssociationInitParameters_2 struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
 	ServiceAccount *string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
@@ -60,11 +60,11 @@ type PodIdentityAssociationInitParameters_2 struct {
 
 	// Reference to a Role in iam to populate targetRoleArn.
 	// +kubebuilder:validation:Optional
-	TargetRoleArnRef *v1.Reference `json:"targetRoleArnRef,omitempty" tf:"-"`
+	TargetRoleArnRef *v2.Reference `json:"targetRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate targetRoleArn.
 	// +kubebuilder:validation:Optional
-	TargetRoleArnSelector *v1.Selector `json:"targetRoleArnSelector,omitempty" tf:"-"`
+	TargetRoleArnSelector *v2.Selector `json:"targetRoleArnSelector,omitempty" tf:"-"`
 }
 
 type PodIdentityAssociationObservation_2 struct {
@@ -120,11 +120,11 @@ type PodIdentityAssociationParameters_2 struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Disable the tags that are automatically added to role session by Amazon EKS.
 	// +kubebuilder:validation:Optional
@@ -147,11 +147,11 @@ type PodIdentityAssociationParameters_2 struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
 	// +kubebuilder:validation:Optional
@@ -170,17 +170,17 @@ type PodIdentityAssociationParameters_2 struct {
 
 	// Reference to a Role in iam to populate targetRoleArn.
 	// +kubebuilder:validation:Optional
-	TargetRoleArnRef *v1.Reference `json:"targetRoleArnRef,omitempty" tf:"-"`
+	TargetRoleArnRef *v2.Reference `json:"targetRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate targetRoleArn.
 	// +kubebuilder:validation:Optional
-	TargetRoleArnSelector *v1.Selector `json:"targetRoleArnSelector,omitempty" tf:"-"`
+	TargetRoleArnSelector *v2.Selector `json:"targetRoleArnSelector,omitempty" tf:"-"`
 }
 
 // PodIdentityAssociationSpec defines the desired state of PodIdentityAssociation
 type PodIdentityAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PodIdentityAssociationParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PodIdentityAssociationParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -196,8 +196,8 @@ type PodIdentityAssociationSpec struct {
 
 // PodIdentityAssociationStatus defines the observed state of PodIdentityAssociation.
 type PodIdentityAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PodIdentityAssociationObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PodIdentityAssociationObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

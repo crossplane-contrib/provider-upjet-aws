@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionEntitiesInitParameters struct {
@@ -32,11 +32,11 @@ type EncryptionEntitiesItemsInitParameters struct {
 
 	// Reference to a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDRef *v1.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
+	PublicKeyIDRef *v2.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDSelector *v1.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
+	PublicKeyIDSelector *v2.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesItemsObservation struct {
@@ -69,11 +69,11 @@ type EncryptionEntitiesItemsParameters struct {
 
 	// Reference to a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDRef *v1.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
+	PublicKeyIDRef *v2.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicKey in cloudfront to populate publicKeyId.
 	// +kubebuilder:validation:Optional
-	PublicKeyIDSelector *v1.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
+	PublicKeyIDSelector *v2.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesObservation struct {
@@ -158,8 +158,8 @@ type FieldPatternsParameters struct {
 
 // FieldLevelEncryptionProfileSpec defines the desired state of FieldLevelEncryptionProfile
 type FieldLevelEncryptionProfileSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FieldLevelEncryptionProfileParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FieldLevelEncryptionProfileParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -175,8 +175,8 @@ type FieldLevelEncryptionProfileSpec struct {
 
 // FieldLevelEncryptionProfileStatus defines the observed state of FieldLevelEncryptionProfile.
 type FieldLevelEncryptionProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FieldLevelEncryptionProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FieldLevelEncryptionProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

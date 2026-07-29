@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LocationS3InitParameters struct {
@@ -27,11 +26,11 @@ type LocationS3InitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketArn.
 	// +kubebuilder:validation:Optional
-	S3BucketArnRef *v1.NamespacedReference `json:"s3BucketArnRef,omitempty" tf:"-"`
+	S3BucketArnRef *v2.NamespacedReference `json:"s3BucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketArn.
 	// +kubebuilder:validation:Optional
-	S3BucketArnSelector *v1.NamespacedSelector `json:"s3BucketArnSelector,omitempty" tf:"-"`
+	S3BucketArnSelector *v2.NamespacedSelector `json:"s3BucketArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing information for connecting to S3.
 	S3Config *S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
@@ -106,11 +105,11 @@ type LocationS3Parameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketArn.
 	// +kubebuilder:validation:Optional
-	S3BucketArnRef *v1.NamespacedReference `json:"s3BucketArnRef,omitempty" tf:"-"`
+	S3BucketArnRef *v2.NamespacedReference `json:"s3BucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketArn.
 	// +kubebuilder:validation:Optional
-	S3BucketArnSelector *v1.NamespacedSelector `json:"s3BucketArnSelector,omitempty" tf:"-"`
+	S3BucketArnSelector *v2.NamespacedSelector `json:"s3BucketArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing information for connecting to S3.
 	// +kubebuilder:validation:Optional
@@ -139,11 +138,11 @@ type S3ConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate bucketAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	BucketAccessRoleArnRef *v1.NamespacedReference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
+	BucketAccessRoleArnRef *v2.NamespacedReference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate bucketAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	BucketAccessRoleArnSelector *v1.NamespacedSelector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
+	BucketAccessRoleArnSelector *v2.NamespacedSelector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigObservation struct {
@@ -162,11 +161,11 @@ type S3ConfigParameters struct {
 
 	// Reference to a Role in iam to populate bucketAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	BucketAccessRoleArnRef *v1.NamespacedReference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
+	BucketAccessRoleArnRef *v2.NamespacedReference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate bucketAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	BucketAccessRoleArnSelector *v1.NamespacedSelector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
+	BucketAccessRoleArnSelector *v2.NamespacedSelector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
 }
 
 // LocationS3Spec defines the desired state of LocationS3
@@ -188,8 +187,8 @@ type LocationS3Spec struct {
 
 // LocationS3Status defines the observed state of LocationS3.
 type LocationS3Status struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LocationS3Observation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LocationS3Observation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

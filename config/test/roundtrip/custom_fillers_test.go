@@ -7,7 +7,7 @@ package roundtrip
 import (
 	"reflect"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/crossplane/upjet/v2/pkg/apitesting/roundtrip"
 	"github.com/google/go-cmp/cmp"
 	"k8s.io/utils/ptr"
@@ -194,17 +194,17 @@ func fuzzElasticacheReplicationGroupV1Beta1(s *elasticachev1beta1.ReplicationGro
 	}
 }
 
-func fuzzSecretKeySelectors(p *[]v1.SecretKeySelector, c randfill.Continue) {
+func fuzzSecretKeySelectors(p *[]xpv2.SecretKeySelector, c randfill.Continue) {
 	c.Fill(p)
 	if p != nil && *p == nil {
-		*p = []v1.SecretKeySelector{}
+		*p = []xpv2.SecretKeySelector{}
 	}
 }
 
-func fuzzLocalSecretKeySelectors(p *[]v1.LocalSecretKeySelector, c randfill.Continue) {
+func fuzzLocalSecretKeySelectors(p *[]xpv2.LocalSecretKeySelector, c randfill.Continue) {
 	c.Fill(p)
 	if p != nil && *p == nil {
-		*p = []v1.LocalSecretKeySelector{}
+		*p = []xpv2.LocalSecretKeySelector{}
 	}
 }
 

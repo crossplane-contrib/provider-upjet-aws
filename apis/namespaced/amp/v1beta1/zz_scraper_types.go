@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AmpInitParameters struct {
@@ -23,11 +22,11 @@ type AmpInitParameters struct {
 
 	// Reference to a Workspace in amp to populate workspaceArn.
 	// +kubebuilder:validation:Optional
-	WorkspaceArnRef *v1.NamespacedReference `json:"workspaceArnRef,omitempty" tf:"-"`
+	WorkspaceArnRef *v2.NamespacedReference `json:"workspaceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in amp to populate workspaceArn.
 	// +kubebuilder:validation:Optional
-	WorkspaceArnSelector *v1.NamespacedSelector `json:"workspaceArnSelector,omitempty" tf:"-"`
+	WorkspaceArnSelector *v2.NamespacedSelector `json:"workspaceArnSelector,omitempty" tf:"-"`
 }
 
 type AmpObservation struct {
@@ -46,11 +45,11 @@ type AmpParameters struct {
 
 	// Reference to a Workspace in amp to populate workspaceArn.
 	// +kubebuilder:validation:Optional
-	WorkspaceArnRef *v1.NamespacedReference `json:"workspaceArnRef,omitempty" tf:"-"`
+	WorkspaceArnRef *v2.NamespacedReference `json:"workspaceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in amp to populate workspaceArn.
 	// +kubebuilder:validation:Optional
-	WorkspaceArnSelector *v1.NamespacedSelector `json:"workspaceArnSelector,omitempty" tf:"-"`
+	WorkspaceArnSelector *v2.NamespacedSelector `json:"workspaceArnSelector,omitempty" tf:"-"`
 }
 
 type DestinationInitParameters struct {
@@ -81,11 +80,11 @@ type EksInitParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -94,11 +93,11 @@ type EksInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -107,11 +106,11 @@ type EksInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type EksObservation struct {
@@ -138,11 +137,11 @@ type EksParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// List of the security group IDs for the Amazon EKS cluster VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -152,11 +151,11 @@ type EksParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -166,11 +165,11 @@ type EksParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type RoleConfigurationInitParameters struct {
@@ -182,11 +181,11 @@ type RoleConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate sourceRoleArn.
 	// +kubebuilder:validation:Optional
-	SourceRoleArnRef *v1.NamespacedReference `json:"sourceRoleArnRef,omitempty" tf:"-"`
+	SourceRoleArnRef *v2.NamespacedReference `json:"sourceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sourceRoleArn.
 	// +kubebuilder:validation:Optional
-	SourceRoleArnSelector *v1.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
+	SourceRoleArnSelector *v2.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the target role configuration. Must be an IAM role ARN.
 	TargetRoleArn *string `json:"targetRoleArn,omitempty" tf:"target_role_arn,omitempty"`
@@ -211,11 +210,11 @@ type RoleConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate sourceRoleArn.
 	// +kubebuilder:validation:Optional
-	SourceRoleArnRef *v1.NamespacedReference `json:"sourceRoleArnRef,omitempty" tf:"-"`
+	SourceRoleArnRef *v2.NamespacedReference `json:"sourceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate sourceRoleArn.
 	// +kubebuilder:validation:Optional
-	SourceRoleArnSelector *v1.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
+	SourceRoleArnSelector *v2.NamespacedSelector `json:"sourceRoleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the target role configuration. Must be an IAM role ARN.
 	// +kubebuilder:validation:Optional
@@ -350,11 +349,11 @@ type VPCInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -364,11 +363,11 @@ type VPCInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type VPCObservation struct {
@@ -393,11 +392,11 @@ type VPCParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -408,11 +407,11 @@ type VPCParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ScraperSpec defines the desired state of Scraper
@@ -434,8 +433,8 @@ type ScraperSpec struct {
 
 // ScraperStatus defines the observed state of Scraper.
 type ScraperStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScraperObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScraperObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

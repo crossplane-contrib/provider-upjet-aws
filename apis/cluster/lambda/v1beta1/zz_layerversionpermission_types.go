@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LayerVersionPermissionInitParameters struct {
@@ -25,11 +25,11 @@ type LayerVersionPermissionInitParameters struct {
 
 	// Reference to a LayerVersion in lambda to populate layerName.
 	// +kubebuilder:validation:Optional
-	LayerNameRef *v1.Reference `json:"layerNameRef,omitempty" tf:"-"`
+	LayerNameRef *v2.Reference `json:"layerNameRef,omitempty" tf:"-"`
 
 	// Selector for a LayerVersion in lambda to populate layerName.
 	// +kubebuilder:validation:Optional
-	LayerNameSelector *v1.Selector `json:"layerNameSelector,omitempty" tf:"-"`
+	LayerNameSelector *v2.Selector `json:"layerNameSelector,omitempty" tf:"-"`
 
 	// AWS Organization ID that should be able to use your Lambda Layer. principal should be set to * when organization_id is provided.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -50,11 +50,11 @@ type LayerVersionPermissionInitParameters struct {
 
 	// Reference to a LayerVersion in lambda to populate versionNumber.
 	// +kubebuilder:validation:Optional
-	VersionNumberRef *v1.Reference `json:"versionNumberRef,omitempty" tf:"-"`
+	VersionNumberRef *v2.Reference `json:"versionNumberRef,omitempty" tf:"-"`
 
 	// Selector for a LayerVersion in lambda to populate versionNumber.
 	// +kubebuilder:validation:Optional
-	VersionNumberSelector *v1.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
+	VersionNumberSelector *v2.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
 }
 
 type LayerVersionPermissionObservation struct {
@@ -108,11 +108,11 @@ type LayerVersionPermissionParameters struct {
 
 	// Reference to a LayerVersion in lambda to populate layerName.
 	// +kubebuilder:validation:Optional
-	LayerNameRef *v1.Reference `json:"layerNameRef,omitempty" tf:"-"`
+	LayerNameRef *v2.Reference `json:"layerNameRef,omitempty" tf:"-"`
 
 	// Selector for a LayerVersion in lambda to populate layerName.
 	// +kubebuilder:validation:Optional
-	LayerNameSelector *v1.Selector `json:"layerNameSelector,omitempty" tf:"-"`
+	LayerNameSelector *v2.Selector `json:"layerNameSelector,omitempty" tf:"-"`
 
 	// AWS Organization ID that should be able to use your Lambda Layer. principal should be set to * when organization_id is provided.
 	// +kubebuilder:validation:Optional
@@ -143,17 +143,17 @@ type LayerVersionPermissionParameters struct {
 
 	// Reference to a LayerVersion in lambda to populate versionNumber.
 	// +kubebuilder:validation:Optional
-	VersionNumberRef *v1.Reference `json:"versionNumberRef,omitempty" tf:"-"`
+	VersionNumberRef *v2.Reference `json:"versionNumberRef,omitempty" tf:"-"`
 
 	// Selector for a LayerVersion in lambda to populate versionNumber.
 	// +kubebuilder:validation:Optional
-	VersionNumberSelector *v1.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
+	VersionNumberSelector *v2.Selector `json:"versionNumberSelector,omitempty" tf:"-"`
 }
 
 // LayerVersionPermissionSpec defines the desired state of LayerVersionPermission
 type LayerVersionPermissionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LayerVersionPermissionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LayerVersionPermissionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -169,8 +169,8 @@ type LayerVersionPermissionSpec struct {
 
 // LayerVersionPermissionStatus defines the observed state of LayerVersionPermission.
 type LayerVersionPermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LayerVersionPermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LayerVersionPermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

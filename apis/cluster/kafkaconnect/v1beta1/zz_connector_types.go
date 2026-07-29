@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApacheKafkaClusterInitParameters struct {
@@ -141,11 +141,11 @@ type CloudwatchLogsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsObservation struct {
@@ -170,11 +170,11 @@ type CloudwatchLogsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type ConnectorInitParameters struct {
@@ -214,11 +214,11 @@ type ConnectorInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.Reference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.Reference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -344,11 +344,11 @@ type ConnectorParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.Reference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.Reference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.Selector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -369,11 +369,11 @@ type CustomPluginInitParameters struct {
 
 	// Reference to a CustomPlugin in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a CustomPlugin in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The revision of the custom plugin.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -398,11 +398,11 @@ type CustomPluginParameters struct {
 
 	// Reference to a CustomPlugin in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a CustomPlugin in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The revision of the custom plugin.
 	// +kubebuilder:validation:Optional
@@ -418,11 +418,11 @@ type FirehoseInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -447,11 +447,11 @@ type FirehoseParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
 	// +kubebuilder:validation:Optional
@@ -590,11 +590,11 @@ type S3InitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -624,11 +624,11 @@ type S3Parameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Specifies whether connector logs get sent to the specified Amazon S3 destination.
 	// +kubebuilder:validation:Optional
@@ -681,11 +681,11 @@ type VPCInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// The security groups for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -696,11 +696,11 @@ type VPCInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// The subnets for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -725,11 +725,11 @@ type VPCParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// The security groups for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -741,11 +741,11 @@ type VPCParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// The subnets for the connector.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -765,11 +765,11 @@ type WorkerConfigurationInitParameters struct {
 
 	// Reference to a WorkerConfiguration in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a WorkerConfiguration in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The revision of the worker configuration.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -794,11 +794,11 @@ type WorkerConfigurationParameters struct {
 
 	// Reference to a WorkerConfiguration in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a WorkerConfiguration in kafkaconnect to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The revision of the worker configuration.
 	// +kubebuilder:validation:Optional
@@ -846,8 +846,8 @@ type WorkerLogDeliveryParameters struct {
 
 // ConnectorSpec defines the desired state of Connector
 type ConnectorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -863,8 +863,8 @@ type ConnectorSpec struct {
 
 // ConnectorStatus defines the observed state of Connector.
 type ConnectorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

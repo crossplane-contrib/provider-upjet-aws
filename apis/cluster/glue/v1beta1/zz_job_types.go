@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CommandInitParameters struct {
@@ -92,11 +92,11 @@ type JobInitParameters struct {
 
 	// References to Connection in glue to populate connections.
 	// +kubebuilder:validation:Optional
-	ConnectionsRefs []v1.Reference `json:"connectionsRefs,omitempty" tf:"-"`
+	ConnectionsRefs []v2.Reference `json:"connectionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Connection in glue to populate connections.
 	// +kubebuilder:validation:Optional
-	ConnectionsSelector *v1.Selector `json:"connectionsSelector,omitempty" tf:"-"`
+	ConnectionsSelector *v2.Selector `json:"connectionsSelector,omitempty" tf:"-"`
 
 	// The map of default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +mapType=granular
@@ -146,11 +146,11 @@ type JobInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Security Configuration to be associated with the job.
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
@@ -265,11 +265,11 @@ type JobParameters struct {
 
 	// References to Connection in glue to populate connections.
 	// +kubebuilder:validation:Optional
-	ConnectionsRefs []v1.Reference `json:"connectionsRefs,omitempty" tf:"-"`
+	ConnectionsRefs []v2.Reference `json:"connectionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Connection in glue to populate connections.
 	// +kubebuilder:validation:Optional
-	ConnectionsSelector *v1.Selector `json:"connectionsSelector,omitempty" tf:"-"`
+	ConnectionsSelector *v2.Selector `json:"connectionsSelector,omitempty" tf:"-"`
 
 	// The map of default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
 	// +kubebuilder:validation:Optional
@@ -338,11 +338,11 @@ type JobParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Security Configuration to be associated with the job.
 	// +kubebuilder:validation:Optional
@@ -391,7 +391,7 @@ type SourceControlDetailsInitParameters struct {
 	AuthStrategy *string `json:"authStrategy,omitempty" tf:"auth_strategy,omitempty"`
 
 	// The value of an authorization token.
-	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+	AuthTokenSecretRef *v2.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// A branch in the remote repository.
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
@@ -444,7 +444,7 @@ type SourceControlDetailsParameters struct {
 
 	// The value of an authorization token.
 	// +kubebuilder:validation:Optional
-	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+	AuthTokenSecretRef *v2.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// A branch in the remote repository.
 	// +kubebuilder:validation:Optional
@@ -473,8 +473,8 @@ type SourceControlDetailsParameters struct {
 
 // JobSpec defines the desired state of Job
 type JobSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     JobParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   JobParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -490,8 +490,8 @@ type JobSpec struct {
 
 // JobStatus defines the observed state of Job.
 type JobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        JobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               JobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

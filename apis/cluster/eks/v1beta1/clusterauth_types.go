@@ -5,7 +5,7 @@
 package v1beta1
 
 import (
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
@@ -25,12 +25,12 @@ type ClusterAuthParameters struct {
 	// Reference to a Cluster to populate clusterName.
 	// Either ClusterName, ClusterNameRef or ClusterNameSelector has to be given.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty"`
+	ClusterNameRef *xpv2.Reference `json:"clusterNameRef,omitempty"`
 
 	// Selector for a Cluster to populate clusterName.
 	// Either ClusterName, ClusterNameRef or ClusterNameSelector has to be given.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty"`
+	ClusterNameSelector *xpv2.Selector `json:"clusterNameSelector,omitempty"`
 
 	// RefreshPeriod is how frequently you'd like the token in the published
 	// Kubeconfig to be refreshed. The maximum is 10m0s.
@@ -47,14 +47,14 @@ type ClusterAuthObservation struct {
 
 // ClusterAuthSpec defines the desired state of ClusterAuth
 type ClusterAuthSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterAuthParameters `json:"forProvider"`
+	xpv2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                     ClusterAuthParameters `json:"forProvider"`
 }
 
 // ClusterAuthStatus defines the observed state of ClusterAuth.
 type ClusterAuthStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterAuthObservation `json:"atProvider,omitempty"`
+	xpv2.ManagedResourceStatus `json:",inline"`
+	AtProvider                 ClusterAuthObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

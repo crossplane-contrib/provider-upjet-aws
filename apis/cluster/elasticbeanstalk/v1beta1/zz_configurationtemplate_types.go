@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationTemplateInitParameters struct {
@@ -21,11 +21,11 @@ type ConfigurationTemplateInitParameters struct {
 
 	// Reference to a Application in elasticbeanstalk to populate application.
 	// +kubebuilder:validation:Optional
-	ApplicationRef *v1.Reference `json:"applicationRef,omitempty" tf:"-"`
+	ApplicationRef *v2.Reference `json:"applicationRef,omitempty" tf:"-"`
 
 	// Selector for a Application in elasticbeanstalk to populate application.
 	// +kubebuilder:validation:Optional
-	ApplicationSelector *v1.Selector `json:"applicationSelector,omitempty" tf:"-"`
+	ApplicationSelector *v2.Selector `json:"applicationSelector,omitempty" tf:"-"`
 
 	// Short description of the Template
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -79,11 +79,11 @@ type ConfigurationTemplateParameters struct {
 
 	// Reference to a Application in elasticbeanstalk to populate application.
 	// +kubebuilder:validation:Optional
-	ApplicationRef *v1.Reference `json:"applicationRef,omitempty" tf:"-"`
+	ApplicationRef *v2.Reference `json:"applicationRef,omitempty" tf:"-"`
 
 	// Selector for a Application in elasticbeanstalk to populate application.
 	// +kubebuilder:validation:Optional
-	ApplicationSelector *v1.Selector `json:"applicationSelector,omitempty" tf:"-"`
+	ApplicationSelector *v2.Selector `json:"applicationSelector,omitempty" tf:"-"`
 
 	// Short description of the Template
 	// +kubebuilder:validation:Optional
@@ -161,8 +161,8 @@ type SettingParameters struct {
 
 // ConfigurationTemplateSpec defines the desired state of ConfigurationTemplate
 type ConfigurationTemplateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConfigurationTemplateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConfigurationTemplateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -178,8 +178,8 @@ type ConfigurationTemplateSpec struct {
 
 // ConfigurationTemplateStatus defines the observed state of ConfigurationTemplate.
 type ConfigurationTemplateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationTemplateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigurationTemplateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExternalKeyInitParameters struct {
@@ -28,7 +28,7 @@ type ExternalKeyInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
-	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+	KeyMaterialBase64SecretRef *v2.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
 	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only). Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	KeySpec *string `json:"keySpec,omitempty" tf:"key_spec,omitempty"`
@@ -124,7 +124,7 @@ type ExternalKeyParameters struct {
 
 	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
 	// +kubebuilder:validation:Optional
-	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+	KeyMaterialBase64SecretRef *v2.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
 	// Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_224, HMAC_256, HMAC_384, HMAC_512, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, ML_DSA_44, ML_DSA_65, ML_DSA_87, or SM2 (China Regions only). Defaults to SYMMETRIC_DEFAULT. For help with choosing a key spec, see the AWS KMS Developer Guide.
 	// +kubebuilder:validation:Optional
@@ -159,8 +159,8 @@ type ExternalKeyParameters struct {
 
 // ExternalKeySpec defines the desired state of ExternalKey
 type ExternalKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ExternalKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ExternalKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -176,8 +176,8 @@ type ExternalKeySpec struct {
 
 // ExternalKeyStatus defines the observed state of ExternalKey.
 type ExternalKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExternalKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExternalKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

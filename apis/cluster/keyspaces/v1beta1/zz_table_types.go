@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CapacitySpecificationInitParameters struct {
@@ -325,11 +325,11 @@ type TableInitParameters struct {
 
 	// Reference to a Keyspace in keyspaces to populate keyspaceName.
 	// +kubebuilder:validation:Optional
-	KeyspaceNameRef *v1.Reference `json:"keyspaceNameRef,omitempty" tf:"-"`
+	KeyspaceNameRef *v2.Reference `json:"keyspaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Keyspace in keyspaces to populate keyspaceName.
 	// +kubebuilder:validation:Optional
-	KeyspaceNameSelector *v1.Selector `json:"keyspaceNameSelector,omitempty" tf:"-"`
+	KeyspaceNameSelector *v2.Selector `json:"keyspaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
 	PointInTimeRecovery []PointInTimeRecoveryInitParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
@@ -427,11 +427,11 @@ type TableParameters struct {
 
 	// Reference to a Keyspace in keyspaces to populate keyspaceName.
 	// +kubebuilder:validation:Optional
-	KeyspaceNameRef *v1.Reference `json:"keyspaceNameRef,omitempty" tf:"-"`
+	KeyspaceNameRef *v2.Reference `json:"keyspaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Keyspace in keyspaces to populate keyspaceName.
 	// +kubebuilder:validation:Optional
-	KeyspaceNameSelector *v1.Selector `json:"keyspaceNameSelector,omitempty" tf:"-"`
+	KeyspaceNameSelector *v2.Selector `json:"keyspaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional
@@ -462,8 +462,8 @@ type TableParameters struct {
 
 // TableSpec defines the desired state of Table
 type TableSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TableParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TableParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -479,8 +479,8 @@ type TableSpec struct {
 
 // TableStatus defines the observed state of Table.
 type TableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

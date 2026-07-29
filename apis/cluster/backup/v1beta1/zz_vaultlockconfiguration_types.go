@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultLockConfigurationInitParameters struct {
@@ -21,11 +21,11 @@ type VaultLockConfigurationInitParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
@@ -74,11 +74,11 @@ type VaultLockConfigurationParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	// +kubebuilder:validation:Optional
@@ -100,8 +100,8 @@ type VaultLockConfigurationParameters struct {
 
 // VaultLockConfigurationSpec defines the desired state of VaultLockConfiguration
 type VaultLockConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VaultLockConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VaultLockConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -117,8 +117,8 @@ type VaultLockConfigurationSpec struct {
 
 // VaultLockConfigurationStatus defines the observed state of VaultLockConfiguration.
 type VaultLockConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultLockConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultLockConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

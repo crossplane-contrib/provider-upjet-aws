@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QuerySuggestionsBlockListInitParameters struct {
@@ -25,11 +25,11 @@ type QuerySuggestionsBlockListInitParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// Name for the block list.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -41,11 +41,11 @@ type QuerySuggestionsBlockListInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// S3 path where your block list text file is located. See details below.
 	SourceS3Path *SourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
@@ -109,11 +109,11 @@ type QuerySuggestionsBlockListParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.Reference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// Name for the block list.
 	// +kubebuilder:validation:Optional
@@ -132,11 +132,11 @@ type QuerySuggestionsBlockListParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// S3 path where your block list text file is located. See details below.
 	// +kubebuilder:validation:Optional
@@ -157,11 +157,11 @@ type SourceS3PathInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the file.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -186,11 +186,11 @@ type SourceS3PathParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the file.
 	// +kubebuilder:validation:Optional
@@ -199,8 +199,8 @@ type SourceS3PathParameters struct {
 
 // QuerySuggestionsBlockListSpec defines the desired state of QuerySuggestionsBlockList
 type QuerySuggestionsBlockListSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     QuerySuggestionsBlockListParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   QuerySuggestionsBlockListParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -216,8 +216,8 @@ type QuerySuggestionsBlockListSpec struct {
 
 // QuerySuggestionsBlockListStatus defines the observed state of QuerySuggestionsBlockList.
 type QuerySuggestionsBlockListStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QuerySuggestionsBlockListObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QuerySuggestionsBlockListObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

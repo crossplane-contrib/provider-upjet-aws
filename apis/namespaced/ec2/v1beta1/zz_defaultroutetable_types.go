@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultRouteTableInitParameters struct {
@@ -23,11 +22,11 @@ type DefaultRouteTableInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
-	DefaultRouteTableIDRef *v1.NamespacedReference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
+	DefaultRouteTableIDRef *v2.NamespacedReference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
-	DefaultRouteTableIDSelector *v1.NamespacedSelector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
+	DefaultRouteTableIDSelector *v2.NamespacedSelector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
 
 	// List of virtual gateways for propagation.
 	// +listType=set
@@ -88,11 +87,11 @@ type DefaultRouteTableParameters struct {
 
 	// Reference to a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
-	DefaultRouteTableIDRef *v1.NamespacedReference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
+	DefaultRouteTableIDRef *v2.NamespacedReference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate defaultRouteTableId.
 	// +kubebuilder:validation:Optional
-	DefaultRouteTableIDSelector *v1.NamespacedSelector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
+	DefaultRouteTableIDSelector *v2.NamespacedSelector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
 
 	// List of virtual gateways for propagation.
 	// +kubebuilder:validation:Optional
@@ -132,11 +131,11 @@ type RouteInitParameters struct {
 
 	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDRef *v1.NamespacedReference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
+	EgressOnlyGatewayIDRef *v2.NamespacedReference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDSelector *v1.NamespacedSelector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
+	EgressOnlyGatewayIDSelector *v2.NamespacedSelector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC internet gateway or a virtual private gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.InternetGateway
@@ -145,11 +144,11 @@ type RouteInitParameters struct {
 
 	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// The Ipv6 CIDR block of the route
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block"`
@@ -234,11 +233,11 @@ type RouteParameters struct {
 
 	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDRef *v1.NamespacedReference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
+	EgressOnlyGatewayIDRef *v2.NamespacedReference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
 	// +kubebuilder:validation:Optional
-	EgressOnlyGatewayIDSelector *v1.NamespacedSelector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
+	EgressOnlyGatewayIDSelector *v2.NamespacedSelector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC internet gateway or a virtual private gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.InternetGateway
@@ -248,11 +247,11 @@ type RouteParameters struct {
 
 	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// The Ipv6 CIDR block of the route
 	// +kubebuilder:validation:Optional
@@ -302,8 +301,8 @@ type DefaultRouteTableSpec struct {
 
 // DefaultRouteTableStatus defines the observed state of DefaultRouteTable.
 type DefaultRouteTableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultRouteTableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultRouteTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

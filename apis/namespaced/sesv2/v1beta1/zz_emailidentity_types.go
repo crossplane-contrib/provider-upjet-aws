@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DKIMSigningAttributesInitParameters struct {
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
-	DomainSigningPrivateKeySecretRef *v1.LocalSecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
+	DomainSigningPrivateKeySecretRef *v2.LocalSecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
 
 	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
@@ -54,7 +53,7 @@ type DKIMSigningAttributesParameters struct {
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
 	// +kubebuilder:validation:Optional
-	DomainSigningPrivateKeySecretRef *v1.LocalSecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
+	DomainSigningPrivateKeySecretRef *v2.LocalSecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
 
 	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
 	// +kubebuilder:validation:Optional
@@ -73,11 +72,11 @@ type EmailIdentityInitParameters struct {
 
 	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+	ConfigurationSetNameSelector *v2.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// The configuration of the DKIM authentication settings for an email domain identity.
 	DKIMSigningAttributes *DKIMSigningAttributesInitParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
@@ -131,11 +130,11 @@ type EmailIdentityParameters struct {
 
 	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameRef *v1.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
+	ConfigurationSetNameRef *v2.NamespacedReference `json:"configurationSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
 	// +kubebuilder:validation:Optional
-	ConfigurationSetNameSelector *v1.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+	ConfigurationSetNameSelector *v2.NamespacedSelector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// The configuration of the DKIM authentication settings for an email domain identity.
 	// +kubebuilder:validation:Optional
@@ -171,8 +170,8 @@ type EmailIdentitySpec struct {
 
 // EmailIdentityStatus defines the observed state of EmailIdentity.
 type EmailIdentityStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EmailIdentityObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EmailIdentityObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

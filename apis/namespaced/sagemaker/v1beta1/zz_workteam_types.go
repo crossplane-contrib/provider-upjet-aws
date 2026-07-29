@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CognitoMemberDefinitionInitParameters struct {
@@ -23,11 +22,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserGroup
@@ -36,11 +35,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupRef *v1.NamespacedReference `json:"userGroupRef,omitempty" tf:"-"`
+	UserGroupRef *v2.NamespacedReference `json:"userGroupRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupSelector *v1.NamespacedSelector `json:"userGroupSelector,omitempty" tf:"-"`
+	UserGroupSelector *v2.NamespacedSelector `json:"userGroupSelector,omitempty" tf:"-"`
 
 	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolDomain
@@ -49,11 +48,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.NamespacedReference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.NamespacedReference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.NamespacedSelector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.NamespacedSelector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type CognitoMemberDefinitionObservation struct {
@@ -78,11 +77,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserGroup
@@ -92,11 +91,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupRef *v1.NamespacedReference `json:"userGroupRef,omitempty" tf:"-"`
+	UserGroupRef *v2.NamespacedReference `json:"userGroupRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupSelector *v1.NamespacedSelector `json:"userGroupSelector,omitempty" tf:"-"`
+	UserGroupSelector *v2.NamespacedSelector `json:"userGroupSelector,omitempty" tf:"-"`
 
 	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolDomain
@@ -106,11 +105,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.NamespacedReference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.NamespacedReference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.NamespacedSelector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.NamespacedSelector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type IAMPolicyConstraintsInitParameters struct {
@@ -275,11 +274,11 @@ type WorkteamInitParameters struct {
 
 	// Reference to a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameRef *v1.NamespacedReference `json:"workforceNameRef,omitempty" tf:"-"`
+	WorkforceNameRef *v2.NamespacedReference `json:"workforceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameSelector *v1.NamespacedSelector `json:"workforceNameSelector,omitempty" tf:"-"`
+	WorkforceNameSelector *v2.NamespacedSelector `json:"workforceNameSelector,omitempty" tf:"-"`
 }
 
 type WorkteamObservation struct {
@@ -357,11 +356,11 @@ type WorkteamParameters struct {
 
 	// Reference to a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameRef *v1.NamespacedReference `json:"workforceNameRef,omitempty" tf:"-"`
+	WorkforceNameRef *v2.NamespacedReference `json:"workforceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameSelector *v1.NamespacedSelector `json:"workforceNameSelector,omitempty" tf:"-"`
+	WorkforceNameSelector *v2.NamespacedSelector `json:"workforceNameSelector,omitempty" tf:"-"`
 }
 
 // WorkteamSpec defines the desired state of Workteam
@@ -383,8 +382,8 @@ type WorkteamSpec struct {
 
 // WorkteamStatus defines the observed state of Workteam.
 type WorkteamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkteamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkteamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

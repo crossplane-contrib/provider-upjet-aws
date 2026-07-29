@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionConfigurationInitParameters struct {
@@ -74,11 +73,11 @@ type IndexInitParameters struct {
 
 	// Reference to a VectorBucket in s3vectors to populate vectorBucketName.
 	// +kubebuilder:validation:Optional
-	VectorBucketNameRef *v1.NamespacedReference `json:"vectorBucketNameRef,omitempty" tf:"-"`
+	VectorBucketNameRef *v2.NamespacedReference `json:"vectorBucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a VectorBucket in s3vectors to populate vectorBucketName.
 	// +kubebuilder:validation:Optional
-	VectorBucketNameSelector *v1.NamespacedSelector `json:"vectorBucketNameSelector,omitempty" tf:"-"`
+	VectorBucketNameSelector *v2.NamespacedSelector `json:"vectorBucketNameSelector,omitempty" tf:"-"`
 }
 
 type IndexObservation struct {
@@ -169,11 +168,11 @@ type IndexParameters struct {
 
 	// Reference to a VectorBucket in s3vectors to populate vectorBucketName.
 	// +kubebuilder:validation:Optional
-	VectorBucketNameRef *v1.NamespacedReference `json:"vectorBucketNameRef,omitempty" tf:"-"`
+	VectorBucketNameRef *v2.NamespacedReference `json:"vectorBucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a VectorBucket in s3vectors to populate vectorBucketName.
 	// +kubebuilder:validation:Optional
-	VectorBucketNameSelector *v1.NamespacedSelector `json:"vectorBucketNameSelector,omitempty" tf:"-"`
+	VectorBucketNameSelector *v2.NamespacedSelector `json:"vectorBucketNameSelector,omitempty" tf:"-"`
 }
 
 type MetadataConfigurationInitParameters struct {
@@ -217,8 +216,8 @@ type IndexSpec struct {
 
 // IndexStatus defines the observed state of Index.
 type IndexStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IndexObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IndexObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

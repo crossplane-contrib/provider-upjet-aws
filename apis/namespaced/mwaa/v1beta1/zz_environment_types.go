@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DagProcessingLogsInitParameters struct {
@@ -68,11 +67,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -80,11 +79,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
@@ -126,11 +125,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate sourceBucketArn.
 	// +kubebuilder:validation:Optional
-	SourceBucketArnRef *v1.NamespacedReference `json:"sourceBucketArnRef,omitempty" tf:"-"`
+	SourceBucketArnRef *v2.NamespacedReference `json:"sourceBucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate sourceBucketArn.
 	// +kubebuilder:validation:Optional
-	SourceBucketArnSelector *v1.NamespacedSelector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
+	SourceBucketArnSelector *v2.NamespacedSelector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
 
 	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
 	StartupScriptS3ObjectVersion *string `json:"startupScriptS3ObjectVersion,omitempty" tf:"startup_script_s3_object_version,omitempty"`
@@ -265,7 +264,7 @@ type EnvironmentParameters struct {
 
 	// The airflow_configuration_options parameter specifies airflow override options. Check the Official documentation for all possible configuration options.
 	// +kubebuilder:validation:Optional
-	AirflowConfigurationOptionsSecretRef *v1.LocalSecretReference `json:"airflowConfigurationOptionsSecretRef,omitempty" tf:"-"`
+	AirflowConfigurationOptionsSecretRef *v2.LocalSecretReference `json:"airflowConfigurationOptionsSecretRef,omitempty" tf:"-"`
 
 	// Airflow version of your environment, will be set by default to the latest version that MWAA supports.
 	// +kubebuilder:validation:Optional
@@ -291,11 +290,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -304,11 +303,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeyRef *v1.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
+	KMSKeyRef *v2.NamespacedReference `json:"kmsKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKey.
 	// +kubebuilder:validation:Optional
-	KMSKeySelector *v1.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
+	KMSKeySelector *v2.NamespacedSelector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	// +kubebuilder:validation:Optional
@@ -367,11 +366,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Bucket in s3 to populate sourceBucketArn.
 	// +kubebuilder:validation:Optional
-	SourceBucketArnRef *v1.NamespacedReference `json:"sourceBucketArnRef,omitempty" tf:"-"`
+	SourceBucketArnRef *v2.NamespacedReference `json:"sourceBucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate sourceBucketArn.
 	// +kubebuilder:validation:Optional
-	SourceBucketArnSelector *v1.NamespacedSelector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
+	SourceBucketArnSelector *v2.NamespacedSelector `json:"sourceBucketArnSelector,omitempty" tf:"-"`
 
 	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
 	// +kubebuilder:validation:Optional
@@ -496,11 +495,11 @@ type NetworkConfigurationInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The private subnet IDs in which the environment should be created. MWAA requires two subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -509,11 +508,11 @@ type NetworkConfigurationInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type NetworkConfigurationObservation struct {
@@ -537,11 +536,11 @@ type NetworkConfigurationParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The private subnet IDs in which the environment should be created. MWAA requires two subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -551,11 +550,11 @@ type NetworkConfigurationParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type SchedulerLogsInitParameters struct {
@@ -705,8 +704,8 @@ type EnvironmentSpec struct {
 
 // EnvironmentStatus defines the observed state of Environment.
 type EnvironmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

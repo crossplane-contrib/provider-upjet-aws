@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ArnResourceInitParameters struct {
@@ -22,11 +22,11 @@ type ArnResourceInitParameters struct {
 
 	// Reference to a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type ArnResourceObservation struct {
@@ -45,11 +45,11 @@ type ArnResourceParameters struct {
 
 	// Reference to a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterInstance in rds to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type DNSResourceInitParameters struct {
@@ -173,11 +173,11 @@ type ResourceConfigurationInitParameters struct {
 
 	// Reference to a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierRef *v1.Reference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
+	ResourceGatewayIdentifierRef *v2.Reference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierSelector *v1.Selector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
+	ResourceGatewayIdentifierSelector *v2.Selector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -293,11 +293,11 @@ type ResourceConfigurationParameters struct {
 
 	// Reference to a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierRef *v1.Reference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
+	ResourceGatewayIdentifierRef *v2.Reference `json:"resourceGatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGateway in vpclattice to populate resourceGatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceGatewayIdentifierSelector *v1.Selector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
+	ResourceGatewayIdentifierSelector *v2.Selector `json:"resourceGatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -311,8 +311,8 @@ type ResourceConfigurationParameters struct {
 
 // ResourceConfigurationSpec defines the desired state of ResourceConfiguration
 type ResourceConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourceConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -328,8 +328,8 @@ type ResourceConfigurationSpec struct {
 
 // ResourceConfigurationStatus defines the observed state of ResourceConfiguration.
 type ResourceConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

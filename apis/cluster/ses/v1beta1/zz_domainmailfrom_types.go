@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainMailFromInitParameters struct {
@@ -24,11 +24,11 @@ type DomainMailFromInitParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
+	DomainRef *v2.Reference `json:"domainRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
+	DomainSelector *v2.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
@@ -66,11 +66,11 @@ type DomainMailFromParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
+	DomainRef *v2.Reference `json:"domainRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
+	DomainSelector *v2.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
 	// +kubebuilder:validation:Optional
@@ -84,8 +84,8 @@ type DomainMailFromParameters struct {
 
 // DomainMailFromSpec defines the desired state of DomainMailFrom
 type DomainMailFromSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainMailFromParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainMailFromParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type DomainMailFromSpec struct {
 
 // DomainMailFromStatus defines the observed state of DomainMailFrom.
 type DomainMailFromStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainMailFromObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainMailFromObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedPolicyAttachmentInitParameters struct {
@@ -57,11 +56,11 @@ type ManagedPolicyAttachmentParameters struct {
 
 	// Reference to a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnRef *v1.NamespacedReference `json:"permissionSetArnRef,omitempty" tf:"-"`
+	PermissionSetArnRef *v2.NamespacedReference `json:"permissionSetArnRef,omitempty" tf:"-"`
 
 	// Selector for a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnSelector *v1.NamespacedSelector `json:"permissionSetArnSelector,omitempty" tf:"-"`
+	PermissionSetArnSelector *v2.NamespacedSelector `json:"permissionSetArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -88,8 +87,8 @@ type ManagedPolicyAttachmentSpec struct {
 
 // ManagedPolicyAttachmentStatus defines the observed state of ManagedPolicyAttachment.
 type ManagedPolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedPolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedPolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

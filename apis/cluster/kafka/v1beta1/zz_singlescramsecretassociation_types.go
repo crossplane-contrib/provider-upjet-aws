@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SingleScramSecretAssociationInitParameters struct {
@@ -41,11 +41,11 @@ type SingleScramSecretAssociationParameters struct {
 
 	// Reference to a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.Reference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -60,17 +60,17 @@ type SingleScramSecretAssociationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 // SingleScramSecretAssociationSpec defines the desired state of SingleScramSecretAssociation
 type SingleScramSecretAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SingleScramSecretAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SingleScramSecretAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -86,8 +86,8 @@ type SingleScramSecretAssociationSpec struct {
 
 // SingleScramSecretAssociationStatus defines the observed state of SingleScramSecretAssociation.
 type SingleScramSecretAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SingleScramSecretAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SingleScramSecretAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

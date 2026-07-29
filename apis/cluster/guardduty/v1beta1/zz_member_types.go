@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MemberInitParameters struct {
@@ -22,11 +22,11 @@ type MemberInitParameters struct {
 
 	// Reference to a Detector in guardduty to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.Reference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Detector in guardduty to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/guardduty/v1beta2.Detector
@@ -35,11 +35,11 @@ type MemberInitParameters struct {
 
 	// Reference to a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDRef *v1.Reference `json:"detectorIdRef,omitempty" tf:"-"`
+	DetectorIDRef *v2.Reference `json:"detectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDSelector *v1.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
+	DetectorIDSelector *v2.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether an email notification is sent to the accounts. Defaults to false.
 	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
@@ -94,11 +94,11 @@ type MemberParameters struct {
 
 	// Reference to a Detector in guardduty to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.Reference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Detector in guardduty to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/guardduty/v1beta2.Detector
@@ -108,11 +108,11 @@ type MemberParameters struct {
 
 	// Reference to a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDRef *v1.Reference `json:"detectorIdRef,omitempty" tf:"-"`
+	DetectorIDRef *v2.Reference `json:"detectorIdRef,omitempty" tf:"-"`
 
 	// Selector for a Detector in guardduty to populate detectorId.
 	// +kubebuilder:validation:Optional
-	DetectorIDSelector *v1.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
+	DetectorIDSelector *v2.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether an email notification is sent to the accounts. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -138,8 +138,8 @@ type MemberParameters struct {
 
 // MemberSpec defines the desired state of Member
 type MemberSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MemberParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MemberParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -155,8 +155,8 @@ type MemberSpec struct {
 
 // MemberStatus defines the observed state of Member.
 type MemberStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemberObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MemberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

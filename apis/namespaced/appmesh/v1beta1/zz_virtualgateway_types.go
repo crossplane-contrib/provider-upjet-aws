@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogFileInitParameters struct {
@@ -112,11 +111,11 @@ type CertificateAcmInitParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.NamespacedReference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.NamespacedReference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.NamespacedSelector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.NamespacedSelector `json:"certificateArnSelector,omitempty" tf:"-"`
 }
 
 type CertificateAcmObservation struct {
@@ -135,11 +134,11 @@ type CertificateAcmParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.NamespacedReference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.NamespacedReference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.NamespacedSelector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.NamespacedSelector `json:"certificateArnSelector,omitempty" tf:"-"`
 }
 
 type CertificateFileInitParameters struct {
@@ -1188,8 +1187,8 @@ type VirtualGatewaySpec struct {
 
 // VirtualGatewayStatus defines the observed state of VirtualGateway.
 type VirtualGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

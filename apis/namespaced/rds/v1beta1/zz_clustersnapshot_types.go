@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterSnapshotInitParameters struct {
@@ -23,11 +22,11 @@ type ClusterSnapshotInitParameters struct {
 
 	// Reference to a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierRef *v1.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+	DBClusterIdentifierRef *v2.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierSelector *v1.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
+	DBClusterIdentifierSelector *v2.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
@@ -116,11 +115,11 @@ type ClusterSnapshotParameters struct {
 
 	// Reference to a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierRef *v1.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+	DBClusterIdentifierRef *v2.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierSelector *v1.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
+	DBClusterIdentifierSelector *v2.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Identifier for the snapshot.
 	// +kubebuilder:validation:Optional
@@ -161,8 +160,8 @@ type ClusterSnapshotSpec struct {
 
 // ClusterSnapshotStatus defines the observed state of ClusterSnapshot.
 type ClusterSnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterSnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterSnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

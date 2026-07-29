@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerPolicyInitParameters struct {
@@ -22,11 +21,11 @@ type ContainerPolicyInitParameters struct {
 
 	// Reference to a Container in mediastore to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in mediastore to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The contents of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -56,11 +55,11 @@ type ContainerPolicyParameters struct {
 
 	// Reference to a Container in mediastore to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in mediastore to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The contents of the policy.
 	// +kubebuilder:validation:Optional
@@ -91,8 +90,8 @@ type ContainerPolicySpec struct {
 
 // ContainerPolicyStatus defines the observed state of ContainerPolicy.
 type ContainerPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

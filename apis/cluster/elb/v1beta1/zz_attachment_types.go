@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type AttachmentInitParameters struct {
 
 	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
+	ELBRef *v2.Reference `json:"elbRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
+	ELBSelector *v2.Selector `json:"elbSelector,omitempty" tf:"-"`
 
 	// Instance ID to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
@@ -33,11 +33,11 @@ type AttachmentInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
+	InstanceRef *v2.Reference `json:"instanceRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
+	InstanceSelector *v2.Selector `json:"instanceSelector,omitempty" tf:"-"`
 }
 
 type AttachmentObservation struct {
@@ -64,11 +64,11 @@ type AttachmentParameters struct {
 
 	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
+	ELBRef *v2.Reference `json:"elbRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
+	ELBSelector *v2.Selector `json:"elbSelector,omitempty" tf:"-"`
 
 	// Instance ID to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
@@ -77,11 +77,11 @@ type AttachmentParameters struct {
 
 	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
+	InstanceRef *v2.Reference `json:"instanceRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
+	InstanceSelector *v2.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -91,8 +91,8 @@ type AttachmentParameters struct {
 
 // AttachmentSpec defines the desired state of Attachment
 type AttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -108,8 +108,8 @@ type AttachmentSpec struct {
 
 // AttachmentStatus defines the observed state of Attachment.
 type AttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -5,154 +5,154 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Index.
-func (mg *Index) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Index) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Index.
-func (mg *Index) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Index) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Index.
-func (mg *Index) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Index) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Index.
-func (mg *Index) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Index) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Index.
-func (mg *Index) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Index) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Index.
-func (mg *Index) SetConditions(c ...xpv1.Condition) {
+func (mg *Index) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Index.
-func (mg *Index) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Index) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Index.
-func (mg *Index) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Index) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Index.
-func (mg *Index) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Index) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Index.
-func (mg *Index) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Index) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VectorBucket.
-func (mg *VectorBucket) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VectorBucket) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VectorBucket.
-func (mg *VectorBucket) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VectorBucket) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VectorBucket.
-func (mg *VectorBucket) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VectorBucket) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VectorBucket.
-func (mg *VectorBucket) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VectorBucket) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VectorBucket.
-func (mg *VectorBucket) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VectorBucket) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VectorBucket.
-func (mg *VectorBucket) SetConditions(c ...xpv1.Condition) {
+func (mg *VectorBucket) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VectorBucket.
-func (mg *VectorBucket) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VectorBucket) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VectorBucket.
-func (mg *VectorBucket) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VectorBucket) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VectorBucket.
-func (mg *VectorBucket) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VectorBucket) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VectorBucket.
-func (mg *VectorBucket) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VectorBucket) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VectorBucketPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VectorBucketPolicy) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VectorBucketPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VectorBucketPolicy) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VectorBucketPolicy) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *VectorBucketPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VectorBucketPolicy) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VectorBucketPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VectorBucketPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VectorBucketPolicy.
-func (mg *VectorBucketPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VectorBucketPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

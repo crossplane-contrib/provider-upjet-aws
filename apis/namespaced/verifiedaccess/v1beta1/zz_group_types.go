@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupInitParameters struct {
@@ -36,11 +35,11 @@ type GroupInitParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 }
 
 type GroupObservation struct {
@@ -121,11 +120,11 @@ type GroupParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 }
 
 type SseConfigurationInitParameters struct {
@@ -140,11 +139,11 @@ type SseConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type SseConfigurationObservation struct {
@@ -170,11 +169,11 @@ type SseConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 // GroupSpec defines the desired state of Group
@@ -196,8 +195,8 @@ type GroupSpec struct {
 
 // GroupStatus defines the observed state of Group.
 type GroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

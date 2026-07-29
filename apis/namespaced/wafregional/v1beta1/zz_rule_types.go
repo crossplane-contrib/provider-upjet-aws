@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleInitParameters struct {
@@ -94,11 +93,11 @@ type RulePredicateInitParameters struct {
 
 	// Reference to a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
@@ -129,11 +128,11 @@ type RulePredicateParameters struct {
 
 	// Reference to a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in wafregional to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	// +kubebuilder:validation:Optional
@@ -163,8 +162,8 @@ type RuleSpec struct {
 
 // RuleStatus defines the observed state of Rule.
 type RuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

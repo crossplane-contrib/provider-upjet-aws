@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointConnectionAccepterInitParameters struct {
@@ -50,11 +50,11 @@ type VPCEndpointConnectionAccepterParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
 	// AWS VPC Endpoint Service ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
@@ -64,17 +64,17 @@ type VPCEndpointConnectionAccepterParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+	VPCEndpointServiceIDRef *v2.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
+	VPCEndpointServiceIDSelector *v2.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointConnectionAccepterSpec defines the desired state of VPCEndpointConnectionAccepter
 type VPCEndpointConnectionAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointConnectionAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCEndpointConnectionAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -90,8 +90,8 @@ type VPCEndpointConnectionAccepterSpec struct {
 
 // VPCEndpointConnectionAccepterStatus defines the observed state of VPCEndpointConnectionAccepter.
 type VPCEndpointConnectionAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointConnectionAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointConnectionAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

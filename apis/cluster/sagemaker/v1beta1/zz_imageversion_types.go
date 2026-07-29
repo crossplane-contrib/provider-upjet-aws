@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ImageVersionInitParameters struct {
@@ -32,11 +32,11 @@ type ImageVersionInitParameters struct {
 
 	// Reference to a Image in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+	ImageNameRef *v2.Reference `json:"imageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Image in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
+	ImageNameSelector *v2.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// Indicates SageMaker AI job type compatibility. Valid values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.
 	JobType *string `json:"jobType,omitempty" tf:"job_type,omitempty"`
@@ -132,11 +132,11 @@ type ImageVersionParameters struct {
 
 	// Reference to a Image in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+	ImageNameRef *v2.Reference `json:"imageNameRef,omitempty" tf:"-"`
 
 	// Selector for a Image in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
+	ImageNameSelector *v2.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// Indicates SageMaker AI job type compatibility. Valid values are: TRAINING, INFERENCE, and NOTEBOOK_KERNEL.
 	// +kubebuilder:validation:Optional
@@ -170,8 +170,8 @@ type ImageVersionParameters struct {
 
 // ImageVersionSpec defines the desired state of ImageVersion
 type ImageVersionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ImageVersionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ImageVersionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -187,8 +187,8 @@ type ImageVersionSpec struct {
 
 // ImageVersionStatus defines the observed state of ImageVersion.
 type ImageVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ImageVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ImageVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

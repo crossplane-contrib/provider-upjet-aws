@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityProviderConfigInitParameters struct {
@@ -21,11 +21,11 @@ type IdentityProviderConfigInitParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	Oidc []IdentityProviderConfigOidcInitParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
@@ -159,11 +159,11 @@ type IdentityProviderConfigParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -182,8 +182,8 @@ type IdentityProviderConfigParameters struct {
 
 // IdentityProviderConfigSpec defines the desired state of IdentityProviderConfig
 type IdentityProviderConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IdentityProviderConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IdentityProviderConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -199,8 +199,8 @@ type IdentityProviderConfigSpec struct {
 
 // IdentityProviderConfigStatus defines the observed state of IdentityProviderConfig.
 type IdentityProviderConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IdentityProviderConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IdentityProviderConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

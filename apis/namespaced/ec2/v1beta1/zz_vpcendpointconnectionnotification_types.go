@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointConnectionNotificationInitParameters struct {
@@ -27,11 +26,11 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 
 	// Reference to a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
-	ConnectionNotificationArnRef *v1.NamespacedReference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
+	ConnectionNotificationArnRef *v2.NamespacedReference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
-	ConnectionNotificationArnSelector *v1.NamespacedSelector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
+	ConnectionNotificationArnSelector *v2.NamespacedSelector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC Endpoint to receive notifications for.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
@@ -43,11 +42,11 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDRef *v1.NamespacedReference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+	VPCEndpointServiceIDRef *v2.NamespacedReference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDSelector *v1.NamespacedSelector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
+	VPCEndpointServiceIDSelector *v2.NamespacedSelector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointConnectionNotificationObservation struct {
@@ -94,11 +93,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// Reference to a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
-	ConnectionNotificationArnRef *v1.NamespacedReference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
+	ConnectionNotificationArnRef *v2.NamespacedReference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate connectionNotificationArn.
 	// +kubebuilder:validation:Optional
-	ConnectionNotificationArnSelector *v1.NamespacedSelector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
+	ConnectionNotificationArnSelector *v2.NamespacedSelector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,11 +116,11 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDRef *v1.NamespacedReference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+	VPCEndpointServiceIDRef *v2.NamespacedReference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointServiceIDSelector *v1.NamespacedSelector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
+	VPCEndpointServiceIDSelector *v2.NamespacedSelector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointConnectionNotificationSpec defines the desired state of VPCEndpointConnectionNotification
@@ -143,8 +142,8 @@ type VPCEndpointConnectionNotificationSpec struct {
 
 // VPCEndpointConnectionNotificationStatus defines the observed state of VPCEndpointConnectionNotification.
 type VPCEndpointConnectionNotificationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointConnectionNotificationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointConnectionNotificationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

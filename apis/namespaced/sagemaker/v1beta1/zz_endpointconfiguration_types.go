@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AsyncInferenceConfigInitParameters struct {
@@ -307,11 +306,11 @@ type EndpointConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of a AWS KMS key that SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -319,11 +318,11 @@ type EndpointConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List each model that you want to host at this endpoint. See below.
 	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
@@ -392,11 +391,11 @@ type EndpointConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of a AWS KMS key that SageMaker AI uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -405,11 +404,11 @@ type EndpointConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List each model that you want to host at this endpoint. See below.
 	// +kubebuilder:validation:Optional
@@ -552,11 +551,11 @@ type ProductionVariantsInitParameters struct {
 
 	// Reference to a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameRef *v1.NamespacedReference `json:"modelNameRef,omitempty" tf:"-"`
+	ModelNameRef *v2.NamespacedReference `json:"modelNameRef,omitempty" tf:"-"`
 
 	// Selector for a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameSelector *v1.NamespacedSelector `json:"modelNameSelector,omitempty" tf:"-"`
+	ModelNameSelector *v2.NamespacedSelector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// How the endpoint routes incoming traffic. See routing_config below.
 	RoutingConfig []RoutingConfigInitParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
@@ -675,11 +674,11 @@ type ProductionVariantsParameters struct {
 
 	// Reference to a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameRef *v1.NamespacedReference `json:"modelNameRef,omitempty" tf:"-"`
+	ModelNameRef *v2.NamespacedReference `json:"modelNameRef,omitempty" tf:"-"`
 
 	// Selector for a Model in sagemaker to populate modelName.
 	// +kubebuilder:validation:Optional
-	ModelNameSelector *v1.NamespacedSelector `json:"modelNameSelector,omitempty" tf:"-"`
+	ModelNameSelector *v2.NamespacedSelector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// How the endpoint routes incoming traffic. See routing_config below.
 	// +kubebuilder:validation:Optional
@@ -1099,8 +1098,8 @@ type EndpointConfigurationSpec struct {
 
 // EndpointConfigurationStatus defines the observed state of EndpointConfiguration.
 type EndpointConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

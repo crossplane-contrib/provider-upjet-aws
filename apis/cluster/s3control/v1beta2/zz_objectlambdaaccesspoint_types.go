@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AwsLambdaInitParameters struct {
@@ -22,11 +22,11 @@ type AwsLambdaInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
 	FunctionPayload *string `json:"functionPayload,omitempty" tf:"function_payload,omitempty"`
@@ -51,11 +51,11 @@ type AwsLambdaParameters struct {
 
 	// Reference to a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
 	// +kubebuilder:validation:Optional
@@ -78,11 +78,11 @@ type ConfigurationInitParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate supportingAccessPoint.
 	// +kubebuilder:validation:Optional
-	SupportingAccessPointRef *v1.Reference `json:"supportingAccessPointRef,omitempty" tf:"-"`
+	SupportingAccessPointRef *v2.Reference `json:"supportingAccessPointRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate supportingAccessPoint.
 	// +kubebuilder:validation:Optional
-	SupportingAccessPointSelector *v1.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
+	SupportingAccessPointSelector *v2.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
 	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
 	TransformationConfiguration []TransformationConfigurationInitParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
@@ -123,11 +123,11 @@ type ConfigurationParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate supportingAccessPoint.
 	// +kubebuilder:validation:Optional
-	SupportingAccessPointRef *v1.Reference `json:"supportingAccessPointRef,omitempty" tf:"-"`
+	SupportingAccessPointRef *v2.Reference `json:"supportingAccessPointRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate supportingAccessPoint.
 	// +kubebuilder:validation:Optional
-	SupportingAccessPointSelector *v1.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
+	SupportingAccessPointSelector *v2.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
 	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
 	// +kubebuilder:validation:Optional
@@ -244,8 +244,8 @@ type TransformationConfigurationParameters struct {
 
 // ObjectLambdaAccessPointSpec defines the desired state of ObjectLambdaAccessPoint
 type ObjectLambdaAccessPointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ObjectLambdaAccessPointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ObjectLambdaAccessPointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -261,8 +261,8 @@ type ObjectLambdaAccessPointSpec struct {
 
 // ObjectLambdaAccessPointStatus defines the observed state of ObjectLambdaAccessPoint.
 type ObjectLambdaAccessPointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectLambdaAccessPointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectLambdaAccessPointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentRuntimeEndpointInitParameters struct {
@@ -72,11 +71,11 @@ type AgentRuntimeEndpointParameters struct {
 
 	// Reference to a AgentRuntime in bedrockagentcore to populate agentRuntimeId.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeIDRef *v1.NamespacedReference `json:"agentRuntimeIdRef,omitempty" tf:"-"`
+	AgentRuntimeIDRef *v2.NamespacedReference `json:"agentRuntimeIdRef,omitempty" tf:"-"`
 
 	// Selector for a AgentRuntime in bedrockagentcore to populate agentRuntimeId.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeIDSelector *v1.NamespacedSelector `json:"agentRuntimeIdSelector,omitempty" tf:"-"`
+	AgentRuntimeIDSelector *v2.NamespacedSelector `json:"agentRuntimeIdSelector,omitempty" tf:"-"`
 
 	// Version of the agent runtime to use for this endpoint.
 	// +kubebuilder:validation:Optional
@@ -120,8 +119,8 @@ type AgentRuntimeEndpointSpec struct {
 
 // AgentRuntimeEndpointStatus defines the observed state of AgentRuntimeEndpoint.
 type AgentRuntimeEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AgentRuntimeEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AgentRuntimeEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

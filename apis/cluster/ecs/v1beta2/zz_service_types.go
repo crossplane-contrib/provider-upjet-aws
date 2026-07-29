@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogConfigurationInitParameters struct {
@@ -493,11 +493,11 @@ type LoadBalancerInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerObservation struct {
@@ -543,11 +543,11 @@ type LoadBalancerParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 }
 
 type ManagedEBSVolumeInitParameters struct {
@@ -977,11 +977,11 @@ type ServiceInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
+	IAMRoleRef *v2.Reference `json:"iamRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
@@ -1027,11 +1027,11 @@ type ServiceInitParameters struct {
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
+	TaskDefinitionRef *v2.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
 
 	// Selector for a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
+	TaskDefinitionSelector *v2.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with plantimestamp(). See example above.
 	// +mapType=granular
@@ -1054,11 +1054,11 @@ type ServiceNetworkConfigurationInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1069,11 +1069,11 @@ type ServiceNetworkConfigurationInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// Subnets associated with the task or service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1105,11 +1105,11 @@ type ServiceNetworkConfigurationParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1121,11 +1121,11 @@ type ServiceNetworkConfigurationParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// Subnets associated with the task or service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1274,11 +1274,11 @@ type ServiceParameters struct {
 
 	// Reference to a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
-	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
+	ClusterRef *v2.Reference `json:"clusterRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
-	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
+	ClusterSelector *v2.Selector `json:"clusterSelector,omitempty" tf:"-"`
 
 	// Configuration block for deployment circuit breaker. See below.
 	// +kubebuilder:validation:Optional
@@ -1332,11 +1332,11 @@ type ServiceParameters struct {
 
 	// Reference to a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
+	IAMRoleRef *v2.Reference `json:"iamRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
 	// +kubebuilder:validation:Optional
@@ -1400,11 +1400,11 @@ type ServiceParameters struct {
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
+	TaskDefinitionRef *v2.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
 
 	// Selector for a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
+	TaskDefinitionSelector *v2.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with plantimestamp(). See example above.
 	// +kubebuilder:validation:Optional
@@ -1691,8 +1691,8 @@ type VolumeConfigurationParameters struct {
 
 // ServiceSpec defines the desired state of Service
 type ServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1708,8 +1708,8 @@ type ServiceSpec struct {
 
 // ServiceStatus defines the observed state of Service.
 type ServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

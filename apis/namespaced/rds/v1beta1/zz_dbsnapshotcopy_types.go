@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DBSnapshotCopyInitParameters struct {
@@ -28,11 +27,11 @@ type DBSnapshotCopyInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of an option group to associate with the copy of the snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
@@ -51,11 +50,11 @@ type DBSnapshotCopyInitParameters struct {
 
 	// Reference to a Snapshot in rds to populate sourceDbSnapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBSnapshotIdentifierRef *v1.NamespacedReference `json:"sourceDbSnapshotIdentifierRef,omitempty" tf:"-"`
+	SourceDBSnapshotIdentifierRef *v2.NamespacedReference `json:"sourceDbSnapshotIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Snapshot in rds to populate sourceDbSnapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBSnapshotIdentifierSelector *v1.NamespacedSelector `json:"sourceDbSnapshotIdentifierSelector,omitempty" tf:"-"`
+	SourceDBSnapshotIdentifierSelector *v2.NamespacedSelector `json:"sourceDbSnapshotIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -168,11 +167,11 @@ type DBSnapshotCopyParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of an option group to associate with the copy of the snapshot.
 	// +kubebuilder:validation:Optional
@@ -200,11 +199,11 @@ type DBSnapshotCopyParameters struct {
 
 	// Reference to a Snapshot in rds to populate sourceDbSnapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBSnapshotIdentifierRef *v1.NamespacedReference `json:"sourceDbSnapshotIdentifierRef,omitempty" tf:"-"`
+	SourceDBSnapshotIdentifierRef *v2.NamespacedReference `json:"sourceDbSnapshotIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Snapshot in rds to populate sourceDbSnapshotIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBSnapshotIdentifierSelector *v1.NamespacedSelector `json:"sourceDbSnapshotIdentifierSelector,omitempty" tf:"-"`
+	SourceDBSnapshotIdentifierSelector *v2.NamespacedSelector `json:"sourceDbSnapshotIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -239,8 +238,8 @@ type DBSnapshotCopySpec struct {
 
 // DBSnapshotCopyStatus defines the observed state of DBSnapshotCopy.
 type DBSnapshotCopyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DBSnapshotCopyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DBSnapshotCopyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

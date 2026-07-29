@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CapacityProviderConfigInitParameters struct {
@@ -41,11 +41,11 @@ type DeadLetterConfigInitParameters struct {
 
 	// Reference to a Queue in sqs to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type DeadLetterConfigObservation struct {
@@ -64,11 +64,11 @@ type DeadLetterConfigParameters struct {
 
 	// Reference to a Queue in sqs to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+	TargetArnRef *v2.Reference `json:"targetArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate targetArn.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type DurableConfigInitParameters struct {
@@ -150,11 +150,11 @@ type FileSystemConfigInitParameters struct {
 
 	// Reference to a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Path where the function can access the file system. Must start with /mnt/.
 	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
@@ -179,11 +179,11 @@ type FileSystemConfigParameters struct {
 
 	// Reference to a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.Reference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Path where the function can access the file system. Must start with /mnt/.
 	// +kubebuilder:validation:Optional
@@ -237,11 +237,11 @@ type FunctionInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
@@ -250,11 +250,11 @@ type FunctionInitParameters struct {
 
 	// References to LayerVersion in lambda to populate layers.
 	// +kubebuilder:validation:Optional
-	LayersRefs []v1.Reference `json:"layersRefs,omitempty" tf:"-"`
+	LayersRefs []v2.Reference `json:"layersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LayerVersion in lambda to populate layers.
 	// +kubebuilder:validation:Optional
-	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
+	LayersSelector *v2.Selector `json:"layersSelector,omitempty" tf:"-"`
 
 	// Configuration block for advanced logging settings. See below.
 	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
@@ -276,11 +276,11 @@ type FunctionInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	ReplacementSecurityGroupIDRefs []v1.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
+	ReplacementSecurityGroupIDRefs []v2.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate replacementSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
+	ReplacementSecurityGroupIDSelector *v2.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -299,11 +299,11 @@ type FunctionInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Identifier of the function's runtime. Required if package_type is Zip. See Runtimes for valid values.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
@@ -314,11 +314,11 @@ type FunctionInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.Reference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// S3 key of an object containing the function's deployment package. Required if s3_bucket is set.
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
@@ -578,11 +578,11 @@ type FunctionParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta1.LayerVersion
@@ -592,11 +592,11 @@ type FunctionParameters struct {
 
 	// References to LayerVersion in lambda to populate layers.
 	// +kubebuilder:validation:Optional
-	LayersRefs []v1.Reference `json:"layersRefs,omitempty" tf:"-"`
+	LayersRefs []v2.Reference `json:"layersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LayerVersion in lambda to populate layers.
 	// +kubebuilder:validation:Optional
-	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
+	LayersSelector *v2.Selector `json:"layersSelector,omitempty" tf:"-"`
 
 	// Configuration block for advanced logging settings. See below.
 	// +kubebuilder:validation:Optional
@@ -629,11 +629,11 @@ type FunctionParameters struct {
 
 	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	ReplacementSecurityGroupIDRefs []v1.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
+	ReplacementSecurityGroupIDRefs []v2.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate replacementSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
+	ReplacementSecurityGroupIDSelector *v2.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the function's VPC configuration prior to destruction. Required if replace_security_groups_on_destroy is true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -655,11 +655,11 @@ type FunctionParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Identifier of the function's runtime. Required if package_type is Zip. See Runtimes for valid values.
 	// +kubebuilder:validation:Optional
@@ -672,11 +672,11 @@ type FunctionParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.Reference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// S3 key of an object containing the function's deployment package. Required if s3_bucket is set.
 	// +kubebuilder:validation:Optional
@@ -820,11 +820,11 @@ type LoggingConfigInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 
 	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
@@ -862,11 +862,11 @@ type LoggingConfigParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.Reference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 
 	// Detail level of Lambda platform logs. Valid values: DEBUG, INFO, WARN.
 	// +kubebuilder:validation:Optional
@@ -940,11 +940,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs associated with the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -955,11 +955,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs associated with the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -994,11 +994,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs associated with the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1010,11 +1010,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs associated with the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1027,8 +1027,8 @@ type VPCConfigParameters struct {
 
 // FunctionSpec defines the desired state of Function
 type FunctionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1044,8 +1044,8 @@ type FunctionSpec struct {
 
 // FunctionStatus defines the observed state of Function.
 type FunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GlobalNodeGroupsInitParameters struct {
@@ -79,11 +79,11 @@ type GlobalReplicationGroupInitParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate primaryReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	PrimaryReplicationGroupIDRef *v1.Reference `json:"primaryReplicationGroupIdRef,omitempty" tf:"-"`
+	PrimaryReplicationGroupIDRef *v2.Reference `json:"primaryReplicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate primaryReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	PrimaryReplicationGroupIDSelector *v1.Selector `json:"primaryReplicationGroupIdSelector,omitempty" tf:"-"`
+	PrimaryReplicationGroupIDSelector *v2.Selector `json:"primaryReplicationGroupIdSelector,omitempty" tf:"-"`
 }
 
 type GlobalReplicationGroupObservation struct {
@@ -226,11 +226,11 @@ type GlobalReplicationGroupParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate primaryReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	PrimaryReplicationGroupIDRef *v1.Reference `json:"primaryReplicationGroupIdRef,omitempty" tf:"-"`
+	PrimaryReplicationGroupIDRef *v2.Reference `json:"primaryReplicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate primaryReplicationGroupId.
 	// +kubebuilder:validation:Optional
-	PrimaryReplicationGroupIDSelector *v1.Selector `json:"primaryReplicationGroupIdSelector,omitempty" tf:"-"`
+	PrimaryReplicationGroupIDSelector *v2.Selector `json:"primaryReplicationGroupIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -240,8 +240,8 @@ type GlobalReplicationGroupParameters struct {
 
 // GlobalReplicationGroupSpec defines the desired state of GlobalReplicationGroup
 type GlobalReplicationGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GlobalReplicationGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GlobalReplicationGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -257,8 +257,8 @@ type GlobalReplicationGroupSpec struct {
 
 // GlobalReplicationGroupStatus defines the observed state of GlobalReplicationGroup.
 type GlobalReplicationGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GlobalReplicationGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GlobalReplicationGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

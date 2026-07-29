@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayVPCAttachmentAccepterInitParameters struct {
@@ -26,11 +25,11 @@ type TransitGatewayVPCAttachmentAccepterInitParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether the VPC Attachment should be associated with the EC2 Transit Gateway association default route table. Default value: true.
 	TransitGatewayDefaultRouteTableAssociation *bool `json:"transitGatewayDefaultRouteTableAssociation,omitempty" tf:"transit_gateway_default_route_table_association,omitempty"`
@@ -110,11 +109,11 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.NamespacedReference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.NamespacedSelector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether the VPC Attachment should be associated with the EC2 Transit Gateway association default route table. Default value: true.
 	// +kubebuilder:validation:Optional
@@ -144,8 +143,8 @@ type TransitGatewayVPCAttachmentAccepterSpec struct {
 
 // TransitGatewayVPCAttachmentAccepterStatus defines the observed state of TransitGatewayVPCAttachmentAccepter.
 type TransitGatewayVPCAttachmentAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayVPCAttachmentAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayVPCAttachmentAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

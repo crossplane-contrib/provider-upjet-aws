@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AppMonitor.
-func (mg *AppMonitor) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppMonitor) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppMonitor.
-func (mg *AppMonitor) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppMonitor) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppMonitor.
-func (mg *AppMonitor) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppMonitor) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppMonitor.
-func (mg *AppMonitor) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppMonitor) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppMonitor.
-func (mg *AppMonitor) SetConditions(c ...xpv1.Condition) {
+func (mg *AppMonitor) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppMonitor.
-func (mg *AppMonitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppMonitor) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppMonitor.
-func (mg *AppMonitor) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppMonitor) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppMonitor.
-func (mg *AppMonitor) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppMonitor) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MetricsDestination.
-func (mg *MetricsDestination) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MetricsDestination) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MetricsDestination.
-func (mg *MetricsDestination) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MetricsDestination) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MetricsDestination.
-func (mg *MetricsDestination) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MetricsDestination) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MetricsDestination.
-func (mg *MetricsDestination) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MetricsDestination) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MetricsDestination.
-func (mg *MetricsDestination) SetConditions(c ...xpv1.Condition) {
+func (mg *MetricsDestination) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MetricsDestination.
-func (mg *MetricsDestination) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MetricsDestination) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MetricsDestination.
-func (mg *MetricsDestination) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MetricsDestination) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MetricsDestination.
-func (mg *MetricsDestination) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MetricsDestination) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

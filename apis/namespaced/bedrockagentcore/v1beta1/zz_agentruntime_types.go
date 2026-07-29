@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentRuntimeArtifactInitParameters struct {
@@ -83,11 +82,11 @@ type AgentRuntimeInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -213,11 +212,11 @@ type AgentRuntimeParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -557,11 +556,11 @@ type EFSAccessPointInitParameters struct {
 
 	// Reference to a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -586,11 +585,11 @@ type EFSAccessPointParameters struct {
 
 	// Reference to a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -1063,11 +1062,11 @@ type S3FilesAccessPointInitParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -1092,11 +1091,11 @@ type S3FilesAccessPointParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -1211,8 +1210,8 @@ type AgentRuntimeSpec struct {
 
 // AgentRuntimeStatus defines the observed state of AgentRuntime.
 type AgentRuntimeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AgentRuntimeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AgentRuntimeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,8 @@ import (
 	ekstypes "github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -86,8 +86,8 @@ func GetConnectionDetails(ctx context.Context, stsClient *sts.PresignClient, clu
 		return managed.ConnectionDetails{}, errors.Wrap(err, errProduceKubeconfig)
 	}
 	return managed.ConnectionDetails{
-		xpv1.ResourceCredentialsSecretEndpointKey:   []byte(*cluster.Endpoint),
-		xpv1.ResourceCredentialsSecretKubeconfigKey: rawConfig,
-		xpv1.ResourceCredentialsSecretCAKey:         caData,
+		xpv2.CredentialsSecretEndpointKey:   []byte(*cluster.Endpoint),
+		xpv2.CredentialsSecretKubeconfigKey: rawConfig,
+		xpv2.CredentialsSecretCAKey:         caData,
 	}, nil
 }

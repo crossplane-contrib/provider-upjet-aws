@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuntimeManagementConfigInitParameters struct {
@@ -22,11 +21,11 @@ type RuntimeManagementConfigInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Version of the function. This can be $LATEST or a published version number. If omitted, this resource will manage the runtime configuration for $LATEST.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -71,11 +70,11 @@ type RuntimeManagementConfigParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Version of the function. This can be $LATEST or a published version number. If omitted, this resource will manage the runtime configuration for $LATEST.
 	// +kubebuilder:validation:Optional
@@ -114,8 +113,8 @@ type RuntimeManagementConfigSpec struct {
 
 // RuntimeManagementConfigStatus defines the observed state of RuntimeManagementConfig.
 type RuntimeManagementConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuntimeManagementConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuntimeManagementConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type ConnectionAssociationInitParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the LAG with which to associate the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Lag
@@ -36,11 +35,11 @@ type ConnectionAssociationInitParameters struct {
 
 	// Reference to a Lag in directconnect to populate lagId.
 	// +kubebuilder:validation:Optional
-	LagIDRef *v1.NamespacedReference `json:"lagIdRef,omitempty" tf:"-"`
+	LagIDRef *v2.NamespacedReference `json:"lagIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lag in directconnect to populate lagId.
 	// +kubebuilder:validation:Optional
-	LagIDSelector *v1.NamespacedSelector `json:"lagIdSelector,omitempty" tf:"-"`
+	LagIDSelector *v2.NamespacedSelector `json:"lagIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionAssociationObservation struct {
@@ -68,11 +67,11 @@ type ConnectionAssociationParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.NamespacedReference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.NamespacedSelector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the LAG with which to associate the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Lag
@@ -82,11 +81,11 @@ type ConnectionAssociationParameters struct {
 
 	// Reference to a Lag in directconnect to populate lagId.
 	// +kubebuilder:validation:Optional
-	LagIDRef *v1.NamespacedReference `json:"lagIdRef,omitempty" tf:"-"`
+	LagIDRef *v2.NamespacedReference `json:"lagIdRef,omitempty" tf:"-"`
 
 	// Selector for a Lag in directconnect to populate lagId.
 	// +kubebuilder:validation:Optional
-	LagIDSelector *v1.NamespacedSelector `json:"lagIdSelector,omitempty" tf:"-"`
+	LagIDSelector *v2.NamespacedSelector `json:"lagIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -113,8 +112,8 @@ type ConnectionAssociationSpec struct {
 
 // ConnectionAssociationStatus defines the observed state of ConnectionAssociation.
 type ConnectionAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

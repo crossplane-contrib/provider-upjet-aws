@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectLambdaAccessPointPolicyInitParameters struct {
@@ -26,11 +25,11 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 
 	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Object Lambda Access Point resource policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -72,11 +71,11 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 
 	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a ObjectLambdaAccessPoint in s3control to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Object Lambda Access Point resource policy document.
 	// +kubebuilder:validation:Optional
@@ -107,8 +106,8 @@ type ObjectLambdaAccessPointPolicySpec struct {
 
 // ObjectLambdaAccessPointPolicyStatus defines the observed state of ObjectLambdaAccessPointPolicy.
 type ObjectLambdaAccessPointPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectLambdaAccessPointPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectLambdaAccessPointPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

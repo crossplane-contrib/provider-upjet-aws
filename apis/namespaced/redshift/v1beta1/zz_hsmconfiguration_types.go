@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HSMConfigurationInitParameters struct {
@@ -26,7 +25,7 @@ type HSMConfigurationInitParameters struct {
 	HSMPartitionName *string `json:"hsmPartitionName,omitempty" tf:"hsm_partition_name,omitempty"`
 
 	// The password required to access the HSM partition.
-	HSMPartitionPasswordSecretRef v1.LocalSecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
+	HSMPartitionPasswordSecretRef v2.LocalSecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
 
 	// The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
 	HSMServerPublicCertificate *string `json:"hsmServerPublicCertificate,omitempty" tf:"hsm_server_public_certificate,omitempty"`
@@ -84,7 +83,7 @@ type HSMConfigurationParameters struct {
 
 	// The password required to access the HSM partition.
 	// +kubebuilder:validation:Optional
-	HSMPartitionPasswordSecretRef v1.LocalSecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
+	HSMPartitionPasswordSecretRef v2.LocalSecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
 
 	// The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
 	// +kubebuilder:validation:Optional
@@ -120,8 +119,8 @@ type HSMConfigurationSpec struct {
 
 // HSMConfigurationStatus defines the observed state of HSMConfiguration.
 type HSMConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HSMConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HSMConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

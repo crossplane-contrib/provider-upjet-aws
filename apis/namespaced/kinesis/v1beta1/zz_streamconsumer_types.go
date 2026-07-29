@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamConsumerInitParameters struct {
@@ -26,11 +25,11 @@ type StreamConsumerInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -83,11 +82,11 @@ type StreamConsumerParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.NamespacedReference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.NamespacedSelector `json:"streamArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -113,8 +112,8 @@ type StreamConsumerSpec struct {
 
 // StreamConsumerStatus defines the observed state of StreamConsumer.
 type StreamConsumerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamConsumerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamConsumerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

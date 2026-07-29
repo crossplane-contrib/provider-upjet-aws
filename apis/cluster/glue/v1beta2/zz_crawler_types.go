@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CatalogTargetInitParameters struct {
@@ -24,11 +24,11 @@ type CatalogTargetInitParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the dead-letter SQS queue.
 	DlqEventQueueArn *string `json:"dlqEventQueueArn,omitempty" tf:"dlq_event_queue_arn,omitempty"`
@@ -42,11 +42,11 @@ type CatalogTargetInitParameters struct {
 
 	// References to CatalogTable in glue to populate tables.
 	// +kubebuilder:validation:Optional
-	TablesRefs []v1.Reference `json:"tablesRefs,omitempty" tf:"-"`
+	TablesRefs []v2.Reference `json:"tablesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of CatalogTable in glue to populate tables.
 	// +kubebuilder:validation:Optional
-	TablesSelector *v1.Selector `json:"tablesSelector,omitempty" tf:"-"`
+	TablesSelector *v2.Selector `json:"tablesSelector,omitempty" tf:"-"`
 }
 
 type CatalogTargetObservation struct {
@@ -80,11 +80,11 @@ type CatalogTargetParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the dead-letter SQS queue.
 	// +kubebuilder:validation:Optional
@@ -101,11 +101,11 @@ type CatalogTargetParameters struct {
 
 	// References to CatalogTable in glue to populate tables.
 	// +kubebuilder:validation:Optional
-	TablesRefs []v1.Reference `json:"tablesRefs,omitempty" tf:"-"`
+	TablesRefs []v2.Reference `json:"tablesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of CatalogTable in glue to populate tables.
 	// +kubebuilder:validation:Optional
-	TablesSelector *v1.Selector `json:"tablesSelector,omitempty" tf:"-"`
+	TablesSelector *v2.Selector `json:"tablesSelector,omitempty" tf:"-"`
 }
 
 type CrawlerInitParameters struct {
@@ -125,11 +125,11 @@ type CrawlerInitParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// List of nested Delta Lake target arguments. See Delta Target below.
 	DeltaTarget []DeltaTargetInitParameters `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
@@ -168,11 +168,11 @@ type CrawlerInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of nested Amazon S3 target arguments. See S3 Target below.
 	S3Target []S3TargetInitParameters `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
@@ -296,11 +296,11 @@ type CrawlerParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// List of nested Delta Lake target arguments. See Delta Target below.
 	// +kubebuilder:validation:Optional
@@ -355,11 +355,11 @@ type CrawlerParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of nested Amazon S3 target arguments. See S3 Target below.
 	// +kubebuilder:validation:Optional
@@ -590,11 +590,11 @@ type JdbcTargetInitParameters struct {
 
 	// Reference to a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+	ConnectionNameRef *v2.Reference `json:"connectionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
+	ConnectionNameSelector *v2.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
 	EnableAdditionalMetadata []*string `json:"enableAdditionalMetadata,omitempty" tf:"enable_additional_metadata,omitempty"`
@@ -630,11 +630,11 @@ type JdbcTargetParameters struct {
 
 	// Reference to a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+	ConnectionNameRef *v2.Reference `json:"connectionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
+	ConnectionNameSelector *v2.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
 	// +kubebuilder:validation:Optional
@@ -705,11 +705,11 @@ type MongodbTargetInitParameters struct {
 
 	// Reference to a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+	ConnectionNameRef *v2.Reference `json:"connectionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
+	ConnectionNameSelector *v2.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table to crawl.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -739,11 +739,11 @@ type MongodbTargetParameters struct {
 
 	// Reference to a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+	ConnectionNameRef *v2.Reference `json:"connectionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in glue to populate connectionName.
 	// +kubebuilder:validation:Optional
-	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
+	ConnectionNameSelector *v2.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional
@@ -873,8 +873,8 @@ type SchemaChangePolicyParameters struct {
 
 // CrawlerSpec defines the desired state of Crawler
 type CrawlerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CrawlerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CrawlerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -890,8 +890,8 @@ type CrawlerSpec struct {
 
 // CrawlerStatus defines the observed state of Crawler.
 type CrawlerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CrawlerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CrawlerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

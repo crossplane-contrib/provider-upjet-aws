@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedZoneDNSSECInitParameters struct {
@@ -22,11 +21,11 @@ type HostedZoneDNSSECInitParameters struct {
 
 	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDRef *v1.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+	HostedZoneIDRef *v2.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDSelector *v1.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
+	HostedZoneIDSelector *v2.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
 	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`
@@ -53,11 +52,11 @@ type HostedZoneDNSSECParameters struct {
 
 	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDRef *v1.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+	HostedZoneIDRef *v2.NamespacedReference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
-	HostedZoneIDSelector *v1.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
+	HostedZoneIDSelector *v2.NamespacedSelector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
 	// +kubebuilder:validation:Optional
@@ -83,8 +82,8 @@ type HostedZoneDNSSECSpec struct {
 
 // HostedZoneDNSSECStatus defines the observed state of HostedZoneDNSSEC.
 type HostedZoneDNSSECStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedZoneDNSSECObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedZoneDNSSECObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

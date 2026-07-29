@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIDestinationInitParameters struct {
@@ -22,11 +22,11 @@ type APIDestinationInitParameters struct {
 
 	// Reference to a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.Reference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 
 	// The description of the new API Destination. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -78,11 +78,11 @@ type APIDestinationParameters struct {
 
 	// Reference to a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+	ConnectionArnRef *v2.Reference `json:"connectionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in cloudwatchevents to populate connectionArn.
 	// +kubebuilder:validation:Optional
-	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
+	ConnectionArnSelector *v2.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 
 	// The description of the new API Destination. Maximum of 512 characters.
 	// +kubebuilder:validation:Optional
@@ -108,8 +108,8 @@ type APIDestinationParameters struct {
 
 // APIDestinationSpec defines the desired state of APIDestination
 type APIDestinationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     APIDestinationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   APIDestinationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type APIDestinationSpec struct {
 
 // APIDestinationStatus defines the observed state of APIDestination.
 type APIDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PortfolioShareInitParameters struct {
@@ -25,11 +25,11 @@ type PortfolioShareInitParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -94,11 +94,11 @@ type PortfolioShareParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,8 @@ type PortfolioShareParameters struct {
 
 // PortfolioShareSpec defines the desired state of PortfolioShare
 type PortfolioShareSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PortfolioShareParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PortfolioShareParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -145,8 +145,8 @@ type PortfolioShareSpec struct {
 
 // PortfolioShareStatus defines the observed state of PortfolioShare.
 type PortfolioShareStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PortfolioShareObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PortfolioShareObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

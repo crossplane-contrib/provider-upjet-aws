@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TableItemInitParameters struct {
@@ -31,11 +30,11 @@ type TableItemInitParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type TableItemObservation struct {
@@ -91,11 +90,11 @@ type TableItemParameters struct {
 
 	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 // TableItemSpec defines the desired state of TableItem
@@ -117,8 +116,8 @@ type TableItemSpec struct {
 
 // TableItemStatus defines the observed state of TableItem.
 type TableItemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableItemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableItemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

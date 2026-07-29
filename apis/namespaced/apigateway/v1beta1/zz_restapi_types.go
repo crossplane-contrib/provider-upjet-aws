@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RestAPIEndpointConfigurationInitParameters struct {
@@ -30,11 +29,11 @@ type RestAPIEndpointConfigurationInitParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.NamespacedReference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.NamespacedReference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.NamespacedSelector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.NamespacedSelector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIEndpointConfigurationObservation struct {
@@ -69,11 +68,11 @@ type RestAPIEndpointConfigurationParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.NamespacedReference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.NamespacedReference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.NamespacedSelector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.NamespacedSelector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIInitParameters struct {
@@ -281,8 +280,8 @@ type RestAPISpec struct {
 
 // RestAPIStatus defines the observed state of RestAPI.
 type RestAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RestAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RestAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

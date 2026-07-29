@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserGroupInitParameters struct {
@@ -24,11 +24,11 @@ type UserGroupInitParameters struct {
 
 	// References to User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
+	UserIDRefs []v2.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticache/v1beta2.User
@@ -84,11 +84,11 @@ type UserGroupParameters struct {
 
 	// References to User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
+	UserIDRefs []v2.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elasticache/v1beta2.User
@@ -101,8 +101,8 @@ type UserGroupParameters struct {
 
 // UserGroupSpec defines the desired state of UserGroup
 type UserGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type UserGroupSpec struct {
 
 // UserGroupStatus defines the observed state of UserGroup.
 type UserGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

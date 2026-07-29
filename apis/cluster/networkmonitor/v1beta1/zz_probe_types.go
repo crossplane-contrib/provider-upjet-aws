@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProbeInitParameters struct {
@@ -34,11 +34,11 @@ type ProbeInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
+	SourceArnRef *v2.Reference `json:"sourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
+	SourceArnSelector *v2.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -105,11 +105,11 @@ type ProbeParameters struct {
 
 	// Reference to a Monitor in networkmonitor to populate monitorName.
 	// +kubebuilder:validation:Optional
-	MonitorNameRef *v1.Reference `json:"monitorNameRef,omitempty" tf:"-"`
+	MonitorNameRef *v2.Reference `json:"monitorNameRef,omitempty" tf:"-"`
 
 	// Selector for a Monitor in networkmonitor to populate monitorName.
 	// +kubebuilder:validation:Optional
-	MonitorNameSelector *v1.Selector `json:"monitorNameSelector,omitempty" tf:"-"`
+	MonitorNameSelector *v2.Selector `json:"monitorNameSelector,omitempty" tf:"-"`
 
 	// The size of the packets sent between the source and destination. This must be a number between 56 and 8500.
 	// +kubebuilder:validation:Optional
@@ -132,11 +132,11 @@ type ProbeParameters struct {
 
 	// Reference to a Subnet in ec2 to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
+	SourceArnRef *v2.Reference `json:"sourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate sourceArn.
 	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
+	SourceArnSelector *v2.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -146,8 +146,8 @@ type ProbeParameters struct {
 
 // ProbeSpec defines the desired state of Probe
 type ProbeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProbeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProbeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -163,8 +163,8 @@ type ProbeSpec struct {
 
 // ProbeStatus defines the observed state of Probe.
 type ProbeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProbeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProbeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

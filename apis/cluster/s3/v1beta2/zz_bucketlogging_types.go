@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketLoggingInitParameters struct {
@@ -21,11 +21,11 @@ type BucketLoggingInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
@@ -36,11 +36,11 @@ type BucketLoggingInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
-	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+	TargetBucketRef *v2.Reference `json:"targetBucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
-	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
+	TargetBucketSelector *v2.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// Set of configuration blocks with information for granting permissions. See below.
 	TargetGrant []TargetGrantInitParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
@@ -89,11 +89,11 @@ type BucketLoggingParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
@@ -111,11 +111,11 @@ type BucketLoggingParameters struct {
 
 	// Reference to a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
-	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+	TargetBucketRef *v2.Reference `json:"targetBucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate targetBucket.
 	// +kubebuilder:validation:Optional
-	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
+	TargetBucketSelector *v2.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// Set of configuration blocks with information for granting permissions. See below.
 	// +kubebuilder:validation:Optional
@@ -268,8 +268,8 @@ type TargetObjectKeyFormatParameters struct {
 
 // BucketLoggingSpec defines the desired state of BucketLogging
 type BucketLoggingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketLoggingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketLoggingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -285,8 +285,8 @@ type BucketLoggingSpec struct {
 
 // BucketLoggingStatus defines the observed state of BucketLogging.
 type BucketLoggingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketLoggingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketLoggingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

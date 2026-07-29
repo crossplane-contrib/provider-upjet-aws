@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInstanceInitParameters struct {
@@ -34,11 +34,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Indicates whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
@@ -52,11 +52,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate dbParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBParameterGroupNameRef *v1.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
+	DBParameterGroupNameRef *v2.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate dbParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
+	DBParameterGroupNameSelector *v2.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.SubnetGroup
@@ -64,11 +64,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the database engine to be used for the RDS cluster instance.
 	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
@@ -93,11 +93,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -108,11 +108,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
@@ -272,11 +272,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Indicates whether to copy all of the user-defined tags from the DB instance to snapshots of the DB instance. Default false.
 	// +kubebuilder:validation:Optional
@@ -293,11 +293,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate dbParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBParameterGroupNameRef *v1.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
+	DBParameterGroupNameRef *v2.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate dbParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
+	DBParameterGroupNameSelector *v2.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the DB subnet group to associate with this DB instance. The default behavior varies depending on whether db_subnet_group_name is specified. Please refer to official AWS documentation to understand how db_subnet_group_name and publicly_accessible parameters affect DB instance behaviour. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta1.SubnetGroup
@@ -306,11 +306,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the database engine to be used for the RDS cluster instance.
 	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
@@ -341,11 +341,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether Performance Insights is enabled or not. NOTE: When Performance Insights is configured at the cluster level through aws_rds_cluster, this argument cannot be set to a value that conflicts with the cluster's configuration.
 	// +kubebuilder:validation:Optional
@@ -358,11 +358,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
@@ -397,8 +397,8 @@ type ClusterInstanceParameters struct {
 
 // ClusterInstanceSpec defines the desired state of ClusterInstance
 type ClusterInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -414,8 +414,8 @@ type ClusterInstanceSpec struct {
 
 // ClusterInstanceStatus defines the observed state of ClusterInstance.
 type ClusterInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

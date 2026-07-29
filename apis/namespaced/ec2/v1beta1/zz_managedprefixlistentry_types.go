@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedPrefixListEntryInitParameters struct {
@@ -23,11 +22,11 @@ type ManagedPrefixListEntryInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
 
 	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -39,11 +38,11 @@ type ManagedPrefixListEntryInitParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedPrefixListEntryObservation struct {
@@ -75,11 +74,11 @@ type ManagedPrefixListEntryParameters struct {
 
 	// Reference to a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
 
 	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
 	// +kubebuilder:validation:Optional
@@ -93,11 +92,11 @@ type ManagedPrefixListEntryParameters struct {
 
 	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRef *v1.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
+	PrefixListIDRef *v2.NamespacedReference `json:"prefixListIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.NamespacedSelector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -124,8 +123,8 @@ type ManagedPrefixListEntrySpec struct {
 
 // ManagedPrefixListEntryStatus defines the observed state of ManagedPrefixListEntry.
 type ManagedPrefixListEntryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedPrefixListEntryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedPrefixListEntryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

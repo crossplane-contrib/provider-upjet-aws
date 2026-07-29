@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessConfigInitParameters struct {
@@ -163,11 +162,11 @@ type EventSourceMappingInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// List of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +listType=set
@@ -179,11 +178,11 @@ type EventSourceMappingInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
@@ -402,11 +401,11 @@ type EventSourceMappingParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// List of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +kubebuilder:validation:Optional
@@ -420,11 +419,11 @@ type EventSourceMappingParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	// +kubebuilder:validation:Optional
@@ -571,11 +570,11 @@ type OnFailureInitParameters struct {
 
 	// Reference to a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
 }
 
 type OnFailureObservation struct {
@@ -594,11 +593,11 @@ type OnFailureParameters struct {
 
 	// Reference to a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnRef *v1.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
+	DestinationArnRef *v2.NamespacedReference `json:"destinationArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destinationArn.
 	// +kubebuilder:validation:Optional
-	DestinationArnSelector *v1.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
+	DestinationArnSelector *v2.NamespacedSelector `json:"destinationArnSelector,omitempty" tf:"-"`
 }
 
 type ProvisionedPollerConfigInitParameters struct {
@@ -923,8 +922,8 @@ type EventSourceMappingSpec struct {
 
 // EventSourceMappingStatus defines the observed state of EventSourceMapping.
 type EventSourceMappingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSourceMappingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSourceMappingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

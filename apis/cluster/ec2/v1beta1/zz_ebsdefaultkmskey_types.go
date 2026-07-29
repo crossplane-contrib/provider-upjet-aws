@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EBSDefaultKMSKeyInitParameters struct {
@@ -22,11 +22,11 @@ type EBSDefaultKMSKeyInitParameters struct {
 
 	// Reference to a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnRef *v1.Reference `json:"keyArnRef,omitempty" tf:"-"`
+	KeyArnRef *v2.Reference `json:"keyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnSelector *v1.Selector `json:"keyArnSelector,omitempty" tf:"-"`
+	KeyArnSelector *v2.Selector `json:"keyArnSelector,omitempty" tf:"-"`
 }
 
 type EBSDefaultKMSKeyObservation struct {
@@ -50,11 +50,11 @@ type EBSDefaultKMSKeyParameters struct {
 
 	// Reference to a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnRef *v1.Reference `json:"keyArnRef,omitempty" tf:"-"`
+	KeyArnRef *v2.Reference `json:"keyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnSelector *v1.Selector `json:"keyArnSelector,omitempty" tf:"-"`
+	KeyArnSelector *v2.Selector `json:"keyArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -64,8 +64,8 @@ type EBSDefaultKMSKeyParameters struct {
 
 // EBSDefaultKMSKeySpec defines the desired state of EBSDefaultKMSKey
 type EBSDefaultKMSKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EBSDefaultKMSKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EBSDefaultKMSKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type EBSDefaultKMSKeySpec struct {
 
 // EBSDefaultKMSKeyStatus defines the observed state of EBSDefaultKMSKey.
 type EBSDefaultKMSKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EBSDefaultKMSKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EBSDefaultKMSKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

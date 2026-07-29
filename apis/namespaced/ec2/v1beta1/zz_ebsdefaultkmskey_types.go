@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EBSDefaultKMSKeyInitParameters struct {
@@ -23,11 +22,11 @@ type EBSDefaultKMSKeyInitParameters struct {
 
 	// Reference to a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnRef *v1.NamespacedReference `json:"keyArnRef,omitempty" tf:"-"`
+	KeyArnRef *v2.NamespacedReference `json:"keyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnSelector *v1.NamespacedSelector `json:"keyArnSelector,omitempty" tf:"-"`
+	KeyArnSelector *v2.NamespacedSelector `json:"keyArnSelector,omitempty" tf:"-"`
 }
 
 type EBSDefaultKMSKeyObservation struct {
@@ -51,11 +50,11 @@ type EBSDefaultKMSKeyParameters struct {
 
 	// Reference to a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnRef *v1.NamespacedReference `json:"keyArnRef,omitempty" tf:"-"`
+	KeyArnRef *v2.NamespacedReference `json:"keyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyArn.
 	// +kubebuilder:validation:Optional
-	KeyArnSelector *v1.NamespacedSelector `json:"keyArnSelector,omitempty" tf:"-"`
+	KeyArnSelector *v2.NamespacedSelector `json:"keyArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -82,8 +81,8 @@ type EBSDefaultKMSKeySpec struct {
 
 // EBSDefaultKMSKeyStatus defines the observed state of EBSDefaultKMSKey.
 type EBSDefaultKMSKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EBSDefaultKMSKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EBSDefaultKMSKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

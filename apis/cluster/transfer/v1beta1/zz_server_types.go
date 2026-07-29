@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EndpointDetailsInitParameters struct {
@@ -23,11 +23,11 @@ type EndpointDetailsInitParameters struct {
 
 	// References to EIP in ec2 to populate addressAllocationIds.
 	// +kubebuilder:validation:Optional
-	AddressAllocationIdsRefs []v1.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
+	AddressAllocationIdsRefs []v2.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate addressAllocationIds.
 	// +kubebuilder:validation:Optional
-	AddressAllocationIdsSelector *v1.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
+	AddressAllocationIdsSelector *v2.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
 
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
@@ -41,11 +41,11 @@ type EndpointDetailsInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
@@ -57,11 +57,11 @@ type EndpointDetailsInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type EndpointDetailsObservation struct {
@@ -96,11 +96,11 @@ type EndpointDetailsParameters struct {
 
 	// References to EIP in ec2 to populate addressAllocationIds.
 	// +kubebuilder:validation:Optional
-	AddressAllocationIdsRefs []v1.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
+	AddressAllocationIdsRefs []v2.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate addressAllocationIds.
 	// +kubebuilder:validation:Optional
-	AddressAllocationIdsSelector *v1.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
+	AddressAllocationIdsSelector *v2.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
 
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
@@ -116,11 +116,11 @@ type EndpointDetailsParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	// +kubebuilder:validation:Optional
@@ -134,11 +134,11 @@ type EndpointDetailsParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type OnPartialUploadInitParameters struct {
@@ -279,11 +279,11 @@ type ServerInitParameters struct {
 
 	// Reference to a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
-	CertificateRef *v1.Reference `json:"certificateRef,omitempty" tf:"-"`
+	CertificateRef *v2.Reference `json:"certificateRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
-	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
+	CertificateSelector *v2.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
@@ -292,11 +292,11 @@ type ServerInitParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
@@ -314,7 +314,7 @@ type ServerInitParameters struct {
 	Function *string `json:"function,omitempty" tf:"function,omitempty"`
 
 	// RSA, ECDSA, or ED25519 private key (e.g., as generated by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key, ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key or ssh-keygen -t ed25519 -N "" -f my-new-server-key commands).
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Type of IP addresses for the AWS Transfer Family endpoint. Valid values are IPV4 and DUALSTACK. The default value is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids cannot be specified in the endpoint_details block. Updating ip_address_type stops the server and then restarts it with the new ip_address_type value.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
@@ -332,17 +332,17 @@ type ServerInitParameters struct {
 
 	// Reference to a Role in iam to populate loggingRole.
 	// +kubebuilder:validation:Optional
-	LoggingRoleRef *v1.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
+	LoggingRoleRef *v2.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate loggingRole.
 	// +kubebuilder:validation:Optional
-	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
+	LoggingRoleSelector *v2.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
 
 	// Specify a string to display when users connect to a server. This string is displayed after the user authenticates. The SFTP protocol does not support post-authentication display banners.
-	PostAuthenticationLoginBannerSecretRef *v1.SecretKeySelector `json:"postAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
+	PostAuthenticationLoginBannerSecretRef *v2.SecretKeySelector `json:"postAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
 	// Specify a string to display when users connect to a server. This string is displayed before the user authenticates.
-	PreAuthenticationLoginBannerSecretRef *v1.SecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
+	PreAuthenticationLoginBannerSecretRef *v2.SecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
 	// The protocol settings that are configured for your server. See protocol_details Block below for details.
 	ProtocolDetails []ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
@@ -473,11 +473,11 @@ type ServerParameters struct {
 
 	// Reference to a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
-	CertificateRef *v1.Reference `json:"certificateRef,omitempty" tf:"-"`
+	CertificateRef *v2.Reference `json:"certificateRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificate.
 	// +kubebuilder:validation:Optional
-	CertificateSelector *v1.Selector `json:"certificateSelector,omitempty" tf:"-"`
+	CertificateSelector *v2.Selector `json:"certificateSelector,omitempty" tf:"-"`
 
 	// The directory service ID of the directory service you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ds/v1beta1.Directory
@@ -487,11 +487,11 @@ type ServerParameters struct {
 
 	// Reference to a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+	DirectoryIDRef *v2.Reference `json:"directoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Directory in ds to populate directoryId.
 	// +kubebuilder:validation:Optional
-	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+	DirectoryIDSelector *v2.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	// +kubebuilder:validation:Optional
@@ -515,7 +515,7 @@ type ServerParameters struct {
 
 	// RSA, ECDSA, or ED25519 private key (e.g., as generated by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key, ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key or ssh-keygen -t ed25519 -N "" -f my-new-server-key commands).
 	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Type of IP addresses for the AWS Transfer Family endpoint. Valid values are IPV4 and DUALSTACK. The default value is IPV4. When ip_address_type is set to DUALSTACK, address_allocation_ids cannot be specified in the endpoint_details block. Updating ip_address_type stops the server and then restarts it with the new ip_address_type value.
 	// +kubebuilder:validation:Optional
@@ -537,19 +537,19 @@ type ServerParameters struct {
 
 	// Reference to a Role in iam to populate loggingRole.
 	// +kubebuilder:validation:Optional
-	LoggingRoleRef *v1.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
+	LoggingRoleRef *v2.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate loggingRole.
 	// +kubebuilder:validation:Optional
-	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
+	LoggingRoleSelector *v2.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
 
 	// Specify a string to display when users connect to a server. This string is displayed after the user authenticates. The SFTP protocol does not support post-authentication display banners.
 	// +kubebuilder:validation:Optional
-	PostAuthenticationLoginBannerSecretRef *v1.SecretKeySelector `json:"postAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
+	PostAuthenticationLoginBannerSecretRef *v2.SecretKeySelector `json:"postAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
 	// Specify a string to display when users connect to a server. This string is displayed before the user authenticates.
 	// +kubebuilder:validation:Optional
-	PreAuthenticationLoginBannerSecretRef *v1.SecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
+	PreAuthenticationLoginBannerSecretRef *v2.SecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
 	// The protocol settings that are configured for your server. See protocol_details Block below for details.
 	// +kubebuilder:validation:Optional
@@ -628,8 +628,8 @@ type WorkflowDetailsParameters struct {
 
 // ServerSpec defines the desired state of Server
 type ServerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -645,8 +645,8 @@ type ServerSpec struct {
 
 // ServerStatus defines the observed state of Server.
 type ServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

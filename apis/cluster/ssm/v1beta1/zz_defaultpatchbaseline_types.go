@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultPatchBaselineInitParameters struct {
@@ -24,11 +24,11 @@ type DefaultPatchBaselineInitParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.Reference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.Reference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
@@ -52,11 +52,11 @@ type DefaultPatchBaselineInitParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemRef *v1.Reference `json:"operatingSystemRef,omitempty" tf:"-"`
+	OperatingSystemRef *v2.Reference `json:"operatingSystemRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemSelector *v1.Selector `json:"operatingSystemSelector,omitempty" tf:"-"`
+	OperatingSystemSelector *v2.Selector `json:"operatingSystemSelector,omitempty" tf:"-"`
 }
 
 type DefaultPatchBaselineObservation struct {
@@ -103,11 +103,11 @@ type DefaultPatchBaselineParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.Reference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.Reference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
@@ -132,11 +132,11 @@ type DefaultPatchBaselineParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemRef *v1.Reference `json:"operatingSystemRef,omitempty" tf:"-"`
+	OperatingSystemRef *v2.Reference `json:"operatingSystemRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemSelector *v1.Selector `json:"operatingSystemSelector,omitempty" tf:"-"`
+	OperatingSystemSelector *v2.Selector `json:"operatingSystemSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -146,8 +146,8 @@ type DefaultPatchBaselineParameters struct {
 
 // DefaultPatchBaselineSpec defines the desired state of DefaultPatchBaseline
 type DefaultPatchBaselineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DefaultPatchBaselineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DefaultPatchBaselineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -163,8 +163,8 @@ type DefaultPatchBaselineSpec struct {
 
 // DefaultPatchBaselineStatus defines the observed state of DefaultPatchBaseline.
 type DefaultPatchBaselineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultPatchBaselineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultPatchBaselineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
