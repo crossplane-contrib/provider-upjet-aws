@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: account.aws.upbound.io/v1beta1
+kind: PrimaryContact
+metadata:
+  annotations:
+    meta.upbound.io/example-id: account/v1beta1/primarycontact
+    # crossplane.io/external-name must be set to the AWS account ID.
+    # Required when using managementPolicies: [Observe] or importing an existing resource.
+    # For normal Create/Update/Delete usage this annotation is set automatically after the first apply.
+    # crossplane.io/external-name: "123456789012"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  managementPolicies: ["Observe"]
+  forProvider:
+    addressLine1: 123 Main St
+    city: Seattle
+    countryCode: US
+    fullName: Jane Doe
+    phoneNumber: "+15555550100"
+    postalCode: "98101"
+    stateOrRegion: WA

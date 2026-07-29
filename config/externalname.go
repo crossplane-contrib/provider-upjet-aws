@@ -267,6 +267,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// The Alternate Contact for the current account can be imported using the alternate_contact_type
 	"aws_account_alternate_contact": config.TemplatedStringAsIdentifier("", "{{ .parameters.alternate_contact_type }}"),
+	// The Primary Contact for the current account can be imported using the account_id
+	"aws_account_primary_contact": config.IdentifierFromProvider,
 	// The account region can be imported using region_name or a comma separated account_id and region_name
 	"aws_account_region": config.TemplatedStringAsIdentifier("", "{{ .parameters.region_name }}"),
 
