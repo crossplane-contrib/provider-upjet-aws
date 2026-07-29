@@ -59,13 +59,9 @@ type BucketNotificationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Used to configure notifications to a Lambda Function. See below.
-	// +listType=map
-	// +listMapKey=index
 	LambdaFunction []LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
 
 	// Notification configuration to SQS Queue. See below.
-	// +listType=map
-	// +listMapKey=index
 	Queue []QueueObservation `json:"queue,omitempty" tf:"queue,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -73,8 +69,6 @@ type BucketNotificationObservation struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Notification configuration to SNS Topic. See below.
-	// +listType=map
-	// +listMapKey=index
 	Topic []TopicObservation `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -161,7 +155,6 @@ type LambdaFunctionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
 	Index *string `json:"index,omitempty" tf:"-"`
 
 	// Lambda function ARN.
@@ -246,7 +239,6 @@ type QueueObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
 	Index *string `json:"index,omitempty" tf:"-"`
 
 	// SQS queue ARN.
@@ -341,7 +333,6 @@ type TopicObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// This is an injected field with a default value for being able to merge items of the parent object list.
-	// +kubebuilder:default:="0"
 	Index *string `json:"index,omitempty" tf:"-"`
 
 	// SNS topic ARN.

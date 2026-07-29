@@ -870,7 +870,6 @@ spec:
                             configurations.
                           type: string
                         index:
-                          default: "0"
                           description: This is an injected field with a default value
                             for being able to merge items of the parent object list.
                           type: string
@@ -879,9 +878,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   queue:
                     description: Notification configuration to SQS Queue. See below.
                     items:
@@ -903,7 +899,6 @@ spec:
                             configurations.
                           type: string
                         index:
-                          default: "0"
                           description: This is an injected field with a default value
                             for being able to merge items of the parent object list.
                           type: string
@@ -912,9 +907,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -941,7 +933,6 @@ spec:
                             configurations.
                           type: string
                         index:
-                          default: "0"
                           description: This is an injected field with a default value
                             for being able to merge items of the parent object list.
                           type: string
@@ -950,9 +941,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                    x-kubernetes-list-map-keys:
-                    - index
-                    x-kubernetes-list-type: map
                 type: object
               conditions:
                 description: Conditions of the resource.
