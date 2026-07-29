@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	alternatecontact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/alternatecontact"
+	"github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/primarycontact"
 	region "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/region"
 )
 
@@ -18,6 +19,7 @@ import (
 func Setup_account(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alternatecontact.Setup,
+		primarycontact.Setup,
 		region.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -32,6 +34,7 @@ func Setup_account(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_account(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		alternatecontact.SetupGated,
+		primarycontact.SetupGated,
 		region.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -45,6 +48,7 @@ func SetupGated_account(mgr ctrl.Manager, o controller.Options) error {
 func SetupWebhookWithManager_account(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		alternatecontact.SetupWebhookWithManager,
+		primarycontact.SetupWebhookWithManager,
 		region.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
