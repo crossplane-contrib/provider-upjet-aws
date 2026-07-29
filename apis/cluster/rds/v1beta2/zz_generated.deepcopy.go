@@ -2337,6 +2337,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
 		*out = new(float64)
@@ -3341,6 +3351,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
