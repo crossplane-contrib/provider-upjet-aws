@@ -924,6 +924,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -1211,6 +1216,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
@@ -2149,6 +2164,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -2950,6 +2970,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutoMinorVersionUpgrade != nil {
+		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -3237,6 +3262,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
@@ -6358,6 +6393,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
 		*out = new(float64)
@@ -7394,6 +7439,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyIDRef != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDRef, &out.PerformanceInsightsKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PerformanceInsightsKMSKeyIDSelector != nil {
+		in, out := &in.PerformanceInsightsKMSKeyIDSelector, &out.PerformanceInsightsKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PerformanceInsightsRetentionPeriod != nil {
 		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod

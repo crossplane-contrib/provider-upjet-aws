@@ -38,3 +38,6 @@ func (tr *Permission) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProvisionedConcurrencyConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *RuntimeManagementConfig) Hub() {}

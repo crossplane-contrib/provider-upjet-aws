@@ -447,6 +447,14 @@ type EnvironmentInitParameters struct {
 	// Configuration block. Detailed below.
 	Fleet *FleetInitParameters `json:"fleet,omitempty" tf:"fleet,omitempty"`
 
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
+
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (
 	// e.g aws/codebuild/amazonlinux2-x86_64-standard:4.0), Docker Hub images (e.g.g.,
@@ -491,6 +499,14 @@ type EnvironmentObservation struct {
 
 	// Configuration block. Detailed below.
 	Fleet *FleetObservation `json:"fleet,omitempty" tf:"fleet,omitempty"`
+
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
 
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (
@@ -541,6 +557,15 @@ type EnvironmentParameters struct {
 	// Configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
 	Fleet *FleetParameters `json:"fleet,omitempty" tf:"fleet,omitempty"`
+
+	// Host operating system kernel used for on-demand builds in the build project. This setting
+	// controls the kernel of the underlying build host. It does not change the build environment operating system, which is
+	// determined by the image you specify. Valid values: LINUX_KERNEL_4 (runs on an Amazon Linux 2 host, kernel 4.x),
+	// LINUX_KERNEL_6 (runs on an Amazon Linux 2023 host, kernel 6.x), LINUX_KERNEL_LATEST (runs on the latest supported
+	// host kernel). Applies to the LINUX_CONTAINER, ARM_CONTAINER, LINUX_EC2, and ARM_EC2 environment types; not
+	// applicable to Windows, Lambda, or Mac environment types. If not specified, CodeBuild selects a default.
+	// +kubebuilder:validation:Optional
+	HostKernel *string `json:"hostKernel,omitempty" tf:"host_kernel,omitempty"`
 
 	// Docker image to use for this build project. Valid values
 	// include Docker images provided by CodeBuild (

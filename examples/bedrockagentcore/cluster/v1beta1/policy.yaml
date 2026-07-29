@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Cedar Policy Example
+# Attaches an inline Cedar authorization rule to a Policy Engine, which
+# evaluates it at runtime to control agent access to resources. Includes the
+# Policy Engine dependency referenced via selector.
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_policy
+    description: Allow access to AgentCore Gateway resources
+    validationMode: IGNORE_ALL_FINDINGS
+    policyEngineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    definition:
+      cedar:
+        statement: |
+          forbid(
+            principal is AgentCore::IamEntity,
+            action,
+            resource is AgentCore::Gateway,
+          )
+          when {
+            principal.hasTag("username") &&
+            principal.getTag("username") == "John" &&
+            context.input.amount < 600
+          };
+---
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: PolicyEngine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy-engine
+spec:
+  forProvider:
+    region: us-west-2
+    name: example_policy_engine
+    description: Policy engine for policy example
+---

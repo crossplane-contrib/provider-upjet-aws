@@ -321,7 +321,7 @@ type RecordObservation struct {
 	// A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below.
 	FailoverRoutingPolicy *FailoverRoutingPolicyObservation `json:"failoverRoutingPolicy,omitempty" tf:"failover_routing_policy,omitempty"`
 
-	// FQDN built using the zone domain and name.
+	// FQDN built using the zone domain and name. Does not include trailing ..
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.

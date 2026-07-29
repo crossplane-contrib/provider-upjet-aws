@@ -41,6 +41,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// bedrock
 	//
+	// Bedrock Guardrail can be imported using the composite ID: guardrail_id,version
+	"aws_bedrock_guardrail": bedrockGuardrail(),
 	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
 	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
 
@@ -57,14 +59,26 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_bedrockagentcore_api_key_credential_provider": frameworkNameAsIdentifier(),
 	"aws_bedrockagentcore_browser":                     config.FrameworkResourceWithComputedIdentifier("browser_id", "stub_browser_xp_szn45-n7uhLDeK0u"),
 	"aws_bedrockagentcore_code_interpreter":            config.FrameworkResourceWithComputedIdentifier("code_interpreter_id", "stub_code_interpreter_tool_xp_123abc-QJBfJmqq7c"),
-	"aws_bedrockagentcore_gateway":                     config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
-	"aws_bedrockagentcore_gateway_target":              config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// imported via evaluator_id, must match regex [a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_evaluator":      config.FrameworkResourceWithComputedIdentifier("evaluator_id", "xp_stub_evaluator-0000000000"),
+	"aws_bedrockagentcore_gateway":        config.FrameworkResourceWithComputedIdentifier("gateway_id", "gateway-stub-crossplane-x00x0x-xx0x0xx0xx"),
+	"aws_bedrockagentcore_gateway_target": config.FrameworkResourceWithComputedIdentifier("target_id", "XXXXXXXX11"),
+	// must match regex [a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_harness": config.FrameworkResourceWithComputedIdentifier("harness_id", "xp_stub_harness-0000000000"),
 	// import using ID of memory, must satisfy regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
 	"aws_bedrockagentcore_memory":                     identifierFromProviderWithDefaultStub("stub_memory_placeholder_xp-stub123456"),
 	"aws_bedrockagentcore_memory_strategy":            config.FrameworkResourceWithComputedIdentifier("memory_strategy_id", "STUB123456"),
 	"aws_bedrockagentcore_oauth2_credential_provider": frameworkNameAsIdentifier(),
-	"aws_bedrockagentcore_token_vault_cmk":            bedrockAgentCoreTokenVaultCMK(),
-	"aws_bedrockagentcore_workload_identity":          frameworkNameAsIdentifier(),
+	// must match regex [a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}
+	"aws_bedrockagentcore_online_evaluation_config": config.FrameworkResourceWithComputedIdentifier("online_evaluation_config_id", "xp_stub_evalconfig-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy": config.FrameworkResourceWithComputedIdentifier("policy_id", "xp_stub_policy_00000-0000000000"),
+	// must match regex ^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$
+	"aws_bedrockagentcore_policy_engine": config.FrameworkResourceWithComputedIdentifier("policy_engine_id", "xp_stub_policy_engine-0000000000"),
+	// import using the resourceArn of the target Gateway or AgentRuntime
+	"aws_bedrockagentcore_resource_policy":   bedrockAgentCoreResourcePolicy(),
+	"aws_bedrockagentcore_token_vault_cmk":   bedrockAgentCoreTokenVaultCMK(),
+	"aws_bedrockagentcore_workload_identity": frameworkNameAsIdentifier(),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
@@ -127,6 +141,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// single MSK SCRAM secret associations can be imported using cluster_arn and secret_arn, separated by a comma (,)
 	"aws_msk_single_scram_secret_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_arn }},{{ .parameters.secret_arn }}"),
+
+	// lambda
+	//
+	// Lambda Runtime Management Config can be imported using function_name and qualifier, separated by a comma (,)
+	"aws_lambda_runtime_management_config": lambdaRuntimeManagementConfig(),
 
 	// memorydb
 	//
@@ -3696,6 +3715,34 @@ func s3BucketIdentifier() config.ExternalName {
 	return e
 }
 
+// lambdaRuntimeManagementConfig handles the external-name of the
+// aws_lambda_runtime_management_config resource. It is a
+// terraform-plugin-framework resource without an "id" attribute, imported
+// using "function_name,qualifier" (qualifier defaults to "$LATEST" when
+// omitted). function_name and qualifier stay regular spec fields so that the
+// function_name reference resolves and an explicit qualifier reaches
+// Terraform; only the external-name computation is customized here.
+func lambdaRuntimeManagementConfig() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// The resource has no monolithic "id" attribute, so do not push one into
+	// the Terraform state.
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		functionName, ok := tfstate["function_name"].(string)
+		if !ok || functionName == "" {
+			return "", errors.New("function_name field missing from tfstate")
+		}
+		qualifier, _ := tfstate["qualifier"].(string)
+		if qualifier == "" {
+			qualifier = "$LATEST"
+		}
+		return fmt.Sprintf("%s,%s", functionName, qualifier), nil
+	}
+	return e
+}
+
 func dsqlClusterPeering() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -3767,6 +3814,54 @@ func wafv2WebACLRuleGroupAssociation() config.ExternalName {
 		}
 
 		return "", errors.New("either rule_group_reference or managed_rule_group must be present in state file")
+	}
+	return e
+}
+
+// bedrockGuardrail configures the external name for aws_bedrock_guardrail, a
+//
+//	. Its Terraform identity is the composite
+//
+// "guardrail_id,version" where both parts are computed by AWS: guardrail_id is
+// the AWS-assigned identifier and version is computed (defaults to "DRAFT").
+// The external name is therefore the joined "guardrail_id,version" string and
+// no user-supplied name is involved.
+func bedrockGuardrail() config.ExternalName { //nolint:gocyclo // easier to follow as a unit
+	const (
+		sep             = ","
+		stubGuardrailID = "xpstubguardrail0"
+		stubVersion     = "DRAFT"
+	)
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["guardrail_id"].(string)
+		if !ok || id == "" {
+			return "", errors.New("cannot find \"guardrail_id\" in tfstate")
+		}
+		version, ok := tfstate["version"].(string)
+		if !ok || version == "" {
+			return "", errors.New("cannot find \"version\" in tfstate")
+		}
+		return id + sep + version, nil
+	}
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		guardrailID, version := stubGuardrailID, stubVersion
+		if externalName != "" {
+			parts := strings.SplitN(externalName, sep, 2)
+			if len(parts) != 2 {
+				return
+			}
+			guardrailID, version = parts[0], parts[1]
+		}
+		if v, ok := base["guardrail_id"].(string); !ok || v == "" || v == stubGuardrailID {
+			base["guardrail_id"] = guardrailID
+		}
+		if v, ok := base["version"].(string); !ok || v == "" || v == stubVersion {
+			base["version"] = version
+		}
+	}
+	e.TFPluginFrameworkOptions = config.TFPluginFrameworkOptions{
+		ComputedIdentifierAttributes: []string{"guardrail_id", "version"},
 	}
 	return e
 }
@@ -3847,6 +3942,29 @@ func bedrockAgentCoreAgentRuntimeEndpoint() config.ExternalName {
 		return fmt.Sprintf("%s:%s", agentRuntimeId, name), nil
 	}
 	e.IdentifierFields = []string{"name", "agent_runtime_id"}
+	return e
+}
+
+func bedrockAgentCoreResourcePolicy() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.OmittedFields = []string{}
+	e.GetIDFn = func(_ context.Context, _ string, _ map[string]any, _ map[string]any) (string, error) {
+		return "", nil
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		name, ok := tfstate["resource_arn"].(string)
+		if !ok {
+			return "", errors.New("resource_arn field missing from tfstate")
+		}
+		return name, nil
+	}
+	e.SetIdentifierArgumentFn = func(tfstate map[string]any, externalName string) {
+		if externalName == "" {
+			return
+		}
+		tfstate["resource_arn"] = externalName
+	}
+	e.IdentifierFields = []string{"resource_arn"}
 	return e
 }
 

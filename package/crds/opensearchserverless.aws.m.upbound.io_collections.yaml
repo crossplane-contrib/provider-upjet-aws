@@ -72,98 +72,96 @@ spec:
                   encryptionConfig:
                     description: Configuration block for direct collection encryption
                       settings. See encryption_config below for details.
-                    items:
-                      properties:
-                        awsOwnedKey:
-                          description: Whether to use an AWS owned key for collection
-                            encryption.
-                          type: boolean
-                        kmsKeyArn:
-                          description: ARN of the AWS KMS key to use for collection
-                            encryption.
-                          type: string
-                        kmsKeyArnRef:
-                          description: Reference to a Key in kms to populate kmsKeyArn.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            namespace:
-                              description: Namespace of the referenced object
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        kmsKeyArnSelector:
-                          description: Selector for a Key in kms to populate kmsKeyArn.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
+                    properties:
+                      awsOwnedKey:
+                        description: Whether to use an AWS owned key for collection
+                          encryption.
+                        type: boolean
+                      kmsKeyArn:
+                        description: ARN of the AWS KMS key to use for collection
+                          encryption.
+                        type: string
+                      kmsKeyArnRef:
+                        description: Reference to a Key in kms to populate kmsKeyArn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
                                 type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            namespace:
-                              description: Namespace for the selector
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      kmsKeyArnSelector:
+                        description: Selector for a Key in kms to populate kmsKeyArn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
                               type: string
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                      type: object
-                    type: array
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   name:
                     description: |-
                       Name of the collection.
@@ -194,14 +192,12 @@ spec:
                     description: Configuration block for vector search options. Only
                       valid when type is VECTORSEARCH. See vector_options below for
                       details.
-                    items:
-                      properties:
-                        serverlessVectorAcceleration:
-                          description: Status of serverless vector acceleration for
-                            the collection. One of ENABLED, DISABLED, or ALLOWED.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      serverlessVectorAcceleration:
+                        description: Status of serverless vector acceleration for
+                          the collection. One of ENABLED, DISABLED, or ALLOWED.
+                        type: string
+                    type: object
                 required:
                 - region
                 type: object
@@ -231,98 +227,96 @@ spec:
                   encryptionConfig:
                     description: Configuration block for direct collection encryption
                       settings. See encryption_config below for details.
-                    items:
-                      properties:
-                        awsOwnedKey:
-                          description: Whether to use an AWS owned key for collection
-                            encryption.
-                          type: boolean
-                        kmsKeyArn:
-                          description: ARN of the AWS KMS key to use for collection
-                            encryption.
-                          type: string
-                        kmsKeyArnRef:
-                          description: Reference to a Key in kms to populate kmsKeyArn.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            namespace:
-                              description: Namespace of the referenced object
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        kmsKeyArnSelector:
-                          description: Selector for a Key in kms to populate kmsKeyArn.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
+                    properties:
+                      awsOwnedKey:
+                        description: Whether to use an AWS owned key for collection
+                          encryption.
+                        type: boolean
+                      kmsKeyArn:
+                        description: ARN of the AWS KMS key to use for collection
+                          encryption.
+                        type: string
+                      kmsKeyArnRef:
+                        description: Reference to a Key in kms to populate kmsKeyArn.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          namespace:
+                            description: Namespace of the referenced object
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
                                 type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            namespace:
-                              description: Namespace for the selector
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      kmsKeyArnSelector:
+                        description: Selector for a Key in kms to populate kmsKeyArn.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
                               type: string
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                      type: object
-                    type: array
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          namespace:
+                            description: Namespace for the selector
+                            type: string
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   name:
                     description: |-
                       Name of the collection.
@@ -348,14 +342,12 @@ spec:
                     description: Configuration block for vector search options. Only
                       valid when type is VECTORSEARCH. See vector_options below for
                       details.
-                    items:
-                      properties:
-                        serverlessVectorAcceleration:
-                          description: Status of serverless vector acceleration for
-                            the collection. One of ENABLED, DISABLED, or ALLOWED.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      serverlessVectorAcceleration:
+                        description: Status of serverless vector acceleration for
+                          the collection. One of ENABLED, DISABLED, or ALLOWED.
+                        type: string
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -451,18 +443,16 @@ spec:
                   encryptionConfig:
                     description: Configuration block for direct collection encryption
                       settings. See encryption_config below for details.
-                    items:
-                      properties:
-                        awsOwnedKey:
-                          description: Whether to use an AWS owned key for collection
-                            encryption.
-                          type: boolean
-                        kmsKeyArn:
-                          description: ARN of the AWS KMS key to use for collection
-                            encryption.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      awsOwnedKey:
+                        description: Whether to use an AWS owned key for collection
+                          encryption.
+                        type: boolean
+                      kmsKeyArn:
+                        description: ARN of the AWS KMS key to use for collection
+                          encryption.
+                        type: string
+                    type: object
                   id:
                     description: Unique identifier for the collection.
                     type: string
@@ -508,14 +498,12 @@ spec:
                     description: Configuration block for vector search options. Only
                       valid when type is VECTORSEARCH. See vector_options below for
                       details.
-                    items:
-                      properties:
-                        serverlessVectorAcceleration:
-                          description: Status of serverless vector acceleration for
-                            the collection. One of ENABLED, DISABLED, or ALLOWED.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      serverlessVectorAcceleration:
+                        description: Status of serverless vector acceleration for
+                          the collection. One of ENABLED, DISABLED, or ALLOWED.
+                        type: string
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -149,6 +149,29 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the hosting environment.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -204,6 +227,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   description:
@@ -232,6 +365,88 @@ spec:
                               description: ARN of the Amazon S3 Files access point
                                 to mount into the agent runtime.
                               type: string
+                            accessPointArnRef:
+                              description: Reference to a AccessPoint in efs to populate
+                                accessPointArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            accessPointArnSelector:
+                              description: Selector for a AccessPoint in efs to populate
+                                accessPointArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
                             mountPath:
                               description: Mount path for the S3 Files access point
                                 inside the agent runtime. Must be under /mnt with
@@ -248,6 +463,88 @@ spec:
                               description: ARN of the Amazon S3 Files access point
                                 to mount into the agent runtime.
                               type: string
+                            accessPointArnRef:
+                              description: Reference to a AccessPoint in s3control
+                                to populate accessPointArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            accessPointArnSelector:
+                              description: Selector for a AccessPoint in s3control
+                                to populate accessPointArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
                             mountPath:
                               description: Mount path for the S3 Files access point
                                 inside the agent runtime. Must be under /mnt with
@@ -528,6 +825,29 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the hosting environment.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -583,6 +903,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   description:
@@ -611,6 +1041,88 @@ spec:
                               description: ARN of the Amazon S3 Files access point
                                 to mount into the agent runtime.
                               type: string
+                            accessPointArnRef:
+                              description: Reference to a AccessPoint in efs to populate
+                                accessPointArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            accessPointArnSelector:
+                              description: Selector for a AccessPoint in efs to populate
+                                accessPointArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
                             mountPath:
                               description: Mount path for the S3 Files access point
                                 inside the agent runtime. Must be under /mnt with
@@ -627,6 +1139,88 @@ spec:
                               description: ARN of the Amazon S3 Files access point
                                 to mount into the agent runtime.
                               type: string
+                            accessPointArnRef:
+                              description: Reference to a AccessPoint in s3control
+                                to populate accessPointArn.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the referenced object
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            accessPointArnSelector:
+                              description: Selector for a AccessPoint in s3control
+                                to populate accessPointArn.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                namespace:
+                                  description: Namespace for the selector
+                                  type: string
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
                             mountPath:
                               description: Mount path for the S3 Files access point
                                 inside the agent runtime. Must be under /mnt with
@@ -964,6 +1558,29 @@ spec:
                               type: string
                             type: array
                             x-kubernetes-list-type: set
+                          allowedWorkloadConfiguration:
+                            description: Configuration restricting which workloads
+                              may use this authorizer. See allowed_workload_configuration
+                              below.
+                            properties:
+                              hostingEnvironment:
+                                description: Hosting environments allowed to use the
+                                  authorizer. Between 1 and 10 entries. See hosting_environment
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the hosting environment.
+                                      type: string
+                                  type: object
+                                type: array
+                              workloadIdentities:
+                                description: List of workload identity names allowed
+                                  to use the authorizer. Between 1 and 10 entries.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
@@ -1019,6 +1636,116 @@ spec:
                             description: URL used to fetch OpenID Connect configuration
                               or authorization server metadata. Must end with .well-known/openid-configuration.
                             type: string
+                          privateEndpoint:
+                            description: Private endpoint used to reach the authorization
+                              server. See private_endpoint below.
+                            properties:
+                              managedVpcResource:
+                                description: Managed VPC resource configuration. See
+                                  managed_vpc_resource below.
+                                properties:
+                                  endpointIpAddressType:
+                                    description: IP address type for the endpoint.
+                                      Valid values are IPV4 and IPV6.
+                                    type: string
+                                  routingDomain:
+                                    description: Routing domain for the endpoint.
+                                    type: string
+                                  securityGroupIds:
+                                    description: IDs of the security groups for the
+                                      endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  subnetIds:
+                                    description: IDs of the subnets for the endpoint.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  tags:
+                                    additionalProperties:
+                                      type: string
+                                    description: Key-value map of resource tags.
+                                    type: object
+                                    x-kubernetes-map-type: granular
+                                  vpcIdentifier:
+                                    description: Identifier of the VPC for the endpoint.
+                                    type: string
+                                type: object
+                              selfManagedLatticeResource:
+                                description: Self-managed VPC Lattice resource configuration.
+                                  See self_managed_lattice_resource below.
+                                properties:
+                                  resourceConfigurationIdentifier:
+                                    description: Identifier of the VPC Lattice resource
+                                      configuration.
+                                    type: string
+                                type: object
+                            type: object
+                          privateEndpointOverrides:
+                            description: Overrides for the private endpoints used
+                              to reach the authorization server. See private_endpoint_overrides
+                              below.
+                            items:
+                              properties:
+                                domain:
+                                  description: Domain the override applies to.
+                                  type: string
+                                privateEndpoint:
+                                  description: Private endpoint configuration. See
+                                    private_endpoint below.
+                                  properties:
+                                    managedVpcResource:
+                                      description: Managed VPC resource configuration.
+                                        See managed_vpc_resource below.
+                                      properties:
+                                        endpointIpAddressType:
+                                          description: IP address type for the endpoint.
+                                            Valid values are IPV4 and IPV6.
+                                          type: string
+                                        routingDomain:
+                                          description: Routing domain for the endpoint.
+                                          type: string
+                                        securityGroupIds:
+                                          description: IDs of the security groups
+                                            for the endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        subnetIds:
+                                          description: IDs of the subnets for the
+                                            endpoint.
+                                          items:
+                                            type: string
+                                          type: array
+                                          x-kubernetes-list-type: set
+                                        tags:
+                                          additionalProperties:
+                                            type: string
+                                          description: Key-value map of resource tags.
+                                          type: object
+                                          x-kubernetes-map-type: granular
+                                        vpcIdentifier:
+                                          description: Identifier of the VPC for the
+                                            endpoint.
+                                          type: string
+                                      type: object
+                                    selfManagedLatticeResource:
+                                      description: Self-managed VPC Lattice resource
+                                        configuration. See self_managed_lattice_resource
+                                        below.
+                                      properties:
+                                        resourceConfigurationIdentifier:
+                                          description: Identifier of the VPC Lattice
+                                            resource configuration.
+                                          type: string
+                                      type: object
+                                  type: object
+                              type: object
+                            type: array
                         type: object
                     type: object
                   description:
@@ -1108,6 +1835,15 @@ spec:
                         description: Network mode configuration. See network_mode_config
                           below.
                         properties:
+                          requireServiceS3Endpoint:
+                            description: '(Read-only) Whether a service-managed Amazon
+                              S3 gateway endpoint is provisioned in the VPC for the
+                              agent runtime. This value is managed by the service
+                              and cannot be set: it is rejected on both create and
+                              update. Agent runtimes created on or after the May 5,
+                              2026 rollout do not include a service-managed Amazon
+                              S3 gateway.'
+                            type: boolean
                           securityGroups:
                             description: Security groups associated with the VPC configuration.
                             items:

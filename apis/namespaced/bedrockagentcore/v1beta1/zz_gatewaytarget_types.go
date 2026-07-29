@@ -20,7 +20,17 @@ type APIGatewayInitParameters struct {
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationInitParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
@@ -45,8 +55,18 @@ type APIGatewayParameters struct {
 	APIGatewayToolConfiguration *APIGatewayToolConfigurationParameters `json:"apiGatewayToolConfiguration,omitempty" tf:"api_gateway_tool_configuration,omitempty"`
 
 	// ID of the API Gateway REST API to invoke.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	RestAPIID *string `json:"restApiId" tf:"rest_api_id,omitempty"`
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	// +kubebuilder:validation:Optional
@@ -94,7 +114,17 @@ type APIKeyInitParameters struct {
 	CredentialPrefix *string `json:"credentialPrefix,omitempty" tf:"credential_prefix,omitempty"`
 
 	// ARN of the OIDC provider for API key authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.APIKeyCredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type APIKeyObservation struct {
@@ -127,8 +157,18 @@ type APIKeyParameters struct {
 	CredentialPrefix *string `json:"credentialPrefix,omitempty" tf:"credential_prefix,omitempty"`
 
 	// ARN of the OIDC provider for API key authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.APIKeyCredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	// +kubebuilder:validation:Optional
-	ProviderArn *string `json:"providerArn" tf:"provider_arn,omitempty"`
+	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreRuntimeInitParameters struct {
@@ -324,7 +364,7 @@ type GatewayTargetInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
-	PrivateEndpoint *PrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *GatewayTargetPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Configuration for the target endpoint. See target_configuration below.
 	TargetConfiguration *TargetConfigurationInitParameters `json:"targetConfiguration,omitempty" tf:"target_configuration,omitempty"`
@@ -350,7 +390,7 @@ type GatewayTargetObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
-	PrivateEndpoint *PrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *GatewayTargetPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -397,7 +437,7 @@ type GatewayTargetParameters struct {
 
 	// Configuration for private connectivity from AgentCore Gateway to a resource inside your VPC. Traffic is routed through Amazon VPC Lattice and never traverses the public internet. See private_endpoint below.
 	// +kubebuilder:validation:Optional
-	PrivateEndpoint *PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+	PrivateEndpoint *GatewayTargetPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -407,6 +447,212 @@ type GatewayTargetParameters struct {
 	// Configuration for the target endpoint. See target_configuration below.
 	// +kubebuilder:validation:Optional
 	TargetConfiguration *TargetConfigurationParameters `json:"targetConfiguration,omitempty" tf:"target_configuration,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointInitParameters struct {
+
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointManagedVPCResourceInitParameters struct {
+
+	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dns_name",true)
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// Reference to a LB in elbv2 to populate routingDomain.
+	// +kubebuilder:validation:Optional
+	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
+
+	// Selector for a LB in elbv2 to populate routingDomain.
+	// +kubebuilder:validation:Optional
+	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
+
+	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Map of tags to apply to the managed Lattice resource gateway.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// ID of the VPC that contains the private resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+}
+
+type GatewayTargetPrivateEndpointManagedVPCResourceObservation struct {
+
+	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Map of tags to apply to the managed Lattice resource gateway.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// ID of the VPC that contains the private resource.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointManagedVPCResourceParameters struct {
+
+	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
+	// +kubebuilder:validation:Optional
+	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dns_name",true)
+	// +kubebuilder:validation:Optional
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// Reference to a LB in elbv2 to populate routingDomain.
+	// +kubebuilder:validation:Optional
+	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
+
+	// Selector for a LB in elbv2 to populate routingDomain.
+	// +kubebuilder:validation:Optional
+	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
+
+	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Map of tags to apply to the managed Lattice resource gateway.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// ID of the VPC that contains the private resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+}
+
+type GatewayTargetPrivateEndpointObservation struct {
+
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointParameters struct {
+
+	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
+	// +kubebuilder:validation:Optional
+	ManagedVPCResource *GatewayTargetPrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
+	// +kubebuilder:validation:Optional
+	SelfManagedLatticeResource *GatewayTargetPrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointSelfManagedLatticeResourceInitParameters struct {
+
+	// ARN or ID of the VPC Lattice resource configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
+}
+
+type GatewayTargetPrivateEndpointSelfManagedLatticeResourceObservation struct {
+
+	// ARN or ID of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type GatewayTargetPrivateEndpointSelfManagedLatticeResourceParameters struct {
+
+	// ARN or ID of the VPC Lattice resource configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+
+	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 }
 
 type HTTPInitParameters struct {
@@ -771,144 +1017,6 @@ type JwtPassthroughObservation struct {
 type JwtPassthroughParameters struct {
 }
 
-type ManagedVPCResourceInitParameters struct {
-
-	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
-	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
-
-	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dns_name",true)
-	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
-
-	// Reference to a LB in elbv2 to populate routingDomain.
-	// +kubebuilder:validation:Optional
-	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
-
-	// Selector for a LB in elbv2 to populate routingDomain.
-	// +kubebuilder:validation:Optional
-	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
-
-	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +listType=set
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroupIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
-
-	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-
-	// Map of tags to apply to the managed Lattice resource gateway.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// ID of the VPC that contains the private resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
-
-	// Reference to a VPC in ec2 to populate vpcIdentifier.
-	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
-
-	// Selector for a VPC in ec2 to populate vpcIdentifier.
-	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
-}
-
-type ManagedVPCResourceObservation struct {
-
-	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
-	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
-
-	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
-	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
-
-	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
-	// +listType=set
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-
-	// Map of tags to apply to the managed Lattice resource gateway.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// ID of the VPC that contains the private resource.
-	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
-}
-
-type ManagedVPCResourceParameters struct {
-
-	// IP address type for the resource configuration endpoint. Valid values: IPV4, IPV6.
-	// +kubebuilder:validation:Optional
-	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
-
-	// Intermediate domain (e.g. a VPCE or ALB DNS name) to use instead of the actual target domain. Useful when the MCP server uses a private TLS certificate — place an ALB with a public ACM cert in front and set this to the ALB DNS name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("dns_name",true)
-	// +kubebuilder:validation:Optional
-	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
-
-	// Reference to a LB in elbv2 to populate routingDomain.
-	// +kubebuilder:validation:Optional
-	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
-
-	// Selector for a LB in elbv2 to populate routingDomain.
-	// +kubebuilder:validation:Optional
-	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
-
-	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// References to SecurityGroup in ec2 to populate securityGroupIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
-	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
-
-	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
-
-	// Map of tags to apply to the managed Lattice resource gateway.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// ID of the VPC that contains the private resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.VPC
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
-
-	// Reference to a VPC in ec2 to populate vpcIdentifier.
-	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
-
-	// Selector for a VPC in ec2 to populate vpcIdentifier.
-	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
-}
-
 type McpLambdaInitParameters struct {
 
 	// ARN of the Lambda function to invoke.
@@ -1059,7 +1167,17 @@ type OauthInitParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the Oauth credential provider for OAuth authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +listType=set
@@ -1106,8 +1224,18 @@ type OauthParameters struct {
 	GrantType *string `json:"grantType,omitempty" tf:"grant_type,omitempty"`
 
 	// ARN of the Oauth credential provider for OAuth authentication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/bedrockagentcore/v1beta1.Oauth2CredentialProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("credential_provider_arn",true)
 	// +kubebuilder:validation:Optional
-	ProviderArn *string `json:"providerArn" tf:"provider_arn,omitempty"`
+	ProviderArn *string `json:"providerArn,omitempty" tf:"provider_arn,omitempty"`
+
+	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
+	// +kubebuilder:validation:Optional
+	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +kubebuilder:validation:Optional
@@ -1644,35 +1772,6 @@ type OutputSchemaPropertyPropertyParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
-type PrivateEndpointInitParameters struct {
-
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
-	ManagedVPCResource *ManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
-
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource *SelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
-}
-
-type PrivateEndpointObservation struct {
-
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
-	ManagedVPCResource *ManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
-
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
-	SelfManagedLatticeResource *SelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
-}
-
-type PrivateEndpointParameters struct {
-
-	// AWS creates and manages the VPC Lattice resource gateway and resource configuration on your behalf using a service-linked role. See managed_vpc_resource below.
-	// +kubebuilder:validation:Optional
-	ManagedVPCResource *ManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
-
-	// Use an existing VPC Lattice resource configuration that you manage yourself. Useful for cross-account setups or advanced Lattice configurations. See self_managed_lattice_resource below.
-	// +kubebuilder:validation:Optional
-	SelfManagedLatticeResource *SelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
-}
-
 type PropertyInitParameters struct {
 
 	// Description of the tool. Provides information about the purpose and usage of the tool. If not provided, uses the description from the API's OpenAPI specification.
@@ -1976,45 +2075,6 @@ type PropertyPropertyParameters struct {
 	// Data type of the schema. Valid values: string, number, integer, boolean, array, object.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
-}
-
-type SelfManagedLatticeResourceInitParameters struct {
-
-	// ARN or ID of the VPC Lattice resource configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
-
-	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
-	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
-
-	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
-	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
-}
-
-type SelfManagedLatticeResourceObservation struct {
-
-	// ARN or ID of the VPC Lattice resource configuration.
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
-}
-
-type SelfManagedLatticeResourceParameters struct {
-
-	// ARN or ID of the VPC Lattice resource configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/vpclattice/v1beta1.ResourceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
-
-	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
-	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
-
-	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
-	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SmithyModelInitParameters struct {

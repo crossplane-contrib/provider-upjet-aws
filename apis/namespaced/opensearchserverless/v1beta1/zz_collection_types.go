@@ -25,7 +25,7 @@ type CollectionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block for direct collection encryption settings. See encryption_config below for details.
-	EncryptionConfig []EncryptionConfigInitParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+	EncryptionConfig *EncryptionConfigInitParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Name of the collection.
 	// Name of the collection.
@@ -44,7 +44,7 @@ type CollectionInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
-	VectorOptions []VectorOptionsInitParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
+	VectorOptions *VectorOptionsInitParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
 }
 
 type CollectionObservation struct {
@@ -69,7 +69,7 @@ type CollectionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block for direct collection encryption settings. See encryption_config below for details.
-	EncryptionConfig []EncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+	EncryptionConfig *EncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Unique identifier for the collection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -103,7 +103,7 @@ type CollectionObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
-	VectorOptions []VectorOptionsObservation `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
+	VectorOptions *VectorOptionsObservation `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
 }
 
 type CollectionParameters struct {
@@ -120,7 +120,7 @@ type CollectionParameters struct {
 
 	// Configuration block for direct collection encryption settings. See encryption_config below for details.
 	// +kubebuilder:validation:Optional
-	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+	EncryptionConfig *EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 
 	// Name of the collection.
 	// Name of the collection.
@@ -149,7 +149,7 @@ type CollectionParameters struct {
 
 	// Configuration block for vector search options. Only valid when type is VECTORSEARCH. See vector_options below for details.
 	// +kubebuilder:validation:Optional
-	VectorOptions []VectorOptionsParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
+	VectorOptions *VectorOptionsParameters `json:"vectorOptions,omitempty" tf:"vector_options,omitempty"`
 }
 
 type EncryptionConfigInitParameters struct {

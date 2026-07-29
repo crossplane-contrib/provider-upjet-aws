@@ -658,6 +658,15 @@ spec:
                       to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -1268,6 +1277,15 @@ spec:
                       to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -1722,6 +1740,15 @@ spec:
                       to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
                     type: number
+                  useResourceTimeoutForPropagation:
+                    description: Whether to apply resource level timeout values while
+                      retrying eventually consistent API operations. By default the
+                      provider uses a 5 minute timeout to allow for propagation in
+                      the Lambda service. When set to true, this default value is
+                      replaced with the configurable resource timeouts. Increased
+                      timeout values may be useful in highly active accounts, or regions
+                      where propagation delays are inconsistent.
+                    type: boolean
                   uuid:
                     description: UUID of the created event source mapping.
                     type: string

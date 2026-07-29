@@ -130,6 +130,7 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/batch/schedulingpolicy"
+	guardrail "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/guardrail"
 	inferenceprofile "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagent/agent"
 	agentruntime "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/agentruntime"
@@ -137,11 +138,17 @@ import (
 	apikeycredentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/apikeycredentialprovider"
 	browser "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/browser"
 	codeinterpreter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/codeinterpreter"
+	evaluator "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/evaluator"
 	gateway "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gateway"
 	gatewaytarget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/gatewaytarget"
+	harness "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/harness"
 	memory "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memory"
 	memorystrategy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/memorystrategy"
 	oauth2credentialprovider "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/oauth2credentialprovider"
+	onlineevaluationconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/onlineevaluationconfig"
+	policybedrockagentcore "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/policy"
+	policyengine "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/policyengine"
+	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/resourcepolicy"
 	tokenvaultcmk "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/tokenvaultcmk"
 	workloadidentity "github.com/upbound/provider-aws/v2/internal/controller/namespaced/bedrockagentcore/workloadidentity"
 	budget "github.com/upbound/provider-aws/v2/internal/controller/namespaced/budgets/budget"
@@ -196,7 +203,7 @@ import (
 	destinationpolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/destinationpolicy"
 	group "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/group"
 	metricfilter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/metricfilter"
-	resourcepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/resourcepolicy"
+	resourcepolicycloudwatchlogs "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/resourcepolicy"
 	stream "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/stream"
 	subscriptionfilter "github.com/upbound/provider-aws/v2/internal/controller/namespaced/cloudwatchlogs/subscriptionfilter"
 	domaincodeartifact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/codeartifact/domain"
@@ -634,6 +641,7 @@ import (
 	layerversionpermission "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/layerversionpermission"
 	permissionlambda "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/permission"
 	provisionedconcurrencyconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/provisionedconcurrencyconfig"
+	runtimemanagementconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lambda/runtimemanagementconfig"
 	bot "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/bot"
 	botalias "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/botalias"
 	intent "github.com/upbound/provider-aws/v2/internal/controller/namespaced/lexmodels/intent"
@@ -1157,6 +1165,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		guardrail.Setup,
 		inferenceprofile.Setup,
 		agent.Setup,
 		agentruntime.Setup,
@@ -1164,11 +1173,17 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.Setup,
 		browser.Setup,
 		codeinterpreter.Setup,
+		evaluator.Setup,
 		gateway.Setup,
 		gatewaytarget.Setup,
+		harness.Setup,
 		memory.Setup,
 		memorystrategy.Setup,
 		oauth2credentialprovider.Setup,
+		onlineevaluationconfig.Setup,
+		policybedrockagentcore.Setup,
+		policyengine.Setup,
+		resourcepolicy.Setup,
 		tokenvaultcmk.Setup,
 		workloadidentity.Setup,
 		budget.Setup,
@@ -1223,7 +1238,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		destinationpolicy.Setup,
 		group.Setup,
 		metricfilter.Setup,
-		resourcepolicy.Setup,
+		resourcepolicycloudwatchlogs.Setup,
 		stream.Setup,
 		subscriptionfilter.Setup,
 		domaincodeartifact.Setup,
@@ -1661,6 +1676,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.Setup,
 		permissionlambda.Setup,
 		provisionedconcurrencyconfig.Setup,
+		runtimemanagementconfig.Setup,
 		bot.Setup,
 		botalias.Setup,
 		intent.Setup,
@@ -2190,6 +2206,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.SetupGated,
 		jobqueue.SetupGated,
 		schedulingpolicy.SetupGated,
+		guardrail.SetupGated,
 		inferenceprofile.SetupGated,
 		agent.SetupGated,
 		agentruntime.SetupGated,
@@ -2197,11 +2214,17 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apikeycredentialprovider.SetupGated,
 		browser.SetupGated,
 		codeinterpreter.SetupGated,
+		evaluator.SetupGated,
 		gateway.SetupGated,
 		gatewaytarget.SetupGated,
+		harness.SetupGated,
 		memory.SetupGated,
 		memorystrategy.SetupGated,
 		oauth2credentialprovider.SetupGated,
+		onlineevaluationconfig.SetupGated,
+		policybedrockagentcore.SetupGated,
+		policyengine.SetupGated,
+		resourcepolicy.SetupGated,
 		tokenvaultcmk.SetupGated,
 		workloadidentity.SetupGated,
 		budget.SetupGated,
@@ -2256,7 +2279,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		destinationpolicy.SetupGated,
 		group.SetupGated,
 		metricfilter.SetupGated,
-		resourcepolicy.SetupGated,
+		resourcepolicycloudwatchlogs.SetupGated,
 		stream.SetupGated,
 		subscriptionfilter.SetupGated,
 		domaincodeartifact.SetupGated,
@@ -2694,6 +2717,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		layerversionpermission.SetupGated,
 		permissionlambda.SetupGated,
 		provisionedconcurrencyconfig.SetupGated,
+		runtimemanagementconfig.SetupGated,
 		bot.SetupGated,
 		botalias.SetupGated,
 		intent.SetupGated,
@@ -3222,6 +3246,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		jobdefinition.SetupWebhookWithManager,
 		jobqueue.SetupWebhookWithManager,
 		schedulingpolicy.SetupWebhookWithManager,
+		guardrail.SetupWebhookWithManager,
 		inferenceprofile.SetupWebhookWithManager,
 		agent.SetupWebhookWithManager,
 		agentruntime.SetupWebhookWithManager,
@@ -3229,11 +3254,17 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		apikeycredentialprovider.SetupWebhookWithManager,
 		browser.SetupWebhookWithManager,
 		codeinterpreter.SetupWebhookWithManager,
+		evaluator.SetupWebhookWithManager,
 		gateway.SetupWebhookWithManager,
 		gatewaytarget.SetupWebhookWithManager,
+		harness.SetupWebhookWithManager,
 		memory.SetupWebhookWithManager,
 		memorystrategy.SetupWebhookWithManager,
 		oauth2credentialprovider.SetupWebhookWithManager,
+		onlineevaluationconfig.SetupWebhookWithManager,
+		policybedrockagentcore.SetupWebhookWithManager,
+		policyengine.SetupWebhookWithManager,
+		resourcepolicy.SetupWebhookWithManager,
 		tokenvaultcmk.SetupWebhookWithManager,
 		workloadidentity.SetupWebhookWithManager,
 		budget.SetupWebhookWithManager,
@@ -3288,7 +3319,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		destinationpolicy.SetupWebhookWithManager,
 		group.SetupWebhookWithManager,
 		metricfilter.SetupWebhookWithManager,
-		resourcepolicy.SetupWebhookWithManager,
+		resourcepolicycloudwatchlogs.SetupWebhookWithManager,
 		stream.SetupWebhookWithManager,
 		subscriptionfilter.SetupWebhookWithManager,
 		domaincodeartifact.SetupWebhookWithManager,
@@ -3726,6 +3757,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		layerversionpermission.SetupWebhookWithManager,
 		permissionlambda.SetupWebhookWithManager,
 		provisionedconcurrencyconfig.SetupWebhookWithManager,
+		runtimemanagementconfig.SetupWebhookWithManager,
 		bot.SetupWebhookWithManager,
 		botalias.SetupWebhookWithManager,
 		intent.SetupWebhookWithManager,
