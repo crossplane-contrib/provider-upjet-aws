@@ -6,6 +6,11 @@ package templates
 
 import _ "embed"
 
+// MainTemplate is populated with provider main program template.
+//
+//go:embed main.go.tmpl
+var MainTemplate string
+
 // ControllerTemplate is the template for the MR controller setup files.
 //
 //go:embed controller.go.tmpl

@@ -224,6 +224,35 @@ type AgentRuntimeParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type AllowedWorkloadConfigurationInitParameters struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	HostingEnvironment []HostingEnvironmentInitParameters `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
+type AllowedWorkloadConfigurationObservation struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	HostingEnvironment []HostingEnvironmentObservation `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
+type AllowedWorkloadConfigurationParameters struct {
+
+	// Hosting environments allowed to use the authorizer. Between 1 and 10 entries. See hosting_environment below.
+	// +kubebuilder:validation:Optional
+	HostingEnvironment []HostingEnvironmentParameters `json:"hostingEnvironment,omitempty" tf:"hosting_environment,omitempty"`
+
+	// List of workload identity names allowed to use the authorizer. Between 1 and 10 entries.
+	// +kubebuilder:validation:Optional
+	WorkloadIdentities []*string `json:"workloadIdentities,omitempty" tf:"workload_identities,omitempty"`
+}
+
 type AuthorizerConfigurationInitParameters struct {
 
 	// JWT-based authorization configuration block. See custom_jwt_authorizer below.
@@ -434,11 +463,20 @@ type CustomJwtAuthorizerInitParameters struct {
 	// +listType=set
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	AllowedWorkloadConfiguration *AllowedWorkloadConfigurationInitParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []CustomClaimInitParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
 
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	PrivateEndpoint *PrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	PrivateEndpointOverrides []PrivateEndpointOverridesInitParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
 }
 
 type CustomJwtAuthorizerObservation struct {
@@ -455,11 +493,20 @@ type CustomJwtAuthorizerObservation struct {
 	// +listType=set
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	AllowedWorkloadConfiguration *AllowedWorkloadConfigurationObservation `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	CustomClaim []CustomClaimObservation `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
 
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	PrivateEndpoint *PrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	PrivateEndpointOverrides []PrivateEndpointOverridesObservation `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
 }
 
 type CustomJwtAuthorizerParameters struct {
@@ -479,6 +526,10 @@ type CustomJwtAuthorizerParameters struct {
 	// +listType=set
 	AllowedScopes []*string `json:"allowedScopes,omitempty" tf:"allowed_scopes,omitempty"`
 
+	// Configuration restricting which workloads may use this authorizer. See allowed_workload_configuration below.
+	// +kubebuilder:validation:Optional
+	AllowedWorkloadConfiguration *AllowedWorkloadConfigurationParameters `json:"allowedWorkloadConfiguration,omitempty" tf:"allowed_workload_configuration,omitempty"`
+
 	// Repeatable block to define a custom claim validation name, value, and operation. See custom_claim below.
 	// +kubebuilder:validation:Optional
 	CustomClaim []CustomClaimParameters `json:"customClaim,omitempty" tf:"custom_claim,omitempty"`
@@ -486,12 +537,30 @@ type CustomJwtAuthorizerParameters struct {
 	// URL used to fetch OpenID Connect configuration or authorization server metadata. Must end with .well-known/openid-configuration.
 	// +kubebuilder:validation:Optional
 	DiscoveryURL *string `json:"discoveryUrl" tf:"discovery_url,omitempty"`
+
+	// Private endpoint used to reach the authorization server. See private_endpoint below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpoint *PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// Overrides for the private endpoints used to reach the authorization server. See private_endpoint_overrides below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointOverrides []PrivateEndpointOverridesParameters `json:"privateEndpointOverrides,omitempty" tf:"private_endpoint_overrides,omitempty"`
 }
 
 type EFSAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -509,8 +578,18 @@ type EFSAccessPointObservation struct {
 type EFSAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/efs/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	AccessPointArn *string `json:"accessPointArn" tf:"access_point_arn,omitempty"`
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -556,6 +635,25 @@ type FilesystemConfigurationParameters struct {
 	SessionStorage *SessionStorageParameters `json:"sessionStorage,omitempty" tf:"session_storage,omitempty"`
 }
 
+type HostingEnvironmentInitParameters struct {
+
+	// ARN of the hosting environment.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type HostingEnvironmentObservation struct {
+
+	// ARN of the hosting environment.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type HostingEnvironmentParameters struct {
+
+	// ARN of the hosting environment.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn" tf:"arn,omitempty"`
+}
+
 type LifecycleConfigurationInitParameters struct {
 
 	// Timeout in seconds for idle runtime sessions.
@@ -583,6 +681,84 @@ type LifecycleConfigurationParameters struct {
 	// Maximum lifetime for the instance in seconds.
 	// +kubebuilder:validation:Optional
 	MaxLifetime *float64 `json:"maxLifetime,omitempty" tf:"max_lifetime"`
+}
+
+type ManagedVPCResourceInitParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type ManagedVPCResourceObservation struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type ManagedVPCResourceParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	// +kubebuilder:validation:Optional
+	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	// +kubebuilder:validation:Optional
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	// +kubebuilder:validation:Optional
+	VPCIdentifier *string `json:"vpcIdentifier" tf:"vpc_identifier,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {
@@ -627,6 +803,9 @@ type NetworkModeConfigInitParameters struct {
 
 type NetworkModeConfigObservation struct {
 
+	// (Read-only) Whether a service-managed Amazon S3 gateway endpoint is provisioned in the VPC for the agent runtime. This value is managed by the service and cannot be set: it is rejected on both create and update. Agent runtimes created on or after the May 5, 2026 rollout do not include a service-managed Amazon S3 gateway.
+	RequireServiceS3Endpoint *bool `json:"requireServiceS3Endpoint,omitempty" tf:"require_service_s3_endpoint,omitempty"`
+
 	// Security groups associated with the VPC configuration.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -647,6 +826,190 @@ type NetworkModeConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+}
+
+type PrivateEndpointInitParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *ManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *SelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointManagedVPCResourceInitParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointManagedVPCResourceObservation struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	EndpointIPAddressType *string `json:"endpointIpAddressType,omitempty" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	VPCIdentifier *string `json:"vpcIdentifier,omitempty" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointManagedVPCResourceParameters struct {
+
+	// IP address type for the endpoint. Valid values are IPV4 and IPV6.
+	// +kubebuilder:validation:Optional
+	EndpointIPAddressType *string `json:"endpointIpAddressType" tf:"endpoint_ip_address_type,omitempty"`
+
+	// Routing domain for the endpoint.
+	// +kubebuilder:validation:Optional
+	RoutingDomain *string `json:"routingDomain,omitempty" tf:"routing_domain,omitempty"`
+
+	// IDs of the security groups for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// IDs of the subnets for the endpoint.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of the VPC for the endpoint.
+	// +kubebuilder:validation:Optional
+	VPCIdentifier *string `json:"vpcIdentifier" tf:"vpc_identifier,omitempty"`
+}
+
+type PrivateEndpointObservation struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *ManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *SelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointOverridesInitParameters struct {
+
+	// Domain the override applies to.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	PrivateEndpoint *PrivateEndpointOverridesPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type PrivateEndpointOverridesObservation struct {
+
+	// Domain the override applies to.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	PrivateEndpoint *PrivateEndpointOverridesPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type PrivateEndpointOverridesParameters struct {
+
+	// Domain the override applies to.
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain" tf:"domain,omitempty"`
+
+	// Private endpoint configuration. See private_endpoint below.
+	// +kubebuilder:validation:Optional
+	PrivateEndpoint *PrivateEndpointOverridesPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointInitParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *PrivateEndpointManagedVPCResourceInitParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *PrivateEndpointSelfManagedLatticeResourceInitParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointObservation struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	ManagedVPCResource *PrivateEndpointManagedVPCResourceObservation `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	SelfManagedLatticeResource *PrivateEndpointSelfManagedLatticeResourceObservation `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointOverridesPrivateEndpointParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	// +kubebuilder:validation:Optional
+	ManagedVPCResource *PrivateEndpointManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// +kubebuilder:validation:Optional
+	SelfManagedLatticeResource *PrivateEndpointSelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointParameters struct {
+
+	// Managed VPC resource configuration. See managed_vpc_resource below.
+	// +kubebuilder:validation:Optional
+	ManagedVPCResource *ManagedVPCResourceParameters `json:"managedVpcResource,omitempty" tf:"managed_vpc_resource,omitempty"`
+
+	// Self-managed VPC Lattice resource configuration. See self_managed_lattice_resource below.
+	// +kubebuilder:validation:Optional
+	SelfManagedLatticeResource *SelfManagedLatticeResourceParameters `json:"selfManagedLatticeResource,omitempty" tf:"self_managed_lattice_resource,omitempty"`
+}
+
+type PrivateEndpointSelfManagedLatticeResourceInitParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type PrivateEndpointSelfManagedLatticeResourceObservation struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type PrivateEndpointSelfManagedLatticeResourceParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type ProtocolConfigurationInitParameters struct {
@@ -693,7 +1056,17 @@ type RequestHeaderConfigurationParameters struct {
 type S3FilesAccessPointInitParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
@@ -711,8 +1084,18 @@ type S3FilesAccessPointObservation struct {
 type S3FilesAccessPointParameters struct {
 
 	// ARN of the Amazon S3 Files access point to mount into the agent runtime.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	AccessPointArn *string `json:"accessPointArn" tf:"access_point_arn,omitempty"`
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -756,6 +1139,25 @@ type S3Parameters struct {
 	// Version ID of the Amazon S3 object. If not specified, the latest version of the object is used.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+}
+
+type SelfManagedLatticeResourceInitParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type SelfManagedLatticeResourceObservation struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier,omitempty" tf:"resource_configuration_identifier,omitempty"`
+}
+
+type SelfManagedLatticeResourceParameters struct {
+
+	// Identifier of the VPC Lattice resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfigurationIdentifier *string `json:"resourceConfigurationIdentifier" tf:"resource_configuration_identifier,omitempty"`
 }
 
 type SessionStorageInitParameters struct {

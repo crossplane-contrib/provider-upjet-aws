@@ -409,7 +409,17 @@ type S3LocationParameters struct {
 type SecretsManagerInitParameters struct {
 
 	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type SecretsManagerObservation struct {
@@ -421,8 +431,18 @@ type SecretsManagerObservation struct {
 type SecretsManagerParameters struct {
 
 	// ARN of the AWS Secrets Manager secret containing the certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	SecretArn *string `json:"secretArn" tf:"secret_arn,omitempty"`
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v1.NamespacedReference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.NamespacedSelector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigInitParameters struct {

@@ -352,6 +352,9 @@ type FunctionInitParameters struct {
 	// Configuration block for X-Ray tracing. See below.
 	TracingConfig *TracingConfigInitParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
 
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
+
 	// Configuration block for VPC. See below.
 	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -504,6 +507,9 @@ type FunctionObservation struct {
 
 	// Configuration block for X-Ray tracing. See below.
 	TracingConfig *TracingConfigObservation `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 
 	// Configuration block for VPC. See below.
 	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
@@ -713,6 +719,10 @@ type FunctionParameters struct {
 	// Configuration block for X-Ray tracing. See below.
 	// +kubebuilder:validation:Optional
 	TracingConfig *TracingConfigParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
+
+	// Whether to apply resource level timeout values while retrying eventually consistent API operations. By default the provider uses a 5 minute timeout to allow for propagation in the Lambda service. When set to true, this default value is replaced with the configurable resource timeouts. Increased timeout values may be useful in highly active accounts, or regions where propagation delays are inconsistent.
+	// +kubebuilder:validation:Optional
+	UseResourceTimeoutForPropagation *bool `json:"useResourceTimeoutForPropagation,omitempty" tf:"use_resource_timeout_for_propagation,omitempty"`
 
 	// Configuration block for VPC. See below.
 	// +kubebuilder:validation:Optional

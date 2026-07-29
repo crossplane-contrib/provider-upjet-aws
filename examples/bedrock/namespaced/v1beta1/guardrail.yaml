@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: bedrock.aws.m.upbound.io/v1beta1
+kind: Guardrail
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/guardrail
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1
+    name: example
+    blockedInputMessaging: example
+    blockedOutputsMessaging: example
+    description: example
+    contentPolicyConfig:
+      filtersConfig:
+        - inputStrength: MEDIUM
+          outputStrength: MEDIUM
+          type: HATE
+      tierConfig:
+        tierName: CLASSIC
+    sensitiveInformationPolicyConfig:
+      piiEntitiesConfig:
+        - action: BLOCK
+          inputAction: BLOCK
+          outputAction: ANONYMIZE
+          inputEnabled: true
+          outputEnabled: true
+          type: NAME
+      regexesConfig:
+        - action: BLOCK
+          inputAction: BLOCK
+          outputAction: BLOCK
+          inputEnabled: true
+          outputEnabled: false
+          description: example regex
+          name: regex_example
+          pattern: ^\d{3}-\d{2}-\d{4}$
+    topicPolicyConfig:
+      topicsConfig:
+        - name: investment_topic
+          examples:
+            - Where should I invest my money ?
+          type: DENY
+          definition: Investment advice refers to inquiries, guidance, or recommendations regarding the management or allocation of funds or assets with the goal of generating returns .
+      tierConfig:
+        tierName: CLASSIC
+    wordPolicyConfig:
+      managedWordListsConfig:
+        - type: PROFANITY
+      wordsConfig:
+        - text: HATE

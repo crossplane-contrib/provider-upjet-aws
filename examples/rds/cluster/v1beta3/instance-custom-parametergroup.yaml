@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# This example attaches a custom, provider-managed ParameterGroup to the
+# Instance via a cross-resource reference (parameterGroupNameSelector). Because
+# the ParameterGroup has a fixed family (postgres16), the Instance must pin a
+# matching engine major version (engineVersion: "16"); otherwise AWS would pick
+# a default engine version that may not match the parameter group family and the
+# instance creation would fail. Keep engineVersion and the ParameterGroup family
+# in sync when bumping the version.
+apiVersion: rds.aws.upbound.io/v1beta3
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta3/instance
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: instance-custom-parametergroup
+  name: example-dbinstance-custompg-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    allocatedStorage: 20
+    autoGeneratePassword: true
+    autoMinorVersionUpgrade: true
+    backupRetentionPeriod: 14
+    backupWindow: 09:46-10:16
+    dbName: example
+    engine: postgres
+    engineVersion: "16"
+    instanceClass: db.t3.micro
+    maintenanceWindow: Mon:00:00-Mon:03:00
+    parameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance-custom-parametergroup
+    passwordSecretRef:
+      key: password
+      name: example-dbinstance-custompg
+      namespace: upbound-system
+    publiclyAccessible: false
+    region: us-west-1
+    skipFinalSnapshot: true
+    storageType: gp2
+    username: adminuser
+  writeConnectionSecretToRef:
+    name: example-dbinstance-custompg-out
+    namespace: default
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta3/instance
+  labels:
+    testing.upbound.io/example-name: instance-custom-parametergroup
+  name: example-custom-pg-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    description: Custom parameter group for the RDS instance example
+    family: postgres16
+    parameter:
+      - name: application_name
+        value: example
+        applyMethod: immediate
+    region: us-west-1

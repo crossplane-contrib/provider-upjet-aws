@@ -25,6 +25,9 @@ type ClusterInitParameters struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false. See Amazon RDS Documentation for more information.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
@@ -216,7 +219,16 @@ type ClusterInitParameters struct {
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	PerformanceInsightsKMSKeyIDRef *v1.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	PerformanceInsightsKMSKeyIDSelector *v1.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
@@ -311,6 +323,9 @@ type ClusterObservation struct {
 
 	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
@@ -551,6 +566,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
 
+	// Whether to apply minor engine upgrades automatically to the DB cluster during the maintenance window. Defaults to true.
+	// +kubebuilder:validation:Optional
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
@@ -783,8 +802,17 @@ type ClusterParameters struct {
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
 	// Specifies the KMS Key ID to encrypt Performance Insights data. If not specified, the default RDS KMS key will be used (aws/rds).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	PerformanceInsightsKMSKeyIDRef *v1.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	PerformanceInsightsKMSKeyIDSelector *v1.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	// +kubebuilder:validation:Optional

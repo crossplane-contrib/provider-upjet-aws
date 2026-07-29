@@ -669,7 +669,7 @@ spec:
                   webserverAccessMode:
                     description: 'Specifies whether the webserver should be accessible
                       over the internet or via your specified VPC. Possible options:
-                      PRIVATE_ONLY (default) and PUBLIC_ONLY.'
+                      PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.'
                     type: string
                   weeklyMaintenanceWindowStart:
                     description: Specifies the start date for the weekly maintenance
@@ -1275,7 +1275,7 @@ spec:
                   webserverAccessMode:
                     description: 'Specifies whether the webserver should be accessible
                       over the internet or via your specified VPC. Possible options:
-                      PRIVATE_ONLY (default) and PUBLIC_ONLY.'
+                      PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.'
                     type: string
                   weeklyMaintenanceWindowStart:
                     description: Specifies the start date for the weekly maintenance
@@ -1654,7 +1654,7 @@ spec:
                   webserverAccessMode:
                     description: 'Specifies whether the webserver should be accessible
                       over the internet or via your specified VPC. Possible options:
-                      PRIVATE_ONLY (default) and PUBLIC_ONLY.'
+                      PRIVATE_ONLY (default), PUBLIC_ONLY and PUBLIC_AND_PRIVATE.'
                     type: string
                   webserverUrl:
                     description: The webserver URL of the MWAA Environment

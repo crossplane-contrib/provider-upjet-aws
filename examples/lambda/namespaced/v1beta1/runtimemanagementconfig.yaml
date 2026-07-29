@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: RuntimeManagementConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/runtimemanagementconfig
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    updateRuntimeOn: FunctionUpdate
+
+---
+
+apiVersion: lambda.aws.m.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/runtimemanagementconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    handler: index.py
+    packageType: Zip
+    region: us-east-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    runtime: python3.9
+    s3Bucket: official-provider-test-data
+    s3Key: hello-python.zip
+    timeout: 60
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/runtimemanagementconfig
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": ["lambda.amazonaws.com"]
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }

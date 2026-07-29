@@ -52,7 +52,7 @@ type DBInstanceInitParameters struct {
 
 	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
 	// The maintenance schedule for the DB instance.
-	MaintenanceSchedule []DBInstanceMaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *DBInstanceMaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
@@ -241,7 +241,7 @@ type DBInstanceObservation struct {
 
 	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
 	// The maintenance schedule for the DB instance.
-	MaintenanceSchedule []DBInstanceMaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *DBInstanceMaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the
@@ -354,7 +354,7 @@ type DBInstanceParameters struct {
 	// Maintenance schedule for the DB instance, including the preferred maintenance window and timezone. This argument is updatable.
 	// The maintenance schedule for the DB instance.
 	// +kubebuilder:validation:Optional
-	MaintenanceSchedule []DBInstanceMaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *DBInstanceMaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB instance when interacting with the

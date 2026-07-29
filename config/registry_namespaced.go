@@ -17,7 +17,6 @@ import (
 
 	"github.com/upbound/provider-aws/v2/config/namespaced"
 	"github.com/upbound/provider-aws/v2/config/templates"
-	"github.com/upbound/provider-aws/v2/hack"
 )
 
 // GetProviderNamespaced returns the provider configuration.
@@ -68,7 +67,7 @@ func GetProviderNamespaced(ctx context.Context, fwProvider fwprovider.Provider, 
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithFeaturesPackage("internal/features"),
-		config.WithMainTemplate(hack.MainTemplate),
+		config.WithMainTemplate(templates.MainTemplate),
 		config.WithTerraformProvider(sdkProvider),
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),

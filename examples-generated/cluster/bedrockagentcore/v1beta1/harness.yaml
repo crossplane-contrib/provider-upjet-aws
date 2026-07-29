@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
+kind: Harness
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/harness
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    harnessName: example_harness
+    model:
+      bedrockModelConfig:
+        modelId: anthropic.claude-sonnet-4-20250514
+    region: us-west-1
+    systemPrompt:
+    - textSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/harness
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/harness
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [{
+            Effect   = "Allow"
+            Action   = ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"]
+            Resource = "*"
+          }]
+        })}
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

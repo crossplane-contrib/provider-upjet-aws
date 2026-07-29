@@ -134,4 +134,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		delete(r.References, "function_name")
 		delete(r.References, "qualifier")
 	})
+
+	p.AddResourceConfigurator("aws_lambda_runtime_management_config", func(r *config.Resource) {
+		r.References["function_name"] = config.Reference{
+			TerraformName: "aws_lambda_function",
+		}
+	})
 }

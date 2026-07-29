@@ -65,7 +65,7 @@ type DBClusterInitParameters struct {
 	// Specifies the maintenance schedule for the DB cluster, including the preferred
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
-	MaintenanceSchedule []MaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *MaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -220,7 +220,7 @@ type DBClusterObservation struct {
 	// Specifies the maintenance schedule for the DB cluster, including the preferred
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
-	MaintenanceSchedule []MaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *MaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the
@@ -349,7 +349,7 @@ type DBClusterParameters struct {
 	// maintenance window and timezone. This field is only supported for InfluxDB V3 clusters
 	// (when using an InfluxDB V3 db parameter group).
 	// +kubebuilder:validation:Optional
-	MaintenanceSchedule []MaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+	MaintenanceSchedule *MaintenanceScheduleParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
 
 	// Name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. Cluster names must be unique per customer and per region. The argument must start with a letter, cannot contain consecutive hyphens (-) and cannot end with a hyphen.
 	// The name that uniquely identifies the DB cluster when interacting with the

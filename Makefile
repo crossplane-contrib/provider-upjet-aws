@@ -11,7 +11,7 @@ PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v2
 
 export TERRAFORM_VERSION := 1.5.5
-export TERRAFORM_PROVIDER_VERSION := 6.53.0
+export TERRAFORM_PROVIDER_VERSION := 6.55.0
 export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
@@ -83,8 +83,8 @@ KIND_VERSION = v0.32.0
 UPTEST_VERSION = v2.2.0
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
-CROSSPLANE_VERSION = 2.3.2
-CROSSPLANE_CLI_VERSION = v2.3.2
+CROSSPLANE_VERSION = 2.3.4
+CROSSPLANE_CLI_VERSION = v2.3.4
 CRDDIFF_VERSION = v0.12.1
 
 export CROSSPLANE_CLI_VERSION := $(CROSSPLANE_CLI_VERSION)
@@ -434,6 +434,18 @@ delete-build-tags:
 	@EXTRA_BUILDTAGGER_ARGS="--delete" RESTORE_DEEPCOPY_TAGS="true" ./scripts/tag.sh || $(FAIL)
 	@$(OK) Untagging source files.
 endif
+
+# TODO: Temporary workaround for https://github.com/crossplane/build/issues/61
+# Remove when issue is addressed.
+# `go.test.unit` does not propagate GO_TEST_FLAGS for the first `go test`
+# invocation at https://github.com/crossplane/build/blob/38cdd2d9558259446cdf476a769e4c462fbc308f/makelib/golang.mk#L115.
+# Duplicate and override `go.test.unit` here
+go.test.unit:
+	@$(INFO) go test unit-tests
+	@mkdir -p $(GO_TEST_OUTPUT)
+	@CGO_ENABLED=$(GO_CGO_ENABLED) $(GOHOST) test -cover $(GO_TEST_FLAGS) $(GO_STATIC_FLAGS) $(GO_PACKAGES) || $(FAIL)
+	@CGO_ENABLED=$(GO_CGO_ENABLED) $(GOHOST) test -v -covermode=$(GO_COVER_MODE) -coverprofile=$(GO_TEST_OUTPUT)/coverage.txt $(GO_TEST_FLAGS) $(GO_STATIC_FLAGS) $(GO_PACKAGES) 2>&1 | tee $(GO_TEST_OUTPUT)/unit-tests.log || $(FAIL)
+	@$(OK) go test unit-tests
 
 # TODO(negz): Update CI to use these targets.
 vendor: modules.download
