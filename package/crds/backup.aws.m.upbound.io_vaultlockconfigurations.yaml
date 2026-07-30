@@ -353,6 +353,10 @@ spec:
                     type: number
                   id:
                     type: string
+                  lockDate:
+                    type: string
+                  locked:
+                    type: boolean
                   maxRetentionDays:
                     description: The maximum retention period that the vault retains
                       its recovery points.
