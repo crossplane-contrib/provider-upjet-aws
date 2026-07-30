@@ -3975,6 +3975,16 @@ func (in *VaultLockConfigurationObservation) DeepCopyInto(out *VaultLockConfigur
 		*out = new(string)
 		**out = **in
 	}
+	if in.LockDate != nil {
+		in, out := &in.LockDate, &out.LockDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.Locked != nil {
+		in, out := &in.Locked, &out.Locked
+		*out = new(bool)
+		**out = **in
+	}
 	if in.MaxRetentionDays != nil {
 		in, out := &in.MaxRetentionDays, &out.MaxRetentionDays
 		*out = new(float64)

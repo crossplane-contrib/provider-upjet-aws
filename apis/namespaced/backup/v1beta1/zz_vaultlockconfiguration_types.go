@@ -51,6 +51,10 @@ type VaultLockConfigurationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	LockDate *string `json:"lockDate,omitempty" tf:"lock_date,omitempty"`
+
+	Locked *bool `json:"locked,omitempty" tf:"locked,omitempty"`
+
 	// The maximum retention period that the vault retains its recovery points.
 	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
