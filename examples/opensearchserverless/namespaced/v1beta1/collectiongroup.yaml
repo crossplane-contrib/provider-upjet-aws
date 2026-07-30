@@ -14,8 +14,8 @@ metadata:
 spec:
   forProvider:
     capacityLimits:
-    - maxIndexingCapacityInOcu: 10
-      maxSearchCapacityInOcu: 10
+    - maxIndexingCapacityInOcu: 16
+      maxSearchCapacityInOcu: 16
       minIndexingCapacityInOcu: 0
       minSearchCapacityInOcu: 0
     description: Scale-to-zero collection group
