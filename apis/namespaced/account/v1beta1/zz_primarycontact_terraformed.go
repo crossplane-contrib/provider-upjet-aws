@@ -80,7 +80,7 @@ func (tr *PrimaryContact) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// GetMergedParameters of this PrimaryContact
+// GetInitParameters of this PrimaryContact
 func (tr *PrimaryContact) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {

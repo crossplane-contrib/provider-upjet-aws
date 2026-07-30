@@ -10,7 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	alternatecontact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/alternatecontact"
-	"github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/primarycontact"
+	primarycontact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/primarycontact"
 	region "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/region"
 )
 

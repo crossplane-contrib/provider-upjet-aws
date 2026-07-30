@@ -138,7 +138,7 @@ type PrimaryContactParameters struct {
 	// +kubebuilder:validation:Optional
 	FullName *string `json:"fullName,omitempty" tf:"full_name,omitempty"`
 
-	// The phone number of the primary contact information.
+	// The phone number of the primary contact information. The number will be validated and, in some countries, checked for activation.
 	// +kubebuilder:validation:Optional
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
@@ -146,7 +146,7 @@ type PrimaryContactParameters struct {
 	// +kubebuilder:validation:Optional
 	PostalCode *string `json:"postalCode,omitempty" tf:"postal_code,omitempty"`
 
-	// The state or region of the primary contact address.
+	// The state or region of the primary contact address. This field is required in selected countries.
 	// +kubebuilder:validation:Optional
 	StateOrRegion *string `json:"stateOrRegion,omitempty" tf:"state_or_region,omitempty"`
 
@@ -158,8 +158,18 @@ type PrimaryContactParameters struct {
 // PrimaryContactSpec defines the desired state of PrimaryContact
 type PrimaryContactSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
-	ForProvider            PrimaryContactParameters     `json:"forProvider"`
-	InitProvider           PrimaryContactInitParameters `json:"initProvider,omitempty"`
+	ForProvider            PrimaryContactParameters `json:"forProvider"`
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PrimaryContactInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrimaryContactStatus defines the observed state of PrimaryContact.

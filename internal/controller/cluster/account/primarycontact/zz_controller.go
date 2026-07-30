@@ -22,10 +22,9 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/provider-aws/v2/internal/clients"
 	v1beta1 "github.com/upbound/provider-aws/v2/apis/cluster/account/v1beta1"
-features "github.com/upbound/provider-aws/v2/internal/features"
-
+	"github.com/upbound/provider-aws/v2/internal/clients"
+	features "github.com/upbound/provider-aws/v2/internal/features"
 )
 
 // SetupWebhookWithManager registers the conversion webhook for PrimaryContact.
@@ -56,13 +55,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.PrimaryContact_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-              tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_account_primary_contact"],
-                tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
-                tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
-                tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
-                tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.PrimaryContact_GroupVersionKind, mgr, o.PollInterval)),
-                tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)),
-                ),
+			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_account_primary_contact"],
+				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
+				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
+				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
+				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.PrimaryContact_GroupVersionKind, mgr, o.PollInterval)),
+				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)),
+			),
 		),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -72,13 +71,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 				reconciliationpolicy.WithFinalizerRateLimiter(rl),
 			),
 		),
-		managed.WithTimeout(3*time.Minute),
+		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithPollInterval(o.PollInterval),
 	}
 
 	if o.PollJitter != 0 {
-	    opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
+		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
 	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
