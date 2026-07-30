@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIGatewayInitParameters struct {
@@ -26,11 +25,11 @@ type APIGatewayInitParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
@@ -62,11 +61,11 @@ type APIGatewayParameters struct {
 
 	// Reference to a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDRef *v1.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
+	RestAPIIDRef *v2.NamespacedReference `json:"restApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a RestAPI in apigateway to populate restApiId.
 	// +kubebuilder:validation:Optional
-	RestAPIIDSelector *v1.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
+	RestAPIIDSelector *v2.NamespacedSelector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Stage name of the REST API to add as a target.
 	// +kubebuilder:validation:Optional
@@ -120,11 +119,11 @@ type APIKeyInitParameters struct {
 
 	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type APIKeyObservation struct {
@@ -164,11 +163,11 @@ type APIKeyParameters struct {
 
 	// Reference to a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a APIKeyCredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreRuntimeInitParameters struct {
@@ -180,11 +179,11 @@ type AgentcoreRuntimeInitParameters struct {
 
 	// Reference to a AgentRuntime in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a AgentRuntime in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Runtime qualifier identifying a specific endpoint version. Defaults to DEFAULT when not set.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -209,11 +208,11 @@ type AgentcoreRuntimeParameters struct {
 
 	// Reference to a AgentRuntime in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a AgentRuntime in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Runtime qualifier identifying a specific endpoint version. Defaults to DEFAULT when not set.
 	// +kubebuilder:validation:Optional
@@ -351,11 +350,11 @@ type GatewayTargetInitParameters struct {
 
 	// Reference to a Gateway in bedrockagentcore to populate gatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	GatewayIdentifierRef *v1.NamespacedReference `json:"gatewayIdentifierRef,omitempty" tf:"-"`
+	GatewayIdentifierRef *v2.NamespacedReference `json:"gatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in bedrockagentcore to populate gatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	GatewayIdentifierSelector *v1.NamespacedSelector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
+	GatewayIdentifierSelector *v2.NamespacedSelector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration below.
 	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
@@ -421,11 +420,11 @@ type GatewayTargetParameters struct {
 
 	// Reference to a Gateway in bedrockagentcore to populate gatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	GatewayIdentifierRef *v1.NamespacedReference `json:"gatewayIdentifierRef,omitempty" tf:"-"`
+	GatewayIdentifierRef *v2.NamespacedReference `json:"gatewayIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in bedrockagentcore to populate gatewayIdentifier.
 	// +kubebuilder:validation:Optional
-	GatewayIdentifierSelector *v1.NamespacedSelector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
+	GatewayIdentifierSelector *v2.NamespacedSelector `json:"gatewayIdentifierSelector,omitempty" tf:"-"`
 
 	// Configuration for HTTP header and query parameter propagation between the gateway and target servers. See metadata_configuration below.
 	// +kubebuilder:validation:Optional
@@ -470,11 +469,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceInitParameters struct {
 
 	// Reference to a LB in elbv2 to populate routingDomain.
 	// +kubebuilder:validation:Optional
-	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
+	RoutingDomainRef *v2.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate routingDomain.
 	// +kubebuilder:validation:Optional
-	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
+	RoutingDomainSelector *v2.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
 
 	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -484,11 +483,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
 	// +listType=set
@@ -505,11 +504,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+	VPCIdentifierRef *v2.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+	VPCIdentifierSelector *v2.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
 }
 
 type GatewayTargetPrivateEndpointManagedVPCResourceObservation struct {
@@ -550,11 +549,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceParameters struct {
 
 	// Reference to a LB in elbv2 to populate routingDomain.
 	// +kubebuilder:validation:Optional
-	RoutingDomainRef *v1.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
+	RoutingDomainRef *v2.NamespacedReference `json:"routingDomainRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate routingDomain.
 	// +kubebuilder:validation:Optional
-	RoutingDomainSelector *v1.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
+	RoutingDomainSelector *v2.NamespacedSelector `json:"routingDomainSelector,omitempty" tf:"-"`
 
 	// Set of security group IDs (up to 5) to associate with the Lattice resource gateway. Defaults to the VPC default security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -565,11 +564,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// Set of subnet IDs inside the VPC where Lattice ENIs are placed.
 	// +kubebuilder:validation:Optional
@@ -589,11 +588,11 @@ type GatewayTargetPrivateEndpointManagedVPCResourceParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierRef *v1.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
+	VPCIdentifierRef *v2.NamespacedReference `json:"vpcIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcIdentifier.
 	// +kubebuilder:validation:Optional
-	VPCIdentifierSelector *v1.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
+	VPCIdentifierSelector *v2.NamespacedSelector `json:"vpcIdentifierSelector,omitempty" tf:"-"`
 }
 
 type GatewayTargetPrivateEndpointObservation struct {
@@ -625,11 +624,11 @@ type GatewayTargetPrivateEndpointSelfManagedLatticeResourceInitParameters struct
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierRef *v2.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierSelector *v2.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 }
 
 type GatewayTargetPrivateEndpointSelfManagedLatticeResourceObservation struct {
@@ -648,11 +647,11 @@ type GatewayTargetPrivateEndpointSelfManagedLatticeResourceParameters struct {
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierRef *v1.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierRef *v2.NamespacedReference `json:"resourceConfigurationIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationIdentifier.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationIdentifierSelector *v1.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
+	ResourceConfigurationIdentifierSelector *v2.NamespacedSelector `json:"resourceConfigurationIdentifierSelector,omitempty" tf:"-"`
 }
 
 type HTTPInitParameters struct {
@@ -1026,11 +1025,11 @@ type McpLambdaInitParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
 	// Schema definition for the tool. See tool_schema below.
 	ToolSchema *ToolSchemaInitParameters `json:"toolSchema,omitempty" tf:"tool_schema,omitempty"`
@@ -1055,11 +1054,11 @@ type McpLambdaParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
 	// Schema definition for the tool. See tool_schema below.
 	// +kubebuilder:validation:Optional
@@ -1173,11 +1172,11 @@ type OauthInitParameters struct {
 
 	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +listType=set
@@ -1231,11 +1230,11 @@ type OauthParameters struct {
 
 	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// Set of OAuth scopes to request.
 	// +kubebuilder:validation:Optional
@@ -2400,8 +2399,8 @@ type GatewayTargetSpec struct {
 
 // GatewayTargetStatus defines the observed state of GatewayTarget.
 type GatewayTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

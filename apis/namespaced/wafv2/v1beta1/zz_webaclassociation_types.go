@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WebACLAssociationInitParameters struct {
@@ -46,11 +45,11 @@ type WebACLAssociationParameters struct {
 
 	// Reference to a Stage in apigateway to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/wafv2/v1beta1.WebACL
@@ -60,11 +59,11 @@ type WebACLAssociationParameters struct {
 
 	// Reference to a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnRef *v1.NamespacedReference `json:"webAclArnRef,omitempty" tf:"-"`
+	WebACLArnRef *v2.NamespacedReference `json:"webAclArnRef,omitempty" tf:"-"`
 
 	// Selector for a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnSelector *v1.NamespacedSelector `json:"webAclArnSelector,omitempty" tf:"-"`
+	WebACLArnSelector *v2.NamespacedSelector `json:"webAclArnSelector,omitempty" tf:"-"`
 }
 
 // WebACLAssociationSpec defines the desired state of WebACLAssociation
@@ -86,8 +85,8 @@ type WebACLAssociationSpec struct {
 
 // WebACLAssociationStatus defines the observed state of WebACLAssociation.
 type WebACLAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebACLAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebACLAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

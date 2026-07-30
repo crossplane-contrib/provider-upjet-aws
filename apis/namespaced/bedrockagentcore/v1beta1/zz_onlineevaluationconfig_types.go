@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudwatchConfigInitParameters struct {
@@ -34,11 +33,11 @@ type CloudwatchLogsInitParameters struct {
 
 	// References to Group in cloudwatchlogs to populate logGroupNames.
 	// +kubebuilder:validation:Optional
-	LogGroupNamesRefs []v1.NamespacedReference `json:"logGroupNamesRefs,omitempty" tf:"-"`
+	LogGroupNamesRefs []v2.NamespacedReference `json:"logGroupNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in cloudwatchlogs to populate logGroupNames.
 	// +kubebuilder:validation:Optional
-	LogGroupNamesSelector *v1.NamespacedSelector `json:"logGroupNamesSelector,omitempty" tf:"-"`
+	LogGroupNamesSelector *v2.NamespacedSelector `json:"logGroupNamesSelector,omitempty" tf:"-"`
 
 	// List of service names to filter traces within the specified log groups.
 	ServiceNames []*string `json:"serviceNames,omitempty" tf:"service_names,omitempty"`
@@ -62,11 +61,11 @@ type CloudwatchLogsParameters struct {
 
 	// References to Group in cloudwatchlogs to populate logGroupNames.
 	// +kubebuilder:validation:Optional
-	LogGroupNamesRefs []v1.NamespacedReference `json:"logGroupNamesRefs,omitempty" tf:"-"`
+	LogGroupNamesRefs []v2.NamespacedReference `json:"logGroupNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Group in cloudwatchlogs to populate logGroupNames.
 	// +kubebuilder:validation:Optional
-	LogGroupNamesSelector *v1.NamespacedSelector `json:"logGroupNamesSelector,omitempty" tf:"-"`
+	LogGroupNamesSelector *v2.NamespacedSelector `json:"logGroupNamesSelector,omitempty" tf:"-"`
 
 	// List of service names to filter traces within the specified log groups.
 	// +kubebuilder:validation:Optional
@@ -140,11 +139,11 @@ type OnlineEvaluationConfigEvaluatorInitParameters struct {
 
 	// Reference to a Evaluator in bedrockagentcore to populate evaluatorId.
 	// +kubebuilder:validation:Optional
-	EvaluatorIDRef *v1.NamespacedReference `json:"evaluatorIdRef,omitempty" tf:"-"`
+	EvaluatorIDRef *v2.NamespacedReference `json:"evaluatorIdRef,omitempty" tf:"-"`
 
 	// Selector for a Evaluator in bedrockagentcore to populate evaluatorId.
 	// +kubebuilder:validation:Optional
-	EvaluatorIDSelector *v1.NamespacedSelector `json:"evaluatorIdSelector,omitempty" tf:"-"`
+	EvaluatorIDSelector *v2.NamespacedSelector `json:"evaluatorIdSelector,omitempty" tf:"-"`
 }
 
 type OnlineEvaluationConfigEvaluatorObservation struct {
@@ -163,11 +162,11 @@ type OnlineEvaluationConfigEvaluatorParameters struct {
 
 	// Reference to a Evaluator in bedrockagentcore to populate evaluatorId.
 	// +kubebuilder:validation:Optional
-	EvaluatorIDRef *v1.NamespacedReference `json:"evaluatorIdRef,omitempty" tf:"-"`
+	EvaluatorIDRef *v2.NamespacedReference `json:"evaluatorIdRef,omitempty" tf:"-"`
 
 	// Selector for a Evaluator in bedrockagentcore to populate evaluatorId.
 	// +kubebuilder:validation:Optional
-	EvaluatorIDSelector *v1.NamespacedSelector `json:"evaluatorIdSelector,omitempty" tf:"-"`
+	EvaluatorIDSelector *v2.NamespacedSelector `json:"evaluatorIdSelector,omitempty" tf:"-"`
 }
 
 type OnlineEvaluationConfigInitParameters struct {
@@ -188,11 +187,11 @@ type OnlineEvaluationConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate evaluationExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	EvaluationExecutionRoleArnRef *v1.NamespacedReference `json:"evaluationExecutionRoleArnRef,omitempty" tf:"-"`
+	EvaluationExecutionRoleArnRef *v2.NamespacedReference `json:"evaluationExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate evaluationExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	EvaluationExecutionRoleArnSelector *v1.NamespacedSelector `json:"evaluationExecutionRoleArnSelector,omitempty" tf:"-"`
+	EvaluationExecutionRoleArnSelector *v2.NamespacedSelector `json:"evaluationExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// List of evaluators to apply during online evaluation. Minimum 1, maximum 10. See evaluator Block below.
 	Evaluator []OnlineEvaluationConfigEvaluatorInitParameters `json:"evaluator,omitempty" tf:"evaluator,omitempty"`
@@ -283,11 +282,11 @@ type OnlineEvaluationConfigParameters struct {
 
 	// Reference to a Role in iam to populate evaluationExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	EvaluationExecutionRoleArnRef *v1.NamespacedReference `json:"evaluationExecutionRoleArnRef,omitempty" tf:"-"`
+	EvaluationExecutionRoleArnRef *v2.NamespacedReference `json:"evaluationExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate evaluationExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	EvaluationExecutionRoleArnSelector *v1.NamespacedSelector `json:"evaluationExecutionRoleArnSelector,omitempty" tf:"-"`
+	EvaluationExecutionRoleArnSelector *v2.NamespacedSelector `json:"evaluationExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// List of evaluators to apply during online evaluation. Minimum 1, maximum 10. See evaluator Block below.
 	// +kubebuilder:validation:Optional
@@ -463,8 +462,8 @@ type OnlineEvaluationConfigSpec struct {
 
 // OnlineEvaluationConfigStatus defines the observed state of OnlineEvaluationConfig.
 type OnlineEvaluationConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OnlineEvaluationConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OnlineEvaluationConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

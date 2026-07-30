@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConditionInitParameters struct {
@@ -28,11 +28,11 @@ type ConditionInitParameters struct {
 
 	// Reference to a Organization in organizations to populate value.
 	// +kubebuilder:validation:Optional
-	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
+	ValueRef *v2.Reference `json:"valueRef,omitempty" tf:"-"`
 
 	// Selector for a Organization in organizations to populate value.
 	// +kubebuilder:validation:Optional
-	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
+	ValueSelector *v2.Selector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type ConditionObservation struct {
@@ -65,11 +65,11 @@ type ConditionParameters struct {
 
 	// Reference to a Organization in organizations to populate value.
 	// +kubebuilder:validation:Optional
-	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
+	ValueRef *v2.Reference `json:"valueRef,omitempty" tf:"-"`
 
 	// Selector for a Organization in organizations to populate value.
 	// +kubebuilder:validation:Optional
-	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
+	ValueSelector *v2.Selector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type PermissionInitParameters struct {
@@ -87,11 +87,11 @@ type PermissionInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -144,11 +144,11 @@ type PermissionParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
 	// +kubebuilder:validation:Optional
@@ -166,8 +166,8 @@ type PermissionParameters struct {
 
 // PermissionSpec defines the desired state of Permission
 type PermissionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PermissionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PermissionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -183,8 +183,8 @@ type PermissionSpec struct {
 
 // PermissionStatus defines the observed state of Permission.
 type PermissionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PermissionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PermissionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

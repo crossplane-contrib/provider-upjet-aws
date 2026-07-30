@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttributeInitParameters struct {
@@ -60,11 +60,11 @@ type LBSSLNegotiationPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -124,11 +124,11 @@ type LBSSLNegotiationPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
 	// +kubebuilder:validation:Optional
@@ -147,8 +147,8 @@ type LBSSLNegotiationPolicyParameters struct {
 
 // LBSSLNegotiationPolicySpec defines the desired state of LBSSLNegotiationPolicy
 type LBSSLNegotiationPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LBSSLNegotiationPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LBSSLNegotiationPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -164,8 +164,8 @@ type LBSSLNegotiationPolicySpec struct {
 
 // LBSSLNegotiationPolicyStatus defines the observed state of LBSSLNegotiationPolicy.
 type LBSSLNegotiationPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBSSLNegotiationPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBSSLNegotiationPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

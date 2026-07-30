@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VectorBucketPolicyInitParameters struct {
@@ -25,11 +25,11 @@ type VectorBucketPolicyInitParameters struct {
 
 	// Reference to a VectorBucket in s3vectors to populate vectorBucketArn.
 	// +kubebuilder:validation:Optional
-	VectorBucketArnRef *v1.Reference `json:"vectorBucketArnRef,omitempty" tf:"-"`
+	VectorBucketArnRef *v2.Reference `json:"vectorBucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a VectorBucket in s3vectors to populate vectorBucketArn.
 	// +kubebuilder:validation:Optional
-	VectorBucketArnSelector *v1.Selector `json:"vectorBucketArnSelector,omitempty" tf:"-"`
+	VectorBucketArnSelector *v2.Selector `json:"vectorBucketArnSelector,omitempty" tf:"-"`
 }
 
 type VectorBucketPolicyObservation struct {
@@ -65,17 +65,17 @@ type VectorBucketPolicyParameters struct {
 
 	// Reference to a VectorBucket in s3vectors to populate vectorBucketArn.
 	// +kubebuilder:validation:Optional
-	VectorBucketArnRef *v1.Reference `json:"vectorBucketArnRef,omitempty" tf:"-"`
+	VectorBucketArnRef *v2.Reference `json:"vectorBucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a VectorBucket in s3vectors to populate vectorBucketArn.
 	// +kubebuilder:validation:Optional
-	VectorBucketArnSelector *v1.Selector `json:"vectorBucketArnSelector,omitempty" tf:"-"`
+	VectorBucketArnSelector *v2.Selector `json:"vectorBucketArnSelector,omitempty" tf:"-"`
 }
 
 // VectorBucketPolicySpec defines the desired state of VectorBucketPolicy
 type VectorBucketPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VectorBucketPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VectorBucketPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type VectorBucketPolicySpec struct {
 
 // VectorBucketPolicyStatus defines the observed state of VectorBucketPolicy.
 type VectorBucketPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VectorBucketPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VectorBucketPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

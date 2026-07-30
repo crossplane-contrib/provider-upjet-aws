@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VolumeAttachmentInitParameters struct {
@@ -32,11 +32,11 @@ type VolumeAttachmentInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// This is
 	// useful when destroying an instance which has volumes created by some other
@@ -54,11 +54,11 @@ type VolumeAttachmentInitParameters struct {
 
 	// Reference to a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.Reference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 type VolumeAttachmentObservation struct {
@@ -117,11 +117,11 @@ type VolumeAttachmentParameters struct {
 
 	// Reference to a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -147,17 +147,17 @@ type VolumeAttachmentParameters struct {
 
 	// Reference to a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
+	VolumeIDRef *v2.Reference `json:"volumeIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSVolume in ec2 to populate volumeId.
 	// +kubebuilder:validation:Optional
-	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
+	VolumeIDSelector *v2.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 // VolumeAttachmentSpec defines the desired state of VolumeAttachment
 type VolumeAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VolumeAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VolumeAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -173,8 +173,8 @@ type VolumeAttachmentSpec struct {
 
 // VolumeAttachmentStatus defines the observed state of VolumeAttachment.
 type VolumeAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VolumeAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VolumeAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

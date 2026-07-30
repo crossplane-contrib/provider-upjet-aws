@@ -9,7 +9,7 @@
 package v1beta1
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/crossplane/upjet/v2/apis/configuration/v1alpha1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
@@ -409,12 +409,12 @@ func (in *WebIdentityTokenConfig) DeepCopyInto(out *WebIdentityTokenConfig) {
 	*out = *in
 	if in.SecretRef != nil {
 		in, out := &in.SecretRef, &out.SecretRef
-		*out = new(v1.SecretKeySelector)
+		*out = new(v2.SecretKeySelector)
 		**out = **in
 	}
 	if in.Fs != nil {
 		in, out := &in.Fs, &out.Fs
-		*out = new(v1.FsSelector)
+		*out = new(v2.FsSelector)
 		**out = **in
 	}
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InlinePolicyInitParameters struct {
@@ -65,11 +64,11 @@ type RoleInitParameters struct {
 
 	// References to Policy in iam to populate managedPolicyArns.
 	// +kubebuilder:validation:Optional
-	ManagedPolicyArnsRefs []v1.NamespacedReference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
+	ManagedPolicyArnsRefs []v2.NamespacedReference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in iam to populate managedPolicyArns.
 	// +kubebuilder:validation:Optional
-	ManagedPolicyArnsSelector *v1.NamespacedSelector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
+	ManagedPolicyArnsSelector *v2.NamespacedSelector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
@@ -160,11 +159,11 @@ type RoleParameters struct {
 
 	// References to Policy in iam to populate managedPolicyArns.
 	// +kubebuilder:validation:Optional
-	ManagedPolicyArnsRefs []v1.NamespacedReference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
+	ManagedPolicyArnsRefs []v2.NamespacedReference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in iam to populate managedPolicyArns.
 	// +kubebuilder:validation:Optional
-	ManagedPolicyArnsSelector *v1.NamespacedSelector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
+	ManagedPolicyArnsSelector *v2.NamespacedSelector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	// +kubebuilder:validation:Optional
@@ -203,8 +202,8 @@ type RoleSpec struct {
 
 // RoleStatus defines the observed state of Role.
 type RoleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudwatchLogOptionsInitParameters struct {
@@ -217,11 +216,11 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Reference to a CustomerGateway in ec2 to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayIDRef *v1.NamespacedReference `json:"customerGatewayIdRef,omitempty" tf:"-"`
+	CustomerGatewayIDRef *v2.NamespacedReference `json:"customerGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a CustomerGateway in ec2 to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayIDSelector *v1.NamespacedSelector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
+	CustomerGatewayIDSelector *v2.NamespacedSelector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 
 	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
@@ -258,11 +257,11 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
@@ -320,7 +319,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
 	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
-	Tunnel1PresharedKeySecretRef *v1.LocalSecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
+	Tunnel1PresharedKeySecretRef *v2.LocalSecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
 
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
@@ -387,7 +386,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
 	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
-	Tunnel2PresharedKeySecretRef *v1.LocalSecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
+	Tunnel2PresharedKeySecretRef *v2.LocalSecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
@@ -414,11 +413,11 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Reference to a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
-	TypeRef *v1.NamespacedReference `json:"typeRef,omitempty" tf:"-"`
+	TypeRef *v2.NamespacedReference `json:"typeRef,omitempty" tf:"-"`
 
 	// Selector for a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
-	TypeSelector *v1.NamespacedSelector `json:"typeSelector,omitempty" tf:"-"`
+	TypeSelector *v2.NamespacedSelector `json:"typeSelector,omitempty" tf:"-"`
 
 	// ID of the VPN concentrator to associate with the VPN connection.
 	VPNConcentratorID *string `json:"vpnConcentratorId,omitempty" tf:"vpn_concentrator_id,omitempty"`
@@ -429,11 +428,11 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VPNConnectionObservation_2 struct {
@@ -691,11 +690,11 @@ type VPNConnectionParameters_2 struct {
 
 	// Reference to a CustomerGateway in ec2 to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayIDRef *v1.NamespacedReference `json:"customerGatewayIdRef,omitempty" tf:"-"`
+	CustomerGatewayIDRef *v2.NamespacedReference `json:"customerGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a CustomerGateway in ec2 to populate customerGatewayId.
 	// +kubebuilder:validation:Optional
-	CustomerGatewayIDSelector *v1.NamespacedSelector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
+	CustomerGatewayIDSelector *v2.NamespacedSelector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
 
 	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	// +kubebuilder:validation:Optional
@@ -747,11 +746,11 @@ type VPNConnectionParameters_2 struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
 	// +kubebuilder:validation:Optional
@@ -826,7 +825,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
-	Tunnel1PresharedKeySecretRef *v1.LocalSecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
+	Tunnel1PresharedKeySecretRef *v2.LocalSecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
 
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -913,7 +912,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
-	Tunnel2PresharedKeySecretRef *v1.LocalSecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
+	Tunnel2PresharedKeySecretRef *v2.LocalSecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -947,11 +946,11 @@ type VPNConnectionParameters_2 struct {
 
 	// Reference to a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
-	TypeRef *v1.NamespacedReference `json:"typeRef,omitempty" tf:"-"`
+	TypeRef *v2.NamespacedReference `json:"typeRef,omitempty" tf:"-"`
 
 	// Selector for a CustomerGateway in ec2 to populate type.
 	// +kubebuilder:validation:Optional
-	TypeSelector *v1.NamespacedSelector `json:"typeSelector,omitempty" tf:"-"`
+	TypeSelector *v2.NamespacedSelector `json:"typeSelector,omitempty" tf:"-"`
 
 	// ID of the VPN concentrator to associate with the VPN connection.
 	// +kubebuilder:validation:Optional
@@ -964,11 +963,11 @@ type VPNConnectionParameters_2 struct {
 
 	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.NamespacedReference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.NamespacedSelector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VgwTelemetryInitParameters struct {
@@ -1017,8 +1016,8 @@ type VPNConnectionSpec struct {
 
 // VPNConnectionStatus defines the observed state of VPNConnection.
 type VPNConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNConnectionObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNConnectionObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

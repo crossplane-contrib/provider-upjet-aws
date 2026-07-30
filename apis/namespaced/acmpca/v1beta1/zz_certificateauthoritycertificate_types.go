@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateAuthorityCertificateInitParameters struct {
@@ -22,17 +21,17 @@ type CertificateAuthorityCertificateInitParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
-	CertificateChainSecretRef *v1.LocalSecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
+	CertificateChainSecretRef *v2.LocalSecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
 	// PEM-encoded certificate for the Certificate Authority.
-	CertificateSecretRef v1.LocalSecretKeySelector `json:"certificateSecretRef" tf:"-"`
+	CertificateSecretRef v2.LocalSecretKeySelector `json:"certificateSecretRef" tf:"-"`
 }
 
 type CertificateAuthorityCertificateObservation struct {
@@ -56,19 +55,19 @@ type CertificateAuthorityCertificateParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
 	// +kubebuilder:validation:Optional
-	CertificateChainSecretRef *v1.LocalSecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
+	CertificateChainSecretRef *v2.LocalSecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
 	// PEM-encoded certificate for the Certificate Authority.
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef v1.LocalSecretKeySelector `json:"certificateSecretRef" tf:"-"`
+	CertificateSecretRef v2.LocalSecretKeySelector `json:"certificateSecretRef" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -95,8 +94,8 @@ type CertificateAuthorityCertificateSpec struct {
 
 // CertificateAuthorityCertificateStatus defines the observed state of CertificateAuthorityCertificate.
 type CertificateAuthorityCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateAuthorityCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateAuthorityCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

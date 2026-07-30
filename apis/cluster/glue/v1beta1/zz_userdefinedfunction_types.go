@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceUrisInitParameters struct {
@@ -108,11 +108,11 @@ type UserDefinedFunctionParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The owner of the function.
 	// +kubebuilder:validation:Optional
@@ -134,8 +134,8 @@ type UserDefinedFunctionParameters struct {
 
 // UserDefinedFunctionSpec defines the desired state of UserDefinedFunction
 type UserDefinedFunctionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserDefinedFunctionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserDefinedFunctionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -151,8 +151,8 @@ type UserDefinedFunctionSpec struct {
 
 // UserDefinedFunctionStatus defines the observed state of UserDefinedFunction.
 type UserDefinedFunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserDefinedFunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserDefinedFunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationConfigurationInitParameters struct {
@@ -394,11 +393,11 @@ type DestinationTableConfigurationInitParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
 	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
@@ -409,11 +408,11 @@ type DestinationTableConfigurationInitParameters struct {
 
 	// Reference to a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
 	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
@@ -443,11 +442,11 @@ type DestinationTableConfigurationParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
 	// +kubebuilder:validation:Optional
@@ -460,11 +459,11 @@ type DestinationTableConfigurationParameters struct {
 
 	// Reference to a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
 	// +kubebuilder:validation:Optional
@@ -540,11 +539,11 @@ type ElasticsearchConfigurationInitParameters struct {
 
 	// Reference to a Domain in elasticsearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnRef *v1.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in elasticsearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnSelector *v1.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
 
 	// The Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
@@ -565,11 +564,11 @@ type ElasticsearchConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -655,11 +654,11 @@ type ElasticsearchConfigurationParameters struct {
 
 	// Reference to a Domain in elasticsearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnRef *v1.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in elasticsearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnSelector *v1.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
 
 	// The Elasticsearch index name.
 	// +kubebuilder:validation:Optional
@@ -685,11 +684,11 @@ type ElasticsearchConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
@@ -756,11 +755,11 @@ type ExtendedS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -806,11 +805,11 @@ type ExtendedS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	S3BackupConfiguration *S3BackupConfigurationInitParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
@@ -881,11 +880,11 @@ type ExtendedS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -944,11 +943,11 @@ type ExtendedS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	// +kubebuilder:validation:Optional
@@ -1030,7 +1029,7 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 type HTTPEndpointConfigurationInitParameters struct {
 
 	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
-	AccessKeySecretRef *v1.LocalSecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
+	AccessKeySecretRef *v2.LocalSecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -1060,11 +1059,11 @@ type HTTPEndpointConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -1122,7 +1121,7 @@ type HTTPEndpointConfigurationParameters struct {
 
 	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
 	// +kubebuilder:validation:Optional
-	AccessKeySecretRef *v1.LocalSecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
+	AccessKeySecretRef *v2.LocalSecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	// +kubebuilder:validation:Optional
@@ -1160,11 +1159,11 @@ type HTTPEndpointConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	// +kubebuilder:validation:Optional
@@ -1289,11 +1288,11 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -1324,11 +1323,11 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type HTTPEndpointConfigurationS3ConfigurationObservation struct {
@@ -1372,11 +1371,11 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -1415,11 +1414,11 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type HiveJSONSerDeInitParameters struct {
@@ -1511,11 +1510,11 @@ type IcebergConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
@@ -1601,11 +1600,11 @@ type IcebergConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
@@ -1752,11 +1751,11 @@ type IcebergConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -1787,11 +1786,11 @@ type IcebergConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type IcebergConfigurationS3ConfigurationObservation struct {
@@ -1835,11 +1834,11 @@ type IcebergConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -1878,11 +1877,11 @@ type IcebergConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type InputFormatConfigurationInitParameters struct {
@@ -2087,11 +2086,11 @@ type OpensearchConfigurationInitParameters struct {
 
 	// Reference to a Domain in opensearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnRef *v1.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in opensearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnSelector *v1.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
 
 	// The OpenSearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
@@ -2112,11 +2111,11 @@ type OpensearchConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -2209,11 +2208,11 @@ type OpensearchConfigurationParameters struct {
 
 	// Reference to a Domain in opensearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnRef *v1.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
+	DomainArnRef *v2.NamespacedReference `json:"domainArnRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in opensearch to populate domainArn.
 	// +kubebuilder:validation:Optional
-	DomainArnSelector *v1.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
+	DomainArnSelector *v2.NamespacedSelector `json:"domainArnSelector,omitempty" tf:"-"`
 
 	// The OpenSearch index name.
 	// +kubebuilder:validation:Optional
@@ -2239,11 +2238,11 @@ type OpensearchConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
@@ -2397,11 +2396,11 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -2432,11 +2431,11 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OpensearchConfigurationS3ConfigurationObservation struct {
@@ -2480,11 +2479,11 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -2523,11 +2522,11 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
@@ -2539,11 +2538,11 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -2553,11 +2552,11 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -2567,11 +2566,11 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type OpensearchConfigurationVPCConfigObservation struct {
@@ -2600,11 +2599,11 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -2615,11 +2614,11 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -2630,11 +2629,11 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type OpensearchserverlessConfigurationCloudwatchLoggingOptionsInitParameters struct {
@@ -2694,11 +2693,11 @@ type OpensearchserverlessConfigurationInitParameters struct {
 
 	// Reference to a Collection in opensearchserverless to populate collectionEndpoint.
 	// +kubebuilder:validation:Optional
-	CollectionEndpointRef *v1.NamespacedReference `json:"collectionEndpointRef,omitempty" tf:"-"`
+	CollectionEndpointRef *v2.NamespacedReference `json:"collectionEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Collection in opensearchserverless to populate collectionEndpoint.
 	// +kubebuilder:validation:Optional
-	CollectionEndpointSelector *v1.NamespacedSelector `json:"collectionEndpointSelector,omitempty" tf:"-"`
+	CollectionEndpointSelector *v2.NamespacedSelector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
 	// The Serverless offering for Amazon OpenSearch Service index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
@@ -2716,11 +2715,11 @@ type OpensearchserverlessConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -2790,11 +2789,11 @@ type OpensearchserverlessConfigurationParameters struct {
 
 	// Reference to a Collection in opensearchserverless to populate collectionEndpoint.
 	// +kubebuilder:validation:Optional
-	CollectionEndpointRef *v1.NamespacedReference `json:"collectionEndpointRef,omitempty" tf:"-"`
+	CollectionEndpointRef *v2.NamespacedReference `json:"collectionEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Collection in opensearchserverless to populate collectionEndpoint.
 	// +kubebuilder:validation:Optional
-	CollectionEndpointSelector *v1.NamespacedSelector `json:"collectionEndpointSelector,omitempty" tf:"-"`
+	CollectionEndpointSelector *v2.NamespacedSelector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
 	// The Serverless offering for Amazon OpenSearch Service index name.
 	// +kubebuilder:validation:Optional
@@ -2816,11 +2815,11 @@ type OpensearchserverlessConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
@@ -2970,11 +2969,11 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -3005,11 +3004,11 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OpensearchserverlessConfigurationS3ConfigurationObservation struct {
@@ -3053,11 +3052,11 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -3096,11 +3095,11 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OpensearchserverlessConfigurationVPCConfigInitParameters struct {
@@ -3578,7 +3577,7 @@ type RedshiftConfigurationInitParameters struct {
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
 	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *RedshiftConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -3593,11 +3592,11 @@ type RedshiftConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
@@ -3683,7 +3682,7 @@ type RedshiftConfigurationParameters struct {
 
 	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -3701,11 +3700,11 @@ type RedshiftConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
@@ -3864,11 +3863,11 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -3899,11 +3898,11 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationObservation struct {
@@ -3947,11 +3946,11 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -3990,11 +3989,11 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
@@ -4045,11 +4044,11 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -4080,11 +4079,11 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type RedshiftConfigurationS3ConfigurationObservation struct {
@@ -4128,11 +4127,11 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -4171,11 +4170,11 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type RedshiftConfigurationSecretsManagerConfigurationInitParameters struct {
@@ -4435,11 +4434,11 @@ type S3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -4470,11 +4469,11 @@ type S3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigurationObservation struct {
@@ -4518,11 +4517,11 @@ type S3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -4561,11 +4560,11 @@ type S3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SchemaConfigurationInitParameters struct {
@@ -4583,11 +4582,11 @@ type SchemaConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/glue/v1beta1.CatalogTable
@@ -4595,11 +4594,11 @@ type SchemaConfigurationInitParameters struct {
 
 	// Reference to a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
@@ -4648,11 +4647,11 @@ type SchemaConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/glue/v1beta1.CatalogTable
@@ -4661,11 +4660,11 @@ type SchemaConfigurationParameters struct {
 
 	// Reference to a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameRef *v1.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
+	TableNameRef *v2.NamespacedReference `json:"tableNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogTable in glue to populate tableName.
 	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
+	TableNameSelector *v2.NamespacedSelector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
 	// +kubebuilder:validation:Optional
@@ -4842,13 +4841,13 @@ type SnowflakeConfigurationInitParameters struct {
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The passphrase for the private key.
-	KeyPassphraseSecretRef *v1.LocalSecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
+	KeyPassphraseSecretRef *v2.LocalSecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
 
 	// The name of the metadata column.
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
 	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
-	PrivateKeySecretRef *v1.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration *SnowflakeConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -4863,11 +4862,11 @@ type SnowflakeConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 backup mode.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -4986,7 +4985,7 @@ type SnowflakeConfigurationParameters struct {
 
 	// The passphrase for the private key.
 	// +kubebuilder:validation:Optional
-	KeyPassphraseSecretRef *v1.LocalSecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
+	KeyPassphraseSecretRef *v2.LocalSecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
 
 	// The name of the metadata column.
 	// +kubebuilder:validation:Optional
@@ -4994,7 +4993,7 @@ type SnowflakeConfigurationParameters struct {
 
 	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef *v1.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -5012,11 +5011,11 @@ type SnowflakeConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 backup mode.
 	// +kubebuilder:validation:Optional
@@ -5186,11 +5185,11 @@ type SnowflakeConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -5221,11 +5220,11 @@ type SnowflakeConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SnowflakeConfigurationS3ConfigurationObservation struct {
@@ -5269,11 +5268,11 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -5312,11 +5311,11 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SnowflakeConfigurationSecretsManagerConfigurationInitParameters struct {
@@ -5466,7 +5465,7 @@ type SplunkConfigurationInitParameters struct {
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
-	HecTokenSecretRef *v1.LocalSecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
+	HecTokenSecretRef *v2.LocalSecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration *SplunkConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -5550,7 +5549,7 @@ type SplunkConfigurationParameters struct {
 
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
-	HecTokenSecretRef *v1.LocalSecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
+	HecTokenSecretRef *v2.LocalSecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -5709,11 +5708,11 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
@@ -5744,11 +5743,11 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SplunkConfigurationS3ConfigurationObservation struct {
@@ -5792,11 +5791,11 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
@@ -5835,11 +5834,11 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SplunkConfigurationSecretsManagerConfigurationInitParameters struct {
@@ -5890,11 +5889,11 @@ type VPCConfigInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -5904,11 +5903,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -5918,11 +5917,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigObservation struct {
@@ -5951,11 +5950,11 @@ type VPCConfigParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -5966,11 +5965,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -5981,11 +5980,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // DeliveryStreamSpec defines the desired state of DeliveryStream
@@ -6007,8 +6006,8 @@ type DeliveryStreamSpec struct {
 
 // DeliveryStreamStatus defines the observed state of DeliveryStream.
 type DeliveryStreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeliveryStreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeliveryStreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketIntelligentTieringConfigurationFilterInitParameters struct {
@@ -54,11 +54,11 @@ type BucketIntelligentTieringConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
 	Filter *BucketIntelligentTieringConfigurationFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -107,11 +107,11 @@ type BucketIntelligentTieringConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
 	// +kubebuilder:validation:Optional
@@ -166,8 +166,8 @@ type TieringParameters struct {
 
 // BucketIntelligentTieringConfigurationSpec defines the desired state of BucketIntelligentTieringConfiguration
 type BucketIntelligentTieringConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketIntelligentTieringConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketIntelligentTieringConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -183,8 +183,8 @@ type BucketIntelligentTieringConfigurationSpec struct {
 
 // BucketIntelligentTieringConfigurationStatus defines the observed state of BucketIntelligentTieringConfiguration.
 type BucketIntelligentTieringConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketIntelligentTieringConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketIntelligentTieringConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

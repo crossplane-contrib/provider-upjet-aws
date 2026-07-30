@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SignatureValidityPeriodInitParameters struct {
@@ -179,8 +179,8 @@ type SigningProfileRevocationRecordParameters struct {
 
 // SigningProfileSpec defines the desired state of SigningProfile
 type SigningProfileSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SigningProfileParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SigningProfileParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -196,8 +196,8 @@ type SigningProfileSpec struct {
 
 // SigningProfileStatus defines the observed state of SigningProfile.
 type SigningProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SigningProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SigningProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

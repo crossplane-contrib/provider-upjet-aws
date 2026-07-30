@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RouteResponseInitParameters struct {
@@ -21,11 +21,11 @@ type RouteResponseInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The model selection expression for the route response.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
@@ -40,11 +40,11 @@ type RouteResponseInitParameters struct {
 
 	// Reference to a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
-	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
+	RouteIDRef *v2.Reference `json:"routeIdRef,omitempty" tf:"-"`
 
 	// Selector for a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
-	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
+	RouteIDSelector *v2.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// Route response key.
 	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
@@ -85,11 +85,11 @@ type RouteResponseParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The model selection expression for the route response.
 	// +kubebuilder:validation:Optional
@@ -112,11 +112,11 @@ type RouteResponseParameters struct {
 
 	// Reference to a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
-	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
+	RouteIDRef *v2.Reference `json:"routeIdRef,omitempty" tf:"-"`
 
 	// Selector for a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
-	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
+	RouteIDSelector *v2.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// Route response key.
 	// +kubebuilder:validation:Optional
@@ -125,8 +125,8 @@ type RouteResponseParameters struct {
 
 // RouteResponseSpec defines the desired state of RouteResponse
 type RouteResponseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteResponseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RouteResponseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -142,8 +142,8 @@ type RouteResponseSpec struct {
 
 // RouteResponseStatus defines the observed state of RouteResponse.
 type RouteResponseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteResponseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteResponseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

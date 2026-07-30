@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SourceResourceInitParameters struct {
@@ -22,11 +22,11 @@ type SourceResourceInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Owner of the resource.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
@@ -63,11 +63,11 @@ type SourceResourceParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Owner of the resource.
 	// +kubebuilder:validation:Optional
@@ -119,11 +119,11 @@ type VPCIpamPoolInitParameters struct {
 
 	// Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
-	IpamScopeIDRef *v1.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
+	IpamScopeIDRef *v2.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
-	IpamScopeIDSelector *v1.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
+	IpamScopeIDSelector *v2.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
 
 	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
 	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
@@ -141,11 +141,11 @@ type VPCIpamPoolInitParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
 	// +kubebuilder:validation:Optional
-	SourceIpamPoolIDRef *v1.Reference `json:"sourceIpamPoolIdRef,omitempty" tf:"-"`
+	SourceIpamPoolIDRef *v2.Reference `json:"sourceIpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate sourceIpamPoolId.
 	// +kubebuilder:validation:Optional
-	SourceIpamPoolIDSelector *v1.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
+	SourceIpamPoolIDSelector *v2.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
 
 	// Resource to use to use to configure a resource planning IPAM Pool. If configured, the locale of the parent pool must match the region that the vpc resides in.
 	SourceResource *SourceResourceInitParameters `json:"sourceResource,omitempty" tf:"source_resource,omitempty"`
@@ -277,11 +277,11 @@ type VPCIpamPoolParameters struct {
 
 	// Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
-	IpamScopeIDRef *v1.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
+	IpamScopeIDRef *v2.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
-	IpamScopeIDSelector *v1.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
+	IpamScopeIDSelector *v2.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
 
 	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
 	// +kubebuilder:validation:Optional
@@ -308,11 +308,11 @@ type VPCIpamPoolParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
 	// +kubebuilder:validation:Optional
-	SourceIpamPoolIDRef *v1.Reference `json:"sourceIpamPoolIdRef,omitempty" tf:"-"`
+	SourceIpamPoolIDRef *v2.Reference `json:"sourceIpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate sourceIpamPoolId.
 	// +kubebuilder:validation:Optional
-	SourceIpamPoolIDSelector *v1.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
+	SourceIpamPoolIDSelector *v2.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
 
 	// Resource to use to use to configure a resource planning IPAM Pool. If configured, the locale of the parent pool must match the region that the vpc resides in.
 	// +kubebuilder:validation:Optional
@@ -326,8 +326,8 @@ type VPCIpamPoolParameters struct {
 
 // VPCIpamPoolSpec defines the desired state of VPCIpamPool
 type VPCIpamPoolSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCIpamPoolParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCIpamPoolParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -343,8 +343,8 @@ type VPCIpamPoolSpec struct {
 
 // VPCIpamPoolStatus defines the observed state of VPCIpamPool.
 type VPCIpamPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIpamPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIpamPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

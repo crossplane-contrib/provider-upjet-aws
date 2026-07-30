@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessConfigInitParameters struct {
@@ -129,11 +128,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
 	StorageConfig *StorageConfigInitParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
@@ -309,11 +308,11 @@ type ClusterParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -770,11 +769,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -785,11 +784,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -850,11 +849,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -866,11 +865,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs. Must be in at least two different availability zones. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -919,8 +918,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

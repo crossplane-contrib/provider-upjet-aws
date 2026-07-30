@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionInitParameters struct {
@@ -81,7 +81,7 @@ type ConnectionParameters struct {
 
 	// Map of key-value pairs used as connection properties specific to the Athena compute environment.
 	// +kubebuilder:validation:Optional
-	AthenaPropertiesSecretRef *v1.SecretReference `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
+	AthenaPropertiesSecretRef *v2.SecretReference `json:"athenaPropertiesSecretRef,omitempty" tf:"-"`
 
 	// Configuration block for authentication options. See authentication_configuration below.
 	// +kubebuilder:validation:Optional
@@ -93,7 +93,7 @@ type ConnectionParameters struct {
 
 	// Map of key-value pairs used as parameters for this connection. For more information, see the AWS Documentation.
 	// +kubebuilder:validation:Optional
-	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
+	ConnectionPropertiesSecretRef *v2.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
 	// Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, DYNAMODB, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	// +kubebuilder:validation:Optional
@@ -145,11 +145,11 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -182,7 +182,7 @@ type AuthenticationConfigurationParameters struct {
 
 	// Map of custom authentication credentials.
 	// +kubebuilder:validation:Optional
-	CustomAuthenticationCredentialsSecretRef *v1.SecretReference `json:"customAuthenticationCredentialsSecretRef,omitempty" tf:"-"`
+	CustomAuthenticationCredentialsSecretRef *v2.SecretReference `json:"customAuthenticationCredentialsSecretRef,omitempty" tf:"-"`
 
 	// ARN of the KMS key used for encryption.
 	// +kubebuilder:validation:Optional
@@ -200,17 +200,17 @@ type AuthenticationConfigurationParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type AuthorizationCodePropertiesInitParameters struct {
 
 	// Authorization code.
-	AuthorizationCodeSecretRef v1.SecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
+	AuthorizationCodeSecretRef v2.SecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
 
 	// Redirect URI for OAuth2 flow.
 	RedirectURI *string `json:"redirectUri,omitempty" tf:"redirect_uri,omitempty"`
@@ -226,7 +226,7 @@ type AuthorizationCodePropertiesParameters struct {
 
 	// Authorization code.
 	// +kubebuilder:validation:Optional
-	AuthorizationCodeSecretRef v1.SecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
+	AuthorizationCodeSecretRef v2.SecretKeySelector `json:"authorizationCodeSecretRef" tf:"-"`
 
 	// Redirect URI for OAuth2 flow.
 	// +kubebuilder:validation:Optional
@@ -236,7 +236,7 @@ type AuthorizationCodePropertiesParameters struct {
 type BasicAuthenticationCredentialsInitParameters struct {
 
 	// Password for authentication.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Username for authentication.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -252,7 +252,7 @@ type BasicAuthenticationCredentialsParameters struct {
 
 	// Password for authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Username for authentication.
 	// +kubebuilder:validation:Optional
@@ -291,16 +291,16 @@ type Oauth2ClientApplicationParameters struct {
 type Oauth2CredentialsInitParameters struct {
 
 	// OAuth2 access token.
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// JWT token.
-	JwtTokenSecretRef *v1.SecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
+	JwtTokenSecretRef *v2.SecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
 
 	// OAuth2 refresh token.
-	RefreshTokenSecretRef *v1.SecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
+	RefreshTokenSecretRef *v2.SecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
 
 	// Client secret for user-managed client application.
-	UserManagedClientApplicationClientSecretSecretRef *v1.SecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
+	UserManagedClientApplicationClientSecretSecretRef *v2.SecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
 }
 
 type Oauth2CredentialsObservation struct {
@@ -310,19 +310,19 @@ type Oauth2CredentialsParameters struct {
 
 	// OAuth2 access token.
 	// +kubebuilder:validation:Optional
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// JWT token.
 	// +kubebuilder:validation:Optional
-	JwtTokenSecretRef *v1.SecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
+	JwtTokenSecretRef *v2.SecretKeySelector `json:"jwtTokenSecretRef,omitempty" tf:"-"`
 
 	// OAuth2 refresh token.
 	// +kubebuilder:validation:Optional
-	RefreshTokenSecretRef *v1.SecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
+	RefreshTokenSecretRef *v2.SecretKeySelector `json:"refreshTokenSecretRef,omitempty" tf:"-"`
 
 	// Client secret for user-managed client application.
 	// +kubebuilder:validation:Optional
-	UserManagedClientApplicationClientSecretSecretRef *v1.SecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
+	UserManagedClientApplicationClientSecretSecretRef *v2.SecretKeySelector `json:"userManagedClientApplicationClientSecretSecretRef,omitempty" tf:"-"`
 }
 
 type Oauth2PropertiesInitParameters struct {
@@ -387,7 +387,7 @@ type Oauth2PropertiesParameters struct {
 
 	// Map of additional parameters for the token URL.
 	// +kubebuilder:validation:Optional
-	TokenURLParametersMapSecretRef *v1.SecretReference `json:"tokenUrlParametersMapSecretRef,omitempty" tf:"-"`
+	TokenURLParametersMapSecretRef *v2.SecretReference `json:"tokenUrlParametersMapSecretRef,omitempty" tf:"-"`
 }
 
 type PhysicalConnectionRequirementsInitParameters struct {
@@ -399,11 +399,11 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate availabilityZone.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneRef *v1.Reference `json:"availabilityZoneRef,omitempty" tf:"-"`
+	AvailabilityZoneRef *v2.Reference `json:"availabilityZoneRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate availabilityZone.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneSelector *v1.Selector `json:"availabilityZoneSelector,omitempty" tf:"-"`
+	AvailabilityZoneSelector *v2.Selector `json:"availabilityZoneSelector,omitempty" tf:"-"`
 
 	// The security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -413,11 +413,11 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIdList.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDListRefs []v1.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
+	SecurityGroupIDListRefs []v2.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIdList.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDListSelector *v1.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
+	SecurityGroupIDListSelector *v2.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
 
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -426,11 +426,11 @@ type PhysicalConnectionRequirementsInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type PhysicalConnectionRequirementsObservation struct {
@@ -456,11 +456,11 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// Reference to a Subnet in ec2 to populate availabilityZone.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneRef *v1.Reference `json:"availabilityZoneRef,omitempty" tf:"-"`
+	AvailabilityZoneRef *v2.Reference `json:"availabilityZoneRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate availabilityZone.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneSelector *v1.Selector `json:"availabilityZoneSelector,omitempty" tf:"-"`
+	AvailabilityZoneSelector *v2.Selector `json:"availabilityZoneSelector,omitempty" tf:"-"`
 
 	// The security group ID list used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -471,11 +471,11 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIdList.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDListRefs []v1.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
+	SecurityGroupIDListRefs []v2.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIdList.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDListSelector *v1.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
+	SecurityGroupIDListSelector *v2.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
 
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -485,17 +485,17 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // ConnectionSpec defines the desired state of Connection
 type ConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -511,8 +511,8 @@ type ConnectionSpec struct {
 
 // ConnectionStatus defines the observed state of Connection.
 type ConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

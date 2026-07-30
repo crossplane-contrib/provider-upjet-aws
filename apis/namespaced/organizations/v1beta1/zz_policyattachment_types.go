@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyAttachmentInitParameters struct {
@@ -23,11 +22,11 @@ type PolicyAttachmentInitParameters struct {
 
 	// Reference to a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDRef *v1.NamespacedReference `json:"policyIdRef,omitempty" tf:"-"`
+	PolicyIDRef *v2.NamespacedReference `json:"policyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDSelector *v1.NamespacedSelector `json:"policyIdSelector,omitempty" tf:"-"`
+	PolicyIDSelector *v2.NamespacedSelector `json:"policyIdSelector,omitempty" tf:"-"`
 
 	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
@@ -59,11 +58,11 @@ type PolicyAttachmentParameters struct {
 
 	// Reference to a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDRef *v1.NamespacedReference `json:"policyIdRef,omitempty" tf:"-"`
+	PolicyIDRef *v2.NamespacedReference `json:"policyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in organizations to populate policyId.
 	// +kubebuilder:validation:Optional
-	PolicyIDSelector *v1.NamespacedSelector `json:"policyIdSelector,omitempty" tf:"-"`
+	PolicyIDSelector *v2.NamespacedSelector `json:"policyIdSelector,omitempty" tf:"-"`
 
 	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
 	// +kubebuilder:validation:Optional
@@ -93,8 +92,8 @@ type PolicyAttachmentSpec struct {
 
 // PolicyAttachmentStatus defines the observed state of PolicyAttachment.
 type PolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

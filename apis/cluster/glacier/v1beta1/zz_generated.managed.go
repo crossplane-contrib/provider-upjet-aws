@@ -5,104 +5,104 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Vault.
-func (mg *Vault) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Vault) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Vault.
-func (mg *Vault) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Vault) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Vault.
-func (mg *Vault) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Vault) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Vault.
-func (mg *Vault) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Vault) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Vault.
-func (mg *Vault) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Vault) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Vault.
-func (mg *Vault) SetConditions(c ...xpv1.Condition) {
+func (mg *Vault) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Vault.
-func (mg *Vault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Vault) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Vault.
-func (mg *Vault) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Vault) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Vault.
-func (mg *Vault) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Vault) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Vault.
-func (mg *Vault) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Vault) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VaultLock.
-func (mg *VaultLock) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VaultLock) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VaultLock.
-func (mg *VaultLock) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VaultLock) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VaultLock.
-func (mg *VaultLock) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VaultLock) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VaultLock.
-func (mg *VaultLock) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VaultLock) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VaultLock.
-func (mg *VaultLock) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VaultLock) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VaultLock.
-func (mg *VaultLock) SetConditions(c ...xpv1.Condition) {
+func (mg *VaultLock) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VaultLock.
-func (mg *VaultLock) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VaultLock) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VaultLock.
-func (mg *VaultLock) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VaultLock) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VaultLock.
-func (mg *VaultLock) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VaultLock) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VaultLock.
-func (mg *VaultLock) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VaultLock) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountLevelDetailedStatusCodeMetricsInitParameters struct {
@@ -486,11 +485,11 @@ type ExcludeInitParameters struct {
 
 	// References to Bucket in s3 to populate buckets.
 	// +kubebuilder:validation:Optional
-	BucketsRefs []v1.NamespacedReference `json:"bucketsRefs,omitempty" tf:"-"`
+	BucketsRefs []v2.NamespacedReference `json:"bucketsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Bucket in s3 to populate buckets.
 	// +kubebuilder:validation:Optional
-	BucketsSelector *v1.NamespacedSelector `json:"bucketsSelector,omitempty" tf:"-"`
+	BucketsSelector *v2.NamespacedSelector `json:"bucketsSelector,omitempty" tf:"-"`
 
 	// List of AWS Regions.
 	// +listType=set
@@ -519,11 +518,11 @@ type ExcludeParameters struct {
 
 	// References to Bucket in s3 to populate buckets.
 	// +kubebuilder:validation:Optional
-	BucketsRefs []v1.NamespacedReference `json:"bucketsRefs,omitempty" tf:"-"`
+	BucketsRefs []v2.NamespacedReference `json:"bucketsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Bucket in s3 to populate buckets.
 	// +kubebuilder:validation:Optional
-	BucketsSelector *v1.NamespacedSelector `json:"bucketsSelector,omitempty" tf:"-"`
+	BucketsSelector *v2.NamespacedSelector `json:"bucketsSelector,omitempty" tf:"-"`
 
 	// List of AWS Regions.
 	// +kubebuilder:validation:Optional
@@ -810,11 +809,11 @@ type S3BucketDestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -864,11 +863,11 @@ type S3BucketDestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Encryption of the metrics exports in this S3 tables bucket. See Encryption below for more details.
 	// +kubebuilder:validation:Optional
@@ -1247,8 +1246,8 @@ type StorageLensConfigurationSpec struct {
 
 // StorageLensConfigurationStatus defines the observed state of StorageLensConfiguration.
 type StorageLensConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StorageLensConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StorageLensConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

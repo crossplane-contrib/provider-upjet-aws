@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainNameConfigurationInitParameters struct {
@@ -22,11 +22,11 @@ type DomainNameConfigurationInitParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// Endpoint type. Valid values: REGIONAL.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
@@ -75,11 +75,11 @@ type DomainNameConfigurationParameters struct {
 
 	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// Endpoint type. Valid values: REGIONAL.
 	// +kubebuilder:validation:Optional
@@ -203,8 +203,8 @@ type MutualTLSAuthenticationParameters struct {
 
 // DomainNameSpec defines the desired state of DomainName
 type DomainNameSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainNameParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainNameParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -220,8 +220,8 @@ type DomainNameSpec struct {
 
 // DomainNameStatus defines the observed state of DomainName.
 type DomainNameStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainNameObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainNameObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

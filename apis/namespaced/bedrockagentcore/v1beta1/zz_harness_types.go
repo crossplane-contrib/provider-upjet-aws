@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentcoreBrowserInitParameters struct {
@@ -23,11 +22,11 @@ type AgentcoreBrowserInitParameters struct {
 
 	// Reference to a Browser in bedrockagentcore to populate browserArn.
 	// +kubebuilder:validation:Optional
-	BrowserArnRef *v1.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
+	BrowserArnRef *v2.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
 
 	// Selector for a Browser in bedrockagentcore to populate browserArn.
 	// +kubebuilder:validation:Optional
-	BrowserArnSelector *v1.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
+	BrowserArnSelector *v2.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreBrowserObservation struct {
@@ -46,11 +45,11 @@ type AgentcoreBrowserParameters struct {
 
 	// Reference to a Browser in bedrockagentcore to populate browserArn.
 	// +kubebuilder:validation:Optional
-	BrowserArnRef *v1.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
+	BrowserArnRef *v2.NamespacedReference `json:"browserArnRef,omitempty" tf:"-"`
 
 	// Selector for a Browser in bedrockagentcore to populate browserArn.
 	// +kubebuilder:validation:Optional
-	BrowserArnSelector *v1.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
+	BrowserArnSelector *v2.NamespacedSelector `json:"browserArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreCodeInterpreterInitParameters struct {
@@ -62,11 +61,11 @@ type AgentcoreCodeInterpreterInitParameters struct {
 
 	// Reference to a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
 	// +kubebuilder:validation:Optional
-	CodeInterpreterArnRef *v1.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
+	CodeInterpreterArnRef *v2.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
 
 	// Selector for a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
 	// +kubebuilder:validation:Optional
-	CodeInterpreterArnSelector *v1.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
+	CodeInterpreterArnSelector *v2.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreCodeInterpreterObservation struct {
@@ -85,11 +84,11 @@ type AgentcoreCodeInterpreterParameters struct {
 
 	// Reference to a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
 	// +kubebuilder:validation:Optional
-	CodeInterpreterArnRef *v1.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
+	CodeInterpreterArnRef *v2.NamespacedReference `json:"codeInterpreterArnRef,omitempty" tf:"-"`
 
 	// Selector for a CodeInterpreter in bedrockagentcore to populate codeInterpreterArn.
 	// +kubebuilder:validation:Optional
-	CodeInterpreterArnSelector *v1.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
+	CodeInterpreterArnSelector *v2.NamespacedSelector `json:"codeInterpreterArnSelector,omitempty" tf:"-"`
 }
 
 type AgentcoreGatewayInitParameters struct {
@@ -101,11 +100,11 @@ type AgentcoreGatewayInitParameters struct {
 
 	// Reference to a Gateway in bedrockagentcore to populate gatewayArn.
 	// +kubebuilder:validation:Optional
-	GatewayArnRef *v1.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
+	GatewayArnRef *v2.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in bedrockagentcore to populate gatewayArn.
 	// +kubebuilder:validation:Optional
-	GatewayArnSelector *v1.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
+	GatewayArnSelector *v2.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
 
 	// Outbound authentication configuration. See outbound_auth below.
 	OutboundAuth *OutboundAuthInitParameters `json:"outboundAuth,omitempty" tf:"outbound_auth,omitempty"`
@@ -130,11 +129,11 @@ type AgentcoreGatewayParameters struct {
 
 	// Reference to a Gateway in bedrockagentcore to populate gatewayArn.
 	// +kubebuilder:validation:Optional
-	GatewayArnRef *v1.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
+	GatewayArnRef *v2.NamespacedReference `json:"gatewayArnRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in bedrockagentcore to populate gatewayArn.
 	// +kubebuilder:validation:Optional
-	GatewayArnSelector *v1.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
+	GatewayArnSelector *v2.NamespacedSelector `json:"gatewayArnSelector,omitempty" tf:"-"`
 
 	// Outbound authentication configuration. See outbound_auth below.
 	// +kubebuilder:validation:Optional
@@ -153,11 +152,11 @@ type AgentcoreMemoryConfigurationInitParameters struct {
 
 	// Reference to a Memory in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Memory in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Number of recent messages to keep in the conversation window.
 	MessagesCount *float64 `json:"messagesCount,omitempty" tf:"messages_count,omitempty"`
@@ -195,11 +194,11 @@ type AgentcoreMemoryConfigurationParameters struct {
 
 	// Reference to a Memory in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Memory in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Number of recent messages to keep in the conversation window.
 	// +kubebuilder:validation:Optional
@@ -258,11 +257,11 @@ type AgentcoreRuntimeEnvironmentInitParameters struct {
 
 	// Reference to a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeArnRef *v1.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
+	AgentRuntimeArnRef *v2.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
 
 	// Selector for a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeArnSelector *v1.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
+	AgentRuntimeArnSelector *v2.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
 
 	AgentRuntimeID *string `json:"agentRuntimeId,omitempty" tf:"agent_runtime_id"`
 
@@ -365,11 +364,11 @@ type AgentcoreRuntimeEnvironmentParameters struct {
 
 	// Reference to a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeArnRef *v1.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
+	AgentRuntimeArnRef *v2.NamespacedReference `json:"agentRuntimeArnRef,omitempty" tf:"-"`
 
 	// Selector for a AgentRuntime in bedrockagentcore to populate agentRuntimeArn.
 	// +kubebuilder:validation:Optional
-	AgentRuntimeArnSelector *v1.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
+	AgentRuntimeArnSelector *v2.NamespacedSelector `json:"agentRuntimeArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	AgentRuntimeID *string `json:"agentRuntimeId,omitempty" tf:"agent_runtime_id"`
@@ -993,11 +992,11 @@ type FilesystemConfigurationEFSAccessPointInitParameters struct {
 
 	// Reference to a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path"`
@@ -1022,11 +1021,11 @@ type FilesystemConfigurationEFSAccessPointParameters struct {
 
 	// Reference to a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in efs to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -1042,11 +1041,11 @@ type FilesystemConfigurationS3FilesAccessPointInitParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path"`
@@ -1071,11 +1070,11 @@ type FilesystemConfigurationS3FilesAccessPointParameters struct {
 
 	// Reference to a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnRef *v1.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
+	AccessPointArnRef *v2.NamespacedReference `json:"accessPointArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessPoint in s3control to populate accessPointArn.
 	// +kubebuilder:validation:Optional
-	AccessPointArnSelector *v1.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
+	AccessPointArnSelector *v2.NamespacedSelector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// Mount path for the S3 Files access point inside the agent runtime. Must be under /mnt with exactly one subdirectory level (for example, /mnt/data).
 	// +kubebuilder:validation:Optional
@@ -1110,11 +1109,11 @@ type GeminiModelConfigInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+	APIKeyArnRef *v2.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1163,11 +1162,11 @@ type GeminiModelConfigParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+	APIKeyArnRef *v2.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -1330,11 +1329,11 @@ type HarnessInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the harness. Must be 1-40 characters, alphanumeric and underscores only.
 	HarnessName *string `json:"harnessName,omitempty" tf:"harness_name,omitempty"`
@@ -1459,7 +1458,7 @@ type HarnessParameters struct {
 
 	// Map of environment variables.
 	// +kubebuilder:validation:Optional
-	EnvironmentVariablesSecretRef *v1.LocalSecretReference `json:"environmentVariablesSecretRef,omitempty" tf:"-"`
+	EnvironmentVariablesSecretRef *v2.LocalSecretReference `json:"environmentVariablesSecretRef,omitempty" tf:"-"`
 
 	// ARN of the IAM role that the harness assumes to access AWS services.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -1469,11 +1468,11 @@ type HarnessParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the harness. Must be 1-40 characters, alphanumeric and underscores only.
 	// +kubebuilder:validation:Optional
@@ -1532,7 +1531,7 @@ type InlineFunctionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// JSON string defining the input schema for the function.
-	InputSchemaSecretRef v1.LocalSecretKeySelector `json:"inputSchemaSecretRef" tf:"-"`
+	InputSchemaSecretRef v2.LocalSecretKeySelector `json:"inputSchemaSecretRef" tf:"-"`
 }
 
 type InlineFunctionObservation struct {
@@ -1549,7 +1548,7 @@ type InlineFunctionParameters struct {
 
 	// JSON string defining the input schema for the function.
 	// +kubebuilder:validation:Optional
-	InputSchemaSecretRef v1.LocalSecretKeySelector `json:"inputSchemaSecretRef" tf:"-"`
+	InputSchemaSecretRef v2.LocalSecretKeySelector `json:"inputSchemaSecretRef" tf:"-"`
 }
 
 type MemoryInitParameters struct {
@@ -1664,11 +1663,11 @@ type OpenaiModelConfigInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+	APIKeyArnRef *v2.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	MaxTokens *float64 `json:"maxTokens,omitempty" tf:"max_tokens,omitempty"`
@@ -1711,11 +1710,11 @@ type OpenaiModelConfigParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnRef *v1.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
+	APIKeyArnRef *v2.NamespacedReference `json:"apiKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate apiKeyArn.
 	// +kubebuilder:validation:Optional
-	APIKeyArnSelector *v1.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
+	APIKeyArnSelector *v2.NamespacedSelector `json:"apiKeyArnSelector,omitempty" tf:"-"`
 
 	// Maximum number of tokens in the model response.
 	// +kubebuilder:validation:Optional
@@ -1765,11 +1764,11 @@ type OutboundAuthOauthInitParameters struct {
 
 	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// List of OAuth scopes.
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
@@ -1817,11 +1816,11 @@ type OutboundAuthOauthParameters struct {
 
 	// Reference to a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnRef *v1.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
+	ProviderArnRef *v2.NamespacedReference `json:"providerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Oauth2CredentialProvider in bedrockagentcore to populate providerArn.
 	// +kubebuilder:validation:Optional
-	ProviderArnSelector *v1.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
+	ProviderArnSelector *v2.NamespacedSelector `json:"providerArnSelector,omitempty" tf:"-"`
 
 	// List of OAuth scopes.
 	// +kubebuilder:validation:Optional
@@ -1859,7 +1858,7 @@ type RemoteMcpInitParameters struct {
 	Headers map[string]*string `json:"headersSecretRef,omitempty" tf:"-"`
 
 	// URL of the remote MCP server.
-	URLSecretRef v1.LocalSecretKeySelector `json:"urlSecretRef" tf:"-"`
+	URLSecretRef v2.LocalSecretKeySelector `json:"urlSecretRef" tf:"-"`
 }
 
 type RemoteMcpObservation struct {
@@ -1869,11 +1868,11 @@ type RemoteMcpParameters struct {
 
 	// Map of HTTP headers to include in requests to the MCP server.
 	// +kubebuilder:validation:Optional
-	HeadersSecretRef *v1.LocalSecretReference `json:"headersSecretRef,omitempty" tf:"-"`
+	HeadersSecretRef *v2.LocalSecretReference `json:"headersSecretRef,omitempty" tf:"-"`
 
 	// URL of the remote MCP server.
 	// +kubebuilder:validation:Optional
-	URLSecretRef v1.LocalSecretKeySelector `json:"urlSecretRef" tf:"-"`
+	URLSecretRef v2.LocalSecretKeySelector `json:"urlSecretRef" tf:"-"`
 }
 
 type RetrievalConfigInitParameters struct {
@@ -1891,11 +1890,11 @@ type RetrievalConfigInitParameters struct {
 
 	// Reference to a MemoryStrategy in bedrockagentcore to populate strategyId.
 	// +kubebuilder:validation:Optional
-	StrategyIDRef *v1.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
+	StrategyIDRef *v2.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
 
 	// Selector for a MemoryStrategy in bedrockagentcore to populate strategyId.
 	// +kubebuilder:validation:Optional
-	StrategyIDSelector *v1.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
+	StrategyIDSelector *v2.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
 	// Top-k sampling parameter.
 	TopK *float64 `json:"topK,omitempty" tf:"top_k,omitempty"`
@@ -1934,11 +1933,11 @@ type RetrievalConfigParameters struct {
 
 	// Reference to a MemoryStrategy in bedrockagentcore to populate strategyId.
 	// +kubebuilder:validation:Optional
-	StrategyIDRef *v1.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
+	StrategyIDRef *v2.NamespacedReference `json:"strategyIdRef,omitempty" tf:"-"`
 
 	// Selector for a MemoryStrategy in bedrockagentcore to populate strategyId.
 	// +kubebuilder:validation:Optional
-	StrategyIDSelector *v1.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
+	StrategyIDSelector *v2.NamespacedSelector `json:"strategyIdSelector,omitempty" tf:"-"`
 
 	// Top-k sampling parameter.
 	// +kubebuilder:validation:Optional
@@ -2025,7 +2024,7 @@ type SummarizationParameters struct {
 type SystemPromptInitParameters struct {
 
 	// Text content of the system prompt.
-	TextSecretRef v1.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
+	TextSecretRef v2.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
 }
 
 type SystemPromptObservation struct {
@@ -2035,7 +2034,7 @@ type SystemPromptParameters struct {
 
 	// Text content of the system prompt.
 	// +kubebuilder:validation:Optional
-	TextSecretRef v1.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
+	TextSecretRef v2.LocalSecretKeySelector `json:"textSecretRef" tf:"-"`
 }
 
 type ToolInitParameters struct {
@@ -2154,8 +2153,8 @@ type HarnessSpec struct {
 
 // HarnessStatus defines the observed state of Harness.
 type HarnessStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HarnessObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HarnessObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

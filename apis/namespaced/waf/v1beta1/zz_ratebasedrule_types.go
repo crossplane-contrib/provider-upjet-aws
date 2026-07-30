@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PredicatesInitParameters struct {
@@ -23,11 +22,11 @@ type PredicatesInitParameters struct {
 
 	// Reference to a IPSet in waf to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in waf to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Set this to false if you want to allow, block, or count requests
 	// based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet.
@@ -64,11 +63,11 @@ type PredicatesParameters struct {
 
 	// Reference to a IPSet in waf to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDRef *v1.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
+	DataIDRef *v2.NamespacedReference `json:"dataIdRef,omitempty" tf:"-"`
 
 	// Selector for a IPSet in waf to populate dataId.
 	// +kubebuilder:validation:Optional
-	DataIDSelector *v1.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
+	DataIDSelector *v2.NamespacedSelector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Set this to false if you want to allow, block, or count requests
 	// based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet.
@@ -183,8 +182,8 @@ type RateBasedRuleSpec struct {
 
 // RateBasedRuleStatus defines the observed state of RateBasedRule.
 type RateBasedRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RateBasedRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RateBasedRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

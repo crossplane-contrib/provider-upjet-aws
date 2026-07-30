@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIKeyCredentialProviderInitParameters struct {
 
 	// API key value. Cannot be used with api_key_wo.
-	APIKeySecretRef *v1.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+	APIKeySecretRef *v2.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
-	APIKeyWoSecretRef *v1.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
+	APIKeyWoSecretRef *v2.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
@@ -62,11 +62,11 @@ type APIKeyCredentialProviderParameters struct {
 
 	// API key value. Cannot be used with api_key_wo.
 	// +kubebuilder:validation:Optional
-	APIKeySecretRef *v1.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+	APIKeySecretRef *v2.SecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
 
 	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
 	// +kubebuilder:validation:Optional
-	APIKeyWoSecretRef *v1.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
+	APIKeyWoSecretRef *v2.SecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
 	// +kubebuilder:validation:Optional
@@ -97,8 +97,8 @@ type APIKeySecretArnParameters struct {
 
 // APIKeyCredentialProviderSpec defines the desired state of APIKeyCredentialProvider
 type APIKeyCredentialProviderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     APIKeyCredentialProviderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   APIKeyCredentialProviderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -114,8 +114,8 @@ type APIKeyCredentialProviderSpec struct {
 
 // APIKeyCredentialProviderStatus defines the observed state of APIKeyCredentialProvider.
 type APIKeyCredentialProviderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIKeyCredentialProviderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIKeyCredentialProviderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

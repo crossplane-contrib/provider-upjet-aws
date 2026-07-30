@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoExportPolicyInitParameters struct {
@@ -70,11 +69,11 @@ type DataRepositoryAssociationInitParameters struct {
 
 	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with data_repository_path. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
@@ -159,11 +158,11 @@ type DataRepositoryAssociationParameters struct {
 
 	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with data_repository_path. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.
 	// +kubebuilder:validation:Optional
@@ -237,8 +236,8 @@ type DataRepositoryAssociationSpec struct {
 
 // DataRepositoryAssociationStatus defines the observed state of DataRepositoryAssociation.
 type DataRepositoryAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataRepositoryAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataRepositoryAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

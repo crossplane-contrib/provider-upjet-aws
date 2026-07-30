@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyGroupInitParameters struct {
@@ -20,11 +20,11 @@ type KeyGroupInitParameters struct {
 
 	// References to PublicKey in cloudfront to populate items.
 	// +kubebuilder:validation:Optional
-	ItemRefs []v1.Reference `json:"itemRefs,omitempty" tf:"-"`
+	ItemRefs []v2.Reference `json:"itemRefs,omitempty" tf:"-"`
 
 	// Selector for a list of PublicKey in cloudfront to populate items.
 	// +kubebuilder:validation:Optional
-	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
+	ItemSelector *v2.Selector `json:"itemSelector,omitempty" tf:"-"`
 
 	// A list of the identifiers of the public keys in the key group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta1.PublicKey
@@ -64,11 +64,11 @@ type KeyGroupParameters struct {
 
 	// References to PublicKey in cloudfront to populate items.
 	// +kubebuilder:validation:Optional
-	ItemRefs []v1.Reference `json:"itemRefs,omitempty" tf:"-"`
+	ItemRefs []v2.Reference `json:"itemRefs,omitempty" tf:"-"`
 
 	// Selector for a list of PublicKey in cloudfront to populate items.
 	// +kubebuilder:validation:Optional
-	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
+	ItemSelector *v2.Selector `json:"itemSelector,omitempty" tf:"-"`
 
 	// A list of the identifiers of the public keys in the key group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cloudfront/v1beta1.PublicKey
@@ -85,8 +85,8 @@ type KeyGroupParameters struct {
 
 // KeyGroupSpec defines the desired state of KeyGroup
 type KeyGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     KeyGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   KeyGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -102,8 +102,8 @@ type KeyGroupSpec struct {
 
 // KeyGroupStatus defines the observed state of KeyGroup.
 type KeyGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KeyGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KeyGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

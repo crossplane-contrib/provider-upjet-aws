@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentInitParameters struct {
@@ -29,11 +28,11 @@ type AgentInitParameters struct {
 
 	// Reference to a Role in iam to populate agentResourceRoleArn.
 	// +kubebuilder:validation:Optional
-	AgentResourceRoleArnRef *v1.NamespacedReference `json:"agentResourceRoleArnRef,omitempty" tf:"-"`
+	AgentResourceRoleArnRef *v2.NamespacedReference `json:"agentResourceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate agentResourceRoleArn.
 	// +kubebuilder:validation:Optional
-	AgentResourceRoleArnSelector *v1.NamespacedSelector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
+	AgentResourceRoleArnSelector *v2.NamespacedSelector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the AWS KMS key that encrypts the agent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -42,11 +41,11 @@ type AgentInitParameters struct {
 
 	// Reference to a Key in kms to populate customerEncryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	CustomerEncryptionKeyArnRef *v1.NamespacedReference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
+	CustomerEncryptionKeyArnRef *v2.NamespacedReference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate customerEncryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	CustomerEncryptionKeyArnSelector *v1.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
+	CustomerEncryptionKeyArnSelector *v2.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Description of the agent.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -167,11 +166,11 @@ type AgentParameters struct {
 
 	// Reference to a Role in iam to populate agentResourceRoleArn.
 	// +kubebuilder:validation:Optional
-	AgentResourceRoleArnRef *v1.NamespacedReference `json:"agentResourceRoleArnRef,omitempty" tf:"-"`
+	AgentResourceRoleArnRef *v2.NamespacedReference `json:"agentResourceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate agentResourceRoleArn.
 	// +kubebuilder:validation:Optional
-	AgentResourceRoleArnSelector *v1.NamespacedSelector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
+	AgentResourceRoleArnSelector *v2.NamespacedSelector `json:"agentResourceRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the AWS KMS key that encrypts the agent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -181,11 +180,11 @@ type AgentParameters struct {
 
 	// Reference to a Key in kms to populate customerEncryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	CustomerEncryptionKeyArnRef *v1.NamespacedReference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
+	CustomerEncryptionKeyArnRef *v2.NamespacedReference `json:"customerEncryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate customerEncryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	CustomerEncryptionKeyArnSelector *v1.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
+	CustomerEncryptionKeyArnSelector *v2.NamespacedSelector `json:"customerEncryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Description of the agent.
 	// +kubebuilder:validation:Optional
@@ -497,8 +496,8 @@ type AgentSpec struct {
 
 // AgentStatus defines the observed state of Agent.
 type AgentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AgentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AgentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

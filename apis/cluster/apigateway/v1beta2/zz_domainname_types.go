@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainNameInitParameters struct {
@@ -22,11 +22,11 @@ type DomainNameInitParameters struct {
 
 	// Reference to a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// Certificate issued for the domain name being registered, in PEM format. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
@@ -38,7 +38,7 @@ type DomainNameInitParameters struct {
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
 	// Private key associated with the domain certificate given in certificate_body. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
-	CertificatePrivateKeySecretRef *v1.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
+	CertificatePrivateKeySecretRef *v2.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
 
 	// Fully-qualified domain name to register.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
@@ -65,11 +65,11 @@ type DomainNameInitParameters struct {
 
 	// Reference to a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
-	RegionalCertificateArnRef *v1.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
+	RegionalCertificateArnRef *v2.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
-	RegionalCertificateArnSelector *v1.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
+	RegionalCertificateArnSelector *v2.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
 
 	// User-friendly name of the certificate that will be used by regional endpoint for this domain name. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`
@@ -176,11 +176,11 @@ type DomainNameParameters struct {
 
 	// Reference to a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+	CertificateArnRef *v2.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateValidation in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
-	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+	CertificateArnSelector *v2.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// Certificate issued for the domain name being registered, in PEM format. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
 	// +kubebuilder:validation:Optional
@@ -196,7 +196,7 @@ type DomainNameParameters struct {
 
 	// Private key associated with the domain certificate given in certificate_body. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
 	// +kubebuilder:validation:Optional
-	CertificatePrivateKeySecretRef *v1.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
+	CertificatePrivateKeySecretRef *v2.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
 
 	// Fully-qualified domain name to register.
 	// +kubebuilder:validation:Optional
@@ -235,11 +235,11 @@ type DomainNameParameters struct {
 
 	// Reference to a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
-	RegionalCertificateArnRef *v1.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
+	RegionalCertificateArnRef *v2.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateValidation in acm to populate regionalCertificateArn.
 	// +kubebuilder:validation:Optional
-	RegionalCertificateArnSelector *v1.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
+	RegionalCertificateArnSelector *v2.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
 
 	// User-friendly name of the certificate that will be used by regional endpoint for this domain name. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	// +kubebuilder:validation:Optional
@@ -319,8 +319,8 @@ type MutualTLSAuthenticationParameters struct {
 
 // DomainNameSpec defines the desired state of DomainName
 type DomainNameSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainNameParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainNameParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -336,8 +336,8 @@ type DomainNameSpec struct {
 
 // DomainNameStatus defines the observed state of DomainName.
 type DomainNameStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainNameObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainNameObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

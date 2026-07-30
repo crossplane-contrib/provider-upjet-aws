@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentAccepterInitParameters struct {
@@ -22,11 +22,11 @@ type AttachmentAccepterInitParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate attachmentId.
 	// +kubebuilder:validation:Optional
-	AttachmentIDRef *v1.Reference `json:"attachmentIdRef,omitempty" tf:"-"`
+	AttachmentIDRef *v2.Reference `json:"attachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate attachmentId.
 	// +kubebuilder:validation:Optional
-	AttachmentIDSelector *v1.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
+	AttachmentIDSelector *v2.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
 	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.VPCAttachment
@@ -35,11 +35,11 @@ type AttachmentAccepterInitParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate attachmentType.
 	// +kubebuilder:validation:Optional
-	AttachmentTypeRef *v1.Reference `json:"attachmentTypeRef,omitempty" tf:"-"`
+	AttachmentTypeRef *v2.Reference `json:"attachmentTypeRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate attachmentType.
 	// +kubebuilder:validation:Optional
-	AttachmentTypeSelector *v1.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
+	AttachmentTypeSelector *v2.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
 }
 
 type AttachmentAccepterObservation struct {
@@ -90,11 +90,11 @@ type AttachmentAccepterParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate attachmentId.
 	// +kubebuilder:validation:Optional
-	AttachmentIDRef *v1.Reference `json:"attachmentIdRef,omitempty" tf:"-"`
+	AttachmentIDRef *v2.Reference `json:"attachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate attachmentId.
 	// +kubebuilder:validation:Optional
-	AttachmentIDSelector *v1.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
+	AttachmentIDSelector *v2.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
 
 	// Type of attachment. Valid values: CONNECT, DIRECT_CONNECT_GATEWAY, SITE_TO_SITE_VPN, TRANSIT_GATEWAY_ROUTE_TABLE, VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/networkmanager/v1beta2.VPCAttachment
@@ -104,17 +104,17 @@ type AttachmentAccepterParameters struct {
 
 	// Reference to a VPCAttachment in networkmanager to populate attachmentType.
 	// +kubebuilder:validation:Optional
-	AttachmentTypeRef *v1.Reference `json:"attachmentTypeRef,omitempty" tf:"-"`
+	AttachmentTypeRef *v2.Reference `json:"attachmentTypeRef,omitempty" tf:"-"`
 
 	// Selector for a VPCAttachment in networkmanager to populate attachmentType.
 	// +kubebuilder:validation:Optional
-	AttachmentTypeSelector *v1.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
+	AttachmentTypeSelector *v2.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
 }
 
 // AttachmentAccepterSpec defines the desired state of AttachmentAccepter
 type AttachmentAccepterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AttachmentAccepterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AttachmentAccepterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -130,8 +130,8 @@ type AttachmentAccepterSpec struct {
 
 // AttachmentAccepterStatus defines the observed state of AttachmentAccepter.
 type AttachmentAccepterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AttachmentAccepterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AttachmentAccepterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

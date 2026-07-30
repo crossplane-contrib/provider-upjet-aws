@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssociationInitParameters struct {
@@ -22,11 +22,11 @@ type AssociationInitParameters struct {
 
 	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
-	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
+	LicenseConfigurationArnRef *v2.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
-	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
+	LicenseConfigurationArnSelector *v2.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
 	// ARN of the resource associated with the license configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.Instance
@@ -35,11 +35,11 @@ type AssociationInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type AssociationObservation struct {
@@ -68,11 +68,11 @@ type AssociationParameters struct {
 
 	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
-	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
+	LicenseConfigurationArnRef *v2.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
-	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
+	LicenseConfigurationArnSelector *v2.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -87,17 +87,17 @@ type AssociationParameters struct {
 
 	// Reference to a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // AssociationSpec defines the desired state of Association
 type AssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type AssociationSpec struct {
 
 // AssociationStatus defines the observed state of Association.
 type AssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

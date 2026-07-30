@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ModelPackageGroupPolicyInitParameters struct {
@@ -21,11 +21,11 @@ type ModelPackageGroupPolicyInitParameters struct {
 
 	// Reference to a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
 	// +kubebuilder:validation:Optional
-	ModelPackageGroupNameRef *v1.Reference `json:"modelPackageGroupNameRef,omitempty" tf:"-"`
+	ModelPackageGroupNameRef *v2.Reference `json:"modelPackageGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
 	// +kubebuilder:validation:Optional
-	ModelPackageGroupNameSelector *v1.Selector `json:"modelPackageGroupNameSelector,omitempty" tf:"-"`
+	ModelPackageGroupNameSelector *v2.Selector `json:"modelPackageGroupNameSelector,omitempty" tf:"-"`
 
 	ResourcePolicy *string `json:"resourcePolicy,omitempty" tf:"resource_policy,omitempty"`
 }
@@ -54,11 +54,11 @@ type ModelPackageGroupPolicyParameters struct {
 
 	// Reference to a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
 	// +kubebuilder:validation:Optional
-	ModelPackageGroupNameRef *v1.Reference `json:"modelPackageGroupNameRef,omitempty" tf:"-"`
+	ModelPackageGroupNameRef *v2.Reference `json:"modelPackageGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
 	// +kubebuilder:validation:Optional
-	ModelPackageGroupNameSelector *v1.Selector `json:"modelPackageGroupNameSelector,omitempty" tf:"-"`
+	ModelPackageGroupNameSelector *v2.Selector `json:"modelPackageGroupNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -71,8 +71,8 @@ type ModelPackageGroupPolicyParameters struct {
 
 // ModelPackageGroupPolicySpec defines the desired state of ModelPackageGroupPolicy
 type ModelPackageGroupPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ModelPackageGroupPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ModelPackageGroupPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -88,8 +88,8 @@ type ModelPackageGroupPolicySpec struct {
 
 // ModelPackageGroupPolicyStatus defines the observed state of ModelPackageGroupPolicy.
 type ModelPackageGroupPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ModelPackageGroupPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ModelPackageGroupPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

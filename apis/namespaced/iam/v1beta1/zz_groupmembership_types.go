@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupMembershipInitParameters struct {
@@ -22,22 +21,22 @@ type GroupMembershipInitParameters struct {
 
 	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupRef *v1.NamespacedReference `json:"groupRef,omitempty" tf:"-"`
+	GroupRef *v2.NamespacedReference `json:"groupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The name to identify the Group Membership
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// References to User in iam to populate users.
 	// +kubebuilder:validation:Optional
-	UserRefs []v1.NamespacedReference `json:"userRefs,omitempty" tf:"-"`
+	UserRefs []v2.NamespacedReference `json:"userRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in iam to populate users.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
@@ -71,11 +70,11 @@ type GroupMembershipParameters struct {
 
 	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupRef *v1.NamespacedReference `json:"groupRef,omitempty" tf:"-"`
+	GroupRef *v2.NamespacedReference `json:"groupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
-	GroupSelector *v1.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
+	GroupSelector *v2.NamespacedSelector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The name to identify the Group Membership
 	// +kubebuilder:validation:Optional
@@ -83,11 +82,11 @@ type GroupMembershipParameters struct {
 
 	// References to User in iam to populate users.
 	// +kubebuilder:validation:Optional
-	UserRefs []v1.NamespacedReference `json:"userRefs,omitempty" tf:"-"`
+	UserRefs []v2.NamespacedReference `json:"userRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in iam to populate users.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
@@ -117,8 +116,8 @@ type GroupMembershipSpec struct {
 
 // GroupMembershipStatus defines the observed state of GroupMembership.
 type GroupMembershipStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupMembershipObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupMembershipObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

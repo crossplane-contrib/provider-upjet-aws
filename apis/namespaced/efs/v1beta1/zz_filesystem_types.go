@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FileSystemInitParameters struct {
@@ -35,11 +34,11 @@ type FileSystemInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// A file system lifecycle policy object. See lifecycle_policy block below for details.
 	LifecyclePolicy []LifecyclePolicyInitParameters `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
@@ -155,11 +154,11 @@ type FileSystemParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// A file system lifecycle policy object. See lifecycle_policy block below for details.
 	// +kubebuilder:validation:Optional
@@ -287,8 +286,8 @@ type FileSystemSpec struct {
 
 // FileSystemStatus defines the observed state of FileSystem.
 type FileSystemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FileSystemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FileSystemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

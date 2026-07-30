@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StackInitParameters struct {
@@ -31,11 +31,11 @@ type StackInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// A list of SNS topic ARNs to publish stack related events.
 	// +listType=set
@@ -158,11 +158,11 @@ type StackParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// Stack name.
 	// +kubebuilder:validation:Required
@@ -218,8 +218,8 @@ type StackParameters struct {
 
 // StackSpec defines the desired state of Stack
 type StackSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StackParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StackParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -235,8 +235,8 @@ type StackSpec struct {
 
 // StackStatus defines the observed state of Stack.
 type StackStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StackObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StackObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

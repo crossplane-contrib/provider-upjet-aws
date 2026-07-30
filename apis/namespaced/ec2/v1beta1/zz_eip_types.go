@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EIPInitParameters struct {
@@ -34,11 +33,11 @@ type EIPInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceRef *v1.NamespacedReference `json:"instanceRef,omitempty" tf:"-"`
+	InstanceRef *v2.NamespacedReference `json:"instanceRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceSelector *v1.NamespacedSelector `json:"instanceSelector,omitempty" tf:"-"`
+	InstanceSelector *v2.NamespacedSelector `json:"instanceSelector,omitempty" tf:"-"`
 
 	// The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it.
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
@@ -52,11 +51,11 @@ type EIPInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceRef *v1.NamespacedReference `json:"networkInterfaceRef,omitempty" tf:"-"`
+	NetworkInterfaceRef *v2.NamespacedReference `json:"networkInterfaceRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceSelector *v1.NamespacedSelector `json:"networkInterfaceSelector,omitempty" tf:"-"`
+	NetworkInterfaceSelector *v2.NamespacedSelector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
 	// EC2 IPv4 address pool identifier or amazon.
 	// This option is only available for VPC EIPs.
@@ -167,11 +166,11 @@ type EIPParameters struct {
 
 	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceRef *v1.NamespacedReference `json:"instanceRef,omitempty" tf:"-"`
+	InstanceRef *v2.NamespacedReference `json:"instanceRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
-	InstanceSelector *v1.NamespacedSelector `json:"instanceSelector,omitempty" tf:"-"`
+	InstanceSelector *v2.NamespacedSelector `json:"instanceSelector,omitempty" tf:"-"`
 
 	// The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it.
 	// +kubebuilder:validation:Optional
@@ -188,11 +187,11 @@ type EIPParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceRef *v1.NamespacedReference `json:"networkInterfaceRef,omitempty" tf:"-"`
+	NetworkInterfaceRef *v2.NamespacedReference `json:"networkInterfaceRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceSelector *v1.NamespacedSelector `json:"networkInterfaceSelector,omitempty" tf:"-"`
+	NetworkInterfaceSelector *v2.NamespacedSelector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
 	// EC2 IPv4 address pool identifier or amazon.
 	// This option is only available for VPC EIPs.
@@ -229,8 +228,8 @@ type EIPSpec struct {
 
 // EIPStatus defines the observed state of EIP.
 type EIPStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EIPObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EIPObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

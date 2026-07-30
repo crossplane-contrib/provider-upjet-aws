@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BrokerInitParameters struct {
@@ -40,11 +40,11 @@ type BrokerInitParameters struct {
 
 	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnRef *v1.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnRef *v2.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnSelector *v1.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnSelector *v2.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
@@ -79,11 +79,11 @@ type BrokerInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -97,11 +97,11 @@ type BrokerInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -248,11 +248,11 @@ type BrokerParameters struct {
 
 	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnRef *v1.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnRef *v2.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
 	// +kubebuilder:validation:Optional
-	DataReplicationPrimaryBrokerArnSelector *v1.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
+	DataReplicationPrimaryBrokerArnSelector *v2.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	// +kubebuilder:validation:Optional
@@ -302,11 +302,11 @@ type BrokerParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -322,11 +322,11 @@ type BrokerParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -355,11 +355,11 @@ type ConfigurationInitParameters struct {
 
 	// Reference to a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 
 	// Revision of the Configuration.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -384,11 +384,11 @@ type ConfigurationParameters struct {
 
 	// Reference to a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in mq to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 
 	// Revision of the Configuration.
 	// +kubebuilder:validation:Optional
@@ -460,7 +460,7 @@ type LdapServerMetadataInitParameters struct {
 	RoleSearchSubtree *bool `json:"roleSearchSubtree,omitempty" tf:"role_search_subtree,omitempty"`
 
 	// Service account password.
-	ServiceAccountPasswordSecretRef *v1.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+	ServiceAccountPasswordSecretRef *v2.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
 
 	// Service account username.
 	ServiceAccountUsername *string `json:"serviceAccountUsername,omitempty" tf:"service_account_username,omitempty"`
@@ -535,7 +535,7 @@ type LdapServerMetadataParameters struct {
 
 	// Service account password.
 	// +kubebuilder:validation:Optional
-	ServiceAccountPasswordSecretRef *v1.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+	ServiceAccountPasswordSecretRef *v2.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
 
 	// Service account username.
 	// +kubebuilder:validation:Optional
@@ -657,7 +657,7 @@ type UserInitParameters struct {
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// Password of the user. Must be 12 to 250 characters long, contain at least 4 unique characters, and must not contain commas.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to set replication user. Defaults to false.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
@@ -695,7 +695,7 @@ type UserParameters struct {
 
 	// Password of the user. Must be 12 to 250 characters long, contain at least 4 unique characters, and must not contain commas.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to set replication user. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -708,8 +708,8 @@ type UserParameters struct {
 
 // BrokerSpec defines the desired state of Broker
 type BrokerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BrokerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BrokerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -725,8 +725,8 @@ type BrokerSpec struct {
 
 // BrokerStatus defines the observed state of Broker.
 type BrokerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BrokerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BrokerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

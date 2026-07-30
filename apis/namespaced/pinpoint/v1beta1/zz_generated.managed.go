@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this App.
-func (mg *App) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *App) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this App.
-func (mg *App) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *App) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this App.
-func (mg *App) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *App) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this App.
-func (mg *App) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *App) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this App.
-func (mg *App) SetConditions(c ...xpv1.Condition) {
+func (mg *App) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this App.
-func (mg *App) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *App) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this App.
-func (mg *App) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *App) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this App.
-func (mg *App) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *App) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SMSChannel.
-func (mg *SMSChannel) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SMSChannel) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SMSChannel.
-func (mg *SMSChannel) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SMSChannel) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SMSChannel.
-func (mg *SMSChannel) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SMSChannel) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SMSChannel.
-func (mg *SMSChannel) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SMSChannel) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SMSChannel.
-func (mg *SMSChannel) SetConditions(c ...xpv1.Condition) {
+func (mg *SMSChannel) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SMSChannel.
-func (mg *SMSChannel) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SMSChannel) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SMSChannel.
-func (mg *SMSChannel) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SMSChannel) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SMSChannel.
-func (mg *SMSChannel) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SMSChannel) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

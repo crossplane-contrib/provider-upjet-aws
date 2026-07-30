@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkACLRuleInitParameters struct {
@@ -40,11 +40,11 @@ type NetworkACLRuleInitParameters struct {
 
 	// Reference to a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
-	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
+	NetworkACLIDRef *v2.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
-	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
+	NetworkACLIDSelector *v2.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
 	// The protocol. A value of -1 means all protocols.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -136,11 +136,11 @@ type NetworkACLRuleParameters struct {
 
 	// Reference to a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
-	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
+	NetworkACLIDRef *v2.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkACL in ec2 to populate networkAclId.
 	// +kubebuilder:validation:Optional
-	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
+	NetworkACLIDSelector *v2.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
 	// The protocol. A value of -1 means all protocols.
 	// +kubebuilder:validation:Optional
@@ -166,8 +166,8 @@ type NetworkACLRuleParameters struct {
 
 // NetworkACLRuleSpec defines the desired state of NetworkACLRule
 type NetworkACLRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NetworkACLRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NetworkACLRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -183,8 +183,8 @@ type NetworkACLRuleSpec struct {
 
 // NetworkACLRuleStatus defines the observed state of NetworkACLRule.
 type NetworkACLRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkACLRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkACLRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

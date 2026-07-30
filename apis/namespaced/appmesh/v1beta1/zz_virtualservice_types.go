@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProviderInitParameters struct {
@@ -52,11 +51,11 @@ type ProviderVirtualNodeInitParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameRef *v1.NamespacedReference `json:"virtualNodeNameRef,omitempty" tf:"-"`
+	VirtualNodeNameRef *v2.NamespacedReference `json:"virtualNodeNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameSelector *v1.NamespacedSelector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
+	VirtualNodeNameSelector *v2.NamespacedSelector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualNodeObservation struct {
@@ -75,11 +74,11 @@ type ProviderVirtualNodeParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameRef *v1.NamespacedReference `json:"virtualNodeNameRef,omitempty" tf:"-"`
+	VirtualNodeNameRef *v2.NamespacedReference `json:"virtualNodeNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNodeName.
 	// +kubebuilder:validation:Optional
-	VirtualNodeNameSelector *v1.NamespacedSelector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
+	VirtualNodeNameSelector *v2.NamespacedSelector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualRouterInitParameters struct {
@@ -91,11 +90,11 @@ type ProviderVirtualRouterInitParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.NamespacedReference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.NamespacedReference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.NamespacedSelector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.NamespacedSelector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualRouterObservation struct {
@@ -114,11 +113,11 @@ type ProviderVirtualRouterParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.NamespacedReference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.NamespacedReference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.NamespacedSelector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.NamespacedSelector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type VirtualServiceInitParameters_2 struct {
@@ -130,11 +129,11 @@ type VirtualServiceInitParameters_2 struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -202,11 +201,11 @@ type VirtualServiceParameters_2 struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -269,8 +268,8 @@ type VirtualServiceSpec struct {
 
 // VirtualServiceStatus defines the observed state of VirtualService.
 type VirtualServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualServiceObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualServiceObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

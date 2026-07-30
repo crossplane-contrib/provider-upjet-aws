@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityInfoInitParameters struct {
@@ -81,17 +80,17 @@ type UserInitParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A block that contains information about the phone settings for the user. Documented below.
 	PhoneConfig *UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
@@ -103,11 +102,11 @@ type UserInitParameters struct {
 
 	// Reference to a RoutingProfile in connect to populate routingProfileId.
 	// +kubebuilder:validation:Optional
-	RoutingProfileIDRef *v1.NamespacedReference `json:"routingProfileIdRef,omitempty" tf:"-"`
+	RoutingProfileIDRef *v2.NamespacedReference `json:"routingProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoutingProfile in connect to populate routingProfileId.
 	// +kubebuilder:validation:Optional
-	RoutingProfileIDSelector *v1.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
+	RoutingProfileIDSelector *v2.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.SecurityProfile
@@ -117,11 +116,11 @@ type UserInitParameters struct {
 
 	// References to SecurityProfile in connect to populate securityProfileIds.
 	// +kubebuilder:validation:Optional
-	SecurityProfileIdsRefs []v1.NamespacedReference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+	SecurityProfileIdsRefs []v2.NamespacedReference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
 	// +kubebuilder:validation:Optional
-	SecurityProfileIdsSelector *v1.NamespacedSelector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
+	SecurityProfileIdsSelector *v2.NamespacedSelector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -200,11 +199,11 @@ type UserParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	// +kubebuilder:validation:Optional
@@ -212,7 +211,7 @@ type UserParameters struct {
 
 	// The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A block that contains information about the phone settings for the user. Documented below.
 	// +kubebuilder:validation:Optional
@@ -231,11 +230,11 @@ type UserParameters struct {
 
 	// Reference to a RoutingProfile in connect to populate routingProfileId.
 	// +kubebuilder:validation:Optional
-	RoutingProfileIDRef *v1.NamespacedReference `json:"routingProfileIdRef,omitempty" tf:"-"`
+	RoutingProfileIDRef *v2.NamespacedReference `json:"routingProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoutingProfile in connect to populate routingProfileId.
 	// +kubebuilder:validation:Optional
-	RoutingProfileIDSelector *v1.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
+	RoutingProfileIDSelector *v2.NamespacedSelector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/connect/v1beta1.SecurityProfile
@@ -246,11 +245,11 @@ type UserParameters struct {
 
 	// References to SecurityProfile in connect to populate securityProfileIds.
 	// +kubebuilder:validation:Optional
-	SecurityProfileIdsRefs []v1.NamespacedReference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+	SecurityProfileIdsRefs []v2.NamespacedReference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
 	// +kubebuilder:validation:Optional
-	SecurityProfileIdsSelector *v1.NamespacedSelector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
+	SecurityProfileIdsSelector *v2.NamespacedSelector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -326,8 +325,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

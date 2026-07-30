@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCEndpointSubnetAssociationInitParameters struct {
@@ -21,11 +21,11 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
@@ -34,11 +34,11 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointSubnetAssociationObservation struct {
@@ -71,11 +71,11 @@ type VPCEndpointSubnetAssociationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
@@ -85,17 +85,17 @@ type VPCEndpointSubnetAssociationParameters struct {
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+	VPCEndpointIDRef *v2.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+	VPCEndpointIDSelector *v2.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSubnetAssociationSpec defines the desired state of VPCEndpointSubnetAssociation
 type VPCEndpointSubnetAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointSubnetAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCEndpointSubnetAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -111,8 +111,8 @@ type VPCEndpointSubnetAssociationSpec struct {
 
 // VPCEndpointSubnetAssociationStatus defines the observed state of VPCEndpointSubnetAssociation.
 type VPCEndpointSubnetAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointSubnetAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointSubnetAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

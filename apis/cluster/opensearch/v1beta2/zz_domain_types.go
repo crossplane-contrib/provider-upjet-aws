@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedSecurityOptionsInitParameters struct {
@@ -815,11 +815,11 @@ type EncryptAtRestInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptAtRestObservation struct {
@@ -845,11 +845,11 @@ type EncryptAtRestParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityCenterOptionsInitParameters struct {
@@ -969,11 +969,11 @@ type LogPublishingOptionsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -1004,11 +1004,11 @@ type LogPublishingOptionsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+	CloudwatchLogGroupArnRef *v2.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
 	// +kubebuilder:validation:Optional
-	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+	CloudwatchLogGroupArnSelector *v2.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Whether given log publishing option is enabled or not.
 	// +kubebuilder:validation:Optional
@@ -1067,7 +1067,7 @@ type MasterUserOptionsInitParameters struct {
 	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
 
 	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
-	MasterUserPasswordSecretRef *v1.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type MasterUserOptionsObservation struct {
@@ -1091,7 +1091,7 @@ type MasterUserOptionsParameters struct {
 
 	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
 	// +kubebuilder:validation:Optional
-	MasterUserPasswordSecretRef *v1.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
+	MasterUserPasswordSecretRef *v2.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type NaturalLanguageQueryGenerationOptionsInitParameters struct {
@@ -1325,11 +1325,11 @@ type VPCOptionsInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1340,11 +1340,11 @@ type VPCOptionsInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1376,11 +1376,11 @@ type VPCOptionsParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -1392,11 +1392,11 @@ type VPCOptionsParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -1457,8 +1457,8 @@ type ZoneAwarenessConfigParameters struct {
 
 // DomainSpec defines the desired state of Domain
 type DomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1474,8 +1474,8 @@ type DomainSpec struct {
 
 // DomainStatus defines the observed state of Domain.
 type DomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

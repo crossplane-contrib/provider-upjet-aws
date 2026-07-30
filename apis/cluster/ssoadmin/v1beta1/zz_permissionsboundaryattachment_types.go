@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PermissionsBoundaryAttachmentInitParameters struct {
@@ -52,11 +52,11 @@ type PermissionsBoundaryAttachmentParameters struct {
 
 	// Reference to a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnRef *v1.Reference `json:"permissionSetArnRef,omitempty" tf:"-"`
+	PermissionSetArnRef *v2.Reference `json:"permissionSetArnRef,omitempty" tf:"-"`
 
 	// Selector for a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnSelector *v1.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
+	PermissionSetArnSelector *v2.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
 
 	// The permissions boundary policy. See below.
 	// +kubebuilder:validation:Optional
@@ -76,11 +76,11 @@ type PermissionsBoundaryCustomerManagedPolicyReferenceInitParameters struct {
 
 	// Reference to a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The path to the IAM policy to be attached. The default is /. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -104,11 +104,11 @@ type PermissionsBoundaryCustomerManagedPolicyReferenceParameters struct {
 
 	// Reference to a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The path to the IAM policy to be attached. The default is /. See IAM Identifiers for more information.
 	// +kubebuilder:validation:Optional
@@ -146,8 +146,8 @@ type PermissionsBoundaryParameters struct {
 
 // PermissionsBoundaryAttachmentSpec defines the desired state of PermissionsBoundaryAttachment
 type PermissionsBoundaryAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PermissionsBoundaryAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PermissionsBoundaryAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -163,8 +163,8 @@ type PermissionsBoundaryAttachmentSpec struct {
 
 // PermissionsBoundaryAttachmentStatus defines the observed state of PermissionsBoundaryAttachment.
 type PermissionsBoundaryAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PermissionsBoundaryAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PermissionsBoundaryAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

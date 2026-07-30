@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketInventoryDestinationInitParameters struct {
@@ -60,11 +60,11 @@ type BucketInventoryInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	Destination *BucketInventoryDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -133,11 +133,11 @@ type BucketInventoryParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	// +kubebuilder:validation:Optional
@@ -186,11 +186,11 @@ type DestinationBucketInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -234,11 +234,11 @@ type DestinationBucketParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.Reference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	// +kubebuilder:validation:Optional
@@ -331,8 +331,8 @@ type SseS3Parameters struct {
 
 // BucketInventorySpec defines the desired state of BucketInventory
 type BucketInventorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketInventoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketInventoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -348,8 +348,8 @@ type BucketInventorySpec struct {
 
 // BucketInventoryStatus defines the observed state of BucketInventory.
 type BucketInventoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketInventoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketInventoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

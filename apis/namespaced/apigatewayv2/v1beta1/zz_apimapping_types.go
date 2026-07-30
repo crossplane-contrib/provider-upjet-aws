@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIMappingInitParameters struct {
@@ -22,11 +21,11 @@ type APIMappingInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
@@ -37,11 +36,11 @@ type APIMappingInitParameters struct {
 
 	// Reference to a DomainName in apigatewayv2 to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a DomainName in apigatewayv2 to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/apigatewayv2/v1beta1.Stage
@@ -50,11 +49,11 @@ type APIMappingInitParameters struct {
 
 	// Reference to a Stage in apigatewayv2 to populate stage.
 	// +kubebuilder:validation:Optional
-	StageRef *v1.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
+	StageRef *v2.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigatewayv2 to populate stage.
 	// +kubebuilder:validation:Optional
-	StageSelector *v1.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
+	StageSelector *v2.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
 }
 
 type APIMappingObservation struct {
@@ -88,11 +87,11 @@ type APIMappingParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	// +kubebuilder:validation:Optional
@@ -105,11 +104,11 @@ type APIMappingParameters struct {
 
 	// Reference to a DomainName in apigatewayv2 to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameRef *v1.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
+	DomainNameRef *v2.NamespacedReference `json:"domainNameRef,omitempty" tf:"-"`
 
 	// Selector for a DomainName in apigatewayv2 to populate domainName.
 	// +kubebuilder:validation:Optional
-	DomainNameSelector *v1.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
+	DomainNameSelector *v2.NamespacedSelector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -124,11 +123,11 @@ type APIMappingParameters struct {
 
 	// Reference to a Stage in apigatewayv2 to populate stage.
 	// +kubebuilder:validation:Optional
-	StageRef *v1.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
+	StageRef *v2.NamespacedReference `json:"stageRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigatewayv2 to populate stage.
 	// +kubebuilder:validation:Optional
-	StageSelector *v1.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
+	StageSelector *v2.NamespacedSelector `json:"stageSelector,omitempty" tf:"-"`
 }
 
 // APIMappingSpec defines the desired state of APIMapping
@@ -150,8 +149,8 @@ type APIMappingSpec struct {
 
 // APIMappingStatus defines the observed state of APIMapping.
 type APIMappingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIMappingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIMappingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

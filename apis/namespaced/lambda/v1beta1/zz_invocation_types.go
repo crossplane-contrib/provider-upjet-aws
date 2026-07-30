@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InvocationInitParameters struct {
@@ -22,11 +21,11 @@ type InvocationInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// JSON payload to the Lambda function.
 	Input *string `json:"input,omitempty" tf:"input,omitempty"`
@@ -91,11 +90,11 @@ type InvocationParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// JSON payload to the Lambda function.
 	// +kubebuilder:validation:Optional
@@ -147,8 +146,8 @@ type InvocationSpec struct {
 
 // InvocationStatus defines the observed state of Invocation.
 type InvocationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InvocationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InvocationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

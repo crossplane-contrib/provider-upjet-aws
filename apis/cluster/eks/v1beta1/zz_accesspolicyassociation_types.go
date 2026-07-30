@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessPolicyAssociationInitParameters struct {
@@ -48,11 +48,11 @@ type AccessPolicyAssociationParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	PolicyArn *string `json:"policyArn" tf:"policy_arn,omitempty"`
@@ -64,11 +64,11 @@ type AccessPolicyAssociationParameters struct {
 
 	// Reference to a AccessEntry in eks to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnRef *v1.Reference `json:"principalArnRef,omitempty" tf:"-"`
+	PrincipalArnRef *v2.Reference `json:"principalArnRef,omitempty" tf:"-"`
 
 	// Selector for a AccessEntry in eks to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
+	PrincipalArnSelector *v2.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
@@ -103,8 +103,8 @@ type AccessScopeParameters struct {
 
 // AccessPolicyAssociationSpec defines the desired state of AccessPolicyAssociation
 type AccessPolicyAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccessPolicyAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccessPolicyAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -120,8 +120,8 @@ type AccessPolicyAssociationSpec struct {
 
 // AccessPolicyAssociationStatus defines the observed state of AccessPolicyAssociation.
 type AccessPolicyAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessPolicyAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessPolicyAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationInitParameters struct {
@@ -124,11 +124,11 @@ type MemoryStrategyInitParameters struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// ID of the memory to associate with this strategy. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Memory
@@ -137,11 +137,11 @@ type MemoryStrategyInitParameters struct {
 
 	// Reference to a Memory in bedrockagentcore to populate memoryId.
 	// +kubebuilder:validation:Optional
-	MemoryIDRef *v1.Reference `json:"memoryIdRef,omitempty" tf:"-"`
+	MemoryIDRef *v2.Reference `json:"memoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Memory in bedrockagentcore to populate memoryId.
 	// +kubebuilder:validation:Optional
-	MemoryIDSelector *v1.Selector `json:"memoryIdSelector,omitempty" tf:"-"`
+	MemoryIDSelector *v2.Selector `json:"memoryIdSelector,omitempty" tf:"-"`
 
 	// Name of the memory strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -204,11 +204,11 @@ type MemoryStrategyParameters struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.Reference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.Selector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// ID of the memory to associate with this strategy. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/bedrockagentcore/v1beta1.Memory
@@ -218,11 +218,11 @@ type MemoryStrategyParameters struct {
 
 	// Reference to a Memory in bedrockagentcore to populate memoryId.
 	// +kubebuilder:validation:Optional
-	MemoryIDRef *v1.Reference `json:"memoryIdRef,omitempty" tf:"-"`
+	MemoryIDRef *v2.Reference `json:"memoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Memory in bedrockagentcore to populate memoryId.
 	// +kubebuilder:validation:Optional
-	MemoryIDSelector *v1.Selector `json:"memoryIdSelector,omitempty" tf:"-"`
+	MemoryIDSelector *v2.Selector `json:"memoryIdSelector,omitempty" tf:"-"`
 
 	// Name of the memory strategy.
 	// +kubebuilder:validation:Optional
@@ -245,8 +245,8 @@ type MemoryStrategyParameters struct {
 
 // MemoryStrategySpec defines the desired state of MemoryStrategy
 type MemoryStrategySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MemoryStrategyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MemoryStrategyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -262,8 +262,8 @@ type MemoryStrategySpec struct {
 
 // MemoryStrategyStatus defines the observed state of MemoryStrategy.
 type MemoryStrategyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemoryStrategyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MemoryStrategyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

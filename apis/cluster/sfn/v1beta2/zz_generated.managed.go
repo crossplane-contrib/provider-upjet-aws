@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this StateMachine.
-func (mg *StateMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StateMachine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this StateMachine.
-func (mg *StateMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *StateMachine) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this StateMachine.
-func (mg *StateMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StateMachine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StateMachine.
-func (mg *StateMachine) GetProviderConfigReference() *xpv1.Reference {
+func (mg *StateMachine) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StateMachine.
-func (mg *StateMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *StateMachine) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StateMachine.
-func (mg *StateMachine) SetConditions(c ...xpv1.Condition) {
+func (mg *StateMachine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this StateMachine.
-func (mg *StateMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *StateMachine) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this StateMachine.
-func (mg *StateMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StateMachine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StateMachine.
-func (mg *StateMachine) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *StateMachine) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StateMachine.
-func (mg *StateMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *StateMachine) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DatabaseInitParameters struct {
@@ -22,11 +21,11 @@ type DatabaseInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -69,11 +68,11 @@ type DatabaseParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -105,8 +104,8 @@ type DatabaseSpec struct {
 
 // DatabaseStatus defines the observed state of Database.
 type DatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

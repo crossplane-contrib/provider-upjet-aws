@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ComputeEnvironmentOrderInitParameters struct {
@@ -22,11 +22,11 @@ type ComputeEnvironmentOrderInitParameters struct {
 
 	// Reference to a ComputeEnvironment in batch to populate computeEnvironment.
 	// +kubebuilder:validation:Optional
-	ComputeEnvironmentRef *v1.Reference `json:"computeEnvironmentRef,omitempty" tf:"-"`
+	ComputeEnvironmentRef *v2.Reference `json:"computeEnvironmentRef,omitempty" tf:"-"`
 
 	// Selector for a ComputeEnvironment in batch to populate computeEnvironment.
 	// +kubebuilder:validation:Optional
-	ComputeEnvironmentSelector *v1.Selector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
+	ComputeEnvironmentSelector *v2.Selector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
 
 	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
@@ -51,11 +51,11 @@ type ComputeEnvironmentOrderParameters struct {
 
 	// Reference to a ComputeEnvironment in batch to populate computeEnvironment.
 	// +kubebuilder:validation:Optional
-	ComputeEnvironmentRef *v1.Reference `json:"computeEnvironmentRef,omitempty" tf:"-"`
+	ComputeEnvironmentRef *v2.Reference `json:"computeEnvironmentRef,omitempty" tf:"-"`
 
 	// Selector for a ComputeEnvironment in batch to populate computeEnvironment.
 	// +kubebuilder:validation:Optional
-	ComputeEnvironmentSelector *v1.Selector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
+	ComputeEnvironmentSelector *v2.Selector `json:"computeEnvironmentSelector,omitempty" tf:"-"`
 
 	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
 	// +kubebuilder:validation:Optional
@@ -81,11 +81,11 @@ type JobQueueInitParameters struct {
 
 	// Reference to a SchedulingPolicy in batch to populate schedulingPolicyArn.
 	// +kubebuilder:validation:Optional
-	SchedulingPolicyArnRef *v1.Reference `json:"schedulingPolicyArnRef,omitempty" tf:"-"`
+	SchedulingPolicyArnRef *v2.Reference `json:"schedulingPolicyArnRef,omitempty" tf:"-"`
 
 	// Selector for a SchedulingPolicy in batch to populate schedulingPolicyArn.
 	// +kubebuilder:validation:Optional
-	SchedulingPolicyArnSelector *v1.Selector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
+	SchedulingPolicyArnSelector *v2.Selector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
 
 	// The state of the job queue. Must be one of: ENABLED or DISABLED
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -159,11 +159,11 @@ type JobQueueParameters struct {
 
 	// Reference to a SchedulingPolicy in batch to populate schedulingPolicyArn.
 	// +kubebuilder:validation:Optional
-	SchedulingPolicyArnRef *v1.Reference `json:"schedulingPolicyArnRef,omitempty" tf:"-"`
+	SchedulingPolicyArnRef *v2.Reference `json:"schedulingPolicyArnRef,omitempty" tf:"-"`
 
 	// Selector for a SchedulingPolicy in batch to populate schedulingPolicyArn.
 	// +kubebuilder:validation:Optional
-	SchedulingPolicyArnSelector *v1.Selector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
+	SchedulingPolicyArnSelector *v2.Selector `json:"schedulingPolicyArnSelector,omitempty" tf:"-"`
 
 	// The state of the job queue. Must be one of: ENABLED or DISABLED
 	// +kubebuilder:validation:Optional
@@ -226,8 +226,8 @@ type JobStateTimeLimitActionParameters struct {
 
 // JobQueueSpec defines the desired state of JobQueue
 type JobQueueSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     JobQueueParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   JobQueueParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -243,8 +243,8 @@ type JobQueueSpec struct {
 
 // JobQueueStatus defines the observed state of JobQueue.
 type JobQueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        JobQueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               JobQueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AggregationConfigInitParameters struct {
@@ -1193,11 +1193,11 @@ type S3InitParameters struct {
 
 	// Reference to a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -1354,11 +1354,11 @@ type S3Parameters struct {
 
 	// Reference to a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -2018,11 +2018,11 @@ type SourceConnectorPropertiesS3InitParameters struct {
 
 	// Reference to a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -2053,11 +2053,11 @@ type SourceConnectorPropertiesS3Parameters struct {
 
 	// Reference to a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a BucketPolicy in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -2614,8 +2614,8 @@ type ZendeskParameters struct {
 
 // FlowSpec defines the desired state of Flow
 type FlowSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlowParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FlowParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2631,8 +2631,8 @@ type FlowSpec struct {
 
 // FlowStatus defines the observed state of Flow.
 type FlowStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlowObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlowObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BrowserInitParameters struct {
@@ -34,11 +34,11 @@ type BrowserInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the browser.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -156,11 +156,11 @@ type BrowserParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the browser.
 	// +kubebuilder:validation:Optional
@@ -366,11 +366,11 @@ type S3LocationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// S3 key prefix for recording files.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -394,11 +394,11 @@ type S3LocationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// S3 key prefix for recording files.
 	// +kubebuilder:validation:Optional
@@ -414,11 +414,11 @@ type SecretsManagerInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type SecretsManagerObservation struct {
@@ -437,11 +437,11 @@ type SecretsManagerParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigInitParameters struct {
@@ -481,8 +481,8 @@ type VPCConfigParameters struct {
 
 // BrowserSpec defines the desired state of Browser
 type BrowserSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BrowserParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BrowserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -498,8 +498,8 @@ type BrowserSpec struct {
 
 // BrowserStatus defines the observed state of Browser.
 type BrowserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BrowserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BrowserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

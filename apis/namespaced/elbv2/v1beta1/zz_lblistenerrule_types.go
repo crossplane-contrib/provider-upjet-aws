@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionAuthenticateCognitoInitParameters struct {
@@ -39,11 +38,11 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolArn.
 	// +kubebuilder:validation:Optional
-	UserPoolArnRef *v1.NamespacedReference `json:"userPoolArnRef,omitempty" tf:"-"`
+	UserPoolArnRef *v2.NamespacedReference `json:"userPoolArnRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolArn.
 	// +kubebuilder:validation:Optional
-	UserPoolArnSelector *v1.NamespacedSelector `json:"userPoolArnSelector,omitempty" tf:"-"`
+	UserPoolArnSelector *v2.NamespacedSelector `json:"userPoolArnSelector,omitempty" tf:"-"`
 
 	// The ID of the Cognito user pool client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolClient
@@ -52,11 +51,11 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
 	// +kubebuilder:validation:Optional
-	UserPoolClientIDRef *v1.NamespacedReference `json:"userPoolClientIdRef,omitempty" tf:"-"`
+	UserPoolClientIDRef *v2.NamespacedReference `json:"userPoolClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate userPoolClientId.
 	// +kubebuilder:validation:Optional
-	UserPoolClientIDSelector *v1.NamespacedSelector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
+	UserPoolClientIDSelector *v2.NamespacedSelector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
 
 	// The domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolDomain
@@ -65,11 +64,11 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPoolDomain.
 	// +kubebuilder:validation:Optional
-	UserPoolDomainRef *v1.NamespacedReference `json:"userPoolDomainRef,omitempty" tf:"-"`
+	UserPoolDomainRef *v2.NamespacedReference `json:"userPoolDomainRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPoolDomain.
 	// +kubebuilder:validation:Optional
-	UserPoolDomainSelector *v1.NamespacedSelector `json:"userPoolDomainSelector,omitempty" tf:"-"`
+	UserPoolDomainSelector *v2.NamespacedSelector `json:"userPoolDomainSelector,omitempty" tf:"-"`
 }
 
 type ActionAuthenticateCognitoObservation struct {
@@ -131,11 +130,11 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolArn.
 	// +kubebuilder:validation:Optional
-	UserPoolArnRef *v1.NamespacedReference `json:"userPoolArnRef,omitempty" tf:"-"`
+	UserPoolArnRef *v2.NamespacedReference `json:"userPoolArnRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolArn.
 	// +kubebuilder:validation:Optional
-	UserPoolArnSelector *v1.NamespacedSelector `json:"userPoolArnSelector,omitempty" tf:"-"`
+	UserPoolArnSelector *v2.NamespacedSelector `json:"userPoolArnSelector,omitempty" tf:"-"`
 
 	// The ID of the Cognito user pool client.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolClient
@@ -145,11 +144,11 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
 	// +kubebuilder:validation:Optional
-	UserPoolClientIDRef *v1.NamespacedReference `json:"userPoolClientIdRef,omitempty" tf:"-"`
+	UserPoolClientIDRef *v2.NamespacedReference `json:"userPoolClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate userPoolClientId.
 	// +kubebuilder:validation:Optional
-	UserPoolClientIDSelector *v1.NamespacedSelector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
+	UserPoolClientIDSelector *v2.NamespacedSelector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
 
 	// The domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPoolDomain
@@ -159,11 +158,11 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPoolDomain.
 	// +kubebuilder:validation:Optional
-	UserPoolDomainRef *v1.NamespacedReference `json:"userPoolDomainRef,omitempty" tf:"-"`
+	UserPoolDomainRef *v2.NamespacedReference `json:"userPoolDomainRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPoolDomain.
 	// +kubebuilder:validation:Optional
-	UserPoolDomainSelector *v1.NamespacedSelector `json:"userPoolDomainSelector,omitempty" tf:"-"`
+	UserPoolDomainSelector *v2.NamespacedSelector `json:"userPoolDomainSelector,omitempty" tf:"-"`
 }
 
 type ActionAuthenticateOidcInitParameters struct {
@@ -179,7 +178,7 @@ type ActionAuthenticateOidcInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret.
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// Issuer of the JWT.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -254,7 +253,7 @@ type ActionAuthenticateOidcParameters struct {
 
 	// The OAuth 2.0 client secret.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// Issuer of the JWT.
 	// +kubebuilder:validation:Optional
@@ -391,11 +390,11 @@ type ActionInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -524,11 +523,11 @@ type ActionParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	// +kubebuilder:validation:Optional
@@ -711,11 +710,11 @@ type ForwardTargetGroupInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -740,11 +739,11 @@ type ForwardTargetGroupParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The weight. The range is 0 to 999.
 	// +kubebuilder:validation:Optional
@@ -929,11 +928,11 @@ type LBListenerRuleInitParameters struct {
 
 	// Reference to a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// The priority for the rule between 1 and 50000. Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
@@ -1000,11 +999,11 @@ type LBListenerRuleParameters struct {
 
 	// Reference to a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBListener in elbv2 to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// The priority for the rule between 1 and 50000. Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority.
 	// +kubebuilder:validation:Optional
@@ -1246,8 +1245,8 @@ type LBListenerRuleSpec struct {
 
 // LBListenerRuleStatus defines the observed state of LBListenerRule.
 type LBListenerRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBListenerRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBListenerRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WebACLAssociationInitParameters struct {
@@ -45,11 +45,11 @@ type WebACLAssociationParameters struct {
 
 	// Reference to a Stage in apigateway to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.Reference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stage in apigateway to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/wafv2/v1beta1.WebACL
@@ -59,17 +59,17 @@ type WebACLAssociationParameters struct {
 
 	// Reference to a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnRef *v1.Reference `json:"webAclArnRef,omitempty" tf:"-"`
+	WebACLArnRef *v2.Reference `json:"webAclArnRef,omitempty" tf:"-"`
 
 	// Selector for a WebACL in wafv2 to populate webAclArn.
 	// +kubebuilder:validation:Optional
-	WebACLArnSelector *v1.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
+	WebACLArnSelector *v2.Selector `json:"webAclArnSelector,omitempty" tf:"-"`
 }
 
 // WebACLAssociationSpec defines the desired state of WebACLAssociation
 type WebACLAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WebACLAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WebACLAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -85,8 +85,8 @@ type WebACLAssociationSpec struct {
 
 // WebACLAssociationStatus defines the observed state of WebACLAssociation.
 type WebACLAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebACLAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebACLAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

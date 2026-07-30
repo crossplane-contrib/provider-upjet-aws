@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HomeDirectoryMappingsInitParameters struct {
@@ -109,11 +108,11 @@ type UserInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
@@ -121,11 +120,11 @@ type UserInitParameters struct {
 
 	// Reference to a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -208,11 +207,11 @@ type UserParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/transfer/v1beta1.Server
@@ -221,11 +220,11 @@ type UserParameters struct {
 
 	// Reference to a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -252,8 +251,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BuildInitParameters struct {
@@ -103,11 +102,11 @@ type StorageLocationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your build files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -116,11 +115,11 @@ type StorageLocationInitParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
 
 	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
@@ -132,11 +131,11 @@ type StorageLocationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type StorageLocationObservation struct {
@@ -163,11 +162,11 @@ type StorageLocationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your build files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -177,11 +176,11 @@ type StorageLocationParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.NamespacedReference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.NamespacedSelector `json:"keySelector,omitempty" tf:"-"`
 
 	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	// +kubebuilder:validation:Optional
@@ -195,11 +194,11 @@ type StorageLocationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 // BuildSpec defines the desired state of Build
@@ -221,8 +220,8 @@ type BuildSpec struct {
 
 // BuildStatus defines the observed state of Build.
 type BuildStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BuildObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BuildObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

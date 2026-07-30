@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EndpointAccessInitParameters struct {
@@ -22,11 +21,11 @@ type EndpointAccessInitParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
@@ -38,19 +37,19 @@ type EndpointAccessInitParameters struct {
 
 	// Reference to a SubnetGroup in redshift to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in redshift to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -101,11 +100,11 @@ type EndpointAccessParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -124,19 +123,19 @@ type EndpointAccessParameters struct {
 
 	// Reference to a SubnetGroup in redshift to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in redshift to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -205,8 +204,8 @@ type EndpointAccessSpec struct {
 
 // EndpointAccessStatus defines the observed state of EndpointAccess.
 type EndpointAccessStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointAccessObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointAccessObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

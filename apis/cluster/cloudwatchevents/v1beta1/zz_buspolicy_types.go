@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BusPolicyInitParameters struct {
@@ -22,11 +22,11 @@ type BusPolicyInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The text of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -59,11 +59,11 @@ type BusPolicyParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The text of the policy.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type BusPolicyParameters struct {
 
 // BusPolicySpec defines the desired state of BusPolicy
 type BusPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BusPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BusPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type BusPolicySpec struct {
 
 // BusPolicyStatus defines the observed state of BusPolicy.
 type BusPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BusPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BusPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

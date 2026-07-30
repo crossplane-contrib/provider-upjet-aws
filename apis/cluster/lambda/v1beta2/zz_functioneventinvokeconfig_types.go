@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DestinationConfigOnFailureInitParameters struct {
@@ -22,11 +22,11 @@ type DestinationConfigOnFailureInitParameters struct {
 
 	// Reference to a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type DestinationConfigOnFailureObservation struct {
@@ -45,11 +45,11 @@ type DestinationConfigOnFailureParameters struct {
 
 	// Reference to a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type FunctionEventInvokeConfigDestinationConfigInitParameters struct {
@@ -161,11 +161,11 @@ type OnSuccessInitParameters struct {
 
 	// Reference to a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type OnSuccessObservation struct {
@@ -184,17 +184,17 @@ type OnSuccessParameters struct {
 
 	// Reference to a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+	DestinationRef *v2.Reference `json:"destinationRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate destination.
 	// +kubebuilder:validation:Optional
-	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+	DestinationSelector *v2.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 // FunctionEventInvokeConfigSpec defines the desired state of FunctionEventInvokeConfig
 type FunctionEventInvokeConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionEventInvokeConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionEventInvokeConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -210,8 +210,8 @@ type FunctionEventInvokeConfigSpec struct {
 
 // FunctionEventInvokeConfigStatus defines the observed state of FunctionEventInvokeConfig.
 type FunctionEventInvokeConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionEventInvokeConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionEventInvokeConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

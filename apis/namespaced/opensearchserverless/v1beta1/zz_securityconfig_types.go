@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SAMLOptionsInitParameters struct {
@@ -150,8 +149,8 @@ type SecurityConfigSpec struct {
 
 // SecurityConfigStatus defines the observed state of SecurityConfig.
 type SecurityConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

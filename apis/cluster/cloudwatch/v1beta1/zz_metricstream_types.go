@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExcludeFilterInitParameters struct {
@@ -118,11 +118,11 @@ type MetricStreamInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+	FirehoseArnRef *v2.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
+	FirehoseArnSelector *v2.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 
 	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
 	IncludeFilter []IncludeFilterInitParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
@@ -143,11 +143,11 @@ type MetricStreamInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7 or opentelemetry1.0, you can stream percentile statistics (p99 etc.). See details below.
 	StatisticsConfiguration []StatisticsConfigurationInitParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
@@ -224,11 +224,11 @@ type MetricStreamParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+	FirehoseArnRef *v2.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
+	FirehoseArnSelector *v2.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 
 	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
 	// +kubebuilder:validation:Optional
@@ -259,11 +259,11 @@ type MetricStreamParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7 or opentelemetry1.0, you can stream percentile statistics (p99 etc.). See details below.
 	// +kubebuilder:validation:Optional
@@ -309,8 +309,8 @@ type StatisticsConfigurationParameters struct {
 
 // MetricStreamSpec defines the desired state of MetricStream
 type MetricStreamSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MetricStreamParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MetricStreamParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -326,8 +326,8 @@ type MetricStreamSpec struct {
 
 // MetricStreamStatus defines the observed state of MetricStream.
 type MetricStreamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MetricStreamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MetricStreamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

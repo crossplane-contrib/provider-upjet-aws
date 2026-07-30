@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpotInstanceRequestCPUOptionsInitParameters struct {
@@ -361,11 +360,11 @@ type SpotInstanceRequestInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -381,11 +380,11 @@ type SpotInstanceRequestInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
@@ -864,11 +863,11 @@ type SpotInstanceRequestParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -889,11 +888,11 @@ type SpotInstanceRequestParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
@@ -1135,8 +1134,8 @@ type SpotInstanceRequestSpec struct {
 
 // SpotInstanceRequestStatus defines the observed state of SpotInstanceRequest.
 type SpotInstanceRequestStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpotInstanceRequestObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpotInstanceRequestObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

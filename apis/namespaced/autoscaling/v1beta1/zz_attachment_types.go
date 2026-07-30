@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentInitParameters struct {
@@ -22,11 +21,11 @@ type AttachmentInitParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameRef *v1.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+	AutoscalingGroupNameRef *v2.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameSelector *v1.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+	AutoscalingGroupNameSelector *v2.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
@@ -35,11 +34,11 @@ type AttachmentInitParameters struct {
 
 	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBRef *v1.NamespacedReference `json:"elbRef,omitempty" tf:"-"`
+	ELBRef *v2.NamespacedReference `json:"elbRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBSelector *v1.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
+	ELBSelector *v2.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
 
 	// ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LBTargetGroup
@@ -48,11 +47,11 @@ type AttachmentInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
-	LBTargetGroupArnRef *v1.NamespacedReference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
+	LBTargetGroupArnRef *v2.NamespacedReference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
-	LBTargetGroupArnSelector *v1.NamespacedSelector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
+	LBTargetGroupArnSelector *v2.NamespacedSelector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
 }
 
 type AttachmentObservation struct {
@@ -82,11 +81,11 @@ type AttachmentParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameRef *v1.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+	AutoscalingGroupNameRef *v2.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameSelector *v1.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+	AutoscalingGroupNameSelector *v2.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elb/v1beta1.ELB
@@ -96,11 +95,11 @@ type AttachmentParameters struct {
 
 	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBRef *v1.NamespacedReference `json:"elbRef,omitempty" tf:"-"`
+	ELBRef *v2.NamespacedReference `json:"elbRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
-	ELBSelector *v1.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
+	ELBSelector *v2.NamespacedSelector `json:"elbSelector,omitempty" tf:"-"`
 
 	// ARN of a load balancer target group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LBTargetGroup
@@ -110,11 +109,11 @@ type AttachmentParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
-	LBTargetGroupArnRef *v1.NamespacedReference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
+	LBTargetGroupArnRef *v2.NamespacedReference `json:"lbTargetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate lbTargetGroupArn.
 	// +kubebuilder:validation:Optional
-	LBTargetGroupArnSelector *v1.NamespacedSelector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
+	LBTargetGroupArnSelector *v2.NamespacedSelector `json:"lbTargetGroupArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -141,8 +140,8 @@ type AttachmentSpec struct {
 
 // AttachmentStatus defines the observed state of Attachment.
 type AttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

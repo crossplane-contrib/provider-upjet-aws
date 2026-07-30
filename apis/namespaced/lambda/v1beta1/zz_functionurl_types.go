@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CorsInitParameters struct {
@@ -109,11 +108,11 @@ type FunctionURLInitParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// How the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM.
 	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
@@ -172,11 +171,11 @@ type FunctionURLParameters struct {
 
 	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameRef *v1.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
+	FunctionNameRef *v2.NamespacedReference `json:"functionNameRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
-	FunctionNameSelector *v1.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
+	FunctionNameSelector *v2.NamespacedSelector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// How the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM.
 	// +kubebuilder:validation:Optional
@@ -211,8 +210,8 @@ type FunctionURLSpec struct {
 
 // FunctionURLStatus defines the observed state of FunctionURL.
 type FunctionURLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionURLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionURLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

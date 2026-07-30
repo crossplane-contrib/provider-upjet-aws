@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogSettingsInitParameters struct {
@@ -191,11 +190,11 @@ type StageInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Settings for logging access in this stage.
 	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
@@ -217,11 +216,11 @@ type StageInitParameters struct {
 
 	// Reference to a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDRef *v1.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
+	DeploymentIDRef *v2.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDSelector *v1.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
+	DeploymentIDSelector *v2.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// Description for the stage. Must be less than or equal to 1024 characters in length.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -307,11 +306,11 @@ type StageParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Settings for logging access in this stage.
 	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
@@ -338,11 +337,11 @@ type StageParameters struct {
 
 	// Reference to a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDRef *v1.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
+	DeploymentIDRef *v2.NamespacedReference `json:"deploymentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
-	DeploymentIDSelector *v1.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
+	DeploymentIDSelector *v2.NamespacedSelector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// Description for the stage. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
@@ -387,8 +386,8 @@ type StageSpec struct {
 
 // StageStatus defines the observed state of Stage.
 type StageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInitParameters struct {
@@ -60,11 +59,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnRef *v1.NamespacedReference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+	DefaultIAMRoleArnRef *v2.NamespacedReference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnSelector *v1.NamespacedSelector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+	DefaultIAMRoleArnSelector *v2.NamespacedSelector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The Elastic IP (EIP) address for the cluster.
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
@@ -81,11 +80,11 @@ type ClusterInitParameters struct {
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.NamespacedReference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.NamespacedReference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -100,11 +99,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
@@ -125,14 +124,14 @@ type ClusterInitParameters struct {
 	// One of master_password, master_password_wo or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
-	MasterPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
 	// Password for the master DB user.
 	// Conflicts with manage_master_password and master_password.
 	// One of master_password_wo, master_password or manage_master_password is required unless snapshot_identifier is provided.
 	// Note that this may show up in logs.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
-	MasterPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+	MasterPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
@@ -183,11 +182,11 @@ type ClusterInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -436,11 +435,11 @@ type ClusterParameters struct {
 
 	// Reference to a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnRef *v1.NamespacedReference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+	DefaultIAMRoleArnRef *v2.NamespacedReference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnSelector *v1.NamespacedSelector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+	DefaultIAMRoleArnSelector *v2.NamespacedSelector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The Elastic IP (EIP) address for the cluster.
 	// +kubebuilder:validation:Optional
@@ -461,11 +460,11 @@ type ClusterParameters struct {
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.NamespacedReference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.NamespacedReference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -482,11 +481,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	// +kubebuilder:validation:Optional
@@ -512,7 +511,7 @@ type ClusterParameters struct {
 	// Note that this may show up in logs, and it will be stored in the state file.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
-	MasterPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
 	// Password for the master DB user.
 	// Conflicts with manage_master_password and master_password.
@@ -520,7 +519,7 @@ type ClusterParameters struct {
 	// Note that this may show up in logs.
 	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
-	MasterPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+	MasterPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
 	// +kubebuilder:validation:Optional
@@ -590,11 +589,11 @@ type ClusterParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -624,8 +623,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

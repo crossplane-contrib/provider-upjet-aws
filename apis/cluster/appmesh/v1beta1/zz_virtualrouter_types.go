@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpecListenerPortMappingInitParameters struct {
@@ -51,11 +51,11 @@ type VirtualRouterInitParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -123,11 +123,11 @@ type VirtualRouterParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -192,8 +192,8 @@ type VirtualRouterSpecParameters struct {
 
 // VirtualRouterSpec defines the desired state of VirtualRouter
 type VirtualRouterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualRouterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualRouterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -209,8 +209,8 @@ type VirtualRouterSpec struct {
 
 // VirtualRouterStatus defines the observed state of VirtualRouter.
 type VirtualRouterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualRouterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualRouterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RuleInitParameters struct {
@@ -25,11 +24,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
@@ -47,11 +46,11 @@ type RuleInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
@@ -122,11 +121,11 @@ type RuleParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
 	// +kubebuilder:validation:Optional
@@ -153,11 +152,11 @@ type RuleParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
 	// +kubebuilder:validation:Optional
@@ -192,8 +191,8 @@ type RuleSpec struct {
 
 // RuleStatus defines the observed state of Rule.
 type RuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

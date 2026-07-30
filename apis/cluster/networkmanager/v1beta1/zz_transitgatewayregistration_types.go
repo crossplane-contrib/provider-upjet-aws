@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayRegistrationInitParameters struct {
@@ -37,11 +37,11 @@ type TransitGatewayRegistrationParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ARN of the Transit Gateway to register.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGateway
@@ -51,17 +51,17 @@ type TransitGatewayRegistrationParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayArn.
 	// +kubebuilder:validation:Optional
-	TransitGatewayArnRef *v1.Reference `json:"transitGatewayArnRef,omitempty" tf:"-"`
+	TransitGatewayArnRef *v2.Reference `json:"transitGatewayArnRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayArn.
 	// +kubebuilder:validation:Optional
-	TransitGatewayArnSelector *v1.Selector `json:"transitGatewayArnSelector,omitempty" tf:"-"`
+	TransitGatewayArnSelector *v2.Selector `json:"transitGatewayArnSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayRegistrationSpec defines the desired state of TransitGatewayRegistration
 type TransitGatewayRegistrationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayRegistrationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayRegistrationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -77,8 +77,8 @@ type TransitGatewayRegistrationSpec struct {
 
 // TransitGatewayRegistrationStatus defines the observed state of TransitGatewayRegistration.
 type TransitGatewayRegistrationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayRegistrationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayRegistrationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

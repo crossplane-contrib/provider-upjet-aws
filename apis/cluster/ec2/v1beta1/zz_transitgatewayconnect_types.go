@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayConnectInitParameters struct {
@@ -35,11 +35,11 @@ type TransitGatewayConnectInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// The underlaying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
@@ -48,11 +48,11 @@ type TransitGatewayConnectInitParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDRef *v1.Reference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
+	TransportAttachmentIDRef *v2.Reference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDSelector *v1.Selector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
+	TransportAttachmentIDSelector *v2.Selector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayConnectObservation struct {
@@ -120,11 +120,11 @@ type TransitGatewayConnectParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// The underlaying VPC attachment
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
@@ -134,17 +134,17 @@ type TransitGatewayConnectParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDRef *v1.Reference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
+	TransportAttachmentIDRef *v2.Reference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transportAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransportAttachmentIDSelector *v1.Selector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
+	TransportAttachmentIDSelector *v2.Selector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayConnectSpec defines the desired state of TransitGatewayConnect
 type TransitGatewayConnectSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayConnectParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayConnectParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -160,8 +160,8 @@ type TransitGatewayConnectSpec struct {
 
 // TransitGatewayConnectStatus defines the observed state of TransitGatewayConnect.
 type TransitGatewayConnectStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayConnectObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayConnectObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

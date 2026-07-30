@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupMembershipInitParameters struct {
@@ -22,11 +22,11 @@ type GroupMembershipInitParameters struct {
 
 	// Reference to a Group in identitystore to populate groupId.
 	// +kubebuilder:validation:Optional
-	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
+	GroupIDRef *v2.Reference `json:"groupIdRef,omitempty" tf:"-"`
 
 	// Selector for a Group in identitystore to populate groupId.
 	// +kubebuilder:validation:Optional
-	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
+	GroupIDSelector *v2.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
 	// The identifier for a user in the Identity Store.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/identitystore/v1beta2.User
@@ -35,11 +35,11 @@ type GroupMembershipInitParameters struct {
 
 	// Reference to a User in identitystore to populate memberId.
 	// +kubebuilder:validation:Optional
-	MemberIDRef *v1.Reference `json:"memberIdRef,omitempty" tf:"-"`
+	MemberIDRef *v2.Reference `json:"memberIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in identitystore to populate memberId.
 	// +kubebuilder:validation:Optional
-	MemberIDSelector *v1.Selector `json:"memberIdSelector,omitempty" tf:"-"`
+	MemberIDSelector *v2.Selector `json:"memberIdSelector,omitempty" tf:"-"`
 }
 
 type GroupMembershipObservation struct {
@@ -73,11 +73,11 @@ type GroupMembershipParameters struct {
 
 	// Reference to a Group in identitystore to populate groupId.
 	// +kubebuilder:validation:Optional
-	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
+	GroupIDRef *v2.Reference `json:"groupIdRef,omitempty" tf:"-"`
 
 	// Selector for a Group in identitystore to populate groupId.
 	// +kubebuilder:validation:Optional
-	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
+	GroupIDSelector *v2.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
 	// Identity Store ID associated with the Single Sign-On Instance.
 	// +kubebuilder:validation:Required
@@ -91,11 +91,11 @@ type GroupMembershipParameters struct {
 
 	// Reference to a User in identitystore to populate memberId.
 	// +kubebuilder:validation:Optional
-	MemberIDRef *v1.Reference `json:"memberIdRef,omitempty" tf:"-"`
+	MemberIDRef *v2.Reference `json:"memberIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in identitystore to populate memberId.
 	// +kubebuilder:validation:Optional
-	MemberIDSelector *v1.Selector `json:"memberIdSelector,omitempty" tf:"-"`
+	MemberIDSelector *v2.Selector `json:"memberIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -105,8 +105,8 @@ type GroupMembershipParameters struct {
 
 // GroupMembershipSpec defines the desired state of GroupMembership
 type GroupMembershipSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GroupMembershipParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GroupMembershipParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -122,8 +122,8 @@ type GroupMembershipSpec struct {
 
 // GroupMembershipStatus defines the observed state of GroupMembership.
 type GroupMembershipStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupMembershipObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupMembershipObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

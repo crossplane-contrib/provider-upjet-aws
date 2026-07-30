@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EndpointConfigurationInitParameters struct {
@@ -89,11 +88,11 @@ type EndpointGroupInitParameters struct {
 
 	// Reference to a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. Fields documented below.
 	PortOverride []PortOverrideInitParameters `json:"portOverride,omitempty" tf:"port_override,omitempty"`
@@ -177,11 +176,11 @@ type EndpointGroupParameters struct {
 
 	// Reference to a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnRef *v1.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
+	ListenerArnRef *v2.NamespacedReference `json:"listenerArnRef,omitempty" tf:"-"`
 
 	// Selector for a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
-	ListenerArnSelector *v1.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
+	ListenerArnSelector *v2.NamespacedSelector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. Fields documented below.
 	// +kubebuilder:validation:Optional
@@ -244,8 +243,8 @@ type EndpointGroupSpec struct {
 
 // EndpointGroupStatus defines the observed state of EndpointGroup.
 type EndpointGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

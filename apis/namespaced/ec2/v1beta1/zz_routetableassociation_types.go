@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RouteTableAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type RouteTableAssociationInitParameters struct {
 
 	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the routing table to associate with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.RouteTable
@@ -35,11 +34,11 @@ type RouteTableAssociationInitParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The subnet ID to create an association. Conflicts with gateway_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -47,11 +46,11 @@ type RouteTableAssociationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type RouteTableAssociationObservation struct {
@@ -83,11 +82,11 @@ type RouteTableAssociationParameters struct {
 
 	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -101,11 +100,11 @@ type RouteTableAssociationParameters struct {
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The subnet ID to create an association. Conflicts with gateway_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -114,11 +113,11 @@ type RouteTableAssociationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // RouteTableAssociationSpec defines the desired state of RouteTableAssociation
@@ -140,8 +139,8 @@ type RouteTableAssociationSpec struct {
 
 // RouteTableAssociationStatus defines the observed state of RouteTableAssociation.
 type RouteTableAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteTableAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteTableAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

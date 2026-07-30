@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultVPCInitParameters struct {
@@ -157,8 +157,8 @@ type DefaultVPCParameters struct {
 
 // DefaultVPCSpec defines the desired state of DefaultVPC
 type DefaultVPCSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DefaultVPCParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DefaultVPCParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type DefaultVPCSpec struct {
 
 // DefaultVPCStatus defines the observed state of DefaultVPC.
 type DefaultVPCStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultVPCObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultVPCObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

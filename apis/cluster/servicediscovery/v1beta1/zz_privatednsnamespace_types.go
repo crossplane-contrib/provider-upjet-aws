@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSNamespaceInitParameters struct {
@@ -31,11 +31,11 @@ type PrivateDNSNamespaceInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
-	VPCRef *v1.Reference `json:"vpcRef,omitempty" tf:"-"`
+	VPCRef *v2.Reference `json:"vpcRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
-	VPCSelector *v1.Selector `json:"vpcSelector,omitempty" tf:"-"`
+	VPCSelector *v2.Selector `json:"vpcSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSNamespaceObservation struct {
@@ -98,17 +98,17 @@ type PrivateDNSNamespaceParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
-	VPCRef *v1.Reference `json:"vpcRef,omitempty" tf:"-"`
+	VPCRef *v2.Reference `json:"vpcRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpc.
 	// +kubebuilder:validation:Optional
-	VPCSelector *v1.Selector `json:"vpcSelector,omitempty" tf:"-"`
+	VPCSelector *v2.Selector `json:"vpcSelector,omitempty" tf:"-"`
 }
 
 // PrivateDNSNamespaceSpec defines the desired state of PrivateDNSNamespace
 type PrivateDNSNamespaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSNamespaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrivateDNSNamespaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type PrivateDNSNamespaceSpec struct {
 
 // PrivateDNSNamespaceStatus defines the observed state of PrivateDNSNamespace.
 type PrivateDNSNamespaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSNamespaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

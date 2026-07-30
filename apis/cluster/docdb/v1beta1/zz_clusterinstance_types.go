@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInstanceInitParameters struct {
@@ -36,11 +36,11 @@ type ClusterInstanceInitParameters struct {
 
 	// Reference to a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Copy all DB instance tags to snapshots. Default is false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
@@ -185,11 +185,11 @@ type ClusterInstanceParameters struct {
 
 	// Reference to a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Copy all DB instance tags to snapshots. Default is false.
 	// +kubebuilder:validation:Optional
@@ -232,8 +232,8 @@ type ClusterInstanceParameters struct {
 
 // ClusterInstanceSpec defines the desired state of ClusterInstance
 type ClusterInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -249,8 +249,8 @@ type ClusterInstanceSpec struct {
 
 // ClusterInstanceStatus defines the observed state of ClusterInstance.
 type ClusterInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

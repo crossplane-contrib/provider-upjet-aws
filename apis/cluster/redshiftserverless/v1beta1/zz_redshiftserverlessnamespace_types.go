@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedshiftServerlessNamespaceInitParameters struct {
@@ -20,7 +20,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 
 	// The password of the administrator for the first database created in the namespace.
 	// Conflicts with manage_admin_password and admin_user_password_wo.
-	AdminUserPasswordSecretRef *v1.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
+	AdminUserPasswordSecretRef *v2.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
 
 	// The password of the administrator for the first database created in the namespace.
 	// Conflicts with manage_admin_password and admin_user_password.
@@ -30,7 +30,7 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	AdminUserPasswordWoVersion *float64 `json:"adminUserPasswordWoVersion,omitempty" tf:"admin_user_password_wo_version,omitempty"`
 
 	// The username of the administrator for the first database created in the namespace.
-	AdminUsernameSecretRef *v1.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
+	AdminUsernameSecretRef *v2.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
 
 	// The name of the first database created in the namespace.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
@@ -42,19 +42,19 @@ type RedshiftServerlessNamespaceInitParameters struct {
 
 	// Reference to a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnRef *v1.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+	DefaultIAMRoleArnRef *v2.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnSelector *v1.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+	DefaultIAMRoleArnSelector *v2.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM roles to associate with the namespace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -69,11 +69,11 @@ type RedshiftServerlessNamespaceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
 	// +listType=set
@@ -155,7 +155,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// The password of the administrator for the first database created in the namespace.
 	// Conflicts with manage_admin_password and admin_user_password_wo.
 	// +kubebuilder:validation:Optional
-	AdminUserPasswordSecretRef *v1.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
+	AdminUserPasswordSecretRef *v2.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
 
 	// The password of the administrator for the first database created in the namespace.
 	// Conflicts with manage_admin_password and admin_user_password.
@@ -168,7 +168,7 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// The username of the administrator for the first database created in the namespace.
 	// +kubebuilder:validation:Optional
-	AdminUsernameSecretRef *v1.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
+	AdminUsernameSecretRef *v2.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
 
 	// The name of the first database created in the namespace.
 	// +kubebuilder:validation:Optional
@@ -182,19 +182,19 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// Reference to a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnRef *v1.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+	DefaultIAMRoleArnRef *v2.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate defaultIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DefaultIAMRoleArnSelector *v1.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+	DefaultIAMRoleArnSelector *v2.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
 
 	// References to Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+	IAMRoleRefs []v2.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Role in iam to populate iamRoles.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// A list of IAM roles to associate with the namespace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -211,11 +211,11 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
 	// +kubebuilder:validation:Optional
@@ -240,8 +240,8 @@ type RedshiftServerlessNamespaceParameters struct {
 
 // RedshiftServerlessNamespaceSpec defines the desired state of RedshiftServerlessNamespace
 type RedshiftServerlessNamespaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedshiftServerlessNamespaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RedshiftServerlessNamespaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -257,8 +257,8 @@ type RedshiftServerlessNamespaceSpec struct {
 
 // RedshiftServerlessNamespaceStatus defines the observed state of RedshiftServerlessNamespace.
 type RedshiftServerlessNamespaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedshiftServerlessNamespaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedshiftServerlessNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

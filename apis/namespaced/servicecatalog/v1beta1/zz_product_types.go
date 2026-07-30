@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProductInitParameters struct {
@@ -252,8 +251,8 @@ type ProductSpec struct {
 
 // ProductStatus defines the observed state of Product.
 type ProductStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProductObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProductObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

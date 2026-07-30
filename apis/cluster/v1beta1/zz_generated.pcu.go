@@ -5,24 +5,24 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetProviderConfigReference of this ProviderConfigUsage.
-func (p *ProviderConfigUsage) GetProviderConfigReference() xpv1.Reference {
+func (p *ProviderConfigUsage) GetProviderConfigReference() xpv2.Reference {
 	return p.ProviderConfigReference
 }
 
 // GetResourceReference of this ProviderConfigUsage.
-func (p *ProviderConfigUsage) GetResourceReference() xpv1.TypedReference {
+func (p *ProviderConfigUsage) GetResourceReference() xpv2.TypedReference {
 	return p.ResourceReference
 }
 
 // SetProviderConfigReference of this ProviderConfigUsage.
-func (p *ProviderConfigUsage) SetProviderConfigReference(r xpv1.Reference) {
+func (p *ProviderConfigUsage) SetProviderConfigReference(r xpv2.Reference) {
 	p.ProviderConfigReference = r
 }
 
 // SetResourceReference of this ProviderConfigUsage.
-func (p *ProviderConfigUsage) SetResourceReference(r xpv1.TypedReference) {
+func (p *ProviderConfigUsage) SetResourceReference(r xpv2.TypedReference) {
 	p.ResourceReference = r
 }

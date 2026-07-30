@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AllowedPublishersInitParameters struct {
@@ -24,11 +23,11 @@ type AllowedPublishersInitParameters struct {
 
 	// References to SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
-	SigningProfileVersionArnsRefs []v1.NamespacedReference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
+	SigningProfileVersionArnsRefs []v2.NamespacedReference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
-	SigningProfileVersionArnsSelector *v1.NamespacedSelector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
+	SigningProfileVersionArnsSelector *v2.NamespacedSelector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
 }
 
 type AllowedPublishersObservation struct {
@@ -49,11 +48,11 @@ type AllowedPublishersParameters struct {
 
 	// References to SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
-	SigningProfileVersionArnsRefs []v1.NamespacedReference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
+	SigningProfileVersionArnsRefs []v2.NamespacedReference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
-	SigningProfileVersionArnsSelector *v1.NamespacedSelector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
+	SigningProfileVersionArnsSelector *v2.NamespacedSelector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
 }
 
 type CodeSigningConfigInitParameters struct {
@@ -170,8 +169,8 @@ type CodeSigningConfigSpec struct {
 
 // CodeSigningConfigStatus defines the observed state of CodeSigningConfig.
 type CodeSigningConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CodeSigningConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CodeSigningConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

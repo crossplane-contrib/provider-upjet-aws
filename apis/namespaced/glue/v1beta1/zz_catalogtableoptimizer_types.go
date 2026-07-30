@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CatalogTableOptimizerInitParameters struct {
@@ -67,11 +66,11 @@ type CatalogTableOptimizerParameters struct {
 
 	// Reference to a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a CatalogDatabase in glue to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -281,8 +280,8 @@ type CatalogTableOptimizerSpec struct {
 
 // CatalogTableOptimizerStatus defines the observed state of CatalogTableOptimizer.
 type CatalogTableOptimizerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CatalogTableOptimizerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CatalogTableOptimizerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainValidationRecordsInitParameters struct {
@@ -89,11 +88,11 @@ type LBCertificateParameters struct {
 
 	// Reference to a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameRef *v1.NamespacedReference `json:"lbNameRef,omitempty" tf:"-"`
+	LBNameRef *v2.NamespacedReference `json:"lbNameRef,omitempty" tf:"-"`
 
 	// Selector for a LB in lightsail to populate lbName.
 	// +kubebuilder:validation:Optional
-	LBNameSelector *v1.NamespacedSelector `json:"lbNameSelector,omitempty" tf:"-"`
+	LBNameSelector *v2.NamespacedSelector `json:"lbNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -125,8 +124,8 @@ type LBCertificateSpec struct {
 
 // LBCertificateStatus defines the observed state of LBCertificate.
 type LBCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoggingOptionsInitParameters struct {
@@ -29,11 +28,11 @@ type LoggingOptionsInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type LoggingOptionsObservation struct {
@@ -77,11 +76,11 @@ type LoggingOptionsParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 // LoggingOptionsSpec defines the desired state of LoggingOptions
@@ -103,8 +102,8 @@ type LoggingOptionsSpec struct {
 
 // LoggingOptionsStatus defines the observed state of LoggingOptions.
 type LoggingOptionsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoggingOptionsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoggingOptionsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

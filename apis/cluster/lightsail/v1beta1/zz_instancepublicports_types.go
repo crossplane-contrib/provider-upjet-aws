@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstancePublicPortsInitParameters struct {
@@ -21,11 +21,11 @@ type InstancePublicPortsInitParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Descriptor of the ports to open for the specified instance. AWS closes all currently open ports that are not included in this argument. See port_info Block for details.
 	PortInfo []PortInfoInitParameters `json:"portInfo,omitempty" tf:"port_info,omitempty"`
@@ -56,11 +56,11 @@ type InstancePublicPortsParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Descriptor of the ports to open for the specified instance. AWS closes all currently open ports that are not included in this argument. See port_info Block for details.
 	// +kubebuilder:validation:Optional
@@ -152,8 +152,8 @@ type PortInfoParameters struct {
 
 // InstancePublicPortsSpec defines the desired state of InstancePublicPorts
 type InstancePublicPortsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InstancePublicPortsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InstancePublicPortsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -169,8 +169,8 @@ type InstancePublicPortsSpec struct {
 
 // InstancePublicPortsStatus defines the observed state of InstancePublicPorts.
 type InstancePublicPortsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstancePublicPortsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstancePublicPortsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

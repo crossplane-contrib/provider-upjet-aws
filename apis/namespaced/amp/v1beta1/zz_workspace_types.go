@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoggingConfigurationInitParameters struct {
@@ -44,11 +43,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Logging configuration for the workspace. See Logging Configuration below for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
@@ -104,11 +103,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Logging configuration for the workspace. See Logging Configuration below for details.
 	// +kubebuilder:validation:Optional
@@ -144,8 +143,8 @@ type WorkspaceSpec struct {
 
 // WorkspaceStatus defines the observed state of Workspace.
 type WorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

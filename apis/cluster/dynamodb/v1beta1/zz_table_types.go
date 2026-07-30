@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttributeInitParameters struct {
@@ -475,11 +475,11 @@ type ServerSideEncryptionInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type ServerSideEncryptionObservation struct {
@@ -505,11 +505,11 @@ type ServerSideEncryptionParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type TTLInitParameters struct {
@@ -903,11 +903,11 @@ type TableReplicaInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
@@ -983,11 +983,11 @@ type TableReplicaParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	// +kubebuilder:validation:Optional
@@ -1067,8 +1067,8 @@ type WarmThroughputParameters struct {
 
 // TableSpec defines the desired state of Table
 type TableSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TableParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TableParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1084,8 +1084,8 @@ type TableSpec struct {
 
 // TableStatus defines the observed state of Table.
 type TableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

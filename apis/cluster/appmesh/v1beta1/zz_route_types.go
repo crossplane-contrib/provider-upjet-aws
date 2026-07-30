@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionWeightedTargetInitParameters struct {
@@ -145,11 +145,11 @@ type HTTPRouteActionWeightedTargetInitParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+	VirtualNodeRef *v2.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
+	VirtualNodeSelector *v2.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -181,11 +181,11 @@ type HTTPRouteActionWeightedTargetParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+	VirtualNodeRef *v2.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
+	VirtualNodeSelector *v2.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -1158,11 +1158,11 @@ type RouteInitParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -1184,11 +1184,11 @@ type RouteInitParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type RouteObservation struct {
@@ -1246,11 +1246,11 @@ type RouteParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.Reference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -1282,11 +1282,11 @@ type RouteParameters struct {
 
 	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+	VirtualRouterNameRef *v2.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
-	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+	VirtualRouterNameSelector *v2.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type RouteSpecInitParameters struct {
@@ -1763,11 +1763,11 @@ type TCPRouteActionWeightedTargetInitParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+	VirtualNodeRef *v2.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
+	VirtualNodeSelector *v2.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -1799,11 +1799,11 @@ type TCPRouteActionWeightedTargetParameters struct {
 
 	// Reference to a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+	VirtualNodeRef *v2.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNode in appmesh to populate virtualNode.
 	// +kubebuilder:validation:Optional
-	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
+	VirtualNodeSelector *v2.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -2044,8 +2044,8 @@ type WeightedTargetParameters struct {
 
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2061,8 +2061,8 @@ type RouteSpec struct {
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

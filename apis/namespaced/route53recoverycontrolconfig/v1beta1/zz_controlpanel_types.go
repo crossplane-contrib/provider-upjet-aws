@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ControlPanelInitParameters struct {
@@ -23,11 +22,11 @@ type ControlPanelInitParameters struct {
 
 	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Name describing the control panel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -78,11 +77,11 @@ type ControlPanelParameters struct {
 
 	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Name describing the control panel.
 	// +kubebuilder:validation:Optional
@@ -113,8 +112,8 @@ type ControlPanelSpec struct {
 
 // ControlPanelStatus defines the observed state of ControlPanel.
 type ControlPanelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ControlPanelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ControlPanelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

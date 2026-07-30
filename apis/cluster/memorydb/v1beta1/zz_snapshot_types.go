@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterConfigurationInitParameters struct {
@@ -72,11 +72,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Cluster in memorydb to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in memorydb to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// ARN of the KMS key used to encrypt the snapshot at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -84,11 +84,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -137,11 +137,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Cluster in memorydb to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in memorydb to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// ARN of the KMS key used to encrypt the snapshot at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -150,11 +150,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -169,8 +169,8 @@ type SnapshotParameters struct {
 
 // SnapshotSpec defines the desired state of Snapshot
 type SnapshotSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SnapshotParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SnapshotParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -186,8 +186,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayPolicyTableInitParameters struct {
@@ -27,11 +26,11 @@ type TransitGatewayPolicyTableInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPolicyTableObservation struct {
@@ -81,11 +80,11 @@ type TransitGatewayPolicyTableParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.NamespacedReference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.NamespacedSelector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayPolicyTableSpec defines the desired state of TransitGatewayPolicyTable
@@ -107,8 +106,8 @@ type TransitGatewayPolicyTableSpec struct {
 
 // TransitGatewayPolicyTableStatus defines the observed state of TransitGatewayPolicyTable.
 type TransitGatewayPolicyTableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayPolicyTableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayPolicyTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

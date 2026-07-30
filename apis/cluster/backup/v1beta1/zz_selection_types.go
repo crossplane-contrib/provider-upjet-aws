@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConditionInitParameters struct {
@@ -74,11 +74,11 @@ type SelectionInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// The display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -91,11 +91,11 @@ type SelectionInitParameters struct {
 
 	// References to Instance in rds to populate notResources.
 	// +kubebuilder:validation:Optional
-	NotResourcesRefs []v1.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
+	NotResourcesRefs []v2.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in rds to populate notResources.
 	// +kubebuilder:validation:Optional
-	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
+	NotResourcesSelector *v2.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta2.Plan
@@ -103,11 +103,11 @@ type SelectionInitParameters struct {
 
 	// Reference to a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
-	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
+	PlanIDRef *v2.Reference `json:"planIdRef,omitempty" tf:"-"`
 
 	// Selector for a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
-	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
+	PlanIDSelector *v2.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
@@ -117,11 +117,11 @@ type SelectionInitParameters struct {
 
 	// References to Instance in rds to populate resources.
 	// +kubebuilder:validation:Optional
-	ResourcesRefs []v1.Reference `json:"resourcesRefs,omitempty" tf:"-"`
+	ResourcesRefs []v2.Reference `json:"resourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in rds to populate resources.
 	// +kubebuilder:validation:Optional
-	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
+	ResourcesSelector *v2.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan. See below for details.
 	SelectionTag []SelectionTagInitParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
@@ -174,11 +174,11 @@ type SelectionParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// The display name of a resource selection document.
 	// +kubebuilder:validation:Optional
@@ -193,11 +193,11 @@ type SelectionParameters struct {
 
 	// References to Instance in rds to populate notResources.
 	// +kubebuilder:validation:Optional
-	NotResourcesRefs []v1.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
+	NotResourcesRefs []v2.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in rds to populate notResources.
 	// +kubebuilder:validation:Optional
-	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
+	NotResourcesSelector *v2.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/backup/v1beta2.Plan
@@ -206,11 +206,11 @@ type SelectionParameters struct {
 
 	// Reference to a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
-	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
+	PlanIDRef *v2.Reference `json:"planIdRef,omitempty" tf:"-"`
 
 	// Selector for a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
-	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
+	PlanIDSelector *v2.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -226,11 +226,11 @@ type SelectionParameters struct {
 
 	// References to Instance in rds to populate resources.
 	// +kubebuilder:validation:Optional
-	ResourcesRefs []v1.Reference `json:"resourcesRefs,omitempty" tf:"-"`
+	ResourcesRefs []v2.Reference `json:"resourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in rds to populate resources.
 	// +kubebuilder:validation:Optional
-	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
+	ResourcesSelector *v2.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan. See below for details.
 	// +kubebuilder:validation:Optional
@@ -394,8 +394,8 @@ type StringNotLikeParameters struct {
 
 // SelectionSpec defines the desired state of Selection
 type SelectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SelectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SelectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -411,8 +411,8 @@ type SelectionSpec struct {
 
 // SelectionStatus defines the observed state of Selection.
 type SelectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SelectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SelectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

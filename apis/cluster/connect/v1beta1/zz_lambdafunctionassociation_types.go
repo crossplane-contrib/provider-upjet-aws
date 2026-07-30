@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LambdaFunctionAssociationInitParameters struct {
@@ -42,11 +42,11 @@ type LambdaFunctionAssociationParameters struct {
 
 	// Reference to a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/connect/v1beta1.Instance
@@ -56,11 +56,11 @@ type LambdaFunctionAssociationParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -70,8 +70,8 @@ type LambdaFunctionAssociationParameters struct {
 
 // LambdaFunctionAssociationSpec defines the desired state of LambdaFunctionAssociation
 type LambdaFunctionAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LambdaFunctionAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LambdaFunctionAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,8 +87,8 @@ type LambdaFunctionAssociationSpec struct {
 
 // LambdaFunctionAssociationStatus defines the observed state of LambdaFunctionAssociation.
 type LambdaFunctionAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LambdaFunctionAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LambdaFunctionAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

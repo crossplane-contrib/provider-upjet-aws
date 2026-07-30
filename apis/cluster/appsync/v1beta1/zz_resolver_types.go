@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CachingConfigInitParameters struct {
@@ -54,11 +54,11 @@ type PipelineConfigInitParameters struct {
 
 	// References to Function in appsync to populate functions.
 	// +kubebuilder:validation:Optional
-	FunctionsRefs []v1.Reference `json:"functionsRefs,omitempty" tf:"-"`
+	FunctionsRefs []v2.Reference `json:"functionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Function in appsync to populate functions.
 	// +kubebuilder:validation:Optional
-	FunctionsSelector *v1.Selector `json:"functionsSelector,omitempty" tf:"-"`
+	FunctionsSelector *v2.Selector `json:"functionsSelector,omitempty" tf:"-"`
 }
 
 type PipelineConfigObservation struct {
@@ -77,11 +77,11 @@ type PipelineConfigParameters struct {
 
 	// References to Function in appsync to populate functions.
 	// +kubebuilder:validation:Optional
-	FunctionsRefs []v1.Reference `json:"functionsRefs,omitempty" tf:"-"`
+	FunctionsRefs []v2.Reference `json:"functionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Function in appsync to populate functions.
 	// +kubebuilder:validation:Optional
-	FunctionsSelector *v1.Selector `json:"functionsSelector,omitempty" tf:"-"`
+	FunctionsSelector *v2.Selector `json:"functionsSelector,omitempty" tf:"-"`
 }
 
 type ResolverInitParameters struct {
@@ -98,11 +98,11 @@ type ResolverInitParameters struct {
 
 	// Reference to a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceRef *v1.Reference `json:"dataSourceRef,omitempty" tf:"-"`
+	DataSourceRef *v2.Reference `json:"dataSourceRef,omitempty" tf:"-"`
 
 	// Selector for a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
+	DataSourceSelector *v2.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
 
 	// Resolver type. Valid values are UNIT and PIPELINE.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -187,11 +187,11 @@ type ResolverParameters struct {
 
 	// Reference to a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a GraphQLAPI in appsync to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Caching Config. See Caching Config.
 	// +kubebuilder:validation:Optional
@@ -208,11 +208,11 @@ type ResolverParameters struct {
 
 	// Reference to a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceRef *v1.Reference `json:"dataSourceRef,omitempty" tf:"-"`
+	DataSourceRef *v2.Reference `json:"dataSourceRef,omitempty" tf:"-"`
 
 	// Selector for a Datasource in appsync to populate dataSource.
 	// +kubebuilder:validation:Optional
-	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
+	DataSourceSelector *v2.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
 
 	// Field name from the schema defined in the GraphQL API.
 	// +kubebuilder:validation:Required
@@ -345,8 +345,8 @@ type SyncConfigLambdaConflictHandlerConfigParameters struct {
 
 // ResolverSpec defines the desired state of Resolver
 type ResolverSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResolverParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResolverParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -362,8 +362,8 @@ type ResolverSpec struct {
 
 // ResolverStatus defines the observed state of Resolver.
 type ResolverStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResolverObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResolverObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

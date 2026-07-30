@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheTagConfigInitParameters struct {
@@ -1129,11 +1128,11 @@ type OrderedCacheBehaviorFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.NamespacedReference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.NamespacedReference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.NamespacedSelector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.NamespacedSelector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorFunctionAssociationObservation struct {
@@ -1159,11 +1158,11 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.NamespacedReference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.NamespacedReference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.NamespacedSelector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.NamespacedSelector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorGRPCConfigInitParameters struct {
@@ -1268,11 +1267,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
@@ -1305,11 +1304,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.NamespacedReference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.NamespacedSelector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorObservation struct {
@@ -1532,11 +1531,11 @@ type OriginInitParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.NamespacedReference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.NamespacedReference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.NamespacedSelector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.NamespacedSelector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	OriginID *string `json:"originId,omitempty" tf:"origin_id,omitempty"`
@@ -1645,11 +1644,11 @@ type OriginParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.NamespacedReference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.NamespacedReference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.NamespacedSelector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.NamespacedSelector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	// +kubebuilder:validation:Optional
@@ -1728,11 +1727,11 @@ type S3OriginConfigInitParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.NamespacedReference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.NamespacedReference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.NamespacedSelector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.NamespacedSelector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type S3OriginConfigObservation struct {
@@ -1751,11 +1750,11 @@ type S3OriginConfigParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.NamespacedReference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.NamespacedReference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.NamespacedSelector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.NamespacedSelector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type TrustStoreConfigInitParameters struct {
@@ -1999,8 +1998,8 @@ type DistributionSpec struct {
 
 // DistributionStatus defines the observed state of Distribution.
 type DistributionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DistributionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DistributionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

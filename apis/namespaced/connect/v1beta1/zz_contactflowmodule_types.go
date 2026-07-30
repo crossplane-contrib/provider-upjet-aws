@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContactFlowModuleInitParameters struct {
@@ -35,11 +34,11 @@ type ContactFlowModuleInitParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Contact Flow Module.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -117,11 +116,11 @@ type ContactFlowModuleParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.NamespacedReference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.NamespacedSelector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Contact Flow Module.
 	// +kubebuilder:validation:Optional
@@ -157,8 +156,8 @@ type ContactFlowModuleSpec struct {
 
 // ContactFlowModuleStatus defines the observed state of ContactFlowModule.
 type ContactFlowModuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContactFlowModuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContactFlowModuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

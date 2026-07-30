@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceProfileInitParameters struct {
@@ -25,11 +24,11 @@ type InstanceProfileInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -78,11 +77,11 @@ type InstanceProfileParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -109,8 +108,8 @@ type InstanceProfileSpec struct {
 
 // InstanceProfileStatus defines the observed state of InstanceProfile.
 type InstanceProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

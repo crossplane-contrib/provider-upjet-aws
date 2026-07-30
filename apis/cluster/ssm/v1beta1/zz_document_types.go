@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachmentsSourceInitParameters struct {
@@ -225,8 +225,8 @@ type ParameterParameters struct {
 
 // DocumentSpec defines the desired state of Document
 type DocumentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DocumentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DocumentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -242,8 +242,8 @@ type DocumentSpec struct {
 
 // DocumentStatus defines the observed state of Document.
 type DocumentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DocumentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DocumentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CognitoConfigInitParameters struct {
@@ -22,11 +22,11 @@ type CognitoConfigInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// ID for your Amazon Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
@@ -35,11 +35,11 @@ type CognitoConfigInitParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.Reference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type CognitoConfigObservation struct {
@@ -61,11 +61,11 @@ type CognitoConfigParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// ID for your Amazon Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
@@ -75,11 +75,11 @@ type CognitoConfigParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.Reference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type OidcConfigInitParameters struct {
@@ -95,7 +95,7 @@ type OidcConfigInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OIDC IdP client secret used to configure your private workforce.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OIDC IdP issuer used to configure your private workforce.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -164,7 +164,7 @@ type OidcConfigParameters struct {
 
 	// The OIDC IdP client secret used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OIDC IdP issuer used to configure your private workforce.
 	// +kubebuilder:validation:Optional
@@ -330,8 +330,8 @@ type WorkforceVPCConfigParameters struct {
 
 // WorkforceSpec defines the desired state of Workforce
 type WorkforceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkforceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkforceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -347,8 +347,8 @@ type WorkforceSpec struct {
 
 // WorkforceStatus defines the observed state of Workforce.
 type WorkforceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkforceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkforceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -5,8 +5,7 @@
 package v1beta1
 
 import (
-	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	xpv2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/crossplane/upjet/v2/apis/configuration/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -92,21 +91,21 @@ type AssumeRoleWithWebIdentityOptions struct {
 // WebIdentityTokenConfig is for configuring the token
 // to be used for Web Identity authentication
 //
-// TODO: can be later expanded to use by inlining v1.CommonCredentialSelectors,
+// TODO: can be later expanded to use by inlining xpv2.CommonCredentialSelectors,
 // Env configuration is intentionally left out to not cause ambiguity
 // with the deprecated direct configuration with environment variables.
 type WebIdentityTokenConfig struct {
 	// Source is the source of the web identity token.
 	// +kubebuilder:validation:Enum=Secret;Filesystem
-	Source xpv1.CredentialsSource `json:"source"`
+	Source xpv2.CredentialsSource `json:"source"`
 	// A SecretRef is a reference to a secret key that contains the credentials
 	// that must be used to obtain the web identity token.
 	// +optional
-	SecretRef *xpv1.SecretKeySelector `json:"secretRef,omitempty"`
+	SecretRef *xpv2.SecretKeySelector `json:"secretRef,omitempty"`
 	// Fs is a reference to a filesystem location that contains credentials that
 	// must be used to obtain the web identity token.
 	// +optional
-	Fs *xpv1.FsSelector `json:"fs,omitempty"`
+	Fs *xpv2.FsSelector `json:"fs,omitempty"`
 }
 
 // Upbound defines the options for authenticating using Upbound as an identity
@@ -233,7 +232,7 @@ type Tag struct {
 type ProviderCredentials struct {
 	// Source of the provider credentials.
 	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity;PodIdentity;Upbound
-	Source xpv1.CredentialsSource `json:"source"`
+	Source xpv2.CredentialsSource `json:"source"`
 
 	// WebIdentity defines the options for assuming an IAM role with a Web Identity.
 	WebIdentity *AssumeRoleWithWebIdentityOptions `json:"webIdentity,omitempty"`
@@ -241,12 +240,12 @@ type ProviderCredentials struct {
 	// Upbound defines the options for authenticating using Upbound as an identity provider.
 	Upbound *Upbound `json:"upbound,omitempty"`
 
-	xpv1.CommonCredentialSelectors `json:",inline"`
+	xpv2.CommonCredentialSelectors `json:",inline"`
 }
 
 // A ProviderConfigStatus reflects the observed state of a ProviderConfig.
 type ProviderConfigStatus struct {
-	xpv1.ProviderConfigStatus `json:",inline"`
+	xpv2.ProviderConfigStatus `json:",inline"`
 }
 
 // +kubebuilder:object:root=true

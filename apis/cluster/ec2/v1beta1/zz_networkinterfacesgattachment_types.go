@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkInterfaceSgAttachmentInitParameters struct {
@@ -22,11 +22,11 @@ type NetworkInterfaceSgAttachmentInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the security group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -34,11 +34,11 @@ type NetworkInterfaceSgAttachmentInitParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceSgAttachmentObservation struct {
@@ -65,11 +65,11 @@ type NetworkInterfaceSgAttachmentParameters struct {
 
 	// Reference to a Instance in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -83,17 +83,17 @@ type NetworkInterfaceSgAttachmentParameters struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 }
 
 // NetworkInterfaceSgAttachmentSpec defines the desired state of NetworkInterfaceSgAttachment
 type NetworkInterfaceSgAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NetworkInterfaceSgAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NetworkInterfaceSgAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -109,8 +109,8 @@ type NetworkInterfaceSgAttachmentSpec struct {
 
 // NetworkInterfaceSgAttachmentStatus defines the observed state of NetworkInterfaceSgAttachment.
 type NetworkInterfaceSgAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkInterfaceSgAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkInterfaceSgAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

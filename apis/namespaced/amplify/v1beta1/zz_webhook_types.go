@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WebhookInitParameters struct {
@@ -23,11 +22,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDRef *v1.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
+	AppIDRef *v2.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDSelector *v1.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
+	AppIDSelector *v2.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// Name for a branch that is part of the Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amplify/v1beta1.Branch
@@ -35,11 +34,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a Branch in amplify to populate branchName.
 	// +kubebuilder:validation:Optional
-	BranchNameRef *v1.NamespacedReference `json:"branchNameRef,omitempty" tf:"-"`
+	BranchNameRef *v2.NamespacedReference `json:"branchNameRef,omitempty" tf:"-"`
 
 	// Selector for a Branch in amplify to populate branchName.
 	// +kubebuilder:validation:Optional
-	BranchNameSelector *v1.NamespacedSelector `json:"branchNameSelector,omitempty" tf:"-"`
+	BranchNameSelector *v2.NamespacedSelector `json:"branchNameSelector,omitempty" tf:"-"`
 
 	// Description for a webhook.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -79,11 +78,11 @@ type WebhookParameters struct {
 
 	// Reference to a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDRef *v1.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
+	AppIDRef *v2.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDSelector *v1.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
+	AppIDSelector *v2.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// Name for a branch that is part of the Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/amplify/v1beta1.Branch
@@ -92,11 +91,11 @@ type WebhookParameters struct {
 
 	// Reference to a Branch in amplify to populate branchName.
 	// +kubebuilder:validation:Optional
-	BranchNameRef *v1.NamespacedReference `json:"branchNameRef,omitempty" tf:"-"`
+	BranchNameRef *v2.NamespacedReference `json:"branchNameRef,omitempty" tf:"-"`
 
 	// Selector for a Branch in amplify to populate branchName.
 	// +kubebuilder:validation:Optional
-	BranchNameSelector *v1.NamespacedSelector `json:"branchNameSelector,omitempty" tf:"-"`
+	BranchNameSelector *v2.NamespacedSelector `json:"branchNameSelector,omitempty" tf:"-"`
 
 	// Description for a webhook.
 	// +kubebuilder:validation:Optional
@@ -127,8 +126,8 @@ type WebhookSpec struct {
 
 // WebhookStatus defines the observed state of Webhook.
 type WebhookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebhookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebhookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

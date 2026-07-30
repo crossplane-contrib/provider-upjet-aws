@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SchemaInitParameters_2 struct {
@@ -32,11 +31,11 @@ type SchemaInitParameters_2 struct {
 
 	// Reference to a Registry in glue to populate registryArn.
 	// +kubebuilder:validation:Optional
-	RegistryArnRef *v1.NamespacedReference `json:"registryArnRef,omitempty" tf:"-"`
+	RegistryArnRef *v2.NamespacedReference `json:"registryArnRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in glue to populate registryArn.
 	// +kubebuilder:validation:Optional
-	RegistryArnSelector *v1.NamespacedSelector `json:"registryArnSelector,omitempty" tf:"-"`
+	RegistryArnSelector *v2.NamespacedSelector `json:"registryArnSelector,omitempty" tf:"-"`
 
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
@@ -127,11 +126,11 @@ type SchemaParameters_2 struct {
 
 	// Reference to a Registry in glue to populate registryArn.
 	// +kubebuilder:validation:Optional
-	RegistryArnRef *v1.NamespacedReference `json:"registryArnRef,omitempty" tf:"-"`
+	RegistryArnRef *v2.NamespacedReference `json:"registryArnRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in glue to populate registryArn.
 	// +kubebuilder:validation:Optional
-	RegistryArnSelector *v1.NamespacedSelector `json:"registryArnSelector,omitempty" tf:"-"`
+	RegistryArnSelector *v2.NamespacedSelector `json:"registryArnSelector,omitempty" tf:"-"`
 
 	// The schema definition using the data_format setting for schema_name.
 	// +kubebuilder:validation:Optional
@@ -166,8 +165,8 @@ type SchemaSpec struct {
 
 // SchemaStatus defines the observed state of Schema.
 type SchemaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SchemaObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SchemaObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdditionalClaimInitParameters struct {
@@ -161,7 +160,7 @@ type AuthenticateOidcInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// OAuth 2.0 client secret.
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -236,7 +235,7 @@ type AuthenticateOidcParameters struct {
 
 	// OAuth 2.0 client secret.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// OIDC issuer identifier of the IdP.
 	// +kubebuilder:validation:Optional
@@ -300,11 +299,11 @@ type DefaultActionInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -385,11 +384,11 @@ type DefaultActionParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito, authenticate-oidc and jwt-validation.
 	// +kubebuilder:validation:Optional
@@ -522,11 +521,11 @@ type LBListenerInitParameters struct {
 
 	// Reference to a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnRef *v1.NamespacedReference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+	LoadBalancerArnRef *v2.NamespacedReference `json:"loadBalancerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnSelector *v1.NamespacedSelector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
+	LoadBalancerArnSelector *v2.NamespacedSelector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
 	// The mutual authentication configuration information. See below.
 	MutualAuthentication *MutualAuthenticationInitParameters `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
@@ -732,11 +731,11 @@ type LBListenerParameters struct {
 
 	// Reference to a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnRef *v1.NamespacedReference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+	LoadBalancerArnRef *v2.NamespacedReference `json:"loadBalancerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnSelector *v1.NamespacedSelector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
+	LoadBalancerArnSelector *v2.NamespacedSelector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
 	// The mutual authentication configuration information. See below.
 	// +kubebuilder:validation:Optional
@@ -1003,11 +1002,11 @@ type TargetGroupInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -1031,11 +1030,11 @@ type TargetGroupParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Weight. The range is 0 to 999.
 	// +kubebuilder:validation:Optional
@@ -1061,8 +1060,8 @@ type LBListenerSpec struct {
 
 // LBListenerStatus defines the observed state of LBListener.
 type LBListenerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBListenerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBListenerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

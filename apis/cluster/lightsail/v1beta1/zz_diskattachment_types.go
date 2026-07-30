@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DiskAttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type DiskAttachmentInitParameters struct {
 
 	// Reference to a Disk in lightsail to populate diskName.
 	// +kubebuilder:validation:Optional
-	DiskNameRef *v1.Reference `json:"diskNameRef,omitempty" tf:"-"`
+	DiskNameRef *v2.Reference `json:"diskNameRef,omitempty" tf:"-"`
 
 	// Selector for a Disk in lightsail to populate diskName.
 	// +kubebuilder:validation:Optional
-	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
+	DiskNameSelector *v2.Selector `json:"diskNameSelector,omitempty" tf:"-"`
 
 	// Disk path to expose to the instance.
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
@@ -36,11 +36,11 @@ type DiskAttachmentInitParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 }
 
 type DiskAttachmentObservation struct {
@@ -71,11 +71,11 @@ type DiskAttachmentParameters struct {
 
 	// Reference to a Disk in lightsail to populate diskName.
 	// +kubebuilder:validation:Optional
-	DiskNameRef *v1.Reference `json:"diskNameRef,omitempty" tf:"-"`
+	DiskNameRef *v2.Reference `json:"diskNameRef,omitempty" tf:"-"`
 
 	// Selector for a Disk in lightsail to populate diskName.
 	// +kubebuilder:validation:Optional
-	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
+	DiskNameSelector *v2.Selector `json:"diskNameSelector,omitempty" tf:"-"`
 
 	// Disk path to expose to the instance.
 	// +kubebuilder:validation:Optional
@@ -88,11 +88,11 @@ type DiskAttachmentParameters struct {
 
 	// Reference to a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+	InstanceNameRef *v2.Reference `json:"instanceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in lightsail to populate instanceName.
 	// +kubebuilder:validation:Optional
-	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+	InstanceNameSelector *v2.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -102,8 +102,8 @@ type DiskAttachmentParameters struct {
 
 // DiskAttachmentSpec defines the desired state of DiskAttachment
 type DiskAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DiskAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DiskAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -119,8 +119,8 @@ type DiskAttachmentSpec struct {
 
 // DiskAttachmentStatus defines the observed state of DiskAttachment.
 type DiskAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DiskAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DiskAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

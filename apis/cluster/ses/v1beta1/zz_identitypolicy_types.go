@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityPolicyInitParameters struct {
@@ -22,11 +22,11 @@ type IdentityPolicyInitParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.Reference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.Reference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.Selector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.Selector `json:"identitySelector,omitempty" tf:"-"`
 
 	// Name of the policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -62,11 +62,11 @@ type IdentityPolicyParameters struct {
 
 	// Reference to a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.Reference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.Reference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a DomainIdentity in ses to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.Selector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.Selector `json:"identitySelector,omitempty" tf:"-"`
 
 	// Name of the policy.
 	// +kubebuilder:validation:Optional
@@ -84,8 +84,8 @@ type IdentityPolicyParameters struct {
 
 // IdentityPolicySpec defines the desired state of IdentityPolicy
 type IdentityPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IdentityPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IdentityPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type IdentityPolicySpec struct {
 
 // IdentityPolicyStatus defines the observed state of IdentityPolicy.
 type IdentityPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IdentityPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IdentityPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

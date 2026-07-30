@@ -5,104 +5,104 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this StackSet.
-func (mg *StackSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StackSet) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this StackSet.
-func (mg *StackSet) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *StackSet) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this StackSet.
-func (mg *StackSet) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StackSet) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StackSet.
-func (mg *StackSet) GetProviderConfigReference() *xpv1.Reference {
+func (mg *StackSet) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StackSet.
-func (mg *StackSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *StackSet) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StackSet.
-func (mg *StackSet) SetConditions(c ...xpv1.Condition) {
+func (mg *StackSet) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this StackSet.
-func (mg *StackSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *StackSet) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this StackSet.
-func (mg *StackSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StackSet) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StackSet.
-func (mg *StackSet) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *StackSet) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StackSet.
-func (mg *StackSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *StackSet) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this StackSetInstance.
-func (mg *StackSetInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StackSetInstance) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this StackSetInstance.
-func (mg *StackSetInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *StackSetInstance) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this StackSetInstance.
-func (mg *StackSetInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StackSetInstance) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StackSetInstance.
-func (mg *StackSetInstance) GetProviderConfigReference() *xpv1.Reference {
+func (mg *StackSetInstance) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StackSetInstance.
-func (mg *StackSetInstance) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *StackSetInstance) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StackSetInstance.
-func (mg *StackSetInstance) SetConditions(c ...xpv1.Condition) {
+func (mg *StackSetInstance) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this StackSetInstance.
-func (mg *StackSetInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *StackSetInstance) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this StackSetInstance.
-func (mg *StackSetInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StackSetInstance) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StackSetInstance.
-func (mg *StackSetInstance) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *StackSetInstance) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StackSetInstance.
-func (mg *StackSetInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *StackSetInstance) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

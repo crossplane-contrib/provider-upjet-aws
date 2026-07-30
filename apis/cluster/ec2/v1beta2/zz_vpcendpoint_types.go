@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSEntryInitParameters struct {
@@ -95,11 +95,11 @@ type SubnetConfigurationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetConfigurationObservation struct {
@@ -132,11 +132,11 @@ type SubnetConfigurationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointInitParameters struct {
@@ -164,11 +164,11 @@ type VPCEndpointInitParameters struct {
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationArnRef *v1.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+	ResourceConfigurationArnRef *v2.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
+	ResourceConfigurationArnSelector *v2.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
@@ -177,11 +177,11 @@ type VPCEndpointInitParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.Reference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
@@ -190,11 +190,11 @@ type VPCEndpointInitParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkArnRef *v1.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+	ServiceNetworkArnRef *v2.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkArnSelector *v1.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
+	ServiceNetworkArnSelector *v2.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
@@ -215,11 +215,11 @@ type VPCEndpointInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointObservation struct {
@@ -351,11 +351,11 @@ type VPCEndpointParameters struct {
 
 	// Reference to a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationArnRef *v1.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
+	ResourceConfigurationArnRef *v2.Reference `json:"resourceConfigurationArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceConfiguration in vpclattice to populate resourceConfigurationArn.
 	// +kubebuilder:validation:Optional
-	ResourceConfigurationArnSelector *v1.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
+	ResourceConfigurationArnSelector *v2.Selector `json:"resourceConfigurationArnSelector,omitempty" tf:"-"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker AI Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook). Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPCEndpointService
@@ -365,11 +365,11 @@ type VPCEndpointParameters struct {
 
 	// Reference to a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.Reference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The ARN of a Service Network to connect this VPC Endpoint to. Exactly one of resource_configuration_arn, service_name or service_network_arn is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/vpclattice/v1beta1.ServiceNetwork
@@ -379,11 +379,11 @@ type VPCEndpointParameters struct {
 
 	// Reference to a ServiceNetwork in vpclattice to populate serviceNetworkArn.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkArnRef *v1.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
+	ServiceNetworkArnRef *v2.Reference `json:"serviceNetworkArnRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceNetwork in vpclattice to populate serviceNetworkArn.
 	// +kubebuilder:validation:Optional
-	ServiceNetworkArnSelector *v1.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
+	ServiceNetworkArnSelector *v2.Selector `json:"serviceNetworkArnSelector,omitempty" tf:"-"`
 
 	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
 	// +kubebuilder:validation:Optional
@@ -409,17 +409,17 @@ type VPCEndpointParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCEndpointSpec defines the desired state of VPCEndpoint
 type VPCEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -435,8 +435,8 @@ type VPCEndpointSpec struct {
 
 // VPCEndpointStatus defines the observed state of VPCEndpoint.
 type VPCEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

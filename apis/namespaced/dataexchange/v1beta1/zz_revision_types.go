@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RevisionInitParameters struct {
@@ -26,11 +25,11 @@ type RevisionInitParameters struct {
 
 	// Reference to a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDRef *v1.NamespacedReference `json:"dataSetIdRef,omitempty" tf:"-"`
+	DataSetIDRef *v2.NamespacedReference `json:"dataSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDSelector *v1.NamespacedSelector `json:"dataSetIdSelector,omitempty" tf:"-"`
+	DataSetIDSelector *v2.NamespacedSelector `json:"dataSetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -81,11 +80,11 @@ type RevisionParameters struct {
 
 	// Reference to a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDRef *v1.NamespacedReference `json:"dataSetIdRef,omitempty" tf:"-"`
+	DataSetIDRef *v2.NamespacedReference `json:"dataSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDSelector *v1.NamespacedSelector `json:"dataSetIdSelector,omitempty" tf:"-"`
+	DataSetIDSelector *v2.NamespacedSelector `json:"dataSetIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -117,8 +116,8 @@ type RevisionSpec struct {
 
 // RevisionStatus defines the observed state of Revision.
 type RevisionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RevisionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RevisionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

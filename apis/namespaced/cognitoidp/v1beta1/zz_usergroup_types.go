@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserGroupInitParameters struct {
@@ -32,11 +31,11 @@ type UserGroupInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The user pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
@@ -44,11 +43,11 @@ type UserGroupInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type UserGroupObservation struct {
@@ -102,11 +101,11 @@ type UserGroupParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The user pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cognitoidp/v1beta1.UserPool
@@ -115,11 +114,11 @@ type UserGroupParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.NamespacedReference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.NamespacedSelector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 // UserGroupSpec defines the desired state of UserGroup
@@ -141,8 +140,8 @@ type UserGroupSpec struct {
 
 // UserGroupStatus defines the observed state of UserGroup.
 type UserGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

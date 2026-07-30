@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateInitParameters struct {
 
 	// The contents of the .pem X.509 certificate file for the certificate. Either certificate_pem or certificate_wallet must be set.
-	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+	CertificatePemSecretRef *v2.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
 
 	// The contents of the Oracle Wallet certificate for use with SSL, provided as a base64-encoded String. Either certificate_pem or certificate_wallet must be set.
-	CertificateWalletSecretRef *v1.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
+	CertificateWalletSecretRef *v2.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -50,11 +50,11 @@ type CertificateParameters struct {
 
 	// The contents of the .pem X.509 certificate file for the certificate. Either certificate_pem or certificate_wallet must be set.
 	// +kubebuilder:validation:Optional
-	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+	CertificatePemSecretRef *v2.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
 
 	// The contents of the Oracle Wallet certificate for use with SSL, provided as a base64-encoded String. Either certificate_pem or certificate_wallet must be set.
 	// +kubebuilder:validation:Optional
-	CertificateWalletSecretRef *v1.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
+	CertificateWalletSecretRef *v2.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -69,8 +69,8 @@ type CertificateParameters struct {
 
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -86,8 +86,8 @@ type CertificateSpec struct {
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

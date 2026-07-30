@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomResponseBodyInitParameters struct {
@@ -224,8 +223,8 @@ type RuleGroupSpec struct {
 
 // RuleGroupStatus defines the observed state of RuleGroup.
 type RuleGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RuleGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RuleGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AllowedWorkloadConfigurationHostingEnvironmentInitParameters struct {
@@ -486,11 +485,11 @@ type GatewayInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -511,11 +510,11 @@ type GatewayInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -613,11 +612,11 @@ type GatewayParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the gateway.
 	// +kubebuilder:validation:Optional
@@ -648,11 +647,11 @@ type GatewayParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -780,11 +779,11 @@ type LambdaInitParameters struct {
 
 	// Reference to a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type LambdaObservation struct {
@@ -803,11 +802,11 @@ type LambdaParameters struct {
 
 	// Reference to a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 }
 
 type McpInitParameters struct {
@@ -881,11 +880,11 @@ type PolicyEngineConfigurationInitParameters struct {
 
 	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -910,11 +909,11 @@ type PolicyEngineConfigurationParameters struct {
 
 	// Reference to a PolicyEngine in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyEngine in bedrockagentcore to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Enforcement mode for the policy engine. Valid values: LOG_ONLY, ENFORCE. In LOG_ONLY mode, the policy engine evaluates actions and records traces but does not enforce decisions. In ENFORCE mode, the policy engine evaluates actions and enforces allow/deny decisions.
 	// +kubebuilder:validation:Optional
@@ -1075,8 +1074,8 @@ type GatewaySpec struct {
 
 // GatewayStatus defines the observed state of Gateway.
 type GatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

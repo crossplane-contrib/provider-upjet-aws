@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueueRedriveAllowPolicyInitParameters struct {
@@ -23,11 +22,11 @@ type QueueRedriveAllowPolicyInitParameters struct {
 
 	// Reference to a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLRef *v1.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
+	QueueURLRef *v2.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLSelector *v1.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
+	QueueURLSelector *v2.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
 	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
@@ -57,11 +56,11 @@ type QueueRedriveAllowPolicyParameters struct {
 
 	// Reference to a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLRef *v1.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
+	QueueURLRef *v2.NamespacedReference `json:"queueUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueUrl.
 	// +kubebuilder:validation:Optional
-	QueueURLSelector *v1.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
+	QueueURLSelector *v2.NamespacedSelector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
 	// +kubebuilder:validation:Optional
@@ -92,8 +91,8 @@ type QueueRedriveAllowPolicySpec struct {
 
 // QueueRedriveAllowPolicyStatus defines the observed state of QueueRedriveAllowPolicy.
 type QueueRedriveAllowPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueueRedriveAllowPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueueRedriveAllowPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

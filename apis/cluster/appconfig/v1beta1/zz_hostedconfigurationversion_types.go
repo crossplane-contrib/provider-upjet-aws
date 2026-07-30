@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedConfigurationVersionInitParameters struct {
@@ -22,11 +22,11 @@ type HostedConfigurationVersionInitParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Configuration profile ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.ConfigurationProfile
@@ -35,14 +35,14 @@ type HostedConfigurationVersionInitParameters struct {
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDRef *v1.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+	ConfigurationProfileIDRef *v2.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+	ConfigurationProfileIDSelector *v2.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
 	// Content of the configuration or the configuration data.
-	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+	ContentSecretRef v2.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
@@ -89,11 +89,11 @@ type HostedConfigurationVersionParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Configuration profile ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/appconfig/v1beta1.ConfigurationProfile
@@ -103,15 +103,15 @@ type HostedConfigurationVersionParameters struct {
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDRef *v1.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+	ConfigurationProfileIDRef *v2.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+	ConfigurationProfileIDSelector *v2.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
 	// Content of the configuration or the configuration data.
 	// +kubebuilder:validation:Optional
-	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+	ContentSecretRef v2.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
 	// +kubebuilder:validation:Optional
@@ -129,8 +129,8 @@ type HostedConfigurationVersionParameters struct {
 
 // HostedConfigurationVersionSpec defines the desired state of HostedConfigurationVersion
 type HostedConfigurationVersionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HostedConfigurationVersionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HostedConfigurationVersionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -146,8 +146,8 @@ type HostedConfigurationVersionSpec struct {
 
 // HostedConfigurationVersionStatus defines the observed state of HostedConfigurationVersion.
 type HostedConfigurationVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedConfigurationVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedConfigurationVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

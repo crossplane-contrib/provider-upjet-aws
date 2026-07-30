@@ -5,124 +5,124 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Stack.
-func (mg *Stack) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Stack) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Stack.
-func (mg *Stack) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Stack) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Stack.
-func (mg *Stack) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Stack) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Stack.
-func (mg *Stack) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Stack) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Stack.
-func (mg *Stack) SetConditions(c ...xpv1.Condition) {
+func (mg *Stack) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Stack.
-func (mg *Stack) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Stack) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Stack.
-func (mg *Stack) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Stack) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Stack.
-func (mg *Stack) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Stack) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this StackSet.
-func (mg *StackSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StackSet) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this StackSet.
-func (mg *StackSet) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StackSet) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StackSet.
-func (mg *StackSet) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *StackSet) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StackSet.
-func (mg *StackSet) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *StackSet) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StackSet.
-func (mg *StackSet) SetConditions(c ...xpv1.Condition) {
+func (mg *StackSet) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this StackSet.
-func (mg *StackSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StackSet) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StackSet.
-func (mg *StackSet) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *StackSet) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StackSet.
-func (mg *StackSet) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *StackSet) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this StackSetInstance.
-func (mg *StackSetInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StackSetInstance) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this StackSetInstance.
-func (mg *StackSetInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StackSetInstance) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StackSetInstance.
-func (mg *StackSetInstance) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *StackSetInstance) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StackSetInstance.
-func (mg *StackSetInstance) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *StackSetInstance) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StackSetInstance.
-func (mg *StackSetInstance) SetConditions(c ...xpv1.Condition) {
+func (mg *StackSetInstance) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this StackSetInstance.
-func (mg *StackSetInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StackSetInstance) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StackSetInstance.
-func (mg *StackSetInstance) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *StackSetInstance) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StackSetInstance.
-func (mg *StackSetInstance) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *StackSetInstance) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

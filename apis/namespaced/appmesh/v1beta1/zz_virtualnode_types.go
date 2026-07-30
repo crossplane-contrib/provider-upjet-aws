@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AwsCloudMapInitParameters struct {
@@ -27,11 +26,11 @@ type AwsCloudMapInitParameters struct {
 
 	// Reference to a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Name of the AWS Cloud Map service to use. Use the aws_service_discovery_service resource to configure a Cloud Map service. Must be between 1 and 1024 characters in length.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -65,11 +64,11 @@ type AwsCloudMapParameters struct {
 
 	// Reference to a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a HTTPNamespace in servicediscovery to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Name of the AWS Cloud Map service to use. Use the aws_service_discovery_service resource to configure a Cloud Map service. Must be between 1 and 1024 characters in length.
 	// +kubebuilder:validation:Optional
@@ -2019,11 +2018,11 @@ type VirtualNodeInitParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
@@ -2091,11 +2090,11 @@ type VirtualNodeParameters struct {
 
 	// Reference to a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameRef *v1.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
+	MeshNameRef *v2.NamespacedReference `json:"meshNameRef,omitempty" tf:"-"`
 
 	// Selector for a Mesh in appmesh to populate meshName.
 	// +kubebuilder:validation:Optional
-	MeshNameSelector *v1.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
+	MeshNameSelector *v2.NamespacedSelector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
@@ -2217,8 +2216,8 @@ type VirtualNodeSpec struct {
 
 // VirtualNodeStatus defines the observed state of VirtualNode.
 type VirtualNodeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualNodeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualNodeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

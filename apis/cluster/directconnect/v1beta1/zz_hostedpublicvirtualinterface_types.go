@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HostedPublicVirtualInterfaceInitParameters struct {
@@ -33,11 +33,11 @@ type HostedPublicVirtualInterfaceInitParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
@@ -130,11 +130,11 @@ type HostedPublicVirtualInterfaceParameters struct {
 
 	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	// +kubebuilder:validation:Optional
@@ -165,8 +165,8 @@ type HostedPublicVirtualInterfaceParameters struct {
 
 // HostedPublicVirtualInterfaceSpec defines the desired state of HostedPublicVirtualInterface
 type HostedPublicVirtualInterfaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HostedPublicVirtualInterfaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HostedPublicVirtualInterfaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -182,8 +182,8 @@ type HostedPublicVirtualInterfaceSpec struct {
 
 // HostedPublicVirtualInterfaceStatus defines the observed state of HostedPublicVirtualInterface.
 type HostedPublicVirtualInterfaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HostedPublicVirtualInterfaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HostedPublicVirtualInterfaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

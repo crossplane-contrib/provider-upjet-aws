@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SMSPreferencesInitParameters struct {
@@ -28,11 +28,11 @@ type SMSPreferencesInitParameters struct {
 
 	// Reference to a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnRef *v1.Reference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnRef *v2.Reference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnSelector *v1.Selector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnSelector *v2.Selector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
 	DeliveryStatusSuccessSamplingRate *string `json:"deliveryStatusSuccessSamplingRate,omitempty" tf:"delivery_status_success_sampling_rate,omitempty"`
@@ -89,11 +89,11 @@ type SMSPreferencesParameters struct {
 
 	// Reference to a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnRef *v1.Reference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnRef *v2.Reference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate deliveryStatusIamRoleArn.
 	// +kubebuilder:validation:Optional
-	DeliveryStatusIAMRoleArnSelector *v1.Selector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
+	DeliveryStatusIAMRoleArnSelector *v2.Selector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
 
 	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
 	// +kubebuilder:validation:Optional
@@ -115,8 +115,8 @@ type SMSPreferencesParameters struct {
 
 // SMSPreferencesSpec defines the desired state of SMSPreferences
 type SMSPreferencesSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SMSPreferencesParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SMSPreferencesParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -132,8 +132,8 @@ type SMSPreferencesSpec struct {
 
 // SMSPreferencesStatus defines the observed state of SMSPreferences.
 type SMSPreferencesStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SMSPreferencesObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SMSPreferencesObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

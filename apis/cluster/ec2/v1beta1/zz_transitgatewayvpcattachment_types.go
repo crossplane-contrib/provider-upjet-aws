@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayVPCAttachmentInitParameters struct {
@@ -29,11 +29,11 @@ type TransitGatewayVPCAttachmentInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of EC2 Subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -58,11 +58,11 @@ type TransitGatewayVPCAttachmentInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -70,11 +70,11 @@ type TransitGatewayVPCAttachmentInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayVPCAttachmentObservation struct {
@@ -154,11 +154,11 @@ type TransitGatewayVPCAttachmentParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifiers of EC2 Subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -188,11 +188,11 @@ type TransitGatewayVPCAttachmentParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -201,17 +201,17 @@ type TransitGatewayVPCAttachmentParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayVPCAttachmentSpec defines the desired state of TransitGatewayVPCAttachment
 type TransitGatewayVPCAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayVPCAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayVPCAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -227,8 +227,8 @@ type TransitGatewayVPCAttachmentSpec struct {
 
 // TransitGatewayVPCAttachmentStatus defines the observed state of TransitGatewayVPCAttachment.
 type TransitGatewayVPCAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayVPCAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayVPCAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

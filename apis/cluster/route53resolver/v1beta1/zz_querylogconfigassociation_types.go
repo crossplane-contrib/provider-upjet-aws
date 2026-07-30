@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueryLogConfigAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type QueryLogConfigAssociationInitParameters struct {
 
 	// Reference to a QueryLogConfig in route53resolver to populate resolverQueryLogConfigId.
 	// +kubebuilder:validation:Optional
-	ResolverQueryLogConfigIDRef *v1.Reference `json:"resolverQueryLogConfigIdRef,omitempty" tf:"-"`
+	ResolverQueryLogConfigIDRef *v2.Reference `json:"resolverQueryLogConfigIdRef,omitempty" tf:"-"`
 
 	// Selector for a QueryLogConfig in route53resolver to populate resolverQueryLogConfigId.
 	// +kubebuilder:validation:Optional
-	ResolverQueryLogConfigIDSelector *v1.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
+	ResolverQueryLogConfigIDSelector *v2.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
 
 	// The ID of a VPC that you want this query logging configuration to log queries for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -35,11 +35,11 @@ type QueryLogConfigAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type QueryLogConfigAssociationObservation struct {
@@ -73,11 +73,11 @@ type QueryLogConfigAssociationParameters struct {
 
 	// Reference to a QueryLogConfig in route53resolver to populate resolverQueryLogConfigId.
 	// +kubebuilder:validation:Optional
-	ResolverQueryLogConfigIDRef *v1.Reference `json:"resolverQueryLogConfigIdRef,omitempty" tf:"-"`
+	ResolverQueryLogConfigIDRef *v2.Reference `json:"resolverQueryLogConfigIdRef,omitempty" tf:"-"`
 
 	// Selector for a QueryLogConfig in route53resolver to populate resolverQueryLogConfigId.
 	// +kubebuilder:validation:Optional
-	ResolverQueryLogConfigIDSelector *v1.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
+	ResolverQueryLogConfigIDSelector *v2.Selector `json:"resolverQueryLogConfigIdSelector,omitempty" tf:"-"`
 
 	// The ID of a VPC that you want this query logging configuration to log queries for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.VPC
@@ -87,17 +87,17 @@ type QueryLogConfigAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // QueryLogConfigAssociationSpec defines the desired state of QueryLogConfigAssociation
 type QueryLogConfigAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     QueryLogConfigAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   QueryLogConfigAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type QueryLogConfigAssociationSpec struct {
 
 // QueryLogConfigAssociationStatus defines the observed state of QueryLogConfigAssociation.
 type QueryLogConfigAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueryLogConfigAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueryLogConfigAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

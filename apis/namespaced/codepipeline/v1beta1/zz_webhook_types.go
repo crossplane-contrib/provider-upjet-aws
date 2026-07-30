@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationConfigurationInitParameters struct {
@@ -20,7 +19,7 @@ type AuthenticationConfigurationInitParameters struct {
 	AllowedIPRange *string `json:"allowedIpRange,omitempty" tf:"allowed_ip_range,omitempty"`
 
 	// The shared secret for the GitHub repository webhook. Set this as secret in your github_repository_webhook's configuration block. Required for GITHUB_HMAC.
-	SecretTokenSecretRef *v1.LocalSecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
+	SecretTokenSecretRef *v2.LocalSecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -37,7 +36,7 @@ type AuthenticationConfigurationParameters struct {
 
 	// The shared secret for the GitHub repository webhook. Set this as secret in your github_repository_webhook's configuration block. Required for GITHUB_HMAC.
 	// +kubebuilder:validation:Optional
-	SecretTokenSecretRef *v1.LocalSecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
+	SecretTokenSecretRef *v2.LocalSecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
 }
 
 type FilterInitParameters struct {
@@ -93,11 +92,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a Codepipeline in codepipeline to populate targetPipeline.
 	// +kubebuilder:validation:Optional
-	TargetPipelineRef *v1.NamespacedReference `json:"targetPipelineRef,omitempty" tf:"-"`
+	TargetPipelineRef *v2.NamespacedReference `json:"targetPipelineRef,omitempty" tf:"-"`
 
 	// Selector for a Codepipeline in codepipeline to populate targetPipeline.
 	// +kubebuilder:validation:Optional
-	TargetPipelineSelector *v1.NamespacedSelector `json:"targetPipelineSelector,omitempty" tf:"-"`
+	TargetPipelineSelector *v2.NamespacedSelector `json:"targetPipelineSelector,omitempty" tf:"-"`
 }
 
 type WebhookObservation struct {
@@ -174,11 +173,11 @@ type WebhookParameters struct {
 
 	// Reference to a Codepipeline in codepipeline to populate targetPipeline.
 	// +kubebuilder:validation:Optional
-	TargetPipelineRef *v1.NamespacedReference `json:"targetPipelineRef,omitempty" tf:"-"`
+	TargetPipelineRef *v2.NamespacedReference `json:"targetPipelineRef,omitempty" tf:"-"`
 
 	// Selector for a Codepipeline in codepipeline to populate targetPipeline.
 	// +kubebuilder:validation:Optional
-	TargetPipelineSelector *v1.NamespacedSelector `json:"targetPipelineSelector,omitempty" tf:"-"`
+	TargetPipelineSelector *v2.NamespacedSelector `json:"targetPipelineSelector,omitempty" tf:"-"`
 }
 
 // WebhookSpec defines the desired state of Webhook
@@ -200,8 +199,8 @@ type WebhookSpec struct {
 
 // WebhookStatus defines the observed state of Webhook.
 type WebhookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebhookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebhookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

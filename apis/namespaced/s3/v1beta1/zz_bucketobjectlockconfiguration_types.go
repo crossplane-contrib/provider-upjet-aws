@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketObjectLockConfigurationInitParameters struct {
@@ -23,11 +22,11 @@ type BucketObjectLockConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
@@ -40,7 +39,7 @@ type BucketObjectLockConfigurationInitParameters struct {
 
 	// This argument is deprecated and no longer needed to enable Object Lock.
 	// To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
-	TokenSecretRef *v1.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
+	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketObjectLockConfigurationObservation struct {
@@ -75,11 +74,11 @@ type BucketObjectLockConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
@@ -101,7 +100,7 @@ type BucketObjectLockConfigurationParameters struct {
 	// This argument is deprecated and no longer needed to enable Object Lock.
 	// To enable Object Lock for an existing bucket, you must first enable versioning on the bucket and then enable Object Lock. For more details on versioning, see the aws_s3_bucket_versioning resource.
 	// +kubebuilder:validation:Optional
-	TokenSecretRef *v1.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
+	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketObjectLockConfigurationRuleInitParameters struct {
@@ -181,8 +180,8 @@ type BucketObjectLockConfigurationSpec struct {
 
 // BucketObjectLockConfigurationStatus defines the observed state of BucketObjectLockConfiguration.
 type BucketObjectLockConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketObjectLockConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketObjectLockConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

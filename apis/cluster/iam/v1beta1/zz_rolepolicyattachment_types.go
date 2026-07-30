@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RolePolicyAttachmentInitParameters struct {
@@ -22,11 +22,11 @@ type RolePolicyAttachmentInitParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -34,11 +34,11 @@ type RolePolicyAttachmentInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 }
 
 type RolePolicyAttachmentObservation struct {
@@ -61,11 +61,11 @@ type RolePolicyAttachmentParameters struct {
 
 	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+	PolicyArnRef *v2.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
-	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
+	PolicyArnSelector *v2.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -74,17 +74,17 @@ type RolePolicyAttachmentParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.Reference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.Selector `json:"roleSelector,omitempty" tf:"-"`
 }
 
 // RolePolicyAttachmentSpec defines the desired state of RolePolicyAttachment
 type RolePolicyAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RolePolicyAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RolePolicyAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -100,8 +100,8 @@ type RolePolicyAttachmentSpec struct {
 
 // RolePolicyAttachmentStatus defines the observed state of RolePolicyAttachment.
 type RolePolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RolePolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RolePolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

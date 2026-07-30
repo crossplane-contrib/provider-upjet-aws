@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogsInitParameters struct {
@@ -96,11 +96,11 @@ type ELBInitParameters struct {
 
 	// References to Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
-	InstancesRefs []v1.Reference `json:"instancesRefs,omitempty" tf:"-"`
+	InstancesRefs []v2.Reference `json:"instancesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
-	InstancesSelector *v1.Selector `json:"instancesSelector,omitempty" tf:"-"`
+	InstancesSelector *v2.Selector `json:"instancesSelector,omitempty" tf:"-"`
 
 	// If true, ELB will be an internal ELB.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
@@ -125,11 +125,11 @@ type ELBInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -260,11 +260,11 @@ type ELBParameters struct {
 
 	// References to Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
-	InstancesRefs []v1.Reference `json:"instancesRefs,omitempty" tf:"-"`
+	InstancesRefs []v2.Reference `json:"instancesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate instances.
 	// +kubebuilder:validation:Optional
-	InstancesSelector *v1.Selector `json:"instancesSelector,omitempty" tf:"-"`
+	InstancesSelector *v2.Selector `json:"instancesSelector,omitempty" tf:"-"`
 
 	// If true, ELB will be an internal ELB.
 	// +kubebuilder:validation:Optional
@@ -299,11 +299,11 @@ type ELBParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+	SubnetsRefs []v2.Reference `json:"subnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
+	SubnetsSelector *v2.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -443,8 +443,8 @@ type ListenerParameters struct {
 
 // ELBSpec defines the desired state of ELB
 type ELBSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ELBParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ELBParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -460,8 +460,8 @@ type ELBSpec struct {
 
 // ELBStatus defines the observed state of ELB.
 type ELBStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ELBObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ELBObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

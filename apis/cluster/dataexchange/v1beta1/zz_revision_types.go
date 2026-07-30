@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RevisionInitParameters struct {
@@ -25,11 +25,11 @@ type RevisionInitParameters struct {
 
 	// Reference to a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDRef *v1.Reference `json:"dataSetIdRef,omitempty" tf:"-"`
+	DataSetIDRef *v2.Reference `json:"dataSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDSelector *v1.Selector `json:"dataSetIdSelector,omitempty" tf:"-"`
+	DataSetIDSelector *v2.Selector `json:"dataSetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -80,11 +80,11 @@ type RevisionParameters struct {
 
 	// Reference to a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDRef *v1.Reference `json:"dataSetIdRef,omitempty" tf:"-"`
+	DataSetIDRef *v2.Reference `json:"dataSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataSet in dataexchange to populate dataSetId.
 	// +kubebuilder:validation:Optional
-	DataSetIDSelector *v1.Selector `json:"dataSetIdSelector,omitempty" tf:"-"`
+	DataSetIDSelector *v2.Selector `json:"dataSetIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -99,8 +99,8 @@ type RevisionParameters struct {
 
 // RevisionSpec defines the desired state of Revision
 type RevisionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RevisionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RevisionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,8 +116,8 @@ type RevisionSpec struct {
 
 // RevisionStatus defines the observed state of Revision.
 type RevisionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RevisionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RevisionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

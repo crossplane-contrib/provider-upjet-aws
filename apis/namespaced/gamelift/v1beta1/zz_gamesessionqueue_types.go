@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GameSessionQueueInitParameters struct {
@@ -26,11 +25,11 @@ type GameSessionQueueInitParameters struct {
 
 	// References to Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsRefs []v1.NamespacedReference `json:"destinationsRefs,omitempty" tf:"-"`
+	DestinationsRefs []v2.NamespacedReference `json:"destinationsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsSelector *v1.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
+	DestinationsSelector *v2.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
@@ -39,11 +38,11 @@ type GameSessionQueueInitParameters struct {
 
 	// Reference to a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetRef *v1.NamespacedReference `json:"notificationTargetRef,omitempty" tf:"-"`
+	NotificationTargetRef *v2.NamespacedReference `json:"notificationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetSelector *v1.NamespacedSelector `json:"notificationTargetSelector,omitempty" tf:"-"`
+	NotificationTargetSelector *v2.NamespacedSelector `json:"notificationTargetSelector,omitempty" tf:"-"`
 
 	// One or more policies used to choose fleet based on player latency. See below.
 	PlayerLatencyPolicy []PlayerLatencyPolicyInitParameters `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
@@ -105,11 +104,11 @@ type GameSessionQueueParameters struct {
 
 	// References to Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsRefs []v1.NamespacedReference `json:"destinationsRefs,omitempty" tf:"-"`
+	DestinationsRefs []v2.NamespacedReference `json:"destinationsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Fleet in gamelift to populate destinations.
 	// +kubebuilder:validation:Optional
-	DestinationsSelector *v1.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
+	DestinationsSelector *v2.NamespacedSelector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
@@ -119,11 +118,11 @@ type GameSessionQueueParameters struct {
 
 	// Reference to a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetRef *v1.NamespacedReference `json:"notificationTargetRef,omitempty" tf:"-"`
+	NotificationTargetRef *v2.NamespacedReference `json:"notificationTargetRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate notificationTarget.
 	// +kubebuilder:validation:Optional
-	NotificationTargetSelector *v1.NamespacedSelector `json:"notificationTargetSelector,omitempty" tf:"-"`
+	NotificationTargetSelector *v2.NamespacedSelector `json:"notificationTargetSelector,omitempty" tf:"-"`
 
 	// One or more policies used to choose fleet based on player latency. See below.
 	// +kubebuilder:validation:Optional
@@ -192,8 +191,8 @@ type GameSessionQueueSpec struct {
 
 // GameSessionQueueStatus defines the observed state of GameSessionQueue.
 type GameSessionQueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GameSessionQueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GameSessionQueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

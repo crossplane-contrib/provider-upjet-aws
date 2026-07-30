@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCIpamPoolCidrAllocationInitParameters struct {
@@ -33,11 +32,11 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
@@ -116,11 +115,11 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	// +kubebuilder:validation:Optional
@@ -156,8 +155,8 @@ type VPCIpamPoolCidrAllocationSpec struct {
 
 // VPCIpamPoolCidrAllocationStatus defines the observed state of VPCIpamPoolCidrAllocation.
 type VPCIpamPoolCidrAllocationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIpamPoolCidrAllocationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIpamPoolCidrAllocationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterPeeringInitParameters struct {
@@ -23,11 +23,11 @@ type ClusterPeeringInitParameters struct {
 
 	// References to Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersRefs []v1.Reference `json:"clustersRefs,omitempty" tf:"-"`
+	ClustersRefs []v2.Reference `json:"clustersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersSelector *v1.Selector `json:"clustersSelector,omitempty" tf:"-"`
+	ClustersSelector *v2.Selector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dsql/v1beta1.Cluster
@@ -36,11 +36,11 @@ type ClusterPeeringInitParameters struct {
 
 	// Reference to a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.Reference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.Reference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.Selector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.Selector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Witness region for a multi-region cluster.
 	WitnessRegion *string `json:"witnessRegion,omitempty" tf:"witness_region,omitempty"`
@@ -76,11 +76,11 @@ type ClusterPeeringParameters struct {
 
 	// References to Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersRefs []v1.Reference `json:"clustersRefs,omitempty" tf:"-"`
+	ClustersRefs []v2.Reference `json:"clustersRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Cluster in dsql to populate clusters.
 	// +kubebuilder:validation:Optional
-	ClustersSelector *v1.Selector `json:"clustersSelector,omitempty" tf:"-"`
+	ClustersSelector *v2.Selector `json:"clustersSelector,omitempty" tf:"-"`
 
 	// DSQL Cluster Identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/dsql/v1beta1.Cluster
@@ -90,11 +90,11 @@ type ClusterPeeringParameters struct {
 
 	// Reference to a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.Reference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.Reference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in dsql to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.Selector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.Selector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -108,8 +108,8 @@ type ClusterPeeringParameters struct {
 
 // ClusterPeeringSpec defines the desired state of ClusterPeering
 type ClusterPeeringSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterPeeringParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterPeeringParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type ClusterPeeringSpec struct {
 
 // ClusterPeeringStatus defines the observed state of ClusterPeering.
 type ClusterPeeringStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterPeeringObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterPeeringObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

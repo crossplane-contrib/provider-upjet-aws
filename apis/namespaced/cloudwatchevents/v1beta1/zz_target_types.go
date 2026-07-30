@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppsyncTargetInitParameters struct {
@@ -167,11 +166,11 @@ type EcsTargetInitParameters struct {
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinitionArn.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionArnRef *v1.NamespacedReference `json:"taskDefinitionArnRef,omitempty" tf:"-"`
+	TaskDefinitionArnRef *v2.NamespacedReference `json:"taskDefinitionArnRef,omitempty" tf:"-"`
 
 	// Selector for a TaskDefinition in ecs to populate taskDefinitionArn.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionArnSelector *v1.NamespacedSelector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
+	TaskDefinitionArnSelector *v2.NamespacedSelector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
 }
 
 type EcsTargetObservation struct {
@@ -276,11 +275,11 @@ type EcsTargetParameters struct {
 
 	// Reference to a TaskDefinition in ecs to populate taskDefinitionArn.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionArnRef *v1.NamespacedReference `json:"taskDefinitionArnRef,omitempty" tf:"-"`
+	TaskDefinitionArnRef *v2.NamespacedReference `json:"taskDefinitionArnRef,omitempty" tf:"-"`
 
 	// Selector for a TaskDefinition in ecs to populate taskDefinitionArn.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionArnSelector *v1.NamespacedSelector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
+	TaskDefinitionArnSelector *v2.NamespacedSelector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
 }
 
 type HTTPTargetInitParameters struct {
@@ -719,11 +718,11 @@ type TargetInitParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// Used to delete managed rules created by AWS. Defaults to false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
@@ -756,11 +755,11 @@ type TargetInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the rule you want to add targets to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Rule
@@ -768,11 +767,11 @@ type TargetInitParameters struct {
 
 	// Reference to a Rule in cloudwatchevents to populate rule.
 	// +kubebuilder:validation:Optional
-	RuleRef *v1.NamespacedReference `json:"ruleRef,omitempty" tf:"-"`
+	RuleRef *v2.NamespacedReference `json:"ruleRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in cloudwatchevents to populate rule.
 	// +kubebuilder:validation:Optional
-	RuleSelector *v1.NamespacedSelector `json:"ruleSelector,omitempty" tf:"-"`
+	RuleSelector *v2.NamespacedSelector `json:"ruleSelector,omitempty" tf:"-"`
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
@@ -887,11 +886,11 @@ type TargetParameters struct {
 
 	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameRef *v1.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
+	EventBusNameRef *v2.NamespacedReference `json:"eventBusNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
-	EventBusNameSelector *v1.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
+	EventBusNameSelector *v2.NamespacedSelector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// Used to delete managed rules created by AWS. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -938,11 +937,11 @@ type TargetParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the rule you want to add targets to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/cloudwatchevents/v1beta1.Rule
@@ -951,11 +950,11 @@ type TargetParameters struct {
 
 	// Reference to a Rule in cloudwatchevents to populate rule.
 	// +kubebuilder:validation:Optional
-	RuleRef *v1.NamespacedReference `json:"ruleRef,omitempty" tf:"-"`
+	RuleRef *v2.NamespacedReference `json:"ruleRef,omitempty" tf:"-"`
 
 	// Selector for a Rule in cloudwatchevents to populate rule.
 	// +kubebuilder:validation:Optional
-	RuleSelector *v1.NamespacedSelector `json:"ruleSelector,omitempty" tf:"-"`
+	RuleSelector *v2.NamespacedSelector `json:"ruleSelector,omitempty" tf:"-"`
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	// +kubebuilder:validation:Optional
@@ -993,8 +992,8 @@ type TargetSpec struct {
 
 // TargetStatus defines the observed state of Target.
 type TargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

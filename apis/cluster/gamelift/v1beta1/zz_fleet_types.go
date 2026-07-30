@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateConfigurationInitParameters struct {
@@ -89,11 +89,11 @@ type FleetInitParameters struct {
 
 	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
+	BuildIDRef *v2.Reference `json:"buildIdRef,omitempty" tf:"-"`
 
 	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
+	BuildIDSelector *v2.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	CertificateConfiguration []CertificateConfigurationInitParameters `json:"certificateConfiguration,omitempty" tf:"certificate_configuration,omitempty"`
@@ -117,11 +117,11 @@ type FleetInitParameters struct {
 
 	// Reference to a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnRef *v1.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+	InstanceRoleArnRef *v2.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
+	InstanceRoleArnSelector *v2.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
@@ -226,11 +226,11 @@ type FleetParameters struct {
 
 	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
+	BuildIDRef *v2.Reference `json:"buildIdRef,omitempty" tf:"-"`
 
 	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
+	BuildIDSelector *v2.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	// +kubebuilder:validation:Optional
@@ -260,11 +260,11 @@ type FleetParameters struct {
 
 	// Reference to a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnRef *v1.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+	InstanceRoleArnRef *v2.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
+	InstanceRoleArnSelector *v2.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	// +kubebuilder:validation:Optional
@@ -410,8 +410,8 @@ type ServerProcessParameters struct {
 
 // FleetSpec defines the desired state of Fleet
 type FleetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FleetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FleetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -427,8 +427,8 @@ type FleetSpec struct {
 
 // FleetStatus defines the observed state of Fleet.
 type FleetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FleetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FleetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

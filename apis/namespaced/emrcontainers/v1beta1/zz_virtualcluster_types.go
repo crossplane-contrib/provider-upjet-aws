@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerProviderInitParameters struct {
@@ -22,11 +21,11 @@ type ContainerProviderInitParameters struct {
 
 	// Reference to a Cluster in eks to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Nested list containing information about the configuration of the container provider
 	Info *InfoInitParameters `json:"info,omitempty" tf:"info,omitempty"`
@@ -56,11 +55,11 @@ type ContainerProviderParameters struct {
 
 	// Reference to a Cluster in eks to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 
 	// Nested list containing information about the configuration of the container provider
 	// +kubebuilder:validation:Optional
@@ -189,8 +188,8 @@ type VirtualClusterSpec struct {
 
 // VirtualClusterStatus defines the observed state of VirtualCluster.
 type VirtualClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

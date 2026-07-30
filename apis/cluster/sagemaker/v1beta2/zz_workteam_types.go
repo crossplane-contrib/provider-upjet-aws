@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CognitoMemberDefinitionInitParameters struct {
@@ -22,11 +22,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserGroup
@@ -35,11 +35,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupRef *v1.Reference `json:"userGroupRef,omitempty" tf:"-"`
+	UserGroupRef *v2.Reference `json:"userGroupRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupSelector *v1.Selector `json:"userGroupSelector,omitempty" tf:"-"`
+	UserGroupSelector *v2.Selector `json:"userGroupSelector,omitempty" tf:"-"`
 
 	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
@@ -48,11 +48,11 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.Reference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type CognitoMemberDefinitionObservation struct {
@@ -77,11 +77,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserGroup
@@ -91,11 +91,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupRef *v1.Reference `json:"userGroupRef,omitempty" tf:"-"`
+	UserGroupRef *v2.Reference `json:"userGroupRef,omitempty" tf:"-"`
 
 	// Selector for a UserGroup in cognitoidp to populate userGroup.
 	// +kubebuilder:validation:Optional
-	UserGroupSelector *v1.Selector `json:"userGroupSelector,omitempty" tf:"-"`
+	UserGroupSelector *v2.Selector `json:"userGroupSelector,omitempty" tf:"-"`
 
 	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/cognitoidp/v1beta1.UserPoolDomain
@@ -105,11 +105,11 @@ type CognitoMemberDefinitionParameters struct {
 
 	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+	UserPoolRef *v2.Reference `json:"userPoolRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
 	// +kubebuilder:validation:Optional
-	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
+	UserPoolSelector *v2.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type IAMPolicyConstraintsInitParameters struct {
@@ -274,11 +274,11 @@ type WorkteamInitParameters struct {
 
 	// Reference to a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameRef *v1.Reference `json:"workforceNameRef,omitempty" tf:"-"`
+	WorkforceNameRef *v2.Reference `json:"workforceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameSelector *v1.Selector `json:"workforceNameSelector,omitempty" tf:"-"`
+	WorkforceNameSelector *v2.Selector `json:"workforceNameSelector,omitempty" tf:"-"`
 }
 
 type WorkteamObservation struct {
@@ -356,17 +356,17 @@ type WorkteamParameters struct {
 
 	// Reference to a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameRef *v1.Reference `json:"workforceNameRef,omitempty" tf:"-"`
+	WorkforceNameRef *v2.Reference `json:"workforceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workforce in sagemaker to populate workforceName.
 	// +kubebuilder:validation:Optional
-	WorkforceNameSelector *v1.Selector `json:"workforceNameSelector,omitempty" tf:"-"`
+	WorkforceNameSelector *v2.Selector `json:"workforceNameSelector,omitempty" tf:"-"`
 }
 
 // WorkteamSpec defines the desired state of Workteam
 type WorkteamSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkteamParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkteamParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -382,8 +382,8 @@ type WorkteamSpec struct {
 
 // WorkteamStatus defines the observed state of Workteam.
 type WorkteamStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkteamObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkteamObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

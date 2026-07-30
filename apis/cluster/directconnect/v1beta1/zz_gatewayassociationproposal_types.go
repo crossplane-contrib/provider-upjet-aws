@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GatewayAssociationProposalInitParameters struct {
@@ -26,11 +26,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
@@ -39,11 +39,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
@@ -52,11 +52,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDRef *v1.Reference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDRef *v2.Reference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDSelector *v1.Selector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDSelector *v2.Selector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayAssociationProposalObservation struct {
@@ -103,11 +103,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
@@ -117,11 +117,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/directconnect/v1beta1.Gateway
@@ -131,11 +131,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDRef *v1.Reference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDRef *v2.Reference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDSelector *v1.Selector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDSelector *v2.Selector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -145,8 +145,8 @@ type GatewayAssociationProposalParameters struct {
 
 // GatewayAssociationProposalSpec defines the desired state of GatewayAssociationProposal
 type GatewayAssociationProposalSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayAssociationProposalParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GatewayAssociationProposalParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -162,8 +162,8 @@ type GatewayAssociationProposalSpec struct {
 
 // GatewayAssociationProposalStatus defines the observed state of GatewayAssociationProposal.
 type GatewayAssociationProposalStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayAssociationProposalObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayAssociationProposalObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

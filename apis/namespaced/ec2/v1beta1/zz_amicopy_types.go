@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AMICopyEBSBlockDeviceInitParameters struct {
@@ -81,11 +80,11 @@ type AMICopyInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region-unique name for the AMI.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -97,11 +96,11 @@ type AMICopyInitParameters struct {
 
 	// Reference to a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
-	SourceAMIIDRef *v1.NamespacedReference `json:"sourceAmiIdRef,omitempty" tf:"-"`
+	SourceAMIIDRef *v2.NamespacedReference `json:"sourceAmiIdRef,omitempty" tf:"-"`
 
 	// Selector for a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
-	SourceAMIIDSelector *v1.NamespacedSelector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
+	SourceAMIIDSelector *v2.NamespacedSelector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 
 	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.
@@ -241,11 +240,11 @@ type AMICopyParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region-unique name for the AMI.
 	// +kubebuilder:validation:Optional
@@ -264,11 +263,11 @@ type AMICopyParameters struct {
 
 	// Reference to a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
-	SourceAMIIDRef *v1.NamespacedReference `json:"sourceAmiIdRef,omitempty" tf:"-"`
+	SourceAMIIDRef *v2.NamespacedReference `json:"sourceAmiIdRef,omitempty" tf:"-"`
 
 	// Selector for a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
-	SourceAMIIDSelector *v1.NamespacedSelector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
+	SourceAMIIDSelector *v2.NamespacedSelector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 
 	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.
@@ -300,8 +299,8 @@ type AMICopySpec struct {
 
 // AMICopyStatus defines the observed state of AMICopy.
 type AMICopyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AMICopyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AMICopyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

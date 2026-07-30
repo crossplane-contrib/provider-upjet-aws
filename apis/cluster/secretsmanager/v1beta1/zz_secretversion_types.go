@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecretVersionInitParameters struct {
 
 	// Specifies binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
-	SecretBinarySecretRef *v1.SecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
+	SecretBinarySecretRef *v2.SecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
@@ -25,17 +25,17 @@ type SecretVersionInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
-	SecretStringSecretRef *v1.SecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
+	SecretStringSecretRef *v2.SecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
 	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
-	SecretStringWoSecretRef *v1.SecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
+	SecretStringWoSecretRef *v2.SecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
@@ -86,7 +86,7 @@ type SecretVersionParameters struct {
 
 	// Specifies binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
 	// +kubebuilder:validation:Optional
-	SecretBinarySecretRef *v1.SecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
+	SecretBinarySecretRef *v2.SecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/secretsmanager/v1beta1.Secret
@@ -96,19 +96,19 @@ type SecretVersionParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+	SecretIDRef *v2.Reference `json:"secretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
-	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
+	SecretIDSelector *v2.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
 	// +kubebuilder:validation:Optional
-	SecretStringSecretRef *v1.SecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
+	SecretStringSecretRef *v2.SecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
 	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
 	// +kubebuilder:validation:Optional
-	SecretStringWoSecretRef *v1.SecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
+	SecretStringWoSecretRef *v2.SecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
 	// +kubebuilder:validation:Optional
@@ -122,8 +122,8 @@ type SecretVersionParameters struct {
 
 // SecretVersionSpec defines the desired state of SecretVersion
 type SecretVersionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecretVersionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecretVersionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -139,8 +139,8 @@ type SecretVersionSpec struct {
 
 // SecretVersionStatus defines the observed state of SecretVersion.
 type SecretVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecretVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecretVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

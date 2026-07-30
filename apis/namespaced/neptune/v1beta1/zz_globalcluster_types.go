@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GlobalClusterInitParameters struct {
@@ -32,11 +31,11 @@ type GlobalClusterInitParameters struct {
 
 	// Reference to a Cluster in neptune to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBClusterIdentifierRef *v1.NamespacedReference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
+	SourceDBClusterIdentifierRef *v2.NamespacedReference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBClusterIdentifierSelector *v1.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
+	SourceDBClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
@@ -120,11 +119,11 @@ type GlobalClusterParameters struct {
 
 	// Reference to a Cluster in neptune to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBClusterIdentifierRef *v1.NamespacedReference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
+	SourceDBClusterIdentifierRef *v2.NamespacedReference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate sourceDbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceDBClusterIdentifierSelector *v1.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
+	SourceDBClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	// +kubebuilder:validation:Optional
@@ -150,8 +149,8 @@ type GlobalClusterSpec struct {
 
 // GlobalClusterStatus defines the observed state of GlobalCluster.
 type GlobalClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GlobalClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GlobalClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

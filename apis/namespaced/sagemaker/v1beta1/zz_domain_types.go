@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppLifecycleManagementIdleSettingsInitParameters struct {
@@ -718,11 +717,11 @@ type DefaultUserSettingsInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRole.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleRef *v1.NamespacedReference `json:"executionRoleRef,omitempty" tf:"-"`
+	ExecutionRoleRef *v2.NamespacedReference `json:"executionRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRole.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleSelector *v1.NamespacedSelector `json:"executionRoleSelector,omitempty" tf:"-"`
+	ExecutionRoleSelector *v2.NamespacedSelector `json:"executionRoleSelector,omitempty" tf:"-"`
 
 	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
 	JupyterLabAppSettings *DefaultUserSettingsJupyterLabAppSettingsInitParameters `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
@@ -988,11 +987,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageInitParameters struct
 
 	// Reference to a AppImageConfig in sagemaker to populate appImageConfigName.
 	// +kubebuilder:validation:Optional
-	AppImageConfigNameRef *v1.NamespacedReference `json:"appImageConfigNameRef,omitempty" tf:"-"`
+	AppImageConfigNameRef *v2.NamespacedReference `json:"appImageConfigNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppImageConfig in sagemaker to populate appImageConfigName.
 	// +kubebuilder:validation:Optional
-	AppImageConfigNameSelector *v1.NamespacedSelector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
+	AppImageConfigNameSelector *v2.NamespacedSelector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
 
 	// The name of the Custom Image.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sagemaker/v1beta1.ImageVersion
@@ -1001,11 +1000,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageInitParameters struct
 
 	// Reference to a ImageVersion in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameRef *v1.NamespacedReference `json:"imageNameRef,omitempty" tf:"-"`
+	ImageNameRef *v2.NamespacedReference `json:"imageNameRef,omitempty" tf:"-"`
 
 	// Selector for a ImageVersion in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameSelector *v1.NamespacedSelector `json:"imageNameSelector,omitempty" tf:"-"`
+	ImageNameSelector *v2.NamespacedSelector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// The version number of the Custom Image.
 	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
@@ -1032,11 +1031,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// Reference to a AppImageConfig in sagemaker to populate appImageConfigName.
 	// +kubebuilder:validation:Optional
-	AppImageConfigNameRef *v1.NamespacedReference `json:"appImageConfigNameRef,omitempty" tf:"-"`
+	AppImageConfigNameRef *v2.NamespacedReference `json:"appImageConfigNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppImageConfig in sagemaker to populate appImageConfigName.
 	// +kubebuilder:validation:Optional
-	AppImageConfigNameSelector *v1.NamespacedSelector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
+	AppImageConfigNameSelector *v2.NamespacedSelector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
 
 	// The name of the Custom Image.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sagemaker/v1beta1.ImageVersion
@@ -1046,11 +1045,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// Reference to a ImageVersion in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameRef *v1.NamespacedReference `json:"imageNameRef,omitempty" tf:"-"`
+	ImageNameRef *v2.NamespacedReference `json:"imageNameRef,omitempty" tf:"-"`
 
 	// Selector for a ImageVersion in sagemaker to populate imageName.
 	// +kubebuilder:validation:Optional
-	ImageNameSelector *v1.NamespacedSelector `json:"imageNameSelector,omitempty" tf:"-"`
+	ImageNameSelector *v2.NamespacedSelector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -1250,11 +1249,11 @@ type DefaultUserSettingsParameters struct {
 
 	// Reference to a Role in iam to populate executionRole.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleRef *v1.NamespacedReference `json:"executionRoleRef,omitempty" tf:"-"`
+	ExecutionRoleRef *v2.NamespacedReference `json:"executionRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRole.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleSelector *v1.NamespacedSelector `json:"executionRoleSelector,omitempty" tf:"-"`
+	ExecutionRoleSelector *v2.NamespacedSelector `json:"executionRoleSelector,omitempty" tf:"-"`
 
 	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
 	// +kubebuilder:validation:Optional
@@ -1401,22 +1400,22 @@ type DomainInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	RetentionPolicy *RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The VPC subnets that Studio uses for communication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1438,11 +1437,11 @@ type DomainInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type DomainObservation struct {
@@ -1555,11 +1554,11 @@ type DomainParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -1572,11 +1571,11 @@ type DomainParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.NamespacedReference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The VPC subnets that Studio uses for communication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1602,11 +1601,11 @@ type DomainParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type DomainSettingsInitParameters struct {
@@ -3073,8 +3072,8 @@ type DomainSpec struct {
 
 // DomainStatus defines the observed state of Domain.
 type DomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

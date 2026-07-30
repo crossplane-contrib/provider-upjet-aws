@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AmazonMskClusterInitParameters struct {
@@ -23,11 +22,11 @@ type AmazonMskClusterInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnRef *v1.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
+	MskClusterArnRef *v2.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnSelector *v1.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
+	MskClusterArnSelector *v2.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
 }
 
 type AmazonMskClusterObservation struct {
@@ -46,11 +45,11 @@ type AmazonMskClusterParameters struct {
 
 	// Reference to a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnRef *v1.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
+	MskClusterArnRef *v2.NamespacedReference `json:"mskClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate mskClusterArn.
 	// +kubebuilder:validation:Optional
-	MskClusterArnSelector *v1.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
+	MskClusterArnSelector *v2.NamespacedSelector `json:"mskClusterArnSelector,omitempty" tf:"-"`
 }
 
 type ConsumerGroupReplicationInitParameters struct {
@@ -178,11 +177,11 @@ type ReplicationInfoListInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnRef *v1.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
+	SourceKafkaClusterArnRef *v2.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnSelector *v1.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
+	SourceKafkaClusterArnSelector *v2.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// The type of compression to use writing records to target Kafka cluster.
 	TargetCompressionType *string `json:"targetCompressionType,omitempty" tf:"target_compression_type,omitempty"`
@@ -194,11 +193,11 @@ type ReplicationInfoListInitParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnRef *v1.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
+	TargetKafkaClusterArnRef *v2.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnSelector *v1.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
+	TargetKafkaClusterArnSelector *v2.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// Configuration relating to topic replication.
 	TopicReplication []TopicReplicationInitParameters `json:"topicReplication,omitempty" tf:"topic_replication,omitempty"`
@@ -240,11 +239,11 @@ type ReplicationInfoListParameters struct {
 
 	// Reference to a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnRef *v1.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
+	SourceKafkaClusterArnRef *v2.NamespacedReference `json:"sourceKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate sourceKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	SourceKafkaClusterArnSelector *v1.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
+	SourceKafkaClusterArnSelector *v2.NamespacedSelector `json:"sourceKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// The type of compression to use writing records to target Kafka cluster.
 	// +kubebuilder:validation:Optional
@@ -258,11 +257,11 @@ type ReplicationInfoListParameters struct {
 
 	// Reference to a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnRef *v1.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
+	TargetKafkaClusterArnRef *v2.NamespacedReference `json:"targetKafkaClusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kafka to populate targetKafkaClusterArn.
 	// +kubebuilder:validation:Optional
-	TargetKafkaClusterArnSelector *v1.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
+	TargetKafkaClusterArnSelector *v2.NamespacedSelector `json:"targetKafkaClusterArnSelector,omitempty" tf:"-"`
 
 	// Configuration relating to topic replication.
 	// +kubebuilder:validation:Optional
@@ -293,11 +292,11 @@ type ReplicatorInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -515,11 +514,11 @@ type ReplicatorParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnRef *v1.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
+	ServiceExecutionRoleArnRef *v2.NamespacedReference `json:"serviceExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleArnSelector *v1.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleArnSelector *v2.NamespacedSelector `json:"serviceExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -660,11 +659,11 @@ type VPCConfigInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -673,11 +672,11 @@ type VPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigObservation struct {
@@ -702,11 +701,11 @@ type VPCConfigParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsRefs []v1.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
+	SecurityGroupsIdsRefs []v2.NamespacedReference `json:"securityGroupsIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupsIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsIdsSelector *v1.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
+	SecurityGroupsIdsSelector *v2.NamespacedSelector `json:"securityGroupsIdsSelector,omitempty" tf:"-"`
 
 	// The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets to allow communication between your Kafka Cluster and the replicator.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -716,11 +715,11 @@ type VPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ReplicatorSpec defines the desired state of Replicator
@@ -742,8 +741,8 @@ type ReplicatorSpec struct {
 
 // ReplicatorStatus defines the observed state of Replicator.
 type ReplicatorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReplicatorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReplicatorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

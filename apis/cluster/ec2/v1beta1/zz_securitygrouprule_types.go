@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityGroupRuleInitParameters_2 struct {
@@ -22,11 +22,11 @@ type SecurityGroupRuleInitParameters_2 struct {
 
 	// References to VPC in ec2 to populate cidrBlocks.
 	// +kubebuilder:validation:Optional
-	CidrBlocksRefs []v1.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
+	CidrBlocksRefs []v2.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPC in ec2 to populate cidrBlocks.
 	// +kubebuilder:validation:Optional
-	CidrBlocksSelector *v1.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
+	CidrBlocksSelector *v2.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
 
 	// Description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -41,19 +41,19 @@ type SecurityGroupRuleInitParameters_2 struct {
 
 	// References to VPC in ec2 to populate ipv6CidrBlocks.
 	// +kubebuilder:validation:Optional
-	IPv6CidrBlocksRefs []v1.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
+	IPv6CidrBlocksRefs []v2.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.
 	// +kubebuilder:validation:Optional
-	IPv6CidrBlocksSelector *v1.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
+	IPv6CidrBlocksSelector *v2.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
 
 	// References to ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRefs []v1.Reference `json:"prefixListIdRefs,omitempty" tf:"-"`
+	PrefixListIDRefs []v2.Reference `json:"prefixListIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// List of Prefix List IDs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.ManagedPrefixList
@@ -70,11 +70,11 @@ type SecurityGroupRuleInitParameters_2 struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
@@ -85,11 +85,11 @@ type SecurityGroupRuleInitParameters_2 struct {
 
 	// Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
+	SourceSecurityGroupIDRef *v2.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+	SourceSecurityGroupIDSelector *v2.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// End port (or ICMP code if protocol is "icmp").
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
@@ -156,11 +156,11 @@ type SecurityGroupRuleParameters_2 struct {
 
 	// References to VPC in ec2 to populate cidrBlocks.
 	// +kubebuilder:validation:Optional
-	CidrBlocksRefs []v1.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
+	CidrBlocksRefs []v2.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPC in ec2 to populate cidrBlocks.
 	// +kubebuilder:validation:Optional
-	CidrBlocksSelector *v1.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
+	CidrBlocksSelector *v2.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
 
 	// Description of the rule.
 	// +kubebuilder:validation:Optional
@@ -178,19 +178,19 @@ type SecurityGroupRuleParameters_2 struct {
 
 	// References to VPC in ec2 to populate ipv6CidrBlocks.
 	// +kubebuilder:validation:Optional
-	IPv6CidrBlocksRefs []v1.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
+	IPv6CidrBlocksRefs []v2.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.
 	// +kubebuilder:validation:Optional
-	IPv6CidrBlocksSelector *v1.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
+	IPv6CidrBlocksSelector *v2.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
 
 	// References to ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional
-	PrefixListIDRefs []v1.Reference `json:"prefixListIdRefs,omitempty" tf:"-"`
+	PrefixListIDRefs []v2.Reference `json:"prefixListIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional
-	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+	PrefixListIDSelector *v2.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// List of Prefix List IDs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.ManagedPrefixList
@@ -215,11 +215,11 @@ type SecurityGroupRuleParameters_2 struct {
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+	SecurityGroupIDRef *v2.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
 	// +kubebuilder:validation:Optional
@@ -232,11 +232,11 @@ type SecurityGroupRuleParameters_2 struct {
 
 	// Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
+	SourceSecurityGroupIDRef *v2.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+	SourceSecurityGroupIDSelector *v2.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// End port (or ICMP code if protocol is "icmp").
 	// +kubebuilder:validation:Optional
@@ -250,8 +250,8 @@ type SecurityGroupRuleParameters_2 struct {
 
 // SecurityGroupRuleSpec defines the desired state of SecurityGroupRule
 type SecurityGroupRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupRuleParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecurityGroupRuleParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -267,8 +267,8 @@ type SecurityGroupRuleSpec struct {
 
 // SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.
 type SecurityGroupRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupRuleObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityGroupRuleObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

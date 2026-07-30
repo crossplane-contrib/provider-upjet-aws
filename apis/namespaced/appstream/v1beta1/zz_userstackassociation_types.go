@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserStackAssociationInitParameters struct {
@@ -52,11 +51,11 @@ type UserStackAssociationParameters struct {
 
 	// Reference to a User in appstream to populate authenticationType.
 	// +kubebuilder:validation:Optional
-	AuthenticationTypeRef *v1.NamespacedReference `json:"authenticationTypeRef,omitempty" tf:"-"`
+	AuthenticationTypeRef *v2.NamespacedReference `json:"authenticationTypeRef,omitempty" tf:"-"`
 
 	// Selector for a User in appstream to populate authenticationType.
 	// +kubebuilder:validation:Optional
-	AuthenticationTypeSelector *v1.NamespacedSelector `json:"authenticationTypeSelector,omitempty" tf:"-"`
+	AuthenticationTypeSelector *v2.NamespacedSelector `json:"authenticationTypeSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -75,11 +74,11 @@ type UserStackAssociationParameters struct {
 
 	// Reference to a Stack in appstream to populate stackName.
 	// +kubebuilder:validation:Optional
-	StackNameRef *v1.NamespacedReference `json:"stackNameRef,omitempty" tf:"-"`
+	StackNameRef *v2.NamespacedReference `json:"stackNameRef,omitempty" tf:"-"`
 
 	// Selector for a Stack in appstream to populate stackName.
 	// +kubebuilder:validation:Optional
-	StackNameSelector *v1.NamespacedSelector `json:"stackNameSelector,omitempty" tf:"-"`
+	StackNameSelector *v2.NamespacedSelector `json:"stackNameSelector,omitempty" tf:"-"`
 
 	// Email address of the user who is associated with the stack.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appstream/v1beta1.User
@@ -88,11 +87,11 @@ type UserStackAssociationParameters struct {
 
 	// Reference to a User in appstream to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameRef *v1.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
+	UserNameRef *v2.NamespacedReference `json:"userNameRef,omitempty" tf:"-"`
 
 	// Selector for a User in appstream to populate userName.
 	// +kubebuilder:validation:Optional
-	UserNameSelector *v1.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
+	UserNameSelector *v2.NamespacedSelector `json:"userNameSelector,omitempty" tf:"-"`
 }
 
 // UserStackAssociationSpec defines the desired state of UserStackAssociation
@@ -114,8 +113,8 @@ type UserStackAssociationSpec struct {
 
 // UserStackAssociationStatus defines the observed state of UserStackAssociation.
 type UserStackAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserStackAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserStackAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
