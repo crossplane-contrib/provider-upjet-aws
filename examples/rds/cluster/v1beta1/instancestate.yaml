@@ -68,3 +68,12 @@ spec:
     deletionWindowInDays: 7
     description: Created with Crossplane
     region: us-west-1
+---
+apiVersion: v1
+stringData:
+  password: "password123-${Rand.RFC1123Subdomain}"
+kind: Secret
+metadata:
+  name: example-dbinstance
+  namespace: upbound-system
+type: Opaque
