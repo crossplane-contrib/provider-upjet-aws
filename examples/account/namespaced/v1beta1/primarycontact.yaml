@@ -7,10 +7,8 @@ kind: PrimaryContact
 metadata:
   annotations:
     meta.upbound.io/example-id: account/v1beta1/primarycontact
-    # crossplane.io/external-name must be set to the AWS account ID.
-    # Required when using managementPolicies: [Observe] or importing an existing resource.
-    # For normal Create/Update/Delete usage this annotation is set automatically after the first apply.
-    # crossplane.io/external-name: "123456789012"
+    upjet.upbound.io/manual-intervention: "Testing of this resource is dangerous as it can cause undesired misconfiguration of AWS account"
+    crossplane.io/external-name: "default"
   labels:
     testing.upbound.io/example-name: example
   name: example
