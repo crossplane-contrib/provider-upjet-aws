@@ -34,4 +34,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("encryption_config", "encryptionConfig")
 		r.AddSingletonListConversion("vector_options", "vectorOptions")
 	})
+	p.AddResourceConfigurator("aws_opensearchserverless_collection_group", func(r *config.Resource) {
+		// capacity_limits is a Plugin Framework list-of-objects attribute with a
+		// size-1 validator. Framework attribute validators do not surface as
+		// max_items in the provider schema, so upjet cannot infer the singleton
+		// list on its own; enforce the embedded-object conversion explicitly.
+		r.AddSingletonListConversion("capacity_limits", "capacityLimits")
+	})
 }

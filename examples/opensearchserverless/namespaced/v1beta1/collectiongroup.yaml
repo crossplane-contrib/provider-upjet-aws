@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     capacityLimits:
-    - maxIndexingCapacityInOcu: 16
+      maxIndexingCapacityInOcu: 16
       maxSearchCapacityInOcu: 16
       minIndexingCapacityInOcu: 0
       minSearchCapacityInOcu: 0
