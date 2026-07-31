@@ -170,6 +170,8 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_opensearchserverless_access_policy": config.NameAsIdentifier,
 	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39
 	"aws_opensearchserverless_collection": opensearchserverlessCollection(),
+	// CollectionGroup can be imported using the AWS-assigned collection group ID
+	"aws_opensearchserverless_collection_group": opensearchserverlessCollectionGroup(),
 	// LifecyclePolicy can be imported using the policy name
 	"aws_opensearchserverless_lifecycle_policy": config.NameAsIdentifier,
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
@@ -3211,6 +3213,18 @@ func opensearchserverlessCollection() config.ExternalName {
 		// [a-z0-9]{3,40}
 		if len(externalName) == 0 {
 			return "stubcollection9999", nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
+func opensearchserverlessCollectionGroup() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		// [a-z0-9]{3,40}
+		if len(externalName) == 0 {
+			return "stubcollectiongroup99", nil
 		}
 		return externalName, nil
 	}

@@ -728,6 +728,7 @@ import (
 	domainsamloptionsopensearch "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearch/domainsamloptions"
 	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/accesspolicy"
 	collection "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collection"
+	collectiongroup "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/collectiongroup"
 	lifecyclepolicyopensearchserverless "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/lifecyclepolicy"
 	securityconfig "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/securityconfig"
 	securitypolicy "github.com/upbound/provider-aws/v2/internal/controller/cluster/opensearchserverless/securitypolicy"
@@ -1763,6 +1764,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainsamloptionsopensearch.Setup,
 		accesspolicy.Setup,
 		collection.Setup,
+		collectiongroup.Setup,
 		lifecyclepolicyopensearchserverless.Setup,
 		securityconfig.Setup,
 		securitypolicy.Setup,
@@ -2804,6 +2806,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainsamloptionsopensearch.SetupGated,
 		accesspolicy.SetupGated,
 		collection.SetupGated,
+		collectiongroup.SetupGated,
 		lifecyclepolicyopensearchserverless.SetupGated,
 		securityconfig.SetupGated,
 		securitypolicy.SetupGated,
@@ -3844,6 +3847,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		domainsamloptionsopensearch.SetupWebhookWithManager,
 		accesspolicy.SetupWebhookWithManager,
 		collection.SetupWebhookWithManager,
+		collectiongroup.SetupWebhookWithManager,
 		lifecyclepolicyopensearchserverless.SetupWebhookWithManager,
 		securityconfig.SetupWebhookWithManager,
 		securitypolicy.SetupWebhookWithManager,
