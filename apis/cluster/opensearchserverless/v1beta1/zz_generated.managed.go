@@ -108,52 +108,52 @@ func (mg *Collection) SetWriteConnectionSecretToReference(r *xpv2.SecretReferenc
 }
 
 // GetCondition of this CollectionGroup.
-func (mg *CollectionGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *CollectionGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this CollectionGroup.
-func (mg *CollectionGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *CollectionGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this CollectionGroup.
-func (mg *CollectionGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *CollectionGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CollectionGroup.
-func (mg *CollectionGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *CollectionGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this CollectionGroup.
-func (mg *CollectionGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *CollectionGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this CollectionGroup.
-func (mg *CollectionGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *CollectionGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this CollectionGroup.
-func (mg *CollectionGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *CollectionGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this CollectionGroup.
-func (mg *CollectionGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *CollectionGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CollectionGroup.
-func (mg *CollectionGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *CollectionGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this CollectionGroup.
-func (mg *CollectionGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *CollectionGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

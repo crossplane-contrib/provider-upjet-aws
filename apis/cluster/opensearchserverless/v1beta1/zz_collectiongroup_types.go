@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CapacityLimitsInitParameters struct {
@@ -65,7 +65,7 @@ type CapacityLimitsParameters struct {
 type CollectionGroupInitParameters struct {
 
 	// Configuration block for the collection group's indexing and search capacity limits. See capacity_limits below for details.
-	CapacityLimits []CapacityLimitsInitParameters `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
+	CapacityLimits *CapacityLimitsInitParameters `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
 
 	// Description of the collection group.
 	// Description of the collection group.
@@ -94,7 +94,7 @@ type CollectionGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block for the collection group's indexing and search capacity limits. See capacity_limits below for details.
-	CapacityLimits []CapacityLimitsObservation `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
+	CapacityLimits *CapacityLimitsObservation `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
 
 	// Date the collection group was created.
 	// Date the collection group was created.
@@ -136,7 +136,7 @@ type CollectionGroupParameters struct {
 
 	// Configuration block for the collection group's indexing and search capacity limits. See capacity_limits below for details.
 	// +kubebuilder:validation:Optional
-	CapacityLimits []CapacityLimitsParameters `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
+	CapacityLimits *CapacityLimitsParameters `json:"capacityLimits,omitempty" tf:"capacity_limits,omitempty"`
 
 	// Description of the collection group.
 	// Description of the collection group.
@@ -171,8 +171,8 @@ type CollectionGroupParameters struct {
 
 // CollectionGroupSpec defines the desired state of CollectionGroup
 type CollectionGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CollectionGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CollectionGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -188,8 +188,8 @@ type CollectionGroupSpec struct {
 
 // CollectionGroupStatus defines the observed state of CollectionGroup.
 type CollectionGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CollectionGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CollectionGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

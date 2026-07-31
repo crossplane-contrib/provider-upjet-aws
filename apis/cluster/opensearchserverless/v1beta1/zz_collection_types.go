@@ -23,11 +23,11 @@ type CollectionInitParameters struct {
 
 	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
 	// +kubebuilder:validation:Optional
-	CollectionGroupNameRef *v1.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+	CollectionGroupNameRef *v2.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
 	// +kubebuilder:validation:Optional
-	CollectionGroupNameSelector *v1.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
+	CollectionGroupNameSelector *v2.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.
@@ -126,11 +126,11 @@ type CollectionParameters struct {
 
 	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
 	// +kubebuilder:validation:Optional
-	CollectionGroupNameRef *v1.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+	CollectionGroupNameRef *v2.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
 	// +kubebuilder:validation:Optional
-	CollectionGroupNameSelector *v1.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
+	CollectionGroupNameSelector *v2.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.

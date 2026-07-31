@@ -61,26 +61,24 @@ spec:
                   capacityLimits:
                     description: Configuration block for the collection group's indexing
                       and search capacity limits. See capacity_limits below for details.
-                    items:
-                      properties:
-                        maxIndexingCapacityInOcu:
-                          description: Maximum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        maxSearchCapacityInOcu:
-                          description: Maximum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minIndexingCapacityInOcu:
-                          description: Minimum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minSearchCapacityInOcu:
-                          description: Minimum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxIndexingCapacityInOcu:
+                        description: Maximum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      maxSearchCapacityInOcu:
+                        description: Maximum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minIndexingCapacityInOcu:
+                        description: Minimum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minSearchCapacityInOcu:
+                        description: Minimum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                    type: object
                   description:
                     description: |-
                       Description of the collection group.
@@ -131,26 +129,24 @@ spec:
                   capacityLimits:
                     description: Configuration block for the collection group's indexing
                       and search capacity limits. See capacity_limits below for details.
-                    items:
-                      properties:
-                        maxIndexingCapacityInOcu:
-                          description: Maximum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        maxSearchCapacityInOcu:
-                          description: Maximum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minIndexingCapacityInOcu:
-                          description: Minimum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minSearchCapacityInOcu:
-                          description: Minimum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxIndexingCapacityInOcu:
+                        description: Maximum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      maxSearchCapacityInOcu:
+                        description: Maximum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minIndexingCapacityInOcu:
+                        description: Minimum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minSearchCapacityInOcu:
+                        description: Minimum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                    type: object
                   description:
                     description: |-
                       Description of the collection group.
@@ -256,26 +252,24 @@ spec:
                   capacityLimits:
                     description: Configuration block for the collection group's indexing
                       and search capacity limits. See capacity_limits below for details.
-                    items:
-                      properties:
-                        maxIndexingCapacityInOcu:
-                          description: Maximum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        maxSearchCapacityInOcu:
-                          description: Maximum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minIndexingCapacityInOcu:
-                          description: Minimum indexing capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                        minSearchCapacityInOcu:
-                          description: Minimum search capacity, in OpenSearch Compute
-                            Units (OCUs), for the collection group.
-                          type: number
-                      type: object
-                    type: array
+                    properties:
+                      maxIndexingCapacityInOcu:
+                        description: Maximum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      maxSearchCapacityInOcu:
+                        description: Maximum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minIndexingCapacityInOcu:
+                        description: Minimum indexing capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                      minSearchCapacityInOcu:
+                        description: Minimum search capacity, in OpenSearch Compute
+                          Units (OCUs), for the collection group.
+                        type: number
+                    type: object
                   createdDate:
                     description: |-
                       Date the collection group was created.
@@ -370,6 +364,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation
