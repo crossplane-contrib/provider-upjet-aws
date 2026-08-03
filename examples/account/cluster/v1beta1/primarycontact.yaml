@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: account.aws.upbound.io/v1beta1
+kind: PrimaryContact
+metadata:
+  annotations:
+    meta.upbound.io/example-id: account/v1beta1/primarycontact
+    upjet.upbound.io/manual-intervention: "Testing of this resource is dangerous as it can cause undesired misconfiguration of AWS account"
+    crossplane.io/external-name: "default"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  managementPolicies: ["Observe"]
+  forProvider:
+    addressLine1: 123 Main St
+    city: Seattle
+    countryCode: US
+    fullName: Jane Doe
+    phoneNumber: "+15555550100"
+    postalCode: "98101"
+    stateOrRegion: WA
