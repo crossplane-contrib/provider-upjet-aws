@@ -10,7 +10,4 @@ package v1beta1
 func (tr *AlternateContact) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PrimaryContact) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Region) Hub() {}
