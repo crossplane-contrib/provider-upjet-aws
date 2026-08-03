@@ -141,7 +141,7 @@ spec:
 
 ---
 
-apiVersion: acm.aws.upbound.io/v1beta2
+apiVersion: acm.aws.m.upbound.io/v1beta1
 kind: Certificate
 metadata:
   annotations:
@@ -160,7 +160,7 @@ spec:
 
 ---
 
-apiVersion: acm.aws.upbound.io/v1beta1
+apiVersion: acm.aws.m.upbound.io/v1beta1
 kind: CertificateValidation
 metadata:
   annotations:
@@ -181,7 +181,7 @@ spec:
 
 ---
 
-apiVersion: elbv2.aws.upbound.io/v1beta2
+apiVersion: elbv2.aws.m.upbound.io/v1beta1
 kind: LB
 metadata:
   annotations:
@@ -208,7 +208,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
@@ -226,7 +226,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -246,7 +246,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -266,7 +266,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
