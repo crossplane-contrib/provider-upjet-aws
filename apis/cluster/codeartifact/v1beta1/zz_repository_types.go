@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExternalConnectionsInitParameters struct {
@@ -118,11 +118,11 @@ type RepositoryParameters struct {
 
 	// Reference to a Domain in codeartifact to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
+	DomainRef *v2.Reference `json:"domainRef,omitempty" tf:"-"`
 
 	// Selector for a Domain in codeartifact to populate domain.
 	// +kubebuilder:validation:Optional
-	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
+	DomainSelector *v2.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// An array of external connections associated with the repository. Only one external connection can be set per repository. see External Connections.
 	// +kubebuilder:validation:Optional
@@ -156,11 +156,11 @@ type UpstreamInitParameters struct {
 
 	// Reference to a Repository in codeartifact to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codeartifact to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 type UpstreamObservation struct {
@@ -179,17 +179,17 @@ type UpstreamParameters struct {
 
 	// Reference to a Repository in codeartifact to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codeartifact to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 // RepositorySpec defines the desired state of Repository
 type RepositorySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RepositoryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RepositoryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -205,8 +205,8 @@ type RepositorySpec struct {
 
 // RepositoryStatus defines the observed state of Repository.
 type RepositoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RepositoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RepositoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

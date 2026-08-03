@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultLockInitParameters struct {
@@ -30,11 +30,11 @@ type VaultLockInitParameters struct {
 
 	// Reference to a Vault in glacier to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameRef *v1.Reference `json:"vaultNameRef,omitempty" tf:"-"`
+	VaultNameRef *v2.Reference `json:"vaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in glacier to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameSelector *v1.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
+	VaultNameSelector *v2.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
 type VaultLockObservation struct {
@@ -85,17 +85,17 @@ type VaultLockParameters struct {
 
 	// Reference to a Vault in glacier to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameRef *v1.Reference `json:"vaultNameRef,omitempty" tf:"-"`
+	VaultNameRef *v2.Reference `json:"vaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in glacier to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameSelector *v1.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
+	VaultNameSelector *v2.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
 // VaultLockSpec defines the desired state of VaultLock
 type VaultLockSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VaultLockParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VaultLockParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -111,8 +111,8 @@ type VaultLockSpec struct {
 
 // VaultLockStatus defines the observed state of VaultLock.
 type VaultLockStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultLockObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultLockObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

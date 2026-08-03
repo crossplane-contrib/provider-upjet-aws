@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionDefinitionInitParameters struct {
@@ -458,11 +457,11 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatefulRuleGroupReferenceObservation struct {
@@ -502,11 +501,11 @@ type StatefulRuleGroupReferenceParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatelessCustomActionInitParameters struct {
@@ -550,11 +549,11 @@ type StatelessRuleGroupReferenceInitParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatelessRuleGroupReferenceObservation struct {
@@ -580,11 +579,11 @@ type StatelessRuleGroupReferenceParameters struct {
 
 	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // FirewallPolicySpec defines the desired state of FirewallPolicy
@@ -606,8 +605,8 @@ type FirewallPolicySpec struct {
 
 // FirewallPolicyStatus defines the observed state of FirewallPolicy.
 type FirewallPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

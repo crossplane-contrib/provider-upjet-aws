@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserPoolUICustomizationInitParameters struct {
@@ -24,11 +24,11 @@ type UserPoolUICustomizationInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
 	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
@@ -39,11 +39,11 @@ type UserPoolUICustomizationInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type UserPoolUICustomizationObservation struct {
@@ -92,11 +92,11 @@ type UserPoolUICustomizationParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
 	// +kubebuilder:validation:Optional
@@ -114,17 +114,17 @@ type UserPoolUICustomizationParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 // UserPoolUICustomizationSpec defines the desired state of UserPoolUICustomization
 type UserPoolUICustomizationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserPoolUICustomizationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserPoolUICustomizationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -140,8 +140,8 @@ type UserPoolUICustomizationSpec struct {
 
 // UserPoolUICustomizationStatus defines the observed state of UserPoolUICustomization.
 type UserPoolUICustomizationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserPoolUICustomizationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserPoolUICustomizationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MountTargetInitParameters struct {
@@ -22,11 +21,11 @@ type MountTargetInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The address (within the address range of the specified subnet) at
 	// which the file system may be mounted via the mount target.
@@ -46,11 +45,11 @@ type MountTargetInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet to add the mount target in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -58,11 +57,11 @@ type MountTargetInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type MountTargetObservation struct {
@@ -126,11 +125,11 @@ type MountTargetParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.NamespacedReference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.NamespacedSelector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The address (within the address range of the specified subnet) at
 	// which the file system may be mounted via the mount target.
@@ -159,11 +158,11 @@ type MountTargetParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet to add the mount target in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -172,11 +171,11 @@ type MountTargetParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // MountTargetSpec defines the desired state of MountTarget
@@ -198,8 +197,8 @@ type MountTargetSpec struct {
 
 // MountTargetStatus defines the observed state of MountTarget.
 type MountTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MountTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MountTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

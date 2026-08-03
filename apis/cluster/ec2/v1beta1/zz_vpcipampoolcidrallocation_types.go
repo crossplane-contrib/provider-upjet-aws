@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCIpamPoolCidrAllocationInitParameters struct {
@@ -32,11 +32,11 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
@@ -115,11 +115,11 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	// +kubebuilder:validation:Optional
@@ -138,8 +138,8 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 // VPCIpamPoolCidrAllocationSpec defines the desired state of VPCIpamPoolCidrAllocation
 type VPCIpamPoolCidrAllocationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCIpamPoolCidrAllocationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCIpamPoolCidrAllocationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -155,8 +155,8 @@ type VPCIpamPoolCidrAllocationSpec struct {
 
 // VPCIpamPoolCidrAllocationStatus defines the observed state of VPCIpamPoolCidrAllocation.
 type VPCIpamPoolCidrAllocationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIpamPoolCidrAllocationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIpamPoolCidrAllocationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

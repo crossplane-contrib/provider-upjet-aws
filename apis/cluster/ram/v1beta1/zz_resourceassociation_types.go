@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceAssociationInitParameters struct {
@@ -25,11 +25,11 @@ type ResourceAssociationInitParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 type ResourceAssociationObservation struct {
@@ -67,17 +67,17 @@ type ResourceAssociationParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 // ResourceAssociationSpec defines the desired state of ResourceAssociation
 type ResourceAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourceAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -93,8 +93,8 @@ type ResourceAssociationSpec struct {
 
 // ResourceAssociationStatus defines the observed state of ResourceAssociation.
 type ResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

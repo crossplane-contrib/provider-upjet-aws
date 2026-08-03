@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeliveryChannelInitParameters struct {
@@ -22,11 +21,11 @@ type DeliveryChannelInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
 	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
@@ -78,11 +77,11 @@ type DeliveryChannelParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameRef *v1.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
+	S3BucketNameRef *v2.NamespacedReference `json:"s3BucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3BucketName.
 	// +kubebuilder:validation:Optional
-	S3BucketNameSelector *v1.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+	S3BucketNameSelector *v2.NamespacedSelector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -139,8 +138,8 @@ type DeliveryChannelSpec struct {
 
 // DeliveryChannelStatus defines the observed state of DeliveryChannel.
 type DeliveryChannelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeliveryChannelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeliveryChannelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

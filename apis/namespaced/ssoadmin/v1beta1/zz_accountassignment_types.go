@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountAssignmentInitParameters struct {
@@ -59,11 +58,11 @@ type AccountAssignmentParameters struct {
 
 	// Reference to a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnRef *v1.NamespacedReference `json:"permissionSetArnRef,omitempty" tf:"-"`
+	PermissionSetArnRef *v2.NamespacedReference `json:"permissionSetArnRef,omitempty" tf:"-"`
 
 	// Selector for a PermissionSet in ssoadmin to populate permissionSetArn.
 	// +kubebuilder:validation:Optional
-	PermissionSetArnSelector *v1.NamespacedSelector `json:"permissionSetArnSelector,omitempty" tf:"-"`
+	PermissionSetArnSelector *v2.NamespacedSelector `json:"permissionSetArnSelector,omitempty" tf:"-"`
 
 	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be set to the crossplane external-name of either a Group or User in the identitystore api group, but the Ref and Selector fields will only work with a Group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/identitystore/v1beta1.Group
@@ -74,11 +73,11 @@ type AccountAssignmentParameters struct {
 
 	// Reference to a Group in identitystore to populate principalId.
 	// +kubebuilder:validation:Optional
-	PrincipalIDFromGroupRef *v1.NamespacedReference `json:"principalIdFromGroupRef,omitempty" tf:"-"`
+	PrincipalIDFromGroupRef *v2.NamespacedReference `json:"principalIdFromGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in identitystore to populate principalId.
 	// +kubebuilder:validation:Optional
-	PrincipalIDFromGroupSelector *v1.NamespacedSelector `json:"principalIdFromGroupSelector,omitempty" tf:"-"`
+	PrincipalIDFromGroupSelector *v2.NamespacedSelector `json:"principalIdFromGroupSelector,omitempty" tf:"-"`
 
 	// The entity type for which the assignment will be created. Valid values: USER, GROUP.
 	// +kubebuilder:validation:Required
@@ -117,8 +116,8 @@ type AccountAssignmentSpec struct {
 
 // AccountAssignmentStatus defines the observed state of AccountAssignment.
 type AccountAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

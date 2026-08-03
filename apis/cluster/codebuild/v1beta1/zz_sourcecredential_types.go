@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SourceCredentialInitParameters struct {
@@ -26,7 +26,7 @@ type SourceCredentialInitParameters struct {
 	// For a GitHub and GitHub Enterprise, this is the personal access token. For Bitbucket, this is the
 	// app password. When using an AWS CodeStar connection (auth_type = "CODECONNECTIONS"), this is an AWS CodeStar
 	// Connection ARN.
-	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for
 	// other types of source providers or connections.
@@ -79,7 +79,7 @@ type SourceCredentialParameters struct {
 	// app password. When using an AWS CodeStar connection (auth_type = "CODECONNECTIONS"), this is an AWS CodeStar
 	// Connection ARN.
 	// +kubebuilder:validation:Optional
-	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for
 	// other types of source providers or connections.
@@ -89,8 +89,8 @@ type SourceCredentialParameters struct {
 
 // SourceCredentialSpec defines the desired state of SourceCredential
 type SourceCredentialSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SourceCredentialParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SourceCredentialParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,8 +106,8 @@ type SourceCredentialSpec struct {
 
 // SourceCredentialStatus defines the observed state of SourceCredential.
 type SourceCredentialStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SourceCredentialObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SourceCredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

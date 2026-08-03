@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyAttachmentInitParameters struct {
@@ -21,11 +21,11 @@ type PolicyAttachmentInitParameters struct {
 
 	// Reference to a Policy in iot to populate policy.
 	// +kubebuilder:validation:Optional
-	PolicyRef *v1.Reference `json:"policyRef,omitempty" tf:"-"`
+	PolicyRef *v2.Reference `json:"policyRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iot to populate policy.
 	// +kubebuilder:validation:Optional
-	PolicySelector *v1.Selector `json:"policySelector,omitempty" tf:"-"`
+	PolicySelector *v2.Selector `json:"policySelector,omitempty" tf:"-"`
 
 	// The identity to which the policy is attached.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iot/v1beta1.Certificate
@@ -34,11 +34,11 @@ type PolicyAttachmentInitParameters struct {
 
 	// Reference to a Certificate in iot to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in iot to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type PolicyAttachmentObservation struct {
@@ -64,11 +64,11 @@ type PolicyAttachmentParameters struct {
 
 	// Reference to a Policy in iot to populate policy.
 	// +kubebuilder:validation:Optional
-	PolicyRef *v1.Reference `json:"policyRef,omitempty" tf:"-"`
+	PolicyRef *v2.Reference `json:"policyRef,omitempty" tf:"-"`
 
 	// Selector for a Policy in iot to populate policy.
 	// +kubebuilder:validation:Optional
-	PolicySelector *v1.Selector `json:"policySelector,omitempty" tf:"-"`
+	PolicySelector *v2.Selector `json:"policySelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -83,17 +83,17 @@ type PolicyAttachmentParameters struct {
 
 	// Reference to a Certificate in iot to populate target.
 	// +kubebuilder:validation:Optional
-	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+	TargetRef *v2.Reference `json:"targetRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in iot to populate target.
 	// +kubebuilder:validation:Optional
-	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+	TargetSelector *v2.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 // PolicyAttachmentSpec defines the desired state of PolicyAttachment
 type PolicyAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -109,8 +109,8 @@ type PolicyAttachmentSpec struct {
 
 // PolicyAttachmentStatus defines the observed state of PolicyAttachment.
 type PolicyAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

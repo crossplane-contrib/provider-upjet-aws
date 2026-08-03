@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterRoleAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type ClusterRoleAssociationInitParameters struct {
 
 	// Reference to a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierRef *v1.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+	DBClusterIdentifierRef *v2.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierSelector *v1.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
+	DBClusterIdentifierSelector *v2.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
@@ -39,11 +38,11 @@ type ClusterRoleAssociationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ClusterRoleAssociationObservation struct {
@@ -75,11 +74,11 @@ type ClusterRoleAssociationParameters struct {
 
 	// Reference to a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierRef *v1.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+	DBClusterIdentifierRef *v2.NamespacedReference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate dbClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifierSelector *v1.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
+	DBClusterIdentifierSelector *v2.NamespacedSelector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
 	// +kubebuilder:validation:Optional
@@ -98,11 +97,11 @@ type ClusterRoleAssociationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 // ClusterRoleAssociationSpec defines the desired state of ClusterRoleAssociation
@@ -124,8 +123,8 @@ type ClusterRoleAssociationSpec struct {
 
 // ClusterRoleAssociationStatus defines the observed state of ClusterRoleAssociation.
 type ClusterRoleAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterRoleAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterRoleAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

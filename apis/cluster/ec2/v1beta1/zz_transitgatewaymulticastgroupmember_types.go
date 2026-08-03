@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayMulticastGroupMemberInitParameters struct {
@@ -25,11 +25,11 @@ type TransitGatewayMulticastGroupMemberInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayMulticastDomain
@@ -38,11 +38,11 @@ type TransitGatewayMulticastGroupMemberInitParameters struct {
 
 	// Reference to a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDRef *v1.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDRef *v2.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDSelector *v1.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDSelector *v2.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayMulticastGroupMemberObservation struct {
@@ -78,11 +78,11 @@ type TransitGatewayMulticastGroupMemberParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -97,17 +97,17 @@ type TransitGatewayMulticastGroupMemberParameters struct {
 
 	// Reference to a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDRef *v1.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDRef *v2.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDSelector *v1.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDSelector *v2.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayMulticastGroupMemberSpec defines the desired state of TransitGatewayMulticastGroupMember
 type TransitGatewayMulticastGroupMemberSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayMulticastGroupMemberParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayMulticastGroupMemberParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -123,8 +123,8 @@ type TransitGatewayMulticastGroupMemberSpec struct {
 
 // TransitGatewayMulticastGroupMemberStatus defines the observed state of TransitGatewayMulticastGroupMember.
 type TransitGatewayMulticastGroupMemberStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayMulticastGroupMemberObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayMulticastGroupMemberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

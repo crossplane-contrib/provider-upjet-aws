@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConstraintsInitParameters struct {
@@ -64,11 +64,11 @@ type GrantInitParameters struct {
 
 	// Reference to a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
-	GranteePrincipalRef *v1.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
+	GranteePrincipalRef *v2.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
-	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
+	GranteePrincipalSelector *v2.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -77,11 +77,11 @@ type GrantInitParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// A friendly name for identifying the grant.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -156,11 +156,11 @@ type GrantParameters struct {
 
 	// Reference to a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
-	GranteePrincipalRef *v1.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
+	GranteePrincipalRef *v2.Reference `json:"granteePrincipalRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate granteePrincipal.
 	// +kubebuilder:validation:Optional
-	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
+	GranteePrincipalSelector *v2.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
@@ -170,11 +170,11 @@ type GrantParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// A friendly name for identifying the grant.
 	// +kubebuilder:validation:Optional
@@ -202,8 +202,8 @@ type GrantParameters struct {
 
 // GrantSpec defines the desired state of Grant
 type GrantSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GrantParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GrantParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -219,8 +219,8 @@ type GrantSpec struct {
 
 // GrantStatus defines the observed state of Grant.
 type GrantStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GrantObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GrantObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

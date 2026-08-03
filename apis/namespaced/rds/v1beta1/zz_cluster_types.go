@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterInitParameters struct {
@@ -63,11 +62,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBClusterParameterGroupNameRef *v1.NamespacedReference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+	DBClusterParameterGroupNameRef *v2.NamespacedReference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBClusterParameterGroupNameSelector *v1.NamespacedSelector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
+	DBClusterParameterGroupNameSelector *v2.NamespacedSelector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.ParameterGroup
@@ -75,11 +74,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate dbInstanceParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBInstanceParameterGroupNameRef *v1.NamespacedReference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
+	DBInstanceParameterGroupNameRef *v2.NamespacedReference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBInstanceParameterGroupNameSelector *v1.NamespacedSelector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
+	DBInstanceParameterGroupNameSelector *v2.NamespacedSelector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
@@ -88,11 +87,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.NamespacedReference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.NamespacedReference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// For use with RDS Custom.
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
@@ -161,21 +160,21 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
-	MasterPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
 	// Only required unless manage_master_user_password is set to true, a snapshot_identifier, replication_source_identifier, or master_password is provided or unless a global_cluster_identifier is provided when the cluster is the "secondary" cluster of a global database) Password for the master DB user. Note that this may show up in logs. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
-	MasterPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+	MasterPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
 	MasterPasswordWoVersion *float64 `json:"masterPasswordWoVersion,omitempty" tf:"master_password_wo_version,omitempty"`
@@ -187,11 +186,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDRef *v1.NamespacedReference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDRef *v2.NamespacedReference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDSelector *v1.NamespacedSelector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDSelector *v2.NamespacedSelector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -206,11 +205,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.NamespacedReference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.NamespacedReference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
@@ -224,11 +223,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
@@ -278,11 +277,11 @@ type ClusterInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -614,11 +613,11 @@ type ClusterParameters struct {
 
 	// Reference to a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBClusterParameterGroupNameRef *v1.NamespacedReference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+	DBClusterParameterGroupNameRef *v2.NamespacedReference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBClusterParameterGroupNameSelector *v1.NamespacedSelector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
+	DBClusterParameterGroupNameSelector *v2.NamespacedSelector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/rds/v1beta1.ParameterGroup
@@ -627,11 +626,11 @@ type ClusterParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate dbInstanceParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBInstanceParameterGroupNameRef *v1.NamespacedReference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
+	DBInstanceParameterGroupNameRef *v2.NamespacedReference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.
 	// +kubebuilder:validation:Optional
-	DBInstanceParameterGroupNameSelector *v1.NamespacedSelector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
+	DBInstanceParameterGroupNameSelector *v2.NamespacedSelector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
@@ -641,11 +640,11 @@ type ClusterParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.NamespacedReference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.NamespacedReference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.NamespacedSelector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// For use with RDS Custom.
 	// +kubebuilder:validation:Optional
@@ -734,11 +733,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.
 	// +kubebuilder:validation:Optional
@@ -747,11 +746,11 @@ type ClusterParameters struct {
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
-	MasterPasswordSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
+	MasterPasswordSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
 	// Only required unless manage_master_user_password is set to true, a snapshot_identifier, replication_source_identifier, or master_password is provided or unless a global_cluster_identifier is provided when the cluster is the "secondary" cluster of a global database) Password for the master DB user. Note that this may show up in logs. Please refer to the RDS Naming Constraints. Cannot be set if manage_master_user_password is set to true.
 	// +kubebuilder:validation:Optional
-	MasterPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
+	MasterPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"masterPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with master_password_wo to trigger an update. Increment this value when an update to the master_password_wo is required.
 	// +kubebuilder:validation:Optional
@@ -765,11 +764,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDRef *v1.NamespacedReference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDRef *v2.NamespacedReference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDSelector *v1.NamespacedSelector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDSelector *v2.NamespacedSelector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	// +kubebuilder:validation:Optional
@@ -787,11 +786,11 @@ type ClusterParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.NamespacedReference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.NamespacedReference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.NamespacedSelector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	// +kubebuilder:validation:Optional
@@ -808,11 +807,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.NamespacedReference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.NamespacedSelector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the amount of time to retain performance insights data for. Defaults to 7 days if Performance Insights are enabled. Valid values are 7, month * 31 (where month is a number of months from 1-23), and 731. See here for more information on retention periods.
 	// +kubebuilder:validation:Optional
@@ -882,11 +881,11 @@ type ClusterParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.NamespacedReference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to associate with the Cluster
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -912,11 +911,11 @@ type ClusterRestoreToPointInTimeInitParameters struct {
 
 	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceClusterIdentifierRef *v1.NamespacedReference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
+	SourceClusterIdentifierRef *v2.NamespacedReference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceClusterIdentifierSelector *v1.NamespacedSelector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
+	SourceClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Cluster resource ID of the source database cluster from which to restore. To be used for restoring a deleted cluster in the same account which still has a retained automatic backup available.
 	SourceClusterResourceID *string `json:"sourceClusterResourceId,omitempty" tf:"source_cluster_resource_id,omitempty"`
@@ -962,11 +961,11 @@ type ClusterRestoreToPointInTimeParameters struct {
 
 	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceClusterIdentifierRef *v1.NamespacedReference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
+	SourceClusterIdentifierRef *v2.NamespacedReference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
-	SourceClusterIdentifierSelector *v1.NamespacedSelector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
+	SourceClusterIdentifierSelector *v2.NamespacedSelector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Cluster resource ID of the source database cluster from which to restore. To be used for restoring a deleted cluster in the same account which still has a retained automatic backup available.
 	// +kubebuilder:validation:Optional
@@ -985,11 +984,11 @@ type ClusterS3ImportInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Can be blank, but is the path to your backup
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -1031,11 +1030,11 @@ type ClusterS3ImportParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Can be blank, but is the path to your backup
 	// +kubebuilder:validation:Optional
@@ -1181,8 +1180,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

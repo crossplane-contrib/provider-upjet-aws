@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReportDefinitionInitParameters struct {
@@ -42,11 +41,11 @@ type ReportDefinitionInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
@@ -145,11 +144,11 @@ type ReportDefinitionParameters struct {
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// Report path prefix. Limited to 256 characters. May be empty ("") but the resource can then not be modified via the AWS Console.
 	// +kubebuilder:validation:Optional
@@ -188,8 +187,8 @@ type ReportDefinitionSpec struct {
 
 // ReportDefinitionStatus defines the observed state of ReportDefinition.
 type ReportDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReportDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReportDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

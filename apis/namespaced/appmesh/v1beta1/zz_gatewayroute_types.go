@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -110,11 +109,11 @@ type ActionTargetVirtualServiceInitParameters struct {
 
 	// Reference to a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameRef *v1.NamespacedReference `json:"virtualServiceNameRef,omitempty" tf:"-"`
+	VirtualServiceNameRef *v2.NamespacedReference `json:"virtualServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameSelector *v1.NamespacedSelector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
+	VirtualServiceNameSelector *v2.NamespacedSelector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
 }
 
 type ActionTargetVirtualServiceObservation struct {
@@ -133,11 +132,11 @@ type ActionTargetVirtualServiceParameters struct {
 
 	// Reference to a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameRef *v1.NamespacedReference `json:"virtualServiceNameRef,omitempty" tf:"-"`
+	VirtualServiceNameRef *v2.NamespacedReference `json:"virtualServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualService in appmesh to populate virtualServiceName.
 	// +kubebuilder:validation:Optional
-	VirtualServiceNameSelector *v1.NamespacedSelector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
+	VirtualServiceNameSelector *v2.NamespacedSelector `json:"virtualServiceNameSelector,omitempty" tf:"-"`
 }
 
 type GRPCRouteInitParameters struct {
@@ -194,11 +193,11 @@ type GatewayRouteInitParameters struct {
 
 	// Reference to a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameRef *v1.NamespacedReference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
+	VirtualGatewayNameRef *v2.NamespacedReference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameSelector *v1.NamespacedSelector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
+	VirtualGatewayNameSelector *v2.NamespacedSelector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
 }
 
 type GatewayRouteObservation struct {
@@ -282,11 +281,11 @@ type GatewayRouteParameters struct {
 
 	// Reference to a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameRef *v1.NamespacedReference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
+	VirtualGatewayNameRef *v2.NamespacedReference `json:"virtualGatewayNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualGateway in appmesh to populate virtualGatewayName.
 	// +kubebuilder:validation:Optional
-	VirtualGatewayNameSelector *v1.NamespacedSelector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
+	VirtualGatewayNameSelector *v2.NamespacedSelector `json:"virtualGatewayNameSelector,omitempty" tf:"-"`
 }
 
 type HTTPRouteActionInitParameters struct {
@@ -1375,8 +1374,8 @@ type GatewayRouteSpec struct {
 
 // GatewayRouteStatus defines the observed state of GatewayRoute.
 type GatewayRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayRouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayRouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

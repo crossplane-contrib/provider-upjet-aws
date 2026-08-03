@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ScriptInitParameters struct {
@@ -102,11 +102,11 @@ type ScriptStorageLocationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your script files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Object
@@ -115,11 +115,11 @@ type ScriptStorageLocationInitParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.Reference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
 	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
@@ -131,11 +131,11 @@ type ScriptStorageLocationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ScriptStorageLocationObservation struct {
@@ -162,11 +162,11 @@ type ScriptStorageLocationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name of the zip file containing your script files.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta1.Object
@@ -176,11 +176,11 @@ type ScriptStorageLocationParameters struct {
 
 	// Reference to a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+	KeyRef *v2.Reference `json:"keyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate key.
 	// +kubebuilder:validation:Optional
-	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
+	KeySelector *v2.Selector `json:"keySelector,omitempty" tf:"-"`
 
 	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	// +kubebuilder:validation:Optional
@@ -194,17 +194,17 @@ type ScriptStorageLocationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 // ScriptSpec defines the desired state of Script
 type ScriptSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ScriptParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ScriptParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -220,8 +220,8 @@ type ScriptSpec struct {
 
 // ScriptStatus defines the observed state of Script.
 type ScriptStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScriptObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScriptObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

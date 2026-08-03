@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BedrockEvaluatorModelConfigInitParameters struct {
@@ -146,11 +146,11 @@ type EvaluatorInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Evaluation level that determines the scope of evaluation. Valid values: TOOL_CALL, TRACE, SESSION.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
@@ -228,11 +228,11 @@ type EvaluatorParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Evaluation level that determines the scope of evaluation. Valid values: TOOL_CALL, TRACE, SESSION.
 	// +kubebuilder:validation:Optional
@@ -307,11 +307,11 @@ type LambdaConfigInitParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
 	// Time in seconds to wait for the Lambda function before timing out. Defaults to 60. Range 1–300.
 	LambdaTimeoutInSeconds *float64 `json:"lambdaTimeoutInSeconds,omitempty" tf:"lambda_timeout_in_seconds,omitempty"`
@@ -336,11 +336,11 @@ type LambdaConfigParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
 	// Time in seconds to wait for the Lambda function before timing out. Defaults to 60. Range 1–300.
 	// +kubebuilder:validation:Optional
@@ -350,7 +350,7 @@ type LambdaConfigParameters struct {
 type LlmAsAJudgeInitParameters struct {
 
 	// Instructions that tell the model how to score the agent.
-	InstructionsSecretRef v1.SecretKeySelector `json:"instructionsSecretRef" tf:"-"`
+	InstructionsSecretRef v2.SecretKeySelector `json:"instructionsSecretRef" tf:"-"`
 
 	// Which Bedrock model to use. See model_config below.
 	ModelConfig *ModelConfigInitParameters `json:"modelConfig,omitempty" tf:"model_config,omitempty"`
@@ -372,7 +372,7 @@ type LlmAsAJudgeParameters struct {
 
 	// Instructions that tell the model how to score the agent.
 	// +kubebuilder:validation:Optional
-	InstructionsSecretRef v1.SecretKeySelector `json:"instructionsSecretRef" tf:"-"`
+	InstructionsSecretRef v2.SecretKeySelector `json:"instructionsSecretRef" tf:"-"`
 
 	// Which Bedrock model to use. See model_config below.
 	// +kubebuilder:validation:Optional
@@ -472,8 +472,8 @@ type RatingScaleParameters struct {
 
 // EvaluatorSpec defines the desired state of Evaluator
 type EvaluatorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EvaluatorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EvaluatorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -489,8 +489,8 @@ type EvaluatorSpec struct {
 
 // EvaluatorStatus defines the observed state of Evaluator.
 type EvaluatorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EvaluatorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EvaluatorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

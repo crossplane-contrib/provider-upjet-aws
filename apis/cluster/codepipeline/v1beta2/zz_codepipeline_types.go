@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -163,11 +163,11 @@ type ArtifactStoreInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The type of the artifact store, such as Amazon S3
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -201,11 +201,11 @@ type ArtifactStoreParameters struct {
 
 	// Reference to a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The region where the artifact store is located. Required for a cross-region CodePipeline, do not provide for a single-region CodePipeline.
 	// +kubebuilder:validation:Optional
@@ -282,11 +282,11 @@ type CodepipelineInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// (Minimum of at least two stage blocks is required) A stage block. Stages are documented below.
 	Stage []StageInitParameters `json:"stage,omitempty" tf:"stage,omitempty"`
@@ -374,11 +374,11 @@ type CodepipelineParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// (Minimum of at least two stage blocks is required) A stage block. Stages are documented below.
 	// +kubebuilder:validation:Optional
@@ -1511,8 +1511,8 @@ type VariableParameters struct {
 
 // CodepipelineSpec defines the desired state of Codepipeline
 type CodepipelineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CodepipelineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CodepipelineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1528,8 +1528,8 @@ type CodepipelineSpec struct {
 
 // CodepipelineStatus defines the observed state of Codepipeline.
 type CodepipelineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CodepipelineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CodepipelineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

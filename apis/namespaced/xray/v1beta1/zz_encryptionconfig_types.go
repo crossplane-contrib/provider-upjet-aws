@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionConfigInitParameters struct {
@@ -23,11 +22,11 @@ type EncryptionConfigInitParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -59,11 +58,11 @@ type EncryptionConfigParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -94,8 +93,8 @@ type EncryptionConfigSpec struct {
 
 // EncryptionConfigStatus defines the observed state of EncryptionConfig.
 type EncryptionConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EncryptionConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EncryptionConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

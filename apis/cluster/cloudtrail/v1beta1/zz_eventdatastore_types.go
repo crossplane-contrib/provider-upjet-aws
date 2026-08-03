@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedEventSelectorFieldSelectorInitParameters struct {
@@ -135,11 +135,11 @@ type EventDataStoreInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created. Default: true.
 	MultiRegionEnabled *bool `json:"multiRegionEnabled,omitempty" tf:"multi_region_enabled,omitempty"`
@@ -229,11 +229,11 @@ type EventDataStoreParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created. Default: true.
 	// +kubebuilder:validation:Optional
@@ -272,8 +272,8 @@ type EventDataStoreParameters struct {
 
 // EventDataStoreSpec defines the desired state of EventDataStore
 type EventDataStoreSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventDataStoreParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventDataStoreParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -289,8 +289,8 @@ type EventDataStoreSpec struct {
 
 // EventDataStoreStatus defines the observed state of EventDataStore.
 type EventDataStoreStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventDataStoreObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventDataStoreObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

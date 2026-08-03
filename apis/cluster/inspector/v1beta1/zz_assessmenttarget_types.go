@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssessmentTargetInitParameters struct {
@@ -25,11 +25,11 @@ type AssessmentTargetInitParameters struct {
 
 	// Reference to a ResourceGroup in inspector to populate resourceGroupArn.
 	// +kubebuilder:validation:Optional
-	ResourceGroupArnRef *v1.Reference `json:"resourceGroupArnRef,omitempty" tf:"-"`
+	ResourceGroupArnRef *v2.Reference `json:"resourceGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in inspector to populate resourceGroupArn.
 	// +kubebuilder:validation:Optional
-	ResourceGroupArnSelector *v1.Selector `json:"resourceGroupArnSelector,omitempty" tf:"-"`
+	ResourceGroupArnSelector *v2.Selector `json:"resourceGroupArnSelector,omitempty" tf:"-"`
 }
 
 type AssessmentTargetObservation struct {
@@ -69,17 +69,17 @@ type AssessmentTargetParameters struct {
 
 	// Reference to a ResourceGroup in inspector to populate resourceGroupArn.
 	// +kubebuilder:validation:Optional
-	ResourceGroupArnRef *v1.Reference `json:"resourceGroupArnRef,omitempty" tf:"-"`
+	ResourceGroupArnRef *v2.Reference `json:"resourceGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in inspector to populate resourceGroupArn.
 	// +kubebuilder:validation:Optional
-	ResourceGroupArnSelector *v1.Selector `json:"resourceGroupArnSelector,omitempty" tf:"-"`
+	ResourceGroupArnSelector *v2.Selector `json:"resourceGroupArnSelector,omitempty" tf:"-"`
 }
 
 // AssessmentTargetSpec defines the desired state of AssessmentTarget
 type AssessmentTargetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AssessmentTargetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AssessmentTargetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -95,8 +95,8 @@ type AssessmentTargetSpec struct {
 
 // AssessmentTargetStatus defines the observed state of AssessmentTarget.
 type AssessmentTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AssessmentTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AssessmentTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

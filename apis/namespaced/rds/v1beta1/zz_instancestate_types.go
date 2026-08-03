@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceStateInitParameters struct {
@@ -23,11 +22,11 @@ type InstanceStateInitParameters struct {
 
 	// Reference to a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Configured state of the DB Instance. Valid values are available and stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -57,11 +56,11 @@ type InstanceStateParameters struct {
 
 	// Reference to a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierRef *v1.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
+	IdentifierRef *v2.NamespacedReference `json:"identifierRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate identifier.
 	// +kubebuilder:validation:Optional
-	IdentifierSelector *v1.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
+	IdentifierSelector *v2.NamespacedSelector `json:"identifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -92,8 +91,8 @@ type InstanceStateSpec struct {
 
 // InstanceStateStatus defines the observed state of InstanceState.
 type InstanceStateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceStateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceStateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

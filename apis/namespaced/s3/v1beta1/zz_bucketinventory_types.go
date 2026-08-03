@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketInventoryDestinationInitParameters struct {
@@ -61,11 +60,11 @@ type BucketInventoryInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	Destination *BucketInventoryDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -134,11 +133,11 @@ type BucketInventoryParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
 	// +kubebuilder:validation:Optional
@@ -187,11 +186,11 @@ type DestinationBucketInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -235,11 +234,11 @@ type DestinationBucketParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	// +kubebuilder:validation:Optional
@@ -349,8 +348,8 @@ type BucketInventorySpec struct {
 
 // BucketInventoryStatus defines the observed state of BucketInventory.
 type BucketInventoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketInventoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketInventoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

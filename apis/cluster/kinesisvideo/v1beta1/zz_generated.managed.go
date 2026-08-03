@@ -5,54 +5,54 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Stream.
-func (mg *Stream) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Stream) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Stream.
-func (mg *Stream) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Stream) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Stream.
-func (mg *Stream) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Stream) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Stream.
-func (mg *Stream) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Stream) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Stream.
-func (mg *Stream) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Stream) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Stream.
-func (mg *Stream) SetConditions(c ...xpv1.Condition) {
+func (mg *Stream) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Stream.
-func (mg *Stream) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Stream) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Stream.
-func (mg *Stream) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Stream) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Stream.
-func (mg *Stream) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Stream) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Stream.
-func (mg *Stream) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Stream) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

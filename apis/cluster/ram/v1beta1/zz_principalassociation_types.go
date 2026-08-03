@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrincipalAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type PrincipalAssociationInitParameters struct {
 
 	// Reference to a Organization in organizations to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
+	PrincipalRef *v2.Reference `json:"principalRef,omitempty" tf:"-"`
 
 	// Selector for a Organization in organizations to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
+	PrincipalSelector *v2.Selector `json:"principalSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ram/v1beta1.ResourceShare
@@ -35,11 +35,11 @@ type PrincipalAssociationInitParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 type PrincipalAssociationObservation struct {
@@ -68,11 +68,11 @@ type PrincipalAssociationParameters struct {
 
 	// Reference to a Organization in organizations to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
+	PrincipalRef *v2.Reference `json:"principalRef,omitempty" tf:"-"`
 
 	// Selector for a Organization in organizations to populate principal.
 	// +kubebuilder:validation:Optional
-	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
+	PrincipalSelector *v2.Selector `json:"principalSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -87,17 +87,17 @@ type PrincipalAssociationParameters struct {
 
 	// Reference to a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+	ResourceShareArnRef *v2.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceShare in ram to populate resourceShareArn.
 	// +kubebuilder:validation:Optional
-	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
+	ResourceShareArnSelector *v2.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 // PrincipalAssociationSpec defines the desired state of PrincipalAssociation
 type PrincipalAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrincipalAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrincipalAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type PrincipalAssociationSpec struct {
 
 // PrincipalAssociationStatus defines the observed state of PrincipalAssociation.
 type PrincipalAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrincipalAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrincipalAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

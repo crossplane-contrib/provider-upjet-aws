@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InputDestinationsInitParameters struct {
@@ -67,11 +66,11 @@ type InputInitParameters struct {
 
 	// References to InputSecurityGroup in medialive to populate inputSecurityGroups.
 	// +kubebuilder:validation:Optional
-	InputSecurityGroupsRefs []v1.NamespacedReference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
+	InputSecurityGroupsRefs []v2.NamespacedReference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of InputSecurityGroup in medialive to populate inputSecurityGroups.
 	// +kubebuilder:validation:Optional
-	InputSecurityGroupsSelector *v1.NamespacedSelector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
+	InputSecurityGroupsSelector *v2.NamespacedSelector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
 	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
 	MediaConnectFlows []MediaConnectFlowsInitParameters `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
@@ -86,11 +85,11 @@ type InputInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The source URLs for a PULL-type input. See Sources for more details.
 	Sources []SourcesInitParameters `json:"sources,omitempty" tf:"sources,omitempty"`
@@ -183,11 +182,11 @@ type InputParameters struct {
 
 	// References to InputSecurityGroup in medialive to populate inputSecurityGroups.
 	// +kubebuilder:validation:Optional
-	InputSecurityGroupsRefs []v1.NamespacedReference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
+	InputSecurityGroupsRefs []v2.NamespacedReference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of InputSecurityGroup in medialive to populate inputSecurityGroups.
 	// +kubebuilder:validation:Optional
-	InputSecurityGroupsSelector *v1.NamespacedSelector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
+	InputSecurityGroupsSelector *v2.NamespacedSelector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
 	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
 	// +kubebuilder:validation:Optional
@@ -210,11 +209,11 @@ type InputParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The source URLs for a PULL-type input. See Sources for more details.
 	// +kubebuilder:validation:Optional
@@ -340,8 +339,8 @@ type InputSpec struct {
 
 // InputStatus defines the observed state of Input.
 type InputStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InputObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InputObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

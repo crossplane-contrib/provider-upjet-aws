@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutboundCallerConfigInitParameters struct {
@@ -64,11 +64,11 @@ type QueueInitParameters struct {
 
 	// Reference to a HoursOfOperation in connect to populate hoursOfOperationId.
 	// +kubebuilder:validation:Optional
-	HoursOfOperationIDRef *v1.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
+	HoursOfOperationIDRef *v2.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
 
 	// Selector for a HoursOfOperation in connect to populate hoursOfOperationId.
 	// +kubebuilder:validation:Optional
-	HoursOfOperationIDSelector *v1.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
+	HoursOfOperationIDSelector *v2.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/connect/v1beta1.Instance
@@ -77,11 +77,11 @@ type QueueInitParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
 	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
@@ -167,11 +167,11 @@ type QueueParameters struct {
 
 	// Reference to a HoursOfOperation in connect to populate hoursOfOperationId.
 	// +kubebuilder:validation:Optional
-	HoursOfOperationIDRef *v1.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
+	HoursOfOperationIDRef *v2.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
 
 	// Selector for a HoursOfOperation in connect to populate hoursOfOperationId.
 	// +kubebuilder:validation:Optional
-	HoursOfOperationIDSelector *v1.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
+	HoursOfOperationIDSelector *v2.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/connect/v1beta1.Instance
@@ -181,11 +181,11 @@ type QueueParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
 	// +kubebuilder:validation:Optional
@@ -221,8 +221,8 @@ type QueueParameters struct {
 
 // QueueSpec defines the desired state of Queue
 type QueueSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     QueueParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   QueueParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -238,8 +238,8 @@ type QueueSpec struct {
 
 // QueueStatus defines the observed state of Queue.
 type QueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateInitParameters struct {
@@ -22,11 +21,11 @@ type CertificateInitParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
@@ -51,7 +50,7 @@ type CertificateInitParameters struct {
 	Options *OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Certificate's PEM-formatted private key. Conflicts with private_key_wo.
-	PrivateKeySecretRef *v1.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
 	PrivateKeyWo *string `json:"privateKeyWo,omitempty" tf:"private_key_wo,omitempty"`
@@ -174,11 +173,11 @@ type CertificateParameters struct {
 
 	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnRef *v1.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+	CertificateAuthorityArnRef *v2.NamespacedReference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
 
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
-	CertificateAuthorityArnSelector *v1.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+	CertificateAuthorityArnSelector *v2.NamespacedSelector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	// +kubebuilder:validation:Optional
@@ -210,7 +209,7 @@ type CertificateParameters struct {
 
 	// Certificate's PEM-formatted private key. Conflicts with private_key_wo.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef *v1.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+	PrivateKeySecretRef *v2.LocalSecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted private key. Conflicts with private_key. Must be used together with private_key_wo_version.
 	// +kubebuilder:validation:Optional
@@ -359,8 +358,8 @@ type CertificateSpec struct {
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

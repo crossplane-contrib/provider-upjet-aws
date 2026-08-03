@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GatewayAssociationProposalInitParameters struct {
@@ -27,11 +26,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.NamespacedReference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.NamespacedReference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.NamespacedSelector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.NamespacedSelector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
@@ -40,11 +39,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
@@ -53,11 +52,11 @@ type GatewayAssociationProposalInitParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDRef *v1.NamespacedReference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDRef *v2.NamespacedReference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDSelector *v1.NamespacedSelector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDSelector *v2.NamespacedSelector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayAssociationProposalObservation struct {
@@ -104,11 +103,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDRef *v1.NamespacedReference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+	AssociatedGatewayIDRef *v2.NamespacedReference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
 	// +kubebuilder:validation:Optional
-	AssociatedGatewayIDSelector *v1.NamespacedSelector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+	AssociatedGatewayIDSelector *v2.NamespacedSelector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
 
 	// Direct Connect Gateway identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
@@ -118,11 +117,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDRef *v1.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+	DxGatewayIDRef *v2.NamespacedReference `json:"dxGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayId.
 	// +kubebuilder:validation:Optional
-	DxGatewayIDSelector *v1.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+	DxGatewayIDSelector *v2.NamespacedSelector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
 
 	// AWS Account identifier of the Direct Connect Gateway's owner.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/directconnect/v1beta1.Gateway
@@ -132,11 +131,11 @@ type GatewayAssociationProposalParameters struct {
 
 	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDRef *v1.NamespacedReference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDRef *v2.NamespacedReference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in directconnect to populate dxGatewayOwnerAccountId.
 	// +kubebuilder:validation:Optional
-	DxGatewayOwnerAccountIDSelector *v1.NamespacedSelector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
+	DxGatewayOwnerAccountIDSelector *v2.NamespacedSelector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -163,8 +162,8 @@ type GatewayAssociationProposalSpec struct {
 
 // GatewayAssociationProposalStatus defines the observed state of GatewayAssociationProposal.
 type GatewayAssociationProposalStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayAssociationProposalObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayAssociationProposalObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

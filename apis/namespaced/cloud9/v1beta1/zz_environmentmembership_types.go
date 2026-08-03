@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentMembershipInitParameters struct {
@@ -52,11 +51,11 @@ type EnvironmentMembershipParameters struct {
 
 	// Reference to a EnvironmentEC2 in cloud9 to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDRef *v1.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
+	EnvironmentIDRef *v2.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a EnvironmentEC2 in cloud9 to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDSelector *v1.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
+	EnvironmentIDSelector *v2.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
 
 	// The type of environment member permissions you want to associate with this environment member. Allowed values are read-only and read-write .
 	// +kubebuilder:validation:Optional
@@ -75,11 +74,11 @@ type EnvironmentMembershipParameters struct {
 
 	// Reference to a User in iam to populate userArn.
 	// +kubebuilder:validation:Optional
-	UserArnRef *v1.NamespacedReference `json:"userArnRef,omitempty" tf:"-"`
+	UserArnRef *v2.NamespacedReference `json:"userArnRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate userArn.
 	// +kubebuilder:validation:Optional
-	UserArnSelector *v1.NamespacedSelector `json:"userArnSelector,omitempty" tf:"-"`
+	UserArnSelector *v2.NamespacedSelector `json:"userArnSelector,omitempty" tf:"-"`
 }
 
 // EnvironmentMembershipSpec defines the desired state of EnvironmentMembership
@@ -101,8 +100,8 @@ type EnvironmentMembershipSpec struct {
 
 // EnvironmentMembershipStatus defines the observed state of EnvironmentMembership.
 type EnvironmentMembershipStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentMembershipObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentMembershipObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

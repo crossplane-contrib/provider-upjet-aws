@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AnalyticsConfigurationInitParameters struct {
@@ -25,11 +25,11 @@ type AnalyticsConfigurationInitParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
@@ -41,11 +41,11 @@ type AnalyticsConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// If set to true, Amazon Cognito will include user data in the events it publishes to AWS End User Messaging analytics.
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
@@ -83,11 +83,11 @@ type AnalyticsConfigurationParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.Reference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	// +kubebuilder:validation:Optional
@@ -101,11 +101,11 @@ type AnalyticsConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.Reference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// If set to true, Amazon Cognito will include user data in the events it publishes to AWS End User Messaging analytics.
 	// +kubebuilder:validation:Optional
@@ -258,11 +258,11 @@ type UserPoolClientInitParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// List of user pool attributes that the application client can write to.
 	// +listType=set
@@ -461,11 +461,11 @@ type UserPoolClientParameters struct {
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+	UserPoolIDRef *v2.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
-	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+	UserPoolIDSelector *v2.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// List of user pool attributes that the application client can write to.
 	// +kubebuilder:validation:Optional
@@ -475,8 +475,8 @@ type UserPoolClientParameters struct {
 
 // UserPoolClientSpec defines the desired state of UserPoolClient
 type UserPoolClientSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UserPoolClientParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UserPoolClientParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -492,8 +492,8 @@ type UserPoolClientSpec struct {
 
 // UserPoolClientStatus defines the observed state of UserPoolClient.
 type UserPoolClientStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserPoolClientObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserPoolClientObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

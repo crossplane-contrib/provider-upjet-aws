@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DelegatedAdministratorInitParameters struct {
@@ -21,11 +21,11 @@ type DelegatedAdministratorInitParameters struct {
 
 	// Reference to a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.Reference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
@@ -73,11 +73,11 @@ type DelegatedAdministratorParameters struct {
 
 	// Reference to a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.Reference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in organizations to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	// +kubebuilder:validation:Optional
@@ -86,8 +86,8 @@ type DelegatedAdministratorParameters struct {
 
 // DelegatedAdministratorSpec defines the desired state of DelegatedAdministrator
 type DelegatedAdministratorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DelegatedAdministratorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DelegatedAdministratorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -103,8 +103,8 @@ type DelegatedAdministratorSpec struct {
 
 // DelegatedAdministratorStatus defines the observed state of DelegatedAdministrator.
 type DelegatedAdministratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DelegatedAdministratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DelegatedAdministratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

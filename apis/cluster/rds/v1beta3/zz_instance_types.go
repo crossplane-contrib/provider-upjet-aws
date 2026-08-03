@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlueGreenUpdateInitParameters struct {
@@ -111,11 +111,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced .
 	DatabaseInsightsMode *string `json:"databaseInsightsMode,omitempty" tf:"database_insights_mode,omitempty"`
@@ -192,11 +192,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// License model information for this DB instance. Valid values for this field are as follows:
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
@@ -218,11 +218,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDRef *v1.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDRef *v2.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDSelector *v2.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the maximum storage (in GiB) that Amazon RDS can automatically scale to for this DB instance. By default, Storage Autoscaling is disabled. To enable Storage Autoscaling, set max_allocated_storage to greater than or equal to allocated_storage. Setting max_allocated_storage to 0 explicitly disables Storage Autoscaling. When configured, changes to allocated_storage will be automatically ignored as the storage can dynamically scale.
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
@@ -244,11 +244,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
@@ -269,18 +269,18 @@ type InstanceInitParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
 	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
@@ -294,11 +294,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
@@ -326,11 +326,11 @@ type InstanceInitParameters struct {
 
 	// Reference to a Instance in rds to populate replicateSourceDb.
 	// +kubebuilder:validation:Optional
-	ReplicateSourceDBRef *v1.Reference `json:"replicateSourceDbRef,omitempty" tf:"-"`
+	ReplicateSourceDBRef *v2.Reference `json:"replicateSourceDbRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate replicateSourceDb.
 	// +kubebuilder:validation:Optional
-	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
+	ReplicateSourceDBSelector *v2.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time.
 	// Requires the identifier argument to be set with the name of the new DB instance to be created.
@@ -386,11 +386,11 @@ type InstanceInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to
 	// associate.
@@ -827,11 +827,11 @@ type InstanceParameters struct {
 
 	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+	DBSubnetGroupNameRef *v2.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
-	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+	DBSubnetGroupNameSelector *v2.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced .
 	// +kubebuilder:validation:Optional
@@ -929,11 +929,11 @@ type InstanceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// License model information for this DB instance. Valid values for this field are as follows:
 	// +kubebuilder:validation:Optional
@@ -959,11 +959,11 @@ type InstanceParameters struct {
 
 	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDRef *v1.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDRef *v2.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
 	// +kubebuilder:validation:Optional
-	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
+	MasterUserSecretKMSKeyIDSelector *v2.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the maximum storage (in GiB) that Amazon RDS can automatically scale to for this DB instance. By default, Storage Autoscaling is disabled. To enable Storage Autoscaling, set max_allocated_storage to greater than or equal to allocated_storage. Setting max_allocated_storage to 0 explicitly disables Storage Autoscaling. When configured, changes to allocated_storage will be automatically ignored as the storage can dynamically scale.
 	// +kubebuilder:validation:Optional
@@ -988,11 +988,11 @@ type InstanceParameters struct {
 
 	// Reference to a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+	MonitoringRoleArnRef *v2.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate monitoringRoleArn.
 	// +kubebuilder:validation:Optional
-	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
+	MonitoringRoleArnSelector *v2.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Specifies if the RDS instance is multi-AZ
 	// +kubebuilder:validation:Optional
@@ -1018,20 +1018,20 @@ type InstanceParameters struct {
 
 	// Reference to a ParameterGroup in rds to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in rds to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// +kubebuilder:validation:Optional
-	PasswordWoSecretRef *v1.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
+	PasswordWoSecretRef *v2.SecretKeySelector `json:"passwordWoSecretRef,omitempty" tf:"-"`
 
 	// Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required.
 	// +kubebuilder:validation:Optional
@@ -1048,11 +1048,11 @@ type InstanceParameters struct {
 
 	// Reference to a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDRef *v1.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDRef *v2.Reference `json:"performanceInsightsKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate performanceInsightsKmsKeyId.
 	// +kubebuilder:validation:Optional
-	PerformanceInsightsKMSKeyIDSelector *v1.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
+	PerformanceInsightsKMSKeyIDSelector *v2.Selector `json:"performanceInsightsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
@@ -1090,11 +1090,11 @@ type InstanceParameters struct {
 
 	// Reference to a Instance in rds to populate replicateSourceDb.
 	// +kubebuilder:validation:Optional
-	ReplicateSourceDBRef *v1.Reference `json:"replicateSourceDbRef,omitempty" tf:"-"`
+	ReplicateSourceDBRef *v2.Reference `json:"replicateSourceDbRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in rds to populate replicateSourceDb.
 	// +kubebuilder:validation:Optional
-	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
+	ReplicateSourceDBSelector *v2.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time.
 	// Requires the identifier argument to be set with the name of the new DB instance to be created.
@@ -1161,11 +1161,11 @@ type InstanceParameters struct {
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+	VPCSecurityGroupIDRefs []v2.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
 	// +kubebuilder:validation:Optional
-	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+	VPCSecurityGroupIDSelector *v2.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of VPC security groups to
 	// associate.
@@ -1334,8 +1334,8 @@ type S3ImportParameters struct {
 
 // InstanceSpec defines the desired state of Instance
 type InstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1351,8 +1351,8 @@ type InstanceSpec struct {
 
 // InstanceStatus defines the observed state of Instance.
 type InstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

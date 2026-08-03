@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TopicPolicyInitParameters struct {
@@ -23,11 +22,11 @@ type TopicPolicyInitParameters struct {
 
 	// Reference to a Topic in sns to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The fully-formed AWS policy as JSON.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -61,11 +60,11 @@ type TopicPolicyParameters struct {
 
 	// Reference to a Topic in sns to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The fully-formed AWS policy as JSON.
 	// +kubebuilder:validation:Optional
@@ -96,8 +95,8 @@ type TopicPolicySpec struct {
 
 // TopicPolicyStatus defines the observed state of TopicPolicy.
 type TopicPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SMSChannelInitParameters struct {
@@ -23,11 +22,11 @@ type SMSChannelInitParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Whether the channel is enabled or disabled. By default, it is set to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -76,11 +75,11 @@ type SMSChannelParameters struct {
 
 	// Reference to a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in pinpoint to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Whether the channel is enabled or disabled. By default, it is set to true.
 	// +kubebuilder:validation:Optional
@@ -119,8 +118,8 @@ type SMSChannelSpec struct {
 
 // SMSChannelStatus defines the observed state of SMSChannel.
 type SMSChannelStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SMSChannelObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SMSChannelObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

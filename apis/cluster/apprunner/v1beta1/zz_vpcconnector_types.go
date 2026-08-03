@@ -10,18 +10,18 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCConnectorInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -32,11 +32,11 @@ type VPCConnectorInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -99,11 +99,11 @@ type VPCConnectorParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -115,11 +115,11 @@ type VPCConnectorParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.Reference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -141,8 +141,8 @@ type VPCConnectorParameters struct {
 
 // VPCConnectorSpec defines the desired state of VPCConnector
 type VPCConnectorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCConnectorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCConnectorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -158,8 +158,8 @@ type VPCConnectorSpec struct {
 
 // VPCConnectorStatus defines the observed state of VPCConnector.
 type VPCConnectorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCConnectorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCConnectorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

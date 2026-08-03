@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentPolicyConfigInitParameters struct {
@@ -244,11 +244,11 @@ type GuardrailInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the guardrail.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -368,11 +368,11 @@ type GuardrailParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Name of the guardrail.
 	// +kubebuilder:validation:Optional
@@ -853,8 +853,8 @@ type WordsConfigParameters struct {
 
 // GuardrailSpec defines the desired state of Guardrail
 type GuardrailSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GuardrailParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GuardrailParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -870,8 +870,8 @@ type GuardrailSpec struct {
 
 // GuardrailStatus defines the observed state of Guardrail.
 type GuardrailStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GuardrailObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GuardrailObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

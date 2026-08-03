@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCLinkInitParameters struct {
@@ -28,11 +27,11 @@ type VPCLinkInitParameters struct {
 
 	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnRefs []v1.NamespacedReference `json:"targetArnRefs,omitempty" tf:"-"`
+	TargetArnRefs []v2.NamespacedReference `json:"targetArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
@@ -92,11 +91,11 @@ type VPCLinkParameters struct {
 
 	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnRefs []v1.NamespacedReference `json:"targetArnRefs,omitempty" tf:"-"`
+	TargetArnRefs []v2.NamespacedReference `json:"targetArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.NamespacedSelector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
@@ -126,8 +125,8 @@ type VPCLinkSpec struct {
 
 // VPCLinkStatus defines the observed state of VPCLink.
 type VPCLinkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCLinkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCLinkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

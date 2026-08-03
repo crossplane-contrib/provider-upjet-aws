@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogsInitParameters struct {
@@ -85,11 +84,11 @@ type CloudwatchLogsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsObservation struct {
@@ -115,11 +114,11 @@ type CloudwatchLogsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type InstanceLoggingConfigurationInitParameters struct {
@@ -134,11 +133,11 @@ type InstanceLoggingConfigurationInitParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 }
 
 type InstanceLoggingConfigurationObservation struct {
@@ -175,11 +174,11 @@ type InstanceLoggingConfigurationParameters struct {
 
 	// Reference to a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDRef *v1.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDRef *v2.NamespacedReference `json:"verifiedaccessInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in verifiedaccess to populate verifiedaccessInstanceId.
 	// +kubebuilder:validation:Optional
-	VerifiedaccessInstanceIDSelector *v1.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
+	VerifiedaccessInstanceIDSelector *v2.NamespacedSelector `json:"verifiedaccessInstanceIdSelector,omitempty" tf:"-"`
 }
 
 type KinesisDataFirehoseInitParameters struct {
@@ -191,11 +190,11 @@ type KinesisDataFirehoseInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Indicates whether logging is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -220,11 +219,11 @@ type KinesisDataFirehoseParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Indicates whether logging is enabled.
 	// +kubebuilder:validation:Optional
@@ -240,11 +239,11 @@ type S3InitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The ID of the AWS account that owns the Amazon S3 bucket.
 	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
@@ -281,11 +280,11 @@ type S3Parameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.NamespacedReference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.NamespacedSelector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The ID of the AWS account that owns the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -319,8 +318,8 @@ type InstanceLoggingConfigurationSpec struct {
 
 // InstanceLoggingConfigurationStatus defines the observed state of InstanceLoggingConfiguration.
 type InstanceLoggingConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceLoggingConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceLoggingConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

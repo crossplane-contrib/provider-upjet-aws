@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -197,11 +197,11 @@ type CrossRegionCopyRuleInitParameters struct {
 
 	// Reference to a Key in kms to populate cmkArn.
 	// +kubebuilder:validation:Optional
-	CmkArnRef *v1.Reference `json:"cmkArnRef,omitempty" tf:"-"`
+	CmkArnRef *v2.Reference `json:"cmkArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate cmkArn.
 	// +kubebuilder:validation:Optional
-	CmkArnSelector *v1.Selector `json:"cmkArnSelector,omitempty" tf:"-"`
+	CmkArnSelector *v2.Selector `json:"cmkArnSelector,omitempty" tf:"-"`
 
 	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
@@ -256,11 +256,11 @@ type CrossRegionCopyRuleParameters struct {
 
 	// Reference to a Key in kms to populate cmkArn.
 	// +kubebuilder:validation:Optional
-	CmkArnRef *v1.Reference `json:"cmkArnRef,omitempty" tf:"-"`
+	CmkArnRef *v2.Reference `json:"cmkArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate cmkArn.
 	// +kubebuilder:validation:Optional
-	CmkArnSelector *v1.Selector `json:"cmkArnSelector,omitempty" tf:"-"`
+	CmkArnSelector *v2.Selector `json:"cmkArnSelector,omitempty" tf:"-"`
 
 	// Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. Default value is false.
 	// +kubebuilder:validation:Optional
@@ -512,11 +512,11 @@ type LifecyclePolicyInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// See the policy_details configuration block. Max of 1.
 	PolicyDetails *PolicyDetailsInitParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
@@ -583,11 +583,11 @@ type LifecyclePolicyParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// See the policy_details configuration block. Max of 1.
 	// +kubebuilder:validation:Optional
@@ -1225,8 +1225,8 @@ type ShareRuleParameters struct {
 
 // LifecyclePolicySpec defines the desired state of LifecyclePolicy
 type LifecyclePolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LifecyclePolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LifecyclePolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1242,8 +1242,8 @@ type LifecyclePolicySpec struct {
 
 // LifecyclePolicyStatus defines the observed state of LifecyclePolicy.
 type LifecyclePolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LifecyclePolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LifecyclePolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

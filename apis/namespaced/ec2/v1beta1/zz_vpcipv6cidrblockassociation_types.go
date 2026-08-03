@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCIPv6CidrBlockAssociationInitParameters struct {
@@ -29,11 +28,11 @@ type VPCIPv6CidrBlockAssociationInitParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv6IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv6IpamPoolIDRef *v1.NamespacedReference `json:"ipv6IpamPoolIdRef,omitempty" tf:"-"`
+	IPv6IpamPoolIDRef *v2.NamespacedReference `json:"ipv6IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv6IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv6IpamPoolIDSelector *v1.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv6IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
 	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
@@ -47,11 +46,11 @@ type VPCIPv6CidrBlockAssociationInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCIPv6CidrBlockAssociationObservation struct {
@@ -106,11 +105,11 @@ type VPCIPv6CidrBlockAssociationParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv6IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv6IpamPoolIDRef *v1.NamespacedReference `json:"ipv6IpamPoolIdRef,omitempty" tf:"-"`
+	IPv6IpamPoolIDRef *v2.NamespacedReference `json:"ipv6IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv6IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv6IpamPoolIDSelector *v1.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv6IpamPoolIDSelector *v2.NamespacedSelector `json:"ipv6IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// The netmask length of the IPv6 CIDR you want to allocate to this VPC. Requires specifying a ipv6_ipam_pool_id. This parameter is optional if the IPAM pool has allocation_default_netmask set, otherwise it or ipv6_cidr_block are required. Conflicts with ipv6_cidr_block.
 	// +kubebuilder:validation:Optional
@@ -132,11 +131,11 @@ type VPCIPv6CidrBlockAssociationParameters struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.NamespacedReference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // VPCIPv6CidrBlockAssociationSpec defines the desired state of VPCIPv6CidrBlockAssociation
@@ -158,8 +157,8 @@ type VPCIPv6CidrBlockAssociationSpec struct {
 
 // VPCIPv6CidrBlockAssociationStatus defines the observed state of VPCIPv6CidrBlockAssociation.
 type VPCIPv6CidrBlockAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIPv6CidrBlockAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIPv6CidrBlockAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

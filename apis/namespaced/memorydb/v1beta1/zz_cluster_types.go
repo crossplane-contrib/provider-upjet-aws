@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterEndpointInitParameters struct {
@@ -37,11 +36,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ACL in memorydb to populate aclName.
 	// +kubebuilder:validation:Optional
-	ACLNameRef *v1.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
+	ACLNameRef *v2.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
 
 	// Selector for a ACL in memorydb to populate aclName.
 	// +kubebuilder:validation:Optional
-	ACLNameSelector *v1.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
+	ACLNameSelector *v2.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
@@ -70,11 +69,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
@@ -100,22 +99,22 @@ type ClusterInitParameters struct {
 
 	// Reference to a ParameterGroup in memorydb to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in memorydb to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of VPC Security Group ID-s to associate with this cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -145,11 +144,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a SubnetGroup in memorydb to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in memorydb to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
 	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
@@ -273,11 +272,11 @@ type ClusterParameters struct {
 
 	// Reference to a ACL in memorydb to populate aclName.
 	// +kubebuilder:validation:Optional
-	ACLNameRef *v1.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
+	ACLNameRef *v2.NamespacedReference `json:"aclNameRef,omitempty" tf:"-"`
 
 	// Selector for a ACL in memorydb to populate aclName.
 	// +kubebuilder:validation:Optional
-	ACLNameSelector *v1.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
+	ACLNameSelector *v2.NamespacedSelector `json:"aclNameSelector,omitempty" tf:"-"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -314,11 +313,11 @@ type ClusterParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.NamespacedReference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.NamespacedSelector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	// +kubebuilder:validation:Optional
@@ -351,11 +350,11 @@ type ClusterParameters struct {
 
 	// Reference to a ParameterGroup in memorydb to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in memorydb to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
 	// +kubebuilder:validation:Optional
@@ -368,11 +367,11 @@ type ClusterParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Set of VPC Security Group ID-s to associate with this cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -409,11 +408,11 @@ type ClusterParameters struct {
 
 	// Reference to a SubnetGroup in memorydb to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in memorydb to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -500,8 +499,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheTagConfigInitParameters struct {
@@ -1128,11 +1128,11 @@ type OrderedCacheBehaviorFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorFunctionAssociationObservation struct {
@@ -1158,11 +1158,11 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
 	// Reference to a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+	FunctionArnRef *v2.Reference `json:"functionArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in cloudfront to populate functionArn.
 	// +kubebuilder:validation:Optional
-	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+	FunctionArnSelector *v2.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorGRPCConfigInitParameters struct {
@@ -1267,11 +1267,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationInitParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
@@ -1304,11 +1304,11 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// Reference to a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+	LambdaArnRef *v2.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate lambdaArn.
 	// +kubebuilder:validation:Optional
-	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+	LambdaArnSelector *v2.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorObservation struct {
@@ -1531,11 +1531,11 @@ type OriginInitParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	OriginID *string `json:"originId,omitempty" tf:"origin_id,omitempty"`
@@ -1644,11 +1644,11 @@ type OriginParameters struct {
 
 	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+	OriginAccessControlIDRef *v2.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
 	// +kubebuilder:validation:Optional
-	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+	OriginAccessControlIDSelector *v2.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
 
 	// Unique identifier for the origin.
 	// +kubebuilder:validation:Optional
@@ -1727,11 +1727,11 @@ type S3OriginConfigInitParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type S3OriginConfigObservation struct {
@@ -1750,11 +1750,11 @@ type S3OriginConfigParameters struct {
 
 	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+	OriginAccessIdentityRef *v2.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
 	// +kubebuilder:validation:Optional
-	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
+	OriginAccessIdentitySelector *v2.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type TrustStoreConfigInitParameters struct {
@@ -1981,8 +1981,8 @@ type ViewerMtlsConfigParameters struct {
 
 // DistributionSpec defines the desired state of Distribution
 type DistributionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DistributionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DistributionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1998,8 +1998,8 @@ type DistributionSpec struct {
 
 // DistributionStatus defines the observed state of Distribution.
 type DistributionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DistributionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DistributionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

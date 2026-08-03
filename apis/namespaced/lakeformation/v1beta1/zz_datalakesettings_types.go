@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CreateDatabaseDefaultPermissionsInitParameters struct {
@@ -88,11 +87,11 @@ type DataLakeSettingsInitParameters struct {
 
 	// References to User in iam to populate admins.
 	// +kubebuilder:validation:Optional
-	AdminsRefs []v1.NamespacedReference `json:"adminsRefs,omitempty" tf:"-"`
+	AdminsRefs []v2.NamespacedReference `json:"adminsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in iam to populate admins.
 	// +kubebuilder:validation:Optional
-	AdminsSelector *v1.NamespacedSelector `json:"adminsSelector,omitempty" tf:"-"`
+	AdminsSelector *v2.NamespacedSelector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
@@ -185,11 +184,11 @@ type DataLakeSettingsParameters struct {
 
 	// References to User in iam to populate admins.
 	// +kubebuilder:validation:Optional
-	AdminsRefs []v1.NamespacedReference `json:"adminsRefs,omitempty" tf:"-"`
+	AdminsRefs []v2.NamespacedReference `json:"adminsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of User in iam to populate admins.
 	// +kubebuilder:validation:Optional
-	AdminsSelector *v1.NamespacedSelector `json:"adminsSelector,omitempty" tf:"-"`
+	AdminsSelector *v2.NamespacedSelector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	// +kubebuilder:validation:Optional
@@ -259,8 +258,8 @@ type DataLakeSettingsSpec struct {
 
 // DataLakeSettingsStatus defines the observed state of DataLakeSettings.
 type DataLakeSettingsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataLakeSettingsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataLakeSettingsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

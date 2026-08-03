@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DevicePoolInitParameters struct {
@@ -32,11 +31,11 @@ type DevicePoolInitParameters struct {
 
 	// Reference to a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnRef *v1.NamespacedReference `json:"projectArnRef,omitempty" tf:"-"`
+	ProjectArnRef *v2.NamespacedReference `json:"projectArnRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnSelector *v1.NamespacedSelector `json:"projectArnSelector,omitempty" tf:"-"`
+	ProjectArnSelector *v2.NamespacedSelector `json:"projectArnSelector,omitempty" tf:"-"`
 
 	// The device pool's rules. See Rule.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
@@ -105,11 +104,11 @@ type DevicePoolParameters struct {
 
 	// Reference to a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnRef *v1.NamespacedReference `json:"projectArnRef,omitempty" tf:"-"`
+	ProjectArnRef *v2.NamespacedReference `json:"projectArnRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devicefarm to populate projectArn.
 	// +kubebuilder:validation:Optional
-	ProjectArnSelector *v1.NamespacedSelector `json:"projectArnSelector,omitempty" tf:"-"`
+	ProjectArnSelector *v2.NamespacedSelector `json:"projectArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -184,8 +183,8 @@ type DevicePoolSpec struct {
 
 // DevicePoolStatus defines the observed state of DevicePool.
 type DevicePoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DevicePoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DevicePoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,14 +10,24 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CollectionInitParameters struct {
 
 	// Name of the collection group to associate with this collection.
 	// Name of the collection group to associate with this collection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1.CollectionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
+	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameRef *v2.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameSelector *v2.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.
@@ -109,8 +119,18 @@ type CollectionParameters struct {
 
 	// Name of the collection group to associate with this collection.
 	// Name of the collection group to associate with this collection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/opensearchserverless/v1beta1.CollectionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	CollectionGroupName *string `json:"collectionGroupName,omitempty" tf:"collection_group_name,omitempty"`
+
+	// Reference to a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameRef *v2.Reference `json:"collectionGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a CollectionGroup in opensearchserverless to populate collectionGroupName.
+	// +kubebuilder:validation:Optional
+	CollectionGroupNameSelector *v2.Selector `json:"collectionGroupNameSelector,omitempty" tf:"-"`
 
 	// Description of the collection.
 	// Description of the collection.
@@ -163,11 +183,11 @@ type EncryptionConfigInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigObservation struct {
@@ -193,11 +213,11 @@ type EncryptionConfigParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 }
 
 type VectorOptionsInitParameters struct {
@@ -221,8 +241,8 @@ type VectorOptionsParameters struct {
 
 // CollectionSpec defines the desired state of Collection
 type CollectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CollectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CollectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -238,8 +258,8 @@ type CollectionSpec struct {
 
 // CollectionStatus defines the observed state of Collection.
 type CollectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CollectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CollectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

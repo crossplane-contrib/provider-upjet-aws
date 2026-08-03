@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DomainSAMLOptionsInitParameters struct {
@@ -86,7 +85,7 @@ type SAMLOptionsInitParameters struct {
 	MasterBackendRole *string `json:"masterBackendRole,omitempty" tf:"master_backend_role,omitempty"`
 
 	// This username from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
-	MasterUserNameSecretRef *v1.LocalSecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
+	MasterUserNameSecretRef *v2.LocalSecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
 
 	// Element of the SAML assertion to use for backend roles. Default is roles.
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
@@ -135,7 +134,7 @@ type SAMLOptionsParameters struct {
 
 	// This username from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
 	// +kubebuilder:validation:Optional
-	MasterUserNameSecretRef *v1.LocalSecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
+	MasterUserNameSecretRef *v2.LocalSecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
 
 	// Element of the SAML assertion to use for backend roles. Default is roles.
 	// +kubebuilder:validation:Optional
@@ -169,8 +168,8 @@ type DomainSAMLOptionsSpec struct {
 
 // DomainSAMLOptionsStatus defines the observed state of DomainSAMLOptions.
 type DomainSAMLOptionsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainSAMLOptionsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainSAMLOptionsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VaultPolicyInitParameters struct {
@@ -22,11 +21,11 @@ type VaultPolicyInitParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -60,11 +59,11 @@ type VaultPolicyParameters struct {
 
 	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameRef *v1.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
+	BackupVaultNameRef *v2.NamespacedReference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
-	BackupVaultNameSelector *v1.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+	BackupVaultNameSelector *v2.NamespacedSelector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The backup vault access policy document in JSON format.
 	// +kubebuilder:validation:Optional
@@ -95,8 +94,8 @@ type VaultPolicySpec struct {
 
 // VaultPolicyStatus defines the observed state of VaultPolicy.
 type VaultPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VaultPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VaultPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

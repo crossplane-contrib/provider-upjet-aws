@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CidrAuthorizationContextInitParameters struct {
@@ -58,11 +57,11 @@ type VPCIpamPoolCidrInitParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
@@ -111,11 +110,11 @@ type VPCIpamPoolCidrParameters struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDRef *v1.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+	IpamPoolIDRef *v2.NamespacedReference `json:"ipamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
 	// +kubebuilder:validation:Optional
-	IpamPoolIDSelector *v1.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+	IpamPoolIDSelector *v2.NamespacedSelector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
 	// +kubebuilder:validation:Optional
@@ -146,8 +145,8 @@ type VPCIpamPoolCidrSpec struct {
 
 // VPCIpamPoolCidrStatus defines the observed state of VPCIpamPoolCidr.
 type VPCIpamPoolCidrStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCIpamPoolCidrObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCIpamPoolCidrObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

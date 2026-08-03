@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheNodesInitParameters struct {
@@ -102,11 +101,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the cache nodes will accept connections. For Memcached the default is 11211, and for Redis the default port is 6379. Cannot be provided with replication_group_id. Changing this value will re-create the resource.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -124,19 +123,19 @@ type ClusterInitParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDRef *v1.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+	ReplicationGroupIDRef *v2.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDSelector *v1.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+	ReplicationGroupIDSelector *v2.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -163,11 +162,11 @@ type ClusterInitParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -388,11 +387,11 @@ type ClusterParameters struct {
 
 	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+	ParameterGroupNameRef *v2.NamespacedReference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+	ParameterGroupNameSelector *v2.NamespacedSelector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// The port number on which each of the cache nodes will accept connections. For Memcached the default is 11211, and for Redis the default port is 6379. Cannot be provided with replication_group_id. Changing this value will re-create the resource.
 	// +kubebuilder:validation:Optional
@@ -419,19 +418,19 @@ type ClusterParameters struct {
 
 	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDRef *v1.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+	ReplicationGroupIDRef *v2.NamespacedReference `json:"replicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
 	// +kubebuilder:validation:Optional
-	ReplicationGroupIDSelector *v1.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+	ReplicationGroupIDSelector *v2.NamespacedSelector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.NamespacedReference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -464,11 +463,11 @@ type ClusterParameters struct {
 
 	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameRef *v1.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+	SubnetGroupNameRef *v2.NamespacedReference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
-	SubnetGroupNameSelector *v1.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
+	SubnetGroupNameSelector *v2.NamespacedSelector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -548,8 +547,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

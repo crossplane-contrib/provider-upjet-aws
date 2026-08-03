@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CidrOptionsInitParameters struct {
@@ -21,11 +21,11 @@ type CidrOptionsInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.Reference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
 	PortRange []PortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
@@ -37,11 +37,11 @@ type CidrOptionsInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type CidrOptionsObservation struct {
@@ -64,11 +64,11 @@ type CidrOptionsParameters struct {
 
 	// Reference to a Subnet in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.Reference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	PortRange []PortRangeParameters `json:"portRange" tf:"port_range,omitempty"`
@@ -83,11 +83,11 @@ type CidrOptionsParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type EndpointInitParameters struct {
@@ -111,11 +111,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a Certificate in acm to populate domainCertificateArn.
 	// +kubebuilder:validation:Optional
-	DomainCertificateArnRef *v1.Reference `json:"domainCertificateArnRef,omitempty" tf:"-"`
+	DomainCertificateArnRef *v2.Reference `json:"domainCertificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate domainCertificateArn.
 	// +kubebuilder:validation:Optional
-	DomainCertificateArnSelector *v1.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
+	DomainCertificateArnSelector *v2.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
 
 	// - A custom identifier that is prepended to the DNS name that is generated for the endpoint.
 	EndpointDomainPrefix *string `json:"endpointDomainPrefix,omitempty" tf:"endpoint_domain_prefix,omitempty"`
@@ -136,11 +136,11 @@ type EndpointInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of the the security groups IDs to associate with the Verified Access endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -163,11 +163,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a Group in verifiedaccess to populate verifiedAccessGroupId.
 	// +kubebuilder:validation:Optional
-	VerifiedAccessGroupIDRef *v1.Reference `json:"verifiedAccessGroupIdRef,omitempty" tf:"-"`
+	VerifiedAccessGroupIDRef *v2.Reference `json:"verifiedAccessGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a Group in verifiedaccess to populate verifiedAccessGroupId.
 	// +kubebuilder:validation:Optional
-	VerifiedAccessGroupIDSelector *v1.Selector `json:"verifiedAccessGroupIdSelector,omitempty" tf:"-"`
+	VerifiedAccessGroupIDSelector *v2.Selector `json:"verifiedAccessGroupIdSelector,omitempty" tf:"-"`
 }
 
 type EndpointObservation struct {
@@ -264,11 +264,11 @@ type EndpointParameters struct {
 
 	// Reference to a Certificate in acm to populate domainCertificateArn.
 	// +kubebuilder:validation:Optional
-	DomainCertificateArnRef *v1.Reference `json:"domainCertificateArnRef,omitempty" tf:"-"`
+	DomainCertificateArnRef *v2.Reference `json:"domainCertificateArnRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in acm to populate domainCertificateArn.
 	// +kubebuilder:validation:Optional
-	DomainCertificateArnSelector *v1.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
+	DomainCertificateArnSelector *v2.Selector `json:"domainCertificateArnSelector,omitempty" tf:"-"`
 
 	// - A custom identifier that is prepended to the DNS name that is generated for the endpoint.
 	// +kubebuilder:validation:Optional
@@ -300,11 +300,11 @@ type EndpointParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+	SecurityGroupIDRefs []v2.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+	SecurityGroupIDSelector *v2.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// List of the the security groups IDs to associate with the Verified Access endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.SecurityGroup
@@ -331,11 +331,11 @@ type EndpointParameters struct {
 
 	// Reference to a Group in verifiedaccess to populate verifiedAccessGroupId.
 	// +kubebuilder:validation:Optional
-	VerifiedAccessGroupIDRef *v1.Reference `json:"verifiedAccessGroupIdRef,omitempty" tf:"-"`
+	VerifiedAccessGroupIDRef *v2.Reference `json:"verifiedAccessGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a Group in verifiedaccess to populate verifiedAccessGroupId.
 	// +kubebuilder:validation:Optional
-	VerifiedAccessGroupIDSelector *v1.Selector `json:"verifiedAccessGroupIdSelector,omitempty" tf:"-"`
+	VerifiedAccessGroupIDSelector *v2.Selector `json:"verifiedAccessGroupIdSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerOptionsInitParameters struct {
@@ -346,11 +346,11 @@ type LoadBalancerOptionsInitParameters struct {
 
 	// Reference to a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnRef *v1.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+	LoadBalancerArnRef *v2.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
+	LoadBalancerArnSelector *v2.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -364,11 +364,11 @@ type LoadBalancerOptionsInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerOptionsObservation struct {
@@ -393,11 +393,11 @@ type LoadBalancerOptionsParameters struct {
 
 	// Reference to a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnRef *v1.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+	LoadBalancerArnRef *v2.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
 
 	// Selector for a LB in elbv2 to populate loadBalancerArn.
 	// +kubebuilder:validation:Optional
-	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
+	LoadBalancerArnSelector *v2.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -415,11 +415,11 @@ type LoadBalancerOptionsParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerOptionsPortRangeInitParameters struct {
@@ -452,11 +452,11 @@ type NetworkInterfaceOptionsInitParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -487,11 +487,11 @@ type NetworkInterfaceOptionsParameters struct {
 
 	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -627,8 +627,8 @@ type SseSpecificationParameters struct {
 
 // EndpointSpec defines the desired state of Endpoint
 type EndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -644,8 +644,8 @@ type EndpointSpec struct {
 
 // EndpointStatus defines the observed state of Endpoint.
 type EndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

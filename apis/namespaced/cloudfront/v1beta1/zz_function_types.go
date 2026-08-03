@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionInitParameters struct {
 
 	// Source code of the function
-	CodeSecretRef v1.LocalSecretKeySelector `json:"codeSecretRef" tf:"-"`
+	CodeSecretRef v2.LocalSecretKeySelector `json:"codeSecretRef" tf:"-"`
 
 	// Comment.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
@@ -79,7 +78,7 @@ type FunctionParameters struct {
 
 	// Source code of the function
 	// +kubebuilder:validation:Optional
-	CodeSecretRef v1.LocalSecretKeySelector `json:"codeSecretRef" tf:"-"`
+	CodeSecretRef v2.LocalSecretKeySelector `json:"codeSecretRef" tf:"-"`
 
 	// Comment.
 	// +kubebuilder:validation:Optional
@@ -123,8 +122,8 @@ type FunctionSpec struct {
 
 // FunctionStatus defines the observed state of Function.
 type FunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

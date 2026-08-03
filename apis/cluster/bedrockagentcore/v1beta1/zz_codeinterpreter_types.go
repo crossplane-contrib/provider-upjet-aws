@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateLocationInitParameters struct {
@@ -66,11 +66,11 @@ type CodeInterpreterInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the code interpreter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -168,11 +168,11 @@ type CodeInterpreterParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the code interpreter.
 	// +kubebuilder:validation:Optional
@@ -202,11 +202,11 @@ type LocationSecretsManagerInitParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type LocationSecretsManagerObservation struct {
@@ -225,11 +225,11 @@ type LocationSecretsManagerParameters struct {
 
 	// Reference to a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+	SecretArnRef *v2.Reference `json:"secretArnRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in secretsmanager to populate secretArn.
 	// +kubebuilder:validation:Optional
-	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
+	SecretArnSelector *v2.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type NetworkConfigurationVPCConfigInitParameters struct {
@@ -269,8 +269,8 @@ type NetworkConfigurationVPCConfigParameters struct {
 
 // CodeInterpreterSpec defines the desired state of CodeInterpreter
 type CodeInterpreterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CodeInterpreterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CodeInterpreterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -286,8 +286,8 @@ type CodeInterpreterSpec struct {
 
 // CodeInterpreterStatus defines the observed state of CodeInterpreter.
 type CodeInterpreterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CodeInterpreterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CodeInterpreterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

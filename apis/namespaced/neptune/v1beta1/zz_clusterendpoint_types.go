@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterEndpointInitParameters struct {
@@ -22,11 +21,11 @@ type ClusterEndpointInitParameters struct {
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER, WRITER, ANY.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
@@ -91,11 +90,11 @@ type ClusterEndpointParameters struct {
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.NamespacedReference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.NamespacedSelector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER, WRITER, ANY.
 	// +kubebuilder:validation:Optional
@@ -141,8 +140,8 @@ type ClusterEndpointSpec struct {
 
 // ClusterEndpointStatus defines the observed state of ClusterEndpoint.
 type ClusterEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

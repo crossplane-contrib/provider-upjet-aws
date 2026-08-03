@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationInitParameters struct {
@@ -21,11 +21,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta1.VPCLink
@@ -34,11 +34,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// Type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
@@ -53,11 +53,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
-	CredentialsArnRef *v1.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
+	CredentialsArnRef *v2.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
-	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
+	CredentialsArnSelector *v2.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
 	// Description of the integration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -80,11 +80,11 @@ type IntegrationInitParameters struct {
 
 	// Reference to a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
-	IntegrationURIRef *v1.Reference `json:"integrationUriRef,omitempty" tf:"-"`
+	IntegrationURIRef *v2.Reference `json:"integrationUriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
-	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
+	IntegrationURISelector *v2.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
 	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
 	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
@@ -203,11 +203,11 @@ type IntegrationParameters struct {
 
 	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigatewayv2/v1beta1.VPCLink
@@ -217,11 +217,11 @@ type IntegrationParameters struct {
 
 	// Reference to a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+	ConnectionIDRef *v2.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCLink in apigatewayv2 to populate connectionId.
 	// +kubebuilder:validation:Optional
-	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+	ConnectionIDSelector *v2.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// Type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
 	// +kubebuilder:validation:Optional
@@ -239,11 +239,11 @@ type IntegrationParameters struct {
 
 	// Reference to a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
-	CredentialsArnRef *v1.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
+	CredentialsArnRef *v2.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate credentialsArn.
 	// +kubebuilder:validation:Optional
-	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
+	CredentialsArnSelector *v2.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
 	// Description of the integration.
 	// +kubebuilder:validation:Optional
@@ -271,11 +271,11 @@ type IntegrationParameters struct {
 
 	// Reference to a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
-	IntegrationURIRef *v1.Reference `json:"integrationUriRef,omitempty" tf:"-"`
+	IntegrationURIRef *v2.Reference `json:"integrationUriRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate integrationUri.
 	// +kubebuilder:validation:Optional
-	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
+	IntegrationURISelector *v2.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
 	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
 	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
@@ -378,8 +378,8 @@ type TLSConfigParameters struct {
 
 // IntegrationSpec defines the desired state of Integration
 type IntegrationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IntegrationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IntegrationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -395,8 +395,8 @@ type IntegrationSpec struct {
 
 // IntegrationStatus defines the observed state of Integration.
 type IntegrationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

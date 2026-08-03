@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CognitoIdentityProvidersInitParameters struct {
@@ -22,11 +21,11 @@ type CognitoIdentityProvidersInitParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// The provider name for an Amazon Cognito Identity User Pool.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
@@ -56,11 +55,11 @@ type CognitoIdentityProvidersParameters struct {
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
+	ClientIDRef *v2.NamespacedReference `json:"clientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientIDSelector *v2.NamespacedSelector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// The provider name for an Amazon Cognito Identity User Pool.
 	// +kubebuilder:validation:Optional
@@ -100,11 +99,11 @@ type PoolInitParameters struct {
 
 	// References to SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
-	SAMLProviderArnsRefs []v1.NamespacedReference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
+	SAMLProviderArnsRefs []v2.NamespacedReference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
-	SAMLProviderArnsSelector *v1.NamespacedSelector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
+	SAMLProviderArnsSelector *v2.NamespacedSelector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
 	// +mapType=granular
@@ -204,11 +203,11 @@ type PoolParameters struct {
 
 	// References to SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
-	SAMLProviderArnsRefs []v1.NamespacedReference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
+	SAMLProviderArnsRefs []v2.NamespacedReference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SAMLProvider in iam to populate samlProviderArns.
 	// +kubebuilder:validation:Optional
-	SAMLProviderArnsSelector *v1.NamespacedSelector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
+	SAMLProviderArnsSelector *v2.NamespacedSelector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
 	// +kubebuilder:validation:Optional
@@ -240,8 +239,8 @@ type PoolSpec struct {
 
 // PoolStatus defines the observed state of Pool.
 type PoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

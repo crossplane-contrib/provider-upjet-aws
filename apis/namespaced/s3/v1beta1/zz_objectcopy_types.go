@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectCopyGrantInitParameters struct {
@@ -123,7 +122,7 @@ type ObjectCopyInitParameters struct {
 	CustomerKeyMd5 *string `json:"customerKeyMd5,omitempty" tf:"customer_key_md5,omitempty"`
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
-	CustomerKeySecretRef *v1.LocalSecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
+	CustomerKeySecretRef *v2.LocalSecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
 
 	// Account id of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
@@ -141,10 +140,10 @@ type ObjectCopyInitParameters struct {
 	Grant []ObjectCopyGrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
 	// Specifies the AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
-	KMSEncryptionContextSecretRef *v1.LocalSecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
+	KMSEncryptionContextSecretRef *v2.LocalSecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
 
 	// Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
-	KMSKeyIDSecretRef *v1.LocalSecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
+	KMSKeyIDSecretRef *v2.LocalSecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
 
 	// Name of the object once it is in the bucket.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -183,7 +182,7 @@ type ObjectCopyInitParameters struct {
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
-	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
+	SourceCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the desired storage class for the object. Defaults to STANDARD.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
@@ -439,7 +438,7 @@ type ObjectCopyParameters struct {
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
 	// +kubebuilder:validation:Optional
-	CustomerKeySecretRef *v1.LocalSecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
+	CustomerKeySecretRef *v2.LocalSecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
 
 	// Account id of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
 	// +kubebuilder:validation:Optional
@@ -463,11 +462,11 @@ type ObjectCopyParameters struct {
 
 	// Specifies the AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
 	// +kubebuilder:validation:Optional
-	KMSEncryptionContextSecretRef *v1.LocalSecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
+	KMSEncryptionContextSecretRef *v2.LocalSecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
 
 	// Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSecretRef *v1.LocalSecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
+	KMSKeyIDSecretRef *v2.LocalSecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
 
 	// Name of the object once it is in the bucket.
 	// +kubebuilder:validation:Optional
@@ -524,7 +523,7 @@ type ObjectCopyParameters struct {
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
 	// +kubebuilder:validation:Optional
-	SourceCustomerKeySecretRef *v1.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
+	SourceCustomerKeySecretRef *v2.LocalSecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the desired storage class for the object. Defaults to STANDARD.
 	// +kubebuilder:validation:Optional
@@ -585,8 +584,8 @@ type ObjectCopySpec struct {
 
 // ObjectCopyStatus defines the observed state of ObjectCopy.
 type ObjectCopyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectCopyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectCopyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

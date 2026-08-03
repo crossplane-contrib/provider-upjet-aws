@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeploymentTargetsInitParameters struct {
@@ -117,11 +116,11 @@ type StackSetInstanceInitParameters struct {
 
 	// Reference to a StackSet in cloudformation to populate stackSetName.
 	// +kubebuilder:validation:Optional
-	StackSetNameRef *v1.NamespacedReference `json:"stackSetNameRef,omitempty" tf:"-"`
+	StackSetNameRef *v2.NamespacedReference `json:"stackSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a StackSet in cloudformation to populate stackSetName.
 	// +kubebuilder:validation:Optional
-	StackSetNameSelector *v1.NamespacedSelector `json:"stackSetNameSelector,omitempty" tf:"-"`
+	StackSetNameSelector *v2.NamespacedSelector `json:"stackSetNameSelector,omitempty" tf:"-"`
 }
 
 type StackSetInstanceObservation struct {
@@ -291,11 +290,11 @@ type StackSetInstanceParameters struct {
 
 	// Reference to a StackSet in cloudformation to populate stackSetName.
 	// +kubebuilder:validation:Optional
-	StackSetNameRef *v1.NamespacedReference `json:"stackSetNameRef,omitempty" tf:"-"`
+	StackSetNameRef *v2.NamespacedReference `json:"stackSetNameRef,omitempty" tf:"-"`
 
 	// Selector for a StackSet in cloudformation to populate stackSetName.
 	// +kubebuilder:validation:Optional
-	StackSetNameSelector *v1.NamespacedSelector `json:"stackSetNameSelector,omitempty" tf:"-"`
+	StackSetNameSelector *v2.NamespacedSelector `json:"stackSetNameSelector,omitempty" tf:"-"`
 }
 
 // StackSetInstanceSpec defines the desired state of StackSetInstance
@@ -317,8 +316,8 @@ type StackSetInstanceSpec struct {
 
 // StackSetInstanceStatus defines the observed state of StackSetInstance.
 type StackSetInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StackSetInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StackSetInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

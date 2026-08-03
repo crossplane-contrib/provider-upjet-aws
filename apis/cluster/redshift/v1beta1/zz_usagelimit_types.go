@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UsageLimitInitParameters struct {
@@ -28,11 +28,11 @@ type UsageLimitInitParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Amazon Redshift feature that you want to limit. Valid values are spectrum, concurrency-scaling, and cross-region-datasharing.
 	FeatureType *string `json:"featureType,omitempty" tf:"feature_type,omitempty"`
@@ -105,11 +105,11 @@ type UsageLimitParameters struct {
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+	ClusterIdentifierRef *v2.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in redshift to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+	ClusterIdentifierSelector *v2.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Amazon Redshift feature that you want to limit. Valid values are spectrum, concurrency-scaling, and cross-region-datasharing.
 	// +kubebuilder:validation:Optional
@@ -136,8 +136,8 @@ type UsageLimitParameters struct {
 
 // UsageLimitSpec defines the desired state of UsageLimit
 type UsageLimitSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     UsageLimitParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   UsageLimitParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -153,8 +153,8 @@ type UsageLimitSpec struct {
 
 // UsageLimitStatus defines the observed state of UsageLimit.
 type UsageLimitStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UsageLimitObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UsageLimitObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

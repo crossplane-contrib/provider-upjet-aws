@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CedarInitParameters struct {
@@ -69,11 +69,11 @@ type PolicyInitParameters struct {
 
 	// Reference to a PolicyEngine in bedrockagentcore to populate policyEngineId.
 	// +kubebuilder:validation:Optional
-	PolicyEngineIDRef *v1.Reference `json:"policyEngineIdRef,omitempty" tf:"-"`
+	PolicyEngineIDRef *v2.Reference `json:"policyEngineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyEngine in bedrockagentcore to populate policyEngineId.
 	// +kubebuilder:validation:Optional
-	PolicyEngineIDSelector *v1.Selector `json:"policyEngineIdSelector,omitempty" tf:"-"`
+	PolicyEngineIDSelector *v2.Selector `json:"policyEngineIdSelector,omitempty" tf:"-"`
 
 	// Controls whether validation findings cause policy creation or update to fail. Valid values: FAIL_ON_ANY_FINDINGS, IGNORE_ALL_FINDINGS. Defaults to FAIL_ON_ANY_FINDINGS.
 	ValidationMode *string `json:"validationMode,omitempty" tf:"validation_mode,omitempty"`
@@ -131,11 +131,11 @@ type PolicyParameters struct {
 
 	// Reference to a PolicyEngine in bedrockagentcore to populate policyEngineId.
 	// +kubebuilder:validation:Optional
-	PolicyEngineIDRef *v1.Reference `json:"policyEngineIdRef,omitempty" tf:"-"`
+	PolicyEngineIDRef *v2.Reference `json:"policyEngineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyEngine in bedrockagentcore to populate policyEngineId.
 	// +kubebuilder:validation:Optional
-	PolicyEngineIDSelector *v1.Selector `json:"policyEngineIdSelector,omitempty" tf:"-"`
+	PolicyEngineIDSelector *v2.Selector `json:"policyEngineIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -149,8 +149,8 @@ type PolicyParameters struct {
 
 // PolicySpec defines the desired state of Policy
 type PolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -166,8 +166,8 @@ type PolicySpec struct {
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

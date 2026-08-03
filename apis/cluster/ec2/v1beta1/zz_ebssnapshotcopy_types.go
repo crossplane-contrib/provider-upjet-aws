@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EBSSnapshotCopyInitParameters struct {
@@ -30,11 +30,11 @@ type EBSSnapshotCopyInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether to permanently restore an archived snapshot.
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
@@ -49,11 +49,11 @@ type EBSSnapshotCopyInitParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate sourceSnapshotId.
 	// +kubebuilder:validation:Optional
-	SourceSnapshotIDRef *v1.Reference `json:"sourceSnapshotIdRef,omitempty" tf:"-"`
+	SourceSnapshotIDRef *v2.Reference `json:"sourceSnapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate sourceSnapshotId.
 	// +kubebuilder:validation:Optional
-	SourceSnapshotIDSelector *v1.Selector `json:"sourceSnapshotIdSelector,omitempty" tf:"-"`
+	SourceSnapshotIDSelector *v2.Selector `json:"sourceSnapshotIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
@@ -153,11 +153,11 @@ type EBSSnapshotCopyParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Indicates whether to permanently restore an archived snapshot.
 	// +kubebuilder:validation:Optional
@@ -180,11 +180,11 @@ type EBSSnapshotCopyParameters struct {
 
 	// Reference to a EBSSnapshot in ec2 to populate sourceSnapshotId.
 	// +kubebuilder:validation:Optional
-	SourceSnapshotIDRef *v1.Reference `json:"sourceSnapshotIdRef,omitempty" tf:"-"`
+	SourceSnapshotIDRef *v2.Reference `json:"sourceSnapshotIdRef,omitempty" tf:"-"`
 
 	// Selector for a EBSSnapshot in ec2 to populate sourceSnapshotId.
 	// +kubebuilder:validation:Optional
-	SourceSnapshotIDSelector *v1.Selector `json:"sourceSnapshotIdSelector,omitempty" tf:"-"`
+	SourceSnapshotIDSelector *v2.Selector `json:"sourceSnapshotIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	// +kubebuilder:validation:Optional
@@ -202,8 +202,8 @@ type EBSSnapshotCopyParameters struct {
 
 // EBSSnapshotCopySpec defines the desired state of EBSSnapshotCopy
 type EBSSnapshotCopySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EBSSnapshotCopyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EBSSnapshotCopyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -219,8 +219,8 @@ type EBSSnapshotCopySpec struct {
 
 // EBSSnapshotCopyStatus defines the observed state of EBSSnapshotCopy.
 type EBSSnapshotCopyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EBSSnapshotCopyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EBSSnapshotCopyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

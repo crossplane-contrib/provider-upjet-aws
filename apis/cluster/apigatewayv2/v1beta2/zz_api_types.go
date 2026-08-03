@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIInitParameters struct {
@@ -306,8 +306,8 @@ type CorsConfigurationParameters struct {
 
 // APISpec defines the desired state of API
 type APISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     APIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   APIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -323,8 +323,8 @@ type APISpec struct {
 
 // APIStatus defines the observed state of API.
 type APIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

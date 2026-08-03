@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VPCLinkInitParameters struct {
@@ -27,11 +27,11 @@ type VPCLinkInitParameters struct {
 
 	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnRefs []v1.Reference `json:"targetArnRefs,omitempty" tf:"-"`
+	TargetArnRefs []v2.Reference `json:"targetArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
@@ -91,11 +91,11 @@ type VPCLinkParameters struct {
 
 	// References to LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnRefs []v1.Reference `json:"targetArnRefs,omitempty" tf:"-"`
+	TargetArnRefs []v2.Reference `json:"targetArnRefs,omitempty" tf:"-"`
 
 	// Selector for a list of LB in elbv2 to populate targetArns.
 	// +kubebuilder:validation:Optional
-	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+	TargetArnSelector *v2.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
@@ -108,8 +108,8 @@ type VPCLinkParameters struct {
 
 // VPCLinkSpec defines the desired state of VPCLink
 type VPCLinkSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCLinkParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPCLinkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type VPCLinkSpec struct {
 
 // VPCLinkStatus defines the observed state of VPCLink.
 type VPCLinkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCLinkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPCLinkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

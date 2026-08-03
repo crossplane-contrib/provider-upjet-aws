@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrincipalPortfolioAssociationInitParameters struct {
@@ -25,11 +24,11 @@ type PrincipalPortfolioAssociationInitParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.NamespacedReference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.NamespacedReference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Principal ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
@@ -38,11 +37,11 @@ type PrincipalPortfolioAssociationInitParameters struct {
 
 	// Reference to a User in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnRef *v1.NamespacedReference `json:"principalArnRef,omitempty" tf:"-"`
+	PrincipalArnRef *v2.NamespacedReference `json:"principalArnRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnSelector *v1.NamespacedSelector `json:"principalArnSelector,omitempty" tf:"-"`
+	PrincipalArnSelector *v2.NamespacedSelector `json:"principalArnSelector,omitempty" tf:"-"`
 
 	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
@@ -83,11 +82,11 @@ type PrincipalPortfolioAssociationParameters struct {
 
 	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDRef *v1.NamespacedReference `json:"portfolioIdRef,omitempty" tf:"-"`
+	PortfolioIDRef *v2.NamespacedReference `json:"portfolioIdRef,omitempty" tf:"-"`
 
 	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
-	PortfolioIDSelector *v1.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
+	PortfolioIDSelector *v2.NamespacedSelector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Principal ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.User
@@ -97,11 +96,11 @@ type PrincipalPortfolioAssociationParameters struct {
 
 	// Reference to a User in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnRef *v1.NamespacedReference `json:"principalArnRef,omitempty" tf:"-"`
+	PrincipalArnRef *v2.NamespacedReference `json:"principalArnRef,omitempty" tf:"-"`
 
 	// Selector for a User in iam to populate principalArn.
 	// +kubebuilder:validation:Optional
-	PrincipalArnSelector *v1.NamespacedSelector `json:"principalArnSelector,omitempty" tf:"-"`
+	PrincipalArnSelector *v2.NamespacedSelector `json:"principalArnSelector,omitempty" tf:"-"`
 
 	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	// +kubebuilder:validation:Optional
@@ -132,8 +131,8 @@ type PrincipalPortfolioAssociationSpec struct {
 
 // PrincipalPortfolioAssociationStatus defines the observed state of PrincipalPortfolioAssociation.
 type PrincipalPortfolioAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrincipalPortfolioAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrincipalPortfolioAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

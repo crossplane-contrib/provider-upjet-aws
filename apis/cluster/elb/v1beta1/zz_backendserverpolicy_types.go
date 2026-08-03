@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackendServerPolicyInitParameters struct {
@@ -24,11 +24,11 @@ type BackendServerPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// List of Policy Names to apply to the backend server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta1.Policy
@@ -38,11 +38,11 @@ type BackendServerPolicyInitParameters struct {
 
 	// References to Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+	PolicyNamesRefs []v2.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
+	PolicyNamesSelector *v2.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 }
 
 type BackendServerPolicyObservation struct {
@@ -78,11 +78,11 @@ type BackendServerPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+	LoadBalancerNameRef *v2.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancerName.
 	// +kubebuilder:validation:Optional
-	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+	LoadBalancerNameSelector *v2.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// List of Policy Names to apply to the backend server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elb/v1beta1.Policy
@@ -93,11 +93,11 @@ type BackendServerPolicyParameters struct {
 
 	// References to Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+	PolicyNamesRefs []v2.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in elb to populate policyNames.
 	// +kubebuilder:validation:Optional
-	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
+	PolicyNamesSelector *v2.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -107,8 +107,8 @@ type BackendServerPolicyParameters struct {
 
 // BackendServerPolicySpec defines the desired state of BackendServerPolicy
 type BackendServerPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackendServerPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackendServerPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type BackendServerPolicySpec struct {
 
 // BackendServerPolicyStatus defines the observed state of BackendServerPolicy.
 type BackendServerPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackendServerPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackendServerPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

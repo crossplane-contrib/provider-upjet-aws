@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkAssociationInitParameters struct {
@@ -40,11 +39,11 @@ type LinkAssociationParameters struct {
 
 	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDRef *v1.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
+	DeviceIDRef *v2.NamespacedReference `json:"deviceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
-	DeviceIDSelector *v1.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
+	DeviceIDSelector *v2.NamespacedSelector `json:"deviceIdSelector,omitempty" tf:"-"`
 
 	// ID of the global network.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.GlobalNetwork
@@ -54,11 +53,11 @@ type LinkAssociationParameters struct {
 
 	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDRef *v1.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+	GlobalNetworkIDRef *v2.NamespacedReference `json:"globalNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
 	// +kubebuilder:validation:Optional
-	GlobalNetworkIDSelector *v1.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+	GlobalNetworkIDSelector *v2.NamespacedSelector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
 
 	// ID of the link.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/networkmanager/v1beta1.Link
@@ -68,11 +67,11 @@ type LinkAssociationParameters struct {
 
 	// Reference to a Link in networkmanager to populate linkId.
 	// +kubebuilder:validation:Optional
-	LinkIDRef *v1.NamespacedReference `json:"linkIdRef,omitempty" tf:"-"`
+	LinkIDRef *v2.NamespacedReference `json:"linkIdRef,omitempty" tf:"-"`
 
 	// Selector for a Link in networkmanager to populate linkId.
 	// +kubebuilder:validation:Optional
-	LinkIDSelector *v1.NamespacedSelector `json:"linkIdSelector,omitempty" tf:"-"`
+	LinkIDSelector *v2.NamespacedSelector `json:"linkIdSelector,omitempty" tf:"-"`
 }
 
 // LinkAssociationSpec defines the desired state of LinkAssociation
@@ -94,8 +93,8 @@ type LinkAssociationSpec struct {
 
 // LinkAssociationStatus defines the observed state of LinkAssociation.
 type LinkAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

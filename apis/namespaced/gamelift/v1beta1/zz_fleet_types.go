@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateConfigurationInitParameters struct {
@@ -90,11 +89,11 @@ type FleetInitParameters struct {
 
 	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDRef *v1.NamespacedReference `json:"buildIdRef,omitempty" tf:"-"`
+	BuildIDRef *v2.NamespacedReference `json:"buildIdRef,omitempty" tf:"-"`
 
 	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDSelector *v1.NamespacedSelector `json:"buildIdSelector,omitempty" tf:"-"`
+	BuildIDSelector *v2.NamespacedSelector `json:"buildIdSelector,omitempty" tf:"-"`
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	CertificateConfiguration *CertificateConfigurationInitParameters `json:"certificateConfiguration,omitempty" tf:"certificate_configuration,omitempty"`
@@ -118,11 +117,11 @@ type FleetInitParameters struct {
 
 	// Reference to a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnRef *v1.NamespacedReference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+	InstanceRoleArnRef *v2.NamespacedReference `json:"instanceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnSelector *v1.NamespacedSelector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
+	InstanceRoleArnSelector *v2.NamespacedSelector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
@@ -227,11 +226,11 @@ type FleetParameters struct {
 
 	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDRef *v1.NamespacedReference `json:"buildIdRef,omitempty" tf:"-"`
+	BuildIDRef *v2.NamespacedReference `json:"buildIdRef,omitempty" tf:"-"`
 
 	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
-	BuildIDSelector *v1.NamespacedSelector `json:"buildIdSelector,omitempty" tf:"-"`
+	BuildIDSelector *v2.NamespacedSelector `json:"buildIdSelector,omitempty" tf:"-"`
 
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	// +kubebuilder:validation:Optional
@@ -261,11 +260,11 @@ type FleetParameters struct {
 
 	// Reference to a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnRef *v1.NamespacedReference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+	InstanceRoleArnRef *v2.NamespacedReference `json:"instanceRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate instanceRoleArn.
 	// +kubebuilder:validation:Optional
-	InstanceRoleArnSelector *v1.NamespacedSelector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
+	InstanceRoleArnSelector *v2.NamespacedSelector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	// +kubebuilder:validation:Optional
@@ -428,8 +427,8 @@ type FleetSpec struct {
 
 // FleetStatus defines the observed state of Fleet.
 type FleetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FleetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FleetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

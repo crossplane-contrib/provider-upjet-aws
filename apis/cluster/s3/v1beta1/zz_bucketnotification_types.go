@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketNotificationInitParameters struct {
@@ -22,11 +22,11 @@ type BucketNotificationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
@@ -82,11 +82,11 @@ type BucketNotificationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.Reference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -216,11 +216,11 @@ type QueueInitParameters struct {
 
 	// Reference to a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
-	QueueArnRef *v1.Reference `json:"queueArnRef,omitempty" tf:"-"`
+	QueueArnRef *v2.Reference `json:"queueArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
-	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
+	QueueArnSelector *v2.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
 
 type QueueObservation struct {
@@ -277,11 +277,11 @@ type QueueParameters struct {
 
 	// Reference to a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
-	QueueArnRef *v1.Reference `json:"queueArnRef,omitempty" tf:"-"`
+	QueueArnRef *v2.Reference `json:"queueArnRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in sqs to populate queueArn.
 	// +kubebuilder:validation:Optional
-	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
+	QueueArnSelector *v2.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
 
 type TopicInitParameters struct {
@@ -310,11 +310,11 @@ type TopicInitParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type TopicObservation struct {
@@ -371,17 +371,17 @@ type TopicParameters struct {
 
 	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+	TopicArnRef *v2.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
-	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
+	TopicArnSelector *v2.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 // BucketNotificationSpec defines the desired state of BucketNotification
 type BucketNotificationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BucketNotificationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BucketNotificationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -397,8 +397,8 @@ type BucketNotificationSpec struct {
 
 // BucketNotificationStatus defines the observed state of BucketNotification.
 type BucketNotificationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketNotificationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketNotificationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LBTargetGroupAttachmentInitParameters struct {
@@ -31,11 +30,11 @@ type LBTargetGroupAttachmentInitParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
@@ -92,11 +91,11 @@ type LBTargetGroupAttachmentParameters struct {
 
 	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnRef *v1.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
+	TargetGroupArnRef *v2.NamespacedReference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
 	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
-	TargetGroupArnSelector *v1.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+	TargetGroupArnSelector *v2.NamespacedSelector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	// +kubebuilder:validation:Optional
@@ -122,8 +121,8 @@ type LBTargetGroupAttachmentSpec struct {
 
 // LBTargetGroupAttachmentStatus defines the observed state of LBTargetGroupAttachment.
 type LBTargetGroupAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBTargetGroupAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBTargetGroupAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

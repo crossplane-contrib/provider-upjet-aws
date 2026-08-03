@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionConditionInitParameters struct {
@@ -255,11 +254,11 @@ type WebACLLoggingConfigurationInitParameters struct {
 
 	// References to DeliveryStream in firehose to populate logDestinationConfigs.
 	// +kubebuilder:validation:Optional
-	LogDestinationConfigsRefs []v1.NamespacedReference `json:"logDestinationConfigsRefs,omitempty" tf:"-"`
+	LogDestinationConfigsRefs []v2.NamespacedReference `json:"logDestinationConfigsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of DeliveryStream in firehose to populate logDestinationConfigs.
 	// +kubebuilder:validation:Optional
-	LogDestinationConfigsSelector *v1.NamespacedSelector `json:"logDestinationConfigsSelector,omitempty" tf:"-"`
+	LogDestinationConfigsSelector *v2.NamespacedSelector `json:"logDestinationConfigsSelector,omitempty" tf:"-"`
 
 	// Configuration block that specifies which web requests are kept in the logs and which are dropped. It allows filtering based on the rule action and the web request labels applied by matching rules during web ACL evaluation. For more details, refer to the Logging Filter section below.
 	LoggingFilter *LoggingFilterInitParameters `json:"loggingFilter,omitempty" tf:"logging_filter,omitempty"`
@@ -307,11 +306,11 @@ type WebACLLoggingConfigurationParameters struct {
 
 	// References to DeliveryStream in firehose to populate logDestinationConfigs.
 	// +kubebuilder:validation:Optional
-	LogDestinationConfigsRefs []v1.NamespacedReference `json:"logDestinationConfigsRefs,omitempty" tf:"-"`
+	LogDestinationConfigsRefs []v2.NamespacedReference `json:"logDestinationConfigsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of DeliveryStream in firehose to populate logDestinationConfigs.
 	// +kubebuilder:validation:Optional
-	LogDestinationConfigsSelector *v1.NamespacedSelector `json:"logDestinationConfigsSelector,omitempty" tf:"-"`
+	LogDestinationConfigsSelector *v2.NamespacedSelector `json:"logDestinationConfigsSelector,omitempty" tf:"-"`
 
 	// Configuration block that specifies which web requests are kept in the logs and which are dropped. It allows filtering based on the rule action and the web request labels applied by matching rules during web ACL evaluation. For more details, refer to the Logging Filter section below.
 	// +kubebuilder:validation:Optional
@@ -336,11 +335,11 @@ type WebACLLoggingConfigurationParameters struct {
 
 	// Reference to a WebACL in wafv2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a WebACL in wafv2 to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 // WebACLLoggingConfigurationSpec defines the desired state of WebACLLoggingConfiguration
@@ -362,8 +361,8 @@ type WebACLLoggingConfigurationSpec struct {
 
 // WebACLLoggingConfigurationStatus defines the observed state of WebACLLoggingConfiguration.
 type WebACLLoggingConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebACLLoggingConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebACLLoggingConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayMulticastDomainInitParameters struct {
@@ -34,11 +34,11 @@ type TransitGatewayMulticastDomainInitParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayMulticastDomainObservation struct {
@@ -108,17 +108,17 @@ type TransitGatewayMulticastDomainParameters struct {
 
 	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+	TransitGatewayIDRef *v2.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
+	TransitGatewayIDSelector *v2.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayMulticastDomainSpec defines the desired state of TransitGatewayMulticastDomain
 type TransitGatewayMulticastDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayMulticastDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayMulticastDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type TransitGatewayMulticastDomainSpec struct {
 
 // TransitGatewayMulticastDomainStatus defines the observed state of TransitGatewayMulticastDomain.
 type TransitGatewayMulticastDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayMulticastDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayMulticastDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

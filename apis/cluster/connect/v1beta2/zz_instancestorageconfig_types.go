@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionConfigInitParameters struct {
@@ -25,11 +25,11 @@ type EncryptionConfigInitParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigObservation struct {
@@ -55,11 +55,11 @@ type EncryptionConfigParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type InstanceStorageConfigInitParameters struct {
@@ -71,11 +71,11 @@ type InstanceStorageConfigInitParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// A valid resource type. Valid Values: AGENT_EVENTS | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS | CONTACT_TRACE_RECORDS | EMAIL_MESSAGES | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS | SCHEDULED_REPORTS | SCREEN_RECORDINGS.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
@@ -116,11 +116,11 @@ type InstanceStorageConfigParameters struct {
 
 	// Reference to a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in connect to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -145,11 +145,11 @@ type KinesisFirehoseConfigInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+	FirehoseArnRef *v2.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
+	FirehoseArnSelector *v2.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseConfigObservation struct {
@@ -168,11 +168,11 @@ type KinesisFirehoseConfigParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+	FirehoseArnRef *v2.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate firehoseArn.
 	// +kubebuilder:validation:Optional
-	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
+	FirehoseArnSelector *v2.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamConfigInitParameters struct {
@@ -184,11 +184,11 @@ type KinesisStreamConfigInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamConfigObservation struct {
@@ -207,11 +207,11 @@ type KinesisStreamConfigParameters struct {
 
 	// Reference to a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+	StreamArnRef *v2.Reference `json:"streamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate streamArn.
 	// +kubebuilder:validation:Optional
-	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
+	StreamArnSelector *v2.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisVideoStreamConfigInitParameters struct {
@@ -265,11 +265,11 @@ type S3ConfigEncryptionConfigInitParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigEncryptionConfigObservation struct {
@@ -295,11 +295,11 @@ type S3ConfigEncryptionConfigParameters struct {
 
 	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigInitParameters struct {
@@ -311,11 +311,11 @@ type S3ConfigInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The S3 bucket prefix.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -346,11 +346,11 @@ type S3ConfigParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+	BucketNameRef *v2.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
-	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+	BucketNameSelector *v2.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The S3 bucket prefix.
 	// +kubebuilder:validation:Optional
@@ -422,8 +422,8 @@ type StorageConfigParameters struct {
 
 // InstanceStorageConfigSpec defines the desired state of InstanceStorageConfig
 type InstanceStorageConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     InstanceStorageConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   InstanceStorageConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -439,8 +439,8 @@ type InstanceStorageConfigSpec struct {
 
 // InstanceStorageConfigStatus defines the observed state of InstanceStorageConfig.
 type InstanceStorageConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        InstanceStorageConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               InstanceStorageConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

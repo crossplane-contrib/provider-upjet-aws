@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessLogsInitParameters struct {
@@ -22,11 +21,11 @@ type AccessLogsInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Boolean to enable / disable access_logs. Defaults to false, even when bucket is specified.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -56,11 +55,11 @@ type AccessLogsParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Boolean to enable / disable access_logs. Defaults to false, even when bucket is specified.
 	// +kubebuilder:validation:Optional
@@ -250,11 +249,11 @@ type LBInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -268,11 +267,11 @@ type LBInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.NamespacedReference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.NamespacedReference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -525,11 +524,11 @@ type LBParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupRefs []v1.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
+	SecurityGroupRefs []v2.NamespacedReference `json:"securityGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupSelector *v1.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
+	SecurityGroupSelector *v2.NamespacedSelector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
@@ -545,11 +544,11 @@ type LBParameters struct {
 
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetRefs []v1.NamespacedReference `json:"subnetRefs,omitempty" tf:"-"`
+	SubnetRefs []v2.NamespacedReference `json:"subnetRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
-	SubnetSelector *v1.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
+	SubnetSelector *v2.NamespacedSelector `json:"subnetSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -605,11 +604,11 @@ type SubnetMappingInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetMappingObservation struct {
@@ -651,11 +650,11 @@ type SubnetMappingParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // LBSpec defines the desired state of LB
@@ -677,8 +676,8 @@ type LBSpec struct {
 
 // LBStatus defines the observed state of LB.
 type LBStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UsageLimitInitParameters struct {
@@ -32,11 +31,11 @@ type UsageLimitInitParameters struct {
 
 	// Reference to a Workgroup in redshiftserverless to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in redshiftserverless to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// The type of Amazon Redshift Serverless usage to create a usage limit for. Valid values are serverless-compute or cross-region-datasharing.
 	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
@@ -97,11 +96,11 @@ type UsageLimitParameters struct {
 
 	// Reference to a Workgroup in redshiftserverless to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Workgroup in redshiftserverless to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 
 	// The type of Amazon Redshift Serverless usage to create a usage limit for. Valid values are serverless-compute or cross-region-datasharing.
 	// +kubebuilder:validation:Optional
@@ -127,8 +126,8 @@ type UsageLimitSpec struct {
 
 // UsageLimitStatus defines the observed state of UsageLimit.
 type UsageLimitStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UsageLimitObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UsageLimitObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

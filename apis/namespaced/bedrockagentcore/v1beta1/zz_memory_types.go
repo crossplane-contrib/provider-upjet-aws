@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentConfigurationInitParameters struct {
@@ -84,11 +83,11 @@ type KinesisInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate dataStreamArn.
 	// +kubebuilder:validation:Optional
-	DataStreamArnRef *v1.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
+	DataStreamArnRef *v2.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate dataStreamArn.
 	// +kubebuilder:validation:Optional
-	DataStreamArnSelector *v1.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
+	DataStreamArnSelector *v2.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisObservation struct {
@@ -114,11 +113,11 @@ type KinesisParameters struct {
 
 	// Reference to a Stream in kinesis to populate dataStreamArn.
 	// +kubebuilder:validation:Optional
-	DataStreamArnRef *v1.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
+	DataStreamArnRef *v2.NamespacedReference `json:"dataStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate dataStreamArn.
 	// +kubebuilder:validation:Optional
-	DataStreamArnSelector *v1.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
+	DataStreamArnSelector *v2.NamespacedSelector `json:"dataStreamArnSelector,omitempty" tf:"-"`
 }
 
 type MemoryInitParameters_2 struct {
@@ -133,11 +132,11 @@ type MemoryInitParameters_2 struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Number of days after which memory events expire. Must be a positive integer in the range of 7 to 365.
 	EventExpiryDuration *float64 `json:"eventExpiryDuration,omitempty" tf:"event_expiry_duration,omitempty"`
@@ -152,11 +151,11 @@ type MemoryInitParameters_2 struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.NamespacedReference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.NamespacedReference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.NamespacedSelector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.NamespacedSelector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the memory.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -225,11 +224,11 @@ type MemoryParameters_2 struct {
 
 	// Reference to a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnRef *v1.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
+	EncryptionKeyArnRef *v2.NamespacedReference `json:"encryptionKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionKeyArnSelector *v1.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
+	EncryptionKeyArnSelector *v2.NamespacedSelector `json:"encryptionKeyArnSelector,omitempty" tf:"-"`
 
 	// Number of days after which memory events expire. Must be a positive integer in the range of 7 to 365.
 	// +kubebuilder:validation:Optional
@@ -247,11 +246,11 @@ type MemoryParameters_2 struct {
 
 	// Reference to a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnRef *v1.NamespacedReference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
+	MemoryExecutionRoleArnRef *v2.NamespacedReference `json:"memoryExecutionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate memoryExecutionRoleArn.
 	// +kubebuilder:validation:Optional
-	MemoryExecutionRoleArnSelector *v1.NamespacedSelector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
+	MemoryExecutionRoleArnSelector *v2.NamespacedSelector `json:"memoryExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// Name of the memory.
 	// +kubebuilder:validation:Optional
@@ -329,8 +328,8 @@ type MemorySpec struct {
 
 // MemoryStatus defines the observed state of Memory.
 type MemoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemoryObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MemoryObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

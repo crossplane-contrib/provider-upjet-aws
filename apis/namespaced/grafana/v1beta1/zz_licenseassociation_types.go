@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LicenseAssociationInitParameters struct {
@@ -29,11 +28,11 @@ type LicenseAssociationInitParameters struct {
 
 	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type LicenseAssociationObservation struct {
@@ -83,11 +82,11 @@ type LicenseAssociationParameters struct {
 
 	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // LicenseAssociationSpec defines the desired state of LicenseAssociation
@@ -109,8 +108,8 @@ type LicenseAssociationSpec struct {
 
 // LicenseAssociationStatus defines the observed state of LicenseAssociation.
 type LicenseAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LicenseAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LicenseAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LBCookieStickinessPolicyInitParameters struct {
@@ -32,11 +32,11 @@ type LBCookieStickinessPolicyInitParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the stickiness policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -90,11 +90,11 @@ type LBCookieStickinessPolicyParameters struct {
 
 	// Reference to a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+	LoadBalancerRef *v2.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
 
 	// Selector for a ELB in elb to populate loadBalancer.
 	// +kubebuilder:validation:Optional
-	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+	LoadBalancerSelector *v2.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the stickiness policy.
 	// +kubebuilder:validation:Optional
@@ -108,8 +108,8 @@ type LBCookieStickinessPolicyParameters struct {
 
 // LBCookieStickinessPolicySpec defines the desired state of LBCookieStickinessPolicy
 type LBCookieStickinessPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LBCookieStickinessPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LBCookieStickinessPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -125,8 +125,8 @@ type LBCookieStickinessPolicySpec struct {
 
 // LBCookieStickinessPolicyStatus defines the observed state of LBCookieStickinessPolicy.
 type LBCookieStickinessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LBCookieStickinessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LBCookieStickinessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

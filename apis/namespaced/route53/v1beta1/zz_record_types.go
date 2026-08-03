@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AliasInitParameters struct {
@@ -253,11 +252,11 @@ type RecordInitParameters struct {
 
 	// Reference to a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
-	HealthCheckIDRef *v1.NamespacedReference `json:"healthCheckIdRef,omitempty" tf:"-"`
+	HealthCheckIDRef *v2.NamespacedReference `json:"healthCheckIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
-	HealthCheckIDSelector *v1.NamespacedSelector `json:"healthCheckIdSelector,omitempty" tf:"-"`
+	HealthCheckIDSelector *v2.NamespacedSelector `json:"healthCheckIdSelector,omitempty" tf:"-"`
 
 	// A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below.
 	LatencyRoutingPolicy *LatencyRoutingPolicyInitParameters `json:"latencyRoutingPolicy,omitempty" tf:"latency_routing_policy,omitempty"`
@@ -276,11 +275,11 @@ type RecordInitParameters struct {
 
 	// References to EIP in ec2 to populate records.
 	// +kubebuilder:validation:Optional
-	RecordsRefs []v1.NamespacedReference `json:"recordsRefs,omitempty" tf:"-"`
+	RecordsRefs []v2.NamespacedReference `json:"recordsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate records.
 	// +kubebuilder:validation:Optional
-	RecordsSelector *v1.NamespacedSelector `json:"recordsSelector,omitempty" tf:"-"`
+	RecordsSelector *v2.NamespacedSelector `json:"recordsSelector,omitempty" tf:"-"`
 
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
@@ -300,11 +299,11 @@ type RecordInitParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type RecordObservation struct {
@@ -399,11 +398,11 @@ type RecordParameters struct {
 
 	// Reference to a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
-	HealthCheckIDRef *v1.NamespacedReference `json:"healthCheckIdRef,omitempty" tf:"-"`
+	HealthCheckIDRef *v2.NamespacedReference `json:"healthCheckIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
-	HealthCheckIDSelector *v1.NamespacedSelector `json:"healthCheckIdSelector,omitempty" tf:"-"`
+	HealthCheckIDSelector *v2.NamespacedSelector `json:"healthCheckIdSelector,omitempty" tf:"-"`
 
 	// A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below.
 	// +kubebuilder:validation:Optional
@@ -426,11 +425,11 @@ type RecordParameters struct {
 
 	// References to EIP in ec2 to populate records.
 	// +kubebuilder:validation:Optional
-	RecordsRefs []v1.NamespacedReference `json:"recordsRefs,omitempty" tf:"-"`
+	RecordsRefs []v2.NamespacedReference `json:"recordsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of EIP in ec2 to populate records.
 	// +kubebuilder:validation:Optional
-	RecordsSelector *v1.NamespacedSelector `json:"recordsSelector,omitempty" tf:"-"`
+	RecordsSelector *v2.NamespacedSelector `json:"recordsSelector,omitempty" tf:"-"`
 
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	// +kubebuilder:validation:Optional
@@ -455,11 +454,11 @@ type RecordParameters struct {
 
 	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDRef *v1.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
+	ZoneIDRef *v2.NamespacedReference `json:"zoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
-	ZoneIDSelector *v1.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
+	ZoneIDSelector *v2.NamespacedSelector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type WeightedRoutingPolicyInitParameters struct {
@@ -500,8 +499,8 @@ type RecordSpec struct {
 
 // RecordStatus defines the observed state of Record.
 type RecordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RecordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessEndpointInitParameters struct {
@@ -98,11 +98,11 @@ type ImageBuilderInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the public, private, or shared image to use.
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
@@ -212,11 +212,11 @@ type ImageBuilderParameters struct {
 
 	// Reference to a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+	IAMRoleArnRef *v2.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRoleArn.
 	// +kubebuilder:validation:Optional
-	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+	IAMRoleArnSelector *v2.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the public, private, or shared image to use.
 	// +kubebuilder:validation:Optional
@@ -249,11 +249,11 @@ type ImageBuilderVPCConfigInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the subnet to which a network interface is attached from the image builder instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -283,11 +283,11 @@ type ImageBuilderVPCConfigParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+	SubnetIDRefs []v2.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the subnet to which a network interface is attached from the image builder instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.Subnet
@@ -300,8 +300,8 @@ type ImageBuilderVPCConfigParameters struct {
 
 // ImageBuilderSpec defines the desired state of ImageBuilder
 type ImageBuilderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ImageBuilderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ImageBuilderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -317,8 +317,8 @@ type ImageBuilderSpec struct {
 
 // ImageBuilderStatus defines the observed state of ImageBuilder.
 type ImageBuilderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ImageBuilderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ImageBuilderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

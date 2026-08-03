@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyBackupPolicyInitParameters struct {
@@ -43,11 +43,11 @@ type BackupPolicyInitParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 }
 
 type BackupPolicyObservation struct {
@@ -79,11 +79,11 @@ type BackupPolicyParameters struct {
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+	FileSystemIDRef *v2.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a FileSystem in efs to populate fileSystemId.
 	// +kubebuilder:validation:Optional
-	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+	FileSystemIDSelector *v2.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -93,8 +93,8 @@ type BackupPolicyParameters struct {
 
 // BackupPolicySpec defines the desired state of BackupPolicy
 type BackupPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -110,8 +110,8 @@ type BackupPolicySpec struct {
 
 // BackupPolicyStatus defines the observed state of BackupPolicy.
 type BackupPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

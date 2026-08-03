@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstanceMetadataServiceConfigurationInitParameters struct {
@@ -46,11 +45,11 @@ type NotebookInstanceInitParameters struct {
 
 	// Reference to a CodeRepository in sagemaker to populate defaultCodeRepository.
 	// +kubebuilder:validation:Optional
-	DefaultCodeRepositoryRef *v1.NamespacedReference `json:"defaultCodeRepositoryRef,omitempty" tf:"-"`
+	DefaultCodeRepositoryRef *v2.NamespacedReference `json:"defaultCodeRepositoryRef,omitempty" tf:"-"`
 
 	// Selector for a CodeRepository in sagemaker to populate defaultCodeRepository.
 	// +kubebuilder:validation:Optional
-	DefaultCodeRepositorySelector *v1.NamespacedSelector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
+	DefaultCodeRepositorySelector *v2.NamespacedSelector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
 
 	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker AI training and endpoint services unless your configure a NAT Gateway in your VPC.
 	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
@@ -67,11 +66,11 @@ type NotebookInstanceInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
@@ -86,11 +85,11 @@ type NotebookInstanceInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
 	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
@@ -105,11 +104,11 @@ type NotebookInstanceInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -203,11 +202,11 @@ type NotebookInstanceParameters struct {
 
 	// Reference to a CodeRepository in sagemaker to populate defaultCodeRepository.
 	// +kubebuilder:validation:Optional
-	DefaultCodeRepositoryRef *v1.NamespacedReference `json:"defaultCodeRepositoryRef,omitempty" tf:"-"`
+	DefaultCodeRepositoryRef *v2.NamespacedReference `json:"defaultCodeRepositoryRef,omitempty" tf:"-"`
 
 	// Selector for a CodeRepository in sagemaker to populate defaultCodeRepository.
 	// +kubebuilder:validation:Optional
-	DefaultCodeRepositorySelector *v1.NamespacedSelector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
+	DefaultCodeRepositorySelector *v2.NamespacedSelector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
 
 	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker AI training and endpoint services unless your configure a NAT Gateway in your VPC.
 	// +kubebuilder:validation:Optional
@@ -228,11 +227,11 @@ type NotebookInstanceParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDRef *v1.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+	KMSKeyIDRef *v2.NamespacedReference `json:"kmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyId.
 	// +kubebuilder:validation:Optional
-	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+	KMSKeyIDSelector *v2.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	// +kubebuilder:validation:Optional
@@ -255,11 +254,11 @@ type NotebookInstanceParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
 	// +kubebuilder:validation:Optional
@@ -277,11 +276,11 @@ type NotebookInstanceParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -312,8 +311,8 @@ type NotebookInstanceSpec struct {
 
 // NotebookInstanceStatus defines the observed state of NotebookInstance.
 type NotebookInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotebookInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotebookInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LayerVersionInitParameters struct {
@@ -43,11 +42,11 @@ type LayerVersionInitParameters struct {
 
 	// Reference to a Object in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -56,11 +55,11 @@ type LayerVersionInitParameters struct {
 
 	// Reference to a Object in s3 to populate s3Key.
 	// +kubebuilder:validation:Optional
-	S3KeyRef *v1.NamespacedReference `json:"s3KeyRef,omitempty" tf:"-"`
+	S3KeyRef *v2.NamespacedReference `json:"s3KeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate s3Key.
 	// +kubebuilder:validation:Optional
-	S3KeySelector *v1.NamespacedSelector `json:"s3KeySelector,omitempty" tf:"-"`
+	S3KeySelector *v2.NamespacedSelector `json:"s3KeySelector,omitempty" tf:"-"`
 
 	// Object version containing the function's deployment package. Conflicts with filename.
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
@@ -181,11 +180,11 @@ type LayerVersionParameters struct {
 
 	// Reference to a Object in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketRef *v1.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
+	S3BucketRef *v2.NamespacedReference `json:"s3BucketRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate s3Bucket.
 	// +kubebuilder:validation:Optional
-	S3BucketSelector *v1.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
+	S3BucketSelector *v2.NamespacedSelector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// S3 key of an object containing the function's deployment package. Conflicts with filename.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -195,11 +194,11 @@ type LayerVersionParameters struct {
 
 	// Reference to a Object in s3 to populate s3Key.
 	// +kubebuilder:validation:Optional
-	S3KeyRef *v1.NamespacedReference `json:"s3KeyRef,omitempty" tf:"-"`
+	S3KeyRef *v2.NamespacedReference `json:"s3KeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate s3Key.
 	// +kubebuilder:validation:Optional
-	S3KeySelector *v1.NamespacedSelector `json:"s3KeySelector,omitempty" tf:"-"`
+	S3KeySelector *v2.NamespacedSelector `json:"s3KeySelector,omitempty" tf:"-"`
 
 	// Object version containing the function's deployment package. Conflicts with filename.
 	// +kubebuilder:validation:Optional
@@ -233,8 +232,8 @@ type LayerVersionSpec struct {
 
 // LayerVersionStatus defines the observed state of LayerVersion.
 type LayerVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LayerVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LayerVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

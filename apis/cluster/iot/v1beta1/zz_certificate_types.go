@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateInitParameters struct {
@@ -19,14 +19,14 @@ type CertificateInitParameters struct {
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
 	// The CA certificate for the certificate to be registered. If this is set, the CA needs to be registered with AWS IoT beforehand.
-	CAPemSecretRef *v1.SecretKeySelector `json:"caPemSecretRef,omitempty" tf:"-"`
+	CAPemSecretRef *v2.SecretKeySelector `json:"caPemSecretRef,omitempty" tf:"-"`
 
 	// The certificate to be registered. If ca_pem is unspecified, review
 	// RegisterCertificateWithoutCA.
 	// If ca_pem is specified, review
 	// RegisterCertificate
 	// for more information on registering a certificate.
-	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+	CertificatePemSecretRef *v2.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
 
 	// The certificate signing request. Review
 	// CreateCertificateFromCsr
@@ -70,7 +70,7 @@ type CertificateParameters struct {
 
 	// The CA certificate for the certificate to be registered. If this is set, the CA needs to be registered with AWS IoT beforehand.
 	// +kubebuilder:validation:Optional
-	CAPemSecretRef *v1.SecretKeySelector `json:"caPemSecretRef,omitempty" tf:"-"`
+	CAPemSecretRef *v2.SecretKeySelector `json:"caPemSecretRef,omitempty" tf:"-"`
 
 	// The certificate to be registered. If ca_pem is unspecified, review
 	// RegisterCertificateWithoutCA.
@@ -78,7 +78,7 @@ type CertificateParameters struct {
 	// RegisterCertificate
 	// for more information on registering a certificate.
 	// +kubebuilder:validation:Optional
-	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+	CertificatePemSecretRef *v2.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
 
 	// The certificate signing request. Review
 	// CreateCertificateFromCsr
@@ -96,8 +96,8 @@ type CertificateParameters struct {
 
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -113,8 +113,8 @@ type CertificateSpec struct {
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

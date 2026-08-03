@@ -11,6 +11,7 @@ import (
 
 	accesspolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/accesspolicy"
 	collection "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/collection"
+	collectiongroup "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/collectiongroup"
 	lifecyclepolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/lifecyclepolicy"
 	securityconfig "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/securityconfig"
 	securitypolicy "github.com/upbound/provider-aws/v2/internal/controller/namespaced/opensearchserverless/securitypolicy"
@@ -23,6 +24,7 @@ func Setup_opensearchserverless(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accesspolicy.Setup,
 		collection.Setup,
+		collectiongroup.Setup,
 		lifecyclepolicy.Setup,
 		securityconfig.Setup,
 		securitypolicy.Setup,
@@ -41,6 +43,7 @@ func SetupGated_opensearchserverless(mgr ctrl.Manager, o controller.Options) err
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		accesspolicy.SetupGated,
 		collection.SetupGated,
+		collectiongroup.SetupGated,
 		lifecyclepolicy.SetupGated,
 		securityconfig.SetupGated,
 		securitypolicy.SetupGated,
@@ -58,6 +61,7 @@ func SetupWebhookWithManager_opensearchserverless(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		accesspolicy.SetupWebhookWithManager,
 		collection.SetupWebhookWithManager,
+		collectiongroup.SetupWebhookWithManager,
 		lifecyclepolicy.SetupWebhookWithManager,
 		securityconfig.SetupWebhookWithManager,
 		securitypolicy.SetupWebhookWithManager,

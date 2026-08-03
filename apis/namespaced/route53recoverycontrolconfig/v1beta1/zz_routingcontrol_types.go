@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RoutingControlInitParameters struct {
@@ -23,11 +22,11 @@ type RoutingControlInitParameters struct {
 
 	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this routing control will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53recoverycontrolconfig/v1beta1.ControlPanel
@@ -36,11 +35,11 @@ type RoutingControlInitParameters struct {
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnRef *v1.NamespacedReference `json:"controlPanelArnRef,omitempty" tf:"-"`
+	ControlPanelArnRef *v2.NamespacedReference `json:"controlPanelArnRef,omitempty" tf:"-"`
 
 	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnSelector *v1.NamespacedSelector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+	ControlPanelArnSelector *v2.NamespacedSelector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// The name describing the routing control.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -76,11 +75,11 @@ type RoutingControlParameters struct {
 
 	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnRef *v1.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
+	ClusterArnRef *v2.NamespacedReference `json:"clusterArnRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in route53recoverycontrolconfig to populate clusterArn.
 	// +kubebuilder:validation:Optional
-	ClusterArnSelector *v1.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
+	ClusterArnSelector *v2.NamespacedSelector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this routing control will reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/route53recoverycontrolconfig/v1beta1.ControlPanel
@@ -90,11 +89,11 @@ type RoutingControlParameters struct {
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnRef *v1.NamespacedReference `json:"controlPanelArnRef,omitempty" tf:"-"`
+	ControlPanelArnRef *v2.NamespacedReference `json:"controlPanelArnRef,omitempty" tf:"-"`
 
 	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
 	// +kubebuilder:validation:Optional
-	ControlPanelArnSelector *v1.NamespacedSelector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+	ControlPanelArnSelector *v2.NamespacedSelector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// The name describing the routing control.
 	// +kubebuilder:validation:Optional
@@ -120,8 +119,8 @@ type RoutingControlSpec struct {
 
 // RoutingControlStatus defines the observed state of RoutingControl.
 type RoutingControlStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoutingControlObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoutingControlObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

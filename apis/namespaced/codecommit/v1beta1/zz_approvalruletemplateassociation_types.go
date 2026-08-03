@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApprovalRuleTemplateAssociationInitParameters struct {
@@ -42,11 +41,11 @@ type ApprovalRuleTemplateAssociationParameters struct {
 
 	// Reference to a ApprovalRuleTemplate in codecommit to populate approvalRuleTemplateName.
 	// +kubebuilder:validation:Optional
-	ApprovalRuleTemplateNameRef *v1.NamespacedReference `json:"approvalRuleTemplateNameRef,omitempty" tf:"-"`
+	ApprovalRuleTemplateNameRef *v2.NamespacedReference `json:"approvalRuleTemplateNameRef,omitempty" tf:"-"`
 
 	// Selector for a ApprovalRuleTemplate in codecommit to populate approvalRuleTemplateName.
 	// +kubebuilder:validation:Optional
-	ApprovalRuleTemplateNameSelector *v1.NamespacedSelector `json:"approvalRuleTemplateNameSelector,omitempty" tf:"-"`
+	ApprovalRuleTemplateNameSelector *v2.NamespacedSelector `json:"approvalRuleTemplateNameSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -60,11 +59,11 @@ type ApprovalRuleTemplateAssociationParameters struct {
 
 	// Reference to a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameRef *v1.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
+	RepositoryNameRef *v2.NamespacedReference `json:"repositoryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Repository in codecommit to populate repositoryName.
 	// +kubebuilder:validation:Optional
-	RepositoryNameSelector *v1.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
+	RepositoryNameSelector *v2.NamespacedSelector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 // ApprovalRuleTemplateAssociationSpec defines the desired state of ApprovalRuleTemplateAssociation
@@ -86,8 +85,8 @@ type ApprovalRuleTemplateAssociationSpec struct {
 
 // ApprovalRuleTemplateAssociationStatus defines the observed state of ApprovalRuleTemplateAssociation.
 type ApprovalRuleTemplateAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApprovalRuleTemplateAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApprovalRuleTemplateAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

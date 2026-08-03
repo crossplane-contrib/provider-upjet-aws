@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeploymentInitParameters struct {
@@ -23,11 +22,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Configuration profile ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.ConfigurationProfile
@@ -36,11 +35,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDRef *v1.NamespacedReference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+	ConfigurationProfileIDRef *v2.NamespacedReference `json:"configurationProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDSelector *v1.NamespacedSelector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+	ConfigurationProfileIDSelector *v2.NamespacedSelector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
 	// Configuration version to deploy. Can be at most 1024 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.HostedConfigurationVersion
@@ -49,11 +48,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a HostedConfigurationVersion in appconfig to populate configurationVersion.
 	// +kubebuilder:validation:Optional
-	ConfigurationVersionRef *v1.NamespacedReference `json:"configurationVersionRef,omitempty" tf:"-"`
+	ConfigurationVersionRef *v2.NamespacedReference `json:"configurationVersionRef,omitempty" tf:"-"`
 
 	// Selector for a HostedConfigurationVersion in appconfig to populate configurationVersion.
 	// +kubebuilder:validation:Optional
-	ConfigurationVersionSelector *v1.NamespacedSelector `json:"configurationVersionSelector,omitempty" tf:"-"`
+	ConfigurationVersionSelector *v2.NamespacedSelector `json:"configurationVersionSelector,omitempty" tf:"-"`
 
 	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.DeploymentStrategy
@@ -62,11 +61,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a DeploymentStrategy in appconfig to populate deploymentStrategyId.
 	// +kubebuilder:validation:Optional
-	DeploymentStrategyIDRef *v1.NamespacedReference `json:"deploymentStrategyIdRef,omitempty" tf:"-"`
+	DeploymentStrategyIDRef *v2.NamespacedReference `json:"deploymentStrategyIdRef,omitempty" tf:"-"`
 
 	// Selector for a DeploymentStrategy in appconfig to populate deploymentStrategyId.
 	// +kubebuilder:validation:Optional
-	DeploymentStrategyIDSelector *v1.NamespacedSelector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
+	DeploymentStrategyIDSelector *v2.NamespacedSelector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
 
 	// Description of the deployment. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -78,11 +77,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a Environment in appconfig to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDRef *v1.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
+	EnvironmentIDRef *v2.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in appconfig to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDSelector *v1.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
+	EnvironmentIDSelector *v2.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
 
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -91,11 +90,11 @@ type DeploymentInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -163,11 +162,11 @@ type DeploymentParameters struct {
 
 	// Reference to a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDRef *v1.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
+	ApplicationIDRef *v2.NamespacedReference `json:"applicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in appconfig to populate applicationId.
 	// +kubebuilder:validation:Optional
-	ApplicationIDSelector *v1.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
+	ApplicationIDSelector *v2.NamespacedSelector `json:"applicationIdSelector,omitempty" tf:"-"`
 
 	// Configuration profile ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.ConfigurationProfile
@@ -177,11 +176,11 @@ type DeploymentParameters struct {
 
 	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDRef *v1.NamespacedReference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+	ConfigurationProfileIDRef *v2.NamespacedReference `json:"configurationProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
 	// +kubebuilder:validation:Optional
-	ConfigurationProfileIDSelector *v1.NamespacedSelector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+	ConfigurationProfileIDSelector *v2.NamespacedSelector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
 	// Configuration version to deploy. Can be at most 1024 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.HostedConfigurationVersion
@@ -191,11 +190,11 @@ type DeploymentParameters struct {
 
 	// Reference to a HostedConfigurationVersion in appconfig to populate configurationVersion.
 	// +kubebuilder:validation:Optional
-	ConfigurationVersionRef *v1.NamespacedReference `json:"configurationVersionRef,omitempty" tf:"-"`
+	ConfigurationVersionRef *v2.NamespacedReference `json:"configurationVersionRef,omitempty" tf:"-"`
 
 	// Selector for a HostedConfigurationVersion in appconfig to populate configurationVersion.
 	// +kubebuilder:validation:Optional
-	ConfigurationVersionSelector *v1.NamespacedSelector `json:"configurationVersionSelector,omitempty" tf:"-"`
+	ConfigurationVersionSelector *v2.NamespacedSelector `json:"configurationVersionSelector,omitempty" tf:"-"`
 
 	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/appconfig/v1beta1.DeploymentStrategy
@@ -205,11 +204,11 @@ type DeploymentParameters struct {
 
 	// Reference to a DeploymentStrategy in appconfig to populate deploymentStrategyId.
 	// +kubebuilder:validation:Optional
-	DeploymentStrategyIDRef *v1.NamespacedReference `json:"deploymentStrategyIdRef,omitempty" tf:"-"`
+	DeploymentStrategyIDRef *v2.NamespacedReference `json:"deploymentStrategyIdRef,omitempty" tf:"-"`
 
 	// Selector for a DeploymentStrategy in appconfig to populate deploymentStrategyId.
 	// +kubebuilder:validation:Optional
-	DeploymentStrategyIDSelector *v1.NamespacedSelector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
+	DeploymentStrategyIDSelector *v2.NamespacedSelector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
 
 	// Description of the deployment. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
@@ -223,11 +222,11 @@ type DeploymentParameters struct {
 
 	// Reference to a Environment in appconfig to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDRef *v1.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
+	EnvironmentIDRef *v2.NamespacedReference `json:"environmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in appconfig to populate environmentId.
 	// +kubebuilder:validation:Optional
-	EnvironmentIDSelector *v1.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
+	EnvironmentIDSelector *v2.NamespacedSelector `json:"environmentIdSelector,omitempty" tf:"-"`
 
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kms/v1beta1.Key
@@ -237,11 +236,11 @@ type DeploymentParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierRef *v1.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+	KMSKeyIdentifierRef *v2.NamespacedReference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KMSKeyIdentifierSelector *v1.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
+	KMSKeyIdentifierSelector *v2.NamespacedSelector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -273,8 +272,8 @@ type DeploymentSpec struct {
 
 // DeploymentStatus defines the observed state of Deployment.
 type DeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

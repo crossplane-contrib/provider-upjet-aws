@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizerConfigInitParameters struct {
@@ -65,11 +64,11 @@ type DomainConfigurationInitParameters struct {
 
 	// References to Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsRefs []v1.NamespacedReference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
+	ServerCertificateArnsRefs []v2.NamespacedReference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsSelector *v1.NamespacedSelector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
+	ServerCertificateArnsSelector *v2.NamespacedSelector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
 
 	// The type of service delivered by the endpoint. Note: Amazon Web Services IoT Core currently supports only the DATA service type.
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
@@ -172,11 +171,11 @@ type DomainConfigurationParameters struct {
 
 	// References to Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsRefs []v1.NamespacedReference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
+	ServerCertificateArnsRefs []v2.NamespacedReference `json:"serverCertificateArnsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Certificate in acm to populate serverCertificateArns.
 	// +kubebuilder:validation:Optional
-	ServerCertificateArnsSelector *v1.NamespacedSelector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
+	ServerCertificateArnsSelector *v2.NamespacedSelector `json:"serverCertificateArnsSelector,omitempty" tf:"-"`
 
 	// The type of service delivered by the endpoint. Note: Amazon Web Services IoT Core currently supports only the DATA service type.
 	// +kubebuilder:validation:Optional
@@ -238,8 +237,8 @@ type DomainConfigurationSpec struct {
 
 // DomainConfigurationStatus defines the observed state of DomainConfiguration.
 type DomainConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DomainConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DomainConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

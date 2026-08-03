@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BrokerLogsInitParameters struct {
@@ -65,11 +64,11 @@ type BrokerNodeGroupInfoInitParameters struct {
 
 	// References to Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsRefs []v1.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
+	ClientSubnetsRefs []v2.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsSelector *v1.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
+	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
 	// Information about the cluster access configuration. See broker_node_group_info connectivity_info Argument Reference below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo *ConnectivityInfoInitParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
@@ -84,11 +83,11 @@ type BrokerNodeGroupInfoInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
 	StorageInfo *StorageInfoInitParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
@@ -131,11 +130,11 @@ type BrokerNodeGroupInfoParameters struct {
 
 	// References to Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsRefs []v1.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
+	ClientSubnetsRefs []v2.NamespacedReference `json:"clientSubnetsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate clientSubnets.
 	// +kubebuilder:validation:Optional
-	ClientSubnetsSelector *v1.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
+	ClientSubnetsSelector *v2.NamespacedSelector `json:"clientSubnetsSelector,omitempty" tf:"-"`
 
 	// Information about the cluster access configuration. See broker_node_group_info connectivity_info Argument Reference below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	// +kubebuilder:validation:Optional
@@ -153,11 +152,11 @@ type BrokerNodeGroupInfoParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsRefs []v1.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
+	SecurityGroupsRefs []v2.NamespacedReference `json:"securityGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
-	SecurityGroupsSelector *v1.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
+	SecurityGroupsSelector *v2.NamespacedSelector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// A block that contains information about storage volumes attached to MSK broker nodes. See broker_node_group_info storage_info Argument Reference below. This block must not be specified when an Express instance type is specified for instance_type.
 	// +kubebuilder:validation:Optional
@@ -233,11 +232,11 @@ type CloudwatchLogsInitParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsObservation struct {
@@ -262,11 +261,11 @@ type CloudwatchLogsParameters struct {
 
 	// Reference to a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupRef *v1.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
+	LogGroupRef *v2.NamespacedReference `json:"logGroupRef,omitempty" tf:"-"`
 
 	// Selector for a Group in cloudwatchlogs to populate logGroup.
 	// +kubebuilder:validation:Optional
-	LogGroupSelector *v1.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
+	LogGroupSelector *v2.NamespacedSelector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type ClusterClientAuthenticationInitParameters struct {
@@ -522,11 +521,11 @@ type ConfigurationInfoInitParameters struct {
 
 	// Reference to a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Revision of the MSK Configuration to use in the cluster.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -551,11 +550,11 @@ type ConfigurationInfoParameters struct {
 
 	// Reference to a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnRef *v1.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
+	ArnRef *v2.NamespacedReference `json:"arnRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
-	ArnSelector *v1.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
+	ArnSelector *v2.NamespacedSelector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Revision of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Optional
@@ -668,11 +667,11 @@ type EncryptionInfoInitParameters struct {
 
 	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionAtRestKMSKeyArnRef *v1.NamespacedReference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
+	EncryptionAtRestKMSKeyArnRef *v2.NamespacedReference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionAtRestKMSKeyArnSelector *v1.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
+	EncryptionAtRestKMSKeyArnSelector *v2.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block to specify encryption in transit. See encryption_info encryption_in_transit Argument Reference below.
 	EncryptionInTransit *EncryptionInTransitInitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
@@ -697,11 +696,11 @@ type EncryptionInfoParameters struct {
 
 	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionAtRestKMSKeyArnRef *v1.NamespacedReference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
+	EncryptionAtRestKMSKeyArnRef *v2.NamespacedReference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate encryptionAtRestKmsKeyArn.
 	// +kubebuilder:validation:Optional
-	EncryptionAtRestKMSKeyArnSelector *v1.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
+	EncryptionAtRestKMSKeyArnSelector *v2.NamespacedSelector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block to specify encryption in transit. See encryption_info encryption_in_transit Argument Reference below.
 	// +kubebuilder:validation:Optional
@@ -717,11 +716,11 @@ type FirehoseInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -746,11 +745,11 @@ type FirehoseParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamRef *v1.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
+	DeliveryStreamRef *v2.NamespacedReference `json:"deliveryStreamRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate deliveryStream.
 	// +kubebuilder:validation:Optional
-	DeliveryStreamSelector *v1.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
+	DeliveryStreamSelector *v2.NamespacedSelector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
@@ -937,11 +936,11 @@ type S3InitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -971,11 +970,11 @@ type S3Parameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
@@ -1094,8 +1093,8 @@ type ClusterSpec struct {
 
 // ClusterStatus defines the observed state of Cluster.
 type ClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

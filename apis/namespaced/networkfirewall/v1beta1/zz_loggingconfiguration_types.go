@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogDestinationConfigInitParameters struct {
@@ -68,11 +67,11 @@ type LoggingConfigurationInitParameters struct {
 
 	// Reference to a Firewall in networkfirewall to populate firewallArn.
 	// +kubebuilder:validation:Optional
-	FirewallArnRef *v1.NamespacedReference `json:"firewallArnRef,omitempty" tf:"-"`
+	FirewallArnRef *v2.NamespacedReference `json:"firewallArnRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in networkfirewall to populate firewallArn.
 	// +kubebuilder:validation:Optional
-	FirewallArnSelector *v1.NamespacedSelector `json:"firewallArnSelector,omitempty" tf:"-"`
+	FirewallArnSelector *v2.NamespacedSelector `json:"firewallArnSelector,omitempty" tf:"-"`
 
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
 	LoggingConfiguration *LoggingConfigurationLoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
@@ -130,11 +129,11 @@ type LoggingConfigurationParameters struct {
 
 	// Reference to a Firewall in networkfirewall to populate firewallArn.
 	// +kubebuilder:validation:Optional
-	FirewallArnRef *v1.NamespacedReference `json:"firewallArnRef,omitempty" tf:"-"`
+	FirewallArnRef *v2.NamespacedReference `json:"firewallArnRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in networkfirewall to populate firewallArn.
 	// +kubebuilder:validation:Optional
-	FirewallArnSelector *v1.NamespacedSelector `json:"firewallArnSelector,omitempty" tf:"-"`
+	FirewallArnSelector *v2.NamespacedSelector `json:"firewallArnSelector,omitempty" tf:"-"`
 
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
 	// +kubebuilder:validation:Optional
@@ -165,8 +164,8 @@ type LoggingConfigurationSpec struct {
 
 // LoggingConfigurationStatus defines the observed state of LoggingConfiguration.
 type LoggingConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoggingConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoggingConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

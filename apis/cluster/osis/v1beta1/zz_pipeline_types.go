@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BufferOptionsInitParameters struct {
@@ -126,11 +126,11 @@ type PipelineInitParameters struct {
 
 	// Reference to a Role in iam to populate pipelineRoleArn.
 	// +kubebuilder:validation:Optional
-	PipelineRoleArnRef *v1.Reference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
+	PipelineRoleArnRef *v2.Reference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate pipelineRoleArn.
 	// +kubebuilder:validation:Optional
-	PipelineRoleArnSelector *v1.Selector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
+	PipelineRoleArnSelector *v2.Selector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -222,11 +222,11 @@ type PipelineParameters struct {
 
 	// Reference to a Role in iam to populate pipelineRoleArn.
 	// +kubebuilder:validation:Optional
-	PipelineRoleArnRef *v1.Reference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
+	PipelineRoleArnRef *v2.Reference `json:"pipelineRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate pipelineRoleArn.
 	// +kubebuilder:validation:Optional
-	PipelineRoleArnSelector *v1.Selector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
+	PipelineRoleArnSelector *v2.Selector `json:"pipelineRoleArnSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -290,8 +290,8 @@ type VPCOptionsParameters struct {
 
 // PipelineSpec defines the desired state of Pipeline
 type PipelineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PipelineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PipelineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -307,8 +307,8 @@ type PipelineSpec struct {
 
 // PipelineStatus defines the observed state of Pipeline.
 type PipelineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PipelineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PipelineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

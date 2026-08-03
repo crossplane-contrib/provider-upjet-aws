@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ElasticsearchSettingsInitParameters struct {
@@ -99,11 +99,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block for Kafka settings. See below.
 	KafkaSettings *KafkaSettingsInitParameters `json:"kafkaSettings,omitempty" tf:"kafka_settings,omitempty"`
@@ -121,7 +121,7 @@ type EndpointInitParameters struct {
 	OracleSettings *OracleSettingsInitParameters `json:"oracleSettings,omitempty" tf:"oracle_settings,omitempty"`
 
 	// Password to be used to login to the endpoint database.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
 	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
@@ -147,11 +147,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a Role in iam to populate secretsManagerAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	SecretsManagerAccessRoleArnRef *v1.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
+	SecretsManagerAccessRoleArnRef *v2.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate secretsManagerAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
+	SecretsManagerAccessRoleArnSelector *v2.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// text values for username, password , server_name, and port. You can't specify both.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
@@ -166,11 +166,11 @@ type EndpointInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccessRole.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleRef *v1.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
+	ServiceAccessRoleRef *v2.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccessRole.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleSelector *v1.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
+	ServiceAccessRoleSelector *v2.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -302,11 +302,11 @@ type EndpointParameters struct {
 
 	// Reference to a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+	KMSKeyArnRef *v2.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsKeyArn.
 	// +kubebuilder:validation:Optional
-	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+	KMSKeyArnSelector *v2.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Configuration block for Kafka settings. See below.
 	// +kubebuilder:validation:Optional
@@ -330,7 +330,7 @@ type EndpointParameters struct {
 
 	// Password to be used to login to the endpoint database.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
 	// +kubebuilder:validation:Optional
@@ -368,11 +368,11 @@ type EndpointParameters struct {
 
 	// Reference to a Role in iam to populate secretsManagerAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	SecretsManagerAccessRoleArnRef *v1.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
+	SecretsManagerAccessRoleArnRef *v2.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate secretsManagerAccessRoleArn.
 	// +kubebuilder:validation:Optional
-	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
+	SecretsManagerAccessRoleArnSelector *v2.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// text values for username, password , server_name, and port. You can't specify both.
 	// +kubebuilder:validation:Optional
@@ -390,11 +390,11 @@ type EndpointParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccessRole.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleRef *v1.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
+	ServiceAccessRoleRef *v2.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccessRole.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleSelector *v1.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
+	ServiceAccessRoleSelector *v2.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -448,13 +448,13 @@ type KafkaSettingsInitParameters struct {
 	SSLClientKeyArn *string `json:"sslClientKeyArn,omitempty" tf:"ssl_client_key_arn,omitempty"`
 
 	// Password for the client private key used to securely connect to a Kafka target endpoint.
-	SSLClientKeyPasswordSecretRef *v1.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
+	SSLClientKeyPasswordSecretRef *v2.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
 
 	// For SASL/SSL authentication, AWS DMS supports the scram-sha-512 mechanism by default. AWS DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to plain.
 	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
 
 	// Secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
-	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
+	SaslPasswordSecretRef *v2.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
 
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
@@ -576,7 +576,7 @@ type KafkaSettingsParameters struct {
 
 	// Password for the client private key used to securely connect to a Kafka target endpoint.
 	// +kubebuilder:validation:Optional
-	SSLClientKeyPasswordSecretRef *v1.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
+	SSLClientKeyPasswordSecretRef *v2.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
 
 	// For SASL/SSL authentication, AWS DMS supports the scram-sha-512 mechanism by default. AWS DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to plain.
 	// +kubebuilder:validation:Optional
@@ -584,7 +584,7 @@ type KafkaSettingsParameters struct {
 
 	// Secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	// +kubebuilder:validation:Optional
-	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
+	SaslPasswordSecretRef *v2.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
 
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	// +kubebuilder:validation:Optional
@@ -917,7 +917,7 @@ type OracleSettingsInitParameters struct {
 	ArchivedLogsOnly *bool `json:"archivedLogsOnly,omitempty" tf:"archived_logs_only,omitempty"`
 
 	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
-	AsmPasswordSecretRef *v1.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
+	AsmPasswordSecretRef *v2.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
 
 	// For an Oracle source endpoint, your ASM server address.
 	AsmServer *string `json:"asmServer,omitempty" tf:"asm_server,omitempty"`
@@ -983,7 +983,7 @@ type OracleSettingsInitParameters struct {
 	SecurityDBEncryptionName *string `json:"securityDbEncryptionName,omitempty" tf:"security_db_encryption_name,omitempty"`
 
 	// For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
-	SecurityDBEncryptionSecretRef *v1.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
+	SecurityDBEncryptionSecretRef *v2.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
 
 	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible.
 	SpatialDataOptionToGeoJSONFunctionName *string `json:"spatialDataOptionToGeoJsonFunctionName,omitempty" tf:"spatial_data_option_to_geo_json_function_name,omitempty"`
@@ -1146,7 +1146,7 @@ type OracleSettingsParameters struct {
 
 	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
 	// +kubebuilder:validation:Optional
-	AsmPasswordSecretRef *v1.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
+	AsmPasswordSecretRef *v2.SecretKeySelector `json:"asmPasswordSecretRef,omitempty" tf:"-"`
 
 	// For an Oracle source endpoint, your ASM server address.
 	// +kubebuilder:validation:Optional
@@ -1234,7 +1234,7 @@ type OracleSettingsParameters struct {
 
 	// For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
 	// +kubebuilder:validation:Optional
-	SecurityDBEncryptionSecretRef *v1.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
+	SecurityDBEncryptionSecretRef *v2.SecretKeySelector `json:"securityDbEncryptionSecretRef,omitempty" tf:"-"`
 
 	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible.
 	// +kubebuilder:validation:Optional
@@ -1461,7 +1461,7 @@ type PostgresSettingsParameters struct {
 type RedisSettingsInitParameters struct {
 
 	// The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.
-	AuthPasswordSecretRef *v1.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
+	AuthPasswordSecretRef *v2.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
@@ -1507,7 +1507,7 @@ type RedisSettingsParameters struct {
 
 	// The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.
 	// +kubebuilder:validation:Optional
-	AuthPasswordSecretRef *v1.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
+	AuthPasswordSecretRef *v2.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
 	// +kubebuilder:validation:Optional
@@ -1595,8 +1595,8 @@ type RedshiftSettingsParameters struct {
 
 // EndpointSpec defines the desired state of Endpoint
 type EndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1612,8 +1612,8 @@ type EndpointSpec struct {
 
 // EndpointStatus defines the observed state of Endpoint.
 type EndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

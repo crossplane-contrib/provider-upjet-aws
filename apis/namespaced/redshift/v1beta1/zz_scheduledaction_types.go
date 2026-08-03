@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PauseClusterInitParameters struct {
@@ -129,11 +128,11 @@ type ScheduledActionInitParameters struct {
 
 	// Reference to a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleRef *v1.NamespacedReference `json:"iamRoleRef,omitempty" tf:"-"`
+	IAMRoleRef *v2.NamespacedReference `json:"iamRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// The schedule of action. The schedule is defined format of "at expression" or "cron expression", for example at(2016-03-04T17:27:00) or cron(0 10 ? * MON *). See Scheduled Action for more information.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
@@ -198,11 +197,11 @@ type ScheduledActionParameters struct {
 
 	// Reference to a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleRef *v1.NamespacedReference `json:"iamRoleRef,omitempty" tf:"-"`
+	IAMRoleRef *v2.NamespacedReference `json:"iamRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate iamRole.
 	// +kubebuilder:validation:Optional
-	IAMRoleSelector *v1.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
+	IAMRoleSelector *v2.NamespacedSelector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -280,8 +279,8 @@ type ScheduledActionSpec struct {
 
 // ScheduledActionStatus defines the observed state of ScheduledAction.
 type ScheduledActionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScheduledActionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScheduledActionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketServerSideEncryptionConfigurationInitParameters struct {
@@ -23,11 +22,11 @@ type BucketServerSideEncryptionConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
@@ -65,11 +64,11 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
@@ -133,11 +132,11 @@ type RuleApplyServerSideEncryptionByDefaultInitParameters struct {
 
 	// Reference to a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
-	KMSMasterKeyIDRef *v1.NamespacedReference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
+	KMSMasterKeyIDRef *v2.NamespacedReference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
-	KMSMasterKeyIDSelector *v1.NamespacedSelector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
+	KMSMasterKeyIDSelector *v2.NamespacedSelector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
 	// Server-side encryption algorithm to use. Valid values are AES256, aws:kms, and aws:kms:dsse
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
@@ -162,11 +161,11 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 
 	// Reference to a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
-	KMSMasterKeyIDRef *v1.NamespacedReference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
+	KMSMasterKeyIDRef *v2.NamespacedReference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate kmsMasterKeyId.
 	// +kubebuilder:validation:Optional
-	KMSMasterKeyIDSelector *v1.NamespacedSelector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
+	KMSMasterKeyIDSelector *v2.NamespacedSelector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
 	// Server-side encryption algorithm to use. Valid values are AES256, aws:kms, and aws:kms:dsse
 	// +kubebuilder:validation:Optional
@@ -192,8 +191,8 @@ type BucketServerSideEncryptionConfigurationSpec struct {
 
 // BucketServerSideEncryptionConfigurationStatus defines the observed state of BucketServerSideEncryptionConfiguration.
 type BucketServerSideEncryptionConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketServerSideEncryptionConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketServerSideEncryptionConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

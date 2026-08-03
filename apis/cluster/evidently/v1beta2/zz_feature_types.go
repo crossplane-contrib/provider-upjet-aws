@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EvaluationRulesInitParameters struct {
@@ -133,11 +133,11 @@ type FeatureParameters struct {
 
 	// Reference to a Project in evidently to populate project.
 	// +kubebuilder:validation:Optional
-	ProjectRef *v1.Reference `json:"projectRef,omitempty" tf:"-"`
+	ProjectRef *v2.Reference `json:"projectRef,omitempty" tf:"-"`
 
 	// Selector for a Project in evidently to populate project.
 	// +kubebuilder:validation:Optional
-	ProjectSelector *v1.Selector `json:"projectSelector,omitempty" tf:"-"`
+	ProjectSelector *v2.Selector `json:"projectSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -234,8 +234,8 @@ type VariationsParameters struct {
 
 // FeatureSpec defines the desired state of Feature
 type FeatureSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FeatureParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FeatureParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -251,8 +251,8 @@ type FeatureSpec struct {
 
 // FeatureStatus defines the observed state of Feature.
 type FeatureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FeatureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FeatureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

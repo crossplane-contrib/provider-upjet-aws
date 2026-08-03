@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ScheduleInitParameters struct {
@@ -83,11 +82,11 @@ type ScheduleParameters struct {
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameRef *v1.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+	AutoscalingGroupNameRef *v2.NamespacedReference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
-	AutoscalingGroupNameSelector *v1.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+	AutoscalingGroupNameSelector *v2.NamespacedSelector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// The initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. Set to -1 if you don't want to change the desired capacity at the scheduled time. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -142,8 +141,8 @@ type ScheduleSpec struct {
 
 // ScheduleStatus defines the observed state of Schedule.
 type ScheduleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScheduleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScheduleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

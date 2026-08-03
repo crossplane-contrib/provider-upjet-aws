@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TransitGatewayMulticastDomainAssociationInitParameters struct {
@@ -21,11 +21,11 @@ type TransitGatewayMulticastDomainAssociationInitParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
@@ -34,11 +34,11 @@ type TransitGatewayMulticastDomainAssociationInitParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayMulticastDomain
@@ -47,11 +47,11 @@ type TransitGatewayMulticastDomainAssociationInitParameters struct {
 
 	// Reference to a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDRef *v1.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDRef *v2.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDSelector *v1.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDSelector *v2.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayMulticastDomainAssociationObservation struct {
@@ -87,11 +87,11 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 
 	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway attachment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayVPCAttachment
@@ -101,11 +101,11 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 
 	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDRef *v2.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+	TransitGatewayAttachmentIDSelector *v2.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// The ID of the transit gateway multicast domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta1.TransitGatewayMulticastDomain
@@ -115,17 +115,17 @@ type TransitGatewayMulticastDomainAssociationParameters struct {
 
 	// Reference to a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDRef *v1.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDRef *v2.Reference `json:"transitGatewayMulticastDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a TransitGatewayMulticastDomain in ec2 to populate transitGatewayMulticastDomainId.
 	// +kubebuilder:validation:Optional
-	TransitGatewayMulticastDomainIDSelector *v1.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
+	TransitGatewayMulticastDomainIDSelector *v2.Selector `json:"transitGatewayMulticastDomainIdSelector,omitempty" tf:"-"`
 }
 
 // TransitGatewayMulticastDomainAssociationSpec defines the desired state of TransitGatewayMulticastDomainAssociation
 type TransitGatewayMulticastDomainAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayMulticastDomainAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TransitGatewayMulticastDomainAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -141,8 +141,8 @@ type TransitGatewayMulticastDomainAssociationSpec struct {
 
 // TransitGatewayMulticastDomainAssociationStatus defines the observed state of TransitGatewayMulticastDomainAssociation.
 type TransitGatewayMulticastDomainAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayMulticastDomainAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TransitGatewayMulticastDomainAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

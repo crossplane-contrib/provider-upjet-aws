@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubnetGroupInitParameters struct {
@@ -26,11 +25,11 @@ type SubnetGroupInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -88,11 +87,11 @@ type SubnetGroupParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -119,8 +118,8 @@ type SubnetGroupSpec struct {
 
 // SubnetGroupStatus defines the observed state of SubnetGroup.
 type SubnetGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

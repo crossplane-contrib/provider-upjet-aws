@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BucketReplicationConfigurationInitParameters struct {
@@ -23,11 +22,11 @@ type BucketReplicationConfigurationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
@@ -36,18 +35,18 @@ type BucketReplicationConfigurationInitParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketReplicationConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// For more details, see Using S3 Object Lock with replication.
-	TokenSecretRef *v1.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
+	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketReplicationConfigurationObservation struct {
@@ -79,11 +78,11 @@ type BucketReplicationConfigurationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -98,11 +97,11 @@ type BucketReplicationConfigurationParameters struct {
 
 	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleRef *v1.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
+	RoleRef *v2.NamespacedReference `json:"roleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
-	RoleSelector *v1.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
+	RoleSelector *v2.NamespacedSelector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	// +kubebuilder:validation:Optional
@@ -111,7 +110,7 @@ type BucketReplicationConfigurationParameters struct {
 	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// For more details, see Using S3 Object Lock with replication.
 	// +kubebuilder:validation:Optional
-	TokenSecretRef *v1.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
+	TokenSecretRef *v2.LocalSecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketReplicationConfigurationRuleFilterInitParameters struct {
@@ -356,11 +355,11 @@ type EncryptionConfigurationInitParameters struct {
 
 	// Reference to a Key in kms to populate replicaKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyIDRef *v1.NamespacedReference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
+	ReplicaKMSKeyIDRef *v2.NamespacedReference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate replicaKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyIDSelector *v1.NamespacedSelector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
+	ReplicaKMSKeyIDSelector *v2.NamespacedSelector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -378,11 +377,11 @@ type EncryptionConfigurationParameters struct {
 
 	// Reference to a Key in kms to populate replicaKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyIDRef *v1.NamespacedReference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
+	ReplicaKMSKeyIDRef *v2.NamespacedReference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in kms to populate replicaKmsKeyId.
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyIDSelector *v1.NamespacedSelector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
+	ReplicaKMSKeyIDSelector *v2.NamespacedSelector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EventThresholdInitParameters struct {
@@ -518,11 +517,11 @@ type RuleDestinationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Configuration block that provides information about encryption. See below. If source_selection_criteria is specified, you must specify this element.
 	EncryptionConfiguration *EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
@@ -579,11 +578,11 @@ type RuleDestinationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketRef *v1.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
+	BucketRef *v2.NamespacedReference `json:"bucketRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
-	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
+	BucketSelector *v2.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Configuration block that provides information about encryption. See below. If source_selection_criteria is specified, you must specify this element.
 	// +kubebuilder:validation:Optional
@@ -688,8 +687,8 @@ type BucketReplicationConfigurationSpec struct {
 
 // BucketReplicationConfigurationStatus defines the observed state of BucketReplicationConfiguration.
 type BucketReplicationConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BucketReplicationConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BucketReplicationConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RestAPIEndpointConfigurationInitParameters struct {
@@ -29,11 +29,11 @@ type RestAPIEndpointConfigurationInitParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIEndpointConfigurationObservation struct {
@@ -68,11 +68,11 @@ type RestAPIEndpointConfigurationParameters struct {
 
 	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+	VPCEndpointIdsRefs []v2.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
 	// +kubebuilder:validation:Optional
-	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
+	VPCEndpointIdsSelector *v2.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIInitParameters struct {
@@ -265,8 +265,8 @@ type RestAPIParameters struct {
 
 // RestAPISpec defines the desired state of RestAPI
 type RestAPISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RestAPIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RestAPIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -282,8 +282,8 @@ type RestAPISpec struct {
 
 // RestAPIStatus defines the observed state of RestAPI.
 type RestAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RestAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RestAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

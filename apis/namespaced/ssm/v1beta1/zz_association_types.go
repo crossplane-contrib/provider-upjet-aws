@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssociationInitParameters struct {
@@ -47,11 +46,11 @@ type AssociationInitParameters struct {
 
 	// Reference to a Document in ssm to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Document in ssm to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// An output location block. Output Location is documented below.
 	OutputLocation *OutputLocationInitParameters `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
@@ -189,11 +188,11 @@ type AssociationParameters struct {
 
 	// Reference to a Document in ssm to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Document in ssm to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// An output location block. Output Location is documented below.
 	// +kubebuilder:validation:Optional
@@ -282,11 +281,11 @@ type TargetsInitParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type TargetsObservation struct {
@@ -312,11 +311,11 @@ type TargetsParameters struct {
 
 	// References to Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Instance in ec2 to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 // AssociationSpec defines the desired state of Association
@@ -338,8 +337,8 @@ type AssociationSpec struct {
 
 // AssociationStatus defines the observed state of Association.
 type AssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

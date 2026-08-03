@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationCodeConfigurationInitParameters struct {
@@ -188,11 +187,11 @@ type ApplicationInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleRef *v1.NamespacedReference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
+	ServiceExecutionRoleRef *v2.NamespacedReference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleSelector *v1.NamespacedSelector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleSelector *v2.NamespacedSelector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
 
 	// Whether to start or stop the application.
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
@@ -298,11 +297,11 @@ type ApplicationParameters struct {
 
 	// Reference to a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleRef *v1.NamespacedReference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
+	ServiceExecutionRoleRef *v2.NamespacedReference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceExecutionRole.
 	// +kubebuilder:validation:Optional
-	ServiceExecutionRoleSelector *v1.NamespacedSelector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
+	ServiceExecutionRoleSelector *v2.NamespacedSelector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
 
 	// Whether to start or stop the application.
 	// +kubebuilder:validation:Optional
@@ -420,11 +419,11 @@ type CloudwatchLoggingOptionsInitParameters struct {
 
 	// Reference to a Stream in cloudwatchlogs to populate logStreamArn.
 	// +kubebuilder:validation:Optional
-	LogStreamArnRef *v1.NamespacedReference `json:"logStreamArnRef,omitempty" tf:"-"`
+	LogStreamArnRef *v2.NamespacedReference `json:"logStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in cloudwatchlogs to populate logStreamArn.
 	// +kubebuilder:validation:Optional
-	LogStreamArnSelector *v1.NamespacedSelector `json:"logStreamArnSelector,omitempty" tf:"-"`
+	LogStreamArnSelector *v2.NamespacedSelector `json:"logStreamArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLoggingOptionsObservation struct {
@@ -446,11 +445,11 @@ type CloudwatchLoggingOptionsParameters struct {
 
 	// Reference to a Stream in cloudwatchlogs to populate logStreamArn.
 	// +kubebuilder:validation:Optional
-	LogStreamArnRef *v1.NamespacedReference `json:"logStreamArnRef,omitempty" tf:"-"`
+	LogStreamArnRef *v2.NamespacedReference `json:"logStreamArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in cloudwatchlogs to populate logStreamArn.
 	// +kubebuilder:validation:Optional
-	LogStreamArnSelector *v1.NamespacedSelector `json:"logStreamArnSelector,omitempty" tf:"-"`
+	LogStreamArnSelector *v2.NamespacedSelector `json:"logStreamArnSelector,omitempty" tf:"-"`
 }
 
 type CodeContentInitParameters struct {
@@ -855,11 +854,11 @@ type KinesisFirehoseOutputInitParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseOutputObservation struct {
@@ -878,11 +877,11 @@ type KinesisFirehoseOutputParameters struct {
 
 	// Reference to a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a DeliveryStream in firehose to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamsInputInitParameters struct {
@@ -894,11 +893,11 @@ type KinesisStreamsInputInitParameters struct {
 
 	// Reference to a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamsInputObservation struct {
@@ -917,11 +916,11 @@ type KinesisStreamsInputParameters struct {
 
 	// Reference to a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Stream in kinesis to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamsOutputInitParameters struct {
@@ -952,11 +951,11 @@ type LambdaOutputInitParameters struct {
 
 	// Reference to a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type LambdaOutputObservation struct {
@@ -975,11 +974,11 @@ type LambdaOutputParameters struct {
 
 	// Reference to a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
+	ResourceArnRef *v2.NamespacedReference `json:"resourceArnRef,omitempty" tf:"-"`
 
 	// Selector for a Function in lambda to populate resourceArn.
 	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
+	ResourceArnSelector *v2.NamespacedSelector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type MappingParametersCsvMappingParametersInitParameters struct {
@@ -1525,11 +1524,11 @@ type S3ContentLocationInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for the object containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -1538,11 +1537,11 @@ type S3ContentLocationInitParameters struct {
 
 	// Reference to a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeyRef *v1.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
+	FileKeyRef *v2.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeySelector *v1.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
+	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
 	// The version of the object containing the application code.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
@@ -1570,11 +1569,11 @@ type S3ContentLocationParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for the object containing the application code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Object
@@ -1584,11 +1583,11 @@ type S3ContentLocationParameters struct {
 
 	// Reference to a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeyRef *v1.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
+	FileKeyRef *v2.NamespacedReference `json:"fileKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Object in s3 to populate fileKey.
 	// +kubebuilder:validation:Optional
-	FileKeySelector *v1.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
+	FileKeySelector *v2.NamespacedSelector `json:"fileKeySelector,omitempty" tf:"-"`
 
 	// The version of the object containing the application code.
 	// +kubebuilder:validation:Optional
@@ -1604,11 +1603,11 @@ type S3ReferenceDataSourceInitParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for the object containing the application code.
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
@@ -1633,11 +1632,11 @@ type S3ReferenceDataSourceParameters struct {
 
 	// Reference to a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnRef *v1.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
+	BucketArnRef *v2.NamespacedReference `json:"bucketArnRef,omitempty" tf:"-"`
 
 	// Selector for a Bucket in s3 to populate bucketArn.
 	// +kubebuilder:validation:Optional
-	BucketArnSelector *v1.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
+	BucketArnSelector *v2.NamespacedSelector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for the object containing the application code.
 	// +kubebuilder:validation:Optional
@@ -1693,11 +1692,11 @@ type VPCConfigurationInitParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Subnet IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1707,11 +1706,11 @@ type VPCConfigurationInitParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type VPCConfigurationObservation struct {
@@ -1742,11 +1741,11 @@ type VPCConfigurationParameters struct {
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsRefs []v1.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+	SecurityGroupIdsRefs []v2.NamespacedReference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+	SecurityGroupIdsSelector *v2.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Subnet IDs used by the VPC configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.Subnet
@@ -1757,11 +1756,11 @@ type VPCConfigurationParameters struct {
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsRefs []v1.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
+	SubnetIdsRefs []v2.NamespacedReference `json:"subnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
-	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
+	SubnetIdsSelector *v2.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ApplicationSpec defines the desired state of Application
@@ -1783,8 +1782,8 @@ type ApplicationSpec struct {
 
 // ApplicationStatus defines the observed state of Application.
 type ApplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

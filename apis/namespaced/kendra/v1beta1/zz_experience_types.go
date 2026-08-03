@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentSourceConfigurationInitParameters struct {
@@ -118,11 +117,11 @@ type ExperienceInitParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.NamespacedReference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.NamespacedReference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.NamespacedSelector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.NamespacedSelector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// A name for your Amazon Kendra experience.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -134,11 +133,11 @@ type ExperienceInitParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ExperienceObservation struct {
@@ -196,11 +195,11 @@ type ExperienceParameters struct {
 
 	// Reference to a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDRef *v1.NamespacedReference `json:"indexIdRef,omitempty" tf:"-"`
+	IndexIDRef *v2.NamespacedReference `json:"indexIdRef,omitempty" tf:"-"`
 
 	// Selector for a Index in kendra to populate indexId.
 	// +kubebuilder:validation:Optional
-	IndexIDSelector *v1.NamespacedSelector `json:"indexIdSelector,omitempty" tf:"-"`
+	IndexIDSelector *v2.NamespacedSelector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// A name for your Amazon Kendra experience.
 	// +kubebuilder:validation:Optional
@@ -219,11 +218,11 @@ type ExperienceParameters struct {
 
 	// Reference to a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
+	RoleArnRef *v2.NamespacedReference `json:"roleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
+	RoleArnSelector *v2.NamespacedSelector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type UserIdentityConfigurationInitParameters struct {
@@ -264,8 +263,8 @@ type ExperienceSpec struct {
 
 // ExperienceStatus defines the observed state of Experience.
 type ExperienceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExperienceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExperienceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

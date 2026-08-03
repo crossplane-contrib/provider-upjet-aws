@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EvaluationCriteriaInitParameters struct {
@@ -46,11 +45,11 @@ type MetricAlarmInitParameters struct {
 
 	// References to Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.NamespacedReference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.NamespacedReference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.NamespacedSelector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.NamespacedSelector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
@@ -106,11 +105,11 @@ type MetricAlarmInitParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.NamespacedReference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.NamespacedReference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.NamespacedSelector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.NamespacedSelector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 20, 30, or any multiple of 60.
@@ -250,11 +249,11 @@ type MetricAlarmParameters struct {
 
 	// References to Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.NamespacedReference `json:"alarmActionsRefs,omitempty" tf:"-"`
+	AlarmActionsRefs []v2.NamespacedReference `json:"alarmActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Policy in autoscaling to populate alarmActions.
 	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.NamespacedSelector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	AlarmActionsSelector *v2.NamespacedSelector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	// +kubebuilder:validation:Optional
@@ -324,11 +323,11 @@ type MetricAlarmParameters struct {
 
 	// References to Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsRefs []v1.NamespacedReference `json:"okActionsRefs,omitempty" tf:"-"`
+	OkActionsRefs []v2.NamespacedReference `json:"okActionsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Topic in sns to populate okActions.
 	// +kubebuilder:validation:Optional
-	OkActionsSelector *v1.NamespacedSelector `json:"okActionsSelector,omitempty" tf:"-"`
+	OkActionsSelector *v2.NamespacedSelector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 20, 30, or any multiple of 60.
@@ -603,8 +602,8 @@ type MetricAlarmSpec struct {
 
 // MetricAlarmStatus defines the observed state of MetricAlarm.
 type MetricAlarmStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MetricAlarmObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MetricAlarmObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

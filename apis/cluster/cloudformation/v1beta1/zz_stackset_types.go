@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutoDeploymentInitParameters struct {
@@ -149,11 +149,11 @@ type StackSetInitParameters struct {
 
 	// Reference to a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnRef *v1.Reference `json:"administrationRoleArnRef,omitempty" tf:"-"`
+	AdministrationRoleArnRef *v2.Reference `json:"administrationRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnSelector *v1.Selector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
+	AdministrationRoleArnSelector *v2.Selector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
 	AutoDeployment []AutoDeploymentInitParameters `json:"autoDeployment,omitempty" tf:"auto_deployment,omitempty"`
@@ -267,11 +267,11 @@ type StackSetParameters struct {
 
 	// Reference to a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnRef *v1.Reference `json:"administrationRoleArnRef,omitempty" tf:"-"`
+	AdministrationRoleArnRef *v2.Reference `json:"administrationRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate administrationRoleArn.
 	// +kubebuilder:validation:Optional
-	AdministrationRoleArnSelector *v1.Selector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
+	AdministrationRoleArnSelector *v2.Selector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
 	// +kubebuilder:validation:Optional
@@ -332,8 +332,8 @@ type StackSetParameters struct {
 
 // StackSetSpec defines the desired state of StackSet
 type StackSetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StackSetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StackSetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -349,8 +349,8 @@ type StackSetSpec struct {
 
 // StackSetStatus defines the observed state of StackSet.
 type StackSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StackSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StackSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

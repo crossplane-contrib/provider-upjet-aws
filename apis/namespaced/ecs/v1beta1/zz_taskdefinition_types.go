@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizationConfigInitParameters struct {
@@ -395,11 +394,11 @@ type TaskDefinitionInitParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// A unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
@@ -553,11 +552,11 @@ type TaskDefinitionParameters struct {
 
 	// Reference to a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnRef *v1.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
+	ExecutionRoleArnRef *v2.NamespacedReference `json:"executionRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate executionRoleArn.
 	// +kubebuilder:validation:Optional
-	ExecutionRoleArnSelector *v1.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+	ExecutionRoleArnSelector *v2.NamespacedSelector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// A unique name for your task definition.
 	// +kubebuilder:validation:Optional
@@ -753,8 +752,8 @@ type TaskDefinitionSpec struct {
 
 // TaskDefinitionStatus defines the observed state of TaskDefinition.
 type TaskDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TaskDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TaskDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

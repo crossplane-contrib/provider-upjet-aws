@@ -5,164 +5,164 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Queue.
-func (mg *Queue) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Queue) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Queue.
-func (mg *Queue) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Queue) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Queue.
-func (mg *Queue) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Queue) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Queue.
-func (mg *Queue) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Queue) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Queue.
-func (mg *Queue) SetConditions(c ...xpv1.Condition) {
+func (mg *Queue) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Queue.
-func (mg *Queue) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Queue) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Queue.
-func (mg *Queue) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Queue) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Queue.
-func (mg *Queue) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Queue) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this QueuePolicy.
-func (mg *QueuePolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *QueuePolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this QueuePolicy.
-func (mg *QueuePolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *QueuePolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this QueuePolicy.
-func (mg *QueuePolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *QueuePolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this QueuePolicy.
-func (mg *QueuePolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *QueuePolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this QueuePolicy.
-func (mg *QueuePolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *QueuePolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this QueuePolicy.
-func (mg *QueuePolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *QueuePolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this QueuePolicy.
-func (mg *QueuePolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *QueuePolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this QueuePolicy.
-func (mg *QueuePolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *QueuePolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *QueueRedriveAllowPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *QueueRedriveAllowPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *QueueRedriveAllowPolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *QueueRedriveAllowPolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *QueueRedriveAllowPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *QueueRedriveAllowPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *QueueRedriveAllowPolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this QueueRedriveAllowPolicy.
-func (mg *QueueRedriveAllowPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *QueueRedriveAllowPolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *QueueRedrivePolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *QueueRedrivePolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *QueueRedrivePolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *QueueRedrivePolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *QueueRedrivePolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *QueueRedrivePolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *QueueRedrivePolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this QueueRedrivePolicy.
-func (mg *QueueRedrivePolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *QueueRedrivePolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

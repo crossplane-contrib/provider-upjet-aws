@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BranchInitParameters struct {
@@ -20,7 +19,7 @@ type BranchInitParameters struct {
 	BackendEnvironmentArn *string `json:"backendEnvironmentArn,omitempty" tf:"backend_environment_arn,omitempty"`
 
 	// Basic authorization credentials for the branch.
-	BasicAuthCredentialsSecretRef *v1.LocalSecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.LocalSecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// Description for the branch.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -155,11 +154,11 @@ type BranchParameters struct {
 
 	// Reference to a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDRef *v1.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
+	AppIDRef *v2.NamespacedReference `json:"appIdRef,omitempty" tf:"-"`
 
 	// Selector for a App in amplify to populate appId.
 	// +kubebuilder:validation:Optional
-	AppIDSelector *v1.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
+	AppIDSelector *v2.NamespacedSelector `json:"appIdSelector,omitempty" tf:"-"`
 
 	// ARN for a backend environment that is part of an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -167,7 +166,7 @@ type BranchParameters struct {
 
 	// Basic authorization credentials for the branch.
 	// +kubebuilder:validation:Optional
-	BasicAuthCredentialsSecretRef *v1.LocalSecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+	BasicAuthCredentialsSecretRef *v2.LocalSecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// Description for the branch.
 	// +kubebuilder:validation:Optional
@@ -252,8 +251,8 @@ type BranchSpec struct {
 
 // BranchStatus defines the observed state of Branch.
 type BranchStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BranchObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BranchObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

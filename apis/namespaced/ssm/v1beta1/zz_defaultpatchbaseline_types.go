@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefaultPatchBaselineInitParameters struct {
@@ -25,11 +24,11 @@ type DefaultPatchBaselineInitParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.NamespacedReference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.NamespacedReference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.NamespacedSelector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.NamespacedSelector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
@@ -53,11 +52,11 @@ type DefaultPatchBaselineInitParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemRef *v1.NamespacedReference `json:"operatingSystemRef,omitempty" tf:"-"`
+	OperatingSystemRef *v2.NamespacedReference `json:"operatingSystemRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemSelector *v1.NamespacedSelector `json:"operatingSystemSelector,omitempty" tf:"-"`
+	OperatingSystemSelector *v2.NamespacedSelector `json:"operatingSystemSelector,omitempty" tf:"-"`
 }
 
 type DefaultPatchBaselineObservation struct {
@@ -104,11 +103,11 @@ type DefaultPatchBaselineParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDRef *v1.NamespacedReference `json:"baselineIdRef,omitempty" tf:"-"`
+	BaselineIDRef *v2.NamespacedReference `json:"baselineIdRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate baselineId.
 	// +kubebuilder:validation:Optional
-	BaselineIDSelector *v1.NamespacedSelector `json:"baselineIdSelector,omitempty" tf:"-"`
+	BaselineIDSelector *v2.NamespacedSelector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
@@ -133,11 +132,11 @@ type DefaultPatchBaselineParameters struct {
 
 	// Reference to a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemRef *v1.NamespacedReference `json:"operatingSystemRef,omitempty" tf:"-"`
+	OperatingSystemRef *v2.NamespacedReference `json:"operatingSystemRef,omitempty" tf:"-"`
 
 	// Selector for a PatchBaseline in ssm to populate operatingSystem.
 	// +kubebuilder:validation:Optional
-	OperatingSystemSelector *v1.NamespacedSelector `json:"operatingSystemSelector,omitempty" tf:"-"`
+	OperatingSystemSelector *v2.NamespacedSelector `json:"operatingSystemSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -164,8 +163,8 @@ type DefaultPatchBaselineSpec struct {
 
 // DefaultPatchBaselineStatus defines the observed state of DefaultPatchBaseline.
 type DefaultPatchBaselineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DefaultPatchBaselineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DefaultPatchBaselineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

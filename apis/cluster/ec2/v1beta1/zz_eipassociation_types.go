@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EIPAssociationInitParameters struct {
@@ -23,11 +23,11 @@ type EIPAssociationInitParameters struct {
 
 	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
+	AllocationIDRef *v2.Reference `json:"allocationIdRef,omitempty" tf:"-"`
 
 	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
+	AllocationIDSelector *v2.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
 	// Whether to allow an Elastic IP address to be re-associated.
 	// Defaults to true.
@@ -42,11 +42,11 @@ type EIPAssociationInitParameters struct {
 
 	// Reference to a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// ID of the network interface.
 	// If the instance has more than one network interface, you must specify a network interface ID.
@@ -107,11 +107,11 @@ type EIPAssociationParameters struct {
 
 	// Reference to a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
+	AllocationIDRef *v2.Reference `json:"allocationIdRef,omitempty" tf:"-"`
 
 	// Selector for a EIP in ec2 to populate allocationId.
 	// +kubebuilder:validation:Optional
-	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
+	AllocationIDSelector *v2.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
 	// Whether to allow an Elastic IP address to be re-associated.
 	// Defaults to true.
@@ -128,11 +128,11 @@ type EIPAssociationParameters struct {
 
 	// Reference to a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+	InstanceIDRef *v2.Reference `json:"instanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Instance in ec2 to populate instanceId.
 	// +kubebuilder:validation:Optional
-	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+	InstanceIDSelector *v2.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// ID of the network interface.
 	// If the instance has more than one network interface, you must specify a network interface ID.
@@ -157,8 +157,8 @@ type EIPAssociationParameters struct {
 
 // EIPAssociationSpec defines the desired state of EIPAssociation
 type EIPAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EIPAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EIPAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type EIPAssociationSpec struct {
 
 // EIPAssociationStatus defines the observed state of EIPAssociation.
 type EIPAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EIPAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EIPAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

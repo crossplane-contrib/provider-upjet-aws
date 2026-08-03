@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubnetInitParameters_2 struct {
@@ -51,11 +51,11 @@ type SubnetInitParameters_2 struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDRef *v1.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+	IPv4IpamPoolIDRef *v2.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDSelector *v1.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv4IpamPoolIDSelector *v2.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// Netmask. Requires specifying a ipv4_ipam_pool_id.
 	IPv4NetmaskLength *float64 `json:"ipv4NetmaskLength,omitempty" tf:"ipv4_netmask_length,omitempty"`
@@ -95,11 +95,11 @@ type SubnetInitParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetObservation_2 struct {
@@ -240,11 +240,11 @@ type SubnetParameters_2 struct {
 
 	// Reference to a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDRef *v1.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
+	IPv4IpamPoolIDRef *v2.Reference `json:"ipv4IpamPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIpamPool in ec2 to populate ipv4IpamPoolId.
 	// +kubebuilder:validation:Optional
-	IPv4IpamPoolIDSelector *v1.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
+	IPv4IpamPoolIDSelector *v2.Selector `json:"ipv4IpamPoolIdSelector,omitempty" tf:"-"`
 
 	// Netmask. Requires specifying a ipv4_ipam_pool_id.
 	// +kubebuilder:validation:Optional
@@ -300,17 +300,17 @@ type SubnetParameters_2 struct {
 
 	// Reference to a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+	VPCIDRef *v2.Reference `json:"vpcIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
-	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+	VPCIDSelector *v2.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // SubnetSpec defines the desired state of Subnet
 type SubnetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubnetParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SubnetParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -326,8 +326,8 @@ type SubnetSpec struct {
 
 // SubnetStatus defines the observed state of Subnet.
 type SubnetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

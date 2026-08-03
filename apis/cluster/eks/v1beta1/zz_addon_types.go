@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AddonInitParameters struct {
@@ -29,11 +29,11 @@ type AddonInitParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
@@ -65,11 +65,11 @@ type AddonInitParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
+	ServiceAccountRoleArnRef *v2.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
+	ServiceAccountRoleArnSelector *v2.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -159,11 +159,11 @@ type AddonParameters struct {
 
 	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	// +kubebuilder:validation:Optional
@@ -207,11 +207,11 @@ type AddonParameters struct {
 
 	// Reference to a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
+	ServiceAccountRoleArnRef *v2.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
 
 	// Selector for a Role in iam to populate serviceAccountRoleArn.
 	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
+	ServiceAccountRoleArnSelector *v2.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -269,8 +269,8 @@ type PodIdentityAssociationParameters struct {
 
 // AddonSpec defines the desired state of Addon
 type AddonSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AddonParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AddonParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -286,8 +286,8 @@ type AddonSpec struct {
 
 // AddonStatus defines the observed state of Addon.
 type AddonStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AddonObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AddonObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

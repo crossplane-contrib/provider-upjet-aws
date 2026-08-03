@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourceAssociationInitParameters struct {
@@ -26,11 +25,11 @@ type ResourceAssociationInitParameters struct {
 
 	// Reference to a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Resource ID of the resource to be associated with the profile.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -87,11 +86,11 @@ type ResourceAssociationParameters struct {
 
 	// Reference to a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a Profile in route53profiles to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -126,8 +125,8 @@ type ResourceAssociationSpec struct {
 
 // ResourceAssociationStatus defines the observed state of ResourceAssociation.
 type ResourceAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

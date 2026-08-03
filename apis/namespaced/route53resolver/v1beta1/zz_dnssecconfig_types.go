@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSSECConfigInitParameters struct {
@@ -23,11 +22,11 @@ type DNSSECConfigInitParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type DNSSECConfigObservation struct {
@@ -67,11 +66,11 @@ type DNSSECConfigParameters struct {
 
 	// Reference to a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPC in ec2 to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // DNSSECConfigSpec defines the desired state of DNSSECConfig
@@ -93,8 +92,8 @@ type DNSSECConfigSpec struct {
 
 // DNSSECConfigStatus defines the observed state of DNSSECConfig.
 type DNSSECConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DNSSECConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DNSSECConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

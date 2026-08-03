@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EntryInitParameters struct {
@@ -23,11 +22,11 @@ type EntryInitParameters struct {
 
 	// Reference to a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
 
 	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -52,11 +51,11 @@ type EntryParameters struct {
 
 	// Reference to a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrRef *v1.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
+	CidrRef *v2.NamespacedReference `json:"cidrRef,omitempty" tf:"-"`
 
 	// Selector for a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
 	// +kubebuilder:validation:Optional
-	CidrSelector *v1.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
+	CidrSelector *v2.NamespacedSelector `json:"cidrSelector,omitempty" tf:"-"`
 
 	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
 	// +kubebuilder:validation:Optional
@@ -169,8 +168,8 @@ type ManagedPrefixListSpec struct {
 
 // ManagedPrefixListStatus defines the observed state of ManagedPrefixList.
 type ManagedPrefixListStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedPrefixListObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedPrefixListObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
