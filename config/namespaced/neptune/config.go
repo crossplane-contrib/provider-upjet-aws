@@ -6,6 +6,9 @@ package neptune
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
+	"github.com/upbound/provider-aws/v2/config/diffutils"
 )
 
 // Configure adds configurations for the neptune group
@@ -46,6 +49,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.UseAsync = true
 		r.References["db_cluster_identifier"] = config.Reference{
 			TerraformName: "aws_neptune_cluster",
+		}
+	})
+	p.AddResourceConfigurator("aws_neptune_parameter_group", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, s *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			return diffutils.SuppressAWSParameterGroupDiff(r, diff, s)
+		}
+	})
+	p.AddResourceConfigurator("aws_neptune_cluster_parameter_group", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, s *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			return diffutils.SuppressAWSParameterGroupDiff(r, diff, s)
 		}
 	})
 }
