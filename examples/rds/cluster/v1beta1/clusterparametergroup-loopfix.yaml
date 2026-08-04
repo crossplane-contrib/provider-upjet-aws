@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: g-aurorapg16-forcessl-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: aurora-postgresql16
+    description: "case G - RDS cluster param group, default value + immediate"
+    parameter:
+      - name: rds.force_ssl
+        value: "1"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: i-aurorapg16-forcessl-default
+spec:
+  forProvider:
+    region: us-west-2
+    family: aurora-postgresql16
+    description: "case I - RDS cluster param group, Aurora default value + immediate"
+    parameter:
+      - name: rds.force_ssl
+        value: "0"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
