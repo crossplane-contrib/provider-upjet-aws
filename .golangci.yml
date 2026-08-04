@@ -6,13 +6,13 @@ version: "2"
 
 run:
   timeout: 90m
-  concurrency: 1
+  # concurrency: 1
 
 output:
   formats:
     text:
       path: stdout
-      color: true
+      colors: true
       print-linter-name: true
 
 linters:
@@ -30,9 +30,6 @@ linters:
     - unused       # This remains separate in v2
     - misspell
     - nakedret
-
-  presets:
-    - bugs
 
   settings:
     errcheck:
@@ -68,6 +65,7 @@ linters:
       threshold: 100
 
     goconst:
+      ignore-tests: true
       # minimal length of string constant, 3 by default
       min-len: 3
       # minimal occurrences count to trigger, 3 by default
@@ -175,6 +173,27 @@ linters:
         text: "SA1019:.*GetEventRecorderFor is deprecated"
         linters:
           - staticcheck
+
+      # Ease goconst warnings on test files.
+      - path: _test\.go
+        linters:
+          - goconst
+
+      # Ease goconst warnings on config.go files as they target terraform resource names.
+      - path: config/(?:cluster|namespaced)/[^/]+/config\.go
+        linters:
+          - goconst
+
+      # Ease goconst warnings on aws.go as it refers to aws regions and partition names
+      - path: internal/clients/aws\.go
+        linters:
+          - goconst
+
+      # Ease goconst warnings on provider_config.go as it refers to aws regions and partition names
+      #
+      - path: internal/clients/provider_config\.go
+        linters:
+          - goconst
 
 formatters:
   enable:
