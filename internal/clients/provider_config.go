@@ -87,53 +87,90 @@ func getRegion(obj runtime.Object) (string, error) {
 	return r, err
 }
 
+// awsConfigProvenanceMeta carries out-of-band information about how an aws.Config was
+// constructed. The credential cache needs it in order to compute correct cache
+// keys.
+type awsConfigProvenanceMeta struct {
+	// credsFingerprint is a non-reversible digest of the credential material
+	// that the config's root credentials were built from, for the credential
+	// sources whose material lives outside of the ProviderConfig spec, e.g. a
+	// Secret, a file or an environment variable. Changes in such material are
+	// not observable through the ProviderConfig's generation, hence they need
+	// to contribute to the credential cache key. It's empty when there is no
+	// such material or when it could not be digested.
+	credsFingerprint string
+}
+
 // GetAWSConfigWithoutTracking produces an AWS config from the specified
 // v1beta1.ClusterProviderConfig that can be used to authenticate to AWS.
 // ProviderConfigUsage is not tracked when this function is called.
 // The caller is responsible for tracking the usage if needed.
-func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ClusterProviderConfig) (*aws.Config, error) { // nolint:gocyclo
+func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ClusterProviderConfig) (*aws.Config, error) {
+	cfg, _, err := getAWSConfig(ctx, c, obj, pc)
+	return cfg, err
+}
+
+// getAWSConfig produces an AWS config from the specified
+// v1beta1.ClusterProviderConfig that can be used to authenticate to AWS,
+// together with an awsConfigProvenanceMeta describing the credential material the
+// config was built from. ProviderConfigUsage is not tracked when this function
+// is called. The caller is responsible for tracking the usage if needed.
+func getAWSConfig(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ClusterProviderConfig) (*aws.Config, awsConfigProvenanceMeta, error) { // nolint:gocyclo
+	var meta awsConfigProvenanceMeta
 	region, err := getRegion(obj)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot get region")
+		return nil, meta, errors.Wrap(err, "cannot get region")
 	}
 	var cfg *aws.Config
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 	case authKeyIRSA:
 		cfg, err = UseDefault(ctx, region)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfigIRSA)
+			return nil, meta, errors.Wrap(err, errAWSConfigIRSA)
+		}
+		meta.credsFingerprint, err = fingerprintIRSACreds()
+		if err != nil {
+			return nil, meta, errors.Wrap(err, errAWSConfigIRSA)
 		}
 	case authKeyPodIdentity:
 		cfg, err = UseDefault(ctx, region)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfigPodIdentity)
+			return nil, meta, errors.Wrap(err, errAWSConfigPodIdentity)
 		}
 	case authKeyWebIdentity:
 		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec, c)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfigWebIdentity)
+			return nil, meta, errors.Wrap(err, errAWSConfigWebIdentity)
 		}
 	case authKeyUpbound:
 		cfg, err = UseUpbound(ctx, region, &pc.Spec)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfigUpbound)
+			return nil, meta, errors.Wrap(err, errAWSConfigUpbound)
 		}
 	default:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
 		if err != nil {
-			return nil, errors.Wrap(err, "cannot get credentials")
+			return nil, meta, errors.Wrap(err, "cannot get credentials")
 		}
-		cfg, err = UseProviderSecret(ctx, data, DefaultSection, region)
+		creds, err := CredentialsIDSecret(data, DefaultSection)
 		if err != nil {
-			return nil, errors.Wrap(err, errAWSConfig)
+			return nil, meta, errors.Wrap(err, "cannot parse credentials secret")
+		}
+		// the static credentials are not part of the ProviderConfig spec, so
+		// fingerprint them for the credential cache key.
+		meta.credsFingerprint = fingerprintStaticCreds(creds)
+		cfg, err = useStaticCredentials(ctx, creds, region)
+		if err != nil {
+			return nil, meta, errors.Wrap(err, errAWSConfig)
 		}
 	}
 
 	cfg, err = GetRoleChainConfig(ctx, &pc.Spec, cfg)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot get credentials")
+		return nil, meta, errors.Wrap(err, "cannot get credentials")
 	}
-	return SetResolver(pc, cfg)
+	cfg, err = SetResolver(pc, cfg)
+	return cfg, meta, err
 }
 
 // GetAWSConfigWithTracking obtains the provider config referenced by the
@@ -274,7 +311,12 @@ func UseProviderSecret(ctx context.Context, data []byte, profile, region string)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot parse credentials secret")
 	}
+	return useStaticCredentials(ctx, creds, region)
+}
 
+// useStaticCredentials returns an AWS configuration that authenticates with
+// the supplied static credentials.
+func useStaticCredentials(ctx context.Context, creds aws.Credentials, region string) (*aws.Config, error) {
 	awsConfig, err := config.LoadDefaultConfig(
 		ctx,
 		userAgentV2,

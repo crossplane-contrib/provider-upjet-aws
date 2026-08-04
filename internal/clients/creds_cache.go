@@ -6,7 +6,10 @@ package clients
 
 import (
 	"context"
+	"crypto/hmac"
+	"crypto/rand"
 	"crypto/sha256"
+	"encoding/binary"
 	"fmt"
 	"io"
 	"os"
@@ -26,6 +29,17 @@ import (
 
 const (
 	errGetAccountID = "cannot retrieve the AWS account ID"
+
+	// defaultCacheMaxSize is the default maximum number of entries in the
+	// AWS credentials provider cache.
+	defaultCacheMaxSize = 1000
+
+	// Reasons for which a credential provider is not cached. They are logged
+	// as the "reason" of a "Not caching the credential provider" debug line,
+	// so keep them stable: they are meant to be filtered and counted on.
+	skipNotACredentialsCache     = "Configured aws.CredentialsProvider is not an aws.CredentialsCache"
+	skipSourceNotCacheable       = "CredentialsSource is not cacheable"
+	skipNoCredentialsFingerprint = "No credentials fingerprint"
 )
 
 // AWSCredentialsProviderCacheOption lets you configure
@@ -59,8 +73,13 @@ func WithCacheLogger(l logging.Logger) AWSCredentialsProviderCacheOption {
 // *AWSCredentialsProviderCache with the default GetAWSConfig method.
 func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *AWSCredentialsProviderCache {
 	c := &AWSCredentialsProviderCache{
-		cache:   map[string]*awsCredentialsProviderCacheEntry{},
-		maxSize: 100,
+		cache: map[string]*awsCredentialsProviderCacheEntry{},
+		// entries are keyed by, among others, the region and the credential
+		// material, so their count scales with the number of provider configs
+		// times the number of regions in use, plus the rotated-out entries of
+		// both. Evicting an entry means paying for its STS calls again, and the
+		// entries are small, so keep the ceiling generous.
+		maxSize: defaultCacheMaxSize,
 		mu:      &sync.RWMutex{},
 		logger:  logging.NewNopLogger(),
 	}
@@ -84,7 +103,8 @@ type AWSCredentialsProviderCache struct {
 	// cache holds the AWS Config with a unique cache key per
 	// provider configuration. Key content includes the ProviderConfig's UUID
 	// and Generation and additional fields depending on the auth method
-	// (currently only IRSA temporary credential caching is supported).
+	// (currently IRSA, and static credentials with an assume role chain, are
+	// supported. See cacheableSource).
 	cache map[string]*awsCredentialsProviderCacheEntry
 
 	// maxSize is the maximum number of elements this cache can ever have.
@@ -143,23 +163,59 @@ func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, 
 	return result, nil
 }
 
+// cacheableSource reports whether the credentials resulting from the supplied
+// ProviderConfig can and are worth being cached.
+func cacheableSource(pc *v1beta1.ClusterProviderConfig) bool {
+	switch pc.Spec.Credentials.Source {
+	case authKeyIRSA:
+		return true
+	case authKeyWebIdentity, authKeyPodIdentity, authKeyUpbound:
+		// TODO: these authentication methods are not supported by the cache
+		// yet. They need their own out-of-spec key material, similar to the
+		// IRSA token hash.
+		return false
+	default:
+		// Static credential sources, i.e. Secret, Fs and Environment, involve
+		// no AWS API call while retrieving the credentials, so caching them
+		// only pays off when a role chain needs to be assumed on top of them.
+		return len(pc.Spec.AssumeRoleChain) > 0
+	}
+}
+
 // RetrieveCredentials returns a Credentials either from the credential cache.
-// If the authentication scheme is IRSA and the supplied
-// aws.CredentialsProvider implementation is an aws.CredentialsCache, then the
-// retrieved credentials and the account ID are cached for future requests.
+// If the authentication scheme is cacheable, i.e. IRSA or a static credential
+// source with an assume role chain, and the supplied aws.CredentialsProvider
+// implementation is an aws.CredentialsCache, then the retrieved credentials and
+// the account ID are cached for future requests.
 // Otherwise, this function returns the AWS credentials by calling
 // the downstream aws.CredentialsProvider.Retrieve, and for now, does *not*
 // call the given AccountIDFn because in that case, a separate identity cache
 // should be used to retrieve the caller identity.
-func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
-	// Only IRSA credentials are cached currently and
-	// only aws.CredentialsCache is supported as the underlying
-	// credential provider.
-	awsCredsCache, ok := credsProvider.(*aws.CredentialsCache)
-	if !ok {
-		c.logger.Debug("Configured aws.CredentialsProvider is not an aws.CredentialsCache, cannot utilize the provider credential cache...")
+func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ClusterProviderConfig, region string, credsProvider aws.CredentialsProvider, cfgMeta awsConfigProvenanceMeta, accountIDFn AccountIDFn) (Credentials, error) { //nolint:gocyclo // mostly the cache key calculation
+	// Only aws.CredentialsCache is supported as the underlying credential
+	// provider, as the whole point of the cache is to keep the SDK's own
+	// credential cache object, which refreshes the credentials as they expire,
+	// alive across reconciliations.
+	awsCredsCache, isCredsCache := credsProvider.(*aws.CredentialsCache)
+	var skipReason string
+	switch {
+	case !isCredsCache:
+		skipReason = skipNotACredentialsCache
+	case !cacheableSource(pc):
+		skipReason = skipSourceNotCacheable
+	case cfgMeta.credsFingerprint == "":
+		// The credential material lives outside of the ProviderConfig, e.g. in
+		// a Secret, so its generation alone cannot detect a rotation. Without a
+		// fingerprint of the material we cannot construct a safe cache key,
+		// hence skip the cache instead of risking serving credentials derived
+		// from stale material.
+		skipReason = skipNoCredentialsFingerprint
 	}
-	if pc.Spec.Credentials.Source != authKeyIRSA || !ok {
+	if skipReason != "" {
+		c.logger.Debug("Cannot utilize the provider credential cache",
+			"reason", skipReason,
+			"source", string(pc.Spec.Credentials.Source),
+			"providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
 		// if this cache manager is not going to be employed, do not call
 		// the given accountIDFn because there's a separate identity cache
 		// implementation.
@@ -178,20 +234,16 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// Any other external parameter that have an effect on the resulting
 	// credentials and does not appear in the ProviderConfig directly
 	// (i.e. the same provider config content produces a different config),
-	// should be included in the cache key.
+	// should be included in the cache key via `cfgMeta.credsFingerprint`
 	cacheKeyParams := []string{ // nolint:prealloc
 		string(pc.UID),
 		strconv.FormatInt(pc.Generation, 10),
 		region,
 		string(pc.Spec.Credentials.Source),
+		cfgMeta.credsFingerprint, // empty fingerprints are rejected above
 	}
-	tokenHash, err := hashTokenFile(os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"))
-	if err != nil {
-		return Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
-	}
-	cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
 	cacheKey := strings.Join(cacheKeyParams, ":")
-	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
+	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
 	c.mu.RLock()
 	cacheEntry, ok := c.cache[cacheKey]
 	c.mu.RUnlock()
@@ -199,7 +251,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// TODO: consider implementing a TTL even though the cached entry is valid
 	// cache hit
 	if ok {
-		c.logger.Debug("Cache hit", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
+		c.logger.Debug("Cache hit", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
 		// since this is a hot-path in the execution, do not always update
 		// the last access times, it is fine to evict the LRU entry on a less
 		// granular precision.
@@ -216,7 +268,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	cacheEntry, ok = c.cache[cacheKey]
 	if !ok {
 		// cache miss
-		c.logger.Debug("Cache miss", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String(), "cacheSize", len(c.cache))
+		c.logger.Debug("Cache miss", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID), "cacheSize", len(c.cache))
 		c.makeRoom()
 		cacheEntry = &awsCredentialsProviderCacheEntry{
 			awsCredCache: awsCredsCache,
@@ -274,4 +326,38 @@ func hashTokenFile(filename string) (string, error) {
 
 	checksum := hash.Sum(nil)
 	return fmt.Sprintf("%x", checksum), nil
+}
+
+func fingerprintIRSACreds() (string, error) {
+	tokenHash, err := hashTokenFile(os.Getenv(envWebIdentityTokenFile))
+	if err != nil {
+		return "", errors.Wrap(err, "cannot calculate the hash for the credentials file")
+	}
+	return fmt.Sprintf("%s:%s:%s", tokenHash, os.Getenv(envWebIdentityTokenFile), os.Getenv(envWebIdentityRoleARN)), nil
+}
+
+// fingerprintKey keys the credential fingerprints. It is randomly generated
+// per process, so that a fingerprint is meaningless outside of the process
+// that produced it: fingerprints reach the credential cache keys, which are
+// logged at debug level, and an unkeyed digest of a credential would be a
+// stable identifier that anyone holding a candidate credential could confirm
+// by recomputing it. The credential cache never outlives the process, so the
+// fingerprints need no stability across restarts.
+var fingerprintKey = []byte(rand.Text())
+
+// fingerprintStaticCreds returns a non-reversible digest of the supplied
+// aws.Credentials, suitable for use as a cache key component. The digest is
+// only comparable against the digests produced by the same process, see
+// fingerprintKey.
+func fingerprintStaticCreds(creds aws.Credentials) string {
+	h := hmac.New(sha256.New, fingerprintKey)
+	for _, s := range []string{creds.AccessKeyID, creds.SecretAccessKey, creds.SessionToken} {
+		// length-prefix framing, so that different credentials cannot digest
+		// to the same value by concatenating to the same byte string. A mere
+		// separator byte would leave the fields ambiguous if one of them ever
+		// contained that byte itself.
+		_ = binary.Write(h, binary.BigEndian, uint64(len(s)))
+		_, _ = h.Write([]byte(s))
+	}
+	return fmt.Sprintf("%x", h.Sum(nil))
 }

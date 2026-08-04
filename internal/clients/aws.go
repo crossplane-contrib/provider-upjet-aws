@@ -100,17 +100,17 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 
 		ps := terraform.Setup{}
-		awsCfg, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
+		awsCfg, cfgMeta, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
 		} else if awsCfg == nil {
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
 
-		// only IRSA auth credentials are currently cached, other auth methods
-		// will skip the cache and call the downstream
-		// CredentialsProvider.Retrieve().
-		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, func(ctx context.Context) (string, error) {
+		// only IRSA, and static credentials with an assume role chain, are
+		// currently cached. Other auth methods will skip the cache and call the
+		// downstream CredentialsProvider.Retrieve().
+		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, cfgMeta, func(ctx context.Context) (string, error) {
 			if pc.Spec.SkipCredsValidation {
 				// then we do not try to resolve the account ID and instead,
 				// return a constant value as before.
@@ -202,15 +202,15 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 }
 
 // getAWSConfigWithDefaultRegion is a utility function that wraps the
-// GetAWSConfigWithoutTracking and fills empty region in the returned config for
+// getAWSConfig and fills empty region in the returned config for
 // global API groups with appropriate partition-specific regions. Although
 // this does not have an effect on the resource, as global group resources
 // have no concept of region, this is done to conform with the TF AWS config
 // which requires non-empty region
-func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *namespacedv1beta1.ClusterProviderConfig) (*aws.Config, error) {
-	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
+func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *namespacedv1beta1.ClusterProviderConfig) (*aws.Config, awsConfigProvenanceMeta, error) {
+	cfg, meta, err := getAWSConfig(ctx, c, obj, pc)
 	if err != nil {
-		return nil, err
+		return nil, meta, err
 	}
 	// For global API groups, set an appropriate default region when none is specified
 	if cfg.Region == "" {
@@ -219,7 +219,7 @@ func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj run
 			cfg.Region = region
 		}
 	}
-	return cfg, nil
+	return cfg, meta, nil
 }
 
 // getGlobalRegion returns the appropriate region for global resources and API groups
