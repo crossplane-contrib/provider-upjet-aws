@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: docdb.aws.m.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: h-docdb50-ttlmonitor-immediate
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-2
+    family: docdb5.0
+    description: "case H - DocDB cluster param group, default value + immediate"
+    parameter:
+      - name: ttl_monitor
+        value: enabled
+        applyMethod: immediate
+    tags:
+      Test: Uptest

@@ -7,9 +7,11 @@ package docdb
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/types/comments"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
+	"github.com/upbound/provider-aws/v2/config/diffutils"
 	"github.com/upbound/provider-aws/v2/config/namespaced/common"
 )
 
@@ -63,6 +65,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_docdb_subnet_group", func(r *config.Resource) {
 		r.References["subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_docdb_cluster_parameter_group", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, s *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			return diffutils.SuppressAWSParameterGroupDiff(r, diff, s)
 		}
 	})
 }

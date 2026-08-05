@@ -1,0 +1,107 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# rds.force_ssl defaults to 1 on RDS PostgreSQL 15+, so value "1" is a no-op at AWS.
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: a-pg16-forcessl-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: postgres16
+    description: "Case A - default value + applyMethod immediate"
+    parameter:
+      - name: rds.force_ssl
+        value: "1"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case B — provider-upjet-aws#1444. log_checkpoints defaults to 1 on postgres15.
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: b-pg15-logcheckpoints-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: postgres15
+    description: "case B - provider-upjet-aws#1444 reproducer"
+    parameter:
+      - name: log_checkpoints
+        value: "1"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+
+---
+# Case C — provider-upjet-aws#1286. innodb_file_per_table defaults to 1 on mysql8.0.
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: c-mysql80-innodbfpt-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: mysql8.0
+    description: "case C - provider-upjet-aws#1286 reproducer"
+    parameter:
+      - name: innodb_file_per_table
+        value: "1"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case D — same parameter, NON-default value. AWS really applies the change, records
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: d-pg16-forcessl-nondefault
+spec:
+  forProvider:
+    region: us-west-2
+    family: postgres16
+    description: "case D - non-default value + immediate"
+    parameter:
+      - name: rds.force_ssl
+        value: "0"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+  providerConfigRef:
+    name: default
+---
+# Case E — default value but applyMethod pending-reboot, which is what AWS reports back.
+# Desired == observed, so no diff.
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: e-pg16-forcessl-pendingreboot
+spec:
+  forProvider:
+    region: us-west-2
+    family: postgres16
+    description: "case E - default value + pending-reboot"
+    parameter:
+      - name: rds.force_ssl
+        value: "1"
+        applyMethod: pending-reboot
+    tags:
+      Test: Uptest
+---
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  name: f-pg16-forcessl-unset
+spec:
+  forProvider:
+    region: us-west-2
+    family: postgres16
+    description: "case F - default value, applyMethod omitted"
+    parameter:
+      - name: rds.force_ssl
+        value: "1"
+    tags:
+      Test: Uptest

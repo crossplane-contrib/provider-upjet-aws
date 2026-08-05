@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Neptune cluster-level (DB cluster parameter group) cases.
+# Parameter defaults and apply types are from
+# https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html
+# Cluster-level parameters come in both flavors, so both a static and a dynamic
+# parameter are covered here. A changed value on a STATIC parameter has to be
+# requested with pending-reboot, whereas a DYNAMIC one accepts immediate.
+# Note that, unlike aws_rds_cluster_parameter_group, the Neptune cluster
+# parameter group schema defaults applyMethod to pending-reboot, so the loop is
+# triggered by explicitly asking for immediate on a parameter whose value AWS
+# does not have to touch.
+
+# Case O - neptune_enable_audit_log is static and defaults to 0, so the value is a
+# no-op at AWS. AWS ignores the apply method change alone and keeps reporting
+# pending-reboot, which is the perpetual diff.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: o-neptune13-auditlog-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case O - Neptune cluster param group, static default value + immediate"
+    parameter:
+      - name: neptune_enable_audit_log
+        value: "0"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case P - same churn on a DYNAMIC parameter.
+# neptune_enable_slow_query_log defaults to disabled.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: p-neptune13-slowquerylog-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case P - Neptune cluster param group, dynamic default value + immediate"
+    parameter:
+      - name: neptune_enable_slow_query_log
+        value: disabled
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case Q - NON-default value on a DYNAMIC parameter, requested with immediate,
+# which AWS accepts for dynamic parameters. The diff must not be suppressed.
+# neptune_slow_query_log_threshold defaults to 5000 ms.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: q-neptune13-slowquerythreshold-immediate
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case Q - Neptune cluster param group, dynamic non-default value + immediate"
+    parameter:
+      - name: neptune_slow_query_log_threshold
+        value: "10000"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case R - NON-default value on a STATIC parameter, requested with pending-reboot.
+# AWS really applies the change, so the diff must not be suppressed.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: r-neptune13-auditlog-pendingreboot
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case R - Neptune cluster param group, static non-default value + pending-reboot"
+    parameter:
+      - name: neptune_enable_audit_log
+        value: "1"
+        applyMethod: pending-reboot
+    tags:
+      Test: Uptest
+---
+# Case S - a loop-triggering parameter and a genuinely changing parameter in the
+# same set. Suppression is all-or-nothing per parameter group, so this asserts
+# that neptune_slow_query_log_threshold is still updated instead of being
+# swallowed together with the neptune_streams apply method churn.
+# neptune_streams is static and defaults to 0.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: s-neptune13-mixed
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case S - Neptune cluster param group, apply method churn + real change"
+    parameter:
+      - name: neptune_streams
+        value: "0"
+        applyMethod: immediate
+      - name: neptune_slow_query_log_threshold
+        value: "10000"
+        applyMethod: immediate
+    tags:
+      Test: Uptest
+---
+# Case T - default value, applyMethod omitted. Defaults to pending-reboot for
+# Neptune, which is what AWS reports back, so desired == observed and no diff.
+# neptune_lookup_cache is static and defaults to 0.
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  name: t-neptune13-lookupcache-unset
+spec:
+  forProvider:
+    region: us-west-2
+    family: neptune1.3
+    description: "case T - Neptune cluster param group, default value, applyMethod omitted"
+    parameter:
+      - name: neptune_lookup_cache
+        value: "0"
+    tags:
+      Test: Uptest
