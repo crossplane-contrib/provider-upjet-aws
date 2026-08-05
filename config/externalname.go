@@ -28,6 +28,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// API Gateway Accounts can be imported using the word api-gateway-account
 	"aws_api_gateway_account": apiGatewayAccount(),
+	// API Gateway Domain Name Access Associations are imported by their ARN, which the
+	// provider computes on create:
+	// arn:aws:apigateway:<region>:<account>:/domainnameaccessassociations/domainname/<domain-id>/vpcesource/<vpce-id>
+	"aws_api_gateway_domain_name_access_association": identifierFromProviderWithDefaultStub("arn:aws:apigateway:us-west-2:123456789012:/domainnameaccessassociations/domainname/12qmzgp2.9m7ilski.test+hykg7a12e7/vpcesource/vpce-05de3f8f82740a748"),
 
 	// appconfig
 	//
