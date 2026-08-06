@@ -1,0 +1,141 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: quicksight.aws.upbound.io/v1beta1
+kind: VPCConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+    upjet.upbound.io/manual-intervention: "This resource requires an active QuickSight subscription on the AWS account."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-vpc
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-subnet
+spec:
+  forProvider:
+    availabilityZone: us-east-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-sg
+spec:
+  forProvider:
+    description: QuickSight VPC Connection Security Group
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-vpc-connection-role
+spec:
+  forProvider:
+    assumeRolePolicyDocument: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "quicksight.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-vpc-connection-policy
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: quicksight-vpc-connection
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: quicksight-vpc-connection
+  name: quicksight-vpc-connection-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ec2:CreateNetworkInterface",
+              "ec2:ModifyNetworkInterfaceAttribute",
+              "ec2:DeleteNetworkInterface",
+              "ec2:DescribeSubnets",
+              "ec2:DescribeSecurityGroups"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }

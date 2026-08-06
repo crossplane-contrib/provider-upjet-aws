@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: quicksight.aws.upbound.io/v1beta1
+kind: VPCConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: Example Connection
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc_connection_role
+    securityGroupIdRefs:
+    - name: example
+    subnetIdRefs:
+    - name: example
+    - name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: quicksight/v1beta1/vpcconnection
+  labels:
+    testing.upbound.io/example-name: vpc_connection_role
+  name: vpc-connection-role
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Effect = "Allow"
+              Action = "sts:AssumeRole"
+              Principal = {
+                Service = "quicksight.amazonaws.com"
+              }
+            }
+          ]
+        })}
+    inlinePolicy:
+    - name: QuickSightVPCConnectionRolePolicy
+      policy: |-
+        ${jsonencode({
+              Version = "2012-10-17"
+              Statement = [
+                {
+                  Effect = "Allow"
+                  Action = [
+                    "ec2:CreateNetworkInterface",
+                    "ec2:ModifyNetworkInterfaceAttribute",
+                    "ec2:DeleteNetworkInterface",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups"
+                  ]
+                  Resource = ["*"]
+                }
+              ]
+            })}
+    region: us-west-1
