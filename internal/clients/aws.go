@@ -16,6 +16,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/crossplane/upjet/v2/pkg/metrics"
 	"github.com/crossplane/upjet/v2/pkg/terraform"
+	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	"github.com/hashicorp/aws-sdk-go-base/v2/endpoints"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
@@ -340,21 +341,73 @@ func withExternalAPICallCounter(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(externalAPICallCounterMiddleware, middleware.After)
 }
 
+func buildNoForkAWSConfig(region string, creds aws.Credentials, pc *namespacedv1beta1.ClusterProviderConfig) xpprovider.AWSConfig {
+	tfAwsConnsCfg := xpprovider.AWSConfig{
+		Endpoints:               map[string]string{},
+		Region:                  region,
+		SkipCredsValidation:     true, // disabled to prevent extra AWS STS call
+		SkipRequestingAccountId: true, // disabled to prevent extra AWS STS call
+	}
+	if pc != nil {
+		tfAwsConnsCfg.S3UsePathStyle = pc.Spec.S3UsePathStyle
+		tfAwsConnsCfg.SkipRegionValidation = pc.Spec.SkipRegionValidation
+	}
+
+	// Keep IRSA and PodIdentity credentials dynamic in no-fork mode so the
+	// underlying Terraform AWS client can auto-refresh temporary credentials.
+	if useDynamicNoForkCredentials(pc) {
+		tfAwsConnsCfg.AssumeRole = toAWSBaseAssumeRoleChain(pc.Spec.AssumeRoleChain)
+		return tfAwsConnsCfg
+	}
+
+	// Fallback for auth methods that currently rely on pre-resolved credentials.
+	tfAwsConnsCfg.AccessKey = creds.AccessKeyID
+	tfAwsConnsCfg.SecretKey = creds.SecretAccessKey
+	tfAwsConnsCfg.Token = creds.SessionToken
+	return tfAwsConnsCfg
+}
+
+func useDynamicNoForkCredentials(pc *namespacedv1beta1.ClusterProviderConfig) bool {
+	if pc == nil {
+		return false
+	}
+	switch pc.Spec.Credentials.Source {
+	case authKeyIRSA, authKeyPodIdentity:
+		return true
+	default:
+		return false
+	}
+}
+
+func toAWSBaseAssumeRoleChain(chain []namespacedv1beta1.AssumeRoleOptions) []awsbase.AssumeRole {
+	if len(chain) == 0 {
+		return nil
+	}
+
+	result := make([]awsbase.AssumeRole, 0, len(chain))
+	for _, role := range chain {
+		r := awsbase.AssumeRole{
+			RoleARN:           aws.ToString(role.RoleARN),
+			ExternalID:        aws.ToString(role.ExternalID),
+			TransitiveTagKeys: append([]string(nil), role.TransitiveTagKeys...),
+		}
+		if len(role.Tags) > 0 {
+			r.Tags = make(map[string]string, len(role.Tags))
+			for _, t := range role.Tags {
+				r.Tags[aws.ToString(t.Key)] = aws.ToString(t.Value)
+			}
+		}
+		result = append(result, r)
+	}
+
+	return result
+}
+
 // configureNoForkAWSClient populates the supplied *terraform.Setup with
 // Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
 // style FrameworkProvider
 func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *namespacedv1beta1.ClusterProviderConfig) error { //nolint:gocyclo
-	tfAwsConnsCfg := xpprovider.AWSConfig{
-		AccessKey:               creds.AccessKeyID,
-		Endpoints:               map[string]string{},
-		Region:                  region,
-		S3UsePathStyle:          pc.Spec.S3UsePathStyle,
-		SecretKey:               creds.SecretAccessKey,
-		SkipCredsValidation:     true, // disabled to prevent extra AWS STS call
-		SkipRegionValidation:    pc.Spec.SkipRegionValidation,
-		SkipRequestingAccountId: true, // disabled to prevent extra AWS STS call
-		Token:                   creds.SessionToken,
-	}
+	tfAwsConnsCfg := buildNoForkAWSConfig(region, creds, pc)
 
 	if pc.Spec.SkipMetadataApiCheck {
 		tfAwsConnsCfg.EC2MetadataServiceEnableState = imds.ClientDisabled
