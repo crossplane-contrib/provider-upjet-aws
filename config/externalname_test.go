@@ -5,8 +5,45 @@
 package config
 
 import (
+	"context"
 	"testing"
 )
+
+func TestSNSPlatformApplicationImportID(t *testing.T) {
+	externalName := TerraformPluginSDKExternalNameConfigs["aws_sns_platform_application"]
+	setup := map[string]any{
+		"configuration": map[string]any{
+			"region": "eu-west-1",
+		},
+		"client_metadata": map[string]any{
+			"account_id": "123456789012",
+			"partition":  "aws",
+		},
+	}
+
+	tests := map[string]string{
+		"GCM":          "arn:aws:sns:eu-west-1:123456789012:app/GCM/example-application",
+		"APNS":         "arn:aws:sns:eu-west-1:123456789012:app/APNS/example-application",
+		"APNS_SANDBOX": "arn:aws:sns:eu-west-1:123456789012:app/APNS_SANDBOX/example-application",
+	}
+
+	for platform, expectedID := range tests {
+		t.Run(platform, func(t *testing.T) {
+			id, err := externalName.GetIDFn(
+				context.Background(),
+				"example-application",
+				map[string]any{"platform": platform},
+				setup,
+			)
+			if err != nil {
+				t.Fatalf("GetIDFn() error = %v", err)
+			}
+			if id != expectedID {
+				t.Errorf("GetIDFn() = %q, want %q", id, expectedID)
+			}
+		})
+	}
+}
 
 func TestEcsTaskDefinitionSetIdentifierArgumentFn(t *testing.T) {
 	e := ecsTaskDefinition()
