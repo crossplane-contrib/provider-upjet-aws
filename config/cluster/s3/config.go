@@ -93,6 +93,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket_notification", func(r *config.Resource) {
 		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
 		delete(r.References, "lambda_function.lambda_function_arn")
+		for _, f := range []string{"queue", "topic", "lambda_function"} {
+			r.ServerSideApplyMergeStrategies[f] = config.MergeStrategy{
+				ListMergeStrategy: config.ListMergeStrategy{
+					ListMapKeys: config.ListMapKeys{
+						InjectedKey: config.InjectedKey{
+							Key:          "index",
+							DefaultValue: `"0"`,
+						},
+					},
+					MergeStrategy: config.ListTypeMap,
+				},
+			}
+		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {
