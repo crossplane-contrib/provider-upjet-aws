@@ -12,6 +12,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource/fake"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/test"
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/google/go-cmp/cmp"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
@@ -497,4 +498,133 @@ func TestPasswordGenerator(t *testing.T) {
 		})
 	}
 
+}
+
+func TestJSONStringNormalizationConversion(t *testing.T) {
+	type args struct {
+		fieldPath string
+		params    map[string]any
+		mode      config.Mode
+	}
+	type want struct {
+		params map[string]any
+		err    error
+	}
+	cases := map[string]struct {
+		reason string
+		args   args
+		want   want
+	}{
+		"NoOpOnToTerraform": {
+			reason: "Should not modify params when mode is ToTerraform.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": `{"Statement":[{"Effect":"Allow"}]}`},
+				mode:      config.ToTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": `{"Statement":[{"Effect":"Allow"}]}`},
+			},
+		},
+		"NoOpOnMissingField": {
+			reason: "Should not modify params when the field is not present.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"other": "value"},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"other": "value"},
+			},
+		},
+		"NoOpOnEmptyString": {
+			reason: "Should not modify params when the field is an empty string.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": ""},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": ""},
+			},
+		},
+		"NoOpOnInvalidJSON": {
+			reason: "Should not modify params when the field contains invalid JSON.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": "not-json"},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": "not-json"},
+			},
+		},
+		"NoOpOnNonStringField": {
+			reason: "Should not modify params when the field is not a string.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": 42},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": 42},
+			},
+		},
+		"SortsTopLevelArray": {
+			reason: "Should sort top-level arrays in the JSON string.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": `{"Principal":{"AWS":["arn:aws:iam::use2","arn:aws:iam::euw1"]}}`},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": `{"Principal":{"AWS":["arn:aws:iam::euw1","arn:aws:iam::use2"]}}`},
+			},
+		},
+		"AlreadySorted": {
+			reason: "Should produce identical output when arrays are already sorted.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": `{"Principal":{"AWS":["arn:aws:iam::euw1","arn:aws:iam::use2"]}}`},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": `{"Principal":{"AWS":["arn:aws:iam::euw1","arn:aws:iam::use2"]}}`},
+			},
+		},
+		"SortsNestedArrays": {
+			reason: "Should recursively sort arrays nested inside objects.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": `{"Statement":[{"Effect":"Allow","Principal":{"AWS":["arn:b","arn:a"]}},{"Effect":"Deny","Principal":{"AWS":["arn:d","arn:c"]}}]}`},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": `{"Statement":[{"Effect":"Allow","Principal":{"AWS":["arn:a","arn:b"]}},{"Effect":"Deny","Principal":{"AWS":["arn:c","arn:d"]}}]}`},
+			},
+		},
+		"DeterministicAcrossOrderings": {
+			reason: "Two policies differing only in array order should produce the same normalized output.",
+			args: args{
+				fieldPath: "policy",
+				params:    map[string]any{"policy": `{"AWS":["arn:aws:iam::use2","arn:aws:iam::euw1","arn:aws:iam::apse1"]}`},
+				mode:      config.FromTerraform,
+			},
+			want: want{
+				params: map[string]any{"policy": `{"AWS":["arn:aws:iam::apse1","arn:aws:iam::euw1","arn:aws:iam::use2"]}`},
+			},
+		},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			c := NewJSONStringNormalizationConversion(tc.args.fieldPath)
+			got, err := c.Convert(tc.args.params, nil, tc.args.mode)
+			if diff := cmp.Diff(tc.want.err, err, test.EquateErrors()); diff != "" {
+				t.Errorf("%s\nConvert(...): -want error, +got error:\n%s", tc.reason, diff)
+			}
+			if diff := cmp.Diff(tc.want.params, got); diff != "" {
+				t.Errorf("%s\nConvert(...): -want params, +got params:\n%s", tc.reason, diff)
+			}
+		})
+	}
 }
