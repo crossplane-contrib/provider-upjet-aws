@@ -88,11 +88,6 @@ func (in *PlatformApplicationInitParameters) DeepCopyInto(out *PlatformApplicati
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Platform != nil {
-		in, out := &in.Platform, &out.Platform
-		*out = new(string)
-		**out = **in
-	}
 	out.PlatformCredentialSecretRef = in.PlatformCredentialSecretRef
 	if in.PlatformPrincipalSecretRef != nil {
 		in, out := &in.PlatformPrincipalSecretRef, &out.PlatformPrincipalSecretRef
