@@ -46,9 +46,6 @@ type PlatformApplicationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FailureFeedbackRoleArnSelector *v2.Selector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
-	// The platform that the app is registered with. See Platform for supported platforms.
-	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
-
 	// Application Platform credential. See Credential for type of credential required for platform.
 	PlatformCredentialSecretRef v2.SecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
 
@@ -156,8 +153,8 @@ type PlatformApplicationParameters struct {
 	FailureFeedbackRoleArnSelector *v2.Selector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The platform that the app is registered with. See Platform for supported platforms.
-	// +kubebuilder:validation:Optional
-	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+	// +kubebuilder:validation:Required
+	Platform *string `json:"platform" tf:"platform,omitempty"`
 
 	// Application Platform credential. See Credential for type of credential required for platform.
 	// +kubebuilder:validation:Optional
@@ -227,7 +224,6 @@ type PlatformApplicationStatus struct {
 type PlatformApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platform) || (has(self.initProvider) && has(self.initProvider.platform))",message="spec.forProvider.platform is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformCredentialSecretRef)",message="spec.forProvider.platformCredentialSecretRef is a required parameter"
 	Spec   PlatformApplicationSpec   `json:"spec"`
 	Status PlatformApplicationStatus `json:"status,omitempty"`
