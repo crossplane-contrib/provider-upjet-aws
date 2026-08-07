@@ -199,7 +199,7 @@ spec:
                             "Principal": {
                               "AWS": "%s"
                             },
-                            "Action": "sts:AssumeRole"
+                            "Action": ["sts:AssumeRole", "sts:SetSourceIdentity"]
                           }
                         ]
                       }
@@ -1001,6 +1001,42 @@ spec:
                   fromFieldPath: Required
                 toFieldPath: spec.forProvider.manifest.spec.assumeRoleChain[0].roleARN
 
+          # IRSA-enabled Provider Config - chained role with SourceIdentity pass-through
+          - name: IRSAProviderConfigWithChainSourceIdentityPassthrough
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: irsa-chain-passthrough-provider-config
+                labels:
+                  component: aws-irsa-chain-passthrough-provider-config
+                  component-type: aws-provider-config
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: aws.upbound.io/v1beta1
+                    kind: ProviderConfig
+                    metadata:
+                      name: irsa-chain-passthrough-config
+                    spec:
+                      assumeRoleChain:
+                        - roleARN: to-be-patched
+                          sourceIdentity: "<from-mr>"
+                      credentials:
+                        source: IRSA
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.irsa.chainedRoleARNs[0]
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: spec.forProvider.manifest.spec.assumeRoleChain[0].roleARN
+
           # WebIdentity Provider Config - Legacy config with IRSA-dependency
           - name: WebIdentityProviderConfigLegacy
             base:
@@ -1279,6 +1315,54 @@ spec:
                 transforms:
                   - string:
                       fmt: '%s-demo-vpc-irsa-chain-mr'
+                      type: Format
+                    type: string
+
+          # Demo VPC MR for testing IRSA chain with SourceIdentity pass-through
+          - name: DemoVPCIRSAChainSourceIdentityPassthrough
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: demo-vpc-irsa-chain-passthrough-mr
+                labels:
+                  resource-provider: aws-provider-ec2
+                  component: demo-vpc-irsa-chain-passthrough
+              spec:
+                readiness:
+                  policy: AllTrue
+                forProvider:
+                  manifest:
+                    apiVersion: ec2.aws.upbound.io/v1beta1
+                    kind: VPC
+                    metadata:
+                      name: sample-vpc-demo-irsa-chain-passthrough
+                      annotations:
+                        meta.upbound.io/example-id: ec2/v1beta1/vpc
+                        aws.upbound.io/source-identity: e2e-passthrough-test
+                    spec:
+                      providerConfigRef:
+                        name: irsa-chain-passthrough-config
+                      forProvider:
+                        region: us-east-1
+                        cidrBlock: 172.20.0.0/16
+                        tags:
+                          Name: PCTesting-IRSA-Chain-Passthrough-Demo
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: metadata.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-demo-vpc-irsa-chain-passthrough-mr'
                       type: Format
                     type: string
 

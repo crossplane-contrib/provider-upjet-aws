@@ -99,6 +99,17 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 			return terraform.Setup{}, err
 		}
 
+		// Apply any per-managed-resource overrides (currently just
+		// SourceIdentity pass-through) on the spec returned from
+		// resolveProviderConfig, which is always a freshly constructed value.
+		// Substituted values are propagated to the credentials cache key so
+		// that two MRs sharing a ProviderConfig but resolving to different
+		// effective credentials do not collide.
+		credsCacheExtraKey, err := applyManagedResourceOverrides(&pc.Spec, mg)
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "cannot apply managed resource overrides")
+		}
+
 		ps := terraform.Setup{}
 		awsCfg, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
 		if err != nil {
@@ -121,7 +132,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 				return "", errors.Wrap(err, errGetCallerIdentityFailed)
 			}
 			return *o.Account, nil
-		})
+		}, credsCacheExtraKey...)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cache manager failure")
 		}
