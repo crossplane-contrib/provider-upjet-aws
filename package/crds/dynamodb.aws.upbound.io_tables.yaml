@@ -3444,6 +3444,9 @@ spec:
                           description: ARN of the Table Stream. Only available when
                             stream_enabled = true
                           type: string
+                        streamEnabled:
+                          description: Whether Streams are enabled.
+                          type: boolean
                         streamLabel:
                           description: Timestamp, in ISO 8601 format, for this stream.
                             Note that this timestamp is not a unique identifier for
@@ -3451,6 +3454,12 @@ spec:
                             customer ID, table name and this field is guaranteed to
                             be unique. It can be used for creating CloudWatch Alarms.
                             Only available when stream_enabled = true.
+                          type: string
+                        streamViewType:
+                          description: |-
+                            When an item in the table is modified, StreamViewType determines what information is written to the table's stream.
+                            Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+                            Only valid when stream_enabled is true.
                           type: string
                       type: object
                     type: array
