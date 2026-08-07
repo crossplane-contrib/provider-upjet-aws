@@ -3361,8 +3361,18 @@ func (in *TableReplicaObservation) DeepCopyInto(out *TableReplicaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StreamEnabled != nil {
+		in, out := &in.StreamEnabled, &out.StreamEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.StreamLabel != nil {
 		in, out := &in.StreamLabel, &out.StreamLabel
+		*out = new(string)
+		**out = **in
+	}
+	if in.StreamViewType != nil {
+		in, out := &in.StreamViewType, &out.StreamViewType
 		*out = new(string)
 		**out = **in
 	}
