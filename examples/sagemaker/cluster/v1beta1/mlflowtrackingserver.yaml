@@ -6,7 +6,7 @@ metadata:
     uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example-mlflowtrackingserver
-  name: example
+  name: example-trackingserver
 spec:
   forProvider:
     artifactStoreUri: s3://sagemaker-bucketname303/
@@ -14,7 +14,6 @@ spec:
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
-    trackingServerName: example
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role

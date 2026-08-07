@@ -14,4 +14,4 @@ spec:
       -----BEGIN CERTIFICATE-----
       [......] # cert contents
       -----END CERTIFICATE-----
-    username: some_test_cert
+

@@ -180,7 +180,6 @@ metadata:
   name: uptest-networkfirewall-logging
   namespace: upbound-system
 spec:
-  deletionPolicy: Orphan
   forProvider:
     objectLockEnabled: true
     region: us-west-1

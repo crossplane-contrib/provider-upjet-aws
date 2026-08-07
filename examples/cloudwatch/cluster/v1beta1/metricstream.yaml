@@ -91,10 +91,10 @@ metadata:
   name: s3-stream
 spec:
   forProvider:
-    destination: s3
+    destination: extended_s3
     name: metric-stream-test-stream
     region: us-west-1
-    s3Configuration:
+    extendedS3Configuration:
     - bucketArnRef:
         name: bucket
       roleArnRef:

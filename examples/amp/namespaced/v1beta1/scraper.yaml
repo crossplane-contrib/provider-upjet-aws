@@ -15,6 +15,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -28,6 +29,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -110,6 +112,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo-cluster
   name: scraper-monolithic-demo-cluster
+  namespace: upbound-system
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -134,6 +137,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo-cluster-policy
   name: scraper-monolithic-demo-cluster-policy
+  namespace: upbound-system
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -150,6 +154,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
+  namespace: upbound-system
 spec:
   forProvider:
     region: us-east-1
@@ -157,7 +162,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: scraper-monolithic-demo-cluster
     vpcConfig:
-      - subnetIdRefs:
+      subnetIdRefs:
         - name: subnet-1
         - name: subnet-2
 ---
@@ -169,6 +174,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-monolithic-demo
+  namespace: upbound-system
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
@@ -186,6 +192,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: subnet-1
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1a
@@ -205,6 +212,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: subnet-2
+  namespace: upbound-system
 spec:
   forProvider:
     availabilityZone: us-east-1b
@@ -224,6 +232,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: scraper-monolithic-demo
   name: scraper-sg
+  namespace: upbound-system
 spec:
   forProvider:
     description: Security group for AMP scraper

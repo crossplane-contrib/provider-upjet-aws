@@ -13,7 +13,7 @@ spec:
   forProvider:
     region: us-west-1
 ---
-apiVersion: kms.aws.upbound.io/v1beta1
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:
