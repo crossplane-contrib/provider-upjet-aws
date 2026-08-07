@@ -72,5 +72,3 @@ metadata:
   namespace: upbound-system
 stringData:
   clientsecret: "clientsecretvalue"
-
----

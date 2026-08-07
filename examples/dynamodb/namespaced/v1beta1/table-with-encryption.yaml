@@ -59,5 +59,3 @@ spec:
   forProvider:
     description: Example test key for dynamodb table server-side encryption
     region: us-west-1
-
----
