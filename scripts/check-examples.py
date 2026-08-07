@@ -11,14 +11,19 @@ import sys
 
 def load_gvks(path, loader):
     types = set()
+    empty_docs = []
     for root, _, files in os.walk(path):
         for f in files:
             if f.endswith(".yaml"):
-                with open(os.path.join(root, f)) as s:
-                    for t in yaml.safe_load_all(s):
-                        for gvk in loader(t):
-                            types.add(gvk)
-    return types
+                filepath = os.path.join(root, f)
+                with open(filepath) as s:
+                    docs = list(yaml.safe_load_all(s))
+                if None in docs:
+                    empty_docs.append(filepath)
+                for t in docs:
+                    for gvk in loader(t):
+                        types.add(gvk)
+    return types, empty_docs
 
 
 def load_crd_type(t):
@@ -48,13 +53,25 @@ if __name__ == "__main__":
         exception_set = exceptions["provider-aws"]
     except KeyError:
         exception_set = set()
-    known_crd_types = load_gvks(sys.argv[1], load_crd_type)
-    example_types = load_gvks(sys.argv[2], lambda t: [] if t is None or not {"kind", "apiVersion"}.issubset(t.keys())
+    known_crd_types, _ = load_gvks(sys.argv[1], load_crd_type)
+    example_types, empty_docs = load_gvks(sys.argv[2], lambda t: [] if t is None or not {"kind", "apiVersion"}.issubset(t.keys())
         else [f'{t["kind"]}.{t["apiVersion"]}'])
+
+    exit_code = 0
+    if empty_docs:
+        print("The following example manifests contain an empty YAML "
+              "document, usually caused by a trailing '---' separator with "
+              "no content after it:")
+        for f in empty_docs:
+            print(f'  {f}')
+        exit_code = 2
+
     diff = known_crd_types.difference(example_types.union(exception_set))
     if len(diff) == 0:
         print("All CRDs have at least one example...")
         print(f'Exceptions allowed for: {exception_set}')
-        sys.exit(0)
-    print(f'Please add example manifests for the following types: {diff}')
-    sys.exit(2)
+    else:
+        print(f'Please add example manifests for the following types: {diff}')
+        exit_code = 2
+
+    sys.exit(exit_code)
