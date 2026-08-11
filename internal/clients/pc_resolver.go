@@ -49,9 +49,9 @@ func enrichLocalSecretRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.M
 	if pc == nil {
 		return
 	}
-	if pc.Spec.Credentials.SecretRef != nil {
-		pc.Spec.Credentials.SecretRef.Namespace = mg.GetNamespace()
-	}
+	if pc.Spec.Credentials.SecretRef != nil && pc.Spec.Credentials.SecretRef.Namespace == "" {                        
+        pc.Spec.Credentials.SecretRef.Namespace = mg.GetNamespace()
+    }
 	if pc.Spec.Credentials.Upbound != nil &&
 		pc.Spec.Credentials.Upbound.WebIdentity != nil &&
 		pc.Spec.Credentials.Upbound.WebIdentity.TokenConfig != nil &&
