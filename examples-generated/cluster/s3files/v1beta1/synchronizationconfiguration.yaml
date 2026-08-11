@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: s3files.aws.upbound.io/v1beta1
+kind: SynchronizationConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/synchronizationconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    expirationDataRule:
+    - daysAfterLastAccess: 30
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    importDataRule:
+    - prefix: ""
+      sizeLessThan: 52673613135872
+      trigger: ON_FILE_ACCESS
+    region: us-west-1
