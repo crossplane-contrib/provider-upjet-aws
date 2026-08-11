@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: AccessPoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/accesspoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    posixUser:
+      gid: 1001
+      uid: 1001
+    region: us-west-1

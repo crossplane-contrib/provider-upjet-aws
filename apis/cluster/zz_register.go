@@ -259,6 +259,7 @@ import (
 	v1beta2s3 "github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2"
 	v1beta1s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta1"
 	v1beta2s3control "github.com/upbound/provider-aws/v2/apis/cluster/s3control/v1beta2"
+	v1beta1s3files "github.com/upbound/provider-aws/v2/apis/cluster/s3files/v1beta1"
 	v1beta1s3vectors "github.com/upbound/provider-aws/v2/apis/cluster/s3vectors/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta1"
 	v1beta2sagemaker "github.com/upbound/provider-aws/v2/apis/cluster/sagemaker/v1beta2"
@@ -565,6 +566,7 @@ func init() {
 		v1beta2s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta2s3control.SchemeBuilder.AddToScheme,
+		v1beta1s3files.SchemeBuilder.AddToScheme,
 		v1beta1s3vectors.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
 		v1beta2sagemaker.SchemeBuilder.AddToScheme,
