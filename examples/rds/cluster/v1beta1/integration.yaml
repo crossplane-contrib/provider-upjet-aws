@@ -1,0 +1,132 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Integration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    integrationName: example
+    region: us-west-1
+    sourceArnRef:
+      name: example-cluster-${Rand.RFC1123Subdomain}
+    targetArnRef:
+      name: example-namespace-${Rand.RFC1123Subdomain}
+---
+apiVersion: rds.aws.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-cluster-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    autoGeneratePassword: true
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    region: us-west-1
+    skipFinalSnapshot: true
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-namespace-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-workgroup-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    baseCapacity: 8
+    configParameter:
+    - parameterKey: enable_case_sensitive_identifier
+      parameterValue: "true"
+    namespaceName: example-namespace-${Rand.RFC1123Subdomain}
+    publiclyAccessible: false
+    region: us-west-1
+    subnetIdRefs:
+    - name: example1
+    - name: example2
+    - name: example3
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-vpc-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-west-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+spec:
+  forProvider:
+    availabilityZone: us-west-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc-${Rand.RFC1123Subdomain}
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    availabilityZone: us-west-1b
+    cidrBlock: 10.0.2.0/24
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc-${Rand.RFC1123Subdomain}
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/integration
+  labels:
+    testing.upbound.io/example-name: example3
+  name: example3
+spec:
+  forProvider:
+    availabilityZone: us-west-1c
+    cidrBlock: 10.0.3.0/24
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc-${Rand.RFC1123Subdomain}
