@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigateway.aws.m.upbound.io/v1beta1
+kind: DomainNameAccessAssociation
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires a PRIVATE custom DomainName (valid certificate) and an execute-api VPC endpoint."
+  labels:
+    testing.upbound.io/example-name: domainnameaccessassociation
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    domainNameArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domainname
+    accessAssociationSourceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpcendpoint
+    accessAssociationSourceType: VPCE

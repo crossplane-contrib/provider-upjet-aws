@@ -16,6 +16,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		config.MoveToStatus(r.TerraformResource, "policy")
 	})
 
+	p.AddResourceConfigurator("aws_api_gateway_domain_name_access_association", func(r *config.Resource) {
+		r.References["domain_name_arn"] = config.Reference{
+			TerraformName: "aws_api_gateway_domain_name",
+			Extractor:     common.PathARNExtractor,
+		}
+		r.References["access_association_source"] = config.Reference{
+			TerraformName: "aws_vpc_endpoint",
+		}
+	})
+
 	p.AddResourceConfigurator("aws_api_gateway_vpc_link", func(r *config.Resource) {
 		r.References["target_arns"] = config.Reference{
 			TerraformName:     "aws_lb",
