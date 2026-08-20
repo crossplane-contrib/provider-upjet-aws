@@ -89,6 +89,23 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "aws_apigatewayv2_route",
 		}
 	})
+	p.AddResourceConfigurator("aws_apigatewayv2_routing_rule", func(r *config.Resource) {
+		// config/schema.json carries no max_items for Plugin Framework
+		// resources, so the nested blocks the source limits with
+		// listvalidator.SizeAtMost(1) are converted to embedded objects here.
+		// action and condition are SizeAtLeast(1) lists and stay lists.
+		r.AddSingletonListConversion("action[*].invoke_api", "action[*].invokeApi")
+		r.AddSingletonListConversion("condition[*].match_base_paths", "condition[*].matchBasePaths")
+		r.AddSingletonListConversion("condition[*].match_headers", "condition[*].matchHeaders")
+		r.AddSingletonListConversion("condition[*].match_headers[*].any_of", "condition[*].matchHeaders[*].anyOf")
+		r.References["domain_name"] = config.Reference{
+			TerraformName: "aws_apigatewayv2_domain_name",
+		}
+		// invoke_api targets REST APIs only.
+		r.References["action.invoke_api.api_id"] = config.Reference{
+			TerraformName: "aws_api_gateway_rest_api",
+		}
+	})
 	p.AddResourceConfigurator("aws_apigatewayv2_stage", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
 			TerraformName: "aws_apigatewayv2_api",
