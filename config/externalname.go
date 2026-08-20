@@ -29,6 +29,13 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// API Gateway Accounts can be imported using the word api-gateway-account
 	"aws_api_gateway_account": apiGatewayAccount(),
 
+	// apigatewayv2
+	//
+	// API Gateway V2 Routing Rules can be imported using the routing rule ARN,
+	// e.g. arn:aws:apigateway:us-east-1:123456789012:/domainnames/example.com/routingrules/rule1
+	// terraform-plugin-framework
+	"aws_apigatewayv2_routing_rule": config.IdentifierFromProvider,
+
 	// appconfig
 	//
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
