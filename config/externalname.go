@@ -216,6 +216,21 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// The S3 bucket lifecycle configuration resource should be imported using the bucket
 	"aws_s3_bucket_lifecycle_configuration": s3BucketIdentifier(),
 
+	// s3files
+	//
+	// S3 Files File System can be imported using the file system ID
+	"aws_s3files_file_system": identifierFromProviderWithDefaultStub("fs-0123456789abcdef0"),
+	// S3 Files Access Point can be imported using the access point ID
+	"aws_s3files_access_point": identifierFromProviderWithDefaultStub("fsap-0123456789abcdef0"),
+	// S3 Files Mount Target can be imported using the mount target ID
+	"aws_s3files_mount_target": identifierFromProviderWithDefaultStub("fsmt-0123456789abcdef0"),
+	// S3 Files File System Policy can be imported using the file system ID.
+	// The resource has no id attribute, file_system_id is its identity and it is
+	// Required (not Computed), so it must NOT be in ComputedIdentifierAttributes.
+	"aws_s3files_file_system_policy": frameworkParameterAsIdentifier("file_system_id"),
+	// S3 Files Synchronization Configuration can be imported using the file system ID
+	"aws_s3files_synchronization_configuration": frameworkParameterAsIdentifier("file_system_id"),
+
 	// s3vectors
 	//
 	// S3 Vectors Vector Bucket can be imported using the vector bucket ARN
@@ -3123,6 +3138,33 @@ func s3vectorsPolicyIdentifier() config.ExternalName {
 				}
 			}
 			return "", errors.Errorf("cannot find attribute %q in tfstate", "vector_bucket_arn")
+		}),
+	)
+}
+
+// frameworkParameterAsIdentifier handles Terraform Plugin Framework resources
+// whose identity is a Required (not Computed) parameter rather than a computed
+// "id" attribute. Unlike config.ParameterAsIdentifier, it does not omit the
+// field from the CRD spec, so it stays configurable and referenceable. It also
+// does not set ComputedIdentifierAttributes, which would strip the required
+// field from the resource config.
+func frameworkParameterAsIdentifier(param string) config.ExternalName {
+	return config.NewExternalNameFrom(config.IdentifierFromProvider,
+		config.WithSetIdentifierArgumentsFn(func(fn config.SetIdentifierArgumentsFn, base map[string]any, externalName string) {
+			if externalName != "" {
+				if v, ok := base[param].(string); !ok || v == "" {
+					base[param] = externalName
+				}
+			}
+		}),
+		config.WithGetExternalNameFn(func(fn config.GetExternalNameFn, tfState map[string]any) (string, error) {
+			if id, ok := tfState[param]; ok {
+				idStr := fmt.Sprintf("%v", id)
+				if len(idStr) > 0 {
+					return idStr, nil
+				}
+			}
+			return "", errors.Errorf("cannot find attribute %q in tfstate", param)
 		}),
 	)
 }

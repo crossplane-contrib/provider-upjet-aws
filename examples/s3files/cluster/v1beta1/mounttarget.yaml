@@ -1,0 +1,170 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: s3files.aws.upbound.io/v1beta1
+kind: MountTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    securityGroupsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3files.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-1
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3files.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-role-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:DeleteObject",
+              "s3:ListBucket",
+              "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-vpc
+spec:
+  forProvider:
+    region: us-east-1
+    cidrBlock: 172.16.0.0/16
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-subnet
+spec:
+  forProvider:
+    region: us-east-1
+    availabilityZone: us-east-1a
+    cidrBlock: 172.16.10.0/24
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/mounttarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-sg
+spec:
+  forProvider:
+    region: us-east-1
+    name: s3files-example-sg
+    description: Allow NFS traffic to the S3 Files mount target
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
