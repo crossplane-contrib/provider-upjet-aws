@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: FileSystemPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+            "Action": "s3files:ClientMount",
+            "Resource": "*"
+          }
+        ]
+      }
+
+---
+
+apiVersion: s3files.aws.m.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-role
+  namespace: upbound-system
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3files.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3files/v1beta1/filesystempolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: s3files-example-role-policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:DeleteObject",
+              "s3:ListBucket",
+              "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+          }
+        ]
+      }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
