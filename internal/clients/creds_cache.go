@@ -11,7 +11,6 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -21,6 +20,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
 	"github.com/pkg/errors"
 
@@ -103,8 +103,8 @@ type AWSCredentialsProviderCache struct {
 	// cache holds the AWS Config with a unique cache key per
 	// provider configuration. Key content includes the ProviderConfig's UUID
 	// and Generation and additional fields depending on the auth method
-	// (currently IRSA, and static credentials with an assume role chain, are
-	// supported. See cacheableSource).
+	// (currently IRSA, WebIdentity, and static credentials with an assume role
+	// chain, are supported. See cacheableSource).
 	cache map[string]*awsCredentialsProviderCacheEntry
 
 	// maxSize is the maximum number of elements this cache can ever have.
@@ -169,7 +169,13 @@ func cacheableSource(pc *v1beta1.ClusterProviderConfig) bool {
 	switch pc.Spec.Credentials.Source {
 	case authKeyIRSA:
 		return true
-	case authKeyWebIdentity, authKeyPodIdentity, authKeyUpbound:
+	case authKeyWebIdentity:
+		// Retrieving the credentials calls sts:AssumeRoleWithWebIdentity, so
+		// caching pays off regardless of whether a role chain is configured on
+		// top. The token, which is the only credential material outside of the
+		// spec here, is covered by fingerprintIdentityToken.
+		return true
+	case authKeyPodIdentity, authKeyUpbound:
 		// TODO: these authentication methods are not supported by the cache
 		// yet. They need their own out-of-spec key material, similar to the
 		// IRSA token hash.
@@ -183,8 +189,8 @@ func cacheableSource(pc *v1beta1.ClusterProviderConfig) bool {
 }
 
 // RetrieveCredentials returns a Credentials either from the credential cache.
-// If the authentication scheme is cacheable, i.e. IRSA or a static credential
-// source with an assume role chain, and the supplied aws.CredentialsProvider
+// If the authentication scheme is cacheable, i.e. IRSA, WebIdentity or a static
+// credential source with an assume role chain, and the supplied aws.CredentialsProvider
 // implementation is an aws.CredentialsCache, then the retrieved credentials and
 // the account ID are cached for future requests.
 // Otherwise, this function returns the AWS credentials by calling
@@ -305,37 +311,6 @@ func (c *AWSCredentialsProviderCache) makeRoom() {
 	delete(c.cache, dustiest)
 }
 
-// hashTokenFile calculates the sha256 checksum of the token file content at
-// the supplied file path
-func hashTokenFile(filename string) (string, error) {
-	if filename == "" {
-		return "", errors.New("token file name cannot be empty")
-	}
-	file, err := os.Open(filepath.Clean(filename))
-	if err != nil {
-		return "", err
-	}
-	defer func() {
-		_ = file.Close()
-	}()
-
-	hash := sha256.New()
-	if _, err = io.Copy(hash, file); err != nil {
-		return "", err
-	}
-
-	checksum := hash.Sum(nil)
-	return fmt.Sprintf("%x", checksum), nil
-}
-
-func fingerprintIRSACreds() (string, error) {
-	tokenHash, err := hashTokenFile(os.Getenv(envWebIdentityTokenFile))
-	if err != nil {
-		return "", errors.Wrap(err, "cannot calculate the hash for the credentials file")
-	}
-	return fmt.Sprintf("%s:%s:%s", tokenHash, os.Getenv(envWebIdentityTokenFile), os.Getenv(envWebIdentityRoleARN)), nil
-}
-
 // fingerprintKey keys the credential fingerprints. It is randomly generated
 // per process, so that a fingerprint is meaningless outside of the process
 // that produced it: fingerprints reach the credential cache keys, which are
@@ -345,19 +320,87 @@ func fingerprintIRSACreds() (string, error) {
 // fingerprints need no stability across restarts.
 var fingerprintKey = []byte(rand.Text())
 
-// fingerprintStaticCreds returns a non-reversible digest of the supplied
-// aws.Credentials, suitable for use as a cache key component. The digest is
-// only comparable against the digests produced by the same process, see
-// fingerprintKey.
-func fingerprintStaticCreds(creds aws.Credentials) string {
+// Domains for fingerprintMaterial. All credential sources contribute their
+// fingerprint to the very same cache key component, so their digests must not
+// be able to collide across sources even when they digest the same bytes.
+const (
+	fpDomainStaticCreds      = "static-creds"
+	fpDomainWebIdentityToken = "web-identity-token"
+	fpDomainIRSA             = "irsa"
+)
+
+// fingerprintMaterial returns a non-reversible, domain-separated digest of the
+// supplied credential material, suitable for use as a cache key component. The
+// digest is only comparable against the digests produced by the same process,
+// see fingerprintKey.
+func fingerprintMaterial(domain string, parts ...[]byte) string {
 	h := hmac.New(sha256.New, fingerprintKey)
-	for _, s := range []string{creds.AccessKeyID, creds.SecretAccessKey, creds.SessionToken} {
-		// length-prefix framing, so that different credentials cannot digest
-		// to the same value by concatenating to the same byte string. A mere
-		// separator byte would leave the fields ambiguous if one of them ever
+	for _, p := range append([][]byte{[]byte(domain)}, parts...) {
+		// length-prefix framing, so that different material cannot digest to
+		// the same value by concatenating to the same byte string. A mere
+		// separator byte would leave the parts ambiguous if one of them ever
 		// contained that byte itself.
-		_ = binary.Write(h, binary.BigEndian, uint64(len(s)))
-		_, _ = h.Write([]byte(s))
+		_ = binary.Write(h, binary.BigEndian, uint64(len(p)))
+		_, _ = h.Write(p)
 	}
 	return fmt.Sprintf("%x", h.Sum(nil))
+}
+
+// fingerprintStaticCreds returns a non-reversible digest of the supplied
+// aws.Credentials.
+func fingerprintStaticCreds(creds aws.Credentials) string {
+	return fingerprintMaterial(fpDomainStaticCreds,
+		[]byte(creds.AccessKeyID), []byte(creds.SecretAccessKey), []byte(creds.SessionToken))
+}
+
+// fingerprintIdentityToken returns a non-reversible digest of the web identity
+// token that the supplied retriever currently yields.
+//
+// The token is read eagerly, because the cache key must be known before the
+// cache is consulted, whereas the AWS SDK only calls GetIdentityToken lazily,
+// on a credential refresh. Note that the retriever handed to the SDK must stay
+// the live one: a cached credential provider needs to re-read the token source
+// on every refresh, otherwise it pins a token that expires while the cache
+// entry is still in use.
+//
+// This eager read happens synchronously within the caller's reconciliation, so
+// it is bound to the supplied context whenever the retriever supports it. The
+// retriever handed to the SDK, in contrast, deliberately holds a context
+// detached from the reconciliation, see xpWebIdentityTokenRetriever.
+func fingerprintIdentityToken(ctx context.Context, r stscreds.IdentityTokenRetriever) (string, error) {
+	if cr, ok := r.(contextBoundTokenRetriever); ok {
+		r = cr.withContext(ctx)
+	}
+	token, err := r.GetIdentityToken()
+	if err != nil {
+		return "", errors.Wrap(err, "cannot read the web identity token")
+	}
+	return fingerprintMaterial(fpDomainWebIdentityToken, token), nil
+}
+
+// contextBoundTokenRetriever is implemented by the
+// stscreds.IdentityTokenRetriever implementations whose token reads observe a
+// context, so that a caller reading the token synchronously can bind the read
+// to its own context. The SDK's own IdentityTokenRetriever interface has no
+// notion of a context.
+type contextBoundTokenRetriever interface {
+	withContext(ctx context.Context) stscreds.IdentityTokenRetriever
+}
+
+// fingerprintIRSACreds returns a non-reversible digest of the material behind
+// the IRSA credentials, i.e. the projected service account token together with
+// the environment that selects it. Unlike the WebIdentity source, IRSA takes
+// both the token path and the role ARN from the environment instead of from the
+// ProviderConfig spec, so neither is covered by the spec's generation and both
+// belong in the digest.
+func fingerprintIRSACreds() (string, error) {
+	tokenFile := os.Getenv(envWebIdentityTokenFile)
+	if tokenFile == "" {
+		return "", errors.Errorf("environment variable %s must be set for the IRSA credential source", envWebIdentityTokenFile)
+	}
+	token, err := stscreds.IdentityTokenFile(filepath.Clean(tokenFile)).GetIdentityToken()
+	if err != nil {
+		return "", errors.Wrap(err, "cannot read the IRSA web identity token")
+	}
+	return fingerprintMaterial(fpDomainIRSA, token, []byte(tokenFile), []byte(os.Getenv(envWebIdentityRoleARN))), nil
 }

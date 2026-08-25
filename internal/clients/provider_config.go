@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -53,6 +54,29 @@ const (
 	errAWSConfigUpbound     = "failed to get AWS config using Upbound identity"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
+
+	// webIdentityTokenReadTimeout bounds a single read of the web identity
+	// token made through the retriever's detached context. The AWS SDK refreshes
+	// the credentials through a context whose deadline and cancellation it
+	// deliberately suppresses (aws.suppressedContext), so a read started by a
+	// refresh has no bound other than this one, and a hung token source would
+	// otherwise pin the refreshing goroutine forever. Note that only the Secret
+	// token source is interruptible this way, the filesystem and the environment
+	// extractors ignore the context they are given.
+	webIdentityTokenReadTimeout = 30 * time.Second
+
+	// credsExpiryWindow makes the SDK's credential cache treat credentials as
+	// expired this long before they actually do. Credentials retrieved from the
+	// cache are handed to the Terraform provider as static values, and the
+	// external API calls made with them can outlive the reconciliation that
+	// retrieved them, hence they need a validity margin. Without a window, the
+	// SDK happily returns a credential with a second of life left in it.
+	credsExpiryWindow = 5 * time.Minute
+	// credsExpiryWindowJitterFrac spreads the refreshes triggered by
+	// credsExpiryWindow over a fraction of the window, so that the credentials
+	// of many ProviderConfigs minted at the same time do not all refresh at the
+	// very same instant.
+	credsExpiryWindowJitterFrac = 0.2
 )
 
 // GlobalRegion is the region name used for AWS services that do not have a notion
@@ -138,7 +162,9 @@ func getAWSConfig(ctx context.Context, c client.Client, obj runtime.Object, pc *
 			return nil, meta, errors.Wrap(err, errAWSConfigPodIdentity)
 		}
 	case authKeyWebIdentity:
-		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec, c)
+		// the web identity token is not part of the ProviderConfig spec, so
+		// fingerprint it for the credential cache key.
+		cfg, meta.credsFingerprint, err = UseWebIdentityToken(ctx, region, &pc.Spec, c)
 		if err != nil {
 			return nil, meta, errors.Wrap(err, errAWSConfigWebIdentity)
 		}
@@ -305,6 +331,13 @@ func stsRegionOrDefault(region string) func(*sts.Options) {
 	}
 }
 
+// withCredsExpiryWindow configures an aws.CredentialsCache to refresh the
+// credentials before they are about to expire, see credsExpiryWindow.
+func withCredsExpiryWindow(o *aws.CredentialsCacheOptions) {
+	o.ExpiryWindow = credsExpiryWindow
+	o.ExpiryWindowJitterFrac = credsExpiryWindowJitterFrac
+}
+
 // UseProviderSecret - AWS configuration which can be used to issue requests against AWS API
 func UseProviderSecret(ctx context.Context, data []byte, profile, region string) (*aws.Config, error) {
 	creds, err := CredentialsIDSecret(data, profile)
@@ -345,7 +378,7 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 			ctx,
 			userAgentV2,
 			config.WithRegion(cfg.Region),
-			config.WithCredentialsProvider(aws.NewCredentialsCache(stsAssume)),
+			config.WithCredentialsProvider(aws.NewCredentialsCache(stsAssume, withCredsExpiryWindow)),
 		)
 		if err != nil {
 			return nil, errors.Wrap(err, errRoleChainConfig)
@@ -375,7 +408,7 @@ func GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx context.Context, cf
 				aws.ToString(webID.RoleARN),
 				tokenRetriever,
 				SetWebIdentityRoleOptions(webID),
-			)),
+			), withCredsExpiryWindow),
 		),
 	)
 	return &awsConfig, errors.Wrap(err, "failed to assume role via web identity")
@@ -402,35 +435,83 @@ func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 }
 
 type xpWebIdentityTokenRetriever struct {
+	// ctx must be detached from the reconcile context that constructed this
+	// retriever. The credential cache keeps the aws.CredentialsProvider owning
+	// this retriever alive across reconciliations, while the SDK's
+	// stscreds.IdentityTokenRetriever interface offers no way of passing the
+	// context of the refresh that calls GetIdentityToken. Holding the reconcile
+	// context would therefore make every refresh after that reconcile returns
+	// fail with "context canceled", for the whole lifetime of the cache entry
+	// and without any chance of self-healing, as the cache key would not change.
 	ctx           context.Context
 	kube          client.Client
 	tokenSource   xpv2.CredentialsSource
 	tokenSelector xpv2.CommonCredentialSelectors
+	// readTimeout overrides webIdentityTokenReadTimeout. Zero means the
+	// default. Only tests set it.
+	readTimeout time.Duration
 }
 
-func (x *xpWebIdentityTokenRetriever) GetIdentityToken() ([]byte, error) {
-	token, err := resource.CommonCredentialExtractor(x.ctx, x.tokenSource, x.kube, x.tokenSelector)
+// readToken reads the configured web identity token under the supplied context.
+func (x *xpWebIdentityTokenRetriever) readToken(ctx context.Context) ([]byte, error) {
+	token, err := resource.CommonCredentialExtractor(ctx, x.tokenSource, x.kube, x.tokenSelector)
 	return token, errors.Wrap(err, "could not extract token from tokenSource")
 }
 
-// UseWebIdentityToken calls sts.AssumeRoleWithWebIdentity using
-// the configuration supplied in ProviderConfig's
-// spec.credentials.assumeRoleWithWebIdentity.
-func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec, kube client.Client) (*aws.Config, error) {
-	if pcs.Credentials.WebIdentity == nil {
-		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-	}
+// GetIdentityToken reads the token through the retriever's detached context,
+// which carries no deadline and no cancellation of its own, hence the hard
+// timeout. This is the entry point the AWS SDK calls on a credential refresh.
+func (x *xpWebIdentityTokenRetriever) GetIdentityToken() ([]byte, error) {
+	ctx, cancel := context.WithTimeout(x.ctx, x.readTimeoutOrDefault())
+	defer cancel()
+	return x.readToken(ctx)
+}
 
+// readTimeoutOrDefault returns the timeout that bounds a read made through the
+// detached context.
+func (x *xpWebIdentityTokenRetriever) readTimeoutOrDefault() time.Duration {
+	if x.readTimeout <= 0 {
+		return webIdentityTokenReadTimeout
+	}
+	return x.readTimeout
+}
+
+// withContext returns an equivalent retriever whose token reads observe the
+// supplied context. It's meant for the callers reading the token synchronously,
+// within the lifetime of a context they own, and never for the retriever handed
+// to the AWS SDK, see the ctx field's documentation.
+func (x *xpWebIdentityTokenRetriever) withContext(ctx context.Context) stscreds.IdentityTokenRetriever {
+	return boundIdentityTokenRetriever{ctx: ctx, r: x}
+}
+
+// boundIdentityTokenRetriever reads the web identity token through a context
+// owned by its caller, which is then the one responsible for bounding the read.
+// Unlike xpWebIdentityTokenRetriever it imposes no timeout of its own: it serves
+// the callers that read the token synchronously, so their own deadline and
+// cancellation already apply.
+type boundIdentityTokenRetriever struct {
+	ctx context.Context
+	r   *xpWebIdentityTokenRetriever
+}
+
+func (b boundIdentityTokenRetriever) GetIdentityToken() ([]byte, error) {
+	return b.r.readToken(b.ctx)
+}
+
+// webIdentityTokenRetriever returns the stscreds.IdentityTokenRetriever that
+// serves the web identity token configured in the supplied
+// AssumeRoleWithWebIdentityOptions.
+func webIdentityTokenRetriever(ctx context.Context, webID *v1beta1.AssumeRoleWithWebIdentityOptions, kube client.Client) (stscreds.IdentityTokenRetriever, error) {
 	// this is to preserve backward compatibility with
 	// 0.x providers working with >=1.x ProviderConfig API
 	// TODO: when configuring via AWS environment variable support is removed
 	// tokenConfig should be mandatory and this should return an error
-	if pcs.Credentials.WebIdentity.TokenConfig == nil {
-		cfg, err := UseDefault(ctx, region)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to get default AWS config")
+	if webID.TokenConfig == nil {
+		tokenFile := os.Getenv(envWebIdentityTokenFile)
+		if tokenFile == "" {
+			return nil, errors.Errorf("environment variable %s must be set when spec.credentials.webIdentity.tokenConfig of ProviderConfig is not configured", envWebIdentityTokenFile)
 		}
-		return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.WebIdentity, os.Getenv(envWebIdentityTokenFile))
+		return stscreds.IdentityTokenFile(filepath.Clean(tokenFile)), nil
 	}
 
 	// new behavior with tokenConfig in
@@ -453,22 +534,55 @@ func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.Provid
 		return nil, errors.Errorf("if you intend to use IRSA together with WebIdentity auth, environment variable %s must be set together with %s. If only WebIdentity auth without any IRSA configuration is intended, %s must be unset",
 			envWebIdentityRoleARN, envWebIdentityTokenFile, envWebIdentityTokenFile)
 	}
+	return &xpWebIdentityTokenRetriever{
+		// detached from the reconcile's context on purpose, see the field's
+		// documentation.
+		ctx:         context.WithoutCancel(ctx),
+		kube:        kube,
+		tokenSource: webID.TokenConfig.Source,
+		tokenSelector: xpv2.CommonCredentialSelectors{
+			Fs:        webID.TokenConfig.Fs,
+			SecretRef: webID.TokenConfig.SecretRef,
+		},
+	}, nil
+}
+
+// UseWebIdentityToken calls sts.AssumeRoleWithWebIdentity using
+// the configuration supplied in ProviderConfig's
+// spec.credentials.assumeRoleWithWebIdentity. It also returns a fingerprint of
+// the web identity token that the returned config's credentials are derived
+// from. The token lives outside of the ProviderConfig spec, hence a rotation is
+// not observable through the spec's generation and the fingerprint is needed to
+// key the credential cache. Everything else that this credential source derives
+// from, i.e. the role ARN, the session name and the token's location, is part of
+// the spec.
+func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec, kube client.Client) (*aws.Config, string, error) {
+	if pcs.Credentials.WebIdentity == nil {
+		return nil, "", errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+	}
+	tokenRetriever, err := webIdentityTokenRetriever(ctx, pcs.Credentials.WebIdentity, kube)
+	if err != nil {
+		return nil, "", err
+	}
+
+	// the retriever is fingerprinted, and not the token that was read out of
+	// it, so that the retriever handed to the AWS SDK stays the live one: a
+	// cached credential provider needs to re-read the token source on every
+	// refresh.
+	fingerprint, err := fingerprintIdentityToken(ctx, tokenRetriever)
+	if err != nil {
+		return nil, "", err
+	}
 
 	cfg, err := UseDefault(ctx, region)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get default AWS config")
+		return nil, "", errors.Wrap(err, "failed to get default AWS config")
 	}
-	tokenRetriever := &xpWebIdentityTokenRetriever{
-		ctx:         ctx,
-		kube:        kube,
-		tokenSource: pcs.Credentials.WebIdentity.TokenConfig.Source,
-		tokenSelector: xpv2.CommonCredentialSelectors{
-			Fs:        pcs.Credentials.WebIdentity.TokenConfig.Fs,
-			SecretRef: pcs.Credentials.WebIdentity.TokenConfig.SecretRef,
-		},
+	cfg, err = GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, *pcs.Credentials.WebIdentity, tokenRetriever)
+	if err != nil {
+		return nil, "", err
 	}
-
-	return GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, *pcs.Credentials.WebIdentity, tokenRetriever)
+	return cfg, fingerprint, nil
 }
 
 // UseUpbound calls sts.AssumeRoleWithWebIdentity using the configuration

@@ -107,9 +107,9 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
 
-		// only IRSA, and static credentials with an assume role chain, are
-		// currently cached. Other auth methods will skip the cache and call the
-		// downstream CredentialsProvider.Retrieve().
+		// only IRSA, WebIdentity, and static credentials with an assume role
+		// chain, are currently cached. Other auth methods will skip the cache
+		// and call the downstream CredentialsProvider.Retrieve().
 		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, cfgMeta, func(ctx context.Context) (string, error) {
 			if pc.Spec.SkipCredsValidation {
 				// then we do not try to resolve the account ID and instead,

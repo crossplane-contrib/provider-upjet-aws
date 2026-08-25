@@ -84,11 +84,21 @@ func TestCacheableSource(t *testing.T) {
 			want: true,
 		},
 		"WebIdentity": {
-			reason: "WebIdentity credentials are not supported by the cache yet.",
+			reason: "Retrieving WebIdentity credentials calls sts:AssumeRoleWithWebIdentity, so it should be cached.",
 			pc: &v1beta1.ClusterProviderConfig{Spec: v1beta1.ProviderConfigSpec{
 				Credentials: v1beta1.ProviderCredentials{Source: authKeyWebIdentity},
 			}},
-			want: false,
+			want: true,
+		},
+		"WebIdentityWithRoleChain": {
+			reason: "WebIdentity credentials should be cached with or without a role chain on top.",
+			pc: &v1beta1.ClusterProviderConfig{Spec: v1beta1.ProviderConfigSpec{
+				Credentials: v1beta1.ProviderCredentials{Source: authKeyWebIdentity},
+				AssumeRoleChain: []v1beta1.AssumeRoleOptions{
+					{RoleARN: ptr.To("arn:aws:iam::123456789012:role/chained")},
+				},
+			}},
+			want: true,
 		},
 		"PodIdentity": {
 			reason: "PodIdentity credentials are not supported by the cache yet.",
@@ -307,7 +317,7 @@ func TestRetrieveCredentialsUncached(t *testing.T) {
 		"UnsupportedSource": {
 			reason: "Credential sources that the cache does not support yet should not be cached.",
 			pc: &v1beta1.ClusterProviderConfig{Spec: v1beta1.ProviderConfigSpec{
-				Credentials: v1beta1.ProviderCredentials{Source: authKeyWebIdentity},
+				Credentials: v1beta1.ProviderCredentials{Source: authKeyPodIdentity},
 			}},
 		},
 		"NotACredentialsCache": {
@@ -372,10 +382,14 @@ func TestRetrieveCredentialsIRSA(t *testing.T) {
 		return "123456789012", nil
 	}
 
-	// IRSA does not need a credentials fingerprint, it derives its key material
-	// from the projected token file.
+	// IRSA derives its key material from the projected token file, which
+	// getAWSConfig digests into the fingerprint.
+	fingerprint, err := fingerprintIRSACreds()
+	if err != nil {
+		t.Fatalf("fingerprintIRSACreds(): unexpected error: %v", err)
+	}
 	for i := 0; i < 2; i++ {
-		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, awsConfigProvenanceMeta{}, accountIDFn)
+		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, awsConfigProvenanceMeta{credsFingerprint: fingerprint}, accountIDFn)
 		if err != nil {
 			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 		}
@@ -397,13 +411,133 @@ func TestRetrieveCredentialsIRSA(t *testing.T) {
 	if err := os.WriteFile(tokenFile, []byte("a-rotated-web-identity-token"), 0o600); err != nil {
 		t.Fatalf("cannot write the token file: %v", err)
 	}
+	rotatedFingerprint, err := fingerprintIRSACreds()
+	if err != nil {
+		t.Fatalf("fingerprintIRSACreds(): unexpected error: %v", err)
+	}
+	if rotatedFingerprint == fingerprint {
+		t.Error("fingerprintIRSACreds(): want a distinct fingerprint after the token rotated, got the same")
+	}
 	rotated, _ := newCountingCredsCache(creds)
-	if _, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", rotated, awsConfigProvenanceMeta{}, accountIDFn); err != nil {
+	if _, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", rotated, awsConfigProvenanceMeta{credsFingerprint: rotatedFingerprint}, accountIDFn); err != nil {
 		t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 	}
 	if diff := cmp.Diff(2, len(c.cache)); diff != "" {
 		t.Errorf("cache size: -want, +got:\n%s", diff)
 	}
+}
+
+func TestRetrieveCredentialsWebIdentity(t *testing.T) {
+	creds := aws.Credentials{AccessKeyID: "web-identity", SecretAccessKey: "secret", SessionToken: "token"}
+	pc := &v1beta1.ClusterProviderConfig{
+		ObjectMeta: metav1.ObjectMeta{Name: "pc", UID: types.UID("uid"), Generation: 1},
+		Spec: v1beta1.ProviderConfigSpec{
+			Credentials: v1beta1.ProviderCredentials{
+				Source: authKeyWebIdentity,
+				WebIdentity: &v1beta1.AssumeRoleWithWebIdentityOptions{
+					RoleARN: ptr.To("arn:aws:iam::123456789012:role/web-identity"),
+					TokenConfig: &v1beta1.WebIdentityTokenConfig{
+						Source:    xpv2.CredentialsSourceSecret,
+						SecretRef: &xpv2.SecretKeySelector{Key: "token"},
+					},
+				},
+			},
+		},
+	}
+	fingerprint, err := fingerprintIdentityToken(context.Background(), stubTokenRetriever{token: []byte("a-web-identity-token")})
+	if err != nil {
+		t.Fatalf("fingerprintIdentityToken(...): unexpected error: %v", err)
+	}
+	meta := awsConfigProvenanceMeta{credsFingerprint: fingerprint}
+
+	t.Run("CacheHitDoesNotCallAWS", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		provider, counter := newCountingCredsCache(creds)
+		accountIDCalls := 0
+		accountIDFn := func(context.Context) (string, error) {
+			accountIDCalls++
+			return "123456789012", nil
+		}
+
+		// prime the cache, then repeat with an equivalent, freshly built
+		// provider. The fresh provider must not be consulted, as its Retrieve is
+		// the sts:AssumeRoleWithWebIdentity call we are avoiding.
+		if _, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, accountIDFn); err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		fresh, freshCounter := newCountingCredsCache(aws.Credentials{AccessKeyID: "should-not-be-used"})
+		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", fresh, meta, accountIDFn)
+		if err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(0, freshCounter.calls); diff != "" {
+			t.Errorf("freshly built provider Retrieve calls: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, counter.calls); diff != "" {
+			t.Errorf("downstream Retrieve calls: -want, +got:\n%s", diff)
+		}
+		// the account ID is memoized on the entry instead of being resolved
+		// through the separate identity cache, whose key is the resolved
+		// credentials triple and therefore rotates with them.
+		if diff := cmp.Diff(1, accountIDCalls); diff != "" {
+			t.Errorf("AccountIDFn calls: -want, +got:\n%s", diff)
+		}
+	})
+
+	t.Run("RotatedTokenInvalidatesTheEntry", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		accountIDFn := func(context.Context) (string, error) { return "123456789012", nil }
+		provider, _ := newCountingCredsCache(creds)
+		if _, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, accountIDFn); err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+
+		// the ProviderConfig has not changed, but the token it points at has,
+		// e.g. the projected service account token was rotated or the referenced
+		// Secret was updated. The stale entry must not be served.
+		rotatedFingerprint, err := fingerprintIdentityToken(context.Background(), stubTokenRetriever{token: []byte("a-rotated-web-identity-token")})
+		if err != nil {
+			t.Fatalf("fingerprintIdentityToken(...): unexpected error: %v", err)
+		}
+		rotatedCreds := aws.Credentials{AccessKeyID: "rotated"}
+		rotated, rotatedCounter := newCountingCredsCache(rotatedCreds)
+		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", rotated, awsConfigProvenanceMeta{credsFingerprint: rotatedFingerprint}, accountIDFn)
+		if err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(2, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, rotatedCounter.calls); diff != "" {
+			t.Errorf("rotated provider Retrieve calls: -want, +got:\n%s", diff)
+		}
+	})
+
+	t.Run("MissingFingerprintSkipsTheCache", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		provider, _ := newCountingCredsCache(creds)
+		accountIDFn := func(context.Context) (string, error) { return "123456789012", nil }
+
+		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, awsConfigProvenanceMeta{}, accountIDFn)
+		if err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(Credentials{creds: creds}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(0, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+	})
 }
 
 func TestCredentialsProviderCacheMakeRoom(t *testing.T) {
