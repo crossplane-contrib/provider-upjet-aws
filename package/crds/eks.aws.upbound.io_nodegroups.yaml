@@ -1695,8 +1695,8 @@ spec:
               forProvider:
                 properties:
                   amiType:
-                    description: Type of Amazon Machine Image (AMI) associated with
-                      the EKS Node Group. See the AWS documentation for valid values.
+                    description: Type of AMI associated with the EKS Node Group. See
+                      the AWS documentation for valid values.
                     type: string
                   capacityType:
                     description: 'Type of capacity associated with the EKS Node Group.
@@ -1873,8 +1873,8 @@ spec:
                         type: array
                     type: object
                   nodeRoleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role that provides
-                      permissions for the EKS Node Group.
+                    description: ARN of the IAM Role that provides permissions for
+                      the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
                     description: Reference to a Role in iam to populate nodeRoleArn.
@@ -2284,6 +2284,32 @@ spec:
                             type: string
                         type: object
                     type: object
+                  warmPoolConfig:
+                    description: Configuration block with EC2 Auto Scaling warm pool
+                      settings. Including this block enables the warm pool; removing
+                      it disables and removes the warm pool. See warm_pool_config
+                      below for details.
+                    properties:
+                      maxGroupPreparedCapacity:
+                        description: Maximum number of instances that are allowed
+                          to be in the warm pool combined with the Auto Scaling Group.
+                          Use -1 to specify an unlimited capacity.
+                        type: number
+                      minSize:
+                        description: Minimum number of instances to maintain in the
+                          warm pool. Defaults to 0.
+                        type: number
+                      poolState:
+                        description: 'Instance state to transition warm pool instances
+                          to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults
+                          to STOPPED.'
+                        type: string
+                      reuseOnScaleIn:
+                        description: Whether to return instances in the Auto Scaling
+                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          Defaults to false.
+                        type: boolean
+                    type: object
                 required:
                 - region
                 type: object
@@ -2301,8 +2327,8 @@ spec:
                   autoscaler.
                 properties:
                   amiType:
-                    description: Type of Amazon Machine Image (AMI) associated with
-                      the EKS Node Group. See the AWS documentation for valid values.
+                    description: Type of AMI associated with the EKS Node Group. See
+                      the AWS documentation for valid values.
                     type: string
                   capacityType:
                     description: 'Type of capacity associated with the EKS Node Group.
@@ -2402,8 +2428,8 @@ spec:
                         type: array
                     type: object
                   nodeRoleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role that provides
-                      permissions for the EKS Node Group.
+                    description: ARN of the IAM Role that provides permissions for
+                      the EKS Node Group.
                     type: string
                   nodeRoleArnRef:
                     description: Reference to a Role in iam to populate nodeRoleArn.
@@ -2808,6 +2834,32 @@ spec:
                             type: string
                         type: object
                     type: object
+                  warmPoolConfig:
+                    description: Configuration block with EC2 Auto Scaling warm pool
+                      settings. Including this block enables the warm pool; removing
+                      it disables and removes the warm pool. See warm_pool_config
+                      below for details.
+                    properties:
+                      maxGroupPreparedCapacity:
+                        description: Maximum number of instances that are allowed
+                          to be in the warm pool combined with the Auto Scaling Group.
+                          Use -1 to specify an unlimited capacity.
+                        type: number
+                      minSize:
+                        description: Minimum number of instances to maintain in the
+                          warm pool. Defaults to 0.
+                        type: number
+                      poolState:
+                        description: 'Instance state to transition warm pool instances
+                          to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults
+                          to STOPPED.'
+                        type: string
+                      reuseOnScaleIn:
+                        description: Whether to return instances in the Auto Scaling
+                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          Defaults to false.
+                        type: boolean
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -2906,11 +2958,11 @@ spec:
               atProvider:
                 properties:
                   amiType:
-                    description: Type of Amazon Machine Image (AMI) associated with
-                      the EKS Node Group. See the AWS documentation for valid values.
+                    description: Type of AMI associated with the EKS Node Group. See
+                      the AWS documentation for valid values.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the EKS Node Group.
+                    description: ARN of the EKS Node Group.
                     type: string
                   capacityType:
                     description: 'Type of capacity associated with the EKS Node Group.
@@ -3017,8 +3069,8 @@ spec:
                         type: array
                     type: object
                   nodeRoleArn:
-                    description: Amazon Resource Name (ARN) of the IAM Role that provides
-                      permissions for the EKS Node Group.
+                    description: ARN of the IAM Role that provides permissions for
+                      the EKS Node Group.
                     type: string
                   region:
                     description: |-
@@ -3155,6 +3207,32 @@ spec:
                     description: Kubernetes version. Defaults to EKS Cluster Kubernetes
                       version.
                     type: string
+                  warmPoolConfig:
+                    description: Configuration block with EC2 Auto Scaling warm pool
+                      settings. Including this block enables the warm pool; removing
+                      it disables and removes the warm pool. See warm_pool_config
+                      below for details.
+                    properties:
+                      maxGroupPreparedCapacity:
+                        description: Maximum number of instances that are allowed
+                          to be in the warm pool combined with the Auto Scaling Group.
+                          Use -1 to specify an unlimited capacity.
+                        type: number
+                      minSize:
+                        description: Minimum number of instances to maintain in the
+                          warm pool. Defaults to 0.
+                        type: number
+                      poolState:
+                        description: 'Instance state to transition warm pool instances
+                          to. Valid values: STOPPED, RUNNING, HIBERNATED. Defaults
+                          to STOPPED.'
+                        type: string
+                      reuseOnScaleIn:
+                        description: Whether to return instances in the Auto Scaling
+                          Group to the warm pool on scale in. Not supported on Bottlerocket.
+                          Defaults to false.
+                        type: boolean
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

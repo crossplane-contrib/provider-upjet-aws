@@ -105,7 +105,7 @@ type RateBasedRuleInitParameters struct {
 
 type RateBasedRuleObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the WAF rule.

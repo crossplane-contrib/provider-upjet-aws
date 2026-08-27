@@ -15,8 +15,7 @@ import (
 
 type AccessEndpointsInitParameters struct {
 
-	// Type of the interface endpoint.
-	// See the AccessEndpoint AWS API documentation for valid values.
+	// Type of the interface endpoint. See the AccessEndpoint AWS API documentation for valid values.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// ID of the VPC in which the interface endpoint is used.
@@ -25,8 +24,7 @@ type AccessEndpointsInitParameters struct {
 
 type AccessEndpointsObservation struct {
 
-	// Type of the interface endpoint.
-	// See the AccessEndpoint AWS API documentation for valid values.
+	// Type of the interface endpoint. See the AccessEndpoint AWS API documentation for valid values.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// ID of the VPC in which the interface endpoint is used.
@@ -35,8 +33,7 @@ type AccessEndpointsObservation struct {
 
 type AccessEndpointsParameters struct {
 
-	// Type of the interface endpoint.
-	// See the AccessEndpoint AWS API documentation for valid values.
+	// Type of the interface endpoint. See the AccessEndpoint AWS API documentation for valid values.
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
@@ -50,9 +47,7 @@ type ApplicationSettingsInitParameters struct {
 	// Whether application settings should be persisted.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Name of the settings group.
-	// Required when enabled is true.
-	// Can be up to 100 characters.
+	// Name of the settings group. Required when enabled is true. Can be up to 100 characters.
 	SettingsGroup *string `json:"settingsGroup,omitempty" tf:"settings_group,omitempty"`
 }
 
@@ -61,9 +56,7 @@ type ApplicationSettingsObservation struct {
 	// Whether application settings should be persisted.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Name of the settings group.
-	// Required when enabled is true.
-	// Can be up to 100 characters.
+	// Name of the settings group. Required when enabled is true. Can be up to 100 characters.
 	SettingsGroup *string `json:"settingsGroup,omitempty" tf:"settings_group,omitempty"`
 }
 
@@ -73,21 +66,17 @@ type ApplicationSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Name of the settings group.
-	// Required when enabled is true.
-	// Can be up to 100 characters.
+	// Name of the settings group. Required when enabled is true. Can be up to 100 characters.
 	// +kubebuilder:validation:Optional
 	SettingsGroup *string `json:"settingsGroup,omitempty" tf:"settings_group,omitempty"`
 }
 
 type StackInitParameters struct {
 
-	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
-	// See access_endpoints below.
+	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. See access_endpoints below.
 	AccessEndpoints []AccessEndpointsInitParameters `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
 
-	// Settings for application settings persistence.
-	// See application_settings below.
+	// Settings for application settings persistence. See application_settings below.
 	ApplicationSettings *ApplicationSettingsInitParameters `json:"applicationSettings,omitempty" tf:"application_settings,omitempty"`
 
 	// Description for the AppStream stack.
@@ -109,31 +98,26 @@ type StackInitParameters struct {
 	// URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
-	// Configuration block for the storage connectors to enable.
-	// See storage_connectors below.
+	// Configuration block for the storage connectors to enable. See storage_connectors below.
 	StorageConnectors []StorageConnectorsInitParameters `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
-	// The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
-	// See streaming_experience_settings below.
+	// Streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client. See streaming_experience_settings below.
 	StreamingExperienceSettings *StreamingExperienceSettingsInitParameters `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
-	// See user_settings below.
+	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS. See user_settings below.
 	UserSettings []UserSettingsInitParameters `json:"userSettings,omitempty" tf:"user_settings,omitempty"`
 }
 
 type StackObservation struct {
 
-	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
-	// See access_endpoints below.
+	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. See access_endpoints below.
 	AccessEndpoints []AccessEndpointsObservation `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
 
-	// Settings for application settings persistence.
-	// See application_settings below.
+	// Settings for application settings persistence. See application_settings below.
 	ApplicationSettings *ApplicationSettingsObservation `json:"applicationSettings,omitempty" tf:"application_settings,omitempty"`
 
 	// ARN of the appstream stack.
@@ -168,12 +152,10 @@ type StackObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration block for the storage connectors to enable.
-	// See storage_connectors below.
+	// Configuration block for the storage connectors to enable. See storage_connectors below.
 	StorageConnectors []StorageConnectorsObservation `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
-	// The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
-	// See streaming_experience_settings below.
+	// Streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client. See streaming_experience_settings below.
 	StreamingExperienceSettings *StreamingExperienceSettingsObservation `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
 
 	// Key-value map of resource tags.
@@ -183,20 +165,17 @@ type StackObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
-	// See user_settings below.
+	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS. See user_settings below.
 	UserSettings []UserSettingsObservation `json:"userSettings,omitempty" tf:"user_settings,omitempty"`
 }
 
 type StackParameters struct {
 
-	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
-	// See access_endpoints below.
+	// Set of configuration blocks defining the interface VPC endpoints. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. See access_endpoints below.
 	// +kubebuilder:validation:Optional
 	AccessEndpoints []AccessEndpointsParameters `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
 
-	// Settings for application settings persistence.
-	// See application_settings below.
+	// Settings for application settings persistence. See application_settings below.
 	// +kubebuilder:validation:Optional
 	ApplicationSettings *ApplicationSettingsParameters `json:"applicationSettings,omitempty" tf:"application_settings,omitempty"`
 
@@ -230,13 +209,11 @@ type StackParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration block for the storage connectors to enable.
-	// See storage_connectors below.
+	// Configuration block for the storage connectors to enable. See storage_connectors below.
 	// +kubebuilder:validation:Optional
 	StorageConnectors []StorageConnectorsParameters `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
-	// The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
-	// See streaming_experience_settings below.
+	// Streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client. See streaming_experience_settings below.
 	// +kubebuilder:validation:Optional
 	StreamingExperienceSettings *StreamingExperienceSettingsParameters `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
 
@@ -245,16 +222,14 @@ type StackParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
-	// See user_settings below.
+	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS. See user_settings below.
 	// +kubebuilder:validation:Optional
 	UserSettings []UserSettingsParameters `json:"userSettings,omitempty" tf:"user_settings,omitempty"`
 }
 
 type StorageConnectorsInitParameters struct {
 
-	// Type of storage connector.
-	// Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
+	// Type of storage connector. Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
 	// Names of the domains for the account.
@@ -266,8 +241,7 @@ type StorageConnectorsInitParameters struct {
 
 type StorageConnectorsObservation struct {
 
-	// Type of storage connector.
-	// Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
+	// Type of storage connector. Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
 	// Names of the domains for the account.
@@ -279,8 +253,7 @@ type StorageConnectorsObservation struct {
 
 type StorageConnectorsParameters struct {
 
-	// Type of storage connector.
-	// Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
+	// Type of storage connector. Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
 	// +kubebuilder:validation:Optional
 	ConnectorType *string `json:"connectorType" tf:"connector_type,omitempty"`
 
@@ -295,57 +268,48 @@ type StorageConnectorsParameters struct {
 
 type StreamingExperienceSettingsInitParameters struct {
 
-	// The preferred protocol that you want to use while streaming your application.
-	// Valid values are TCP and UDP.
+	// Preferred protocol that you want to use while streaming your application. Valid values are TCP and UDP.
 	PreferredProtocol *string `json:"preferredProtocol,omitempty" tf:"preferred_protocol,omitempty"`
 }
 
 type StreamingExperienceSettingsObservation struct {
 
-	// The preferred protocol that you want to use while streaming your application.
-	// Valid values are TCP and UDP.
+	// Preferred protocol that you want to use while streaming your application. Valid values are TCP and UDP.
 	PreferredProtocol *string `json:"preferredProtocol,omitempty" tf:"preferred_protocol,omitempty"`
 }
 
 type StreamingExperienceSettingsParameters struct {
 
-	// The preferred protocol that you want to use while streaming your application.
-	// Valid values are TCP and UDP.
+	// Preferred protocol that you want to use while streaming your application. Valid values are TCP and UDP.
 	// +kubebuilder:validation:Optional
 	PreferredProtocol *string `json:"preferredProtocol,omitempty" tf:"preferred_protocol,omitempty"`
 }
 
 type UserSettingsInitParameters struct {
 
-	// Action that is enabled or disabled.
-	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
+	// Action that is enabled or disabled. Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Whether the action is enabled or disabled.
-	// Valid values are ENABLED or DISABLED.
+	// Whether the action is enabled or disabled. Valid values are ENABLED or DISABLED.
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type UserSettingsObservation struct {
 
-	// Action that is enabled or disabled.
-	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
+	// Action that is enabled or disabled. Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// Whether the action is enabled or disabled.
-	// Valid values are ENABLED or DISABLED.
+	// Whether the action is enabled or disabled. Valid values are ENABLED or DISABLED.
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type UserSettingsParameters struct {
 
-	// Action that is enabled or disabled.
-	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
+	// Action that is enabled or disabled. Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
-	// Whether the action is enabled or disabled.
-	// Valid values are ENABLED or DISABLED.
+	// Whether the action is enabled or disabled. Valid values are ENABLED or DISABLED.
 	// +kubebuilder:validation:Optional
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 }

@@ -84,8 +84,7 @@ spec:
                     description: Description of the component.
                     type: string
                   kmsKeyId:
-                    description: Amazon Resource Name (ARN) of the Key Management
-                      Service (KMS) Key used to encrypt the component.
+                    description: ARN of the KMS Key used to encrypt the component.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -222,8 +221,7 @@ spec:
                     description: Description of the component.
                     type: string
                   kmsKeyId:
-                    description: Amazon Resource Name (ARN) of the Key Management
-                      Service (KMS) Key used to encrypt the component.
+                    description: ARN of the KMS Key used to encrypt the component.
                     type: string
                   kmsKeyIdRef:
                     description: Reference to a Key in kms to populate kmsKeyId.
@@ -434,7 +432,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the component.
+                    description: ARN of the component.
                     type: string
                   changeDescription:
                     description: Change description of the component.
@@ -453,11 +451,10 @@ spec:
                     description: Encryption status of the component.
                     type: boolean
                   id:
-                    description: Amazon Resource Name (ARN) of the component.
+                    description: ARN of the component.
                     type: string
                   kmsKeyId:
-                    description: Amazon Resource Name (ARN) of the Key Management
-                      Service (KMS) Key used to encrypt the component.
+                    description: ARN of the KMS Key used to encrypt the component.
                     type: string
                   name:
                     description: Name of the component.

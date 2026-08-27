@@ -44,8 +44,7 @@ type IntegrationInitParameters struct {
 	// Credentials required for the integration. For AWS integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY)
-	// when calling the associated resource.
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY) when calling the associated resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -58,14 +57,10 @@ type IntegrationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
-	// Integration HTTP method
-	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
-	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// Not all methods are compatible with all AWS integrations.
-	// e.g., Lambda function can only be invoked via POST.
+	// Integration HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. Not all methods are compatible with all AWS integrations. e.g., Lambda function can only be invoked via POST.
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
-	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	// ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	IntegrationTarget *string `json:"integrationTarget,omitempty" tf:"integration_target,omitempty"`
@@ -81,8 +76,7 @@ type IntegrationInitParameters struct {
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
 
-	// Map of request query string parameters and headers that should be passed to the backend responder.
-	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// Map of request query string parameters and headers that should be passed to the backend responder. For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -103,8 +97,7 @@ type IntegrationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
-	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	// Response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED. Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
 	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
 
 	// ID of the associated REST API.
@@ -129,9 +122,7 @@ type IntegrationInitParameters struct {
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint. e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
@@ -166,20 +157,15 @@ type IntegrationObservation struct {
 	// Credentials required for the integration. For AWS integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY)
-	// when calling the associated resource.
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY) when calling the associated resource.
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Integration HTTP method
-	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
-	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// Not all methods are compatible with all AWS integrations.
-	// e.g., Lambda function can only be invoked via POST.
+	// Integration HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. Not all methods are compatible with all AWS integrations. e.g., Lambda function can only be invoked via POST.
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
-	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	// ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
 	IntegrationTarget *string `json:"integrationTarget,omitempty" tf:"integration_target,omitempty"`
 
 	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
@@ -189,8 +175,7 @@ type IntegrationObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Map of request query string parameters and headers that should be passed to the backend responder.
-	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// Map of request query string parameters and headers that should be passed to the backend responder. For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -201,8 +186,7 @@ type IntegrationObservation struct {
 	// API resource ID.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
-	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	// Response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED. Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
 	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
 
 	// ID of the associated REST API.
@@ -217,9 +201,7 @@ type IntegrationObservation struct {
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint. e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -260,8 +242,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
-	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY)
-	// when calling the associated resource.
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY) when calling the associated resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
@@ -275,15 +256,11 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPMethodSelector *v2.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
-	// Integration HTTP method
-	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
-	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// Not all methods are compatible with all AWS integrations.
-	// e.g., Lambda function can only be invoked via POST.
+	// Integration HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. Not all methods are compatible with all AWS integrations. e.g., Lambda function can only be invoked via POST.
 	// +kubebuilder:validation:Optional
 	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
 
-	// The ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
+	// ALB or NLB ARN to send the request to. Used for private integrations with VPC Link V2. When using VPC Link V2, this parameter specifies the load balancer ARN, while uri is used to set the Host header.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/elbv2/v1beta2.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -306,8 +283,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Map of request query string parameters and headers that should be passed to the backend responder.
-	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// Map of request query string parameters and headers that should be passed to the backend responder. For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
@@ -331,8 +307,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// –  Specifies the response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED.
-	// Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
+	// Response transfer mode of the integration. Valid values are BUFFERED and STREAM. Default to BUFFERED. Once set, setting the value to BUFFERED requires explicitly specifying BUFFERED, rather than removing this argument.
 	// +kubebuilder:validation:Optional
 	ResponseTransferMode *string `json:"responseTransferMode,omitempty" tf:"response_transfer_mode,omitempty"`
 
@@ -362,9 +337,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
-	// For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
-	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY. For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint. e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:123456789012:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("invoke_arn",true)
 	// +kubebuilder:validation:Optional

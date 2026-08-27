@@ -67,11 +67,11 @@ spec:
                     type: array
                   authorizerConfiguration:
                     description: Authorization configuration for authenticating requests.
-                      See authorizer_configuration below.
+                      See authorizer_configuration Block below.
                     properties:
                       customJwtAuthorizer:
                         description: JWT-based authorization configuration block.
-                          See custom_jwt_authorizer below.
+                          See custom_jwt_authorizer Block below.
                         properties:
                           allowedAudience:
                             description: Set of allowed audience values for JWT token
@@ -96,12 +96,12 @@ spec:
                           allowedWorkloadConfiguration:
                             description: Configuration restricting which workloads
                               may use this authorizer. See allowed_workload_configuration
-                              below.
+                              Block below.
                             properties:
                               hostingEnvironment:
                                 description: Hosting environments allowed to use the
                                   authorizer. Between 1 and 10 entries. See hosting_environment
-                                  below.
+                                  Block below.
                                 items:
                                   properties:
                                     arn:
@@ -119,13 +119,14 @@ spec:
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
-                              below.
+                              Block below.
                             items:
                               properties:
                                 authorizingClaimMatchValue:
                                   description: Configuration block to define the value
                                     or values to match for and the relationship of
-                                    the match. See authorizing_claim_match_value below.
+                                    the match. See authorizing_claim_match_value Block
+                                    below.
                                   properties:
                                     claimMatchOperator:
                                       description: Relationship between the claim
@@ -138,7 +139,7 @@ spec:
                                       type: string
                                     claimMatchValue:
                                       description: Value or values to match for. See
-                                        claim_match_value below.
+                                        claim_match_value Block below.
                                       properties:
                                         matchValueString:
                                           description: String value to match for.
@@ -173,11 +174,11 @@ spec:
                             type: string
                           privateEndpoint:
                             description: Private endpoint used to reach the authorization
-                              server. See private_endpoint below.
+                              server. See private_endpoint Block below.
                             properties:
                               managedVpcResource:
                                 description: Managed VPC resource configuration. See
-                                  managed_vpc_resource below.
+                                  managed_vpc_resource Block below.
                                 properties:
                                   endpointIpAddressType:
                                     description: IP address type for the endpoint.
@@ -211,7 +212,7 @@ spec:
                                 type: object
                               selfManagedLatticeResource:
                                 description: Self-managed VPC Lattice resource configuration.
-                                  See self_managed_lattice_resource below.
+                                  See self_managed_lattice_resource Block below.
                                 properties:
                                   resourceConfigurationIdentifier:
                                     description: Identifier of the VPC Lattice resource
@@ -222,7 +223,7 @@ spec:
                           privateEndpointOverrides:
                             description: Overrides for the private endpoints used
                               to reach the authorization server. See private_endpoint_overrides
-                              below.
+                              Block below.
                             items:
                               properties:
                                 domain:
@@ -230,11 +231,11 @@ spec:
                                   type: string
                                 privateEndpoint:
                                   description: Private endpoint configuration. See
-                                    private_endpoint below.
+                                    private_endpoint Block below.
                                   properties:
                                     managedVpcResource:
                                       description: Managed VPC resource configuration.
-                                        See managed_vpc_resource below.
+                                        See managed_vpc_resource Block below.
                                       properties:
                                         endpointIpAddressType:
                                           description: IP address type for the endpoint.
@@ -271,7 +272,7 @@ spec:
                                     selfManagedLatticeResource:
                                       description: Self-managed VPC Lattice resource
                                         configuration. See self_managed_lattice_resource
-                                        below.
+                                        Block below.
                                       properties:
                                         resourceConfigurationIdentifier:
                                           description: Identifier of the VPC Lattice
@@ -285,112 +286,24 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      below.
+                      Block below.If not specified, configured values can be found
+                      in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment below.
+                          See agentcore_runtime_environment Block below.
                         items:
                           properties:
-                            agentRuntimeArn:
-                              description: ARN of the AgentCore memory resource.
-                              type: string
-                            agentRuntimeArnRef:
-                              description: Reference to a AgentRuntime in bedrockagentcore
-                                to populate agentRuntimeArn.
-                              properties:
-                                name:
-                                  description: Name of the referenced object.
-                                  type: string
-                                namespace:
-                                  description: Namespace of the referenced object
-                                  type: string
-                                policy:
-                                  description: Policies for referencing.
-                                  properties:
-                                    resolution:
-                                      default: Required
-                                      description: |-
-                                        Resolution specifies whether resolution of this reference is required.
-                                        The default is 'Required', which means the reconcile will fail if the
-                                        reference cannot be resolved. 'Optional' means this reference will be
-                                        a no-op if it cannot be resolved.
-                                      enum:
-                                      - Required
-                                      - Optional
-                                      type: string
-                                    resolve:
-                                      description: |-
-                                        Resolve specifies when this reference should be resolved. The default
-                                        is 'IfNotPresent', which will attempt to resolve the reference only when
-                                        the corresponding field is not present. Use 'Always' to resolve the
-                                        reference on every reconcile.
-                                      enum:
-                                      - Always
-                                      - IfNotPresent
-                                      type: string
-                                  type: object
-                              required:
-                              - name
-                              type: object
-                            agentRuntimeArnSelector:
-                              description: Selector for a AgentRuntime in bedrockagentcore
-                                to populate agentRuntimeArn.
-                              properties:
-                                matchControllerRef:
-                                  description: |-
-                                    MatchControllerRef ensures an object with the same controller reference
-                                    as the selecting object is selected.
-                                  type: boolean
-                                matchLabels:
-                                  additionalProperties:
-                                    type: string
-                                  description: MatchLabels ensures an object with
-                                    matching labels is selected.
-                                  type: object
-                                namespace:
-                                  description: Namespace for the selector
-                                  type: string
-                                policy:
-                                  description: Policies for selection.
-                                  properties:
-                                    resolution:
-                                      default: Required
-                                      description: |-
-                                        Resolution specifies whether resolution of this reference is required.
-                                        The default is 'Required', which means the reconcile will fail if the
-                                        reference cannot be resolved. 'Optional' means this reference will be
-                                        a no-op if it cannot be resolved.
-                                      enum:
-                                      - Required
-                                      - Optional
-                                      type: string
-                                    resolve:
-                                      description: |-
-                                        Resolve specifies when this reference should be resolved. The default
-                                        is 'IfNotPresent', which will attempt to resolve the reference only when
-                                        the corresponding field is not present. Use 'Always' to resolve the
-                                        reference on every reconcile.
-                                      enum:
-                                      - Always
-                                      - IfNotPresent
-                                      type: string
-                                  type: object
-                              type: object
-                            agentRuntimeId:
-                              type: string
-                            agentRuntimeName:
-                              type: string
                             filesystemConfiguration:
                               description: Filesystem configurations. See filesystem_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   efsAccessPoint:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point below.
+                                      be specified. See efs_access_point Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -493,7 +406,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point below.
+                                      be specified. See s3_files_access_point Block
+                                      below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -597,7 +511,7 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage below.
+                                      be specified. See session_storage Block below.
                                     items:
                                       properties:
                                         mountPath:
@@ -612,7 +526,7 @@ spec:
                               type: array
                             lifecycleConfiguration:
                               description: Lifecycle configuration. See lifecycle_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   idleRuntimeSessionTimeout:
@@ -626,7 +540,7 @@ spec:
                               type: array
                             networkConfiguration:
                               description: Network configuration. See network_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   networkMode:
@@ -635,13 +549,9 @@ spec:
                                     type: string
                                   networkModeConfig:
                                     description: VPC configuration. See network_mode_config
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
-                                        requireServiceS3Endpoint:
-                                          description: Whether to require an S3 endpoint
-                                            for the service in the VPC.
-                                          type: boolean
                                         securityGroups:
                                           description: Security groups for the VPC.
                                           items:
@@ -663,11 +573,11 @@ spec:
                     type: object
                   environmentArtifact:
                     description: Environment artifact configuration. See environment_artifact
-                      below.
+                      Block below.
                     properties:
                       containerConfiguration:
                         description: Container configuration. See container_configuration
-                          below.
+                          Block below.
                         properties:
                           containerUri:
                             description: URI of the container image.
@@ -778,11 +688,15 @@ spec:
                     description: Maximum number of tokens in the model response.
                     type: number
                   memory:
-                    description: Memory configuration. See memory below.
+                    description: Memory configuration. See memory Block below. If
+                      not specified, configured values can be found in memory_actual.
+                      Clearing this value will reset the memory configuration to default
+                      values.
                     properties:
                       agentcoreMemoryConfiguration:
-                        description: AgentCore memory configuration. See agentcore_memory_configuration
-                          below.
+                        description: AgentCore memory configuration. Use this to connect
+                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
@@ -878,11 +792,11 @@ spec:
                             type: number
                           retrievalConfig:
                             description: Retrieval configuration parameters. See retrieval_config
-                              below.
+                              Block below.
                             properties:
                               mapBlockKey:
-                                description: Key for the retrieval configuration map
-                                  block.
+                                description: Namespace path template for retrieval
+                                  settings.
                                 type: string
                               relevanceScore:
                                 description: Relevance score threshold. Valid value
@@ -978,13 +892,44 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      disabled:
+                        description: Explicitly disable memory for this harness. See
+                          disabled Block below.
+                        items:
+                          type: object
+                        type: array
+                      managedMemoryConfiguration:
+                        description: Managed memory configuration. Creates and manages
+                          a memory resource automatically. See managed_memory_configuration
+                          Block below.
+                        items:
+                          properties:
+                            encryptionKeyArn:
+                              description: ARN of a customer-managed KMS key used
+                                to encrypt the memory. Defaults to an AWS-owned key.
+                                Cannot be changed after creation.
+                              type: string
+                            eventExpiryDuration:
+                              description: Event retention in days. Defaults to 30.
+                              type: number
+                            strategies:
+                              description: Set of strategy types to enable. Valid
+                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
+                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
                     type: object
                   model:
-                    description: Model configuration for the harness. See model below.
+                    description: Model configuration for the harness. See model Block
+                      below.
                     properties:
                       bedrockModelConfig:
                         description: Amazon Bedrock model configuration. See bedrock_model_config
-                          below.
+                          Block below.
                         properties:
                           maxTokens:
                             description: Maximum number of tokens in the model response.
@@ -1003,7 +948,7 @@ spec:
                         type: object
                       geminiModelConfig:
                         description: Gemini model configuration. See gemini_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -1110,7 +1055,7 @@ spec:
                         type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -1219,7 +1164,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   skill:
-                    description: Skill configurations. See skill below.
+                    description: Skill configurations. See skill Block below.
                     items:
                       properties:
                         path:
@@ -1229,7 +1174,7 @@ spec:
                     type: array
                   systemPrompt:
                     description: System prompt blocks for the harness. See system_prompt
-                      below.
+                      Block below.
                     items:
                       properties:
                         textSecretRef:
@@ -1256,7 +1201,7 @@ spec:
                     description: Timeout in seconds for the harness execution.
                     type: number
                   tool:
-                    description: Tool configurations. See tool below.
+                    description: Tool configurations. See tool Block below.
                     items:
                       properties:
                         config:
@@ -1265,7 +1210,7 @@ spec:
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
-                                below.
+                                Block below.
                               properties:
                                 browserArn:
                                   description: ARN of the AgentCore browser resource.
@@ -1355,7 +1300,7 @@ spec:
                               type: object
                             agentcoreCodeInterpreter:
                               description: AgentCore code interpreter configuration.
-                                See agentcore_code_interpreter below.
+                                See agentcore_code_interpreter Block below.
                               properties:
                                 codeInterpreterArn:
                                   description: ARN of the AgentCore code interpreter
@@ -1446,7 +1391,7 @@ spec:
                               type: object
                             agentcoreGateway:
                               description: AgentCore gateway configuration. See agentcore_gateway
-                                below.
+                                Block below.
                               properties:
                                 gatewayArn:
                                   description: ARN of the AgentCore gateway resource.
@@ -1535,7 +1480,7 @@ spec:
                                   type: object
                                 outboundAuth:
                                   description: Outbound authentication configuration.
-                                    See outbound_auth below.
+                                    See outbound_auth Block below.
                                   properties:
                                     awsIam:
                                       description: Set to true to use AWS IAM authentication.
@@ -1545,7 +1490,7 @@ spec:
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
-                                        See oauth below.
+                                        See oauth Block below.
                                       properties:
                                         customParameters:
                                           additionalProperties:
@@ -1658,7 +1603,7 @@ spec:
                               type: object
                             inlineFunction:
                               description: Inline function configuration. See inline_function
-                                below.
+                                Block below.
                               properties:
                                 description:
                                   description: Description of the inline function.
@@ -1679,7 +1624,7 @@ spec:
                               type: object
                             remoteMcp:
                               description: Remote MCP server configuration. See remote_mcp
-                                below.
+                                Block below.
                               properties:
                                 headersSecretRef:
                                   description: Map of HTTP headers to include in requests
@@ -1716,7 +1661,7 @@ spec:
                     type: array
                   truncation:
                     description: Truncation configuration for conversation history.
-                      See truncation below.
+                      See truncation Block below.
                     properties:
                       config:
                         description: Strategy-specific configuration. See truncation
@@ -1725,7 +1670,7 @@ spec:
                           properties:
                             slidingWindow:
                               description: Sliding window truncation configuration.
-                                See sliding_window below.
+                                See sliding_window Block below.
                               items:
                                 properties:
                                   messagesCount:
@@ -1736,7 +1681,7 @@ spec:
                               type: array
                             summarization:
                               description: Summarization truncation configuration.
-                                See summarization below.
+                                See summarization Block below.
                               items:
                                 properties:
                                   preserveRecentMessages:
@@ -1784,11 +1729,11 @@ spec:
                     type: array
                   authorizerConfiguration:
                     description: Authorization configuration for authenticating requests.
-                      See authorizer_configuration below.
+                      See authorizer_configuration Block below.
                     properties:
                       customJwtAuthorizer:
                         description: JWT-based authorization configuration block.
-                          See custom_jwt_authorizer below.
+                          See custom_jwt_authorizer Block below.
                         properties:
                           allowedAudience:
                             description: Set of allowed audience values for JWT token
@@ -1813,12 +1758,12 @@ spec:
                           allowedWorkloadConfiguration:
                             description: Configuration restricting which workloads
                               may use this authorizer. See allowed_workload_configuration
-                              below.
+                              Block below.
                             properties:
                               hostingEnvironment:
                                 description: Hosting environments allowed to use the
                                   authorizer. Between 1 and 10 entries. See hosting_environment
-                                  below.
+                                  Block below.
                                 items:
                                   properties:
                                     arn:
@@ -1836,13 +1781,14 @@ spec:
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
-                              below.
+                              Block below.
                             items:
                               properties:
                                 authorizingClaimMatchValue:
                                   description: Configuration block to define the value
                                     or values to match for and the relationship of
-                                    the match. See authorizing_claim_match_value below.
+                                    the match. See authorizing_claim_match_value Block
+                                    below.
                                   properties:
                                     claimMatchOperator:
                                       description: Relationship between the claim
@@ -1855,7 +1801,7 @@ spec:
                                       type: string
                                     claimMatchValue:
                                       description: Value or values to match for. See
-                                        claim_match_value below.
+                                        claim_match_value Block below.
                                       properties:
                                         matchValueString:
                                           description: String value to match for.
@@ -1890,11 +1836,11 @@ spec:
                             type: string
                           privateEndpoint:
                             description: Private endpoint used to reach the authorization
-                              server. See private_endpoint below.
+                              server. See private_endpoint Block below.
                             properties:
                               managedVpcResource:
                                 description: Managed VPC resource configuration. See
-                                  managed_vpc_resource below.
+                                  managed_vpc_resource Block below.
                                 properties:
                                   endpointIpAddressType:
                                     description: IP address type for the endpoint.
@@ -1928,7 +1874,7 @@ spec:
                                 type: object
                               selfManagedLatticeResource:
                                 description: Self-managed VPC Lattice resource configuration.
-                                  See self_managed_lattice_resource below.
+                                  See self_managed_lattice_resource Block below.
                                 properties:
                                   resourceConfigurationIdentifier:
                                     description: Identifier of the VPC Lattice resource
@@ -1939,7 +1885,7 @@ spec:
                           privateEndpointOverrides:
                             description: Overrides for the private endpoints used
                               to reach the authorization server. See private_endpoint_overrides
-                              below.
+                              Block below.
                             items:
                               properties:
                                 domain:
@@ -1947,11 +1893,11 @@ spec:
                                   type: string
                                 privateEndpoint:
                                   description: Private endpoint configuration. See
-                                    private_endpoint below.
+                                    private_endpoint Block below.
                                   properties:
                                     managedVpcResource:
                                       description: Managed VPC resource configuration.
-                                        See managed_vpc_resource below.
+                                        See managed_vpc_resource Block below.
                                       properties:
                                         endpointIpAddressType:
                                           description: IP address type for the endpoint.
@@ -1988,7 +1934,7 @@ spec:
                                     selfManagedLatticeResource:
                                       description: Self-managed VPC Lattice resource
                                         configuration. See self_managed_lattice_resource
-                                        below.
+                                        Block below.
                                       properties:
                                         resourceConfigurationIdentifier:
                                           description: Identifier of the VPC Lattice
@@ -2002,112 +1948,24 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      below.
+                      Block below.If not specified, configured values can be found
+                      in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment below.
+                          See agentcore_runtime_environment Block below.
                         items:
                           properties:
-                            agentRuntimeArn:
-                              description: ARN of the AgentCore memory resource.
-                              type: string
-                            agentRuntimeArnRef:
-                              description: Reference to a AgentRuntime in bedrockagentcore
-                                to populate agentRuntimeArn.
-                              properties:
-                                name:
-                                  description: Name of the referenced object.
-                                  type: string
-                                namespace:
-                                  description: Namespace of the referenced object
-                                  type: string
-                                policy:
-                                  description: Policies for referencing.
-                                  properties:
-                                    resolution:
-                                      default: Required
-                                      description: |-
-                                        Resolution specifies whether resolution of this reference is required.
-                                        The default is 'Required', which means the reconcile will fail if the
-                                        reference cannot be resolved. 'Optional' means this reference will be
-                                        a no-op if it cannot be resolved.
-                                      enum:
-                                      - Required
-                                      - Optional
-                                      type: string
-                                    resolve:
-                                      description: |-
-                                        Resolve specifies when this reference should be resolved. The default
-                                        is 'IfNotPresent', which will attempt to resolve the reference only when
-                                        the corresponding field is not present. Use 'Always' to resolve the
-                                        reference on every reconcile.
-                                      enum:
-                                      - Always
-                                      - IfNotPresent
-                                      type: string
-                                  type: object
-                              required:
-                              - name
-                              type: object
-                            agentRuntimeArnSelector:
-                              description: Selector for a AgentRuntime in bedrockagentcore
-                                to populate agentRuntimeArn.
-                              properties:
-                                matchControllerRef:
-                                  description: |-
-                                    MatchControllerRef ensures an object with the same controller reference
-                                    as the selecting object is selected.
-                                  type: boolean
-                                matchLabels:
-                                  additionalProperties:
-                                    type: string
-                                  description: MatchLabels ensures an object with
-                                    matching labels is selected.
-                                  type: object
-                                namespace:
-                                  description: Namespace for the selector
-                                  type: string
-                                policy:
-                                  description: Policies for selection.
-                                  properties:
-                                    resolution:
-                                      default: Required
-                                      description: |-
-                                        Resolution specifies whether resolution of this reference is required.
-                                        The default is 'Required', which means the reconcile will fail if the
-                                        reference cannot be resolved. 'Optional' means this reference will be
-                                        a no-op if it cannot be resolved.
-                                      enum:
-                                      - Required
-                                      - Optional
-                                      type: string
-                                    resolve:
-                                      description: |-
-                                        Resolve specifies when this reference should be resolved. The default
-                                        is 'IfNotPresent', which will attempt to resolve the reference only when
-                                        the corresponding field is not present. Use 'Always' to resolve the
-                                        reference on every reconcile.
-                                      enum:
-                                      - Always
-                                      - IfNotPresent
-                                      type: string
-                                  type: object
-                              type: object
-                            agentRuntimeId:
-                              type: string
-                            agentRuntimeName:
-                              type: string
                             filesystemConfiguration:
                               description: Filesystem configurations. See filesystem_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   efsAccessPoint:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point below.
+                                      be specified. See efs_access_point Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -2210,7 +2068,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point below.
+                                      be specified. See s3_files_access_point Block
+                                      below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -2314,7 +2173,7 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage below.
+                                      be specified. See session_storage Block below.
                                     items:
                                       properties:
                                         mountPath:
@@ -2329,7 +2188,7 @@ spec:
                               type: array
                             lifecycleConfiguration:
                               description: Lifecycle configuration. See lifecycle_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   idleRuntimeSessionTimeout:
@@ -2343,7 +2202,7 @@ spec:
                               type: array
                             networkConfiguration:
                               description: Network configuration. See network_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   networkMode:
@@ -2352,13 +2211,9 @@ spec:
                                     type: string
                                   networkModeConfig:
                                     description: VPC configuration. See network_mode_config
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
-                                        requireServiceS3Endpoint:
-                                          description: Whether to require an S3 endpoint
-                                            for the service in the VPC.
-                                          type: boolean
                                         securityGroups:
                                           description: Security groups for the VPC.
                                           items:
@@ -2380,11 +2235,11 @@ spec:
                     type: object
                   environmentArtifact:
                     description: Environment artifact configuration. See environment_artifact
-                      below.
+                      Block below.
                     properties:
                       containerConfiguration:
                         description: Container configuration. See container_configuration
-                          below.
+                          Block below.
                         properties:
                           containerUri:
                             description: URI of the container image.
@@ -2490,11 +2345,15 @@ spec:
                     description: Maximum number of tokens in the model response.
                     type: number
                   memory:
-                    description: Memory configuration. See memory below.
+                    description: Memory configuration. See memory Block below. If
+                      not specified, configured values can be found in memory_actual.
+                      Clearing this value will reset the memory configuration to default
+                      values.
                     properties:
                       agentcoreMemoryConfiguration:
-                        description: AgentCore memory configuration. See agentcore_memory_configuration
-                          below.
+                        description: AgentCore memory configuration. Use this to connect
+                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
@@ -2590,11 +2449,11 @@ spec:
                             type: number
                           retrievalConfig:
                             description: Retrieval configuration parameters. See retrieval_config
-                              below.
+                              Block below.
                             properties:
                               mapBlockKey:
-                                description: Key for the retrieval configuration map
-                                  block.
+                                description: Namespace path template for retrieval
+                                  settings.
                                 type: string
                               relevanceScore:
                                 description: Relevance score threshold. Valid value
@@ -2690,13 +2549,44 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      disabled:
+                        description: Explicitly disable memory for this harness. See
+                          disabled Block below.
+                        items:
+                          type: object
+                        type: array
+                      managedMemoryConfiguration:
+                        description: Managed memory configuration. Creates and manages
+                          a memory resource automatically. See managed_memory_configuration
+                          Block below.
+                        items:
+                          properties:
+                            encryptionKeyArn:
+                              description: ARN of a customer-managed KMS key used
+                                to encrypt the memory. Defaults to an AWS-owned key.
+                                Cannot be changed after creation.
+                              type: string
+                            eventExpiryDuration:
+                              description: Event retention in days. Defaults to 30.
+                              type: number
+                            strategies:
+                              description: Set of strategy types to enable. Valid
+                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
+                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
                     type: object
                   model:
-                    description: Model configuration for the harness. See model below.
+                    description: Model configuration for the harness. See model Block
+                      below.
                     properties:
                       bedrockModelConfig:
                         description: Amazon Bedrock model configuration. See bedrock_model_config
-                          below.
+                          Block below.
                         properties:
                           maxTokens:
                             description: Maximum number of tokens in the model response.
@@ -2715,7 +2605,7 @@ spec:
                         type: object
                       geminiModelConfig:
                         description: Gemini model configuration. See gemini_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -2822,7 +2712,7 @@ spec:
                         type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -2926,7 +2816,7 @@ spec:
                         type: object
                     type: object
                   skill:
-                    description: Skill configurations. See skill below.
+                    description: Skill configurations. See skill Block below.
                     items:
                       properties:
                         path:
@@ -2936,7 +2826,7 @@ spec:
                     type: array
                   systemPrompt:
                     description: System prompt blocks for the harness. See system_prompt
-                      below.
+                      Block below.
                     items:
                       properties:
                         textSecretRef:
@@ -2965,7 +2855,7 @@ spec:
                     description: Timeout in seconds for the harness execution.
                     type: number
                   tool:
-                    description: Tool configurations. See tool below.
+                    description: Tool configurations. See tool Block below.
                     items:
                       properties:
                         config:
@@ -2974,7 +2864,7 @@ spec:
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
-                                below.
+                                Block below.
                               properties:
                                 browserArn:
                                   description: ARN of the AgentCore browser resource.
@@ -3064,7 +2954,7 @@ spec:
                               type: object
                             agentcoreCodeInterpreter:
                               description: AgentCore code interpreter configuration.
-                                See agentcore_code_interpreter below.
+                                See agentcore_code_interpreter Block below.
                               properties:
                                 codeInterpreterArn:
                                   description: ARN of the AgentCore code interpreter
@@ -3155,7 +3045,7 @@ spec:
                               type: object
                             agentcoreGateway:
                               description: AgentCore gateway configuration. See agentcore_gateway
-                                below.
+                                Block below.
                               properties:
                                 gatewayArn:
                                   description: ARN of the AgentCore gateway resource.
@@ -3244,7 +3134,7 @@ spec:
                                   type: object
                                 outboundAuth:
                                   description: Outbound authentication configuration.
-                                    See outbound_auth below.
+                                    See outbound_auth Block below.
                                   properties:
                                     awsIam:
                                       description: Set to true to use AWS IAM authentication.
@@ -3254,7 +3144,7 @@ spec:
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
-                                        See oauth below.
+                                        See oauth Block below.
                                       properties:
                                         customParameters:
                                           additionalProperties:
@@ -3367,7 +3257,7 @@ spec:
                               type: object
                             inlineFunction:
                               description: Inline function configuration. See inline_function
-                                below.
+                                Block below.
                               properties:
                                 description:
                                   description: Description of the inline function.
@@ -3390,7 +3280,7 @@ spec:
                               type: object
                             remoteMcp:
                               description: Remote MCP server configuration. See remote_mcp
-                                below.
+                                Block below.
                               properties:
                                 headersSecretRef:
                                   additionalProperties:
@@ -3423,7 +3313,7 @@ spec:
                     type: array
                   truncation:
                     description: Truncation configuration for conversation history.
-                      See truncation below.
+                      See truncation Block below.
                     properties:
                       config:
                         description: Strategy-specific configuration. See truncation
@@ -3432,7 +3322,7 @@ spec:
                           properties:
                             slidingWindow:
                               description: Sliding window truncation configuration.
-                                See sliding_window below.
+                                See sliding_window Block below.
                               items:
                                 properties:
                                   messagesCount:
@@ -3443,7 +3333,7 @@ spec:
                               type: array
                             summarization:
                               description: Summarization truncation configuration.
-                                See summarization below.
+                                See summarization Block below.
                               items:
                                 properties:
                                   preserveRecentMessages:
@@ -3547,11 +3437,11 @@ spec:
                     type: string
                   authorizerConfiguration:
                     description: Authorization configuration for authenticating requests.
-                      See authorizer_configuration below.
+                      See authorizer_configuration Block below.
                     properties:
                       customJwtAuthorizer:
                         description: JWT-based authorization configuration block.
-                          See custom_jwt_authorizer below.
+                          See custom_jwt_authorizer Block below.
                         properties:
                           allowedAudience:
                             description: Set of allowed audience values for JWT token
@@ -3576,12 +3466,12 @@ spec:
                           allowedWorkloadConfiguration:
                             description: Configuration restricting which workloads
                               may use this authorizer. See allowed_workload_configuration
-                              below.
+                              Block below.
                             properties:
                               hostingEnvironment:
                                 description: Hosting environments allowed to use the
                                   authorizer. Between 1 and 10 entries. See hosting_environment
-                                  below.
+                                  Block below.
                                 items:
                                   properties:
                                     arn:
@@ -3599,13 +3489,14 @@ spec:
                           customClaim:
                             description: Repeatable block to define a custom claim
                               validation name, value, and operation. See custom_claim
-                              below.
+                              Block below.
                             items:
                               properties:
                                 authorizingClaimMatchValue:
                                   description: Configuration block to define the value
                                     or values to match for and the relationship of
-                                    the match. See authorizing_claim_match_value below.
+                                    the match. See authorizing_claim_match_value Block
+                                    below.
                                   properties:
                                     claimMatchOperator:
                                       description: Relationship between the claim
@@ -3618,7 +3509,7 @@ spec:
                                       type: string
                                     claimMatchValue:
                                       description: Value or values to match for. See
-                                        claim_match_value below.
+                                        claim_match_value Block below.
                                       properties:
                                         matchValueString:
                                           description: String value to match for.
@@ -3653,11 +3544,11 @@ spec:
                             type: string
                           privateEndpoint:
                             description: Private endpoint used to reach the authorization
-                              server. See private_endpoint below.
+                              server. See private_endpoint Block below.
                             properties:
                               managedVpcResource:
                                 description: Managed VPC resource configuration. See
-                                  managed_vpc_resource below.
+                                  managed_vpc_resource Block below.
                                 properties:
                                   endpointIpAddressType:
                                     description: IP address type for the endpoint.
@@ -3691,7 +3582,7 @@ spec:
                                 type: object
                               selfManagedLatticeResource:
                                 description: Self-managed VPC Lattice resource configuration.
-                                  See self_managed_lattice_resource below.
+                                  See self_managed_lattice_resource Block below.
                                 properties:
                                   resourceConfigurationIdentifier:
                                     description: Identifier of the VPC Lattice resource
@@ -3702,7 +3593,7 @@ spec:
                           privateEndpointOverrides:
                             description: Overrides for the private endpoints used
                               to reach the authorization server. See private_endpoint_overrides
-                              below.
+                              Block below.
                             items:
                               properties:
                                 domain:
@@ -3710,11 +3601,11 @@ spec:
                                   type: string
                                 privateEndpoint:
                                   description: Private endpoint configuration. See
-                                    private_endpoint below.
+                                    private_endpoint Block below.
                                   properties:
                                     managedVpcResource:
                                       description: Managed VPC resource configuration.
-                                        See managed_vpc_resource below.
+                                        See managed_vpc_resource Block below.
                                       properties:
                                         endpointIpAddressType:
                                           description: IP address type for the endpoint.
@@ -3751,7 +3642,7 @@ spec:
                                     selfManagedLatticeResource:
                                       description: Self-managed VPC Lattice resource
                                         configuration. See self_managed_lattice_resource
-                                        below.
+                                        Block below.
                                       properties:
                                         resourceConfigurationIdentifier:
                                           description: Identifier of the VPC Lattice
@@ -3765,30 +3656,36 @@ spec:
                     type: object
                   environment:
                     description: Compute environment configuration. See environment
-                      below.
+                      Block below.If not specified, configured values can be found
+                      in environment_actual.
                     properties:
                       agentcoreRuntimeEnvironment:
                         description: AgentCore runtime environment configuration.
-                          See agentcore_runtime_environment below.
+                          See agentcore_runtime_environment Block below.
                         items:
                           properties:
                             agentRuntimeArn:
-                              description: ARN of the AgentCore memory resource.
+                              description: ARN of the agent runtime the service provisions
+                                for the harness.
                               type: string
                             agentRuntimeId:
+                              description: ID of the agent runtime the service provisions
+                                for the harness.
                               type: string
                             agentRuntimeName:
+                              description: Name of the agent runtime the service derives
+                                for the harness.
                               type: string
                             filesystemConfiguration:
                               description: Filesystem configurations. See filesystem_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   efsAccessPoint:
                                     description: Amazon EFS access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See efs_access_point below.
+                                      be specified. See efs_access_point Block below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -3807,7 +3704,8 @@ spec:
                                     description: Amazon S3 Files access point to mount
                                       as shared file storage. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See s3_files_access_point below.
+                                      be specified. See s3_files_access_point Block
+                                      below.
                                     items:
                                       properties:
                                         accessPointArn:
@@ -3827,7 +3725,7 @@ spec:
                                       persistent storage across agent runtime session
                                       invocations. Exactly one of session_storage,
                                       s3_files_access_point, or efs_access_point must
-                                      be specified. See session_storage below.
+                                      be specified. See session_storage Block below.
                                     items:
                                       properties:
                                         mountPath:
@@ -3842,7 +3740,7 @@ spec:
                               type: array
                             lifecycleConfiguration:
                               description: Lifecycle configuration. See lifecycle_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   idleRuntimeSessionTimeout:
@@ -3856,7 +3754,7 @@ spec:
                               type: array
                             networkConfiguration:
                               description: Network configuration. See network_configuration
-                                below.
+                                Block below.
                               items:
                                 properties:
                                   networkMode:
@@ -3865,7 +3763,7 @@ spec:
                                     type: string
                                   networkModeConfig:
                                     description: VPC configuration. See network_mode_config
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
                                         requireServiceS3Endpoint:
@@ -3891,13 +3789,152 @@ spec:
                           type: object
                         type: array
                     type: object
+                  environmentActual:
+                    description: Actual deployed environment configuration.
+                    items:
+                      properties:
+                        agentcoreRuntimeEnvironment:
+                          description: AgentCore runtime environment configuration.
+                            See agentcore_runtime_environment Block below.
+                          items:
+                            properties:
+                              agentRuntimeArn:
+                                description: ARN of the agent runtime the service
+                                  provisions for the harness.
+                                type: string
+                              agentRuntimeId:
+                                description: ID of the agent runtime the service provisions
+                                  for the harness.
+                                type: string
+                              agentRuntimeName:
+                                description: Name of the agent runtime the service
+                                  derives for the harness.
+                                type: string
+                              filesystemConfiguration:
+                                description: Filesystem configurations. See filesystem_configuration
+                                  Block below.
+                                items:
+                                  properties:
+                                    efsAccessPoint:
+                                      description: Amazon EFS access point to mount
+                                        as shared file storage. Exactly one of session_storage,
+                                        s3_files_access_point, or efs_access_point
+                                        must be specified. See efs_access_point Block
+                                        below.
+                                      items:
+                                        properties:
+                                          accessPointArn:
+                                            description: ARN of the Amazon S3 Files
+                                              access point to mount into the agent
+                                              runtime.
+                                            type: string
+                                          mountPath:
+                                            description: Mount path for the S3 Files
+                                              access point inside the agent runtime.
+                                              Must be under /mnt with exactly one
+                                              subdirectory level (for example, /mnt/data).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3FilesAccessPoint:
+                                      description: Amazon S3 Files access point to
+                                        mount as shared file storage. Exactly one
+                                        of session_storage, s3_files_access_point,
+                                        or efs_access_point must be specified. See
+                                        s3_files_access_point Block below.
+                                      items:
+                                        properties:
+                                          accessPointArn:
+                                            description: ARN of the Amazon S3 Files
+                                              access point to mount into the agent
+                                              runtime.
+                                            type: string
+                                          mountPath:
+                                            description: Mount path for the S3 Files
+                                              access point inside the agent runtime.
+                                              Must be under /mnt with exactly one
+                                              subdirectory level (for example, /mnt/data).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sessionStorage:
+                                      description: Session storage filesystem providing
+                                        persistent storage across agent runtime session
+                                        invocations. Exactly one of session_storage,
+                                        s3_files_access_point, or efs_access_point
+                                        must be specified. See session_storage Block
+                                        below.
+                                      items:
+                                        properties:
+                                          mountPath:
+                                            description: Mount path for the S3 Files
+                                              access point inside the agent runtime.
+                                              Must be under /mnt with exactly one
+                                              subdirectory level (for example, /mnt/data).
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              lifecycleConfiguration:
+                                description: Lifecycle configuration. See lifecycle_configuration
+                                  Block below.
+                                items:
+                                  properties:
+                                    idleRuntimeSessionTimeout:
+                                      description: Timeout in seconds for idle sessions.
+                                      type: number
+                                    maxLifetime:
+                                      description: Maximum lifetime of the instance
+                                        in seconds.
+                                      type: number
+                                  type: object
+                                type: array
+                              networkConfiguration:
+                                description: Network configuration. See network_configuration
+                                  Block below.
+                                items:
+                                  properties:
+                                    networkMode:
+                                      description: 'Network mode. Valid values: PUBLIC,
+                                        VPC.'
+                                      type: string
+                                    networkModeConfig:
+                                      description: VPC configuration. See network_mode_config
+                                        Block below.
+                                      items:
+                                        properties:
+                                          requireServiceS3Endpoint:
+                                            description: Whether to require an S3
+                                              endpoint for the service in the VPC.
+                                            type: boolean
+                                          securityGroups:
+                                            description: Security groups for the VPC.
+                                            items:
+                                              type: string
+                                            type: array
+                                            x-kubernetes-list-type: set
+                                          subnets:
+                                            description: Subnets for the VPC.
+                                            items:
+                                              type: string
+                                            type: array
+                                            x-kubernetes-list-type: set
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   environmentArtifact:
                     description: Environment artifact configuration. See environment_artifact
-                      below.
+                      Block below.
                     properties:
                       containerConfiguration:
                         description: Container configuration. See container_configuration
-                          below.
+                          Block below.
                         properties:
                           containerUri:
                             description: URI of the container image.
@@ -3924,11 +3961,15 @@ spec:
                     description: Maximum number of tokens in the model response.
                     type: number
                   memory:
-                    description: Memory configuration. See memory below.
+                    description: Memory configuration. See memory Block below. If
+                      not specified, configured values can be found in memory_actual.
+                      Clearing this value will reset the memory configuration to default
+                      values.
                     properties:
                       agentcoreMemoryConfiguration:
-                        description: AgentCore memory configuration. See agentcore_memory_configuration
-                          below.
+                        description: AgentCore memory configuration. Use this to connect
+                          to an existing AgentCore memory resource. See agentcore_memory_configuration
+                          Block below.
                         properties:
                           actorId:
                             description: Actor ID for memory sessions.
@@ -3942,11 +3983,11 @@ spec:
                             type: number
                           retrievalConfig:
                             description: Retrieval configuration parameters. See retrieval_config
-                              below.
+                              Block below.
                             properties:
                               mapBlockKey:
-                                description: Key for the retrieval configuration map
-                                  block.
+                                description: Namespace path template for retrieval
+                                  settings.
                                 type: string
                               relevanceScore:
                                 description: Relevance score threshold. Valid value
@@ -3960,13 +4001,126 @@ spec:
                                 type: number
                             type: object
                         type: object
+                      disabled:
+                        description: Explicitly disable memory for this harness. See
+                          disabled Block below.
+                        items:
+                          type: object
+                        type: array
+                      managedMemoryConfiguration:
+                        description: Managed memory configuration. Creates and manages
+                          a memory resource automatically. See managed_memory_configuration
+                          Block below.
+                        items:
+                          properties:
+                            arn:
+                              description: ARN of the hosting environment.
+                              type: string
+                            encryptionKeyArn:
+                              description: ARN of a customer-managed KMS key used
+                                to encrypt the memory. Defaults to an AWS-owned key.
+                                Cannot be changed after creation.
+                              type: string
+                            eventExpiryDuration:
+                              description: Event retention in days. Defaults to 30.
+                              type: number
+                            strategies:
+                              description: Set of strategy types to enable. Valid
+                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
+                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
                     type: object
+                  memoryActual:
+                    description: Actual deployed memory configuration.
+                    items:
+                      properties:
+                        agentcoreMemoryConfiguration:
+                          description: AgentCore memory configuration. Use this to
+                            connect to an existing AgentCore memory resource. See
+                            agentcore_memory_configuration Block below.
+                          items:
+                            properties:
+                              actorId:
+                                description: Actor ID for memory sessions.
+                                type: string
+                              arn:
+                                description: ARN of the hosting environment.
+                                type: string
+                              messagesCount:
+                                description: Number of recent messages to keep in
+                                  the conversation window.
+                                type: number
+                              retrievalConfig:
+                                description: Retrieval configuration parameters. See
+                                  retrieval_config Block below.
+                                items:
+                                  properties:
+                                    mapBlockKey:
+                                      description: Namespace path template for retrieval
+                                        settings.
+                                      type: string
+                                    relevanceScore:
+                                      description: Relevance score threshold. Valid
+                                        value is between 0 and 1.
+                                      type: number
+                                    strategyId:
+                                      description: ID of the memory strategy.
+                                      type: string
+                                    topK:
+                                      description: Top-k sampling parameter.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        disabled:
+                          description: Explicitly disable memory for this harness.
+                            See disabled Block below.
+                          items:
+                            type: object
+                          type: array
+                        managedMemoryConfiguration:
+                          description: Managed memory configuration. Creates and manages
+                            a memory resource automatically. See managed_memory_configuration
+                            Block below.
+                          items:
+                            properties:
+                              arn:
+                                description: ARN of the hosting environment.
+                                type: string
+                              encryptionKeyArn:
+                                description: ARN of a customer-managed KMS key used
+                                  to encrypt the memory. Defaults to an AWS-owned
+                                  key. Cannot be changed after creation.
+                                type: string
+                              eventExpiryDuration:
+                                description: Event retention in days. Defaults to
+                                  30.
+                                type: number
+                              strategies:
+                                description: Set of strategy types to enable. Valid
+                                  values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
+                                  Defaults to ["SEMANTIC", "SUMMARIZATION"].
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   model:
-                    description: Model configuration for the harness. See model below.
+                    description: Model configuration for the harness. See model Block
+                      below.
                     properties:
                       bedrockModelConfig:
                         description: Amazon Bedrock model configuration. See bedrock_model_config
-                          below.
+                          Block below.
                         properties:
                           maxTokens:
                             description: Maximum number of tokens in the model response.
@@ -3985,7 +4139,7 @@ spec:
                         type: object
                       geminiModelConfig:
                         description: Gemini model configuration. See gemini_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -4010,7 +4164,7 @@ spec:
                         type: object
                       openaiModelConfig:
                         description: OpenAI model configuration. See openai_model_config
-                          below.
+                          Block below.
                         properties:
                           apiKeyArn:
                             description: ARN of the secret containing the API key.
@@ -4037,7 +4191,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   skill:
-                    description: Skill configurations. See skill below.
+                    description: Skill configurations. See skill Block below.
                     items:
                       properties:
                         path:
@@ -4047,7 +4201,7 @@ spec:
                     type: array
                   systemPrompt:
                     description: System prompt blocks for the harness. See system_prompt
-                      below.
+                      Block below.
                     items:
                       properties:
                         textSecretRef:
@@ -4082,7 +4236,7 @@ spec:
                     description: Timeout in seconds for the harness execution.
                     type: number
                   tool:
-                    description: Tool configurations. See tool below.
+                    description: Tool configurations. See tool Block below.
                     items:
                       properties:
                         config:
@@ -4091,7 +4245,7 @@ spec:
                           properties:
                             agentcoreBrowser:
                               description: AgentCore browser configuration. See agentcore_browser
-                                below.
+                                Block below.
                               properties:
                                 browserArn:
                                   description: ARN of the AgentCore browser resource.
@@ -4099,7 +4253,7 @@ spec:
                               type: object
                             agentcoreCodeInterpreter:
                               description: AgentCore code interpreter configuration.
-                                See agentcore_code_interpreter below.
+                                See agentcore_code_interpreter Block below.
                               properties:
                                 codeInterpreterArn:
                                   description: ARN of the AgentCore code interpreter
@@ -4108,14 +4262,14 @@ spec:
                               type: object
                             agentcoreGateway:
                               description: AgentCore gateway configuration. See agentcore_gateway
-                                below.
+                                Block below.
                               properties:
                                 gatewayArn:
                                   description: ARN of the AgentCore gateway resource.
                                   type: string
                                 outboundAuth:
                                   description: Outbound authentication configuration.
-                                    See outbound_auth below.
+                                    See outbound_auth Block below.
                                   properties:
                                     awsIam:
                                       description: Set to true to use AWS IAM authentication.
@@ -4125,7 +4279,7 @@ spec:
                                       type: boolean
                                     oauth:
                                       description: OAuth credential provider configuration.
-                                        See oauth below.
+                                        See oauth Block below.
                                       properties:
                                         customParameters:
                                           additionalProperties:
@@ -4154,7 +4308,7 @@ spec:
                               type: object
                             inlineFunction:
                               description: Inline function configuration. See inline_function
-                                below.
+                                Block below.
                               properties:
                                 description:
                                   description: Description of the inline function.
@@ -4162,7 +4316,7 @@ spec:
                               type: object
                             remoteMcp:
                               description: Remote MCP server configuration. See remote_mcp
-                                below.
+                                Block below.
                               properties:
                                 headersSecretRef:
                                   description: Map of HTTP headers to include in requests
@@ -4199,7 +4353,7 @@ spec:
                     type: array
                   truncation:
                     description: Truncation configuration for conversation history.
-                      See truncation below.
+                      See truncation Block below.
                     properties:
                       config:
                         description: Strategy-specific configuration. See truncation
@@ -4208,7 +4362,7 @@ spec:
                           properties:
                             slidingWindow:
                               description: Sliding window truncation configuration.
-                                See sliding_window below.
+                                See sliding_window Block below.
                               items:
                                 properties:
                                   messagesCount:
@@ -4219,7 +4373,7 @@ spec:
                               type: array
                             summarization:
                               description: Summarization truncation configuration.
-                                See summarization below.
+                                See summarization Block below.
                               items:
                                 properties:
                                   preserveRecentMessages:

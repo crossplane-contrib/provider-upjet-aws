@@ -1970,7 +1970,7 @@ spec:
                       with a Wavelength Zone.
                     type: string
                   coreNetworkArn:
-                    description: The Amazon Resource Name (ARN) of a core network.
+                    description: ARN of a core network.
                     type: string
                   destinationCidrBlock:
                     description: The destination CIDR block.
@@ -2377,7 +2377,7 @@ spec:
                         type: object
                     type: object
                   odbNetworkArn:
-                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    description: ARN of an ODB network.
                     type: string
                   region:
                     description: |-
@@ -2718,7 +2718,7 @@ spec:
                       with a Wavelength Zone.
                     type: string
                   coreNetworkArn:
-                    description: The Amazon Resource Name (ARN) of a core network.
+                    description: ARN of a core network.
                     type: string
                   destinationCidrBlock:
                     description: The destination CIDR block.
@@ -3125,7 +3125,7 @@ spec:
                         type: object
                     type: object
                   odbNetworkArn:
-                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    description: ARN of an ODB network.
                     type: string
                   routeTableId:
                     description: The ID of the routing table.
@@ -3537,7 +3537,7 @@ spec:
                       with a Wavelength Zone.
                     type: string
                   coreNetworkArn:
-                    description: The Amazon Resource Name (ARN) of a core network.
+                    description: ARN of a core network.
                     type: string
                   destinationCidrBlock:
                     description: The destination CIDR block.
@@ -3576,7 +3576,7 @@ spec:
                     description: Identifier of an EC2 network interface.
                     type: string
                   odbNetworkArn:
-                    description: The Amazon Resource Name (ARN) of an ODB network.
+                    description: ARN of an ODB network.
                     type: string
                   origin:
                     description: How the route was created - CreateRouteTable, CreateRoute

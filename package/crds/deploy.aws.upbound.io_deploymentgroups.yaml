@@ -3013,8 +3013,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array
@@ -3197,8 +3196,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array
@@ -3874,8 +3872,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array
@@ -4058,8 +4055,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array
@@ -4599,8 +4595,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array
@@ -4628,8 +4623,7 @@ spec:
                               route (documented below).
                             properties:
                               listenerArns:
-                                description: List of Amazon Resource Names (ARNs)
-                                  of the load balancer listeners.
+                                description: List of ARNs of the load balancer listeners.
                                 items:
                                   type: string
                                 type: array

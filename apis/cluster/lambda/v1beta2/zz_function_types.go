@@ -231,7 +231,7 @@ type FunctionInitParameters struct {
 	// ECR image URI containing the function's deployment package. Conflicts with filename and s3_bucket. One of filename, image_uri, or s3_bucket must be specified.
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
+	// ARN of the KMS key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -335,7 +335,7 @@ type FunctionInitParameters struct {
 	// Used to trigger updates. Must be set to a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. If you have specified this field manually, it should be the actual (computed) hash of the underlying lambda function specified in the filename, image_uri, s3_bucket fields.
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	// ARN of the KMS key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
 	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -407,7 +407,7 @@ type FunctionObservation struct {
 	// ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	InvokeArn *string `json:"invokeArn,omitempty" tf:"invoke_arn,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
+	// ARN of the KMS key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Date this resource was last modified.
@@ -487,7 +487,7 @@ type FunctionObservation struct {
 	// Size in bytes of the function .zip file.
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	// ARN of the KMS key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
 	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -571,7 +571,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
+	// ARN of the KMS key used to encrypt environment variables. If not provided when environment variables are in use, AWS Lambda uses a default service key. If provided when environment variables are not in use, the AWS Lambda API does not save this configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -698,7 +698,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
-	// ARN of the AWS Key Management Service key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
+	// ARN of the KMS key used to encrypt the function's .zip deployment package. Conflicts with image_uri.
 	// +kubebuilder:validation:Optional
 	SourceKMSKeyArn *string `json:"sourceKmsKeyArn,omitempty" tf:"source_kms_key_arn,omitempty"`
 

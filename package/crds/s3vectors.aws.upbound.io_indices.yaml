@@ -86,14 +86,13 @@ spec:
                     type: string
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
-                      index. See encyption_configuration block below.
+                      index. See encryption_configuration Block below.
                     properties:
                       kmsKeyArn:
-                        description: AWS Key Management Service (KMS) customer managed
-                          key ID to use for the encryption configuration. This parameter
-                          is allowed if and only if sse_type is set to aws:kms. To
-                          specify the KMS key, you must use the format of the KMS
-                          key Amazon Resource Name (ARN).
+                        description: KMS customer managed key ID to use for the encryption
+                          configuration. This parameter is allowed if and only if
+                          sse_type is set to aws:kms. To specify the KMS key, you
+                          must use the format of the KMS key ARN.
                         type: string
                       sseType:
                         description: 'Type of encryption to use. Valid values: AES256,
@@ -105,7 +104,7 @@ spec:
                     type: string
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
-                      See metadata_configuration block below.
+                      See metadata_configuration Block below.
                     properties:
                       nonFilterableMetadataKeys:
                         description: List of non-filterable metadata keys.
@@ -234,14 +233,13 @@ spec:
                     type: string
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
-                      index. See encyption_configuration block below.
+                      index. See encryption_configuration Block below.
                     properties:
                       kmsKeyArn:
-                        description: AWS Key Management Service (KMS) customer managed
-                          key ID to use for the encryption configuration. This parameter
-                          is allowed if and only if sse_type is set to aws:kms. To
-                          specify the KMS key, you must use the format of the KMS
-                          key Amazon Resource Name (ARN).
+                        description: KMS customer managed key ID to use for the encryption
+                          configuration. This parameter is allowed if and only if
+                          sse_type is set to aws:kms. To specify the KMS key, you
+                          must use the format of the KMS key ARN.
                         type: string
                       sseType:
                         description: 'Type of encryption to use. Valid values: AES256,
@@ -253,7 +251,7 @@ spec:
                     type: string
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
-                      See metadata_configuration block below.
+                      See metadata_configuration Block below.
                     properties:
                       nonFilterableMetadataKeys:
                         description: List of non-filterable metadata keys.
@@ -473,14 +471,13 @@ spec:
                     type: string
                   encryptionConfiguration:
                     description: Block for encryption configuration for the vector
-                      index. See encyption_configuration block below.
+                      index. See encryption_configuration Block below.
                     properties:
                       kmsKeyArn:
-                        description: AWS Key Management Service (KMS) customer managed
-                          key ID to use for the encryption configuration. This parameter
-                          is allowed if and only if sse_type is set to aws:kms. To
-                          specify the KMS key, you must use the format of the KMS
-                          key Amazon Resource Name (ARN).
+                        description: KMS customer managed key ID to use for the encryption
+                          configuration. This parameter is allowed if and only if
+                          sse_type is set to aws:kms. To specify the KMS key, you
+                          must use the format of the KMS key ARN.
                         type: string
                       sseType:
                         description: 'Type of encryption to use. Valid values: AES256,
@@ -497,7 +494,7 @@ spec:
                     type: string
                   metadataConfiguration:
                     description: Block for metadata configuration for the vector index.
-                      See metadata_configuration block below.
+                      See metadata_configuration Block below.
                     properties:
                       nonFilterableMetadataKeys:
                         description: List of non-filterable metadata keys.
@@ -520,9 +517,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   vectorBucketName:

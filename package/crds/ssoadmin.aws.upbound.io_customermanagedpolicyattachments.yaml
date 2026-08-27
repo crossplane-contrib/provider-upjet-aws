@@ -707,12 +707,11 @@ spec:
                         type: object
                     type: object
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set.
+                    description: ARN of the Permission Set.
                     type: string
                   permissionSetArnRef:
                     description: Reference to a PermissionSet in ssoadmin to populate
@@ -1012,17 +1011,15 @@ spec:
                         type: string
                     type: object
                   id:
-                    description: Policy Name, Policy Path, Permission Set Amazon Resource
-                      Name (ARN), and SSO Instance ARN, each separated by a comma
-                      (,).
+                    description: Policy Name, Policy Path, Permission Set ARN, and
+                      SSO Instance ARN, each separated by a comma (,).
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set.
+                    description: ARN of the Permission Set.
                     type: string
                   region:
                     description: |-

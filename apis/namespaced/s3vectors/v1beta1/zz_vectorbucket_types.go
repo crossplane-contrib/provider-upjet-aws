@@ -64,7 +64,7 @@ type VectorBucketEncryptionConfigurationParameters struct {
 
 type VectorBucketInitParameters struct {
 
-	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
+	// Encryption configuration for the vector bucket. See encryption_configuration below for more details.
 	EncryptionConfiguration *VectorBucketEncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Boolean that indicates all indexes and vectors should be deleted from the vector bucket when the vector bucket is destroyed so that the vector bucket can be destroyed without error. If setting this field in the same operation that would require replacing the vector bucket or destroying the vector bucket, this flag will not work.
@@ -83,7 +83,7 @@ type VectorBucketObservation struct {
 	// Date and time when the vector bucket was created.
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
-	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
+	// Encryption configuration for the vector bucket. See encryption_configuration below for more details.
 	EncryptionConfiguration *VectorBucketEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Boolean that indicates all indexes and vectors should be deleted from the vector bucket when the vector bucket is destroyed so that the vector bucket can be destroyed without error. If setting this field in the same operation that would require replacing the vector bucket or destroying the vector bucket, this flag will not work.
@@ -99,7 +99,7 @@ type VectorBucketObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -112,7 +112,7 @@ type VectorBucketObservation struct {
 
 type VectorBucketParameters struct {
 
-	// Encryption configuration for the vector bucket. See Encryption Configuration below for more details.
+	// Encryption configuration for the vector bucket. See encryption_configuration below for more details.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration *VectorBucketEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 

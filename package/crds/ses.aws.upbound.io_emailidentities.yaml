@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   email:
-                    description: The email address to assign to SES.
+                    description: Email address to assign to SES.
                     type: string
                   region:
                     description: |-
@@ -98,7 +98,7 @@ spec:
                   autoscaler.
                 properties:
                   email:
-                    description: The email address to assign to SES.
+                    description: Email address to assign to SES.
                     type: string
                 type: object
               managementPolicies:
@@ -198,10 +198,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the email identity.
+                    description: ARN of the email identity.
                     type: string
                   email:
-                    description: The email address to assign to SES.
+                    description: Email address to assign to SES.
                     type: string
                   id:
                     type: string

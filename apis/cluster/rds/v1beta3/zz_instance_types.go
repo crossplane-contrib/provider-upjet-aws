@@ -1204,7 +1204,7 @@ type MasterUserSecretObservation struct {
 	// The Amazon Web Services KMS key identifier that is used to encrypt the secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret.
+	// ARN of the secret.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
 	// The status of the secret. Valid Values: creating | active | rotating | impaired.

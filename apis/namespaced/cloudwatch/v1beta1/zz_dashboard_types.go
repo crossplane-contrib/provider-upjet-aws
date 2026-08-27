@@ -21,7 +21,7 @@ type DashboardInitParameters struct {
 
 type DashboardObservation struct {
 
-	// The Amazon Resource Name (ARN) of the dashboard.
+	// ARN of the dashboard.
 	DashboardArn *string `json:"dashboardArn,omitempty" tf:"dashboard_arn,omitempty"`
 
 	// The detailed information about the dashboard, including what widgets are included and their location on the dashboard. You can read more about the body structure in the documentation.

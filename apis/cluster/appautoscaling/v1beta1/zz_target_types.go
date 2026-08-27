@@ -82,7 +82,7 @@ type TargetInitParameters struct {
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 
-	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	// Whether the scaling activities for a scalable target are in a suspended state.
 	SuspendedState *SuspendedStateInitParameters `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -92,7 +92,7 @@ type TargetInitParameters struct {
 
 type TargetObservation struct {
 
-	// The ARN of the scalable target.
+	// ARN of the scalable target.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -119,7 +119,7 @@ type TargetObservation struct {
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 
-	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	// Whether the scaling activities for a scalable target are in a suspended state.
 	SuspendedState *SuspendedStateObservation `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
 
 	// Key-value map of resource tags.
@@ -172,7 +172,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 
-	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	// Whether the scaling activities for a scalable target are in a suspended state.
 	// +kubebuilder:validation:Optional
 	SuspendedState *SuspendedStateParameters `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
 

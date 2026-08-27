@@ -18,7 +18,7 @@ type RouteInitParameters struct {
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a core network.
+	// ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
 	// The destination CIDR block.
@@ -91,7 +91,7 @@ type RouteInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of an ODB network.
+	// ARN of an ODB network.
 	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 
 	// The ID of the routing table.
@@ -148,7 +148,7 @@ type RouteObservation struct {
 	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a core network.
+	// ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
 	// The destination CIDR block.
@@ -184,7 +184,7 @@ type RouteObservation struct {
 	// Identifier of an EC2 network interface.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an ODB network.
+	// ARN of an ODB network.
 	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 
 	// How the route was created - CreateRouteTable, CreateRoute or EnableVgwRoutePropagation.
@@ -216,7 +216,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a core network.
+	// ARN of a core network.
 	// +kubebuilder:validation:Optional
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
@@ -298,7 +298,7 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of an ODB network.
+	// ARN of an ODB network.
 	// +kubebuilder:validation:Optional
 	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 

@@ -1256,30 +1256,6 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	if mg.Spec.ForProvider.Environment != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "AgentRuntime", "AgentRuntimeList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn),
-					Extract:      resource.ExtractParamPath("agent_runtime_arn", true),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnRef,
-					Selector:     mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn")
-			}
-			mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnRef = rsp.ResolvedReference
-
-		}
-	}
-	if mg.Spec.ForProvider.Environment != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].FilesystemConfiguration); i5++ {
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.Environment.AgentcoreRuntimeEnvironment[i4].FilesystemConfiguration[i5].EFSAccessPoint); i6++ {
 					{
@@ -1558,30 +1534,6 @@ func (mg *Harness) ResolveReferences(ctx context.Context, c client.Reader) error
 					}
 				}
 			}
-		}
-	}
-	if mg.Spec.InitProvider.Environment != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("bedrockagentcore.aws.m.upbound.io", "v1beta1", "AgentRuntime", "AgentRuntimeList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn),
-					Extract:      resource.ExtractParamPath("agent_runtime_arn", true),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnRef,
-					Selector:     mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn")
-			}
-			mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArn = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Environment.AgentcoreRuntimeEnvironment[i4].AgentRuntimeArnRef = rsp.ResolvedReference
-
 		}
 	}
 	if mg.Spec.InitProvider.Environment != nil {
@@ -2023,12 +1975,64 @@ func (mg *MemoryStrategy) ResolveReferences(ctx context.Context, c client.Reader
 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
+
+	if mg.Spec.ForProvider.Configuration != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef,
+						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName")
+				}
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.ForProvider.Configuration != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef,
+						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn")
+				}
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemoryExecutionRoleArn),
 			Extract:      common1.ARNExtractor(),
@@ -2063,12 +2067,64 @@ func (mg *MemoryStrategy) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.MemoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MemoryIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Configuration != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.m.upbound.io", "v1beta1", "Bucket", "BucketList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName),
+						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef,
+						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName")
+				}
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	if mg.Spec.InitProvider.Configuration != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("sns.aws.m.upbound.io", "v1beta1", "Topic", "TopicList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef,
+						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn")
+				}
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.m.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemoryExecutionRoleArn),
 			Extract:      common1.ARNExtractor(),

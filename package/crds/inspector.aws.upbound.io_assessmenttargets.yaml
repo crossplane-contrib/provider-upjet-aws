@@ -82,10 +82,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceGroupArn:
-                    description: Inspector Resource Group Amazon Resource Name (ARN)
-                      stating tags for instance matching. If not specified, all EC2
-                      instances in the current AWS account and region are included
-                      in the assessment target.
+                    description: Inspector Resource Group ARN stating tags for instance
+                      matching. If not specified, all EC2 instances in the current
+                      AWS account and region are included in the assessment target.
                     type: string
                   resourceGroupArnRef:
                     description: Reference to a ResourceGroup in inspector to populate
@@ -183,10 +182,9 @@ spec:
                     description: The name of the assessment target.
                     type: string
                   resourceGroupArn:
-                    description: Inspector Resource Group Amazon Resource Name (ARN)
-                      stating tags for instance matching. If not specified, all EC2
-                      instances in the current AWS account and region are included
-                      in the assessment target.
+                    description: Inspector Resource Group ARN stating tags for instance
+                      matching. If not specified, all EC2 instances in the current
+                      AWS account and region are included in the assessment target.
                     type: string
                   resourceGroupArnRef:
                     description: Reference to a ResourceGroup in inspector to populate
@@ -375,10 +373,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceGroupArn:
-                    description: Inspector Resource Group Amazon Resource Name (ARN)
-                      stating tags for instance matching. If not specified, all EC2
-                      instances in the current AWS account and region are included
-                      in the assessment target.
+                    description: Inspector Resource Group ARN stating tags for instance
+                      matching. If not specified, all EC2 instances in the current
+                      AWS account and region are included in the assessment target.
                     type: string
                 type: object
               conditions:

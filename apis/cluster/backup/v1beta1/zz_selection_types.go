@@ -83,7 +83,7 @@ type SelectionInitParameters struct {
 	// The display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to exclude from a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -109,7 +109,7 @@ type SelectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PlanIDSelector *v2.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to assign to a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -135,13 +135,13 @@ type SelectionObservation struct {
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
-	// Backup Selection identifier
+	// Backup Selection identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to exclude from a backup plan.
 	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
@@ -152,7 +152,7 @@ type SelectionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to assign to a backup plan.
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -184,7 +184,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to exclude from a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -217,7 +217,7 @@ type SelectionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// Array of strings that either contain ARNs or match patterns of resources to assign to a backup plan.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

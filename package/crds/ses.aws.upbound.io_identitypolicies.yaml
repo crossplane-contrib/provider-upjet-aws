@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   identity:
-                    description: Name or Amazon Resource Name (ARN) of the SES Identity.
+                    description: Name or ARN of the SES Identity.
                     type: string
                   identityRef:
                     description: Reference to a DomainIdentity in ses to populate
@@ -180,7 +180,7 @@ spec:
                   autoscaler.
                 properties:
                   identity:
-                    description: Name or Amazon Resource Name (ARN) of the SES Identity.
+                    description: Name or ARN of the SES Identity.
                     type: string
                   identityRef:
                     description: Reference to a DomainIdentity in ses to populate
@@ -368,7 +368,7 @@ spec:
                   id:
                     type: string
                   identity:
-                    description: Name or Amazon Resource Name (ARN) of the SES Identity.
+                    description: Name or ARN of the SES Identity.
                     type: string
                   name:
                     description: Name of the policy.

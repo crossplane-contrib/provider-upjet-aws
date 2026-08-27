@@ -15,10 +15,10 @@ import (
 
 type SecretVersionInitParameters struct {
 
-	// Specifies binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
+	// Binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
 	SecretBinarySecretRef *v2.LocalSecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
@@ -31,27 +31,26 @@ type SecretVersionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 
-	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
 	SecretStringSecretRef *v2.LocalSecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
-	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
 	SecretStringWoSecretRef *v2.LocalSecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 
-	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
+	// List of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
 	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`
 }
 
 type SecretVersionObservation struct {
 
-	// (Deprecated) The ARN of the secret.
-	// Use secret_arn instead.
+	// (Deprecated) ARN of the secret. Use secret_arn instead.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
+	// Whether a write-only secret string value is set.
 	HasSecretStringWo *bool `json:"hasSecretStringWo,omitempty" tf:"has_secret_string_wo,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -60,19 +59,19 @@ type SecretVersionObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the secret.
+	// ARN of the secret.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
-	// Used together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 
-	// The unique identifier of the version of the secret.
+	// Unique identifier of the version of the secret.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 
-	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
+	// List of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
 	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`
 }
@@ -84,11 +83,11 @@ type SecretVersionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Specifies binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
+	// Binary data that you want to encrypt and store in this version of the secret. This is required if secret_string or secret_string_wo is not set. Needs to be encoded to base64.
 	// +kubebuilder:validation:Optional
 	SecretBinarySecretRef *v2.LocalSecretKeySelector `json:"secretBinarySecretRef,omitempty" tf:"-"`
 
-	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// Secret to which you want to add a new version. You can specify either the ARN or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -102,19 +101,19 @@ type SecretVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretIDSelector *v2.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 
-	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string_wo is not set.
 	// +kubebuilder:validation:Optional
 	SecretStringSecretRef *v2.LocalSecretKeySelector `json:"secretStringSecretRef,omitempty" tf:"-"`
 
-	// Specifies text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
+	// Text data that you want to encrypt and store in this version of the secret. This is required if secret_binary or secret_string is not set.
 	// +kubebuilder:validation:Optional
 	SecretStringWoSecretRef *v2.LocalSecretKeySelector `json:"secretStringWoSecretRef,omitempty" tf:"-"`
 
-	// Used together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
+	// Version identifier that works together with secret_string_wo to trigger an update. Increment this value when an update to secret_string_wo is required.
 	// +kubebuilder:validation:Optional
 	SecretStringWoVersion *float64 `json:"secretStringWoVersion,omitempty" tf:"secret_string_wo_version,omitempty"`
 
-	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
+	// List of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`

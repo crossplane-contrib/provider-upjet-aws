@@ -37,7 +37,7 @@ type HSMConfigurationInitParameters struct {
 
 type HSMConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of the Hsm Client Certificate.
+	// ARN of the Hsm Client Certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A text description of the HSM configuration to be created.

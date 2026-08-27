@@ -68,7 +68,7 @@ type NetworkProfileInitParameters struct {
 
 type NetworkProfileObservation struct {
 
-	// The Amazon Resource Name of this network profile.
+	// ARN of this network profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the network profile.

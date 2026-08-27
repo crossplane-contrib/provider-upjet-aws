@@ -76,7 +76,8 @@ spec:
               forProvider:
                 properties:
                   codeSecretRef:
-                    description: Source code of the function
+                    description: Source code of the function. Must be between 1 and
+                      40960 bytes.
                     properties:
                       key:
                         description: The key to select.
@@ -93,7 +94,7 @@ spec:
                     - namespace
                     type: object
                   comment:
-                    description: Comment.
+                    description: Comment. Must not exceed 128 characters.
                     type: string
                   keyValueStoreAssociations:
                     description: List of aws_cloudfront_key_value_store ARNs to be
@@ -132,7 +133,8 @@ spec:
                   autoscaler.
                 properties:
                   codeSecretRef:
-                    description: Source code of the function
+                    description: Source code of the function. Must be between 1 and
+                      40960 bytes.
                     properties:
                       key:
                         description: The key to select.
@@ -149,7 +151,7 @@ spec:
                     - namespace
                     type: object
                   comment:
-                    description: Comment.
+                    description: Comment. Must not exceed 128 characters.
                     type: string
                   keyValueStoreAssociations:
                     description: List of aws_cloudfront_key_value_store ARNs to be
@@ -276,11 +278,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) identifying your CloudFront
-                      Function.
+                    description: ARN identifying your CloudFront Function.
                     type: string
                   comment:
-                    description: Comment.
+                    description: Comment. Must not exceed 128 characters.
                     type: string
                   etag:
                     description: ETag hash of the function. This is the value for

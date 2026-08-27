@@ -18,7 +18,7 @@ type AMIInitParameters struct {
 	// Machine architecture for created instances. Defaults to x86_64.
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// Boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+	// Boot mode of the AMI. For more information, see Boot modes in the EC2 User Guide.
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
 	// Date and time to deprecate the AMI. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
@@ -67,7 +67,7 @@ type AMIInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the EC2 User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
 	// Base64 representation of the non-volatile UEFI variable store.
@@ -87,7 +87,7 @@ type AMIObservation struct {
 	// ARN of the AMI.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+	// Boot mode of the AMI. For more information, see Boot modes in the EC2 User Guide.
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
 	// Date and time to deprecate the AMI. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
@@ -176,7 +176,7 @@ type AMIObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the EC2 User Guide.
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
 	// Base64 representation of the non-volatile UEFI variable store.
@@ -197,7 +197,7 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Optional
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// Boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+	// Boot mode of the AMI. For more information, see Boot modes in the EC2 User Guide.
 	// +kubebuilder:validation:Optional
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
@@ -265,7 +265,7 @@ type AMIParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the EC2 User Guide.
 	// +kubebuilder:validation:Optional
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 

@@ -92,7 +92,7 @@ type PoolInitParameters struct {
 	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
+	// An array of ARNs of the SAML provider for your identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.SAMLProvider
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
@@ -146,7 +146,7 @@ type PoolObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
+	// An array of ARNs of the SAML provider for your identity.
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
@@ -195,7 +195,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
+	// An array of ARNs of the SAML provider for your identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.SAMLProvider
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

@@ -44,14 +44,11 @@ type MethodInitParameters struct {
 	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// Map of the API models used for the request's content type
-	// where key is the content type (e.g., application/json)
-	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	// Map of the API models used for the request's content type where key is the content type (e.g., application/json) and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
 	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
-	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
-	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false). For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -112,14 +109,11 @@ type MethodObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Map of the API models used for the request's content type
-	// where key is the content type (e.g., application/json)
-	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	// Map of the API models used for the request's content type where key is the content type (e.g., application/json) and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
 	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
-	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
-	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false). For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
@@ -175,15 +169,12 @@ type MethodParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Map of the API models used for the request's content type
-	// where key is the content type (e.g., application/json)
-	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	// Map of the API models used for the request's content type where key is the content type (e.g., application/json) and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
-	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
-	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false). For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`

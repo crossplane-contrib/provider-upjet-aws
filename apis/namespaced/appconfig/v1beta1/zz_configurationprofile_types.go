@@ -31,7 +31,7 @@ type ConfigurationProfileInitParameters struct {
 	// Description of the configuration profile. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier for an Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the Amazon Resource Name (ARN) of the key ID or alias.
+	// Identifier for a KMS key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the ARN of the key ID or alias.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
@@ -60,7 +60,7 @@ type ConfigurationProfileInitParameters struct {
 	// Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	// Set of methods for validating the configuration. Maximum of 2. See validator Block below for more details.
 	Validator []ValidatorInitParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
@@ -72,7 +72,7 @@ type ConfigurationProfileObservation struct {
 	// ARN of the AppConfig Configuration Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The configuration profile ID.
+	// Configuration profile ID.
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
 	// Description of the configuration profile. Can be at most 1024 characters.
@@ -81,7 +81,7 @@ type ConfigurationProfileObservation struct {
 	// AppConfig configuration profile ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier for an Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the Amazon Resource Name (ARN) of the key ID or alias.
+	// Identifier for a KMS key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the ARN of the key ID or alias.
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
@@ -108,7 +108,7 @@ type ConfigurationProfileObservation struct {
 	// Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	// Set of methods for validating the configuration. Maximum of 2. See validator Block below for more details.
 	Validator []ValidatorObservation `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
@@ -132,7 +132,7 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier for an Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the Amazon Resource Name (ARN) of the key ID or alias.
+	// Identifier for a KMS key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the ARN of the key ID or alias.
 	// +kubebuilder:validation:Optional
 	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
 
@@ -172,7 +172,7 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	// Set of methods for validating the configuration. Maximum of 2. See validator Block below for more details.
 	// +kubebuilder:validation:Optional
 	Validator []ValidatorParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }

@@ -90,7 +90,7 @@ type VPCConfigurationInitParameters struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+	// Value of the TLS certificate associated with the infrastructure where your provider type is installed.
 	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 
 	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
@@ -107,7 +107,7 @@ type VPCConfigurationObservation struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
-	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+	// Value of the TLS certificate associated with the infrastructure where your provider type is installed.
 	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 
 	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
@@ -126,7 +126,7 @@ type VPCConfigurationParameters struct {
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 
-	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+	// Value of the TLS certificate associated with the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
 	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 

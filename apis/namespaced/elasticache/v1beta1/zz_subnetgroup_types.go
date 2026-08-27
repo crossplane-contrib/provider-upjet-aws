@@ -62,7 +62,7 @@ type SubnetGroupObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
+	// VPC identifier (VPC ID) of the cache subnet group.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 

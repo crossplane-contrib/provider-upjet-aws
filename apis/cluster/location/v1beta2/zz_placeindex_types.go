@@ -15,32 +15,32 @@ import (
 
 type DataSourceConfigurationInitParameters struct {
 
-	// Specifies how the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
+	// How the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
 	IntendedUse *string `json:"intendedUse,omitempty" tf:"intended_use,omitempty"`
 }
 
 type DataSourceConfigurationObservation struct {
 
-	// Specifies how the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
+	// How the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
 	IntendedUse *string `json:"intendedUse,omitempty" tf:"intended_use,omitempty"`
 }
 
 type DataSourceConfigurationParameters struct {
 
-	// Specifies how the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
+	// How the results of an operation will be stored by the caller. Valid values: SingleUse, Storage. Default: SingleUse.
 	// +kubebuilder:validation:Optional
 	IntendedUse *string `json:"intendedUse,omitempty" tf:"intended_use,omitempty"`
 }
 
 type PlaceIndexInitParameters struct {
 
-	// Specifies the geospatial data provider for the new place index.
+	// Geospatial data provider for the new place index.
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Configuration block with the data storage option chosen for requesting Places. Detailed below.
 	DataSourceConfiguration *DataSourceConfigurationInitParameters `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
-	// The optional description for the place index resource.
+	// Optional description for the place index resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key-value map of resource tags.
@@ -50,21 +50,21 @@ type PlaceIndexInitParameters struct {
 
 type PlaceIndexObservation struct {
 
-	// The timestamp for when the place index resource was created in ISO 8601 format.
+	// Timestamp for when the place index resource was created in ISO 8601 format.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
-	// Specifies the geospatial data provider for the new place index.
+	// Geospatial data provider for the new place index.
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Configuration block with the data storage option chosen for requesting Places. Detailed below.
 	DataSourceConfiguration *DataSourceConfigurationObservation `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
-	// The optional description for the place index resource.
+	// Optional description for the place index resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.
+	// ARN for the place index resource. Used to specify a resource across AWS.
 	IndexArn *string `json:"indexArn,omitempty" tf:"index_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -75,17 +75,17 @@ type PlaceIndexObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The timestamp for when the place index resource was last update in ISO 8601.
+	// Timestamp for when the place index resource was last updated in ISO 8601 format.
 	UpdateTime *string `json:"updateTime,omitempty" tf:"update_time,omitempty"`
 }
 
 type PlaceIndexParameters struct {
 
-	// Specifies the geospatial data provider for the new place index.
+	// Geospatial data provider for the new place index.
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
@@ -93,7 +93,7 @@ type PlaceIndexParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSourceConfiguration *DataSourceConfigurationParameters `json:"dataSourceConfiguration,omitempty" tf:"data_source_configuration,omitempty"`
 
-	// The optional description for the place index resource.
+	// Optional description for the place index resource.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

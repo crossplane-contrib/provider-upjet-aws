@@ -90,7 +90,7 @@ type CollectionGroupInitParameters struct {
 
 type CollectionGroupObservation struct {
 
-	// Amazon Resource Name (ARN) of the collection group.
+	// ARN of the collection group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block for the collection group's indexing and search capacity limits. See capacity_limits below for details.

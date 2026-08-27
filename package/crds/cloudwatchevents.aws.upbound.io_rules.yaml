@@ -178,8 +178,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) associated with the
-                      role that is used for target invocation.
+                    description: ARN associated with the role that is used for target
+                      invocation.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -392,8 +392,8 @@ spec:
                       Conflicts with state.
                     type: boolean
                   roleArn:
-                    description: The Amazon Resource Name (ARN) associated with the
-                      role that is used for target invocation.
+                    description: ARN associated with the role that is used for target
+                      invocation.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -583,7 +583,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the rule.
+                    description: ARN of the rule.
                     type: string
                   description:
                     description: The description of the rule.
@@ -617,8 +617,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) associated with the
-                      role that is used for target invocation.
+                    description: ARN associated with the role that is used for target
+                      invocation.
                     type: string
                   scheduleExpression:
                     description: The scheduling expression. For example, cron(0 20

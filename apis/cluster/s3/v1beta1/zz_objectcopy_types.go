@@ -25,7 +25,7 @@ type ObjectCopyGrantInitParameters struct {
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
+	// Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// URI of the grantee group. Used only when type is Group.
@@ -44,7 +44,7 @@ type ObjectCopyGrantObservation struct {
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
+	// Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// URI of the grantee group. Used only when type is Group.
@@ -66,7 +66,7 @@ type ObjectCopyGrantParameters struct {
 	// +listType=set
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
-	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
+	// Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -83,18 +83,19 @@ type ObjectCopyInitParameters struct {
 	// Name of the bucket to put the file in.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Whether to use an S3 Bucket Key for object encryption with server-side encryption using KMS (SSE-KMS).
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 
-	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
+	// Caching behavior along the request/reply chain. Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
-	// Specifies presentational information for the object. Read w3c content_disposition for further information.
+	// Presentational information for the object. Read w3c content_disposition for further information.
 	ContentDisposition *string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
 
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
+	// Content encodings that have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
 	ContentEncoding *string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty"`
 
 	// Language the content is in e.g., en-US or en-GB.
@@ -115,13 +116,13 @@ type ObjectCopyInitParameters struct {
 	// Copies the object if it hasn't been modified since the specified time, in RFC3339 format.
 	CopyIfUnmodifiedSince *string `json:"copyIfUnmodifiedSince,omitempty" tf:"copy_if_unmodified_since,omitempty"`
 
-	// Specifies the algorithm to use to when encrypting the object (for example, AES256).
+	// Algorithm to use when encrypting the object (for example, AES256).
 	CustomerAlgorithm *string `json:"customerAlgorithm,omitempty" tf:"customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	CustomerKeyMd5 *string `json:"customerKeyMd5,omitempty" tf:"customer_key_md5,omitempty"`
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
+	// Customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
 	CustomerKeySecretRef *v2.SecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
 
 	// Account id of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
@@ -139,10 +140,10 @@ type ObjectCopyInitParameters struct {
 	// Configuration block for header grants. Documented below. Conflicts with acl.
 	Grant []ObjectCopyGrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Specifies the AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+	// AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
 	KMSEncryptionContextSecretRef *v2.SecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
 
-	// Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
+	// AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
 	KMSKeyIDSecretRef *v2.SecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
 
 	// Name of the object once it is in the bucket.
@@ -152,10 +153,10 @@ type ObjectCopyInitParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
+	// Whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
 	MetadataDirective *string `json:"metadataDirective,omitempty" tf:"metadata_directive,omitempty"`
 
-	// The legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
+	// Legal hold status to apply to the specified object. Valid values are ON and OFF.
 	ObjectLockLegalHoldStatus *string `json:"objectLockLegalHoldStatus,omitempty" tf:"object_lock_legal_hold_status,omitempty"`
 
 	// Object lock retention mode that you want to apply to this object. Valid values are GOVERNANCE and COMPLIANCE.
@@ -169,32 +170,32 @@ type ObjectCopyInitParameters struct {
 	// Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. For information about downloading objects from requester pays buckets, see Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the Amazon S3 Developer Guide. If included, the only valid value is requester.
 	RequestPayer *string `json:"requestPayer,omitempty" tf:"request_payer,omitempty"`
 
-	// Specifies server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
+	// Server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Specifies the source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
+	// Source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Specifies the algorithm to use when decrypting the source object (for example, AES256).
+	// Algorithm to use when decrypting the source object (for example, AES256).
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
+	// Customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
 	SourceCustomerKeySecretRef *v2.SecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
-	// Specifies the desired storage class for the object. Defaults to STANDARD.
+	// Desired storage class for the object. Defaults to STANDARD.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
+	// Whether the object tag-set is copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
 	TaggingDirective *string `json:"taggingDirective,omitempty" tf:"tagging_directive,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a target URL for website redirect.
+	// Target URL for website redirect.
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
 }
 
@@ -209,33 +210,34 @@ type ObjectCopyObservation struct {
 	// Name of the bucket to put the file in.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Whether to use an S3 Bucket Key for object encryption with server-side encryption using KMS (SSE-KMS).
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 
-	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
+	// Caching behavior along the request/reply chain. Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
-	// The base64-encoded, 32-bit CRC32 checksum of the object.
+	// Base64-encoded, 32-bit CRC32 checksum of the object.
 	ChecksumCrc32 *string `json:"checksumCrc32,omitempty" tf:"checksum_crc32,omitempty"`
 
-	// The base64-encoded, 32-bit CRC32C checksum of the object.
+	// Base64-encoded, 32-bit CRC32C checksum of the object.
 	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
 
-	// The base64-encoded, 64-bit CRC64NVME checksum of the object.
+	// Base64-encoded, 64-bit CRC64NVME checksum of the object.
 	ChecksumCrc64Nvme *string `json:"checksumCrc64Nvme,omitempty" tf:"checksum_crc64nvme,omitempty"`
 
-	// The base64-encoded, 160-bit SHA-1 digest of the object.
+	// Base64-encoded, 160-bit SHA-1 digest of the object.
 	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
 
-	// The base64-encoded, 256-bit SHA-256 digest of the object.
+	// Base64-encoded, 256-bit SHA-256 digest of the object.
 	ChecksumSha256 *string `json:"checksumSha256,omitempty" tf:"checksum_sha256,omitempty"`
 
-	// Specifies presentational information for the object. Read w3c content_disposition for further information.
+	// Presentational information for the object. Read w3c content_disposition for further information.
 	ContentDisposition *string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
 
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
+	// Content encodings that have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
 	ContentEncoding *string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty"`
 
 	// Language the content is in e.g., en-US or en-GB.
@@ -256,10 +258,10 @@ type ObjectCopyObservation struct {
 	// Copies the object if it hasn't been modified since the specified time, in RFC3339 format.
 	CopyIfUnmodifiedSince *string `json:"copyIfUnmodifiedSince,omitempty" tf:"copy_if_unmodified_since,omitempty"`
 
-	// Specifies the algorithm to use to when encrypting the object (for example, AES256).
+	// Algorithm to use when encrypting the object (for example, AES256).
 	CustomerAlgorithm *string `json:"customerAlgorithm,omitempty" tf:"customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	CustomerKeyMd5 *string `json:"customerKeyMd5,omitempty" tf:"customer_key_md5,omitempty"`
 
 	// ETag generated for the object (an MD5 sum of the object content). For plaintext objects or objects encrypted with an AWS-managed key, the hash is an MD5 digest of the object data. For objects encrypted with a KMS key or objects created by either the Multipart Upload or Part Copy operation, the hash is not an MD5 digest, regardless of the method of encryption. More information on possible values can be found on Common Response Headers.
@@ -296,10 +298,10 @@ type ObjectCopyObservation struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
+	// Whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
 	MetadataDirective *string `json:"metadataDirective,omitempty" tf:"metadata_directive,omitempty"`
 
-	// The legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
+	// Legal hold status to apply to the specified object. Valid values are ON and OFF.
 	ObjectLockLegalHoldStatus *string `json:"objectLockLegalHoldStatus,omitempty" tf:"object_lock_legal_hold_status,omitempty"`
 
 	// Object lock retention mode that you want to apply to this object. Valid values are GOVERNANCE and COMPLIANCE.
@@ -320,25 +322,25 @@ type ObjectCopyObservation struct {
 	// Confirms that the requester knows that they will be charged for the request. Bucket owners need not specify this parameter in their requests. For information about downloading objects from requester pays buckets, see Downloading Objects in Requestor Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html) in the Amazon S3 Developer Guide. If included, the only valid value is requester.
 	RequestPayer *string `json:"requestPayer,omitempty" tf:"request_payer,omitempty"`
 
-	// Specifies server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
+	// Server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Specifies the source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
+	// Source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Specifies the algorithm to use when decrypting the source object (for example, AES256).
+	// Algorithm to use when decrypting the source object (for example, AES256).
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
 
 	// Version of the copied object in the source bucket.
 	SourceVersionID *string `json:"sourceVersionId,omitempty" tf:"source_version_id,omitempty"`
 
-	// Specifies the desired storage class for the object. Defaults to STANDARD.
+	// Desired storage class for the object. Defaults to STANDARD.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
+	// Whether the object tag-set is copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
 	TaggingDirective *string `json:"taggingDirective,omitempty" tf:"tagging_directive,omitempty"`
 
 	// Key-value map of resource tags.
@@ -352,25 +354,25 @@ type ObjectCopyObservation struct {
 	// Version ID of the newly created copy.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 
-	// Specifies a target URL for website redirect.
+	// Target URL for website redirect.
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
 }
 
 type ObjectCopyOverrideProviderInitParameters struct {
 
-	// Override the provider default_tags configuration block.
+	// Configuration block to override the provider default_tags configuration block. See default_tags Block below.
 	DefaultTags *OverrideProviderDefaultTagsInitParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }
 
 type ObjectCopyOverrideProviderObservation struct {
 
-	// Override the provider default_tags configuration block.
+	// Configuration block to override the provider default_tags configuration block. See default_tags Block below.
 	DefaultTags *OverrideProviderDefaultTagsObservation `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }
 
 type ObjectCopyOverrideProviderParameters struct {
 
-	// Override the provider default_tags configuration block.
+	// Configuration block to override the provider default_tags configuration block. See default_tags Block below.
 	// +kubebuilder:validation:Optional
 	DefaultTags *OverrideProviderDefaultTagsParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
 }
@@ -385,22 +387,23 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// Whether to use an S3 Bucket Key for object encryption with server-side encryption using KMS (SSE-KMS).
 	// +kubebuilder:validation:Optional
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
 
-	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
+	// Caching behavior along the request/reply chain. Read w3c cache_control for further details.
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
-	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
+	// Algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, CRC64NVME SHA1, SHA256.
 	// +kubebuilder:validation:Optional
 	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
-	// Specifies presentational information for the object. Read w3c content_disposition for further information.
+	// Presentational information for the object. Read w3c content_disposition for further information.
 	// +kubebuilder:validation:Optional
 	ContentDisposition *string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
 
-	// Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
+	// Content encodings that have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field. Read w3c content encoding for further information.
 	// +kubebuilder:validation:Optional
 	ContentEncoding *string `json:"contentEncoding,omitempty" tf:"content_encoding,omitempty"`
 
@@ -428,15 +431,15 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyIfUnmodifiedSince *string `json:"copyIfUnmodifiedSince,omitempty" tf:"copy_if_unmodified_since,omitempty"`
 
-	// Specifies the algorithm to use to when encrypting the object (for example, AES256).
+	// Algorithm to use when encrypting the object (for example, AES256).
 	// +kubebuilder:validation:Optional
 	CustomerAlgorithm *string `json:"customerAlgorithm,omitempty" tf:"customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	// +kubebuilder:validation:Optional
 	CustomerKeyMd5 *string `json:"customerKeyMd5,omitempty" tf:"customer_key_md5,omitempty"`
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
+	// Customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
 	// +kubebuilder:validation:Optional
 	CustomerKeySecretRef *v2.SecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
 
@@ -460,11 +463,11 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	Grant []ObjectCopyGrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Specifies the AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+	// AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
 	// +kubebuilder:validation:Optional
 	KMSEncryptionContextSecretRef *v2.SecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
 
-	// Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
+	// AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSecretRef *v2.SecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
 
@@ -477,11 +480,11 @@ type ObjectCopyParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
+	// Whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
 	// +kubebuilder:validation:Optional
 	MetadataDirective *string `json:"metadataDirective,omitempty" tf:"metadata_directive,omitempty"`
 
-	// The legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
+	// Legal hold status to apply to the specified object. Valid values are ON and OFF.
 	// +kubebuilder:validation:Optional
 	ObjectLockLegalHoldStatus *string `json:"objectLockLegalHoldStatus,omitempty" tf:"object_lock_legal_hold_status,omitempty"`
 
@@ -505,31 +508,31 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestPayer *string `json:"requestPayer,omitempty" tf:"request_payer,omitempty"`
 
-	// Specifies server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
+	// Server-side encryption of the object in S3. Valid values are AES256 and aws:kms.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Specifies the source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
+	// Source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// Specifies the algorithm to use when decrypting the source object (for example, AES256).
+	// Algorithm to use when decrypting the source object (for example, AES256).
 	// +kubebuilder:validation:Optional
 	SourceCustomerAlgorithm *string `json:"sourceCustomerAlgorithm,omitempty" tf:"source_customer_algorithm,omitempty"`
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+	// 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	// +kubebuilder:validation:Optional
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
+	// Customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
 	// +kubebuilder:validation:Optional
 	SourceCustomerKeySecretRef *v2.SecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
-	// Specifies the desired storage class for the object. Defaults to STANDARD.
+	// Desired storage class for the object. Defaults to STANDARD.
 	// +kubebuilder:validation:Optional
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
-	// Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
+	// Whether the object tag-set is copied from the source object or replaced with tag-set provided in the request. Valid values are COPY and REPLACE.
 	// +kubebuilder:validation:Optional
 	TaggingDirective *string `json:"taggingDirective,omitempty" tf:"tagging_directive,omitempty"`
 
@@ -538,7 +541,7 @@ type ObjectCopyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a target URL for website redirect.
+	// Target URL for website redirect.
 	// +kubebuilder:validation:Optional
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
 }

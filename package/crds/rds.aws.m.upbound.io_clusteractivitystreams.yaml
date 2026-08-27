@@ -163,7 +163,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the DB cluster.
+                    description: ARN of the DB cluster.
                     type: string
                   resourceArnRef:
                     description: Reference to a Cluster in rds to populate resourceArn.
@@ -360,7 +360,7 @@ spec:
                       synchronously or asynchronously. One of: sync, async.'
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the DB cluster.
+                    description: ARN of the DB cluster.
                     type: string
                   resourceArnRef:
                     description: Reference to a Cluster in rds to populate resourceArn.
@@ -519,7 +519,7 @@ spec:
                       Defaults false.
                     type: boolean
                   id:
-                    description: The Amazon Resource Name (ARN) of the DB cluster.
+                    description: ARN of the DB cluster.
                     type: string
                   kinesisStreamName:
                     description: The name of the Amazon Kinesis data stream to be
@@ -543,7 +543,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   resourceArn:
-                    description: The Amazon Resource Name (ARN) of the DB cluster.
+                    description: ARN of the DB cluster.
                     type: string
                 type: object
               conditions:

@@ -248,7 +248,7 @@ type CustomDocumentEnrichmentConfigurationInitParameters struct {
 	// Configuration information for invoking a Lambda function in AWS Lambda on the original or raw documents before extracting their metadata and text. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
 	PreExtractionHookConfiguration *PreExtractionHookConfigurationInitParameters `json:"preExtractionHookConfiguration,omitempty" tf:"pre_extraction_hook_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
+	// ARN of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -263,7 +263,7 @@ type CustomDocumentEnrichmentConfigurationObservation struct {
 	// Configuration information for invoking a Lambda function in AWS Lambda on the original or raw documents before extracting their metadata and text. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
 	PreExtractionHookConfiguration *PreExtractionHookConfigurationObservation `json:"preExtractionHookConfiguration,omitempty" tf:"pre_extraction_hook_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
+	// ARN of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -281,7 +281,7 @@ type CustomDocumentEnrichmentConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PreExtractionHookConfiguration *PreExtractionHookConfigurationParameters `json:"preExtractionHookConfiguration,omitempty" tf:"pre_extraction_hook_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
+	// ARN of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -316,7 +316,7 @@ type DataSourceInitParameters struct {
 	// A name for your data source connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
+	// ARN of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -379,7 +379,7 @@ type DataSourceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
+	// ARN of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
@@ -444,7 +444,7 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
+	// ARN of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -623,7 +623,7 @@ type PostExtractionHookConfigurationInitParameters struct {
 	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition *InvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
@@ -635,7 +635,7 @@ type PostExtractionHookConfigurationObservation struct {
 	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition *InvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
@@ -648,7 +648,7 @@ type PostExtractionHookConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	InvocationCondition *InvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
@@ -662,7 +662,7 @@ type PreExtractionHookConfigurationInitParameters struct {
 	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition *PreExtractionHookConfigurationInvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
@@ -762,7 +762,7 @@ type PreExtractionHookConfigurationObservation struct {
 	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition *PreExtractionHookConfigurationInvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
@@ -775,7 +775,7 @@ type PreExtractionHookConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	InvocationCondition *PreExtractionHookConfigurationInvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	// ARN of a Lambda Function that can manipulate your document metadata fields or attributes and content.
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
@@ -1159,7 +1159,7 @@ type WebCrawlerConfigurationInitParameters struct {
 	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
-	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
+	// Block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, HTTPS. If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
 	Urls *UrlsInitParameters `json:"urls,omitempty" tf:"urls,omitempty"`
 }
 
@@ -1191,7 +1191,7 @@ type WebCrawlerConfigurationObservation struct {
 	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
-	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
+	// Block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, HTTPS. If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
 	Urls *UrlsObservation `json:"urls,omitempty" tf:"urls,omitempty"`
 }
 
@@ -1231,7 +1231,7 @@ type WebCrawlerConfigurationParameters struct {
 	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
-	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
+	// Block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, HTTPS. If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
 	// +kubebuilder:validation:Optional
 	Urls *UrlsParameters `json:"urls" tf:"urls,omitempty"`
 }

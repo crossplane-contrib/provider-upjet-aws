@@ -524,11 +524,11 @@ spec:
                     items:
                       properties:
                         domainName:
-                          description: The domain name of the association in the service
+                          description: Domain name of the association in the service
                             network.
                           type: string
                         hostedZoneId:
-                          description: The ID of the hosted zone containing the domain
+                          description: ID of the hosted zone containing the domain
                             name.
                           type: string
                       type: object

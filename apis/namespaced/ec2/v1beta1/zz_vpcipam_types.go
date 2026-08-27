@@ -59,7 +59,7 @@ type VPCIpamInitParameters struct {
 
 type VPCIpamObservation struct {
 
-	// Amazon Resource Name (ARN) of IPAM
+	// ARN of IPAM
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.

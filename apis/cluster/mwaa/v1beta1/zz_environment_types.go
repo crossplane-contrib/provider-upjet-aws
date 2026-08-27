@@ -60,7 +60,7 @@ type EnvironmentInitParameters struct {
 	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
+	// ARN of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
@@ -73,7 +73,7 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
+	// ARN of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
@@ -118,7 +118,7 @@ type EnvironmentInitParameters struct {
 	// The number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1.
 	Schedulers *float64 `json:"schedulers,omitempty" tf:"schedulers,omitempty"`
 
-	// The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+	// ARN of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	SourceBucketArn *string `json:"sourceBucketArn,omitempty" tf:"source_bucket_arn,omitempty"`
@@ -174,12 +174,12 @@ type EnvironmentObservation struct {
 	// Environment class for the cluster. Possible options are mw1.micro, mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
+	// ARN of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
 	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
+	// ARN of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 
 	LastUpdated []LastUpdatedObservation `json:"lastUpdated,omitempty" tf:"last_updated,omitempty"`
@@ -224,7 +224,7 @@ type EnvironmentObservation struct {
 	// The Service Role ARN of the Amazon MWAA Environment
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+	// ARN of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
 	SourceBucketArn *string `json:"sourceBucketArn,omitempty" tf:"source_bucket_arn,omitempty"`
 
 	// The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script.
@@ -282,7 +282,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	EnvironmentClass *string `json:"environmentClass,omitempty" tf:"environment_class,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
+	// ARN of the task execution role that the Amazon MWAA and its environment can assume. Check the official AWS documentation for the detailed role specification.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -296,7 +296,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleArnSelector *v2.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
+	// ARN of your KMS key that you want to use for encryption. Will be set to the ARN of the managed KMS key aws/airflow by default. Please check the Official Documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
@@ -358,7 +358,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Schedulers *float64 `json:"schedulers,omitempty" tf:"schedulers,omitempty"`
 
-	// The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
+	// ARN of your Amazon S3 storage bucket. For example, arn:aws:s3:::airflow-mybucketname.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/s3/v1beta2.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

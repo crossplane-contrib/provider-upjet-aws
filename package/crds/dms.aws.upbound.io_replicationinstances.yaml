@@ -124,12 +124,12 @@ spec:
                         type: string
                     type: object
                   kmsKeyArn:
-                    description: The Amazon Resource Name (ARN) for the KMS key that
-                      will be used to encrypt the connection parameters. If you do
-                      not specify a value for kms_key_arn, then AWS DMS will use your
-                      default encryption key. AWS KMS creates the default encryption
-                      key for your AWS account. Your AWS account has a different default
-                      encryption key for each AWS region.
+                    description: ARN for the KMS key that will be used to encrypt
+                      the connection parameters. If you do not specify a value for
+                      kms_key_arn, then AWS DMS will use your default encryption key.
+                      AWS KMS creates the default encryption key for your AWS account.
+                      Your AWS account has a different default encryption key for
+                      each AWS region.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -474,12 +474,12 @@ spec:
                         type: string
                     type: object
                   kmsKeyArn:
-                    description: The Amazon Resource Name (ARN) for the KMS key that
-                      will be used to encrypt the connection parameters. If you do
-                      not specify a value for kms_key_arn, then AWS DMS will use your
-                      default encryption key. AWS KMS creates the default encryption
-                      key for your AWS account. Your AWS account has a different default
-                      encryption key for each AWS region.
+                    description: ARN for the KMS key that will be used to encrypt
+                      the connection parameters. If you do not specify a value for
+                      kms_key_arn, then AWS DMS will use your default encryption key.
+                      AWS KMS creates the default encryption key for your AWS account.
+                      Your AWS account has a different default encryption key for
+                      each AWS region.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -902,12 +902,12 @@ spec:
                         type: string
                     type: object
                   kmsKeyArn:
-                    description: The Amazon Resource Name (ARN) for the KMS key that
-                      will be used to encrypt the connection parameters. If you do
-                      not specify a value for kms_key_arn, then AWS DMS will use your
-                      default encryption key. AWS KMS creates the default encryption
-                      key for your AWS account. Your AWS account has a different default
-                      encryption key for each AWS region.
+                    description: ARN for the KMS key that will be used to encrypt
+                      the connection parameters. If you do not specify a value for
+                      kms_key_arn, then AWS DMS will use your default encryption key.
+                      AWS KMS creates the default encryption key for your AWS account.
+                      Your AWS account has a different default encryption key for
+                      each AWS region.
                     type: string
                   multiAz:
                     description: Specifies if the replication instance is a multi-az
@@ -934,8 +934,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   replicationInstanceArn:
-                    description: The Amazon Resource Name (ARN) of the replication
-                      instance.
+                    description: ARN of the replication instance.
                     type: string
                   replicationInstanceClass:
                     description: The compute and memory capacity of the replication

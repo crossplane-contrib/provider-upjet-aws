@@ -397,8 +397,7 @@ spec:
                       value must be a positive number.
                     type: number
                   arn:
-                    description: Amazon Resource Name (ARN) of the Redshift Usage
-                      Limit.
+                    description: ARN of the Redshift Usage Limit.
                     type: string
                   breachAction:
                     description: The action that Amazon Redshift takes when the limit

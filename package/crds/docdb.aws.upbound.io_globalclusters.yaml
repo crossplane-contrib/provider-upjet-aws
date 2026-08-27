@@ -101,8 +101,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation.
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in docdb to populate sourceDbClusterIdentifier.
@@ -222,8 +222,8 @@ spec:
                     description: The global cluster identifier.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation.
                     type: string
                   sourceDbClusterIdentifierRef:
                     description: Reference to a Cluster in docdb to populate sourceDbClusterIdentifier.
@@ -402,7 +402,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Global Cluster Amazon Resource Name (ARN)
+                    description: Global Cluster ARN
                     type: string
                   databaseName:
                     description: Name for an automatically created database on cluster
@@ -431,7 +431,7 @@ spec:
                     items:
                       properties:
                         dbClusterArn:
-                          description: Amazon Resource Name (ARN) of member DB Cluster.
+                          description: ARN of member DB Cluster.
                           type: string
                         isWriter:
                           description: Whether the member is the primary DB Cluster.
@@ -452,8 +452,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   sourceDbClusterIdentifier:
-                    description: Amazon Resource Name (ARN) to use as the primary
-                      DB Cluster of the Global Cluster on creation.
+                    description: ARN to use as the primary DB Cluster of the Global
+                      Cluster on creation.
                     type: string
                   status:
                     type: string

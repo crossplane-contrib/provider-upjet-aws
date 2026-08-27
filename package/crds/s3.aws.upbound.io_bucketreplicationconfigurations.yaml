@@ -1909,8 +1909,7 @@ spec:
                               type: string
                           type: object
                         destination:
-                          description: Specifies the destination for the rule. See
-                            below.
+                          description: Destination for the rule. See below.
                           properties:
                             accessControlTranslation:
                               description: Configuration block that specifies the
@@ -1925,10 +1924,9 @@ spec:
                                 account owner override configuration.
                               properties:
                                 owner:
-                                  description: 'Specifies the replica ownership. For
-                                    default and valid values, see PUT bucket replication
-                                    in the Amazon S3 API Reference. Valid values:
-                                    Destination.'
+                                  description: 'Replica ownership. For default and
+                                    valid values, see PUT bucket replication in the
+                                    Amazon S3 API Reference. Valid values: Destination.'
                                   type: string
                               type: object
                             account:
@@ -2023,8 +2021,8 @@ spec:
                               properties:
                                 replicaKmsKeyId:
                                   description: ID (Key ARN or Alias ARN) of the customer
-                                    managed AWS KMS key stored in AWS Key Management
-                                    Service (KMS) for the destination bucket.
+                                    managed AWS KMS key stored in KMS for the destination
+                                    bucket.
                                   type: string
                                 replicaKmsKeyIdRef:
                                   description: Reference to a Key in kms to populate
@@ -2146,7 +2144,7 @@ spec:
                                   type: object
                               type: object
                             storageClass:
-                              description: The storage class used to store the object.
+                              description: Storage class used to store the object.
                                 By default, Amazon S3 uses the storage class of the
                                 source object to create the object replica.
                               type: string
@@ -2222,8 +2220,7 @@ spec:
                             rules.
                           type: number
                         sourceSelectionCriteria:
-                          description: Specifies special object selection criteria.
-                            See below.
+                          description: Special object selection criteria. See below.
                           properties:
                             replicaModifications:
                               description: Configuration block that you can specify
@@ -2258,9 +2255,10 @@ spec:
                       type: object
                     type: array
                   tokenSecretRef:
-                    description: |-
-                      Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
-                      For more details, see Using S3 Object Lock with replication.
+                    description: Token to allow replication to be enabled on an Object
+                      Lock-enabled bucket. You must contact AWS support for the bucket's
+                      "Object Lock token". For more details, see Using S3 Object Lock
+                      with replication.
                     properties:
                       key:
                         description: The key to select.
@@ -2464,8 +2462,7 @@ spec:
                               type: string
                           type: object
                         destination:
-                          description: Specifies the destination for the rule. See
-                            below.
+                          description: Destination for the rule. See below.
                           properties:
                             accessControlTranslation:
                               description: Configuration block that specifies the
@@ -2480,10 +2477,9 @@ spec:
                                 account owner override configuration.
                               properties:
                                 owner:
-                                  description: 'Specifies the replica ownership. For
-                                    default and valid values, see PUT bucket replication
-                                    in the Amazon S3 API Reference. Valid values:
-                                    Destination.'
+                                  description: 'Replica ownership. For default and
+                                    valid values, see PUT bucket replication in the
+                                    Amazon S3 API Reference. Valid values: Destination.'
                                   type: string
                               type: object
                             account:
@@ -2578,8 +2574,8 @@ spec:
                               properties:
                                 replicaKmsKeyId:
                                   description: ID (Key ARN or Alias ARN) of the customer
-                                    managed AWS KMS key stored in AWS Key Management
-                                    Service (KMS) for the destination bucket.
+                                    managed AWS KMS key stored in KMS for the destination
+                                    bucket.
                                   type: string
                                 replicaKmsKeyIdRef:
                                   description: Reference to a Key in kms to populate
@@ -2701,7 +2697,7 @@ spec:
                                   type: object
                               type: object
                             storageClass:
-                              description: The storage class used to store the object.
+                              description: Storage class used to store the object.
                                 By default, Amazon S3 uses the storage class of the
                                 source object to create the object replica.
                               type: string
@@ -2777,8 +2773,7 @@ spec:
                             rules.
                           type: number
                         sourceSelectionCriteria:
-                          description: Specifies special object selection criteria.
-                            See below.
+                          description: Special object selection criteria. See below.
                           properties:
                             replicaModifications:
                               description: Configuration block that you can specify
@@ -2813,9 +2808,10 @@ spec:
                       type: object
                     type: array
                   tokenSecretRef:
-                    description: |-
-                      Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
-                      For more details, see Using S3 Object Lock with replication.
+                    description: Token to allow replication to be enabled on an Object
+                      Lock-enabled bucket. You must contact AWS support for the bucket's
+                      "Object Lock token". For more details, see Using S3 Object Lock
+                      with replication.
                     properties:
                       key:
                         description: The key to select.
@@ -2961,8 +2957,7 @@ spec:
                               type: string
                           type: object
                         destination:
-                          description: Specifies the destination for the rule. See
-                            below.
+                          description: Destination for the rule. See below.
                           properties:
                             accessControlTranslation:
                               description: Configuration block that specifies the
@@ -2977,10 +2972,9 @@ spec:
                                 account owner override configuration.
                               properties:
                                 owner:
-                                  description: 'Specifies the replica ownership. For
-                                    default and valid values, see PUT bucket replication
-                                    in the Amazon S3 API Reference. Valid values:
-                                    Destination.'
+                                  description: 'Replica ownership. For default and
+                                    valid values, see PUT bucket replication in the
+                                    Amazon S3 API Reference. Valid values: Destination.'
                                   type: string
                               type: object
                             account:
@@ -2999,8 +2993,8 @@ spec:
                               properties:
                                 replicaKmsKeyId:
                                   description: ID (Key ARN or Alias ARN) of the customer
-                                    managed AWS KMS key stored in AWS Key Management
-                                    Service (KMS) for the destination bucket.
+                                    managed AWS KMS key stored in KMS for the destination
+                                    bucket.
                                   type: string
                               type: object
                             metrics:
@@ -3046,7 +3040,7 @@ spec:
                                   type: object
                               type: object
                             storageClass:
-                              description: The storage class used to store the object.
+                              description: Storage class used to store the object.
                                 By default, Amazon S3 uses the storage class of the
                                 source object to create the object replica.
                               type: string
@@ -3122,8 +3116,7 @@ spec:
                             rules.
                           type: number
                         sourceSelectionCriteria:
-                          description: Specifies special object selection criteria.
-                            See below.
+                          description: Special object selection criteria. See below.
                           properties:
                             replicaModifications:
                               description: Configuration block that you can specify

@@ -47,7 +47,7 @@ type DevicePoolInitParameters struct {
 
 type DevicePoolObservation struct {
 
-	// The Amazon Resource Name of this Device Pool
+	// ARN of this Device Pool
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The device pool's description.

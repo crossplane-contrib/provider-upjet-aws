@@ -59,7 +59,7 @@ type GeoMatchSetInitParameters struct {
 
 type GeoMatchSetObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The GeoMatchConstraint objects which contain the country that you want AWS WAF to search for.

@@ -580,8 +580,8 @@ spec:
                     description: Name of reference base model.
                     type: string
                   inputDataConfig:
-                    description: The input data config for the LanguageModel. See
-                      Input Data Config for more details.
+                    description: Input data configuration for the LanguageModel. See
+                      input_data_config Block for details.
                     properties:
                       dataAccessRoleArn:
                         description: IAM role with access to S3 bucket.
@@ -668,8 +668,8 @@ spec:
                         type: string
                     type: object
                   languageCode:
-                    description: The language code you selected for your language
-                      model. Refer to the supported languages page for accepted codes.
+                    description: Language code you selected for your language model.
+                      Refer to the supported languages page for accepted codes.
                     type: string
                   region:
                     description: |-
@@ -702,8 +702,8 @@ spec:
                     description: Name of reference base model.
                     type: string
                   inputDataConfig:
-                    description: The input data config for the LanguageModel. See
-                      Input Data Config for more details.
+                    description: Input data configuration for the LanguageModel. See
+                      input_data_config Block for details.
                     properties:
                       dataAccessRoleArn:
                         description: IAM role with access to S3 bucket.
@@ -790,8 +790,8 @@ spec:
                         type: string
                     type: object
                   languageCode:
-                    description: The language code you selected for your language
-                      model. Refer to the supported languages page for accepted codes.
+                    description: Language code you selected for your language model.
+                      Refer to the supported languages page for accepted codes.
                     type: string
                   tags:
                     additionalProperties:
@@ -914,8 +914,8 @@ spec:
                     description: LanguageModel name.
                     type: string
                   inputDataConfig:
-                    description: The input data config for the LanguageModel. See
-                      Input Data Config for more details.
+                    description: Input data configuration for the LanguageModel. See
+                      input_data_config Block for details.
                     properties:
                       dataAccessRoleArn:
                         description: IAM role with access to S3 bucket.
@@ -928,8 +928,8 @@ spec:
                         type: string
                     type: object
                   languageCode:
-                    description: The language code you selected for your language
-                      model. Refer to the supported languages page for accepted codes.
+                    description: Language code you selected for your language model.
+                      Refer to the supported languages page for accepted codes.
                     type: string
                   region:
                     description: |-

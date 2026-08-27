@@ -62,7 +62,7 @@ type EventSubscriptionInitParameters struct {
 
 type EventSubscriptionObservation struct {
 
-	// Amazon Resource Name (ARN) of the Redshift event notification subscription
+	// ARN of the Redshift event notification subscription
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS customer account associated with the Redshift event notification subscription

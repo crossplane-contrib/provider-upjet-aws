@@ -195,7 +195,7 @@ spec:
                     description: Whether the service quota can be increased.
                     type: boolean
                   arn:
-                    description: Amazon Resource Name (ARN) of the service quota.
+                    description: ARN of the service quota.
                     type: string
                   defaultValue:
                     description: Default value of the service quota.

@@ -82,8 +82,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   streamArn:
-                    description: Amazon Resource Name (ARN) of the data stream the
-                      consumer is registered with.
+                    description: ARN of the data stream the consumer is registered
+                      with.
                     type: string
                   streamArnRef:
                     description: Reference to a Stream in kinesis to populate streamArn.
@@ -184,8 +184,8 @@ spec:
                     description: Name of the stream consumer.
                     type: string
                   streamArn:
-                    description: Amazon Resource Name (ARN) of the data stream the
-                      consumer is registered with.
+                    description: ARN of the data stream the consumer is registered
+                      with.
                     type: string
                   streamArnRef:
                     description: Reference to a Stream in kinesis to populate streamArn.
@@ -364,14 +364,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the stream consumer.
+                    description: ARN of the stream consumer.
                     type: string
                   creationTimestamp:
                     description: Approximate timestamp in RFC3339 format of when the
                       stream consumer was created.
                     type: string
                   id:
-                    description: Amazon Resource Name (ARN) of the stream consumer.
+                    description: ARN of the stream consumer.
                     type: string
                   name:
                     description: Name of the stream consumer.
@@ -382,8 +382,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   streamArn:
-                    description: Amazon Resource Name (ARN) of the data stream the
-                      consumer is registered with.
+                    description: ARN of the data stream the consumer is registered
+                      with.
                     type: string
                   tags:
                     additionalProperties:

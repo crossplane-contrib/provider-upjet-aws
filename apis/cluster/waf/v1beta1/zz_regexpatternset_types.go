@@ -25,7 +25,7 @@ type RegexPatternSetInitParameters struct {
 
 type RegexPatternSetObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the WAF Regex Pattern Set.

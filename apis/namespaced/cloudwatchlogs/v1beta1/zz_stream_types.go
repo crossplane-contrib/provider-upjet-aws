@@ -33,7 +33,7 @@ type StreamInitParameters struct {
 
 type StreamObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the log stream.
+	// ARN specifying the log stream.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

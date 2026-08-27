@@ -18,10 +18,10 @@ type ServiceNetworkResourceAssociationDNSEntryInitParameters struct {
 
 type ServiceNetworkResourceAssociationDNSEntryObservation struct {
 
-	// The domain name of the association in the service network.
+	// Domain name of the association in the service network.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The ID of the hosted zone containing the domain name.
+	// ID of the hosted zone containing the domain name.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 }
 

@@ -1990,7 +1990,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of Glue Job
+                    description: ARN of Glue Job
                     type: string
                   command:
                     description: The command of the job. Defined below.

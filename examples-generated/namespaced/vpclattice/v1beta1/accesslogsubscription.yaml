@@ -14,7 +14,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    destinationArn: ${aws_s3.bucket.arn}
+    destinationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
     region: us-west-1
     resourceIdentifierSelector:
       matchLabels:

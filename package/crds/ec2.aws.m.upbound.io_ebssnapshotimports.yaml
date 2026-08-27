@@ -480,7 +480,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
+                    description: ARN of the EBS Snapshot.
                     type: string
                   clientData:
                     description: The client-specific data. Detailed below.
@@ -549,7 +549,7 @@ spec:
                       KmsKeyId is specified, the Encrypted flag must also be set.
                     type: string
                   outpostArn:
-                    description: Amazon Resource Name (ARN) of the EBS Snapshot.
+                    description: ARN of the EBS Snapshot.
                     type: string
                   ownerAlias:
                     description: Value from an Amazon-maintained list (amazon, aws-marketplace,

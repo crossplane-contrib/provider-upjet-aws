@@ -386,7 +386,7 @@ spec:
               atProvider:
                 properties:
                   accessEntryArn:
-                    description: Amazon Resource Name (ARN) of the Access Entry.
+                    description: ARN of the Access Entry.
                     type: string
                   clusterName:
                     description: Name of the EKS Cluster.

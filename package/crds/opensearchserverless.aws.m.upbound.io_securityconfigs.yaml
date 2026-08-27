@@ -63,13 +63,55 @@ spec:
                       Description of the security configuration.
                       Description of the security configuration.
                     type: string
+                  iamFederationOptions:
+                    description: Configuration block for IAM Federation options. Required
+                      if type is set to iamfederation. See iam_federation_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            Group attribute.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
+                  iamIdentityCenterOptions:
+                    description: Configuration block for IAM Identity Center options.
+                      Required if type is set to iamidentitycenter. See iam_identity_center_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+                            Group attribute.
+                          type: string
+                        instanceArn:
+                          description: |-
+                            ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+                            Instance ARN.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
                       Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
-                    description: Configuration block for SAML options.
+                    description: Configuration block for SAML options. Required if
+                      type is set to saml. See saml_options Block below for details.
                     properties:
                       groupAttribute:
                         description: |-
@@ -78,7 +120,7 @@ spec:
                         type: string
                       metadata:
                         description: |-
-                          The XML IdP metadata file generated from your identity provider.
+                          XML IdP metadata file generated from your identity provider.
                           The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
@@ -94,8 +136,8 @@ spec:
                     type: object
                   type:
                     description: |-
-                      Type of configuration. Must be saml.
-                      Type of configuration. Must be `saml`.
+                      Type of configuration. Valid values are saml, iamidentitycenter and iamfederation.
+                      Type of configuration. Valid values: `saml`, `iamidentitycenter` or `iamfederation`.
                     type: string
                 required:
                 - region
@@ -119,8 +161,50 @@ spec:
                       Description of the security configuration.
                       Description of the security configuration.
                     type: string
+                  iamFederationOptions:
+                    description: Configuration block for IAM Federation options. Required
+                      if type is set to iamfederation. See iam_federation_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            Group attribute.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
+                  iamIdentityCenterOptions:
+                    description: Configuration block for IAM Identity Center options.
+                      Required if type is set to iamidentitycenter. See iam_identity_center_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+                            Group attribute.
+                          type: string
+                        instanceArn:
+                          description: |-
+                            ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+                            Instance ARN.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
                   samlOptions:
-                    description: Configuration block for SAML options.
+                    description: Configuration block for SAML options. Required if
+                      type is set to saml. See saml_options Block below for details.
                     properties:
                       groupAttribute:
                         description: |-
@@ -129,7 +213,7 @@ spec:
                         type: string
                       metadata:
                         description: |-
-                          The XML IdP metadata file generated from your identity provider.
+                          XML IdP metadata file generated from your identity provider.
                           The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
@@ -217,6 +301,47 @@ spec:
                       Description of the security configuration.
                       Description of the security configuration.
                     type: string
+                  iamFederationOptions:
+                    description: Configuration block for IAM Federation options. Required
+                      if type is set to iamfederation. See iam_federation_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            Group attribute.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
+                  iamIdentityCenterOptions:
+                    description: Configuration block for IAM Identity Center options.
+                      Required if type is set to iamidentitycenter. See iam_identity_center_options
+                      Block below for details.
+                    items:
+                      properties:
+                        groupAttribute:
+                          description: |-
+                            Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+                            Group attribute.
+                          type: string
+                        instanceArn:
+                          description: |-
+                            ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+                            Instance ARN.
+                          type: string
+                        userAttribute:
+                          description: |-
+                            User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+                            User attribute.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
                   region:
@@ -225,7 +350,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   samlOptions:
-                    description: Configuration block for SAML options.
+                    description: Configuration block for SAML options. Required if
+                      type is set to saml. See saml_options Block below for details.
                     properties:
                       groupAttribute:
                         description: |-
@@ -234,7 +360,7 @@ spec:
                         type: string
                       metadata:
                         description: |-
-                          The XML IdP metadata file generated from your identity provider.
+                          XML IdP metadata file generated from your identity provider.
                           The XML IdP metadata file generated from your identity provider.
                         type: string
                       sessionTimeout:
@@ -250,8 +376,8 @@ spec:
                     type: object
                   type:
                     description: |-
-                      Type of configuration. Must be saml.
-                      Type of configuration. Must be `saml`.
+                      Type of configuration. Valid values are saml, iamidentitycenter and iamfederation.
+                      Type of configuration. Valid values: `saml`, `iamidentitycenter` or `iamfederation`.
                     type: string
                 type: object
               conditions:

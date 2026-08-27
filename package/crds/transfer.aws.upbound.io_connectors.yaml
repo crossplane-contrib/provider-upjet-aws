@@ -975,9 +975,9 @@ spec:
               forProvider:
                 properties:
                   accessRole:
-                    description: The IAM Role which provides read and write access
-                      to the parent directory of the file location mentioned in the
-                      StartFileTransfer request.
+                    description: IAM Role which provides read and write access to
+                      the parent directory of the file location mentioned in the StartFileTransfer
+                      request.
                     type: string
                   accessRoleRef:
                     description: Reference to a Role in iam to populate accessRole.
@@ -1054,52 +1054,51 @@ spec:
                         type: object
                     type: object
                   as2Config:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See as2_config Block below.
                     properties:
                       compression:
-                        description: Specifies weather AS2 file is compressed. The
-                          valud values are ZLIB and  DISABLED.
+                        description: Whether AS2 file is compressed. The valid values
+                          are ZLIB and DISABLED.
                         type: string
                       encryptionAlgorithm:
-                        description: The algorithm that is used to encrypt the file.
-                          The valid values are AES128_CBC | AES192_CBC | AES256_CBC
-                          | NONE.
+                        description: Algorithm that is used to encrypt the file. The
+                          valid values are AES128_CBC | AES192_CBC | AES256_CBC |
+                          NONE.
                         type: string
                       localProfileId:
-                        description: The unique identifier for the AS2 local profile.
+                        description: Unique identifier for the AS2 local profile.
                         type: string
                       mdnResponse:
-                        description: Used for outbound requests to determine if a
-                          partner response for transfers is synchronous or asynchronous.
-                          The valid values are SYNC and NONE.
+                        description: Determines, for outbound requests, if a partner
+                          response for transfers is synchronous or asynchronous. The
+                          valid values are SYNC and NONE.
                         type: string
                       mdnSigningAlgorithm:
-                        description: The signing algorithm for the Mdn response. The
-                          valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE
-                          | DEFAULT.
+                        description: Signing algorithm for the MDN response. The valid
+                          values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
                         type: string
                       messageSubject:
-                        description: Used as the subject HTTP header attribute in
-                          AS2 messages that are being sent with the connector.
+                        description: Subject HTTP header attribute used in AS2 messages
+                          that are being sent with the connector.
                         type: string
                       partnerProfileId:
-                        description: The unique identifier for the AS2 partner profile.
+                        description: Unique identifier for the AS2 partner profile.
                         type: string
                       signingAlgorithm:
-                        description: The algorithm that is used to sign AS2 messages
-                          sent with the connector. The valid values are SHA256 | SHA384
+                        description: Algorithm that is used to sign AS2 messages sent
+                          with the connector. The valid values are SHA256 | SHA384
                           | SHA512 | SHA1 | NONE .
                         type: string
                     type: object
                   egressConfig:
-                    description: Specifies the egress configuration for the connector.
-                      When set, enables routing through customer VPCs using VPC Lattice
-                      for private connectivity. Fields documented below.
+                    description: Egress configuration for the connector. When set,
+                      enables routing through customer VPCs using VPC Lattice for
+                      private connectivity. See egress_config Block below.
                     properties:
                       vpcLattice:
                         description: VPC Lattice configuration for routing connector
-                          traffic through customer VPCs. Fields documented below.
+                          traffic through customer VPCs. See vpc_lattice Block below.
                         properties:
                           portNumber:
                             description: Port number for connecting to the SFTP server
@@ -1116,7 +1115,7 @@ spec:
                         type: object
                     type: object
                   loggingRole:
-                    description: The IAM Role which is required for allowing the connector
+                    description: IAM Role which is required for allowing the connector
                       to turn on CloudWatch logging for Amazon S3 events.
                     type: string
                   region:
@@ -1128,22 +1127,22 @@ spec:
                     description: Name of the security policy for the connector.
                     type: string
                   sftpConfig:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See sftp_config Block below.
                     properties:
                       trustedHostKeys:
-                        description: A list of public portion of the host key, or
-                          keys, that are used to authenticate the user to the external
-                          server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+                        description: List of public portion of the host key, or keys,
+                          that are used to authenticate the user to the external server
+                          to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       userSecretId:
-                        description: The identifier for the secret (in AWS Secrets
-                          Manager) that contains the SFTP user's private key, password,
-                          or both. The identifier can be either the Amazon Resource
-                          Name (ARN) or the name of the secret.
+                        description: Identifier for the secret (in AWS Secrets Manager)
+                          that contains the SFTP user's private key, password, or
+                          both. The identifier can be either the ARN or the name of
+                          the secret.
                         type: string
                       userSecretIdRef:
                         description: Reference to a Secret in secretsmanager to populate
@@ -1229,7 +1228,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                    description: URL of the partners AS2 endpoint or SFTP endpoint.
                       Required for AS2 connectors and service-managed SFTP connectors.
                       Must be null when using VPC Lattice egress configuration.
                     type: string
@@ -1250,9 +1249,9 @@ spec:
                   autoscaler.
                 properties:
                   accessRole:
-                    description: The IAM Role which provides read and write access
-                      to the parent directory of the file location mentioned in the
-                      StartFileTransfer request.
+                    description: IAM Role which provides read and write access to
+                      the parent directory of the file location mentioned in the StartFileTransfer
+                      request.
                     type: string
                   accessRoleRef:
                     description: Reference to a Role in iam to populate accessRole.
@@ -1329,52 +1328,51 @@ spec:
                         type: object
                     type: object
                   as2Config:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See as2_config Block below.
                     properties:
                       compression:
-                        description: Specifies weather AS2 file is compressed. The
-                          valud values are ZLIB and  DISABLED.
+                        description: Whether AS2 file is compressed. The valid values
+                          are ZLIB and DISABLED.
                         type: string
                       encryptionAlgorithm:
-                        description: The algorithm that is used to encrypt the file.
-                          The valid values are AES128_CBC | AES192_CBC | AES256_CBC
-                          | NONE.
+                        description: Algorithm that is used to encrypt the file. The
+                          valid values are AES128_CBC | AES192_CBC | AES256_CBC |
+                          NONE.
                         type: string
                       localProfileId:
-                        description: The unique identifier for the AS2 local profile.
+                        description: Unique identifier for the AS2 local profile.
                         type: string
                       mdnResponse:
-                        description: Used for outbound requests to determine if a
-                          partner response for transfers is synchronous or asynchronous.
-                          The valid values are SYNC and NONE.
+                        description: Determines, for outbound requests, if a partner
+                          response for transfers is synchronous or asynchronous. The
+                          valid values are SYNC and NONE.
                         type: string
                       mdnSigningAlgorithm:
-                        description: The signing algorithm for the Mdn response. The
-                          valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE
-                          | DEFAULT.
+                        description: Signing algorithm for the MDN response. The valid
+                          values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
                         type: string
                       messageSubject:
-                        description: Used as the subject HTTP header attribute in
-                          AS2 messages that are being sent with the connector.
+                        description: Subject HTTP header attribute used in AS2 messages
+                          that are being sent with the connector.
                         type: string
                       partnerProfileId:
-                        description: The unique identifier for the AS2 partner profile.
+                        description: Unique identifier for the AS2 partner profile.
                         type: string
                       signingAlgorithm:
-                        description: The algorithm that is used to sign AS2 messages
-                          sent with the connector. The valid values are SHA256 | SHA384
+                        description: Algorithm that is used to sign AS2 messages sent
+                          with the connector. The valid values are SHA256 | SHA384
                           | SHA512 | SHA1 | NONE .
                         type: string
                     type: object
                   egressConfig:
-                    description: Specifies the egress configuration for the connector.
-                      When set, enables routing through customer VPCs using VPC Lattice
-                      for private connectivity. Fields documented below.
+                    description: Egress configuration for the connector. When set,
+                      enables routing through customer VPCs using VPC Lattice for
+                      private connectivity. See egress_config Block below.
                     properties:
                       vpcLattice:
                         description: VPC Lattice configuration for routing connector
-                          traffic through customer VPCs. Fields documented below.
+                          traffic through customer VPCs. See vpc_lattice Block below.
                         properties:
                           portNumber:
                             description: Port number for connecting to the SFTP server
@@ -1391,29 +1389,29 @@ spec:
                         type: object
                     type: object
                   loggingRole:
-                    description: The IAM Role which is required for allowing the connector
+                    description: IAM Role which is required for allowing the connector
                       to turn on CloudWatch logging for Amazon S3 events.
                     type: string
                   securityPolicyName:
                     description: Name of the security policy for the connector.
                     type: string
                   sftpConfig:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See sftp_config Block below.
                     properties:
                       trustedHostKeys:
-                        description: A list of public portion of the host key, or
-                          keys, that are used to authenticate the user to the external
-                          server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+                        description: List of public portion of the host key, or keys,
+                          that are used to authenticate the user to the external server
+                          to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       userSecretId:
-                        description: The identifier for the secret (in AWS Secrets
-                          Manager) that contains the SFTP user's private key, password,
-                          or both. The identifier can be either the Amazon Resource
-                          Name (ARN) or the name of the secret.
+                        description: Identifier for the secret (in AWS Secrets Manager)
+                          that contains the SFTP user's private key, password, or
+                          both. The identifier can be either the ARN or the name of
+                          the secret.
                         type: string
                       userSecretIdRef:
                         description: Reference to a Secret in secretsmanager to populate
@@ -1499,7 +1497,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                    description: URL of the partners AS2 endpoint or SFTP endpoint.
                       Required for AS2 connectors and service-managed SFTP connectors.
                       Must be null when using VPC Lattice egress configuration.
                     type: string
@@ -1596,64 +1594,62 @@ spec:
               atProvider:
                 properties:
                   accessRole:
-                    description: The IAM Role which provides read and write access
-                      to the parent directory of the file location mentioned in the
-                      StartFileTransfer request.
+                    description: IAM Role which provides read and write access to
+                      the parent directory of the file location mentioned in the StartFileTransfer
+                      request.
                     type: string
                   arn:
-                    description: The ARN of the connector.
+                    description: ARN of the connector.
                     type: string
                   as2Config:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See as2_config Block below.
                     properties:
                       compression:
-                        description: Specifies weather AS2 file is compressed. The
-                          valud values are ZLIB and  DISABLED.
+                        description: Whether AS2 file is compressed. The valid values
+                          are ZLIB and DISABLED.
                         type: string
                       encryptionAlgorithm:
-                        description: The algorithm that is used to encrypt the file.
-                          The valid values are AES128_CBC | AES192_CBC | AES256_CBC
-                          | NONE.
+                        description: Algorithm that is used to encrypt the file. The
+                          valid values are AES128_CBC | AES192_CBC | AES256_CBC |
+                          NONE.
                         type: string
                       localProfileId:
-                        description: The unique identifier for the AS2 local profile.
+                        description: Unique identifier for the AS2 local profile.
                         type: string
                       mdnResponse:
-                        description: Used for outbound requests to determine if a
-                          partner response for transfers is synchronous or asynchronous.
-                          The valid values are SYNC and NONE.
+                        description: Determines, for outbound requests, if a partner
+                          response for transfers is synchronous or asynchronous. The
+                          valid values are SYNC and NONE.
                         type: string
                       mdnSigningAlgorithm:
-                        description: The signing algorithm for the Mdn response. The
-                          valid values are SHA256 | SHA384 | SHA512 | SHA1 | NONE
-                          | DEFAULT.
+                        description: Signing algorithm for the MDN response. The valid
+                          values are SHA256 | SHA384 | SHA512 | SHA1 | NONE | DEFAULT.
                         type: string
                       messageSubject:
-                        description: Used as the subject HTTP header attribute in
-                          AS2 messages that are being sent with the connector.
+                        description: Subject HTTP header attribute used in AS2 messages
+                          that are being sent with the connector.
                         type: string
                       partnerProfileId:
-                        description: The unique identifier for the AS2 partner profile.
+                        description: Unique identifier for the AS2 partner profile.
                         type: string
                       signingAlgorithm:
-                        description: The algorithm that is used to sign AS2 messages
-                          sent with the connector. The valid values are SHA256 | SHA384
+                        description: Algorithm that is used to sign AS2 messages sent
+                          with the connector. The valid values are SHA256 | SHA384
                           | SHA512 | SHA1 | NONE .
                         type: string
                     type: object
                   connectorId:
-                    description: The unique identifier for the AS2 profile or SFTP
-                      Profile.
+                    description: Unique identifier for the AS2 profile or SFTP Profile.
                     type: string
                   egressConfig:
-                    description: Specifies the egress configuration for the connector.
-                      When set, enables routing through customer VPCs using VPC Lattice
-                      for private connectivity. Fields documented below.
+                    description: Egress configuration for the connector. When set,
+                      enables routing through customer VPCs using VPC Lattice for
+                      private connectivity. See egress_config Block below.
                     properties:
                       vpcLattice:
                         description: VPC Lattice configuration for routing connector
-                          traffic through customer VPCs. Fields documented below.
+                          traffic through customer VPCs. See vpc_lattice Block below.
                         properties:
                           portNumber:
                             description: Port number for connecting to the SFTP server
@@ -1672,7 +1668,7 @@ spec:
                   id:
                     type: string
                   loggingRole:
-                    description: The IAM Role which is required for allowing the connector
+                    description: IAM Role which is required for allowing the connector
                       to turn on CloudWatch logging for Amazon S3 events.
                     type: string
                   region:
@@ -1684,22 +1680,22 @@ spec:
                     description: Name of the security policy for the connector.
                     type: string
                   sftpConfig:
-                    description: Either SFTP or AS2 is configured.The parameters to
-                      configure for the connector object. Fields documented below.
+                    description: Either SFTP or AS2 is configured. Parameters to configure
+                      for the connector object. See sftp_config Block below.
                     properties:
                       trustedHostKeys:
-                        description: A list of public portion of the host key, or
-                          keys, that are used to authenticate the user to the external
-                          server to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
+                        description: List of public portion of the host key, or keys,
+                          that are used to authenticate the user to the external server
+                          to which you are connecting.(https://docs.aws.amazon.com/transfer/latest/userguide/API_SftpConnectorConfig.html)
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       userSecretId:
-                        description: The identifier for the secret (in AWS Secrets
-                          Manager) that contains the SFTP user's private key, password,
-                          or both. The identifier can be either the Amazon Resource
-                          Name (ARN) or the name of the secret.
+                        description: Identifier for the secret (in AWS Secrets Manager)
+                          that contains the SFTP user's private key, password, or
+                          both. The identifier can be either the ARN or the name of
+                          the secret.
                         type: string
                     type: object
                   tags:
@@ -1714,7 +1710,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: The URL of the partners AS2 endpoint or SFTP endpoint.
+                    description: URL of the partners AS2 endpoint or SFTP endpoint.
                       Required for AS2 connectors and service-managed SFTP connectors.
                       Must be null when using VPC Lattice egress configuration.
                     type: string

@@ -32,7 +32,7 @@ type WorkflowInitParameters struct {
 
 type WorkflowObservation struct {
 
-	// Amazon Resource Name (ARN) of Glue Workflow
+	// ARN of Glue Workflow
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.

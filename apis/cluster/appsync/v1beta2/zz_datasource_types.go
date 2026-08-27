@@ -233,46 +233,46 @@ type DatasourceParameters struct {
 
 type DeltaSyncConfigInitParameters struct {
 
-	// The number of minutes that an Item is stored in the data source.
+	// Number of minutes that an Item is stored in the data source.
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// The table name.
+	// Table name.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
-	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
+	// Number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigObservation struct {
 
-	// The number of minutes that an Item is stored in the data source.
+	// Number of minutes that an Item is stored in the data source.
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// The table name.
+	// Table name.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
-	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
+	// Number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigParameters struct {
 
-	// The number of minutes that an Item is stored in the data source.
+	// Number of minutes that an Item is stored in the data source.
 	// +kubebuilder:validation:Optional
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// The table name.
+	// Table name.
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
 
-	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
+	// Number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DynamodbConfigInitParameters struct {
 
-	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
+	// DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	DeltaSyncConfig *DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// Name of the DynamoDB table.
@@ -296,7 +296,7 @@ type DynamodbConfigInitParameters struct {
 
 type DynamodbConfigObservation struct {
 
-	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
+	// DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	DeltaSyncConfig *DeltaSyncConfigObservation `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// AWS region of the DynamoDB table. Defaults to current region.
@@ -314,7 +314,7 @@ type DynamodbConfigObservation struct {
 
 type DynamodbConfigParameters struct {
 
-	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
+	// DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	// +kubebuilder:validation:Optional
 	DeltaSyncConfig *DeltaSyncConfigParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 

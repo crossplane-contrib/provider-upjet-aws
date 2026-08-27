@@ -25,13 +25,13 @@ type RegistryInitParameters struct {
 
 type RegistryObservation struct {
 
-	// Amazon Resource Name (ARN) of Glue Registry.
+	// ARN of Glue Registry.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description of the registry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of Glue Registry.
+	// ARN of Glue Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

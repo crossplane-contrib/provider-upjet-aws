@@ -13,13 +13,96 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type IAMFederationOptionsInitParameters struct {
+
+	// Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// Group attribute.
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// User attribute.
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
+type IAMFederationOptionsObservation struct {
+
+	// Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// Group attribute.
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// User attribute.
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
+type IAMFederationOptionsParameters struct {
+
+	// Group attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// Group attribute.
+	// +kubebuilder:validation:Optional
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// User attribute for this IAM federation integration. At least one of group_attribute or user_attribute must be specified.
+	// User attribute.
+	// +kubebuilder:validation:Optional
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
+type IAMIdentityCenterOptionsInitParameters struct {
+
+	// Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+	// Group attribute.
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+	// Instance ARN.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+	// User attribute.
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
+type IAMIdentityCenterOptionsObservation struct {
+
+	// Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+	// Group attribute.
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+	// Instance ARN.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+	// User attribute.
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
+type IAMIdentityCenterOptionsParameters struct {
+
+	// Group attribute for this IAM Identity Center integration. Valid values are GroupId and GroupName. Defaults to GroupId.
+	// Group attribute.
+	// +kubebuilder:validation:Optional
+	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
+
+	// ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.
+	// Instance ARN.
+	// +kubebuilder:validation:Optional
+	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
+
+	// User attribute for this IAM Identity Center integration. Valid values are UserId, UserName and Email. Defaults to UserId.
+	// User attribute.
+	// +kubebuilder:validation:Optional
+	UserAttribute *string `json:"userAttribute,omitempty" tf:"user_attribute,omitempty"`
+}
+
 type SAMLOptionsInitParameters struct {
 
 	// Group attribute for this SAML integration.
 	// Group attribute for this SAML integration.
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
-	// The XML IdP metadata file generated from your identity provider.
+	// XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -38,7 +121,7 @@ type SAMLOptionsObservation struct {
 	// Group attribute for this SAML integration.
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
-	// The XML IdP metadata file generated from your identity provider.
+	// XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -58,7 +141,7 @@ type SAMLOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupAttribute *string `json:"groupAttribute,omitempty" tf:"group_attribute,omitempty"`
 
-	// The XML IdP metadata file generated from your identity provider.
+	// XML IdP metadata file generated from your identity provider.
 	// The XML IdP metadata file generated from your identity provider.
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata" tf:"metadata,omitempty"`
@@ -80,7 +163,13 @@ type SecurityConfigInitParameters struct {
 	// Description of the security configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block for SAML options.
+	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
+	IAMFederationOptions []IAMFederationOptionsInitParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+
+	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
+	IAMIdentityCenterOptions []IAMIdentityCenterOptionsInitParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+
+	// Configuration block for SAML options. Required if type is set to saml. See saml_options Block below for details.
 	SAMLOptions *SAMLOptionsInitParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 }
 
@@ -94,17 +183,23 @@ type SecurityConfigObservation struct {
 	// Description of the security configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
+	IAMFederationOptions []IAMFederationOptionsObservation `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+
+	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
+	IAMIdentityCenterOptions []IAMIdentityCenterOptionsObservation `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Configuration block for SAML options.
+	// Configuration block for SAML options. Required if type is set to saml. See saml_options Block below for details.
 	SAMLOptions *SAMLOptionsObservation `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 
-	// Type of configuration. Must be saml.
-	// Type of configuration. Must be `saml`.
+	// Type of configuration. Valid values are saml, iamidentitycenter and iamfederation.
+	// Type of configuration. Valid values: `saml`, `iamidentitycenter` or `iamfederation`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -115,17 +210,25 @@ type SecurityConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
+	// +kubebuilder:validation:Optional
+	IAMFederationOptions []IAMFederationOptionsParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+
+	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
+	// +kubebuilder:validation:Optional
+	IAMIdentityCenterOptions []IAMIdentityCenterOptionsParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Configuration block for SAML options.
+	// Configuration block for SAML options. Required if type is set to saml. See saml_options Block below for details.
 	// +kubebuilder:validation:Optional
 	SAMLOptions *SAMLOptionsParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 
-	// Type of configuration. Must be saml.
-	// Type of configuration. Must be `saml`.
+	// Type of configuration. Valid values are saml, iamidentitycenter and iamfederation.
+	// Type of configuration. Valid values: `saml`, `iamidentitycenter` or `iamfederation`.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

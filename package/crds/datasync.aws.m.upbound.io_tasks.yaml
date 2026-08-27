@@ -60,8 +60,8 @@ spec:
               forProvider:
                 properties:
                   cloudwatchLogGroupArn:
-                    description: Amazon Resource Name (ARN) of the CloudWatch Log
-                      Group that is used to monitor and log events in the sync task.
+                    description: ARN of the CloudWatch Log Group that is used to monitor
+                      and log events in the sync task.
                     type: string
                   cloudwatchLogGroupArnRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -146,8 +146,7 @@ spec:
                         type: object
                     type: object
                   destinationLocationArn:
-                    description: Amazon Resource Name (ARN) of destination DataSync
-                      Location.
+                    description: ARN of destination DataSync Location.
                     type: string
                   destinationLocationArnRef:
                     description: Reference to a LocationS3 in datasync to populate
@@ -383,7 +382,7 @@ spec:
                         type: string
                     type: object
                   sourceLocationArn:
-                    description: Amazon Resource Name (ARN) of source DataSync Location.
+                    description: ARN of source DataSync Location.
                     type: string
                   sourceLocationArnRef:
                     description: Reference to a LocationS3 in datasync to populate
@@ -527,9 +526,8 @@ spec:
                           report. See s3_destination below.
                         properties:
                           bucketAccessRoleArn:
-                            description: Specifies the Amazon Resource Name (ARN)
-                              of the IAM policy that allows DataSync to upload a task
-                              report to your S3 bucket.
+                            description: ARN of the IAM policy that allows DataSync
+                              to upload a task report to your S3 bucket.
                             type: string
                           s3BucketArn:
                             description: Specifies the ARN of the S3 bucket where
@@ -565,8 +563,8 @@ spec:
                   autoscaler.
                 properties:
                   cloudwatchLogGroupArn:
-                    description: Amazon Resource Name (ARN) of the CloudWatch Log
-                      Group that is used to monitor and log events in the sync task.
+                    description: ARN of the CloudWatch Log Group that is used to monitor
+                      and log events in the sync task.
                     type: string
                   cloudwatchLogGroupArnRef:
                     description: Reference to a Group in cloudwatchlogs to populate
@@ -651,8 +649,7 @@ spec:
                         type: object
                     type: object
                   destinationLocationArn:
-                    description: Amazon Resource Name (ARN) of destination DataSync
-                      Location.
+                    description: ARN of destination DataSync Location.
                     type: string
                   destinationLocationArnRef:
                     description: Reference to a LocationS3 in datasync to populate
@@ -883,7 +880,7 @@ spec:
                         type: string
                     type: object
                   sourceLocationArn:
-                    description: Amazon Resource Name (ARN) of source DataSync Location.
+                    description: ARN of source DataSync Location.
                     type: string
                   sourceLocationArnRef:
                     description: Reference to a LocationS3 in datasync to populate
@@ -1027,9 +1024,8 @@ spec:
                           report. See s3_destination below.
                         properties:
                           bucketAccessRoleArn:
-                            description: Specifies the Amazon Resource Name (ARN)
-                              of the IAM policy that allows DataSync to upload a task
-                              report to your S3 bucket.
+                            description: ARN of the IAM policy that allows DataSync
+                              to upload a task report to your S3 bucket.
                             type: string
                           s3BucketArn:
                             description: Specifies the ARN of the S3 bucket where
@@ -1113,15 +1109,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the DataSync Task.
+                    description: ARN of the DataSync Task.
                     type: string
                   cloudwatchLogGroupArn:
-                    description: Amazon Resource Name (ARN) of the CloudWatch Log
-                      Group that is used to monitor and log events in the sync task.
+                    description: ARN of the CloudWatch Log Group that is used to monitor
+                      and log events in the sync task.
                     type: string
                   destinationLocationArn:
-                    description: Amazon Resource Name (ARN) of destination DataSync
-                      Location.
+                    description: ARN of destination DataSync Location.
                     type: string
                   excludes:
                     description: Filter rules that determines which files to exclude
@@ -1138,7 +1133,7 @@ spec:
                         type: string
                     type: object
                   id:
-                    description: Amazon Resource Name (ARN) of the DataSync Task.
+                    description: ARN of the DataSync Task.
                     type: string
                   includes:
                     description: Filter rules that determines which files to include
@@ -1278,7 +1273,7 @@ spec:
                         type: string
                     type: object
                   sourceLocationArn:
-                    description: Amazon Resource Name (ARN) of source DataSync Location.
+                    description: ARN of source DataSync Location.
                     type: string
                   tags:
                     additionalProperties:
@@ -1348,9 +1343,8 @@ spec:
                           report. See s3_destination below.
                         properties:
                           bucketAccessRoleArn:
-                            description: Specifies the Amazon Resource Name (ARN)
-                              of the IAM policy that allows DataSync to upload a task
-                              report to your S3 bucket.
+                            description: ARN of the IAM policy that allows DataSync
+                              to upload a task report to your S3 bucket.
                             type: string
                           s3BucketArn:
                             description: Specifies the ARN of the S3 bucket where

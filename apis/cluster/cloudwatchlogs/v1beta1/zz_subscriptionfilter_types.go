@@ -34,7 +34,7 @@ type SubscriptionFilterInitParameters struct {
 	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region", "@source.log". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
 	// +listType=set
 	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`
 
@@ -72,7 +72,7 @@ type SubscriptionFilterObservation struct {
 	// Method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region", "@source.log". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
 	// +listType=set
 	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`
 
@@ -119,7 +119,7 @@ type SubscriptionFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
+	// List of system fields to include in the log events sent to the subscription destination. These fields provide source information for centralized log data in the forwarded payload. Valid values: "@aws.account", "@aws.region", "@source.log". To remove this argument after it has been set, specify an empty list [] explicitly to avoid perpetual differences.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EmitSystemFields []*string `json:"emitSystemFields,omitempty" tf:"emit_system_fields,omitempty"`

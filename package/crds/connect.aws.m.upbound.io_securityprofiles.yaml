@@ -356,7 +356,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Security Profile.
+                    description: ARN of the Security Profile.
                     type: string
                   description:
                     description: Specifies the description of the Security Profile.

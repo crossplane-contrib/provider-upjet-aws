@@ -1017,8 +1017,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) representing the target
-                      group.
+                    description: ARN representing the target group.
                     type: string
                   connectionPoolConfig:
                     description: The settings that determine the size and behavior

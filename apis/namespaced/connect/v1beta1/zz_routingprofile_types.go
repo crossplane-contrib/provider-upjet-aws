@@ -173,7 +173,7 @@ type RoutingProfileInitParameters struct {
 
 type RoutingProfileObservation struct {
 
-	// Amazon Resource Name (ARN) of the Routing Profile.
+	// ARN of the Routing Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the default outbound queue for the Routing Profile.

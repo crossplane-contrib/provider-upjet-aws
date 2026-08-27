@@ -53,7 +53,7 @@ type DefaultActionParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
@@ -72,7 +72,7 @@ type LoggingConfigurationInitParameters struct {
 
 type LoggingConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
@@ -81,7 +81,7 @@ type LoggingConfigurationObservation struct {
 
 type LoggingConfigurationParameters struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -191,7 +191,7 @@ type WebACLInitParameters struct {
 
 type WebACLObservation struct {
 
-	// Amazon Resource Name (ARN) of the WAF Regional WebACL.
+	// ARN of the WAF Regional WebACL.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The action that you want AWS WAF Regional to take when a request doesn't match the criteria in any of the rules that are associated with the web ACL.

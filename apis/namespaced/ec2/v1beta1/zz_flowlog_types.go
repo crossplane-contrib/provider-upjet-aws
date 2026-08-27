@@ -18,10 +18,10 @@ type DestinationOptionsInitParameters struct {
 	// File format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
-	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
+	// Whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
 	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
 
-	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
+	// Whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
 	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
 }
 
@@ -30,10 +30,10 @@ type DestinationOptionsObservation struct {
 	// File format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
-	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
+	// Whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
 	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
 
-	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
+	// Whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
 	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
 }
 
@@ -43,11 +43,11 @@ type DestinationOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
-	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
+	// Whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
 	// +kubebuilder:validation:Optional
 	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
 
-	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
+	// Whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
 	// +kubebuilder:validation:Optional
 	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
 }
@@ -67,7 +67,7 @@ type FlowLogInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliverCrossAccountRoleSelector *v2.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
-	// Describes the destination options for a flow log. More details below.
+	// Destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsInitParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
 	// Elastic Network Interface ID to attach to.
@@ -102,12 +102,10 @@ type FlowLogInitParameters struct {
 	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
+	// Fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
-	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
-	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// Maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Regional NAT Gateway ID to attach to.
@@ -125,11 +123,14 @@ type FlowLogInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	TagFieldSpecification []TagFieldSpecificationInitParameters `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
+	// Type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
 	// Transit Gateway Attachment ID to attach to.
@@ -159,7 +160,7 @@ type FlowLogObservation struct {
 	// ARN of the IAM role in the destination account used for cross-account delivery of flow logs.
 	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
 
-	// Describes the destination options for a flow log. More details below.
+	// Destination options for a flow log. More details below.
 	DestinationOptions *DestinationOptionsObservation `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
 	// Elastic Network Interface ID to attach to.
@@ -177,12 +178,10 @@ type FlowLogObservation struct {
 	// Logging destination type. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
+	// Fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
-	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
-	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// Maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -195,15 +194,18 @@ type FlowLogObservation struct {
 	// Subnet ID to attach to.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	TagFieldSpecification []TagFieldSpecificationObservation `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
+	// Type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
 	// Transit Gateway Attachment ID to attach to.
@@ -232,7 +234,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliverCrossAccountRoleSelector *v2.NamespacedSelector `json:"deliverCrossAccountRoleSelector,omitempty" tf:"-"`
 
-	// Describes the destination options for a flow log. More details below.
+	// Destination options for a flow log. More details below.
 	// +kubebuilder:validation:Optional
 	DestinationOptions *DestinationOptionsParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
@@ -272,13 +274,11 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
+	// Fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
-	// Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600.
-	// When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	// Maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	// +kubebuilder:validation:Optional
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
@@ -304,12 +304,16 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// Tag configuration for the Flow Logs Amazon EC2 Tags feature fields (e.g., $${instance-tag}) used in log_format. More details below.
+	// +kubebuilder:validation:Optional
+	TagFieldSpecification []TagFieldSpecificationParameters `json:"tagFieldSpecification,omitempty" tf:"tag_field_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
+	// Type of traffic to capture. Valid values: ACCEPT,REJECT, ALL. Required if eni_id, regional_nat_gateway_id, subnet_id, or vpc_id is specified.
 	// +kubebuilder:validation:Optional
 	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
 
@@ -333,6 +337,35 @@ type FlowLogParameters struct {
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v2.NamespacedSelector `json:"vpcIdSelector,omitempty" tf:"-"`
+}
+
+type TagFieldSpecificationInitParameters struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	TagKeys []*string `json:"tagKeys,omitempty" tf:"tag_keys,omitempty"`
+}
+
+type TagFieldSpecificationObservation struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	TagKeys []*string `json:"tagKeys,omitempty" tf:"tag_keys,omitempty"`
+}
+
+type TagFieldSpecificationParameters struct {
+
+	// Resource type to associate the tag keys with. Valid values: instance, network-interface, auto-scaling-group.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+
+	// Ordered list of tag keys, on resources of resource_type, to display in Flow Log records. The position of each key determines which field it populates in log_format (e.g., the first instance tag key populates $${instance-tag} and the second populates $${instance-tag-2}).
+	// +kubebuilder:validation:Optional
+	TagKeys []*string `json:"tagKeys" tf:"tag_keys,omitempty"`
 }
 
 // FlowLogSpec defines the desired state of FlowLog

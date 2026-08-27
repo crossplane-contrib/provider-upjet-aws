@@ -39,7 +39,7 @@ type VPCEndpointServiceInitParameters struct {
 	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
-	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// ARNs of one or more Gateway Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -53,7 +53,7 @@ type VPCEndpointServiceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerArnsSelector *v2.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// ARNs of one or more Network Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
@@ -92,7 +92,7 @@ type VPCEndpointServiceObservation struct {
 	// +listType=set
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the VPC endpoint service.
+	// ARN of the VPC endpoint service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A set of Availability Zones in which the service is available.
@@ -103,7 +103,7 @@ type VPCEndpointServiceObservation struct {
 	// +listType=set
 	BaseEndpointDNSNames []*string `json:"baseEndpointDnsNames,omitempty" tf:"base_endpoint_dns_names,omitempty"`
 
-	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// ARNs of one or more Gateway Load Balancers for the endpoint service.
 	// +listType=set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
@@ -113,7 +113,7 @@ type VPCEndpointServiceObservation struct {
 	// Whether or not the service manages its VPC endpoints - true or false.
 	ManagesVPCEndpoints *bool `json:"managesVpcEndpoints,omitempty" tf:"manages_vpc_endpoints,omitempty"`
 
-	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// ARNs of one or more Network Load Balancers for the endpoint service.
 	// +listType=set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 
@@ -159,7 +159,7 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
-	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// ARNs of one or more Gateway Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -174,7 +174,7 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerArnsSelector *v2.NamespacedSelector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// ARNs of one or more Network Load Balancers for the endpoint service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/elbv2/v1beta1.LB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

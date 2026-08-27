@@ -31,7 +31,7 @@ type ParameterGroupInitParameters struct {
 
 type ParameterGroupObservation struct {
 
-	// The Neptune parameter group Amazon Resource Name (ARN).
+	// Neptune parameter group ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the Neptune parameter group.

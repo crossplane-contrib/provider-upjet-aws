@@ -77,10 +77,10 @@ type LanguageModelInitParameters struct {
 	// Name of reference base model.
 	BaseModelName *string `json:"baseModelName,omitempty" tf:"base_model_name,omitempty"`
 
-	// The input data config for the LanguageModel. See Input Data Config for more details.
+	// Input data configuration for the LanguageModel. See input_data_config Block for details.
 	InputDataConfig *InputDataConfigInitParameters `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
 
-	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your language model. Refer to the supported languages page for accepted codes.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Key-value map of resource tags.
@@ -99,10 +99,10 @@ type LanguageModelObservation struct {
 	// LanguageModel name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The input data config for the LanguageModel. See Input Data Config for more details.
+	// Input data configuration for the LanguageModel. See input_data_config Block for details.
 	InputDataConfig *InputDataConfigObservation `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
 
-	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your language model. Refer to the supported languages page for accepted codes.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -123,11 +123,11 @@ type LanguageModelParameters struct {
 	// +kubebuilder:validation:Optional
 	BaseModelName *string `json:"baseModelName,omitempty" tf:"base_model_name,omitempty"`
 
-	// The input data config for the LanguageModel. See Input Data Config for more details.
+	// Input data configuration for the LanguageModel. See input_data_config Block for details.
 	// +kubebuilder:validation:Optional
 	InputDataConfig *InputDataConfigParameters `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
 
-	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your language model. Refer to the supported languages page for accepted codes.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 

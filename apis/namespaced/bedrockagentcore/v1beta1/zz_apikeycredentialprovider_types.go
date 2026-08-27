@@ -14,9 +14,12 @@ import (
 )
 
 type APIKeyCredentialProviderInitParameters struct {
+	APIKeySecretConfig []APIKeySecretConfigInitParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
 
 	// API key value. Cannot be used with api_key_wo.
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+
+	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
 	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
 	APIKeyWoSecretRef *v2.LocalSecretKeySelector `json:"apiKeyWoSecretRef,omitempty" tf:"-"`
@@ -33,6 +36,10 @@ type APIKeyCredentialProviderObservation struct {
 
 	// ARN of the AWS Secrets Manager secret containing the API key.
 	APIKeySecretArn []APIKeySecretArnObservation `json:"apiKeySecretArn,omitempty" tf:"api_key_secret_arn,omitempty"`
+
+	APIKeySecretConfig []APIKeySecretConfigObservation `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
+
+	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
 	// Used together with api_key_wo to trigger an update. Increment this value when an update to api_key_wo is required.
 	APIKeyWoVersion *float64 `json:"apiKeyWoVersion,omitempty" tf:"api_key_wo_version,omitempty"`
@@ -60,9 +67,15 @@ type APIKeyCredentialProviderObservation struct {
 
 type APIKeyCredentialProviderParameters struct {
 
+	// +kubebuilder:validation:Optional
+	APIKeySecretConfig []APIKeySecretConfigParameters `json:"apiKeySecretConfig,omitempty" tf:"api_key_secret_config,omitempty"`
+
 	// API key value. Cannot be used with api_key_wo.
 	// +kubebuilder:validation:Optional
 	APIKeySecretRef *v2.LocalSecretKeySelector `json:"apiKeySecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	APIKeySecretSource *string `json:"apiKeySecretSource,omitempty" tf:"api_key_secret_source,omitempty"`
 
 	// Write-only API key value. Cannot be used with api_key. Must be used together with api_key_wo_version.
 	// +kubebuilder:validation:Optional
@@ -93,6 +106,27 @@ type APIKeySecretArnObservation struct {
 }
 
 type APIKeySecretArnParameters struct {
+}
+
+type APIKeySecretConfigInitParameters struct {
+	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
+
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+}
+
+type APIKeySecretConfigObservation struct {
+	JSONKey *string `json:"jsonKey,omitempty" tf:"json_key,omitempty"`
+
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+}
+
+type APIKeySecretConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	JSONKey *string `json:"jsonKey" tf:"json_key,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
 }
 
 // APIKeyCredentialProviderSpec defines the desired state of APIKeyCredentialProvider

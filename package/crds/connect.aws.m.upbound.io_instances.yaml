@@ -408,7 +408,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the instance.
+                    description: ARN of the instance.
                     type: string
                   autoResolveBestVoicesEnabled:
                     description: Specifies whether auto resolve best voices is enabled.

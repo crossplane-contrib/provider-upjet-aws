@@ -60,7 +60,7 @@ spec:
               forProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the resource.
+                    description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
                     description: Flag to enable AWS LakeFormation hybrid access permission
@@ -186,7 +186,7 @@ spec:
                   autoscaler.
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the resource.
+                    description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
                     description: Flag to enable AWS LakeFormation hybrid access permission
@@ -360,7 +360,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the resource.
+                    description: ARN of the resource.
                     type: string
                   hybridAccessEnabled:
                     description: Flag to enable AWS LakeFormation hybrid access permission

@@ -183,8 +183,8 @@ spec:
                       Auto Scaling API Reference'
                     type: string
                   suspendedState:
-                    description: Specifies whether the scaling activities for a scalable
-                      target are in a suspended state.
+                    description: Whether the scaling activities for a scalable target
+                      are in a suspended state.
                     properties:
                       dynamicScalingInSuspended:
                         description: Whether scale in by a target tracking scaling
@@ -328,8 +328,8 @@ spec:
                       Auto Scaling API Reference'
                     type: string
                   suspendedState:
-                    description: Specifies whether the scaling activities for a scalable
-                      target are in a suspended state.
+                    description: Whether the scaling activities for a scalable target
+                      are in a suspended state.
                     properties:
                       dynamicScalingInSuspended:
                         description: Whether scale in by a target tracking scaling
@@ -466,7 +466,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the scalable target.
+                    description: ARN of the scalable target.
                     type: string
                   id:
                     type: string
@@ -506,8 +506,8 @@ spec:
                       Auto Scaling API Reference'
                     type: string
                   suspendedState:
-                    description: Specifies whether the scaling activities for a scalable
-                      target are in a suspended state.
+                    description: Whether the scaling activities for a scalable target
+                      are in a suspended state.
                     properties:
                       dynamicScalingInSuspended:
                         description: Whether scale in by a target tracking scaling

@@ -31,7 +31,7 @@ type AppImageConfigInitParameters struct {
 
 type AppImageConfigObservation struct {
 
-	// The Amazon Resource Name (ARN) assigned by AWS to this App Image Config.
+	// ARN assigned by AWS to this App Image Config.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The CodeEditorAppImageConfig. See Code Editor App Image Config details below.

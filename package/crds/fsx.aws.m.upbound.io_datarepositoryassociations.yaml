@@ -67,12 +67,11 @@ spec:
                       false.
                     type: boolean
                   dataRepositoryPath:
-                    description: The path to the Amazon S3 data repository that will
-                      be linked to the file system. The path must be an S3 bucket
-                      s3://myBucket/myPrefix/. This path specifies where in the S3
-                      data repository files will be imported from or exported to.
-                      The same S3 bucket cannot be linked more than once to the same
-                      file system.
+                    description: Path to the Amazon S3 data repository that will be
+                      linked to the file system. The path must be an S3 bucket s3://myBucket/myPrefix/.
+                      This path specifies where in the S3 data repository files will
+                      be imported from or exported to. The same S3 bucket cannot be
+                      linked more than once to the same file system.
                     type: string
                   deleteDataInFilesystem:
                     description: Set to true to delete files from the file system
@@ -80,8 +79,8 @@ spec:
                       false.
                     type: boolean
                   fileSystemId:
-                    description: The ID of the Amazon FSx file system to on which
-                      to create a data repository association.
+                    description: ID of the Amazon FSx file system to on which to create
+                      a data repository association.
                     type: string
                   fileSystemIdRef:
                     description: Reference to a LustreFileSystem in fsx to populate
@@ -166,7 +165,7 @@ spec:
                         type: object
                     type: object
                   fileSystemPath:
-                    description: A path on the file system that points to a high-level
+                    description: Path on the file system that points to a high-level
                       directory (such as /ns1/) or subdirectory (such as /ns1/subdir/)
                       that will be mapped 1-1 with data_repository_path. The leading
                       forward slash in the name is required. Two data repository associations
@@ -191,34 +190,36 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3:
-                    description: |-
-                      See the s3 configuration block. Max of 1.
-                      The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.
+                    description: Configuration for an Amazon S3 data repository linked
+                      to an Amazon FSx Lustre file system with a data repository association.
+                      This configuration defines which file events (new, changed,
+                      or deleted files or directories) are automatically imported
+                      from the linked data repository to the file system or automatically
+                      exported from the file system to the data repository. See the
+                      s3 Block below. Max of 1.
                     properties:
                       autoExportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically exported from your file system to the linked
-                          S3 bucket. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          exported from your file system to the linked S3 bucket.
+                          See the auto_export_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
                         type: object
                       autoImportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically imported from the linked S3 bucket to your
-                          file system. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          imported from the linked S3 bucket to your file system.
+                          See the auto_import_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
@@ -253,12 +254,11 @@ spec:
                       false.
                     type: boolean
                   dataRepositoryPath:
-                    description: The path to the Amazon S3 data repository that will
-                      be linked to the file system. The path must be an S3 bucket
-                      s3://myBucket/myPrefix/. This path specifies where in the S3
-                      data repository files will be imported from or exported to.
-                      The same S3 bucket cannot be linked more than once to the same
-                      file system.
+                    description: Path to the Amazon S3 data repository that will be
+                      linked to the file system. The path must be an S3 bucket s3://myBucket/myPrefix/.
+                      This path specifies where in the S3 data repository files will
+                      be imported from or exported to. The same S3 bucket cannot be
+                      linked more than once to the same file system.
                     type: string
                   deleteDataInFilesystem:
                     description: Set to true to delete files from the file system
@@ -266,8 +266,8 @@ spec:
                       false.
                     type: boolean
                   fileSystemId:
-                    description: The ID of the Amazon FSx file system to on which
-                      to create a data repository association.
+                    description: ID of the Amazon FSx file system to on which to create
+                      a data repository association.
                     type: string
                   fileSystemIdRef:
                     description: Reference to a LustreFileSystem in fsx to populate
@@ -352,7 +352,7 @@ spec:
                         type: object
                     type: object
                   fileSystemPath:
-                    description: A path on the file system that points to a high-level
+                    description: Path on the file system that points to a high-level
                       directory (such as /ns1/) or subdirectory (such as /ns1/subdir/)
                       that will be mapped 1-1 with data_repository_path. The leading
                       forward slash in the name is required. Two data repository associations
@@ -372,34 +372,36 @@ spec:
                       by the total number of disks that make up the file system.
                     type: number
                   s3:
-                    description: |-
-                      See the s3 configuration block. Max of 1.
-                      The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.
+                    description: Configuration for an Amazon S3 data repository linked
+                      to an Amazon FSx Lustre file system with a data repository association.
+                      This configuration defines which file events (new, changed,
+                      or deleted files or directories) are automatically imported
+                      from the linked data repository to the file system or automatically
+                      exported from the file system to the data repository. See the
+                      s3 Block below. Max of 1.
                     properties:
                       autoExportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically exported from your file system to the linked
-                          S3 bucket. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          exported from your file system to the linked S3 bucket.
+                          See the auto_export_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
                         type: object
                       autoImportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically imported from the linked S3 bucket to your
-                          file system. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          imported from the linked S3 bucket to your file system.
+                          See the auto_import_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
@@ -486,11 +488,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name of the file system.
+                    description: ARN of the file system.
                     type: string
                   associationId:
-                    description: Identifier of the data repository association, e.g.,
-                      dra-12345678
+                    description: Identifier of the data repository association.
                     type: string
                   batchImportMetaDataOnCreate:
                     description: Set to true to run an import data repository task
@@ -499,12 +500,11 @@ spec:
                       false.
                     type: boolean
                   dataRepositoryPath:
-                    description: The path to the Amazon S3 data repository that will
-                      be linked to the file system. The path must be an S3 bucket
-                      s3://myBucket/myPrefix/. This path specifies where in the S3
-                      data repository files will be imported from or exported to.
-                      The same S3 bucket cannot be linked more than once to the same
-                      file system.
+                    description: Path to the Amazon S3 data repository that will be
+                      linked to the file system. The path must be an S3 bucket s3://myBucket/myPrefix/.
+                      This path specifies where in the S3 data repository files will
+                      be imported from or exported to. The same S3 bucket cannot be
+                      linked more than once to the same file system.
                     type: string
                   deleteDataInFilesystem:
                     description: Set to true to delete files from the file system
@@ -512,11 +512,11 @@ spec:
                       false.
                     type: boolean
                   fileSystemId:
-                    description: The ID of the Amazon FSx file system to on which
-                      to create a data repository association.
+                    description: ID of the Amazon FSx file system to on which to create
+                      a data repository association.
                     type: string
                   fileSystemPath:
-                    description: A path on the file system that points to a high-level
+                    description: Path on the file system that points to a high-level
                       directory (such as /ns1/) or subdirectory (such as /ns1/subdir/)
                       that will be mapped 1-1 with data_repository_path. The leading
                       forward slash in the name is required. Two data repository associations
@@ -545,34 +545,36 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3:
-                    description: |-
-                      See the s3 configuration block. Max of 1.
-                      The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.
+                    description: Configuration for an Amazon S3 data repository linked
+                      to an Amazon FSx Lustre file system with a data repository association.
+                      This configuration defines which file events (new, changed,
+                      or deleted files or directories) are automatically imported
+                      from the linked data repository to the file system or automatically
+                      exported from the file system to the data repository. See the
+                      s3 Block below. Max of 1.
                     properties:
                       autoExportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically exported from your file system to the linked
-                          S3 bucket. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          exported from your file system to the linked S3 bucket.
+                          See the auto_export_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
                         type: object
                       autoImportPolicy:
-                        description: Specifies the type of updated objects that will
-                          be automatically imported from the linked S3 bucket to your
-                          file system. See the events configuration block.
+                        description: Type of updated objects that are automatically
+                          imported from the linked S3 bucket to your file system.
+                          See the auto_import_policy Block below.
                         properties:
                           events:
-                            description: A list of file event types to automatically
-                              export to your linked S3 bucket or import from the linked
-                              S3 bucket. Valid values are NEW, CHANGED, DELETED. Max
-                              of 3.
+                            description: List of file event types to automatically
+                              export to your linked S3 bucket. Valid values are NEW,
+                              CHANGED, DELETED. Max of 3.
                             items:
                               type: string
                             type: array
@@ -587,9 +589,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

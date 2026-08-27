@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   hostArn:
-                    description: The Amazon Resource Name (ARN) of the host associated
-                      with the connection. Conflicts with provider_type
+                    description: ARN of the host associated with the connection. Conflicts
+                      with provider_type
                     type: string
                   name:
                     description: The name of the connection to be created. The name
@@ -116,8 +116,8 @@ spec:
                   autoscaler.
                 properties:
                   hostArn:
-                    description: The Amazon Resource Name (ARN) of the host associated
-                      with the connection. Conflicts with provider_type
+                    description: ARN of the host associated with the connection. Conflicts
+                      with provider_type
                     type: string
                   name:
                     description: The name of the connection to be created. The name
@@ -241,8 +241,8 @@ spec:
                       PENDING, AVAILABLE and ERROR.
                     type: string
                   hostArn:
-                    description: The Amazon Resource Name (ARN) of the host associated
-                      with the connection. Conflicts with provider_type
+                    description: ARN of the host associated with the connection. Conflicts
+                      with provider_type
                     type: string
                   id:
                     description: The codestar connection ARN.

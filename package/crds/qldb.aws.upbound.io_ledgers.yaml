@@ -78,12 +78,11 @@ spec:
                       By default it is true.
                     type: boolean
                   kmsKey:
-                    description: The key in AWS Key Management Service (AWS KMS) to
-                      use for encryption of data at rest in the ledger. For more information,
-                      see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY"
-                      to use an AWS KMS key that is owned and managed by AWS on your
-                      behalf, or the ARN of a valid symmetric customer managed KMS
-                      key.
+                    description: Key in KMS to use for encryption of data at rest
+                      in the ledger. For more information, see the AWS documentation.
+                      Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that
+                      is owned and managed by AWS on your behalf, or the ARN of a
+                      valid symmetric customer managed KMS key.
                     type: string
                   kmsKeyRef:
                     description: Reference to a Key in kms to populate kmsKey.
@@ -195,12 +194,11 @@ spec:
                       By default it is true.
                     type: boolean
                   kmsKey:
-                    description: The key in AWS Key Management Service (AWS KMS) to
-                      use for encryption of data at rest in the ledger. For more information,
-                      see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY"
-                      to use an AWS KMS key that is owned and managed by AWS on your
-                      behalf, or the ARN of a valid symmetric customer managed KMS
-                      key.
+                    description: Key in KMS to use for encryption of data at rest
+                      in the ledger. For more information, see the AWS documentation.
+                      Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that
+                      is owned and managed by AWS on your behalf, or the ARN of a
+                      valid symmetric customer managed KMS key.
                     type: string
                   kmsKeyRef:
                     description: Reference to a Key in kms to populate kmsKey.
@@ -394,12 +392,11 @@ spec:
                     description: The Name of the QLDB Ledger
                     type: string
                   kmsKey:
-                    description: The key in AWS Key Management Service (AWS KMS) to
-                      use for encryption of data at rest in the ledger. For more information,
-                      see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY"
-                      to use an AWS KMS key that is owned and managed by AWS on your
-                      behalf, or the ARN of a valid symmetric customer managed KMS
-                      key.
+                    description: Key in KMS to use for encryption of data at rest
+                      in the ledger. For more information, see the AWS documentation.
+                      Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that
+                      is owned and managed by AWS on your behalf, or the ARN of a
+                      valid symmetric customer managed KMS key.
                     type: string
                   permissionsMode:
                     description: The permissions mode for the QLDB ledger instance.

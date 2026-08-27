@@ -160,7 +160,7 @@ spec:
               atProvider:
                 properties:
                   dashboardArn:
-                    description: The Amazon Resource Name (ARN) of the dashboard.
+                    description: ARN of the dashboard.
                     type: string
                   dashboardBody:
                     description: The detailed information about the dashboard, including

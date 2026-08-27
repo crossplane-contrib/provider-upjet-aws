@@ -74,15 +74,15 @@ spec:
               forProvider:
                 properties:
                   autoConfigEnabled:
-                    description: Indicates whether Application Insights automatically
-                      configures unmonitored resources in the resource group.
+                    description: Whether to automatically configure unmonitored resources
+                      in the resource group.
                     type: boolean
                   autoCreate:
                     description: Configures all of the resources in the resource group
                       by applying the recommended configurations.
                     type: boolean
                   cweMonitorEnabled:
-                    description: Indicates whether Application Insights can listen
+                    description: Whether to enable Application Insights to listen
                       to CloudWatch events for the application resources, such as
                       instance terminated, failed deployment, and others.
                     type: boolean
@@ -129,15 +129,15 @@ spec:
                   autoscaler.
                 properties:
                   autoConfigEnabled:
-                    description: Indicates whether Application Insights automatically
-                      configures unmonitored resources in the resource group.
+                    description: Whether to automatically configure unmonitored resources
+                      in the resource group.
                     type: boolean
                   autoCreate:
                     description: Configures all of the resources in the resource group
                       by applying the recommended configurations.
                     type: boolean
                   cweMonitorEnabled:
-                    description: Indicates whether Application Insights can listen
+                    description: Whether to enable Application Insights to listen
                       to CloudWatch events for the application resources, such as
                       instance terminated, failed deployment, and others.
                     type: boolean
@@ -258,15 +258,15 @@ spec:
                     description: ARN of the Application.
                     type: string
                   autoConfigEnabled:
-                    description: Indicates whether Application Insights automatically
-                      configures unmonitored resources in the resource group.
+                    description: Whether to automatically configure unmonitored resources
+                      in the resource group.
                     type: boolean
                   autoCreate:
                     description: Configures all of the resources in the resource group
                       by applying the recommended configurations.
                     type: boolean
                   cweMonitorEnabled:
-                    description: Indicates whether Application Insights can listen
+                    description: Whether to enable Application Insights to listen
                       to CloudWatch events for the application resources, such as
                       instance terminated, failed deployment, and others.
                     type: boolean

@@ -40,13 +40,15 @@ type AutoScalingConfigurationVersionObservation struct {
 	// Name of the auto scaling configuration.
 	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName,omitempty" tf:"auto_scaling_configuration_name,omitempty"`
 
-	// The revision of this auto scaling configuration.
+	// Revision of this auto scaling configuration.
 	AutoScalingConfigurationRevision *float64 `json:"autoScalingConfigurationRevision,omitempty" tf:"auto_scaling_configuration_revision,omitempty"`
 
+	// Whether there is an App Runner service associated with this auto scaling configuration.
 	HasAssociatedService *bool `json:"hasAssociatedService,omitempty" tf:"has_associated_service,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether the auto scaling configuration is the default for the AWS account and Region.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// Whether the auto scaling configuration has the highest auto_scaling_configuration_revision among all configurations that share the same auto_scaling_configuration_name.

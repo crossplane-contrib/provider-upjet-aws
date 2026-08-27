@@ -59,11 +59,10 @@ spec:
               forProvider:
                 properties:
                   forceDestroy:
-                    description: |-
-                      when destroying this user, destroy even if it
-                      has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-                      a user with non-provider-managed access keys and login profile will fail to be destroyed.
-                      delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+                    description: This only deletes objects when the user is destroyed,
+                      not when setting this parameter to true. If setting this field
+                      in the same operation that would require replacing the user
+                      or destroying the user, this flag will not work
                     type: boolean
                   path:
                     description: Path in which to create the user.
@@ -93,11 +92,10 @@ spec:
                   autoscaler.
                 properties:
                   forceDestroy:
-                    description: |-
-                      when destroying this user, destroy even if it
-                      has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-                      a user with non-provider-managed access keys and login profile will fail to be destroyed.
-                      delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+                    description: This only deletes objects when the user is destroyed,
+                      not when setting this parameter to true. If setting this field
+                      in the same operation that would require replacing the user
+                      or destroying the user, this flag will not work
                     type: boolean
                   path:
                     description: Path in which to create the user.
@@ -180,11 +178,10 @@ spec:
                     description: The ARN assigned by AWS for this user.
                     type: string
                   forceDestroy:
-                    description: |-
-                      when destroying this user, destroy even if it
-                      has non-provider-managed iam access keys, login profile or mfa devices. without force_destroy
-                      a user with non-provider-managed access keys and login profile will fail to be destroyed.
-                      delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
+                    description: This only deletes objects when the user is destroyed,
+                      not when setting this parameter to true. If setting this field
+                      in the same operation that would require replacing the user
+                      or destroying the user, this flag will not work
                     type: boolean
                   id:
                     description: The user's name.

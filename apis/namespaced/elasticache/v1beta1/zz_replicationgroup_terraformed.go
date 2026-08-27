@@ -21,7 +21,7 @@ func (mg *ReplicationGroup) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ReplicationGroup
 func (tr *ReplicationGroup) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"auth_token": "authTokenSecretRef"}
+	return map[string]string{"auth_token": "authTokenSecretRef", "auth_token_wo": "authTokenWoSecretRef"}
 }
 
 // GetObservation of this ReplicationGroup

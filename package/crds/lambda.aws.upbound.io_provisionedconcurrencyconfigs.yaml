@@ -75,8 +75,7 @@ spec:
               forProvider:
                 properties:
                   functionName:
-                    description: Name or Amazon Resource Name (ARN) of the Lambda
-                      Function.
+                    description: Name or ARN of the Lambda Function.
                     type: string
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
@@ -112,8 +111,7 @@ spec:
                   autoscaler.
                 properties:
                   functionName:
-                    description: Name or Amazon Resource Name (ARN) of the Lambda
-                      Function.
+                    description: Name or ARN of the Lambda Function.
                     type: string
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
@@ -235,8 +233,7 @@ spec:
               atProvider:
                 properties:
                   functionName:
-                    description: Name or Amazon Resource Name (ARN) of the Lambda
-                      Function.
+                    description: Name or ARN of the Lambda Function.
                     type: string
                   id:
                     description: Lambda Function name and qualifier separated by a

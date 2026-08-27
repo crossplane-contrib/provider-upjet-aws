@@ -214,7 +214,7 @@ type LaunchConfigurationInitParameters struct {
 
 type LaunchConfigurationObservation struct {
 
-	// The Amazon Resource Name of the launch configuration.
+	// ARN of the launch configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Associate a public ip address with an instance in a VPC.

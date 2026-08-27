@@ -44,19 +44,19 @@ type SignatureValidityPeriodParameters struct {
 
 type SigningMaterialInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+	// ARN of the certificates that is used to sign your code.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type SigningMaterialObservation struct {
 
-	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+	// ARN of the certificates that is used to sign your code.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type SigningMaterialParameters struct {
 
-	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+	// ARN of the certificates that is used to sign your code.
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn" tf:"certificate_arn,omitempty"`
 }
@@ -83,7 +83,7 @@ type SigningProfileInitParameters struct {
 
 type SigningProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) for the signing profile.
+	// ARN for the signing profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

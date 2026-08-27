@@ -21,7 +21,9 @@ spec:
         returnConnectionPasswordEncrypted: true
       encryptionAtRest:
         catalogEncryptionMode: SSE-KMS
-        catalogEncryptionServiceRole: ${aws_iam.role.test.arn}
+        catalogEncryptionServiceRoleSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test
         sseAwsKmsKeyIdSelector:
           matchLabels:
             testing.upbound.io/example-name: test

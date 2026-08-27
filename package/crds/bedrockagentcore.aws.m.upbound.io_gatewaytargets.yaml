@@ -64,11 +64,11 @@ spec:
                       target. Required when using lambda, open_api_schema and smithy_model
                       in mcp block. If using mcp_server in mcp block with no authorization,
                       it should not be specified. See credential_provider_configuration
-                      below.
+                      Block below.
                     properties:
                       apiKey:
                         description: API key-based authentication configuration. See
-                          api_key below.
+                          api_key Block below.
                         properties:
                           credentialLocation:
                             description: 'Location where the API key credential is
@@ -169,24 +169,24 @@ spec:
                         type: object
                       callerIamCredentials:
                         description: Caller IAM credentials-based authentication configuration.
-                          See caller_iam_credentials below.
+                          See caller_iam_credentials Block below.
                         properties:
                           region:
                             description: Region where this resource will be managed.
                               Defaults to the Region set in the provider configuration.
                             type: string
                           service:
-                            description: The target AWS service name used for SigV4
-                              signing of upstream requests. Required when calling
-                              SigV4-protected endpoints such as another Bedrock AgentCore
-                              Runtime (use bedrock-agentcore). Omit for non-SigV4
-                              IAM-role-based authentication, in which case the block
-                              can be empty (gateway_iam_role {}).
+                            description: Target AWS service name used for SigV4 signing
+                              of upstream requests. Required when calling SigV4-protected
+                              endpoints such as another Bedrock AgentCore Runtime
+                              (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based
+                              authentication, in which case the block can be empty
+                              (gateway_iam_role {}).
                             type: string
                         type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
-                          See gateway_iam_role below.
+                          See gateway_iam_role Block below.
                         properties:
                           region:
                             description: |-
@@ -195,7 +195,7 @@ spec:
                             type: string
                           service:
                             description: |-
-                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
                               The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
                             type: string
                         type: object
@@ -205,7 +205,7 @@ spec:
                         type: object
                       oauth:
                         description: OAuth-based authentication configuration. See
-                          oauth below.
+                          oauth Block below.
                         properties:
                           customParameters:
                             additionalProperties:
@@ -216,12 +216,12 @@ spec:
                             x-kubernetes-map-type: granular
                           defaultReturnUrl:
                             description: |-
-                              The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+                              URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                               The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                             type: string
                           grantType:
                             description: |-
-                              The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+                              OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
                               The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
                             type: string
                           providerArn:
@@ -410,11 +410,11 @@ spec:
                   metadataConfiguration:
                     description: Configuration for HTTP header and query parameter
                       propagation between the gateway and target servers. See metadata_configuration
-                      below.
+                      Block below.
                     properties:
                       allowedQueryParameters:
                         description: |-
-                          A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+                          Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
                           A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
                         items:
                           type: string
@@ -422,7 +422,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedRequestHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
                         items:
                           type: string
@@ -430,7 +430,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedResponseHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from the target response back to the client.
                         items:
                           type: string
@@ -444,12 +444,12 @@ spec:
                     description: Configuration for private connectivity from AgentCore
                       Gateway to a resource inside your VPC. Traffic is routed through
                       Amazon VPC Lattice and never traverses the public internet.
-                      See private_endpoint below.
+                      See private_endpoint Block below.
                     properties:
                       managedVpcResource:
                         description: AWS creates and manages the VPC Lattice resource
                           gateway and resource configuration on your behalf using
-                          a service-linked role. See managed_vpc_resource below.
+                          a service-linked role. See managed_vpc_resource Block below.
                         properties:
                           endpointIpAddressType:
                             description: 'IP address type for the resource configuration
@@ -737,7 +737,7 @@ spec:
                         description: Use an existing VPC Lattice resource configuration
                           that you manage yourself. Useful for cross-account setups
                           or advanced Lattice configurations. See self_managed_lattice_resource
-                          below.
+                          Block below.
                         properties:
                           resourceConfigurationIdentifier:
                             description: ARN or ID of the VPC Lattice resource configuration.
@@ -833,15 +833,15 @@ spec:
                     type: string
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
-                      below.
+                      Block below.
                     properties:
                       http:
                         description: HTTP target configuration for routing requests
-                          directly to an AgentCore Runtime agent. See http below.
+                          directly to an AgentCore Runtime agent. See http Block below.
                         properties:
                           agentcoreRuntime:
                             description: AgentCore Runtime target configuration. See
-                              agentcore_runtime below.
+                              agentcore_runtime Block below.
                             properties:
                               arn:
                                 description: ARN of the AgentCore Runtime agent that
@@ -933,24 +933,269 @@ spec:
                                 description: Runtime qualifier identifying a specific
                                   endpoint version. Defaults to DEFAULT when not set.
                                 type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    source:
+                                      description: Configuration for API schema. See
+                                        api_schema_configuration Block below.
+                                      items:
+                                        properties:
+                                          inlinePayload:
+                                            description: Inline tool schema payload.
+                                              The inline_payload block requires a
+                                              payload (string) containing the MCP
+                                              tool schema definition.
+                                            items:
+                                              properties:
+                                                payload:
+                                                  description: Inline schema payload
+                                                    content.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          s3:
+                                            description: S3 location of the tool schema.
+                                              See s3 Block below.
+                                            items:
+                                              properties:
+                                                bucketOwnerAccountId:
+                                                  description: Account ID of the S3
+                                                    bucket owner.
+                                                  type: string
+                                                uri:
+                                                  description: S3 URI where the tool
+                                                    schema is stored.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
+                          passthrough:
+                            description: Passthrough target configuration that forwards
+                              requests to an external HTTPS endpoint. See passthrough
+                              Block below.
+                            items:
+                              properties:
+                                endpoint:
+                                  description: HTTPS endpoint of the inference provider
+                                    that the gateway forwards requests to.
+                                  type: string
+                                protocolType:
+                                  description: 'Application protocol the passthrough
+                                    target implements. Valid values: MCP, A2A, INFERENCE,
+                                    CUSTOM.'
+                                  type: string
+                                schema:
+                                  description: API schema configuration that defines
+                                    the structure of the runtime target's API. See
+                                    schema Block below.
+                                  items:
+                                    properties:
+                                      source:
+                                        description: Configuration for API schema.
+                                          See api_schema_configuration Block below.
+                                        items:
+                                          properties:
+                                            inlinePayload:
+                                              description: Inline tool schema payload.
+                                                The inline_payload block requires
+                                                a payload (string) containing the
+                                                MCP tool schema definition.
+                                              items:
+                                                properties:
+                                                  payload:
+                                                    description: Inline schema payload
+                                                      content.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                            s3:
+                                              description: S3 location of the tool
+                                                schema. See s3 Block below.
+                                              items:
+                                                properties:
+                                                  bucketOwnerAccountId:
+                                                    description: Account ID of the
+                                                      S3 bucket owner.
+                                                    type: string
+                                                  uri:
+                                                    description: S3 URI where the
+                                                      tool schema is stored.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                          type: object
+                                        type: array
+                                    type: object
+                                  type: array
+                                staticQueryParameterConflictResolution:
+                                  description: 'Controls precedence when a client
+                                    request supplies a query parameter whose name
+                                    matches a configured static query parameter. Valid
+                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                  type: string
+                                staticQueryParameters:
+                                  additionalProperties:
+                                    type: string
+                                  description: Map of static query parameters that
+                                    the gateway always appends to the outbound URL
+                                    when forwarding requests to the target.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                                stickinessConfiguration:
+                                  description: Session stickiness configuration routing
+                                    requests within the same session to the same target.
+                                    See stickiness_configuration below.
+                                  items:
+                                    properties:
+                                      compositeIdentifier:
+                                        description: Additional headers to include
+                                          in session affinity routing.
+                                        items:
+                                          type: string
+                                        type: array
+                                        x-kubernetes-list-type: set
+                                      identifier:
+                                        description: Expression identifying where
+                                          to extract the session identifier from the
+                                          request (for example, $context.header.x-session-id).
+                                        type: string
+                                      timeout:
+                                        description: Session stickiness timeout, in
+                                          seconds. Valid values range from 1 to 86400.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                         type: object
+                      inference:
+                        description: Inference target configuration for routing requests
+                          to a large language model (LLM) provider, either through
+                          a built-in connector or an explicitly configured provider.
+                          See inference Block below.
+                        items:
+                          properties:
+                            connector:
+                              description: Connector integration target configuration.
+                                Connectors provide pre-built integrations with AWS
+                                services and third-party tools. See connector Block
+                                below.
+                              items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    items:
+                                      properties:
+                                        connectorId:
+                                          description: Identifier for the connector
+                                            integration (for example, bedrock-knowledge-bases).
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                            provider:
+                              description: Provider-based inference configuration
+                                that explicitly defines the endpoint, model mapping,
+                                and operations used to route requests to an LLM provider.
+                                See provider Block below.
+                              items:
+                                properties:
+                                  endpoint:
+                                    description: HTTPS endpoint of the inference provider
+                                      that the gateway forwards requests to.
+                                    type: string
+                                  modelMapping:
+                                    description: Configuration that translates client-facing
+                                      model IDs to the model IDs expected by the provider.
+                                      See model_mapping Block below.
+                                    items:
+                                      properties:
+                                        providerPrefix:
+                                          description: Provider prefix configuration
+                                            used for model ID translation. See provider_prefix
+                                            Block below.
+                                          items:
+                                            properties:
+                                              separator:
+                                                description: Single character that
+                                                  separates the provider prefix from
+                                                  the model name (for example, .).
+                                                  Defaults to ..
+                                                type: string
+                                              strip:
+                                                description: Whether clients can omit
+                                                  the provider prefix from model IDs.
+                                                  If true, the gateway accepts model
+                                                  IDs without the prefix and restores
+                                                  the full prefixed form before forwarding
+                                                  to the provider. Defaults to false.
+                                                type: boolean
+                                            type: object
+                                          type: array
+                                      type: object
+                                    type: array
+                                  operation:
+                                    description: List of per-operation configurations
+                                      that map request paths to the models supported
+                                      for each operation. See operation below.
+                                    items:
+                                      properties:
+                                        model:
+                                          description: List of models supported for
+                                            this operation. See model Block below.
+                                          items:
+                                            properties:
+                                              model:
+                                                description: List of models supported
+                                                  for this operation. See model Block
+                                                  below.
+                                                type: string
+                                            type: object
+                                          type: array
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                        providerPath:
+                                          description: Provider path to forward requests
+                                            to, if it differs from the request path.
+                                            For example, /anthropic/v1/messages when
+                                            the provider expects a different path
+                                            than the client-facing /v1/messages.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
-                          mcp below.
+                          mcp Block below.
                         properties:
                           apiGateway:
                             description: API Gateway target configuration. See api_gateway
-                              below.
+                              Block below.
                             properties:
                               apiGatewayToolConfiguration:
                                 description: Configuration for API Gateway tools.
-                                  See api_gateway_tool_configuration below.
+                                  See api_gateway_tool_configuration Block below.
                                 properties:
                                   toolFilter:
                                     description: Repeatable block of path and method
                                       patterns to expose as tools. See tool_filter
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
                                         filterPath:
@@ -974,7 +1219,7 @@ spec:
                                   toolOverride:
                                     description: Repeatable block of explicit tool
                                       definitions with optional custom names and descriptions.
-                                      See tool_override below.
+                                      See tool_override Block below.
                                     items:
                                       properties:
                                         description:
@@ -1091,9 +1336,88 @@ spec:
                                   a target.
                                 type: string
                             type: object
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            items:
+                              properties:
+                                configuration:
+                                  description: Per-tool configurations for the connector.
+                                    See configuration Block below.
+                                  items:
+                                    properties:
+                                      description:
+                                        description: Description of the tool. Provides
+                                          information about the purpose and usage
+                                          of the tool. If not provided, uses the description
+                                          from the API's OpenAPI specification.
+                                        type: string
+                                      name:
+                                        description: Name of tool. Identifies the
+                                          tool in the Model Context Protocol.
+                                        type: string
+                                      parameterOverride:
+                                        description: Parameter overrides to control
+                                          parameter visibility and descriptions. See
+                                          parameter_override Block below.
+                                        items:
+                                          properties:
+                                            description:
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
+                                              type: string
+                                            path:
+                                              description: Resource path in the REST
+                                                API (e.g., /pets). Must explicitly
+                                                match an existing path in the REST
+                                                API.
+                                              type: string
+                                            visible:
+                                              description: Whether this parameter
+                                                is visible to the agent. If not specified,
+                                                uses the service default.
+                                              type: boolean
+                                          type: object
+                                        type: array
+                                      parameterValues:
+                                        description: JSON-encoded parameters to set
+                                          as fixed or default values when provisioning
+                                          this tool. Free-form JSON whose schema is
+                                          defined by the connector.
+                                        type: string
+                                    type: object
+                                  type: array
+                                enabled:
+                                  description: List of tool names to enable from this
+                                    connector. If omitted, all tools provided by the
+                                    connector are enabled.
+                                  items:
+                                    type: string
+                                  type: array
+                                source:
+                                  description: Configuration for API schema. See api_schema_configuration
+                                    Block below.
+                                  items:
+                                    properties:
+                                      connectorId:
+                                        description: Identifier for the connector
+                                          integration (for example, bedrock-knowledge-bases).
+                                        type: string
+                                      version:
+                                        description: Version of the connector to use
+                                          (for example, 1.2.0).
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           lambda:
                             description: Lambda function target configuration. See
-                              lambda below.
+                              lambda Block below.
                             properties:
                               lambdaArn:
                                 description: ARN of the Lambda function to invoke.
@@ -1182,11 +1506,12 @@ spec:
                                 type: object
                               toolSchema:
                                 description: Schema definition for the tool. See tool_schema
-                                  below.
+                                  Block below.
                                 properties:
                                   inlinePayload:
-                                    description: Inline tool definition. See inline_payload
-                                      below.
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
                                     items:
                                       properties:
                                         description:
@@ -1197,7 +1522,7 @@ spec:
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -1208,7 +1533,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -1219,7 +1544,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -1252,7 +1578,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -1305,7 +1631,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -1319,7 +1645,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -1332,7 +1658,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -1373,7 +1699,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -1438,7 +1764,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -1506,7 +1832,7 @@ spec:
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -1517,7 +1843,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -1528,7 +1854,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -1561,7 +1888,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -1614,7 +1941,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -1628,7 +1955,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -1641,7 +1968,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -1682,7 +2009,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -1747,7 +2074,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -1812,8 +2139,8 @@ spec:
                                       type: object
                                     type: array
                                   s3:
-                                    description: S3-based tool definition. See s3
-                                      below.
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
                                     properties:
                                       bucketOwnerAccountId:
                                         description: Account ID of the S3 bucket owner.
@@ -1827,10 +2154,11 @@ spec:
                             type: object
                           mcpServer:
                             description: MCP server target configuration. See mcp_server
-                              below.
+                              Block below.
                             properties:
                               endpoint:
-                                description: Endpoint for the MCP server target configuration.
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
                                 type: string
                               listingMode:
                                 description: Listing mode for the MCP server target.
@@ -1839,21 +2167,65 @@ spec:
                                   for faster access, while resources for DYNAMIC targets
                                   are retrieved dynamically when listing tools.
                                 type: string
+                              mcpToolSchema:
+                                description: Tool schema configuration for the MCP
+                                  server target. Supported only when the credential
+                                  provider is configured with an authorization code
+                                  grant type. When set, dynamic tool discovery and
+                                  synchronization are disabled. See mcp_tool_schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    inlinePayload:
+                                      description: Inline tool schema payload. The
+                                        inline_payload block requires a payload (string)
+                                        containing the MCP tool schema definition.
+                                      items:
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3:
+                                      description: S3 location of the tool schema.
+                                        See s3 Block below.
+                                      items:
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              resourcePriority:
+                                description: Priority for resolving MCP server targets
+                                  with shared resource URIs. Lower values take precedence.
+                                  Defaults to 1000 when not set.
+                                type: number
                             type: object
                           openApiSchema:
                             description: OpenAPI schema-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.
@@ -1865,18 +2237,20 @@ spec:
                             type: object
                           smithyModel:
                             description: Smithy model-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.
@@ -1909,11 +2283,11 @@ spec:
                       target. Required when using lambda, open_api_schema and smithy_model
                       in mcp block. If using mcp_server in mcp block with no authorization,
                       it should not be specified. See credential_provider_configuration
-                      below.
+                      Block below.
                     properties:
                       apiKey:
                         description: API key-based authentication configuration. See
-                          api_key below.
+                          api_key Block below.
                         properties:
                           credentialLocation:
                             description: 'Location where the API key credential is
@@ -2014,24 +2388,24 @@ spec:
                         type: object
                       callerIamCredentials:
                         description: Caller IAM credentials-based authentication configuration.
-                          See caller_iam_credentials below.
+                          See caller_iam_credentials Block below.
                         properties:
                           service:
-                            description: The target AWS service name used for SigV4
-                              signing of upstream requests. Required when calling
-                              SigV4-protected endpoints such as another Bedrock AgentCore
-                              Runtime (use bedrock-agentcore). Omit for non-SigV4
-                              IAM-role-based authentication, in which case the block
-                              can be empty (gateway_iam_role {}).
+                            description: Target AWS service name used for SigV4 signing
+                              of upstream requests. Required when calling SigV4-protected
+                              endpoints such as another Bedrock AgentCore Runtime
+                              (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based
+                              authentication, in which case the block can be empty
+                              (gateway_iam_role {}).
                             type: string
                         type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
-                          See gateway_iam_role below.
+                          See gateway_iam_role Block below.
                         properties:
                           service:
                             description: |-
-                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
                               The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
                             type: string
                         type: object
@@ -2041,7 +2415,7 @@ spec:
                         type: object
                       oauth:
                         description: OAuth-based authentication configuration. See
-                          oauth below.
+                          oauth Block below.
                         properties:
                           customParameters:
                             additionalProperties:
@@ -2052,12 +2426,12 @@ spec:
                             x-kubernetes-map-type: granular
                           defaultReturnUrl:
                             description: |-
-                              The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+                              URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                               The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                             type: string
                           grantType:
                             description: |-
-                              The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+                              OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
                               The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
                             type: string
                           providerArn:
@@ -2246,11 +2620,11 @@ spec:
                   metadataConfiguration:
                     description: Configuration for HTTP header and query parameter
                       propagation between the gateway and target servers. See metadata_configuration
-                      below.
+                      Block below.
                     properties:
                       allowedQueryParameters:
                         description: |-
-                          A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+                          Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
                           A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
                         items:
                           type: string
@@ -2258,7 +2632,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedRequestHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
                         items:
                           type: string
@@ -2266,7 +2640,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedResponseHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from the target response back to the client.
                         items:
                           type: string
@@ -2280,12 +2654,12 @@ spec:
                     description: Configuration for private connectivity from AgentCore
                       Gateway to a resource inside your VPC. Traffic is routed through
                       Amazon VPC Lattice and never traverses the public internet.
-                      See private_endpoint below.
+                      See private_endpoint Block below.
                     properties:
                       managedVpcResource:
                         description: AWS creates and manages the VPC Lattice resource
                           gateway and resource configuration on your behalf using
-                          a service-linked role. See managed_vpc_resource below.
+                          a service-linked role. See managed_vpc_resource Block below.
                         properties:
                           endpointIpAddressType:
                             description: 'IP address type for the resource configuration
@@ -2573,7 +2947,7 @@ spec:
                         description: Use an existing VPC Lattice resource configuration
                           that you manage yourself. Useful for cross-account setups
                           or advanced Lattice configurations. See self_managed_lattice_resource
-                          below.
+                          Block below.
                         properties:
                           resourceConfigurationIdentifier:
                             description: ARN or ID of the VPC Lattice resource configuration.
@@ -2664,15 +3038,15 @@ spec:
                     type: object
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
-                      below.
+                      Block below.
                     properties:
                       http:
                         description: HTTP target configuration for routing requests
-                          directly to an AgentCore Runtime agent. See http below.
+                          directly to an AgentCore Runtime agent. See http Block below.
                         properties:
                           agentcoreRuntime:
                             description: AgentCore Runtime target configuration. See
-                              agentcore_runtime below.
+                              agentcore_runtime Block below.
                             properties:
                               arn:
                                 description: ARN of the AgentCore Runtime agent that
@@ -2764,24 +3138,269 @@ spec:
                                 description: Runtime qualifier identifying a specific
                                   endpoint version. Defaults to DEFAULT when not set.
                                 type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    source:
+                                      description: Configuration for API schema. See
+                                        api_schema_configuration Block below.
+                                      items:
+                                        properties:
+                                          inlinePayload:
+                                            description: Inline tool schema payload.
+                                              The inline_payload block requires a
+                                              payload (string) containing the MCP
+                                              tool schema definition.
+                                            items:
+                                              properties:
+                                                payload:
+                                                  description: Inline schema payload
+                                                    content.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          s3:
+                                            description: S3 location of the tool schema.
+                                              See s3 Block below.
+                                            items:
+                                              properties:
+                                                bucketOwnerAccountId:
+                                                  description: Account ID of the S3
+                                                    bucket owner.
+                                                  type: string
+                                                uri:
+                                                  description: S3 URI where the tool
+                                                    schema is stored.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
+                          passthrough:
+                            description: Passthrough target configuration that forwards
+                              requests to an external HTTPS endpoint. See passthrough
+                              Block below.
+                            items:
+                              properties:
+                                endpoint:
+                                  description: HTTPS endpoint of the inference provider
+                                    that the gateway forwards requests to.
+                                  type: string
+                                protocolType:
+                                  description: 'Application protocol the passthrough
+                                    target implements. Valid values: MCP, A2A, INFERENCE,
+                                    CUSTOM.'
+                                  type: string
+                                schema:
+                                  description: API schema configuration that defines
+                                    the structure of the runtime target's API. See
+                                    schema Block below.
+                                  items:
+                                    properties:
+                                      source:
+                                        description: Configuration for API schema.
+                                          See api_schema_configuration Block below.
+                                        items:
+                                          properties:
+                                            inlinePayload:
+                                              description: Inline tool schema payload.
+                                                The inline_payload block requires
+                                                a payload (string) containing the
+                                                MCP tool schema definition.
+                                              items:
+                                                properties:
+                                                  payload:
+                                                    description: Inline schema payload
+                                                      content.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                            s3:
+                                              description: S3 location of the tool
+                                                schema. See s3 Block below.
+                                              items:
+                                                properties:
+                                                  bucketOwnerAccountId:
+                                                    description: Account ID of the
+                                                      S3 bucket owner.
+                                                    type: string
+                                                  uri:
+                                                    description: S3 URI where the
+                                                      tool schema is stored.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                          type: object
+                                        type: array
+                                    type: object
+                                  type: array
+                                staticQueryParameterConflictResolution:
+                                  description: 'Controls precedence when a client
+                                    request supplies a query parameter whose name
+                                    matches a configured static query parameter. Valid
+                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                  type: string
+                                staticQueryParameters:
+                                  additionalProperties:
+                                    type: string
+                                  description: Map of static query parameters that
+                                    the gateway always appends to the outbound URL
+                                    when forwarding requests to the target.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                                stickinessConfiguration:
+                                  description: Session stickiness configuration routing
+                                    requests within the same session to the same target.
+                                    See stickiness_configuration below.
+                                  items:
+                                    properties:
+                                      compositeIdentifier:
+                                        description: Additional headers to include
+                                          in session affinity routing.
+                                        items:
+                                          type: string
+                                        type: array
+                                        x-kubernetes-list-type: set
+                                      identifier:
+                                        description: Expression identifying where
+                                          to extract the session identifier from the
+                                          request (for example, $context.header.x-session-id).
+                                        type: string
+                                      timeout:
+                                        description: Session stickiness timeout, in
+                                          seconds. Valid values range from 1 to 86400.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                         type: object
+                      inference:
+                        description: Inference target configuration for routing requests
+                          to a large language model (LLM) provider, either through
+                          a built-in connector or an explicitly configured provider.
+                          See inference Block below.
+                        items:
+                          properties:
+                            connector:
+                              description: Connector integration target configuration.
+                                Connectors provide pre-built integrations with AWS
+                                services and third-party tools. See connector Block
+                                below.
+                              items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    items:
+                                      properties:
+                                        connectorId:
+                                          description: Identifier for the connector
+                                            integration (for example, bedrock-knowledge-bases).
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                            provider:
+                              description: Provider-based inference configuration
+                                that explicitly defines the endpoint, model mapping,
+                                and operations used to route requests to an LLM provider.
+                                See provider Block below.
+                              items:
+                                properties:
+                                  endpoint:
+                                    description: HTTPS endpoint of the inference provider
+                                      that the gateway forwards requests to.
+                                    type: string
+                                  modelMapping:
+                                    description: Configuration that translates client-facing
+                                      model IDs to the model IDs expected by the provider.
+                                      See model_mapping Block below.
+                                    items:
+                                      properties:
+                                        providerPrefix:
+                                          description: Provider prefix configuration
+                                            used for model ID translation. See provider_prefix
+                                            Block below.
+                                          items:
+                                            properties:
+                                              separator:
+                                                description: Single character that
+                                                  separates the provider prefix from
+                                                  the model name (for example, .).
+                                                  Defaults to ..
+                                                type: string
+                                              strip:
+                                                description: Whether clients can omit
+                                                  the provider prefix from model IDs.
+                                                  If true, the gateway accepts model
+                                                  IDs without the prefix and restores
+                                                  the full prefixed form before forwarding
+                                                  to the provider. Defaults to false.
+                                                type: boolean
+                                            type: object
+                                          type: array
+                                      type: object
+                                    type: array
+                                  operation:
+                                    description: List of per-operation configurations
+                                      that map request paths to the models supported
+                                      for each operation. See operation below.
+                                    items:
+                                      properties:
+                                        model:
+                                          description: List of models supported for
+                                            this operation. See model Block below.
+                                          items:
+                                            properties:
+                                              model:
+                                                description: List of models supported
+                                                  for this operation. See model Block
+                                                  below.
+                                                type: string
+                                            type: object
+                                          type: array
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                        providerPath:
+                                          description: Provider path to forward requests
+                                            to, if it differs from the request path.
+                                            For example, /anthropic/v1/messages when
+                                            the provider expects a different path
+                                            than the client-facing /v1/messages.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
-                          mcp below.
+                          mcp Block below.
                         properties:
                           apiGateway:
                             description: API Gateway target configuration. See api_gateway
-                              below.
+                              Block below.
                             properties:
                               apiGatewayToolConfiguration:
                                 description: Configuration for API Gateway tools.
-                                  See api_gateway_tool_configuration below.
+                                  See api_gateway_tool_configuration Block below.
                                 properties:
                                   toolFilter:
                                     description: Repeatable block of path and method
                                       patterns to expose as tools. See tool_filter
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
                                         filterPath:
@@ -2805,7 +3424,7 @@ spec:
                                   toolOverride:
                                     description: Repeatable block of explicit tool
                                       definitions with optional custom names and descriptions.
-                                      See tool_override below.
+                                      See tool_override Block below.
                                     items:
                                       properties:
                                         description:
@@ -2922,9 +3541,88 @@ spec:
                                   a target.
                                 type: string
                             type: object
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            items:
+                              properties:
+                                configuration:
+                                  description: Per-tool configurations for the connector.
+                                    See configuration Block below.
+                                  items:
+                                    properties:
+                                      description:
+                                        description: Description of the tool. Provides
+                                          information about the purpose and usage
+                                          of the tool. If not provided, uses the description
+                                          from the API's OpenAPI specification.
+                                        type: string
+                                      name:
+                                        description: Name of tool. Identifies the
+                                          tool in the Model Context Protocol.
+                                        type: string
+                                      parameterOverride:
+                                        description: Parameter overrides to control
+                                          parameter visibility and descriptions. See
+                                          parameter_override Block below.
+                                        items:
+                                          properties:
+                                            description:
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
+                                              type: string
+                                            path:
+                                              description: Resource path in the REST
+                                                API (e.g., /pets). Must explicitly
+                                                match an existing path in the REST
+                                                API.
+                                              type: string
+                                            visible:
+                                              description: Whether this parameter
+                                                is visible to the agent. If not specified,
+                                                uses the service default.
+                                              type: boolean
+                                          type: object
+                                        type: array
+                                      parameterValues:
+                                        description: JSON-encoded parameters to set
+                                          as fixed or default values when provisioning
+                                          this tool. Free-form JSON whose schema is
+                                          defined by the connector.
+                                        type: string
+                                    type: object
+                                  type: array
+                                enabled:
+                                  description: List of tool names to enable from this
+                                    connector. If omitted, all tools provided by the
+                                    connector are enabled.
+                                  items:
+                                    type: string
+                                  type: array
+                                source:
+                                  description: Configuration for API schema. See api_schema_configuration
+                                    Block below.
+                                  items:
+                                    properties:
+                                      connectorId:
+                                        description: Identifier for the connector
+                                          integration (for example, bedrock-knowledge-bases).
+                                        type: string
+                                      version:
+                                        description: Version of the connector to use
+                                          (for example, 1.2.0).
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           lambda:
                             description: Lambda function target configuration. See
-                              lambda below.
+                              lambda Block below.
                             properties:
                               lambdaArn:
                                 description: ARN of the Lambda function to invoke.
@@ -3013,11 +3711,12 @@ spec:
                                 type: object
                               toolSchema:
                                 description: Schema definition for the tool. See tool_schema
-                                  below.
+                                  Block below.
                                 properties:
                                   inlinePayload:
-                                    description: Inline tool definition. See inline_payload
-                                      below.
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
                                     items:
                                       properties:
                                         description:
@@ -3028,7 +3727,7 @@ spec:
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -3039,7 +3738,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -3050,7 +3749,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -3083,7 +3783,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -3136,7 +3836,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -3150,7 +3850,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -3163,7 +3863,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -3204,7 +3904,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -3269,7 +3969,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -3337,7 +4037,7 @@ spec:
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -3348,7 +4048,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -3359,7 +4059,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -3392,7 +4093,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -3445,7 +4146,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -3459,7 +4160,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -3472,7 +4173,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -3513,7 +4214,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -3578,7 +4279,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -3643,8 +4344,8 @@ spec:
                                       type: object
                                     type: array
                                   s3:
-                                    description: S3-based tool definition. See s3
-                                      below.
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
                                     properties:
                                       bucketOwnerAccountId:
                                         description: Account ID of the S3 bucket owner.
@@ -3658,10 +4359,11 @@ spec:
                             type: object
                           mcpServer:
                             description: MCP server target configuration. See mcp_server
-                              below.
+                              Block below.
                             properties:
                               endpoint:
-                                description: Endpoint for the MCP server target configuration.
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
                                 type: string
                               listingMode:
                                 description: Listing mode for the MCP server target.
@@ -3670,21 +4372,65 @@ spec:
                                   for faster access, while resources for DYNAMIC targets
                                   are retrieved dynamically when listing tools.
                                 type: string
+                              mcpToolSchema:
+                                description: Tool schema configuration for the MCP
+                                  server target. Supported only when the credential
+                                  provider is configured with an authorization code
+                                  grant type. When set, dynamic tool discovery and
+                                  synchronization are disabled. See mcp_tool_schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    inlinePayload:
+                                      description: Inline tool schema payload. The
+                                        inline_payload block requires a payload (string)
+                                        containing the MCP tool schema definition.
+                                      items:
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3:
+                                      description: S3 location of the tool schema.
+                                        See s3 Block below.
+                                      items:
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              resourcePriority:
+                                description: Priority for resolving MCP server targets
+                                  with shared resource URIs. Lower values take precedence.
+                                  Defaults to 1000 when not set.
+                                type: number
                             type: object
                           openApiSchema:
                             description: OpenAPI schema-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.
@@ -3696,18 +4442,20 @@ spec:
                             type: object
                           smithyModel:
                             description: Smithy model-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.
@@ -3793,11 +4541,11 @@ spec:
                       target. Required when using lambda, open_api_schema and smithy_model
                       in mcp block. If using mcp_server in mcp block with no authorization,
                       it should not be specified. See credential_provider_configuration
-                      below.
+                      Block below.
                     properties:
                       apiKey:
                         description: API key-based authentication configuration. See
-                          api_key below.
+                          api_key Block below.
                         properties:
                           credentialLocation:
                             description: 'Location where the API key credential is
@@ -3816,24 +4564,24 @@ spec:
                         type: object
                       callerIamCredentials:
                         description: Caller IAM credentials-based authentication configuration.
-                          See caller_iam_credentials below.
+                          See caller_iam_credentials Block below.
                         properties:
                           region:
                             description: Region where this resource will be managed.
                               Defaults to the Region set in the provider configuration.
                             type: string
                           service:
-                            description: The target AWS service name used for SigV4
-                              signing of upstream requests. Required when calling
-                              SigV4-protected endpoints such as another Bedrock AgentCore
-                              Runtime (use bedrock-agentcore). Omit for non-SigV4
-                              IAM-role-based authentication, in which case the block
-                              can be empty (gateway_iam_role {}).
+                            description: Target AWS service name used for SigV4 signing
+                              of upstream requests. Required when calling SigV4-protected
+                              endpoints such as another Bedrock AgentCore Runtime
+                              (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based
+                              authentication, in which case the block can be empty
+                              (gateway_iam_role {}).
                             type: string
                         type: object
                       gatewayIamRole:
                         description: Use the gateway's IAM role for authentication.
-                          See gateway_iam_role below.
+                          See gateway_iam_role Block below.
                         properties:
                           region:
                             description: |-
@@ -3842,7 +4590,7 @@ spec:
                             type: string
                           service:
                             description: |-
-                              The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
+                              Target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use bedrock-agentcore). Omit for non-SigV4 IAM-role-based authentication, in which case the block can be empty (gateway_iam_role {}).
                               The target AWS service name used for SigV4 signing of upstream requests. Required when calling SigV4-protected endpoints such as another Bedrock AgentCore Runtime (use `bedrock-agentcore`). Omit for non-SigV4 IAM-role-based authentication.
                             type: string
                         type: object
@@ -3852,7 +4600,7 @@ spec:
                         type: object
                       oauth:
                         description: OAuth-based authentication configuration. See
-                          oauth below.
+                          oauth Block below.
                         properties:
                           customParameters:
                             additionalProperties:
@@ -3863,12 +4611,12 @@ spec:
                             x-kubernetes-map-type: granular
                           defaultReturnUrl:
                             description: |-
-                              The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
+                              URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                               The URL where the end user's browser is redirected after obtaining the authorization code. Required when grant_type is AUTHORIZATION_CODE.
                             type: string
                           grantType:
                             description: |-
-                              The OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
+                              OAuth grant type. Valid values: CLIENT_CREDENTIALS (machine-to-machine authentication), AUTHORIZATION_CODE (user-delegated access).
                               The OAuth grant type. Valid values are AUTHORIZATION_CODE and CLIENT_CREDENTIALS.
                             type: string
                           providerArn:
@@ -3895,11 +4643,11 @@ spec:
                   metadataConfiguration:
                     description: Configuration for HTTP header and query parameter
                       propagation between the gateway and target servers. See metadata_configuration
-                      below.
+                      Block below.
                     properties:
                       allowedQueryParameters:
                         description: |-
-                          A set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
+                          Set of URL query parameters that are allowed to be propagated from incoming gateway URL to the target. Maximum of 10 parameters.
                           A list of URL query parameters that are allowed to be propagated from incoming gateway URL to the target.
                         items:
                           type: string
@@ -3907,7 +4655,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedRequestHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from incoming client requests to the target. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from incoming client requests to the target.
                         items:
                           type: string
@@ -3915,7 +4663,7 @@ spec:
                         x-kubernetes-list-type: set
                       allowedResponseHeaders:
                         description: |-
-                          A set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
+                          Set of HTTP headers that are allowed to be propagated from the target response back to the client. Maximum of 10 headers.
                           A list of HTTP headers that are allowed to be propagated from the target response back to the client.
                         items:
                           type: string
@@ -3929,12 +4677,12 @@ spec:
                     description: Configuration for private connectivity from AgentCore
                       Gateway to a resource inside your VPC. Traffic is routed through
                       Amazon VPC Lattice and never traverses the public internet.
-                      See private_endpoint below.
+                      See private_endpoint Block below.
                     properties:
                       managedVpcResource:
                         description: AWS creates and manages the VPC Lattice resource
                           gateway and resource configuration on your behalf using
-                          a service-linked role. See managed_vpc_resource below.
+                          a service-linked role. See managed_vpc_resource Block below.
                         properties:
                           endpointIpAddressType:
                             description: 'IP address type for the resource configuration
@@ -3977,7 +4725,7 @@ spec:
                         description: Use an existing VPC Lattice resource configuration
                           that you manage yourself. Useful for cross-account setups
                           or advanced Lattice configurations. See self_managed_lattice_resource
-                          below.
+                          Block below.
                         properties:
                           resourceConfigurationIdentifier:
                             description: ARN or ID of the VPC Lattice resource configuration.
@@ -3991,15 +4739,15 @@ spec:
                     type: string
                   targetConfiguration:
                     description: Configuration for the target endpoint. See target_configuration
-                      below.
+                      Block below.
                     properties:
                       http:
                         description: HTTP target configuration for routing requests
-                          directly to an AgentCore Runtime agent. See http below.
+                          directly to an AgentCore Runtime agent. See http Block below.
                         properties:
                           agentcoreRuntime:
                             description: AgentCore Runtime target configuration. See
-                              agentcore_runtime below.
+                              agentcore_runtime Block below.
                             properties:
                               arn:
                                 description: ARN of the AgentCore Runtime agent that
@@ -4009,24 +4757,269 @@ spec:
                                 description: Runtime qualifier identifying a specific
                                   endpoint version. Defaults to DEFAULT when not set.
                                 type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    source:
+                                      description: Configuration for API schema. See
+                                        api_schema_configuration Block below.
+                                      items:
+                                        properties:
+                                          inlinePayload:
+                                            description: Inline tool schema payload.
+                                              The inline_payload block requires a
+                                              payload (string) containing the MCP
+                                              tool schema definition.
+                                            items:
+                                              properties:
+                                                payload:
+                                                  description: Inline schema payload
+                                                    content.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          s3:
+                                            description: S3 location of the tool schema.
+                                              See s3 Block below.
+                                            items:
+                                              properties:
+                                                bucketOwnerAccountId:
+                                                  description: Account ID of the S3
+                                                    bucket owner.
+                                                  type: string
+                                                uri:
+                                                  description: S3 URI where the tool
+                                                    schema is stored.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
+                          passthrough:
+                            description: Passthrough target configuration that forwards
+                              requests to an external HTTPS endpoint. See passthrough
+                              Block below.
+                            items:
+                              properties:
+                                endpoint:
+                                  description: HTTPS endpoint of the inference provider
+                                    that the gateway forwards requests to.
+                                  type: string
+                                protocolType:
+                                  description: 'Application protocol the passthrough
+                                    target implements. Valid values: MCP, A2A, INFERENCE,
+                                    CUSTOM.'
+                                  type: string
+                                schema:
+                                  description: API schema configuration that defines
+                                    the structure of the runtime target's API. See
+                                    schema Block below.
+                                  items:
+                                    properties:
+                                      source:
+                                        description: Configuration for API schema.
+                                          See api_schema_configuration Block below.
+                                        items:
+                                          properties:
+                                            inlinePayload:
+                                              description: Inline tool schema payload.
+                                                The inline_payload block requires
+                                                a payload (string) containing the
+                                                MCP tool schema definition.
+                                              items:
+                                                properties:
+                                                  payload:
+                                                    description: Inline schema payload
+                                                      content.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                            s3:
+                                              description: S3 location of the tool
+                                                schema. See s3 Block below.
+                                              items:
+                                                properties:
+                                                  bucketOwnerAccountId:
+                                                    description: Account ID of the
+                                                      S3 bucket owner.
+                                                    type: string
+                                                  uri:
+                                                    description: S3 URI where the
+                                                      tool schema is stored.
+                                                    type: string
+                                                type: object
+                                              type: array
+                                          type: object
+                                        type: array
+                                    type: object
+                                  type: array
+                                staticQueryParameterConflictResolution:
+                                  description: 'Controls precedence when a client
+                                    request supplies a query parameter whose name
+                                    matches a configured static query parameter. Valid
+                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                  type: string
+                                staticQueryParameters:
+                                  additionalProperties:
+                                    type: string
+                                  description: Map of static query parameters that
+                                    the gateway always appends to the outbound URL
+                                    when forwarding requests to the target.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                                stickinessConfiguration:
+                                  description: Session stickiness configuration routing
+                                    requests within the same session to the same target.
+                                    See stickiness_configuration below.
+                                  items:
+                                    properties:
+                                      compositeIdentifier:
+                                        description: Additional headers to include
+                                          in session affinity routing.
+                                        items:
+                                          type: string
+                                        type: array
+                                        x-kubernetes-list-type: set
+                                      identifier:
+                                        description: Expression identifying where
+                                          to extract the session identifier from the
+                                          request (for example, $context.header.x-session-id).
+                                        type: string
+                                      timeout:
+                                        description: Session stickiness timeout, in
+                                          seconds. Valid values range from 1 to 86400.
+                                        type: number
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                         type: object
+                      inference:
+                        description: Inference target configuration for routing requests
+                          to a large language model (LLM) provider, either through
+                          a built-in connector or an explicitly configured provider.
+                          See inference Block below.
+                        items:
+                          properties:
+                            connector:
+                              description: Connector integration target configuration.
+                                Connectors provide pre-built integrations with AWS
+                                services and third-party tools. See connector Block
+                                below.
+                              items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    items:
+                                      properties:
+                                        connectorId:
+                                          description: Identifier for the connector
+                                            integration (for example, bedrock-knowledge-bases).
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                            provider:
+                              description: Provider-based inference configuration
+                                that explicitly defines the endpoint, model mapping,
+                                and operations used to route requests to an LLM provider.
+                                See provider Block below.
+                              items:
+                                properties:
+                                  endpoint:
+                                    description: HTTPS endpoint of the inference provider
+                                      that the gateway forwards requests to.
+                                    type: string
+                                  modelMapping:
+                                    description: Configuration that translates client-facing
+                                      model IDs to the model IDs expected by the provider.
+                                      See model_mapping Block below.
+                                    items:
+                                      properties:
+                                        providerPrefix:
+                                          description: Provider prefix configuration
+                                            used for model ID translation. See provider_prefix
+                                            Block below.
+                                          items:
+                                            properties:
+                                              separator:
+                                                description: Single character that
+                                                  separates the provider prefix from
+                                                  the model name (for example, .).
+                                                  Defaults to ..
+                                                type: string
+                                              strip:
+                                                description: Whether clients can omit
+                                                  the provider prefix from model IDs.
+                                                  If true, the gateway accepts model
+                                                  IDs without the prefix and restores
+                                                  the full prefixed form before forwarding
+                                                  to the provider. Defaults to false.
+                                                type: boolean
+                                            type: object
+                                          type: array
+                                      type: object
+                                    type: array
+                                  operation:
+                                    description: List of per-operation configurations
+                                      that map request paths to the models supported
+                                      for each operation. See operation below.
+                                    items:
+                                      properties:
+                                        model:
+                                          description: List of models supported for
+                                            this operation. See model Block below.
+                                          items:
+                                            properties:
+                                              model:
+                                                description: List of models supported
+                                                  for this operation. See model Block
+                                                  below.
+                                                type: string
+                                            type: object
+                                          type: array
+                                        path:
+                                          description: Resource path in the REST API
+                                            (e.g., /pets). Must explicitly match an
+                                            existing path in the REST API.
+                                          type: string
+                                        providerPath:
+                                          description: Provider path to forward requests
+                                            to, if it differs from the request path.
+                                            For example, /anthropic/v1/messages when
+                                            the provider expects a different path
+                                            than the client-facing /v1/messages.
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
-                          mcp below.
+                          mcp Block below.
                         properties:
                           apiGateway:
                             description: API Gateway target configuration. See api_gateway
-                              below.
+                              Block below.
                             properties:
                               apiGatewayToolConfiguration:
                                 description: Configuration for API Gateway tools.
-                                  See api_gateway_tool_configuration below.
+                                  See api_gateway_tool_configuration Block below.
                                 properties:
                                   toolFilter:
                                     description: Repeatable block of path and method
                                       patterns to expose as tools. See tool_filter
-                                      below.
+                                      Block below.
                                     items:
                                       properties:
                                         filterPath:
@@ -4050,7 +5043,7 @@ spec:
                                   toolOverride:
                                     description: Repeatable block of explicit tool
                                       definitions with optional custom names and descriptions.
-                                      See tool_override below.
+                                      See tool_override Block below.
                                     items:
                                       properties:
                                         description:
@@ -4085,20 +5078,100 @@ spec:
                                   a target.
                                 type: string
                             type: object
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            items:
+                              properties:
+                                configuration:
+                                  description: Per-tool configurations for the connector.
+                                    See configuration Block below.
+                                  items:
+                                    properties:
+                                      description:
+                                        description: Description of the tool. Provides
+                                          information about the purpose and usage
+                                          of the tool. If not provided, uses the description
+                                          from the API's OpenAPI specification.
+                                        type: string
+                                      name:
+                                        description: Name of tool. Identifies the
+                                          tool in the Model Context Protocol.
+                                        type: string
+                                      parameterOverride:
+                                        description: Parameter overrides to control
+                                          parameter visibility and descriptions. See
+                                          parameter_override Block below.
+                                        items:
+                                          properties:
+                                            description:
+                                              description: Description of the tool.
+                                                Provides information about the purpose
+                                                and usage of the tool. If not provided,
+                                                uses the description from the API's
+                                                OpenAPI specification.
+                                              type: string
+                                            path:
+                                              description: Resource path in the REST
+                                                API (e.g., /pets). Must explicitly
+                                                match an existing path in the REST
+                                                API.
+                                              type: string
+                                            visible:
+                                              description: Whether this parameter
+                                                is visible to the agent. If not specified,
+                                                uses the service default.
+                                              type: boolean
+                                          type: object
+                                        type: array
+                                      parameterValues:
+                                        description: JSON-encoded parameters to set
+                                          as fixed or default values when provisioning
+                                          this tool. Free-form JSON whose schema is
+                                          defined by the connector.
+                                        type: string
+                                    type: object
+                                  type: array
+                                enabled:
+                                  description: List of tool names to enable from this
+                                    connector. If omitted, all tools provided by the
+                                    connector are enabled.
+                                  items:
+                                    type: string
+                                  type: array
+                                source:
+                                  description: Configuration for API schema. See api_schema_configuration
+                                    Block below.
+                                  items:
+                                    properties:
+                                      connectorId:
+                                        description: Identifier for the connector
+                                          integration (for example, bedrock-knowledge-bases).
+                                        type: string
+                                      version:
+                                        description: Version of the connector to use
+                                          (for example, 1.2.0).
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           lambda:
                             description: Lambda function target configuration. See
-                              lambda below.
+                              lambda Block below.
                             properties:
                               lambdaArn:
                                 description: ARN of the Lambda function to invoke.
                                 type: string
                               toolSchema:
                                 description: Schema definition for the tool. See tool_schema
-                                  below.
+                                  Block below.
                                 properties:
                                   inlinePayload:
-                                    description: Inline tool definition. See inline_payload
-                                      below.
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
                                     items:
                                       properties:
                                         description:
@@ -4109,7 +5182,7 @@ spec:
                                           type: string
                                         inputSchema:
                                           description: Schema for the tool's input.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -4120,7 +5193,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -4131,7 +5204,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -4164,7 +5238,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -4217,7 +5291,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -4231,7 +5305,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -4244,7 +5318,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -4285,7 +5359,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -4350,7 +5424,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -4418,7 +5492,7 @@ spec:
                                           type: string
                                         outputSchema:
                                           description: Schema for the tool's output.
-                                            See schema_definition below.
+                                            See schema_definition Block below.
                                           properties:
                                             description:
                                               description: Description of the tool.
@@ -4429,7 +5503,7 @@ spec:
                                               type: string
                                             items:
                                               description: Items definition for array
-                                                properties. See items above.
+                                                properties. See items Block above.
                                               properties:
                                                 description:
                                                   description: Description of the
@@ -4440,7 +5514,8 @@ spec:
                                                   type: string
                                                 items:
                                                   description: Items definition for
-                                                    array properties. See items above.
+                                                    array properties. See items Block
+                                                    above.
                                                   properties:
                                                     description:
                                                       description: Description of
@@ -4473,7 +5548,7 @@ spec:
                                                   description: Set of property definitions
                                                     for object types. Can only be
                                                     used when type is object. See
-                                                    property below.
+                                                    property Block below.
                                                   items:
                                                     properties:
                                                       description:
@@ -4526,7 +5601,7 @@ spec:
                                               description: Set of property definitions
                                                 for object types. Can only be used
                                                 when type is object. See property
-                                                below.
+                                                Block below.
                                               items:
                                                 properties:
                                                   description:
@@ -4540,7 +5615,7 @@ spec:
                                                   items:
                                                     description: Items definition
                                                       for array properties. See items
-                                                      above.
+                                                      Block above.
                                                     properties:
                                                       description:
                                                         description: Description of
@@ -4553,7 +5628,7 @@ spec:
                                                       items:
                                                         description: Items definition
                                                           for array properties. See
-                                                          items above.
+                                                          items Block above.
                                                         properties:
                                                           description:
                                                             description: Description
@@ -4594,7 +5669,7 @@ spec:
                                                           definitions for object types.
                                                           Can only be used when type
                                                           is object. See property
-                                                          below.
+                                                          Block below.
                                                         items:
                                                           properties:
                                                             description:
@@ -4659,7 +5734,7 @@ spec:
                                                     description: Set of property definitions
                                                       for object types. Can only be
                                                       used when type is object. See
-                                                      property below.
+                                                      property Block below.
                                                     items:
                                                       properties:
                                                         description:
@@ -4724,8 +5799,8 @@ spec:
                                       type: object
                                     type: array
                                   s3:
-                                    description: S3-based tool definition. See s3
-                                      below.
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
                                     properties:
                                       bucketOwnerAccountId:
                                         description: Account ID of the S3 bucket owner.
@@ -4739,10 +5814,11 @@ spec:
                             type: object
                           mcpServer:
                             description: MCP server target configuration. See mcp_server
-                              below.
+                              Block below.
                             properties:
                               endpoint:
-                                description: Endpoint for the MCP server target configuration.
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
                                 type: string
                               listingMode:
                                 description: Listing mode for the MCP server target.
@@ -4751,21 +5827,65 @@ spec:
                                   for faster access, while resources for DYNAMIC targets
                                   are retrieved dynamically when listing tools.
                                 type: string
+                              mcpToolSchema:
+                                description: Tool schema configuration for the MCP
+                                  server target. Supported only when the credential
+                                  provider is configured with an authorization code
+                                  grant type. When set, dynamic tool discovery and
+                                  synchronization are disabled. See mcp_tool_schema
+                                  Block below.
+                                items:
+                                  properties:
+                                    inlinePayload:
+                                      description: Inline tool schema payload. The
+                                        inline_payload block requires a payload (string)
+                                        containing the MCP tool schema definition.
+                                      items:
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    s3:
+                                      description: S3 location of the tool schema.
+                                        See s3 Block below.
+                                      items:
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              resourcePriority:
+                                description: Priority for resolving MCP server targets
+                                  with shared resource URIs. Lower values take precedence.
+                                  Defaults to 1000 when not set.
+                                type: number
                             type: object
                           openApiSchema:
                             description: OpenAPI schema-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.
@@ -4777,18 +5897,20 @@ spec:
                             type: object
                           smithyModel:
                             description: Smithy model-based target configuration.
-                              See api_schema_configuration below.
+                              See api_schema_configuration Block below.
                             properties:
                               inlinePayload:
-                                description: Inline tool definition. See inline_payload
-                                  below.
+                                description: Inline tool schema payload. The inline_payload
+                                  block requires a payload (string) containing the
+                                  MCP tool schema definition.
                                 properties:
                                   payload:
-                                    description: The inline schema payload content.
+                                    description: Inline schema payload content.
                                     type: string
                                 type: object
                               s3:
-                                description: S3-based tool definition. See s3 below.
+                                description: S3 location of the tool schema. See s3
+                                  Block below.
                                 properties:
                                   bucketOwnerAccountId:
                                     description: Account ID of the S3 bucket owner.

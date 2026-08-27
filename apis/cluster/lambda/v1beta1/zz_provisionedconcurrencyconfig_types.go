@@ -15,7 +15,7 @@ import (
 
 type ProvisionedConcurrencyConfigInitParameters struct {
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function.
+	// Name or ARN of the Lambda Function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
@@ -30,7 +30,7 @@ type ProvisionedConcurrencyConfigInitParameters struct {
 
 type ProvisionedConcurrencyConfigObservation struct {
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function.
+	// Name or ARN of the Lambda Function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Lambda Function name and qualifier separated by a comma (,).
@@ -52,7 +52,7 @@ type ProvisionedConcurrencyConfigObservation struct {
 
 type ProvisionedConcurrencyConfigParameters struct {
 
-	// Name or Amazon Resource Name (ARN) of the Lambda Function.
+	// Name or ARN of the Lambda Function.
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 

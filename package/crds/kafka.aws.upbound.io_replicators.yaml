@@ -256,10 +256,10 @@ spec:
                                   type: object
                               type: object
                             subnetIds:
-                              description: The list of subnets to connect to in the
-                                virtual private cloud (VPC). AWS creates elastic network
-                                interfaces inside these subnets to allow communication
-                                between your Kafka Cluster and the replicator.
+                              description: List of subnets to connect to in the VPC.
+                                AWS creates elastic network interfaces inside these
+                                subnets to allow communication between your Kafka
+                                Cluster and the replicator.
                               items:
                                 type: string
                               type: array
@@ -953,10 +953,10 @@ spec:
                                   type: object
                               type: object
                             subnetIds:
-                              description: The list of subnets to connect to in the
-                                virtual private cloud (VPC). AWS creates elastic network
-                                interfaces inside these subnets to allow communication
-                                between your Kafka Cluster and the replicator.
+                              description: List of subnets to connect to in the VPC.
+                                AWS creates elastic network interfaces inside these
+                                subnets to allow communication between your Kafka
+                                Cluster and the replicator.
                               items:
                                 type: string
                               type: array
@@ -1586,10 +1586,10 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             subnetIds:
-                              description: The list of subnets to connect to in the
-                                virtual private cloud (VPC). AWS creates elastic network
-                                interfaces inside these subnets to allow communication
-                                between your Kafka Cluster and the replicator.
+                              description: List of subnets to connect to in the VPC.
+                                AWS creates elastic network interfaces inside these
+                                subnets to allow communication between your Kafka
+                                Cluster and the replicator.
                               items:
                                 type: string
                               type: array

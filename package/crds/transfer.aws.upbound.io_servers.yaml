@@ -2058,9 +2058,8 @@ spec:
               forProvider:
                 properties:
                   certificate:
-                    description: The Amazon Resource Name (ARN) of the AWS Certificate
-                      Manager (ACM) certificate. This is required when protocols is
-                      set to FTPS
+                    description: ARN of the AWS Certificate Manager (ACM) certificate.
+                      Required when protocols is set to FTPS.
                     type: string
                   certificateRef:
                     description: Reference to a Certificate in acm to populate certificate.
@@ -2137,8 +2136,8 @@ spec:
                         type: object
                     type: object
                   directoryId:
-                    description: The directory service ID of the directory service
-                      you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+                    description: Directory service ID of the directory service you
+                      want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
                     type: string
                   directoryIdRef:
                     description: Reference to a Directory in ds to populate directoryId.
@@ -2215,17 +2214,16 @@ spec:
                         type: object
                     type: object
                   domain:
-                    description: 'The domain of the storage system that is used for
-                      file transfers. Valid values are: S3 and EFS. The default value
-                      is S3.'
+                    description: 'Domain of the storage system that is used for file
+                      transfers. Valid values are: S3 and EFS. The default value is
+                      S3.'
                     type: string
                   endpointDetails:
-                    description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. See endpoint_details
-                      Block below for details.
+                    description: VPC endpoint settings that you want to configure
+                      for your SFTP server. See endpoint_details Block below for details.
                     properties:
                       addressAllocationIds:
-                        description: A list of address allocation IDs that are required
+                        description: List of address allocation IDs that are required
                           to attach an Elastic IP address to your SFTP server's endpoint.
                           This property can only be used when endpoint_type is set
                           to VPC.
@@ -2312,7 +2310,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIds:
-                        description: A list of security groups IDs that are available
+                        description: List of security groups IDs that are available
                           to attach to your server's endpoint. If no security groups
                           are specified, the VPC's default security groups are automatically
                           assigned to your endpoint. This property can only be used
@@ -2322,7 +2320,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetIds:
-                        description: A list of subnet IDs that are required to host
+                        description: List of subnet IDs that are required to host
                           your SFTP server endpoint in your VPC. This property can
                           only be used when endpoint_type is set to VPC.
                         items:
@@ -2408,13 +2406,13 @@ spec:
                             type: object
                         type: object
                       vpcEndpointId:
-                        description: The ID of the VPC endpoint. This property can
-                          only be used when endpoint_type is set to VPC_ENDPOINT
+                        description: ID of the VPC endpoint. This property can only
+                          be used when endpoint_type is set to VPC_ENDPOINT
                         type: string
                       vpcId:
-                        description: The VPC ID of the virtual private cloud in which
-                          the SFTP server's endpoint will be hosted. This property
-                          can only be used when endpoint_type is set to VPC.
+                        description: VPC ID of the VPC in which the SFTP server's
+                          endpoint will be hosted. This property can only be used
+                          when endpoint_type is set to VPC.
                         type: string
                       vpcIdRef:
                         description: Reference to a VPC in ec2 to populate vpcId.
@@ -2492,22 +2490,96 @@ spec:
                         type: object
                     type: object
                   endpointType:
-                    description: The type of endpoint that you want your SFTP server
-                      connect to. If you connect to a VPC (or VPC_ENDPOINT), your
-                      SFTP server isn't accessible over the public internet. If you
-                      want to connect your SFTP server via public internet, set PUBLIC.  Defaults
-                      to PUBLIC.
+                    description: Type of endpoint that you want your SFTP server connect
+                      to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server
+                      isn't accessible over the public internet. If you want to connect
+                      your SFTP server via public internet, set PUBLIC. Defaults to
+                      PUBLIC.
                     type: string
                   forceDestroy:
-                    description: A boolean that indicates all users associated with
+                    description: Boolean that indicates all users associated with
                       the server should be deleted so that the Server can be destroyed
                       without error. The default value is false. This option only
                       applies to servers configured with a SERVICE_MANAGED identity_provider_type.
                     type: boolean
                   function:
-                    description: The ARN for a lambda function to use for the Identity
+                    description: ARN for a lambda function to use for the Identity
                       provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
+                  functionRef:
+                    description: Reference to a Function in lambda to populate function.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  functionSelector:
+                    description: Selector for a Function in lambda to populate function.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
                       by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key,
@@ -2529,7 +2601,7 @@ spec:
                     - namespace
                     type: object
                   identityProviderType:
-                    description: The mode of authentication enabled for this service.
+                    description: Mode of authentication enabled for this service.
                       The default value is SERVICE_MANAGED, which allows you to store
                       and access SFTP user credentials within the service. API_GATEWAY
                       indicates that user authentication requires a call to an API
@@ -2543,9 +2615,8 @@ spec:
                       function argument.
                     type: string
                   invocationRole:
-                    description: Amazon Resource Name (ARN) of the IAM role used to
-                      authenticate the user account with an identity_provider_type
-                      of API_GATEWAY.
+                    description: ARN of the IAM role used to authenticate the user
+                      account with an identity_provider_type of API_GATEWAY.
                     type: string
                   ipAddressType:
                     description: Type of IP addresses for the AWS Transfer Family
@@ -2556,9 +2627,9 @@ spec:
                       new ip_address_type value.
                     type: string
                   loggingRole:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to write your SFTP users’ activity to your Amazon
-                      CloudWatch logs for monitoring and auditing purposes.
+                    description: ARN of an IAM role that allows the service to write
+                      your SFTP users’ activity to your Amazon CloudWatch logs for
+                      monitoring and auditing purposes.
                     type: string
                   loggingRoleRef:
                     description: Reference to a Role in iam to populate loggingRole.
@@ -2673,20 +2744,20 @@ spec:
                     - namespace
                     type: object
                   protocolDetails:
-                    description: The protocol settings that are configured for your
-                      server. See protocol_details Block below for details.
+                    description: Protocol settings that are configured for your server.
+                      See protocol_details Block below for details.
                     properties:
                       as2Transports:
-                        description: Indicates the transport method for the AS2 messages.
-                          Currently, only HTTP is supported.
+                        description: Transport method for the AS2 messages. Currently,
+                          only HTTP is supported.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       passiveIp:
-                        description: Indicates passive mode, for FTP and FTPS protocols.
-                          Enter a single IPv4 address, such as the public IP address
-                          of a firewall, router, or load balancer.
+                        description: Passive mode, for FTP and FTPS protocols. Enter
+                          a single IPv4 address, such as the public IP address of
+                          a firewall, router, or load balancer.
                         type: string
                       setStatOption:
                         description: 'Use to ignore the error that is generated when
@@ -2694,18 +2765,20 @@ spec:
                           to an S3 bucket. Valid values: DEFAULT, ENABLE_NO_OP.'
                         type: string
                       tlsSessionResumptionMode:
-                        description: 'A property used with Transfer Family servers
-                          that use the FTPS protocol. Provides a mechanism to resume
-                          or share a negotiated secret key between the control and
-                          data connection for an FTPS session. Valid values: DISABLED,
+                        description: 'Property used with Transfer Family servers that
+                          use the FTPS protocol. Provides a mechanism to resume or
+                          share a negotiated secret key between the control and data
+                          connection for an FTPS session. Valid values: DISABLED,
                           ENABLED, ENFORCED.'
                         type: string
                     type: object
                   protocols:
-                    description: 'Specifies the file transfer protocol or protocols
-                      over which your file transfer protocol client can connect to
-                      your server''s endpoint. This defaults to SFTP . The available
-                      protocols are:'
+                    description: File transfer protocol or protocols over which your
+                      file transfer protocol client can connect to your server's endpoint.
+                      This defaults to SFTP. The available protocols are AS2 (file
+                      transfer over Applicability Statement 2), SFTP (file transfer
+                      over SSH), FTPS (file transfer with TLS encryption), and FTP
+                      (unencrypted file transfer).
                     items:
                       type: string
                     type: array
@@ -2716,20 +2789,28 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3StorageOptions:
-                    description: Specifies whether or not performance for your Amazon
-                      S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options Block below for details.
+                    description: Whether performance for your Amazon S3 directories
+                      is optimized. This is disabled by default. See s3_storage_options
+                      Block below for details.
                     properties:
                       directoryListingOptimization:
-                        description: Specifies whether or not performance for your
-                          Amazon S3 directories is optimized. Valid values are DISABLED,
-                          ENABLED.
+                        description: Whether performance for your Amazon S3 directories
+                          is optimized. Valid values are DISABLED, ENABLED.
                         type: string
                     type: object
                   securityPolicyName:
-                    description: 'Specifies the name of the security policy that is
-                      attached to the server. Default value is: TransferSecurityPolicy-2018-11.
-                      The available values are:'
+                    description: 'Name of the security policy that is attached to
+                      the server. Default value is: TransferSecurityPolicy-2018-11.
+                      The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06,
+                      TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05,
+                      TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03,
+                      TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05,
+                      TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05,
+                      TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04,
+                      TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11,
+                      TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06,
+                      TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07.
+                      See Security policies for AWS Transfer Family servers for details.'
                     type: string
                   sftpAuthenticationMethods:
                     description: 'For SFTP-enabled servers with an identity_provider_type
@@ -2739,7 +2820,7 @@ spec:
                     type: string
                   structuredLogDestinations:
                     description: |-
-                      A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+                      Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
                       This is a set of arns of destinations that will receive structured logs from the transfer server
                     items:
                       type: string
@@ -2752,17 +2833,17 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: '- URL of the service endpoint used to authenticate
-                      users with an identity_provider_type of API_GATEWAY.'
+                    description: URL of the service endpoint used to authenticate
+                      users with an identity_provider_type of API_GATEWAY.
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See workflow_details
-                      Block below for details.
+                    description: Workflow details. See workflow_details Block below
+                      for details.
                     properties:
                       onPartialUpload:
-                        description: A trigger that starts a workflow if a file is
-                          only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload Block below for details.
+                        description: Trigger that starts a workflow if a file is only
+                          partially uploaded. See on_partial_upload Block below for
+                          details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -2771,11 +2852,11 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                       onUpload:
-                        description: 'A trigger that starts a workflow: the workflow
+                        description: 'Trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
                           Block below for details.'
                         properties:
@@ -2786,7 +2867,7 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                     type: object
@@ -2807,9 +2888,8 @@ spec:
                   autoscaler.
                 properties:
                   certificate:
-                    description: The Amazon Resource Name (ARN) of the AWS Certificate
-                      Manager (ACM) certificate. This is required when protocols is
-                      set to FTPS
+                    description: ARN of the AWS Certificate Manager (ACM) certificate.
+                      Required when protocols is set to FTPS.
                     type: string
                   certificateRef:
                     description: Reference to a Certificate in acm to populate certificate.
@@ -2886,8 +2966,8 @@ spec:
                         type: object
                     type: object
                   directoryId:
-                    description: The directory service ID of the directory service
-                      you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+                    description: Directory service ID of the directory service you
+                      want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
                     type: string
                   directoryIdRef:
                     description: Reference to a Directory in ds to populate directoryId.
@@ -2964,17 +3044,16 @@ spec:
                         type: object
                     type: object
                   domain:
-                    description: 'The domain of the storage system that is used for
-                      file transfers. Valid values are: S3 and EFS. The default value
-                      is S3.'
+                    description: 'Domain of the storage system that is used for file
+                      transfers. Valid values are: S3 and EFS. The default value is
+                      S3.'
                     type: string
                   endpointDetails:
-                    description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. See endpoint_details
-                      Block below for details.
+                    description: VPC endpoint settings that you want to configure
+                      for your SFTP server. See endpoint_details Block below for details.
                     properties:
                       addressAllocationIds:
-                        description: A list of address allocation IDs that are required
+                        description: List of address allocation IDs that are required
                           to attach an Elastic IP address to your SFTP server's endpoint.
                           This property can only be used when endpoint_type is set
                           to VPC.
@@ -3061,7 +3140,7 @@ spec:
                             type: object
                         type: object
                       securityGroupIds:
-                        description: A list of security groups IDs that are available
+                        description: List of security groups IDs that are available
                           to attach to your server's endpoint. If no security groups
                           are specified, the VPC's default security groups are automatically
                           assigned to your endpoint. This property can only be used
@@ -3071,7 +3150,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetIds:
-                        description: A list of subnet IDs that are required to host
+                        description: List of subnet IDs that are required to host
                           your SFTP server endpoint in your VPC. This property can
                           only be used when endpoint_type is set to VPC.
                         items:
@@ -3157,13 +3236,13 @@ spec:
                             type: object
                         type: object
                       vpcEndpointId:
-                        description: The ID of the VPC endpoint. This property can
-                          only be used when endpoint_type is set to VPC_ENDPOINT
+                        description: ID of the VPC endpoint. This property can only
+                          be used when endpoint_type is set to VPC_ENDPOINT
                         type: string
                       vpcId:
-                        description: The VPC ID of the virtual private cloud in which
-                          the SFTP server's endpoint will be hosted. This property
-                          can only be used when endpoint_type is set to VPC.
+                        description: VPC ID of the VPC in which the SFTP server's
+                          endpoint will be hosted. This property can only be used
+                          when endpoint_type is set to VPC.
                         type: string
                       vpcIdRef:
                         description: Reference to a VPC in ec2 to populate vpcId.
@@ -3241,22 +3320,96 @@ spec:
                         type: object
                     type: object
                   endpointType:
-                    description: The type of endpoint that you want your SFTP server
-                      connect to. If you connect to a VPC (or VPC_ENDPOINT), your
-                      SFTP server isn't accessible over the public internet. If you
-                      want to connect your SFTP server via public internet, set PUBLIC.  Defaults
-                      to PUBLIC.
+                    description: Type of endpoint that you want your SFTP server connect
+                      to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server
+                      isn't accessible over the public internet. If you want to connect
+                      your SFTP server via public internet, set PUBLIC. Defaults to
+                      PUBLIC.
                     type: string
                   forceDestroy:
-                    description: A boolean that indicates all users associated with
+                    description: Boolean that indicates all users associated with
                       the server should be deleted so that the Server can be destroyed
                       without error. The default value is false. This option only
                       applies to servers configured with a SERVICE_MANAGED identity_provider_type.
                     type: boolean
                   function:
-                    description: The ARN for a lambda function to use for the Identity
+                    description: ARN for a lambda function to use for the Identity
                       provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
+                  functionRef:
+                    description: Reference to a Function in lambda to populate function.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  functionSelector:
+                    description: Selector for a Function in lambda to populate function.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   hostKeySecretRef:
                     description: RSA, ECDSA, or ED25519 private key (e.g., as generated
                       by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key,
@@ -3278,7 +3431,7 @@ spec:
                     - namespace
                     type: object
                   identityProviderType:
-                    description: The mode of authentication enabled for this service.
+                    description: Mode of authentication enabled for this service.
                       The default value is SERVICE_MANAGED, which allows you to store
                       and access SFTP user credentials within the service. API_GATEWAY
                       indicates that user authentication requires a call to an API
@@ -3292,9 +3445,8 @@ spec:
                       function argument.
                     type: string
                   invocationRole:
-                    description: Amazon Resource Name (ARN) of the IAM role used to
-                      authenticate the user account with an identity_provider_type
-                      of API_GATEWAY.
+                    description: ARN of the IAM role used to authenticate the user
+                      account with an identity_provider_type of API_GATEWAY.
                     type: string
                   ipAddressType:
                     description: Type of IP addresses for the AWS Transfer Family
@@ -3305,9 +3457,9 @@ spec:
                       new ip_address_type value.
                     type: string
                   loggingRole:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to write your SFTP users’ activity to your Amazon
-                      CloudWatch logs for monitoring and auditing purposes.
+                    description: ARN of an IAM role that allows the service to write
+                      your SFTP users’ activity to your Amazon CloudWatch logs for
+                      monitoring and auditing purposes.
                     type: string
                   loggingRoleRef:
                     description: Reference to a Role in iam to populate loggingRole.
@@ -3422,20 +3574,20 @@ spec:
                     - namespace
                     type: object
                   protocolDetails:
-                    description: The protocol settings that are configured for your
-                      server. See protocol_details Block below for details.
+                    description: Protocol settings that are configured for your server.
+                      See protocol_details Block below for details.
                     properties:
                       as2Transports:
-                        description: Indicates the transport method for the AS2 messages.
-                          Currently, only HTTP is supported.
+                        description: Transport method for the AS2 messages. Currently,
+                          only HTTP is supported.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       passiveIp:
-                        description: Indicates passive mode, for FTP and FTPS protocols.
-                          Enter a single IPv4 address, such as the public IP address
-                          of a firewall, router, or load balancer.
+                        description: Passive mode, for FTP and FTPS protocols. Enter
+                          a single IPv4 address, such as the public IP address of
+                          a firewall, router, or load balancer.
                         type: string
                       setStatOption:
                         description: 'Use to ignore the error that is generated when
@@ -3443,37 +3595,47 @@ spec:
                           to an S3 bucket. Valid values: DEFAULT, ENABLE_NO_OP.'
                         type: string
                       tlsSessionResumptionMode:
-                        description: 'A property used with Transfer Family servers
-                          that use the FTPS protocol. Provides a mechanism to resume
-                          or share a negotiated secret key between the control and
-                          data connection for an FTPS session. Valid values: DISABLED,
+                        description: 'Property used with Transfer Family servers that
+                          use the FTPS protocol. Provides a mechanism to resume or
+                          share a negotiated secret key between the control and data
+                          connection for an FTPS session. Valid values: DISABLED,
                           ENABLED, ENFORCED.'
                         type: string
                     type: object
                   protocols:
-                    description: 'Specifies the file transfer protocol or protocols
-                      over which your file transfer protocol client can connect to
-                      your server''s endpoint. This defaults to SFTP . The available
-                      protocols are:'
+                    description: File transfer protocol or protocols over which your
+                      file transfer protocol client can connect to your server's endpoint.
+                      This defaults to SFTP. The available protocols are AS2 (file
+                      transfer over Applicability Statement 2), SFTP (file transfer
+                      over SSH), FTPS (file transfer with TLS encryption), and FTP
+                      (unencrypted file transfer).
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   s3StorageOptions:
-                    description: Specifies whether or not performance for your Amazon
-                      S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options Block below for details.
+                    description: Whether performance for your Amazon S3 directories
+                      is optimized. This is disabled by default. See s3_storage_options
+                      Block below for details.
                     properties:
                       directoryListingOptimization:
-                        description: Specifies whether or not performance for your
-                          Amazon S3 directories is optimized. Valid values are DISABLED,
-                          ENABLED.
+                        description: Whether performance for your Amazon S3 directories
+                          is optimized. Valid values are DISABLED, ENABLED.
                         type: string
                     type: object
                   securityPolicyName:
-                    description: 'Specifies the name of the security policy that is
-                      attached to the server. Default value is: TransferSecurityPolicy-2018-11.
-                      The available values are:'
+                    description: 'Name of the security policy that is attached to
+                      the server. Default value is: TransferSecurityPolicy-2018-11.
+                      The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06,
+                      TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05,
+                      TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03,
+                      TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05,
+                      TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05,
+                      TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04,
+                      TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11,
+                      TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06,
+                      TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07.
+                      See Security policies for AWS Transfer Family servers for details.'
                     type: string
                   sftpAuthenticationMethods:
                     description: 'For SFTP-enabled servers with an identity_provider_type
@@ -3483,7 +3645,7 @@ spec:
                     type: string
                   structuredLogDestinations:
                     description: |-
-                      A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+                      Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
                       This is a set of arns of destinations that will receive structured logs from the transfer server
                     items:
                       type: string
@@ -3496,17 +3658,17 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: '- URL of the service endpoint used to authenticate
-                      users with an identity_provider_type of API_GATEWAY.'
+                    description: URL of the service endpoint used to authenticate
+                      users with an identity_provider_type of API_GATEWAY.
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See workflow_details
-                      Block below for details.
+                    description: Workflow details. See workflow_details Block below
+                      for details.
                     properties:
                       onPartialUpload:
-                        description: A trigger that starts a workflow if a file is
-                          only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload Block below for details.
+                        description: Trigger that starts a workflow if a file is only
+                          partially uploaded. See on_partial_upload Block below for
+                          details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -3515,11 +3677,11 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                       onUpload:
-                        description: 'A trigger that starts a workflow: the workflow
+                        description: 'Trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
                           Block below for details.'
                         properties:
@@ -3530,7 +3692,7 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                     type: object
@@ -3627,32 +3789,30 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of Transfer Server
+                    description: ARN of Transfer Server
                     type: string
                   certificate:
-                    description: The Amazon Resource Name (ARN) of the AWS Certificate
-                      Manager (ACM) certificate. This is required when protocols is
-                      set to FTPS
+                    description: ARN of the AWS Certificate Manager (ACM) certificate.
+                      Required when protocols is set to FTPS.
                     type: string
                   directoryId:
-                    description: The directory service ID of the directory service
-                      you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+                    description: Directory service ID of the directory service you
+                      want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
                     type: string
                   domain:
-                    description: 'The domain of the storage system that is used for
-                      file transfers. Valid values are: S3 and EFS. The default value
-                      is S3.'
+                    description: 'Domain of the storage system that is used for file
+                      transfers. Valid values are: S3 and EFS. The default value is
+                      S3.'
                     type: string
                   endpoint:
-                    description: The endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
+                    description: Endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
                     type: string
                   endpointDetails:
-                    description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. See endpoint_details
-                      Block below for details.
+                    description: VPC endpoint settings that you want to configure
+                      for your SFTP server. See endpoint_details Block below for details.
                     properties:
                       addressAllocationIds:
-                        description: A list of address allocation IDs that are required
+                        description: List of address allocation IDs that are required
                           to attach an Elastic IP address to your SFTP server's endpoint.
                           This property can only be used when endpoint_type is set
                           to VPC.
@@ -3661,7 +3821,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       securityGroupIds:
-                        description: A list of security groups IDs that are available
+                        description: List of security groups IDs that are available
                           to attach to your server's endpoint. If no security groups
                           are specified, the VPC's default security groups are automatically
                           assigned to your endpoint. This property can only be used
@@ -3671,7 +3831,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetIds:
-                        description: A list of subnet IDs that are required to host
+                        description: List of subnet IDs that are required to host
                           your SFTP server endpoint in your VPC. This property can
                           only be used when endpoint_type is set to VPC.
                         items:
@@ -3679,43 +3839,42 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       vpcEndpointId:
-                        description: The ID of the VPC endpoint. This property can
-                          only be used when endpoint_type is set to VPC_ENDPOINT
+                        description: ID of the VPC endpoint. This property can only
+                          be used when endpoint_type is set to VPC_ENDPOINT
                         type: string
                       vpcId:
-                        description: The VPC ID of the virtual private cloud in which
-                          the SFTP server's endpoint will be hosted. This property
-                          can only be used when endpoint_type is set to VPC.
+                        description: VPC ID of the VPC in which the SFTP server's
+                          endpoint will be hosted. This property can only be used
+                          when endpoint_type is set to VPC.
                         type: string
                     type: object
                   endpointType:
-                    description: The type of endpoint that you want your SFTP server
-                      connect to. If you connect to a VPC (or VPC_ENDPOINT), your
-                      SFTP server isn't accessible over the public internet. If you
-                      want to connect your SFTP server via public internet, set PUBLIC.  Defaults
-                      to PUBLIC.
+                    description: Type of endpoint that you want your SFTP server connect
+                      to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server
+                      isn't accessible over the public internet. If you want to connect
+                      your SFTP server via public internet, set PUBLIC. Defaults to
+                      PUBLIC.
                     type: string
                   forceDestroy:
-                    description: A boolean that indicates all users associated with
+                    description: Boolean that indicates all users associated with
                       the server should be deleted so that the Server can be destroyed
                       without error. The default value is false. This option only
                       applies to servers configured with a SERVICE_MANAGED identity_provider_type.
                     type: boolean
                   function:
-                    description: The ARN for a lambda function to use for the Identity
+                    description: ARN for a lambda function to use for the Identity
                       provider with an identity_provider_type of AWS_LAMBDA.
                     type: string
                   hostKeyFingerprint:
-                    description: This value contains the message-digest algorithm
-                      (MD5) hash of the server's host key. This value is equivalent
-                      to the output of the ssh-keygen -l -E md5 -f my-new-server-key
-                      command.
+                    description: Message-digest algorithm (MD5) hash of the server's
+                      host key. This value is equivalent to the output of the ssh-keygen
+                      -l -E md5 -f my-new-server-key command.
                     type: string
                   id:
-                    description: The Server ID of the Transfer Server (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   identityProviderType:
-                    description: The mode of authentication enabled for this service.
+                    description: Mode of authentication enabled for this service.
                       The default value is SERVICE_MANAGED, which allows you to store
                       and access SFTP user credentials within the service. API_GATEWAY
                       indicates that user authentication requires a call to an API
@@ -3729,9 +3888,8 @@ spec:
                       function argument.
                     type: string
                   invocationRole:
-                    description: Amazon Resource Name (ARN) of the IAM role used to
-                      authenticate the user account with an identity_provider_type
-                      of API_GATEWAY.
+                    description: ARN of the IAM role used to authenticate the user
+                      account with an identity_provider_type of API_GATEWAY.
                     type: string
                   ipAddressType:
                     description: Type of IP addresses for the AWS Transfer Family
@@ -3742,25 +3900,25 @@ spec:
                       new ip_address_type value.
                     type: string
                   loggingRole:
-                    description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to write your SFTP users’ activity to your Amazon
-                      CloudWatch logs for monitoring and auditing purposes.
+                    description: ARN of an IAM role that allows the service to write
+                      your SFTP users’ activity to your Amazon CloudWatch logs for
+                      monitoring and auditing purposes.
                     type: string
                   protocolDetails:
-                    description: The protocol settings that are configured for your
-                      server. See protocol_details Block below for details.
+                    description: Protocol settings that are configured for your server.
+                      See protocol_details Block below for details.
                     properties:
                       as2Transports:
-                        description: Indicates the transport method for the AS2 messages.
-                          Currently, only HTTP is supported.
+                        description: Transport method for the AS2 messages. Currently,
+                          only HTTP is supported.
                         items:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
                       passiveIp:
-                        description: Indicates passive mode, for FTP and FTPS protocols.
-                          Enter a single IPv4 address, such as the public IP address
-                          of a firewall, router, or load balancer.
+                        description: Passive mode, for FTP and FTPS protocols. Enter
+                          a single IPv4 address, such as the public IP address of
+                          a firewall, router, or load balancer.
                         type: string
                       setStatOption:
                         description: 'Use to ignore the error that is generated when
@@ -3768,18 +3926,20 @@ spec:
                           to an S3 bucket. Valid values: DEFAULT, ENABLE_NO_OP.'
                         type: string
                       tlsSessionResumptionMode:
-                        description: 'A property used with Transfer Family servers
-                          that use the FTPS protocol. Provides a mechanism to resume
-                          or share a negotiated secret key between the control and
-                          data connection for an FTPS session. Valid values: DISABLED,
+                        description: 'Property used with Transfer Family servers that
+                          use the FTPS protocol. Provides a mechanism to resume or
+                          share a negotiated secret key between the control and data
+                          connection for an FTPS session. Valid values: DISABLED,
                           ENABLED, ENFORCED.'
                         type: string
                     type: object
                   protocols:
-                    description: 'Specifies the file transfer protocol or protocols
-                      over which your file transfer protocol client can connect to
-                      your server''s endpoint. This defaults to SFTP . The available
-                      protocols are:'
+                    description: File transfer protocol or protocols over which your
+                      file transfer protocol client can connect to your server's endpoint.
+                      This defaults to SFTP. The available protocols are AS2 (file
+                      transfer over Applicability Statement 2), SFTP (file transfer
+                      over SSH), FTPS (file transfer with TLS encryption), and FTP
+                      (unencrypted file transfer).
                     items:
                       type: string
                     type: array
@@ -3790,20 +3950,28 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3StorageOptions:
-                    description: Specifies whether or not performance for your Amazon
-                      S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options Block below for details.
+                    description: Whether performance for your Amazon S3 directories
+                      is optimized. This is disabled by default. See s3_storage_options
+                      Block below for details.
                     properties:
                       directoryListingOptimization:
-                        description: Specifies whether or not performance for your
-                          Amazon S3 directories is optimized. Valid values are DISABLED,
-                          ENABLED.
+                        description: Whether performance for your Amazon S3 directories
+                          is optimized. Valid values are DISABLED, ENABLED.
                         type: string
                     type: object
                   securityPolicyName:
-                    description: 'Specifies the name of the security policy that is
-                      attached to the server. Default value is: TransferSecurityPolicy-2018-11.
-                      The available values are:'
+                    description: 'Name of the security policy that is attached to
+                      the server. Default value is: TransferSecurityPolicy-2018-11.
+                      The available values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06,
+                      TransferSecurityPolicy-2022-03, TransferSecurityPolicy-2023-05,
+                      TransferSecurityPolicy-2024-01, TransferSecurityPolicy-2025-03,
+                      TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05,
+                      TransferSecurityPolicy-FIPS-2024-01, TransferSecurityPolicy-FIPS-2024-05,
+                      TransferSecurityPolicy-FIPS-2025-03, TransferSecurityPolicy-PQ-SSH-Experimental-2023-04,
+                      TransferSecurityPolicy-PQ-SSH-FIPS-Experimental-2023-04, TransferSecurityPolicy-Restricted-2018-11,
+                      TransferSecurityPolicy-Restricted-2020-06, TransferSecurityPolicy-Restricted-2024-06,
+                      TransferSecurityPolicy-SshAuditCompliant-2025-02, and TransferSecurityPolicy-AS2Restricted-2025-07.
+                      See Security policies for AWS Transfer Family servers for details.'
                     type: string
                   sftpAuthenticationMethods:
                     description: 'For SFTP-enabled servers with an identity_provider_type
@@ -3813,7 +3981,7 @@ spec:
                     type: string
                   structuredLogDestinations:
                     description: |-
-                      A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+                      Set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
                       This is a set of arns of destinations that will receive structured logs from the transfer server
                     items:
                       type: string
@@ -3828,23 +3996,22 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   url:
-                    description: '- URL of the service endpoint used to authenticate
-                      users with an identity_provider_type of API_GATEWAY.'
+                    description: URL of the service endpoint used to authenticate
+                      users with an identity_provider_type of API_GATEWAY.
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See workflow_details
-                      Block below for details.
+                    description: Workflow details. See workflow_details Block below
+                      for details.
                     properties:
                       onPartialUpload:
-                        description: A trigger that starts a workflow if a file is
-                          only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload Block below for details.
+                        description: Trigger that starts a workflow if a file is only
+                          partially uploaded. See on_partial_upload Block below for
+                          details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -3853,11 +4020,11 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                       onUpload:
-                        description: 'A trigger that starts a workflow: the workflow
+                        description: 'Trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
                           Block below for details.'
                         properties:
@@ -3868,7 +4035,7 @@ spec:
                               resources.
                             type: string
                           workflowId:
-                            description: A unique identifier for the workflow.
+                            description: Unique identifier for the workflow.
                             type: string
                         type: object
                     type: object

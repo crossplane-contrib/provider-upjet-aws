@@ -33,7 +33,7 @@ type HostInitParameters struct {
 	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. Exactly one of instance_family or instance_type must be specified.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	// ARN of the AWS Outpost on which to allocate the Dedicated Host.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -67,7 +67,7 @@ type HostObservation struct {
 	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. Exactly one of instance_family or instance_type must be specified.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	// ARN of the AWS Outpost on which to allocate the Dedicated Host.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// The ID of the AWS account that owns the Dedicated Host.
@@ -112,7 +112,7 @@ type HostParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	// ARN of the AWS Outpost on which to allocate the Dedicated Host.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

@@ -18,19 +18,19 @@ type ManagedPolicyAttachmentInitParameters struct {
 
 type ManagedPolicyAttachmentObservation struct {
 
-	// The Amazon Resource Names (ARNs) of the Managed Policy, Permission Set, and SSO Instance, separated by a comma (,).
+	// ARNs of the Managed Policy, Permission Set, and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
-	// The IAM managed policy Amazon Resource Name (ARN) to be attached to the Permission Set.
+	// IAM managed policy ARN to be attached to the Permission Set.
 	ManagedPolicyArn *string `json:"managedPolicyArn,omitempty" tf:"managed_policy_arn,omitempty"`
 
 	// The name of the IAM Managed Policy.
 	ManagedPolicyName *string `json:"managedPolicyName,omitempty" tf:"managed_policy_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -40,15 +40,15 @@ type ManagedPolicyAttachmentObservation struct {
 
 type ManagedPolicyAttachmentParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	// ARN of the SSO Instance under which the operation will be executed.
 	// +kubebuilder:validation:Required
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
-	// The IAM managed policy Amazon Resource Name (ARN) to be attached to the Permission Set.
+	// IAM managed policy ARN to be attached to the Permission Set.
 	// +kubebuilder:validation:Required
 	ManagedPolicyArn *string `json:"managedPolicyArn" tf:"managed_policy_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Permission Set.
+	// ARN of the Permission Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

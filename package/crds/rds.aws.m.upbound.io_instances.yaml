@@ -2688,7 +2688,7 @@ spec:
                             that is used to encrypt the secret.
                           type: string
                         secretArn:
-                          description: The Amazon Resource Name (ARN) of the secret.
+                          description: ARN of the secret.
                           type: string
                         secretStatus:
                           description: 'The status of the secret. Valid Values: creating

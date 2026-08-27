@@ -63,7 +63,7 @@ spec:
                     description: |-
                       A flag to indicate whether to bypass the key policy lockout safety check.
                       Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
                       The default value is false.
                     type: boolean
                   deletionWindowInDays:
@@ -223,7 +223,7 @@ spec:
                     description: |-
                       A flag to indicate whether to bypass the key policy lockout safety check.
                       Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
                       The default value is false.
                     type: boolean
                   deletionWindowInDays:
@@ -423,15 +423,14 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the replica key.
-                      The key ARNs of related multi-Region keys differ only in the
-                      Region value.
+                    description: ARN of the replica key. The key ARNs of related multi-Region
+                      keys differ only in the Region value.
                     type: string
                   bypassPolicyLockoutSafetyCheck:
                     description: |-
                       A flag to indicate whether to bypass the key policy lockout safety check.
                       Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
-                      For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+                      For more information, refer to the scenario in the Default Key Policy section in the AWS KMS Developer Guide.
                       The default value is false.
                     type: boolean
                   deletionWindowInDays:

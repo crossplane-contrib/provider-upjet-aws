@@ -15,7 +15,7 @@ import (
 
 type AwsLambdaInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	// ARN of the AWS Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
@@ -34,7 +34,7 @@ type AwsLambdaInitParameters struct {
 
 type AwsLambdaObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	// ARN of the AWS Lambda function.
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
@@ -43,7 +43,7 @@ type AwsLambdaObservation struct {
 
 type AwsLambdaParameters struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	// ARN of the AWS Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -84,7 +84,7 @@ type ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SupportingAccessPointSelector *v2.NamespacedSelector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
-	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
+	// List of transformation configurations for the Object Lambda Access Point. See transformation_configuration Block below for more details.
 	TransformationConfiguration []TransformationConfigurationInitParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
 }
 
@@ -100,7 +100,7 @@ type ConfigurationObservation struct {
 	// Standard access point associated with the Object Lambda Access Point.
 	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
 
-	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
+	// List of transformation configurations for the Object Lambda Access Point. See transformation_configuration Block below for more details.
 	TransformationConfiguration []TransformationConfigurationObservation `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
 }
 
@@ -129,60 +129,60 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SupportingAccessPointSelector *v2.NamespacedSelector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
-	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
+	// List of transformation configurations for the Object Lambda Access Point. See transformation_configuration Block below for more details.
 	// +kubebuilder:validation:Optional
 	TransformationConfiguration []TransformationConfigurationParameters `json:"transformationConfiguration" tf:"transformation_configuration,omitempty"`
 }
 
 type ContentTransformationInitParameters struct {
 
-	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
+	// Configuration for an AWS Lambda function. See aws_lambda Block below for more details.
 	AwsLambda *AwsLambdaInitParameters `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
 }
 
 type ContentTransformationObservation struct {
 
-	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
+	// Configuration for an AWS Lambda function. See aws_lambda Block below for more details.
 	AwsLambda *AwsLambdaObservation `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
 }
 
 type ContentTransformationParameters struct {
 
-	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
+	// Configuration for an AWS Lambda function. See aws_lambda Block below for more details.
 	// +kubebuilder:validation:Optional
 	AwsLambda *AwsLambdaParameters `json:"awsLambda" tf:"aws_lambda,omitempty"`
 }
 
 type ObjectLambdaAccessPointInitParameters struct {
 
-	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
+	// AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
+	// Configuration block containing details about the Object Lambda Access Point. See configuration Block below for more details.
 	Configuration *ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The name for this Object Lambda Access Point.
+	// Name for this Object Lambda Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ObjectLambdaAccessPointObservation struct {
 
-	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
+	// AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Alias for the S3 Object Lambda Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Object Lambda Access Point.
+	// ARN of the Object Lambda Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
+	// Configuration block containing details about the Object Lambda Access Point. See configuration Block below for more details.
 	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The AWS account ID and access point name separated by a colon (:).
+	// AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name for this Object Lambda Access Point.
+	// Name for this Object Lambda Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -192,15 +192,15 @@ type ObjectLambdaAccessPointObservation struct {
 
 type ObjectLambdaAccessPointParameters struct {
 
-	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
+	// AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
+	// Configuration block containing details about the Object Lambda Access Point. See configuration Block below for more details.
 	// +kubebuilder:validation:Optional
 	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The name for this Object Lambda Access Point.
+	// Name for this Object Lambda Access Point.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -212,32 +212,32 @@ type ObjectLambdaAccessPointParameters struct {
 
 type TransformationConfigurationInitParameters struct {
 
-	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	// Actions of an Object Lambda Access Point configuration. Valid values: GetObject.
 	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
-	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
+	// Content transformation of an Object Lambda Access Point configuration. See content_transformation Block below for more details.
 	ContentTransformation *ContentTransformationInitParameters `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
 }
 
 type TransformationConfigurationObservation struct {
 
-	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	// Actions of an Object Lambda Access Point configuration. Valid values: GetObject.
 	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
-	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
+	// Content transformation of an Object Lambda Access Point configuration. See content_transformation Block below for more details.
 	ContentTransformation *ContentTransformationObservation `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
 }
 
 type TransformationConfigurationParameters struct {
 
-	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	// Actions of an Object Lambda Access Point configuration. Valid values: GetObject.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
-	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
+	// Content transformation of an Object Lambda Access Point configuration. See content_transformation Block below for more details.
 	// +kubebuilder:validation:Optional
 	ContentTransformation *ContentTransformationParameters `json:"contentTransformation" tf:"content_transformation,omitempty"`
 }

@@ -27,7 +27,7 @@ type TrafficPolicyInitParameters struct {
 
 type TrafficPolicyObservation struct {
 
-	// Amazon Resource Name (ARN) of the traffic policy.
+	// ARN of the traffic policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Comment for the traffic policy.

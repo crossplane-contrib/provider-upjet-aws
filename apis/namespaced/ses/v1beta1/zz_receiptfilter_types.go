@@ -15,7 +15,7 @@ import (
 
 type ReceiptFilterInitParameters struct {
 
-	// The IP address or address range to filter, in CIDR notation
+	// IP address or address range to filter, in CIDR notation
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
 	// Block or Allow
@@ -24,13 +24,13 @@ type ReceiptFilterInitParameters struct {
 
 type ReceiptFilterObservation struct {
 
-	// The SES receipt filter ARN.
+	// SES receipt filter ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The IP address or address range to filter, in CIDR notation
+	// IP address or address range to filter, in CIDR notation
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
-	// The SES receipt filter name.
+	// SES receipt filter name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Block or Allow
@@ -43,7 +43,7 @@ type ReceiptFilterObservation struct {
 
 type ReceiptFilterParameters struct {
 
-	// The IP address or address range to filter, in CIDR notation
+	// IP address or address range to filter, in CIDR notation
 	// +kubebuilder:validation:Optional
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 

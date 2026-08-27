@@ -155,8 +155,8 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   payer:
-                    description: 'Specifies who pays for the download and request
-                      fees. Valid values: BucketOwner, Requester.'
+                    description: 'Who pays for the download and request fees. Valid
+                      values: BucketOwner, Requester.'
                     type: string
                   region:
                     description: |-
@@ -260,8 +260,8 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   payer:
-                    description: 'Specifies who pays for the download and request
-                      fees. Valid values: BucketOwner, Requester.'
+                    description: 'Who pays for the download and request fees. Valid
+                      values: BucketOwner, Requester.'
                     type: string
                 type: object
               managementPolicies:
@@ -368,12 +368,12 @@ spec:
                     description: Account ID of the expected bucket owner.
                     type: string
                   id:
-                    description: The bucket or bucket and expected_bucket_owner separated
+                    description: bucket or bucket and expected_bucket_owner separated
                       by a comma (,) if the latter is provided.
                     type: string
                   payer:
-                    description: 'Specifies who pays for the download and request
-                      fees. Valid values: BucketOwner, Requester.'
+                    description: 'Who pays for the download and request fees. Valid
+                      values: BucketOwner, Requester.'
                     type: string
                   region:
                     description: |-

@@ -27,7 +27,7 @@ type FargateProfileInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// ARN of the IAM Role that provides permissions for the EKS Fargate Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
@@ -65,7 +65,7 @@ type FargateProfileInitParameters struct {
 
 type FargateProfileObservation struct {
 
-	// Amazon Resource Name (ARN) of the EKS Fargate Profile.
+	// ARN of the EKS Fargate Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Name of the EKS Cluster.
@@ -74,7 +74,7 @@ type FargateProfileObservation struct {
 	// EKS Cluster name and EKS Fargate Profile name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// ARN of the IAM Role that provides permissions for the EKS Fargate Profile.
 	PodExecutionRoleArn *string `json:"podExecutionRoleArn,omitempty" tf:"pod_execution_role_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -115,7 +115,7 @@ type FargateProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Fargate Profile.
+	// ARN of the IAM Role that provides permissions for the EKS Fargate Profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

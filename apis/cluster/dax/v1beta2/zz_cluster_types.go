@@ -28,7 +28,7 @@ type ClusterInitParameters struct {
 	// Description for the cluster
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A valid Amazon Resource Name (ARN) that identifies
+	// Valid ARN that identifies
 	// an IAM role. At runtime, DAX will assume this role and use the role's
 	// permissions to access DynamoDB on your behalf
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -53,7 +53,7 @@ type ClusterInitParameters struct {
 	// Nodes for supported node types
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// An Amazon Resource Name (ARN) of an
+	// ARN of an
 	// SNS topic to send DAX notifications to. Example:
 	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
@@ -120,7 +120,7 @@ type ClusterObservation struct {
 	// Description for the cluster
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A valid Amazon Resource Name (ARN) that identifies
+	// Valid ARN that identifies
 	// an IAM role. At runtime, DAX will assume this role and use the role's
 	// permissions to access DynamoDB on your behalf
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -142,7 +142,7 @@ type ClusterObservation struct {
 	// ${aws_dax_cluster.test.nodes.0.address}
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
-	// An Amazon Resource Name (ARN) of an
+	// ARN of an
 	// SNS topic to send DAX notifications to. Example:
 	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
@@ -202,7 +202,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A valid Amazon Resource Name (ARN) that identifies
+	// Valid ARN that identifies
 	// an IAM role. At runtime, DAX will assume this role and use the role's
 	// permissions to access DynamoDB on your behalf
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
@@ -230,7 +230,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
-	// An Amazon Resource Name (ARN) of an
+	// ARN of an
 	// SNS topic to send DAX notifications to. Example:
 	// arn:aws:sns:us-east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional

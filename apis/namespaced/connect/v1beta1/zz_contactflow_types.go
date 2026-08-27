@@ -53,7 +53,7 @@ type ContactFlowInitParameters struct {
 
 type ContactFlowObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Contact Flow.
+	// ARN of the Contact Flow.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The identifier of the Contact Flow.

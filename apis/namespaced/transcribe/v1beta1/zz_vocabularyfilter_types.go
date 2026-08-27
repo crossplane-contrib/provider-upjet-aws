@@ -15,17 +15,17 @@ import (
 
 type VocabularyFilterInitParameters struct {
 
-	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
+	// Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
 	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
 	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }
 
@@ -40,7 +40,7 @@ type VocabularyFilterObservation struct {
 	// VocabularyFilter name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -54,16 +54,16 @@ type VocabularyFilterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
+	// Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
 	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
 	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }
 
 type VocabularyFilterParameters struct {
 
-	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
+	// Language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
@@ -77,11 +77,11 @@ type VocabularyFilterParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
+	// Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
 	// +kubebuilder:validation:Optional
 	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
+	// List of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
 	// +kubebuilder:validation:Optional
 	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }

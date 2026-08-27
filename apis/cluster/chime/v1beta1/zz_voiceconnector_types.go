@@ -28,7 +28,7 @@ type VoiceConnectorInitParameters struct {
 
 type VoiceConnectorObservation struct {
 
-	// ARN (Amazon Resource Name) of the Amazon Chime Voice Connector.
+	// ARN of the Amazon Chime Voice Connector.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1

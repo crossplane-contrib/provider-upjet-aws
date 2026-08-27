@@ -48,7 +48,7 @@ type VPCConnectionInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster.
+	// ARN of the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafka/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	TargetClusterArn *string `json:"targetClusterArn,omitempty" tf:"target_cluster_arn,omitempty"`
@@ -76,7 +76,7 @@ type VPCConnectionInitParameters struct {
 
 type VPCConnectionObservation struct {
 
-	// Amazon Resource Name (ARN) of the VPC connection.
+	// ARN of the VPC connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The authentication type for the client VPC connection. Specify one of these auth type strings: SASL_IAM, SASL_SCRAM, or TLS.
@@ -104,7 +104,7 @@ type VPCConnectionObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster.
+	// ARN of the cluster.
 	TargetClusterArn *string `json:"targetClusterArn,omitempty" tf:"target_cluster_arn,omitempty"`
 
 	// The VPC ID of the remote client.
@@ -155,7 +155,7 @@ type VPCConnectionParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the cluster.
+	// ARN of the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/kafka/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

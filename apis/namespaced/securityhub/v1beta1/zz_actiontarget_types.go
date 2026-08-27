@@ -24,7 +24,7 @@ type ActionTargetInitParameters struct {
 
 type ActionTargetObservation struct {
 
-	// Amazon Resource Name (ARN) of the Security Hub custom action target.
+	// ARN of the Security Hub custom action target.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the custom action target.

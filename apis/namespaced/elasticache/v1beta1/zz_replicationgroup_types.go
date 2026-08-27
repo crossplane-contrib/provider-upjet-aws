@@ -106,12 +106,17 @@ type ReplicationGroupInitParameters struct {
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	AuthTokenSecretRef *v2.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
+	// Strategy used when modifying auth_token or auth_token_wo on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token and auth_token_wo must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	AuthTokenWoSecretRef *v2.LocalSecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
+
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-	// Defaults to true.
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
@@ -231,14 +236,14 @@ type ReplicationGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
@@ -349,12 +354,14 @@ type ReplicationGroupObservation struct {
 	// When engine is valkey, default is true.
 	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
-	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
+	// Strategy used when modifying auth_token or auth_token_wo on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token and auth_token_wo must be omitted.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-	// Defaults to true.
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
@@ -473,11 +480,11 @@ type ReplicationGroupObservation struct {
 	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
-	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
@@ -538,9 +545,17 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v2.LocalSecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// Strategy used when modifying auth_token on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token must be omitted.
+	// Strategy used when modifying auth_token or auth_token_wo on an existing replication group. Not used during initial create. Valid values are SET, ROTATE, and DELETE. If omitted during an auth token change, AWS defaults to ROTATE. If value is DELETE then auth_token and auth_token_wo must be omitted.
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Password used to access a password protected server, whose value will not be stored in state. Can be specified only if transit_encryption_enabled = true. Conflicts with auth_token. Requires auth_token_wo_version.
+	// +kubebuilder:validation:Optional
+	AuthTokenWoSecretRef *v2.LocalSecretKeySelector `json:"authTokenWoSecretRef,omitempty" tf:"-"`
+
+	// Integer that, when changed, triggers a re-send of auth_token_wo to the replication group. Requires auth_token_wo.
+	// +kubebuilder:validation:Optional
+	AuthTokenWoVersion *float64 `json:"authTokenWoVersion,omitempty" tf:"auth_token_wo_version,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// If true, the auth token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
@@ -550,7 +565,6 @@ type ReplicationGroupParameters struct {
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
-	// Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
@@ -700,7 +714,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v2.NamespacedSelector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -708,7 +722,7 @@ type ReplicationGroupParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
+	// Names of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in a VPC.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`

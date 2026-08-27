@@ -2211,22 +2211,23 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2238,13 +2239,13 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               serviceName:
                                 description: Fully qualified domain name for the service
@@ -2258,14 +2259,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -2274,8 +2275,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2284,7 +2285,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2299,18 +2301,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2322,11 +2325,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2336,7 +2339,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2344,12 +2348,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -2359,8 +2366,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2374,8 +2381,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2386,34 +2393,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2434,14 +2445,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -2450,8 +2461,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2460,7 +2471,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2475,18 +2487,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2574,11 +2587,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2588,7 +2601,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2596,12 +2610,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -2611,8 +2628,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2626,8 +2643,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2638,34 +2655,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2808,22 +2829,23 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2835,13 +2857,13 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               serviceName:
                                 description: Fully qualified domain name for the service
@@ -2855,14 +2877,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -2871,8 +2893,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -2881,7 +2903,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -2896,18 +2919,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -2919,11 +2943,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -2933,7 +2957,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -2941,12 +2966,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -2956,8 +2984,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -2971,8 +2999,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -2983,34 +3011,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3031,14 +3063,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -3047,8 +3079,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3057,7 +3089,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3072,18 +3105,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3171,11 +3205,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3185,7 +3219,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3193,12 +3228,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -3208,8 +3246,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3223,8 +3261,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3235,34 +3273,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3514,22 +3556,23 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3541,13 +3584,13 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               serviceName:
                                 description: Fully qualified domain name for the service
@@ -3561,14 +3604,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -3577,8 +3620,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3587,7 +3630,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3602,18 +3646,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3625,11 +3670,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3639,7 +3684,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3647,12 +3693,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -3662,8 +3711,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3677,8 +3726,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3689,34 +3738,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3737,14 +3790,14 @@ spec:
                         properties:
                           action:
                             description: Action to take if a match is determined.
-                              See action Block for details.
+                              See spec.grpc_route.action Block for details.
                             properties:
                               rewrite:
                                 description: Gateway route action to rewrite. See
-                                  rewrite Block for details.
+                                  spec.http_route.action.rewrite Block for details.
                                 properties:
                                   hostname:
-                                    description: Host name to match on. See hostname
+                                    description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
                                       Block for details.
                                     properties:
                                       defaultTargetHostname:
@@ -3753,8 +3806,8 @@ spec:
                                         type: string
                                     type: object
                                   path:
-                                    description: Exact path to rewrite. See path Block
-                                      for details.
+                                    description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                      Block for details.
                                     properties:
                                       exact:
                                         description: Value used to replace matched
@@ -3763,7 +3816,8 @@ spec:
                                     type: object
                                   prefix:
                                     description: Specified beginning characters to
-                                      rewrite. See prefix Block for details.
+                                      rewrite. See spec.http_route.action.rewrite.prefix
+                                      Block for details.
                                     properties:
                                       defaultPrefix:
                                         description: 'Default prefix used to replace
@@ -3778,18 +3832,19 @@ spec:
                                 type: object
                               target:
                                 description: Target that traffic is routed to when
-                                  a request matches the gateway route. See target
+                                  a request matches the gateway route. See spec.grpc_route.action.target
                                   Block for details.
                                 properties:
                                   port:
-                                    description: The port number that corresponds
-                                      to the target for Virtual Service provider port.
-                                      This is required when the provider (router or
-                                      node) of the Virtual Service has multiple listeners.
+                                    description: Port number that corresponds to the
+                                      target for Virtual Service provider port. This
+                                      is required when the provider (router or node)
+                                      of the Virtual Service has multiple listeners.
                                     type: number
                                   virtualService:
                                     description: Virtual service gateway route target.
-                                      See virtual_service Block for details.
+                                      See spec.grpc_route.action.target.virtual_service
+                                      Block for details.
                                     properties:
                                       virtualServiceName:
                                         description: Name of the virtual service that
@@ -3801,11 +3856,11 @@ spec:
                             type: object
                           match:
                             description: Criteria for determining a request match.
-                              See match Block for details.
+                              See spec.grpc_route.match Block for details.
                             properties:
                               header:
                                 description: Client request headers to match on. See
-                                  header Block for details.
+                                  spec.http_route.match.header Block for details.
                                 items:
                                   properties:
                                     invert:
@@ -3815,7 +3870,8 @@ spec:
                                       type: boolean
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched
@@ -3823,12 +3879,15 @@ spec:
                                           type: string
                                         prefix:
                                           description: Specified beginning characters
-                                            to rewrite. See prefix Block for details.
+                                            to rewrite. See spec.http_route.action.rewrite.prefix
+                                            Block for details.
                                           type: string
                                         range:
                                           description: Object that specifies the range
                                             of numbers that the header value sent
-                                            by the client must be included in.
+                                            by the client must be included in. See
+                                            spec.http_route.match.header.match.range
+                                            Block for details.
                                           properties:
                                             end:
                                               description: End of the range.
@@ -3838,8 +3897,8 @@ spec:
                                               type: number
                                           type: object
                                         regex:
-                                          description: The regex used to match the
-                                            path.
+                                          description: Header value sent by the client
+                                            must include the specified characters.
                                           type: string
                                         suffix:
                                           description: Header value sent by the client
@@ -3853,8 +3912,8 @@ spec:
                                   type: object
                                 type: array
                               hostname:
-                                description: Host name to match on. See hostname Block
-                                  for details.
+                                description: Host name to rewrite. See spec.http_route.action.rewrite.hostname
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
@@ -3865,34 +3924,38 @@ spec:
                                     type: string
                                 type: object
                               path:
-                                description: Exact path to rewrite. See path Block
-                                  for details.
+                                description: Exact path to rewrite. See spec.http_route.action.rewrite.path
+                                  Block for details.
                                 properties:
                                   exact:
                                     description: Value used to replace matched path.
                                     type: string
                                   regex:
-                                    description: The regex used to match the path.
+                                    description: Header value sent by the client must
+                                      include the specified characters.
                                     type: string
                                 type: object
                               port:
-                                description: The port number that corresponds to the
-                                  target for Virtual Service provider port. This is
-                                  required when the provider (router or node) of the
-                                  Virtual Service has multiple listeners.
+                                description: Port number that corresponds to the target
+                                  for Virtual Service provider port. This is required
+                                  when the provider (router or node) of the Virtual
+                                  Service has multiple listeners.
                                 type: number
                               prefix:
                                 description: Specified beginning characters to rewrite.
-                                  See prefix Block for details.
+                                  See spec.http_route.action.rewrite.prefix Block
+                                  for details.
                                 type: string
                               queryParameter:
                                 description: Client request query parameters to match
-                                  on. See query_parameter Block for details.
+                                  on. See spec.http_route.match.query_parameter Block
+                                  for details.
                                 items:
                                   properties:
                                     match:
                                       description: Criteria for determining a request
-                                        match. See match Block for details.
+                                        match. See spec.grpc_route.match Block for
+                                        details.
                                       properties:
                                         exact:
                                           description: Value used to replace matched

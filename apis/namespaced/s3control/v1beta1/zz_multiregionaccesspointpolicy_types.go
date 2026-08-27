@@ -15,57 +15,57 @@ import (
 
 type MultiRegionAccessPointPolicyDetailsInitParameters struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
+	// Valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type MultiRegionAccessPointPolicyDetailsObservation struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
+	// Valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type MultiRegionAccessPointPolicyDetailsParameters struct {
 
-	// The name of the Multi-Region Access Point.
+	// Name of the Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
+	// Valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy" tf:"policy,omitempty"`
 }
 
 type MultiRegionAccessPointPolicyInitParameters struct {
 
-	// The AWS account ID for the owner of the Multi-Region Access Point.
+	// AWS account ID for the owner of the Multi-Region Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the policy for the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the policy for the Multi-Region Access Point. See details Block below for more details
 	Details *MultiRegionAccessPointPolicyDetailsInitParameters `json:"details,omitempty" tf:"details,omitempty"`
 }
 
 type MultiRegionAccessPointPolicyObservation struct {
 
-	// The AWS account ID for the owner of the Multi-Region Access Point.
+	// AWS account ID for the owner of the Multi-Region Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the policy for the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the policy for the Multi-Region Access Point. See details Block below for more details
 	Details *MultiRegionAccessPointPolicyDetailsObservation `json:"details,omitempty" tf:"details,omitempty"`
 
-	// The last established policy for the Multi-Region Access Point.
+	// Last established policy for the Multi-Region Access Point.
 	Established *string `json:"established,omitempty" tf:"established,omitempty"`
 
-	// The AWS account ID and access point name separated by a colon (:).
+	// AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The proposed policy for the Multi-Region Access Point.
+	// Proposed policy for the Multi-Region Access Point.
 	Proposed *string `json:"proposed,omitempty" tf:"proposed,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -75,11 +75,11 @@ type MultiRegionAccessPointPolicyObservation struct {
 
 type MultiRegionAccessPointPolicyParameters struct {
 
-	// The AWS account ID for the owner of the Multi-Region Access Point.
+	// AWS account ID for the owner of the Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// A configuration block containing details about the policy for the Multi-Region Access Point. See Details Configuration Block below for more details
+	// Configuration block containing details about the policy for the Multi-Region Access Point. See details Block below for more details
 	// +kubebuilder:validation:Optional
 	Details *MultiRegionAccessPointPolicyDetailsParameters `json:"details,omitempty" tf:"details,omitempty"`
 

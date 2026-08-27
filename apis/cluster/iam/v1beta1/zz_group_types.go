@@ -21,16 +21,16 @@ type GroupInitParameters struct {
 
 type GroupObservation struct {
 
-	// The ARN assigned by AWS for this group.
+	// ARN assigned by AWS for this group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The group's name.
+	// Group's name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Path in which to create the group.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The unique ID assigned by AWS.
+	// Unique ID assigned by AWS.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 }
 

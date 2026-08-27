@@ -42,7 +42,7 @@ type CustomDataIdentifierInitParameters struct {
 
 type CustomDataIdentifierObservation struct {
 
-	// The Amazon Resource Name (ARN) of the custom data identifier.
+	// ARN of the custom data identifier.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The date and time, in UTC and extended RFC 3339 format, when the Amazon Macie account was created.

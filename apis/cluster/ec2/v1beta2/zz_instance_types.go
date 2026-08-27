@@ -153,7 +153,7 @@ type EBSBlockDeviceInitParameters struct {
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -200,7 +200,7 @@ type EBSBlockDeviceObservation struct {
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Snapshot ID to mount.
@@ -245,7 +245,7 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -1239,7 +1239,7 @@ type RootBlockDeviceInitParameters struct {
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -1283,7 +1283,7 @@ type RootBlockDeviceObservation struct {
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Map of tags to assign to the device. Note: Tags specified here are applied after instance creation via a separate API call. This means they cannot be used with IAM policies that require tags during resource creation (e.g., ABAC policies with ec2:CreateAction conditions or SCPs requiring volume tags). For ABAC compliance, use volume_tags instead, which applies uniform tags to all volumes during instance creation.
@@ -1321,7 +1321,7 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
+	// ARN of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`

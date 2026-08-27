@@ -3043,6 +3043,16 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FunctionRef != nil {
+		in, out := &in.FunctionRef, &out.FunctionRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionSelector != nil {
+		in, out := &in.FunctionSelector, &out.FunctionSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HostKeySecretRef != nil {
 		in, out := &in.HostKeySecretRef, &out.HostKeySecretRef
 		*out = new(v2.LocalSecretKeySelector)
@@ -3436,6 +3446,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		in, out := &in.Function, &out.Function
 		*out = new(string)
 		**out = **in
+	}
+	if in.FunctionRef != nil {
+		in, out := &in.FunctionRef, &out.FunctionRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionSelector != nil {
+		in, out := &in.FunctionSelector, &out.FunctionSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HostKeySecretRef != nil {
 		in, out := &in.HostKeySecretRef, &out.HostKeySecretRef

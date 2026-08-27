@@ -60,7 +60,7 @@ type BucketLoggingObservation struct {
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
+	// bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -132,19 +132,19 @@ type BucketLoggingParameters struct {
 
 type PartitionedPrefixInitParameters struct {
 
-	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	// Partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
 	PartitionDateSource *string `json:"partitionDateSource,omitempty" tf:"partition_date_source,omitempty"`
 }
 
 type PartitionedPrefixObservation struct {
 
-	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	// Partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
 	PartitionDateSource *string `json:"partitionDateSource,omitempty" tf:"partition_date_source,omitempty"`
 }
 
 type PartitionedPrefixParameters struct {
 
-	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	// Partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
 	// +kubebuilder:validation:Optional
 	PartitionDateSource *string `json:"partitionDateSource" tf:"partition_date_source,omitempty"`
 }

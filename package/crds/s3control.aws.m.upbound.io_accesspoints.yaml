@@ -171,31 +171,38 @@ spec:
                       Detailed below.
                     properties:
                       blockPublicAcls:
-                        description: 'Whether Amazon S3 should block public ACLs for
+                        description: Whether Amazon S3 should block public ACLs for
                           buckets in this account. Defaults to true. Enabling this
                           setting does not affect existing policies or ACLs. When
-                          set to true causes the following behavior:'
+                          set to true, PUT Bucket acl and PUT Object acl calls fail
+                          if the specified ACL is public, PUT Object calls fail if
+                          the request includes a public ACL, and PUT Bucket calls
+                          fail if the request includes a public ACL.
                         type: boolean
                       blockPublicPolicy:
-                        description: 'Whether Amazon S3 should block public bucket
+                        description: Whether Amazon S3 should block public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect existing bucket policies.
-                          When set to true causes Amazon S3 to:'
+                          When set to true, Amazon S3 rejects calls to PUT Bucket
+                          policy if the specified bucket policy allows public access.
                         type: boolean
                       ignorePublicAcls:
-                        description: 'Whether Amazon S3 should ignore public ACLs
-                          for buckets in this account. Defaults to true. Enabling
-                          this setting does not affect the persistence of any existing
-                          ACLs and doesn''t prevent new public ACLs from being set.
-                          When set to true causes Amazon S3 to:'
+                        description: Whether Amazon S3 should ignore public ACLs for
+                          buckets in this account. Defaults to true. Enabling this
+                          setting does not affect the persistence of any existing
+                          ACLs and doesn't prevent new public ACLs from being set.
+                          When set to true, Amazon S3 ignores all public ACLs on buckets
+                          in this account and any objects that they contain.
                         type: boolean
                       restrictPublicBuckets:
-                        description: 'Whether Amazon S3 should restrict public bucket
+                        description: Whether Amazon S3 should restrict public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect previously stored
                           bucket policies, except that public and cross-account access
                           within any public bucket policy, including non-public delegation
-                          to specific accounts, is blocked. When set to true:'
+                          to specific accounts, is blocked. When set to true, only
+                          the bucket owner and AWS Services can access buckets with
+                          public policies.
                         type: boolean
                     type: object
                   region:
@@ -211,12 +218,11 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
-                      point to requests from the specified Virtual Private Cloud (VPC).
-                      Required for S3 on Outposts. Detailed below.
+                      point to requests from the specified VPC. Required for S3 on
+                      Outposts. Detailed below.
                     properties:
                       vpcId:
-                        description: This access point will only allow connections
-                          from the specified VPC ID.
+                        description: VPC ID from which the access point allows connections.
                         type: string
                       vpcIdRef:
                         description: Reference to a VPC in ec2 to populate vpcId.
@@ -427,31 +433,38 @@ spec:
                       Detailed below.
                     properties:
                       blockPublicAcls:
-                        description: 'Whether Amazon S3 should block public ACLs for
+                        description: Whether Amazon S3 should block public ACLs for
                           buckets in this account. Defaults to true. Enabling this
                           setting does not affect existing policies or ACLs. When
-                          set to true causes the following behavior:'
+                          set to true, PUT Bucket acl and PUT Object acl calls fail
+                          if the specified ACL is public, PUT Object calls fail if
+                          the request includes a public ACL, and PUT Bucket calls
+                          fail if the request includes a public ACL.
                         type: boolean
                       blockPublicPolicy:
-                        description: 'Whether Amazon S3 should block public bucket
+                        description: Whether Amazon S3 should block public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect existing bucket policies.
-                          When set to true causes Amazon S3 to:'
+                          When set to true, Amazon S3 rejects calls to PUT Bucket
+                          policy if the specified bucket policy allows public access.
                         type: boolean
                       ignorePublicAcls:
-                        description: 'Whether Amazon S3 should ignore public ACLs
-                          for buckets in this account. Defaults to true. Enabling
-                          this setting does not affect the persistence of any existing
-                          ACLs and doesn''t prevent new public ACLs from being set.
-                          When set to true causes Amazon S3 to:'
+                        description: Whether Amazon S3 should ignore public ACLs for
+                          buckets in this account. Defaults to true. Enabling this
+                          setting does not affect the persistence of any existing
+                          ACLs and doesn't prevent new public ACLs from being set.
+                          When set to true, Amazon S3 ignores all public ACLs on buckets
+                          in this account and any objects that they contain.
                         type: boolean
                       restrictPublicBuckets:
-                        description: 'Whether Amazon S3 should restrict public bucket
+                        description: Whether Amazon S3 should restrict public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect previously stored
                           bucket policies, except that public and cross-account access
                           within any public bucket policy, including non-public delegation
-                          to specific accounts, is blocked. When set to true:'
+                          to specific accounts, is blocked. When set to true, only
+                          the bucket owner and AWS Services can access buckets with
+                          public policies.
                         type: boolean
                     type: object
                   tags:
@@ -462,12 +475,11 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
-                      point to requests from the specified Virtual Private Cloud (VPC).
-                      Required for S3 on Outposts. Detailed below.
+                      point to requests from the specified VPC. Required for S3 on
+                      Outposts. Detailed below.
                     properties:
                       vpcId:
-                        description: This access point will only allow connections
-                          from the specified VPC ID.
+                        description: VPC ID from which the access point allows connections.
                         type: string
                       vpcIdRef:
                         description: Reference to a VPC in ec2 to populate vpcId.
@@ -639,9 +651,9 @@ spec:
                       with this access point.
                     type: string
                   domainName:
-                    description: |-
-                      DNS domain name of the S3 Access Point in the format name-account_id.s3-accesspoint.region.amazonaws.com.
-                      Note: S3 access points only support secure access by HTTPS. HTTP isn't supported.
+                    description: DNS domain name of the S3 Access Point in the format
+                      name-account_id.s3-accesspoint.region.amazonaws.com. S3 access
+                      points only support secure access by HTTPS. HTTP isn't supported.
                     type: string
                   endpoints:
                     additionalProperties:
@@ -650,8 +662,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   hasPublicAccessPolicy:
-                    description: Indicates whether this access point currently has
-                      a policy that allows public access.
+                    description: Whether this access point currently has a policy
+                      that allows public access.
                     type: boolean
                   id:
                     description: For Access Point of an AWS Partition S3 Bucket, the
@@ -663,11 +675,11 @@ spec:
                       the AWS documentation for naming conditions.
                     type: string
                   networkOrigin:
-                    description: Indicates whether this access point allows access
-                      from the public Internet. Values are VPC (the access point doesn't
-                      allow access from the public Internet) and Internet (the access
-                      point allows access from the public Internet, subject to the
-                      access point and bucket access policies).
+                    description: Whether this access point allows access from the
+                      public Internet. Values are VPC (the access point doesn't allow
+                      access from the public Internet) and Internet (the access point
+                      allows access from the public Internet, subject to the access
+                      point and bucket access policies).
                     type: string
                   policy:
                     description: Valid JSON document that specifies the policy that
@@ -684,31 +696,38 @@ spec:
                       Detailed below.
                     properties:
                       blockPublicAcls:
-                        description: 'Whether Amazon S3 should block public ACLs for
+                        description: Whether Amazon S3 should block public ACLs for
                           buckets in this account. Defaults to true. Enabling this
                           setting does not affect existing policies or ACLs. When
-                          set to true causes the following behavior:'
+                          set to true, PUT Bucket acl and PUT Object acl calls fail
+                          if the specified ACL is public, PUT Object calls fail if
+                          the request includes a public ACL, and PUT Bucket calls
+                          fail if the request includes a public ACL.
                         type: boolean
                       blockPublicPolicy:
-                        description: 'Whether Amazon S3 should block public bucket
+                        description: Whether Amazon S3 should block public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect existing bucket policies.
-                          When set to true causes Amazon S3 to:'
+                          When set to true, Amazon S3 rejects calls to PUT Bucket
+                          policy if the specified bucket policy allows public access.
                         type: boolean
                       ignorePublicAcls:
-                        description: 'Whether Amazon S3 should ignore public ACLs
-                          for buckets in this account. Defaults to true. Enabling
-                          this setting does not affect the persistence of any existing
-                          ACLs and doesn''t prevent new public ACLs from being set.
-                          When set to true causes Amazon S3 to:'
+                        description: Whether Amazon S3 should ignore public ACLs for
+                          buckets in this account. Defaults to true. Enabling this
+                          setting does not affect the persistence of any existing
+                          ACLs and doesn't prevent new public ACLs from being set.
+                          When set to true, Amazon S3 ignores all public ACLs on buckets
+                          in this account and any objects that they contain.
                         type: boolean
                       restrictPublicBuckets:
-                        description: 'Whether Amazon S3 should restrict public bucket
+                        description: Whether Amazon S3 should restrict public bucket
                           policies for buckets in this account. Defaults to true.
                           Enabling this setting does not affect previously stored
                           bucket policies, except that public and cross-account access
                           within any public bucket policy, including non-public delegation
-                          to specific accounts, is blocked. When set to true:'
+                          to specific accounts, is blocked. When set to true, only
+                          the bucket owner and AWS Services can access buckets with
+                          public policies.
                         type: boolean
                     type: object
                   region:
@@ -731,12 +750,11 @@ spec:
                     x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: Configuration block to restrict access to this access
-                      point to requests from the specified Virtual Private Cloud (VPC).
-                      Required for S3 on Outposts. Detailed below.
+                      point to requests from the specified VPC. Required for S3 on
+                      Outposts. Detailed below.
                     properties:
                       vpcId:
-                        description: This access point will only allow connections
-                          from the specified VPC ID.
+                        description: VPC ID from which the access point allows connections.
                         type: string
                     type: object
                 type: object

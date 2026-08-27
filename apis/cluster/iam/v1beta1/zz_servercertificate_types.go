@@ -40,7 +40,7 @@ type ServerCertificateInitParameters struct {
 
 type ServerCertificateObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the server certificate.
+	// ARN specifying the server certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The contents of the public key certificate in

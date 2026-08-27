@@ -13,6 +13,84 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type AccessEndpointConfigInitParameters struct {
+
+	// Set of access endpoints used to control the network paths that users use to access their WorkSpaces. Defined below.
+	AccessEndpoints []AccessEndpointsInitParameters `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
+
+	// List of protocols that fall back to the public internet when streaming over a VPC endpoint is unavailable. Valid value is PCOIP.
+	InternetFallbackProtocols []*string `json:"internetFallbackProtocols,omitempty" tf:"internet_fallback_protocols,omitempty"`
+}
+
+type AccessEndpointConfigObservation struct {
+
+	// Set of access endpoints used to control the network paths that users use to access their WorkSpaces. Defined below.
+	AccessEndpoints []AccessEndpointsObservation `json:"accessEndpoints,omitempty" tf:"access_endpoints,omitempty"`
+
+	// List of protocols that fall back to the public internet when streaming over a VPC endpoint is unavailable. Valid value is PCOIP.
+	InternetFallbackProtocols []*string `json:"internetFallbackProtocols,omitempty" tf:"internet_fallback_protocols,omitempty"`
+}
+
+type AccessEndpointConfigParameters struct {
+
+	// Set of access endpoints used to control the network paths that users use to access their WorkSpaces. Defined below.
+	// +kubebuilder:validation:Optional
+	AccessEndpoints []AccessEndpointsParameters `json:"accessEndpoints" tf:"access_endpoints,omitempty"`
+
+	// List of protocols that fall back to the public internet when streaming over a VPC endpoint is unavailable. Valid value is PCOIP.
+	// +kubebuilder:validation:Optional
+	InternetFallbackProtocols []*string `json:"internetFallbackProtocols,omitempty" tf:"internet_fallback_protocols,omitempty"`
+}
+
+type AccessEndpointsInitParameters struct {
+
+	// Type of access endpoint. Valid value is STREAMING_WSP.
+	AccessEndpointType *string `json:"accessEndpointType,omitempty" tf:"access_endpoint_type,omitempty"`
+
+	// Identifier of the VPC endpoint that the access endpoint uses.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDRef *v2.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDSelector *v2.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+}
+
+type AccessEndpointsObservation struct {
+
+	// Type of access endpoint. Valid value is STREAMING_WSP.
+	AccessEndpointType *string `json:"accessEndpointType,omitempty" tf:"access_endpoint_type,omitempty"`
+
+	// Identifier of the VPC endpoint that the access endpoint uses.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+}
+
+type AccessEndpointsParameters struct {
+
+	// Type of access endpoint. Valid value is STREAMING_WSP.
+	// +kubebuilder:validation:Optional
+	AccessEndpointType *string `json:"accessEndpointType" tf:"access_endpoint_type,omitempty"`
+
+	// Identifier of the VPC endpoint that the access endpoint uses.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/ec2/v1beta2.VPCEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDRef *v2.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDSelector *v2.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
+}
+
 type ActiveDirectoryConfigInitParameters struct {
 
 	// Fully qualified domain name of the AWS Directory Service directory.
@@ -64,7 +142,7 @@ type ActiveDirectoryConfigParameters struct {
 
 type CertificateBasedAuthPropertiesInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
+	// ARN of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
 	// Status of certificate-based authentication. Default DISABLED.
@@ -73,7 +151,7 @@ type CertificateBasedAuthPropertiesInitParameters struct {
 
 type CertificateBasedAuthPropertiesObservation struct {
 
-	// The Amazon Resource Name (ARN) of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
+	// ARN of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
 	// Status of certificate-based authentication. Default DISABLED.
@@ -82,7 +160,7 @@ type CertificateBasedAuthPropertiesObservation struct {
 
 type CertificateBasedAuthPropertiesParameters struct {
 
-	// The Amazon Resource Name (ARN) of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
+	// ARN of the certificate manager private certificate authority (ACM-PCA) that is used for certificate-based authentication.
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
 
@@ -462,6 +540,9 @@ type SelfServicePermissionsParameters struct {
 
 type WorkspaceAccessPropertiesInitParameters struct {
 
+	// Configuration for accessing WorkSpaces through VPC endpoints instead of the public internet. Defined below.
+	AccessEndpointConfig *AccessEndpointConfigInitParameters `json:"accessEndpointConfig,omitempty" tf:"access_endpoint_config,omitempty"`
+
 	// Indicates whether users can use Android devices to access their WorkSpaces.
 	DeviceTypeAndroid *string `json:"deviceTypeAndroid,omitempty" tf:"device_type_android,omitempty"`
 
@@ -489,6 +570,9 @@ type WorkspaceAccessPropertiesInitParameters struct {
 
 type WorkspaceAccessPropertiesObservation struct {
 
+	// Configuration for accessing WorkSpaces through VPC endpoints instead of the public internet. Defined below.
+	AccessEndpointConfig *AccessEndpointConfigObservation `json:"accessEndpointConfig,omitempty" tf:"access_endpoint_config,omitempty"`
+
 	// Indicates whether users can use Android devices to access their WorkSpaces.
 	DeviceTypeAndroid *string `json:"deviceTypeAndroid,omitempty" tf:"device_type_android,omitempty"`
 
@@ -515,6 +599,10 @@ type WorkspaceAccessPropertiesObservation struct {
 }
 
 type WorkspaceAccessPropertiesParameters struct {
+
+	// Configuration for accessing WorkSpaces through VPC endpoints instead of the public internet. Defined below.
+	// +kubebuilder:validation:Optional
+	AccessEndpointConfig *AccessEndpointConfigParameters `json:"accessEndpointConfig,omitempty" tf:"access_endpoint_config,omitempty"`
 
 	// Indicates whether users can use Android devices to access their WorkSpaces.
 	// +kubebuilder:validation:Optional

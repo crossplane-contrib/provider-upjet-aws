@@ -68,7 +68,7 @@ type EBSSnapshotCopyInitParameters struct {
 
 type EBSSnapshotCopyObservation struct {
 
-	// Amazon Resource Name (ARN) of the EBS Snapshot.
+	// ARN of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies a completion duration to initiate a time-based snapshot copy. Time-based snapshot copy operations complete within the specified duration.  Value must be between 15 and 2880 minutes, in 15 minute increments only.
@@ -89,7 +89,7 @@ type EBSSnapshotCopyObservation struct {
 	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Amazon Resource Name (ARN) of the EBS Snapshot.
+	// ARN of the EBS Snapshot.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Value from an Amazon-maintained list (amazon, aws-marketplace, microsoft) of snapshot owners.

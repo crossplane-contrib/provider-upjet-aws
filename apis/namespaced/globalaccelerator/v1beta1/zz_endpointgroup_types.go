@@ -21,7 +21,7 @@ type EndpointConfigurationInitParameters struct {
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
-	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+	// ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the ARN of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify.
@@ -36,7 +36,7 @@ type EndpointConfigurationObservation struct {
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
-	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+	// ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the ARN of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify.
@@ -53,7 +53,7 @@ type EndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
-	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+	// ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the ARN of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -82,7 +82,7 @@ type EndpointGroupInitParameters struct {
 	// The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the listener.
+	// ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Listener
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
@@ -106,7 +106,7 @@ type EndpointGroupInitParameters struct {
 
 type EndpointGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) of the endpoint group.
+	// ARN of the endpoint group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The list of endpoint objects. Fields documented below.
@@ -127,10 +127,10 @@ type EndpointGroupObservation struct {
 	// The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the endpoint group.
+	// ARN of the endpoint group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the listener.
+	// ARN of the listener.
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
 	// Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. Fields documented below.
@@ -169,7 +169,7 @@ type EndpointGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the listener.
+	// ARN of the listener.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/globalaccelerator/v1beta1.Listener
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`

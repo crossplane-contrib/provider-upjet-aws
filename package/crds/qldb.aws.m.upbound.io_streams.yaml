@@ -85,8 +85,7 @@ spec:
                           number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
-                        description: The Amazon Resource Name (ARN) of the Kinesis
-                          Data Streams resource.
+                        description: ARN of the Kinesis Data Streams resource.
                         type: string
                       streamArnRef:
                         description: Reference to a Stream in kinesis to populate
@@ -260,9 +259,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role that
-                      grants QLDB permissions for a journal stream to write data records
-                      to a Kinesis Data Streams resource.
+                    description: ARN of the IAM role that grants QLDB permissions
+                      for a journal stream to write data records to a Kinesis Data
+                      Streams resource.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -400,8 +399,7 @@ spec:
                           number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
-                        description: The Amazon Resource Name (ARN) of the Kinesis
-                          Data Streams resource.
+                        description: ARN of the Kinesis Data Streams resource.
                         type: string
                       streamArnRef:
                         description: Reference to a Stream in kinesis to populate
@@ -570,9 +568,9 @@ spec:
                         type: object
                     type: object
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role that
-                      grants QLDB permissions for a journal stream to write data records
-                      to a Kinesis Data Streams resource.
+                    description: ARN of the IAM role that grants QLDB permissions
+                      for a journal stream to write data records to a Kinesis Data
+                      Streams resource.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -777,8 +775,7 @@ spec:
                           number of records sent per API call. Default: true.'
                         type: boolean
                       streamArn:
-                        description: The Amazon Resource Name (ARN) of the Kinesis
-                          Data Streams resource.
+                        description: ARN of the Kinesis Data Streams resource.
                         type: string
                     type: object
                   ledgerName:
@@ -790,9 +787,9 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: The Amazon Resource Name (ARN) of the IAM role that
-                      grants QLDB permissions for a journal stream to write data records
-                      to a Kinesis Data Streams resource.
+                    description: ARN of the IAM role that grants QLDB permissions
+                      for a journal stream to write data records to a Kinesis Data
+                      Streams resource.
                     type: string
                   streamName:
                     description: The name that you want to assign to the QLDB journal

@@ -61,13 +61,14 @@ spec:
                 properties:
                   configuration:
                     description: Custom configuration block. Required when type is
-                      CUSTOM, must be omitted for other types. See configuration below.
+                      CUSTOM, must be omitted for other types. See configuration Block
+                      below.
                     properties:
                       consolidation:
-                        description: Consolidation configuration for processing and
-                          organizing memory content. See consolidation below. Once
-                          added, this block cannot be removed without recreating the
-                          resource.
+                        description: Consolidation configuration for the memory strategy.
+                          See consolidation Block below. Cannot be used with type
+                          set to SELF_MANAGED. Once added, this block cannot be removed
+                          without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
@@ -79,30 +80,295 @@ spec:
                             type: string
                         type: object
                       extraction:
-                        description: Extraction configuration for identifying and
-                          extracting relevant information. See extraction below. Cannot
-                          be used with type set to SUMMARY_OVERRIDE. Once added, this
-                          block cannot be removed without recreating the resource.
+                        description: Extraction configuration for the memory strategy.
+                          See extraction Block below. Cannot be used with type set
+                          to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block
+                          cannot be removed without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
-                              for extraction processing.
+                              for reflection processing.
                             type: string
                           modelId:
-                            description: ID of the foundation model to use for extraction
+                            description: ID of the foundation model to use for reflection
                               processing.
                             type: string
                         type: object
+                      reflection:
+                        description: Reflection configuration for the memory strategy.
+                          See reflection Block below. Can only be used, and is required,
+                          with type set to EPISODIC_OVERRIDE. Once added, this block
+                          cannot be removed without recreating the resource.
+                        items:
+                          properties:
+                            appendToPrompt:
+                              description: Additional text to append to the model
+                                prompt for reflection processing.
+                              type: string
+                            modelId:
+                              description: ID of the foundation model to use for reflection
+                                processing.
+                              type: string
+                            namespaceTemplates:
+                              description: Namespace templates over which to create
+                                reflections. Can be less nested than episode namespaces.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      selfManagedConfiguration:
+                        description: Self-managed processing configuration. Required
+                          when type is SELF_MANAGED and only valid for that type.
+                          See self_managed_configuration Block below.
+                        items:
+                          properties:
+                            historicalContextWindowSize:
+                              description: 'Number of historical messages to include
+                                in processing context. Valid range: 0 to 50. Defaults
+                                to 4.'
+                              type: number
+                            invocationConfiguration:
+                              description: Configuration used to invoke the self-managed
+                                memory processing pipeline. See invocation_configuration
+                                Block below.
+                              items:
+                                properties:
+                                  payloadDeliveryBucketName:
+                                    description: S3 bucket name for event payload
+                                      delivery.
+                                    type: string
+                                  payloadDeliveryBucketNameRef:
+                                    description: Reference to a Bucket in s3 to populate
+                                      payloadDeliveryBucketName.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  payloadDeliveryBucketNameSelector:
+                                    description: Selector for a Bucket in s3 to populate
+                                      payloadDeliveryBucketName.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                  topicArn:
+                                    description: ARN of the SNS topic for job notifications.
+                                    type: string
+                                  topicArnRef:
+                                    description: Reference to a Topic in sns to populate
+                                      topicArn.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  topicArnSelector:
+                                    description: Selector for a Topic in sns to populate
+                                      topicArn.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                type: object
+                              type: array
+                            triggerConditions:
+                              description: Conditions that trigger memory processing.
+                                See trigger_conditions Block below. When omitted,
+                                the service supplies the documented defaults for all
+                                three trigger types.
+                              items:
+                                properties:
+                                  messageBasedTrigger:
+                                    description: Message-based condition. See message_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        messageCount:
+                                          description: Number of messages that trigger
+                                            memory processing. Accepts values from
+                                            1 to 50.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  timeBasedTrigger:
+                                    description: Idle-time condition. See time_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        idleSessionTimeout:
+                                          description: Idle session timeout (seconds)
+                                            that triggers memory processing. Accepts
+                                            values from 10 to 3000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  tokenBasedTrigger:
+                                    description: Token-based condition. See token_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        tokenCount:
+                                          description: Number of tokens that trigger
+                                            memory processing. Accepts values from
+                                            100 to 500000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
-                          Changing this forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE,
+                          SELF_MANAGED. Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
-                    description: Description of the memory strategy.
+                    description: Description of the memory strategy. Once set, a description
+                      cannot be removed via update because the service API ignores
+                      a null description and retains the previously stored value.
                     type: string
                   memoryExecutionRoleArn:
+                    description: ARN of the IAM role that the memory service assumes
+                      to perform operations.
                     type: string
                   memoryExecutionRoleArnRef:
                     description: Reference to a Role in iam to populate memoryExecutionRoleArn.
@@ -270,16 +536,161 @@ spec:
                             type: string
                         type: object
                     type: object
+                  memoryRecordSchema:
+                    description: Schema for metadata fields on records generated by
+                      this strategy. Valid for all strategy types. See memory_record_schema
+                      Block below.
+                    items:
+                      properties:
+                        metadataSchema:
+                          description: List of metadata field definitions for records
+                            generated by this strategy. See metadata_schema Block
+                            below.
+                          items:
+                            properties:
+                              extractionConfig:
+                                description: Configuration for extracting this metadata
+                                  value from conversational content. Applicable only
+                                  when extraction_type is LLM_INFERRED. See extraction_config
+                                  Block below.
+                                items:
+                                  properties:
+                                    llmExtractionConfig:
+                                      description: Model-based extraction configuration.
+                                        See llm_extraction_config Block below.
+                                      items:
+                                        properties:
+                                          definition:
+                                            description: Description of what this
+                                              metadata field represents.
+                                            type: string
+                                          llmExtractionInstruction:
+                                            description: Instructions for extraction.
+                                              Supports built-in operators like LATEST_VALUE
+                                              or custom natural-language instructions.
+                                            type: string
+                                          validation:
+                                            description: Validation rules to constrain
+                                              extracted values. See validation Block
+                                              below.
+                                            items:
+                                              properties:
+                                                numberValidation:
+                                                  description: Validation for NUMBER
+                                                    fields. See number_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      maxValue:
+                                                        description: Maximum allowed
+                                                          value.
+                                                        type: number
+                                                      minValue:
+                                                        description: Minimum allowed
+                                                          value.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringListValidation:
+                                                  description: Validation for STRINGLIST
+                                                    fields. See string_list_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                      maxItems:
+                                                        description: Maximum number
+                                                          of items in the string list.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringValidation:
+                                                  description: Validation for STRING
+                                                    fields. See string_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              extractionType:
+                                description: 'Whether the metadata value is extracted
+                                  by the LLM or passed through deterministically from
+                                  the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.'
+                                type: string
+                              key:
+                                description: Metadata field name. Must match an indexed
+                                  key to be queryable via metadata filters.
+                                type: string
+                              type:
+                                description: 'Metadata value type. Valid values: STRING,
+                                  STRINGLIST, NUMBER.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Name of the memory strategy.
+                    description: Name of the memory strategy. Changing this forces
+                      a new resource, because the service API does not support renaming
+                      a strategy.
                     type: string
-                  namespaces:
-                    description: Set of namespace identifiers where this strategy
-                      applies. Namespaces help organize and scope memory content.
+                  namespaceTemplates:
+                    description: Set containing exactly one namespace template where
+                      this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}).
+                      Namespace templates help organize and scope memory content.
+                      Exactly one of namespace_templates or namespaces must be configured
+                      for all strategies except CUSTOM strategies using SELF_MANAGED
+                      configuration.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  namespaces:
+                    description: Set of namespace identifiers where this strategy
+                      applies. Exactly one of namespaces or namespace_templates must
+                      be configured. The API treats this as a legacy parameter; prefer
+                      namespace_templates. Since the API mirrors the two fields, switching
+                      an existing configuration from namespaces to namespace_templates
+                      with the same value is an in-place no-op.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  reflectionConfiguration:
+                    description: Configuration for the reflections created with the
+                      episodic memory strategy. Valid when type is EPISODIC, must
+                      be omitted for other types. See reflection_configuration Block
+                      below.
+                    items:
+                      properties:
+                        namespaceTemplates:
+                          description: Namespace templates over which to create reflections.
+                            Can be less nested than episode namespaces.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -310,13 +721,14 @@ spec:
                 properties:
                   configuration:
                     description: Custom configuration block. Required when type is
-                      CUSTOM, must be omitted for other types. See configuration below.
+                      CUSTOM, must be omitted for other types. See configuration Block
+                      below.
                     properties:
                       consolidation:
-                        description: Consolidation configuration for processing and
-                          organizing memory content. See consolidation below. Once
-                          added, this block cannot be removed without recreating the
-                          resource.
+                        description: Consolidation configuration for the memory strategy.
+                          See consolidation Block below. Cannot be used with type
+                          set to SELF_MANAGED. Once added, this block cannot be removed
+                          without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
@@ -328,30 +740,295 @@ spec:
                             type: string
                         type: object
                       extraction:
-                        description: Extraction configuration for identifying and
-                          extracting relevant information. See extraction below. Cannot
-                          be used with type set to SUMMARY_OVERRIDE. Once added, this
-                          block cannot be removed without recreating the resource.
+                        description: Extraction configuration for the memory strategy.
+                          See extraction Block below. Cannot be used with type set
+                          to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block
+                          cannot be removed without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
-                              for extraction processing.
+                              for reflection processing.
                             type: string
                           modelId:
-                            description: ID of the foundation model to use for extraction
+                            description: ID of the foundation model to use for reflection
                               processing.
                             type: string
                         type: object
+                      reflection:
+                        description: Reflection configuration for the memory strategy.
+                          See reflection Block below. Can only be used, and is required,
+                          with type set to EPISODIC_OVERRIDE. Once added, this block
+                          cannot be removed without recreating the resource.
+                        items:
+                          properties:
+                            appendToPrompt:
+                              description: Additional text to append to the model
+                                prompt for reflection processing.
+                              type: string
+                            modelId:
+                              description: ID of the foundation model to use for reflection
+                                processing.
+                              type: string
+                            namespaceTemplates:
+                              description: Namespace templates over which to create
+                                reflections. Can be less nested than episode namespaces.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      selfManagedConfiguration:
+                        description: Self-managed processing configuration. Required
+                          when type is SELF_MANAGED and only valid for that type.
+                          See self_managed_configuration Block below.
+                        items:
+                          properties:
+                            historicalContextWindowSize:
+                              description: 'Number of historical messages to include
+                                in processing context. Valid range: 0 to 50. Defaults
+                                to 4.'
+                              type: number
+                            invocationConfiguration:
+                              description: Configuration used to invoke the self-managed
+                                memory processing pipeline. See invocation_configuration
+                                Block below.
+                              items:
+                                properties:
+                                  payloadDeliveryBucketName:
+                                    description: S3 bucket name for event payload
+                                      delivery.
+                                    type: string
+                                  payloadDeliveryBucketNameRef:
+                                    description: Reference to a Bucket in s3 to populate
+                                      payloadDeliveryBucketName.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  payloadDeliveryBucketNameSelector:
+                                    description: Selector for a Bucket in s3 to populate
+                                      payloadDeliveryBucketName.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                  topicArn:
+                                    description: ARN of the SNS topic for job notifications.
+                                    type: string
+                                  topicArnRef:
+                                    description: Reference to a Topic in sns to populate
+                                      topicArn.
+                                    properties:
+                                      name:
+                                        description: Name of the referenced object.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the referenced object
+                                        type: string
+                                      policy:
+                                        description: Policies for referencing.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    required:
+                                    - name
+                                    type: object
+                                  topicArnSelector:
+                                    description: Selector for a Topic in sns to populate
+                                      topicArn.
+                                    properties:
+                                      matchControllerRef:
+                                        description: |-
+                                          MatchControllerRef ensures an object with the same controller reference
+                                          as the selecting object is selected.
+                                        type: boolean
+                                      matchLabels:
+                                        additionalProperties:
+                                          type: string
+                                        description: MatchLabels ensures an object
+                                          with matching labels is selected.
+                                        type: object
+                                      namespace:
+                                        description: Namespace for the selector
+                                        type: string
+                                      policy:
+                                        description: Policies for selection.
+                                        properties:
+                                          resolution:
+                                            default: Required
+                                            description: |-
+                                              Resolution specifies whether resolution of this reference is required.
+                                              The default is 'Required', which means the reconcile will fail if the
+                                              reference cannot be resolved. 'Optional' means this reference will be
+                                              a no-op if it cannot be resolved.
+                                            enum:
+                                            - Required
+                                            - Optional
+                                            type: string
+                                          resolve:
+                                            description: |-
+                                              Resolve specifies when this reference should be resolved. The default
+                                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                                              the corresponding field is not present. Use 'Always' to resolve the
+                                              reference on every reconcile.
+                                            enum:
+                                            - Always
+                                            - IfNotPresent
+                                            type: string
+                                        type: object
+                                    type: object
+                                type: object
+                              type: array
+                            triggerConditions:
+                              description: Conditions that trigger memory processing.
+                                See trigger_conditions Block below. When omitted,
+                                the service supplies the documented defaults for all
+                                three trigger types.
+                              items:
+                                properties:
+                                  messageBasedTrigger:
+                                    description: Message-based condition. See message_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        messageCount:
+                                          description: Number of messages that trigger
+                                            memory processing. Accepts values from
+                                            1 to 50.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  timeBasedTrigger:
+                                    description: Idle-time condition. See time_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        idleSessionTimeout:
+                                          description: Idle session timeout (seconds)
+                                            that triggers memory processing. Accepts
+                                            values from 10 to 3000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  tokenBasedTrigger:
+                                    description: Token-based condition. See token_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        tokenCount:
+                                          description: Number of tokens that trigger
+                                            memory processing. Accepts values from
+                                            100 to 500000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
-                          Changing this forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE,
+                          SELF_MANAGED. Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
-                    description: Description of the memory strategy.
+                    description: Description of the memory strategy. Once set, a description
+                      cannot be removed via update because the service API ignores
+                      a null description and retains the previously stored value.
                     type: string
                   memoryExecutionRoleArn:
+                    description: ARN of the IAM role that the memory service assumes
+                      to perform operations.
                     type: string
                   memoryExecutionRoleArnRef:
                     description: Reference to a Role in iam to populate memoryExecutionRoleArn.
@@ -519,16 +1196,161 @@ spec:
                             type: string
                         type: object
                     type: object
+                  memoryRecordSchema:
+                    description: Schema for metadata fields on records generated by
+                      this strategy. Valid for all strategy types. See memory_record_schema
+                      Block below.
+                    items:
+                      properties:
+                        metadataSchema:
+                          description: List of metadata field definitions for records
+                            generated by this strategy. See metadata_schema Block
+                            below.
+                          items:
+                            properties:
+                              extractionConfig:
+                                description: Configuration for extracting this metadata
+                                  value from conversational content. Applicable only
+                                  when extraction_type is LLM_INFERRED. See extraction_config
+                                  Block below.
+                                items:
+                                  properties:
+                                    llmExtractionConfig:
+                                      description: Model-based extraction configuration.
+                                        See llm_extraction_config Block below.
+                                      items:
+                                        properties:
+                                          definition:
+                                            description: Description of what this
+                                              metadata field represents.
+                                            type: string
+                                          llmExtractionInstruction:
+                                            description: Instructions for extraction.
+                                              Supports built-in operators like LATEST_VALUE
+                                              or custom natural-language instructions.
+                                            type: string
+                                          validation:
+                                            description: Validation rules to constrain
+                                              extracted values. See validation Block
+                                              below.
+                                            items:
+                                              properties:
+                                                numberValidation:
+                                                  description: Validation for NUMBER
+                                                    fields. See number_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      maxValue:
+                                                        description: Maximum allowed
+                                                          value.
+                                                        type: number
+                                                      minValue:
+                                                        description: Minimum allowed
+                                                          value.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringListValidation:
+                                                  description: Validation for STRINGLIST
+                                                    fields. See string_list_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                      maxItems:
+                                                        description: Maximum number
+                                                          of items in the string list.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringValidation:
+                                                  description: Validation for STRING
+                                                    fields. See string_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              extractionType:
+                                description: 'Whether the metadata value is extracted
+                                  by the LLM or passed through deterministically from
+                                  the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.'
+                                type: string
+                              key:
+                                description: Metadata field name. Must match an indexed
+                                  key to be queryable via metadata filters.
+                                type: string
+                              type:
+                                description: 'Metadata value type. Valid values: STRING,
+                                  STRINGLIST, NUMBER.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Name of the memory strategy.
+                    description: Name of the memory strategy. Changing this forces
+                      a new resource, because the service API does not support renaming
+                      a strategy.
                     type: string
-                  namespaces:
-                    description: Set of namespace identifiers where this strategy
-                      applies. Namespaces help organize and scope memory content.
+                  namespaceTemplates:
+                    description: Set containing exactly one namespace template where
+                      this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}).
+                      Namespace templates help organize and scope memory content.
+                      Exactly one of namespace_templates or namespaces must be configured
+                      for all strategies except CUSTOM strategies using SELF_MANAGED
+                      configuration.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  namespaces:
+                    description: Set of namespace identifiers where this strategy
+                      applies. Exactly one of namespaces or namespace_templates must
+                      be configured. The API treats this as a legacy parameter; prefer
+                      namespace_templates. Since the API mirrors the two fields, switching
+                      an existing configuration from namespaces to namespace_templates
+                      with the same value is an in-place no-op.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  reflectionConfiguration:
+                    description: Configuration for the reflections created with the
+                      episodic memory strategy. Valid when type is EPISODIC, must
+                      be omitted for other types. See reflection_configuration Block
+                      below.
+                    items:
+                      properties:
+                        namespaceTemplates:
+                          description: Namespace templates over which to create reflections.
+                            Can be less nested than episode namespaces.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   type:
                     description: 'Type of memory strategy. Valid values: SEMANTIC,
                       SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this
@@ -600,10 +1422,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.namespaces is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespaces)
-                || (has(self.initProvider) && has(self.initProvider.namespaces))'
             - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
@@ -615,13 +1433,14 @@ spec:
                 properties:
                   configuration:
                     description: Custom configuration block. Required when type is
-                      CUSTOM, must be omitted for other types. See configuration below.
+                      CUSTOM, must be omitted for other types. See configuration Block
+                      below.
                     properties:
                       consolidation:
-                        description: Consolidation configuration for processing and
-                          organizing memory content. See consolidation below. Once
-                          added, this block cannot be removed without recreating the
-                          resource.
+                        description: Consolidation configuration for the memory strategy.
+                          See consolidation Block below. Cannot be used with type
+                          set to SELF_MANAGED. Once added, this block cannot be removed
+                          without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
@@ -633,52 +1452,334 @@ spec:
                             type: string
                         type: object
                       extraction:
-                        description: Extraction configuration for identifying and
-                          extracting relevant information. See extraction below. Cannot
-                          be used with type set to SUMMARY_OVERRIDE. Once added, this
-                          block cannot be removed without recreating the resource.
+                        description: Extraction configuration for the memory strategy.
+                          See extraction Block below. Cannot be used with type set
+                          to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block
+                          cannot be removed without recreating the resource.
                         properties:
                           appendToPrompt:
                             description: Additional text to append to the model prompt
-                              for extraction processing.
+                              for reflection processing.
                             type: string
                           modelId:
-                            description: ID of the foundation model to use for extraction
+                            description: ID of the foundation model to use for reflection
                               processing.
                             type: string
                         type: object
+                      reflection:
+                        description: Reflection configuration for the memory strategy.
+                          See reflection Block below. Can only be used, and is required,
+                          with type set to EPISODIC_OVERRIDE. Once added, this block
+                          cannot be removed without recreating the resource.
+                        items:
+                          properties:
+                            appendToPrompt:
+                              description: Additional text to append to the model
+                                prompt for reflection processing.
+                              type: string
+                            modelId:
+                              description: ID of the foundation model to use for reflection
+                                processing.
+                              type: string
+                            namespaceTemplates:
+                              description: Namespace templates over which to create
+                                reflections. Can be less nested than episode namespaces.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      selfManagedConfiguration:
+                        description: Self-managed processing configuration. Required
+                          when type is SELF_MANAGED and only valid for that type.
+                          See self_managed_configuration Block below.
+                        items:
+                          properties:
+                            historicalContextWindowSize:
+                              description: 'Number of historical messages to include
+                                in processing context. Valid range: 0 to 50. Defaults
+                                to 4.'
+                              type: number
+                            invocationConfiguration:
+                              description: Configuration used to invoke the self-managed
+                                memory processing pipeline. See invocation_configuration
+                                Block below.
+                              items:
+                                properties:
+                                  payloadDeliveryBucketName:
+                                    description: S3 bucket name for event payload
+                                      delivery.
+                                    type: string
+                                  topicArn:
+                                    description: ARN of the SNS topic for job notifications.
+                                    type: string
+                                type: object
+                              type: array
+                            triggerConditions:
+                              description: Conditions that trigger memory processing.
+                                See trigger_conditions Block below. When omitted,
+                                the service supplies the documented defaults for all
+                                three trigger types.
+                              items:
+                                properties:
+                                  messageBasedTrigger:
+                                    description: Message-based condition. See message_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        messageCount:
+                                          description: Number of messages that trigger
+                                            memory processing. Accepts values from
+                                            1 to 50.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  timeBasedTrigger:
+                                    description: Idle-time condition. See time_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        idleSessionTimeout:
+                                          description: Idle session timeout (seconds)
+                                            that triggers memory processing. Accepts
+                                            values from 10 to 3000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  tokenBasedTrigger:
+                                    description: Token-based condition. See token_based_trigger
+                                      Block below.
+                                    items:
+                                      properties:
+                                        tokenCount:
+                                          description: Number of tokens that trigger
+                                            memory processing. Accepts values from
+                                            100 to 500000.
+                                          type: number
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                            triggerConditionsActual:
+                              description: Actual deployed trigger conditions.
+                              items:
+                                properties:
+                                  messageBasedTrigger:
+                                    description: Message-based condition.
+                                    items:
+                                      properties:
+                                        messageCount:
+                                          description: Number of messages that trigger
+                                            memory processing.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  timeBasedTrigger:
+                                    description: Idle-time condition.
+                                    items:
+                                      properties:
+                                        idleSessionTimeout:
+                                          description: Idle session timeout (seconds)
+                                            that triggers memory processing.
+                                          type: number
+                                      type: object
+                                    type: array
+                                  tokenBasedTrigger:
+                                    description: Token-based condition.
+                                    items:
+                                      properties:
+                                        tokenCount:
+                                          description: Number of tokens that trigger
+                                            memory processing.
+                                          type: number
+                                      type: object
+                                    type: array
+                                type: object
+                              type: array
+                          type: object
+                        type: array
                       type:
                         description: 'Type of custom override. Valid values: SEMANTIC_OVERRIDE,
-                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE.
-                          Changing this forces a new resource.'
+                          SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE,
+                          SELF_MANAGED. Changing this forces a new resource.'
                         type: string
                     type: object
                   description:
-                    description: Description of the memory strategy.
+                    description: Description of the memory strategy. Once set, a description
+                      cannot be removed via update because the service API ignores
+                      a null description and retains the previously stored value.
                     type: string
                   id:
                     type: string
                   memoryExecutionRoleArn:
+                    description: ARN of the IAM role that the memory service assumes
+                      to perform operations.
                     type: string
                   memoryId:
                     description: ID of the memory to associate with this strategy.
                       Changing this forces a new resource.
                     type: string
+                  memoryRecordSchema:
+                    description: Schema for metadata fields on records generated by
+                      this strategy. Valid for all strategy types. See memory_record_schema
+                      Block below.
+                    items:
+                      properties:
+                        metadataSchema:
+                          description: List of metadata field definitions for records
+                            generated by this strategy. See metadata_schema Block
+                            below.
+                          items:
+                            properties:
+                              extractionConfig:
+                                description: Configuration for extracting this metadata
+                                  value from conversational content. Applicable only
+                                  when extraction_type is LLM_INFERRED. See extraction_config
+                                  Block below.
+                                items:
+                                  properties:
+                                    llmExtractionConfig:
+                                      description: Model-based extraction configuration.
+                                        See llm_extraction_config Block below.
+                                      items:
+                                        properties:
+                                          definition:
+                                            description: Description of what this
+                                              metadata field represents.
+                                            type: string
+                                          llmExtractionInstruction:
+                                            description: Instructions for extraction.
+                                              Supports built-in operators like LATEST_VALUE
+                                              or custom natural-language instructions.
+                                            type: string
+                                          validation:
+                                            description: Validation rules to constrain
+                                              extracted values. See validation Block
+                                              below.
+                                            items:
+                                              properties:
+                                                numberValidation:
+                                                  description: Validation for NUMBER
+                                                    fields. See number_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      maxValue:
+                                                        description: Maximum allowed
+                                                          value.
+                                                        type: number
+                                                      minValue:
+                                                        description: Minimum allowed
+                                                          value.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringListValidation:
+                                                  description: Validation for STRINGLIST
+                                                    fields. See string_list_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                      maxItems:
+                                                        description: Maximum number
+                                                          of items in the string list.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                stringValidation:
+                                                  description: Validation for STRING
+                                                    fields. See string_validation
+                                                    Block below.
+                                                  items:
+                                                    properties:
+                                                      allowedValues:
+                                                        description: Allowed values
+                                                          for items in this STRINGLIST
+                                                          field.
+                                                        items:
+                                                          type: string
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              extractionType:
+                                description: 'Whether the metadata value is extracted
+                                  by the LLM or passed through deterministically from
+                                  the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.'
+                                type: string
+                              key:
+                                description: Metadata field name. Must match an indexed
+                                  key to be queryable via metadata filters.
+                                type: string
+                              type:
+                                description: 'Metadata value type. Valid values: STRING,
+                                  STRINGLIST, NUMBER.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   memoryStrategyId:
                     description: Unique identifier of the Memory Strategy. This corresponds
                       to the service strategyId identifier (AWS API / CloudFormation
                       terminology).
                     type: string
                   name:
-                    description: Name of the memory strategy.
+                    description: Name of the memory strategy. Changing this forces
+                      a new resource, because the service API does not support renaming
+                      a strategy.
                     type: string
-                  namespaces:
-                    description: Set of namespace identifiers where this strategy
-                      applies. Namespaces help organize and scope memory content.
+                  namespaceTemplates:
+                    description: Set containing exactly one namespace template where
+                      this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}).
+                      Namespace templates help organize and scope memory content.
+                      Exactly one of namespace_templates or namespaces must be configured
+                      for all strategies except CUSTOM strategies using SELF_MANAGED
+                      configuration.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  namespaces:
+                    description: Set of namespace identifiers where this strategy
+                      applies. Exactly one of namespaces or namespace_templates must
+                      be configured. The API treats this as a legacy parameter; prefer
+                      namespace_templates. Since the API mirrors the two fields, switching
+                      an existing configuration from namespaces to namespace_templates
+                      with the same value is an in-place no-op.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  reflectionConfiguration:
+                    description: Configuration for the reflections created with the
+                      episodic memory strategy. Valid when type is EPISODIC, must
+                      be omitted for other types. See reflection_configuration Block
+                      below.
+                    items:
+                      properties:
+                        namespaceTemplates:
+                          description: Namespace templates over which to create reflections.
+                            Can be less nested than episode namespaces.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   region:
                     description: |-
                       Region where this resource will be managed. Defaults to the Region set in the provider configuration.

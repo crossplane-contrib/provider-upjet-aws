@@ -56,7 +56,7 @@ type DefaultActionParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
@@ -75,7 +75,7 @@ type LoggingConfigurationInitParameters struct {
 
 type LoggingConfigurationObservation struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
@@ -84,7 +84,7 @@ type LoggingConfigurationObservation struct {
 
 type LoggingConfigurationParameters struct {
 
-	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// ARN of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional

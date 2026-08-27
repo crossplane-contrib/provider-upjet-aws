@@ -95,8 +95,7 @@ spec:
                                 per second to provision for an io1 or io2 volume.
                               type: number
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key for encryption.
+                              description: ARN of the KMS Key for encryption.
                               type: string
                             snapshotId:
                               description: Identifier of the EC2 Volume Snapshot.
@@ -129,8 +128,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         componentArnRef:
                           description: Reference to a Component in imagebuilder to
@@ -328,8 +326,7 @@ spec:
                                 per second to provision for an io1 or io2 volume.
                               type: number
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key for encryption.
+                              description: ARN of the KMS Key for encryption.
                               type: string
                             snapshotId:
                               description: Identifier of the EC2 Volume Snapshot.
@@ -362,8 +359,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         componentArnRef:
                           description: Reference to a Component in imagebuilder to
@@ -594,7 +590,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   arn:
-                    description: Amazon Resource Name (ARN) of the image recipe.
+                    description: ARN of the image recipe.
                     type: string
                   blockDeviceMapping:
                     description: Configuration block(s) with block device mappings
@@ -624,8 +620,7 @@ spec:
                                 per second to provision for an io1 or io2 volume.
                               type: number
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key for encryption.
+                              description: ARN of the KMS Key for encryption.
                               type: string
                             snapshotId:
                               description: Identifier of the EC2 Volume Snapshot.
@@ -658,8 +653,7 @@ spec:
                     items:
                       properties:
                         componentArn:
-                          description: Amazon Resource Name (ARN) of the Image Builder
-                            Component to associate.
+                          description: ARN of the Image Builder Component to associate.
                           type: string
                         parameter:
                           description: Configuration block(s) for parameters to configure
@@ -683,7 +677,7 @@ spec:
                     description: Description of the image recipe.
                     type: string
                   id:
-                    description: Amazon Resource Name (ARN) of the image recipe.
+                    description: ARN of the image recipe.
                     type: string
                   name:
                     description: Name of the image recipe.

@@ -207,7 +207,7 @@ type ConnectorInitParameters struct {
 	// Specifies which plugins to use for the connector. See plugin Block for details.
 	Plugin []PluginInitParameters `json:"plugin,omitempty" tf:"plugin,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
+	// ARN of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
@@ -230,7 +230,7 @@ type ConnectorInitParameters struct {
 
 type ConnectorObservation struct {
 
-	// The Amazon Resource Name (ARN) of the connector.
+	// ARN of the connector.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Information about the capacity allocated to the connector. See capacity Block for details.
@@ -270,7 +270,7 @@ type ConnectorObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
+	// ARN of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	ServiceExecutionRoleArn *string `json:"serviceExecutionRoleArn,omitempty" tf:"service_execution_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
@@ -336,7 +336,7 @@ type ConnectorParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
+	// ARN of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -362,7 +362,7 @@ type ConnectorParameters struct {
 
 type CustomPluginInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the custom plugin.
+	// ARN of the custom plugin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafkaconnect/v1beta2.CustomPlugin
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -381,7 +381,7 @@ type CustomPluginInitParameters struct {
 
 type CustomPluginObservation struct {
 
-	// The Amazon Resource Name (ARN) of the custom plugin.
+	// ARN of the custom plugin.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The revision of the custom plugin.
@@ -390,7 +390,7 @@ type CustomPluginObservation struct {
 
 type CustomPluginParameters struct {
 
-	// The Amazon Resource Name (ARN) of the custom plugin.
+	// ARN of the custom plugin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafkaconnect/v1beta2.CustomPlugin
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -758,7 +758,7 @@ type VPCParameters struct {
 
 type WorkerConfigurationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration.
+	// ARN of the worker configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafkaconnect/v1beta1.WorkerConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -777,7 +777,7 @@ type WorkerConfigurationInitParameters struct {
 
 type WorkerConfigurationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration.
+	// ARN of the worker configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The revision of the worker configuration.
@@ -786,7 +786,7 @@ type WorkerConfigurationObservation struct {
 
 type WorkerConfigurationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the worker configuration.
+	// ARN of the worker configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kafkaconnect/v1beta1.WorkerConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

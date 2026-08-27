@@ -43,7 +43,7 @@ type VPNGatewayObservation_2 struct {
 	// The Autonomous System Number (ASN) for the Amazon side of the gateway. If you don't specify an ASN, the virtual private gateway is created with the default ASN.
 	AmazonSideAsn *string `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
-	// Amazon Resource Name (ARN) of the VPN Gateway.
+	// ARN of the VPN Gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Availability Zone for the virtual private gateway.

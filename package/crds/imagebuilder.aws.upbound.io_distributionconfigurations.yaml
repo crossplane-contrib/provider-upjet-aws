@@ -1117,8 +1117,8 @@ spec:
                     items:
                       properties:
                         amiDistributionConfiguration:
-                          description: Configuration block with Amazon Machine Image
-                            (AMI) distribution settings. Detailed below.
+                          description: Configuration block with AMI distribution settings.
+                            Detailed below.
                           properties:
                             amiTags:
                               additionalProperties:
@@ -1132,8 +1132,8 @@ spec:
                                 AMI.
                               type: string
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key to encrypt the distributed AMI.
+                              description: ARN of the KMS Key to encrypt the distributed
+                                AMI.
                               type: string
                             launchPermission:
                               description: Configuration block of EC2 launch permissions
@@ -1280,8 +1280,7 @@ spec:
                             type: object
                           type: array
                         licenseConfigurationArns:
-                          description: Set of Amazon Resource Names (ARNs) of License
-                            Manager License Configurations.
+                          description: Set of ARNs of License Manager License Configurations.
                           items:
                             type: string
                           type: array
@@ -1373,8 +1372,8 @@ spec:
                     items:
                       properties:
                         amiDistributionConfiguration:
-                          description: Configuration block with Amazon Machine Image
-                            (AMI) distribution settings. Detailed below.
+                          description: Configuration block with AMI distribution settings.
+                            Detailed below.
                           properties:
                             amiTags:
                               additionalProperties:
@@ -1388,8 +1387,8 @@ spec:
                                 AMI.
                               type: string
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key to encrypt the distributed AMI.
+                              description: ARN of the KMS Key to encrypt the distributed
+                                AMI.
                               type: string
                             launchPermission:
                               description: Configuration block of EC2 launch permissions
@@ -1536,8 +1535,7 @@ spec:
                             type: object
                           type: array
                         licenseConfigurationArns:
-                          description: Set of Amazon Resource Names (ARNs) of License
-                            Manager License Configurations.
+                          description: Set of ARNs of License Manager License Configurations.
                           items:
                             type: string
                           type: array
@@ -1697,7 +1695,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the distribution configuration.
+                    description: ARN of the distribution configuration.
                     type: string
                   dateCreated:
                     description: Date the distribution configuration was created.
@@ -1714,8 +1712,8 @@ spec:
                     items:
                       properties:
                         amiDistributionConfiguration:
-                          description: Configuration block with Amazon Machine Image
-                            (AMI) distribution settings. Detailed below.
+                          description: Configuration block with AMI distribution settings.
+                            Detailed below.
                           properties:
                             amiTags:
                               additionalProperties:
@@ -1729,8 +1727,8 @@ spec:
                                 AMI.
                               type: string
                             kmsKeyId:
-                              description: Amazon Resource Name (ARN) of the Key Management
-                                Service (KMS) Key to encrypt the distributed AMI.
+                              description: ARN of the KMS Key to encrypt the distributed
+                                AMI.
                               type: string
                             launchPermission:
                               description: Configuration block of EC2 launch permissions
@@ -1877,8 +1875,7 @@ spec:
                             type: object
                           type: array
                         licenseConfigurationArns:
-                          description: Set of Amazon Resource Names (ARNs) of License
-                            Manager License Configurations.
+                          description: Set of ARNs of License Manager License Configurations.
                           items:
                             type: string
                           type: array
@@ -1930,7 +1927,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: Amazon Resource Name (ARN) of the distribution configuration.
+                    description: ARN of the distribution configuration.
                     type: string
                   name:
                     description: Name of the distribution configuration.

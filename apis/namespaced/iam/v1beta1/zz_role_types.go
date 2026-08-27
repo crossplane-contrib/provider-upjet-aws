@@ -86,7 +86,7 @@ type RoleInitParameters struct {
 
 type RoleObservation struct {
 
-	// Amazon Resource Name (ARN) specifying the role.
+	// ARN specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Policy that grants an entity permission to assume the role. This field is required, but it can be specified in either 'spec.forProvider.assumeRolePolicy' or 'spec.initProvider.assumeRolePolicy'. While it may appear optional in each location individually, the resource requires that it is defined in at least one of them during creation.

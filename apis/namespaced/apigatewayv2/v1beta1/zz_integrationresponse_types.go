@@ -49,7 +49,7 @@ type IntegrationResponseInitParameters struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// The template selection expression for the integration response.
+	// Template selection expression for the integration response.
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 }
 
@@ -78,7 +78,7 @@ type IntegrationResponseObservation struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// The template selection expression for the integration response.
+	// Template selection expression for the integration response.
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 }
 
@@ -128,7 +128,7 @@ type IntegrationResponseParameters struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
-	// The template selection expression for the integration response.
+	// Template selection expression for the integration response.
 	// +kubebuilder:validation:Optional
 	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
 }

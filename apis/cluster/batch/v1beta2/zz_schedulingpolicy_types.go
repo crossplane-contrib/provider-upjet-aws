@@ -59,7 +59,7 @@ type SchedulingPolicyInitParameters struct {
 
 type SchedulingPolicyObservation struct {
 
-	// The Amazon Resource Name of the scheduling policy.
+	// ARN of the scheduling policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	FairSharePolicy *FairSharePolicyObservation `json:"fairSharePolicy,omitempty" tf:"fair_share_policy,omitempty"`

@@ -298,8 +298,8 @@ spec:
                     type: object
                   authorizerType:
                     description: 'Type of authorizer to use. Valid values: CUSTOM_JWT,
-                      AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block
-                      is required.'
+                      AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration
+                      block is required.'
                     type: string
                   description:
                     description: Description of the gateway.
@@ -974,8 +974,8 @@ spec:
                     type: object
                   authorizerType:
                     description: 'Type of authorizer to use. Valid values: CUSTOM_JWT,
-                      AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block
-                      is required.'
+                      AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration
+                      block is required.'
                     type: string
                   description:
                     description: Description of the gateway.
@@ -1730,8 +1730,8 @@ spec:
                     type: object
                   authorizerType:
                     description: 'Type of authorizer to use. Valid values: CUSTOM_JWT,
-                      AWS_IAM. When set to CUSTOM_JWT, authorizer_configuration block
-                      is required.'
+                      AWS_IAM, NONE, AUTHENTICATE_ONLY. When set to CUSTOM_JWT, authorizer_configuration
+                      block is required.'
                     type: string
                   description:
                     description: Description of the gateway.

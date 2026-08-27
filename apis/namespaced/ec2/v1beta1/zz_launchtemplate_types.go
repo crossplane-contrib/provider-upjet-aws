@@ -339,7 +339,7 @@ type HibernationOptionsParameters struct {
 
 type IAMInstanceProfileInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
+	// ARN of the instance profile. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -367,7 +367,7 @@ type IAMInstanceProfileInitParameters struct {
 
 type IAMInstanceProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
+	// ARN of the instance profile. Conflicts with name.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The name of the instance profile.
@@ -376,7 +376,7 @@ type IAMInstanceProfileObservation struct {
 
 type IAMInstanceProfileParameters struct {
 
-	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
+	// ARN of the instance profile. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/namespaced/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -815,7 +815,7 @@ type LaunchTemplateInitParameters_2 struct {
 	// Default Version of the launch template.
 	DefaultVersion *float64 `json:"defaultVersion,omitempty" tf:"default_version,omitempty"`
 
-	// Description of the launch template.
+	// Description of the launch template version (VersionDescription in the EC2 API). Launch templates in AWS do not have a template-level description; whenever a change to this resource creates a new version, the new version is created with this description. To give each version a distinct description, update this argument in the same apply as the other changes.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// If true, enables EC2 Instance Stop Protection.
@@ -1384,7 +1384,7 @@ type LaunchTemplateMetadataOptionsParameters struct {
 
 type LaunchTemplateObservation_2 struct {
 
-	// Amazon Resource Name (ARN) of the launch template.
+	// ARN of the launch template.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specify volumes to attach to the instance besides the volumes specified by the AMI.
@@ -1404,7 +1404,7 @@ type LaunchTemplateObservation_2 struct {
 	// Default Version of the launch template.
 	DefaultVersion *float64 `json:"defaultVersion,omitempty" tf:"default_version,omitempty"`
 
-	// Description of the launch template.
+	// Description of the launch template version (VersionDescription in the EC2 API). Launch templates in AWS do not have a template-level description; whenever a change to this resource creates a new version, the new version is created with this description. To give each version a distinct description, update this argument in the same apply as the other changes.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// If true, enables EC2 Instance Stop Protection.
@@ -1545,7 +1545,7 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	DefaultVersion *float64 `json:"defaultVersion,omitempty" tf:"default_version,omitempty"`
 
-	// Description of the launch template.
+	// Description of the launch template version (VersionDescription in the EC2 API). Launch templates in AWS do not have a template-level description; whenever a change to this resource creates a new version, the new version is created with this description. To give each version a distinct description, update this argument in the same apply as the other changes.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -1803,6 +1803,9 @@ type NetworkInterfacesInitParameters struct {
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
+
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	EnaSrdSpecification *EnaSrdSpecificationInitParameters `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
@@ -1906,6 +1909,9 @@ type NetworkInterfacesObservation struct {
 	// The integer index of the network interface attachment.
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
+
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	EnaSrdSpecification *EnaSrdSpecificationObservation `json:"enaSrdSpecification,omitempty" tf:"ena_srd_specification,omitempty"`
 
@@ -1985,6 +1991,10 @@ type NetworkInterfacesParameters struct {
 	// The integer index of the network interface attachment.
 	// +kubebuilder:validation:Optional
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// The number of ENA queues to be created with the instance. Requires an instance type and operating system that support ENA queue configuration.
+	// +kubebuilder:validation:Optional
+	EnaQueueCount *float64 `json:"enaQueueCount,omitempty" tf:"ena_queue_count,omitempty"`
 
 	// Configuration for Elastic Network Adapter (ENA) Express settings. Applies to network interfaces that use the ena Express feature. See details below.
 	// +kubebuilder:validation:Optional

@@ -101,9 +101,9 @@ spec:
                       with this cluster.
                     type: string
                   clusterSubnetGroupName:
-                    description: The name of a cluster subnet group to be associated
-                      with this cluster. If this parameter is not provided the resulting
-                      cluster will be deployed outside virtual private cloud (VPC).
+                    description: Name of a cluster subnet group to be associated with
+                      this cluster. If this parameter is not provided the resulting
+                      cluster will be deployed outside VPC.
                     type: string
                   clusterType:
                     description: The cluster type to use. Either single-node or multi-node.
@@ -119,8 +119,8 @@ spec:
                       If you do not provide a name, Amazon Redshift will create a default database called dev.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) for the IAM role that
-                      was set as default for the cluster when the cluster was created.
+                    description: ARN for the IAM role that was set as default for
+                      the cluster when the cluster was created.
                     type: string
                   defaultIamRoleArnRef:
                     description: Reference to a Role in iam to populate defaultIamRoleArn.
@@ -608,8 +608,8 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
-                    description: A list of Virtual Private Cloud (VPC) security groups
-                      to be associated with the cluster.
+                    description: List of VPC security groups to be associated with
+                      the cluster.
                     items:
                       type: string
                     type: array
@@ -672,9 +672,9 @@ spec:
                       with this cluster.
                     type: string
                   clusterSubnetGroupName:
-                    description: The name of a cluster subnet group to be associated
-                      with this cluster. If this parameter is not provided the resulting
-                      cluster will be deployed outside virtual private cloud (VPC).
+                    description: Name of a cluster subnet group to be associated with
+                      this cluster. If this parameter is not provided the resulting
+                      cluster will be deployed outside VPC.
                     type: string
                   clusterType:
                     description: The cluster type to use. Either single-node or multi-node.
@@ -690,8 +690,8 @@ spec:
                       If you do not provide a name, Amazon Redshift will create a default database called dev.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) for the IAM role that
-                      was set as default for the cluster when the cluster was created.
+                    description: ARN for the IAM role that was set as default for
+                      the cluster when the cluster was created.
                     type: string
                   defaultIamRoleArnRef:
                     description: Reference to a Role in iam to populate defaultIamRoleArn.
@@ -1174,8 +1174,8 @@ spec:
                         type: object
                     type: object
                   vpcSecurityGroupIds:
-                    description: A list of Virtual Private Cloud (VPC) security groups
-                      to be associated with the cluster.
+                    description: List of VPC security groups to be associated with
+                      the cluster.
                     items:
                       type: string
                     type: array
@@ -1266,7 +1266,7 @@ spec:
                       Always returns auto.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of cluster
+                    description: ARN of cluster
                     type: string
                   automatedSnapshotRetentionPeriod:
                     description: The number of days that automated snapshots are retained.
@@ -1290,7 +1290,7 @@ spec:
                       instance family.
                     type: boolean
                   clusterNamespaceArn:
-                    description: The namespace Amazon Resource Name (ARN) of the cluster
+                    description: Namespace ARN of the cluster
                     type: string
                   clusterNodes:
                     description: The nodes in the cluster. Cluster node blocks are
@@ -1321,9 +1321,9 @@ spec:
                       cluster
                     type: string
                   clusterSubnetGroupName:
-                    description: The name of a cluster subnet group to be associated
-                      with this cluster. If this parameter is not provided the resulting
-                      cluster will be deployed outside virtual private cloud (VPC).
+                    description: Name of a cluster subnet group to be associated with
+                      this cluster. If this parameter is not provided the resulting
+                      cluster will be deployed outside VPC.
                     type: string
                   clusterType:
                     description: The cluster type to use. Either single-node or multi-node.
@@ -1339,8 +1339,8 @@ spec:
                       If you do not provide a name, Amazon Redshift will create a default database called dev.
                     type: string
                   defaultIamRoleArn:
-                    description: The Amazon Resource Name (ARN) for the IAM role that
-                      was set as default for the cluster when the cluster was created.
+                    description: ARN for the IAM role that was set as default for
+                      the cluster when the cluster was created.
                     type: string
                   dnsName:
                     description: The DNS name of the cluster
@@ -1487,8 +1487,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcSecurityGroupIds:
-                    description: A list of Virtual Private Cloud (VPC) security groups
-                      to be associated with the cluster.
+                    description: List of VPC security groups to be associated with
+                      the cluster.
                     items:
                       type: string
                     type: array

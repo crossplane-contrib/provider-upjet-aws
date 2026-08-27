@@ -15,7 +15,7 @@ import (
 
 type IdentityPolicyInitParameters struct {
 
-	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	// Name or ARN of the SES Identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ses/v1beta1.DomainIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -38,7 +38,7 @@ type IdentityPolicyInitParameters struct {
 type IdentityPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	// Name or ARN of the SES Identity.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the policy.
@@ -54,7 +54,7 @@ type IdentityPolicyObservation struct {
 
 type IdentityPolicyParameters struct {
 
-	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	// Name or ARN of the SES Identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ses/v1beta1.DomainIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

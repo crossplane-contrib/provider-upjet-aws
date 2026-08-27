@@ -64,7 +64,7 @@ type DataCellsFilterParameters struct {
 
 type DataLocationInitParameters struct {
 
-	// Amazon Resource Name (ARN) that uniquely identifies the data location resource.
+	// ARN that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lakeformation/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -83,7 +83,7 @@ type DataLocationInitParameters struct {
 
 type DataLocationObservation struct {
 
-	// Amazon Resource Name (ARN) that uniquely identifies the data location resource.
+	// ARN that uniquely identifies the data location resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
@@ -92,7 +92,7 @@ type DataLocationObservation struct {
 
 type DataLocationParameters struct {
 
-	// Amazon Resource Name (ARN) that uniquely identifies the data location resource.
+	// ARN that uniquely identifies the data location resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/lakeformation/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional

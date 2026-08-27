@@ -230,8 +230,8 @@ spec:
                       changed, in RFC3339 format.
                     type: string
                   lastModifiedUser:
-                    description: The Amazon Resource Name (ARN) of the user who made
-                      the most recent changes to the approval rule template.
+                    description: ARN of the user who made the most recent changes
+                      to the approval rule template.
                     type: string
                   region:
                     description: |-

@@ -15,7 +15,7 @@ import (
 
 type ComputeEnvironmentOrderInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the compute environment.
+	// ARN of the compute environment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/batch/v1beta1.ComputeEnvironment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ComputeEnvironment *string `json:"computeEnvironment,omitempty" tf:"compute_environment,omitempty"`
@@ -34,7 +34,7 @@ type ComputeEnvironmentOrderInitParameters struct {
 
 type ComputeEnvironmentOrderObservation struct {
 
-	// The Amazon Resource Name (ARN) of the compute environment.
+	// ARN of the compute environment.
 	ComputeEnvironment *string `json:"computeEnvironment,omitempty" tf:"compute_environment,omitempty"`
 
 	// The order of the compute environment. Compute environments are tried in ascending order. For example, if two compute environments are associated with a job queue, the compute environment with a lower order integer value is tried for job placement first.
@@ -43,7 +43,7 @@ type ComputeEnvironmentOrderObservation struct {
 
 type ComputeEnvironmentOrderParameters struct {
 
-	// The Amazon Resource Name (ARN) of the compute environment.
+	// ARN of the compute environment.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/batch/v1beta1.ComputeEnvironment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -97,7 +97,7 @@ type JobQueueInitParameters struct {
 
 type JobQueueObservation struct {
 
-	// The Amazon Resource Name of the job queue.
+	// ARN of the job queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment runs a specific job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.

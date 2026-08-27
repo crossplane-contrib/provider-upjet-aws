@@ -77,7 +77,7 @@ spec:
                           S3. See s3 Block for details..
                         properties:
                           bucketArn:
-                            description: The Amazon Resource Name (ARN) of an S3 bucket.
+                            description: ARN of an S3 bucket.
                             type: string
                           bucketArnRef:
                             description: Reference to a Bucket in s3 to populate bucketArn.
@@ -294,7 +294,7 @@ spec:
                           S3. See s3 Block for details..
                         properties:
                           bucketArn:
-                            description: The Amazon Resource Name (ARN) of an S3 bucket.
+                            description: ARN of an S3 bucket.
                             type: string
                           bucketArnRef:
                             description: Reference to a Bucket in s3 to populate bucketArn.
@@ -544,7 +544,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: the Amazon Resource Name (ARN) of the custom plugin.
+                    description: the ARN of the custom plugin.
                     type: string
                   contentType:
                     description: The type of the plugin file. Allowed values are ZIP
@@ -568,7 +568,7 @@ spec:
                           S3. See s3 Block for details..
                         properties:
                           bucketArn:
-                            description: The Amazon Resource Name (ARN) of an S3 bucket.
+                            description: ARN of an S3 bucket.
                             type: string
                           fileKey:
                             description: The file key for an object in an S3 bucket.

@@ -2783,12 +2783,11 @@ spec:
                     items:
                       properties:
                         encryptionKey:
-                          description: The encryption key block AWS CodePipeline uses
-                            to encrypt the data in the artifact store, such as an
-                            AWS Key Management Service (AWS KMS) key. If you don't
-                            specify a key, AWS CodePipeline uses the default key for
-                            Amazon Simple Storage Service (Amazon S3). An encryption_key
-                            block is documented below.
+                          description: Encryption key block AWS CodePipeline uses
+                            to encrypt the data in the artifact store, such as a KMS
+                            key. If you don't specify a key, AWS CodePipeline uses
+                            the default key for S3. An encryption_key block is documented
+                            below.
                           properties:
                             id:
                               description: The KMS key ARN or ID
@@ -2902,9 +2901,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: A service role Amazon Resource Name (ARN) that grants
-                      AWS CodePipeline permission to make calls to AWS services on
-                      your behalf.
+                    description: Service role ARN that grants AWS CodePipeline permission
+                      to make calls to AWS services on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -2994,8 +2992,14 @@ spec:
                                 description: A category defines what kind of action
                                   can be taken in the stage, and constrains the provider
                                   type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                  Build, Deploy, Invoke, Source, Compute and Test.
                                 type: string
+                              commands:
+                                description: A list of shell commands to run with
+                                  the compute action.
+                                items:
+                                  type: string
+                                type: array
                               configuration:
                                 additionalProperties:
                                   type: string
@@ -3025,6 +3029,31 @@ spec:
                               outputArtifacts:
                                 description: A list of artifact names to output. Output
                                   artifact names must be unique within a pipeline.
+                                  If the action is Compute, this argument is ignored.
+                                items:
+                                  type: string
+                                type: array
+                              outputArtifactsForComputeAction:
+                                description: A block of output artifacts for the compute
+                                  action. If the action is not Compute, this argument
+                                  is ignored.
+                                items:
+                                  properties:
+                                    files:
+                                      description: A list of the files to associate
+                                        with the output artifact that will be exported
+                                        from the compute action.
+                                      items:
+                                        type: string
+                                      type: array
+                                    name:
+                                      description: The name of a pipeline-level variable.
+                                      type: string
+                                  type: object
+                                type: array
+                              outputVariables:
+                                description: A list of variables that are to be exported
+                                  from the compute action.
                                 items:
                                   type: string
                                 type: array
@@ -3077,10 +3106,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -3129,7 +3156,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -3179,10 +3207,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -3231,7 +3257,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -3296,10 +3323,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -3348,7 +3373,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -3567,12 +3593,11 @@ spec:
                     items:
                       properties:
                         encryptionKey:
-                          description: The encryption key block AWS CodePipeline uses
-                            to encrypt the data in the artifact store, such as an
-                            AWS Key Management Service (AWS KMS) key. If you don't
-                            specify a key, AWS CodePipeline uses the default key for
-                            Amazon Simple Storage Service (Amazon S3). An encryption_key
-                            block is documented below.
+                          description: Encryption key block AWS CodePipeline uses
+                            to encrypt the data in the artifact store, such as a KMS
+                            key. If you don't specify a key, AWS CodePipeline uses
+                            the default key for S3. An encryption_key block is documented
+                            below.
                           properties:
                             id:
                               description: The KMS key ARN or ID
@@ -3676,9 +3701,8 @@ spec:
                       V2. Default value is V1.'
                     type: string
                   roleArn:
-                    description: A service role Amazon Resource Name (ARN) that grants
-                      AWS CodePipeline permission to make calls to AWS services on
-                      your behalf.
+                    description: Service role ARN that grants AWS CodePipeline permission
+                      to make calls to AWS services on your behalf.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -3768,8 +3792,14 @@ spec:
                                 description: A category defines what kind of action
                                   can be taken in the stage, and constrains the provider
                                   type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                  Build, Deploy, Invoke, Source, Compute and Test.
                                 type: string
+                              commands:
+                                description: A list of shell commands to run with
+                                  the compute action.
+                                items:
+                                  type: string
+                                type: array
                               configuration:
                                 additionalProperties:
                                   type: string
@@ -3799,6 +3829,31 @@ spec:
                               outputArtifacts:
                                 description: A list of artifact names to output. Output
                                   artifact names must be unique within a pipeline.
+                                  If the action is Compute, this argument is ignored.
+                                items:
+                                  type: string
+                                type: array
+                              outputArtifactsForComputeAction:
+                                description: A block of output artifacts for the compute
+                                  action. If the action is not Compute, this argument
+                                  is ignored.
+                                items:
+                                  properties:
+                                    files:
+                                      description: A list of the files to associate
+                                        with the output artifact that will be exported
+                                        from the compute action.
+                                      items:
+                                        type: string
+                                      type: array
+                                    name:
+                                      description: The name of a pipeline-level variable.
+                                      type: string
+                                  type: object
+                                type: array
+                              outputVariables:
+                                description: A list of variables that are to be exported
+                                  from the compute action.
                                 items:
                                   type: string
                                 type: array
@@ -3848,10 +3903,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -3896,7 +3949,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -3946,10 +4000,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -3994,7 +4046,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -4059,10 +4112,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -4107,7 +4158,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -4414,12 +4466,11 @@ spec:
                     items:
                       properties:
                         encryptionKey:
-                          description: The encryption key block AWS CodePipeline uses
-                            to encrypt the data in the artifact store, such as an
-                            AWS Key Management Service (AWS KMS) key. If you don't
-                            specify a key, AWS CodePipeline uses the default key for
-                            Amazon Simple Storage Service (Amazon S3). An encryption_key
-                            block is documented below.
+                          description: Encryption key block AWS CodePipeline uses
+                            to encrypt the data in the artifact store, such as a KMS
+                            key. If you don't specify a key, AWS CodePipeline uses
+                            the default key for S3. An encryption_key block is documented
+                            below.
                           properties:
                             id:
                               description: The KMS key ARN or ID
@@ -4462,9 +4513,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   roleArn:
-                    description: A service role Amazon Resource Name (ARN) that grants
-                      AWS CodePipeline permission to make calls to AWS services on
-                      your behalf.
+                    description: Service role ARN that grants AWS CodePipeline permission
+                      to make calls to AWS services on your behalf.
                     type: string
                   stage:
                     description: (Minimum of at least two stage blocks is required)
@@ -4480,8 +4530,14 @@ spec:
                                 description: A category defines what kind of action
                                   can be taken in the stage, and constrains the provider
                                   type for the action. Possible values are Approval,
-                                  Build, Deploy, Invoke, Source and Test.
+                                  Build, Deploy, Invoke, Source, Compute and Test.
                                 type: string
+                              commands:
+                                description: A list of shell commands to run with
+                                  the compute action.
+                                items:
+                                  type: string
+                                type: array
                               configuration:
                                 additionalProperties:
                                   type: string
@@ -4511,6 +4567,31 @@ spec:
                               outputArtifacts:
                                 description: A list of artifact names to output. Output
                                   artifact names must be unique within a pipeline.
+                                  If the action is Compute, this argument is ignored.
+                                items:
+                                  type: string
+                                type: array
+                              outputArtifactsForComputeAction:
+                                description: A block of output artifacts for the compute
+                                  action. If the action is not Compute, this argument
+                                  is ignored.
+                                items:
+                                  properties:
+                                    files:
+                                      description: A list of the files to associate
+                                        with the output artifact that will be exported
+                                        from the compute action.
+                                      items:
+                                        type: string
+                                      type: array
+                                    name:
+                                      description: The name of a pipeline-level variable.
+                                      type: string
+                                  type: object
+                                type: array
+                              outputVariables:
+                                description: A list of variables that are to be exported
+                                  from the compute action.
                                 items:
                                   type: string
                                 type: array
@@ -4563,10 +4644,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -4615,7 +4694,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -4665,10 +4745,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -4717,7 +4795,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action
@@ -4782,10 +4861,8 @@ spec:
                                   items:
                                     properties:
                                       commands:
-                                        description: The shell commands to run with
-                                          your commands rule in CodePipeline. All
-                                          commands are supported except multi-line
-                                          formats.
+                                        description: A list of shell commands to run
+                                          with the compute action.
                                         items:
                                           type: string
                                         type: array
@@ -4834,7 +4911,8 @@ spec:
                                               of action can be taken in the stage,
                                               and constrains the provider type for
                                               the action. Possible values are Approval,
-                                              Build, Deploy, Invoke, Source and Test.
+                                              Build, Deploy, Invoke, Source, Compute
+                                              and Test.
                                             type: string
                                           owner:
                                             description: The creator of the action

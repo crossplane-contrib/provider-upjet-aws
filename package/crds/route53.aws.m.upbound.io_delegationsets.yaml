@@ -148,8 +148,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Delegation
-                      Set.
+                    description: ARN of the Delegation Set.
                     type: string
                   id:
                     description: The delegation set ID

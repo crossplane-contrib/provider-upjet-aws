@@ -238,7 +238,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the Hsm Client Certificate.
+                    description: ARN of the Hsm Client Certificate.
                     type: string
                   description:
                     description: A text description of the HSM configuration to be

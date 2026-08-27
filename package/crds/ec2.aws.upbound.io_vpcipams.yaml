@@ -276,7 +276,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of IPAM
+                    description: ARN of IPAM
                     type: string
                   cascade:
                     description: Enables you to quickly delete an IPAM, private scopes,

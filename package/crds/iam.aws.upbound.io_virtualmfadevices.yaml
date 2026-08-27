@@ -211,8 +211,8 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN), which is also the serial
-                      number, of the virtual MFA device.
+                    description: ARN, which is also the serial number, of the virtual
+                      MFA device.
                     type: string
                   base32StringSeed:
                     description: Base32 seed defined as specified in RFC3548. The

@@ -751,8 +751,8 @@ spec:
               forProvider:
                 properties:
                   agentArns:
-                    description: (Amazon S3 on Outposts only) Amazon Resource Name
-                      (ARN) of the DataSync agent on the Outpost.
+                    description: (Amazon S3 on Outposts only) ARN of the DataSync
+                      agent on the Outpost.
                     items:
                       type: string
                     type: array
@@ -763,9 +763,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
-                      Amazon S3 access point if the S3 bucket is located on an AWS
-                      Outposts resource.
+                    description: ARN of the S3 bucket, or the Amazon S3 access point
+                      if the S3 bucket is located on an AWS Outposts resource.
                     type: string
                   s3BucketArnRef:
                     description: Reference to a Bucket in s3 to populate s3BucketArn.
@@ -955,16 +954,15 @@ spec:
                   autoscaler.
                 properties:
                   agentArns:
-                    description: (Amazon S3 on Outposts only) Amazon Resource Name
-                      (ARN) of the DataSync agent on the Outpost.
+                    description: (Amazon S3 on Outposts only) ARN of the DataSync
+                      agent on the Outpost.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
-                      Amazon S3 access point if the S3 bucket is located on an AWS
-                      Outposts resource.
+                    description: ARN of the S3 bucket, or the Amazon S3 access point
+                      if the S3 bucket is located on an AWS Outposts resource.
                     type: string
                   s3BucketArnRef:
                     description: Reference to a Bucket in s3 to populate s3BucketArn.
@@ -1239,17 +1237,17 @@ spec:
               atProvider:
                 properties:
                   agentArns:
-                    description: (Amazon S3 on Outposts only) Amazon Resource Name
-                      (ARN) of the DataSync agent on the Outpost.
+                    description: (Amazon S3 on Outposts only) ARN of the DataSync
+                      agent on the Outpost.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   arn:
-                    description: Amazon Resource Name (ARN) of the DataSync Location.
+                    description: ARN of the DataSync Location.
                     type: string
                   id:
-                    description: Amazon Resource Name (ARN) of the DataSync Location.
+                    description: ARN of the DataSync Location.
                     type: string
                   region:
                     description: |-
@@ -1257,9 +1255,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   s3BucketArn:
-                    description: Amazon Resource Name (ARN) of the S3 bucket, or the
-                      Amazon S3 access point if the S3 bucket is located on an AWS
-                      Outposts resource.
+                    description: ARN of the S3 bucket, or the Amazon S3 access point
+                      if the S3 bucket is located on an AWS Outposts resource.
                     type: string
                   s3Config:
                     description: Configuration block containing information for connecting

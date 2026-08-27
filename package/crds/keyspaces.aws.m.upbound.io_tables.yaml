@@ -103,8 +103,7 @@ spec:
                       in the Developer Guide.
                     properties:
                       kmsKeyIdentifier:
-                        description: The Amazon Resource Name (ARN) of the customer
-                          managed KMS key.
+                        description: ARN of the customer managed KMS key.
                         type: string
                       type:
                         description: 'The encryption option specified for the table.
@@ -344,8 +343,7 @@ spec:
                       in the Developer Guide.
                     properties:
                       kmsKeyIdentifier:
-                        description: The Amazon Resource Name (ARN) of the customer
-                          managed KMS key.
+                        description: ARN of the customer managed KMS key.
                         type: string
                       type:
                         description: 'The encryption option specified for the table.
@@ -640,8 +638,7 @@ spec:
                       in the Developer Guide.
                     properties:
                       kmsKeyIdentifier:
-                        description: The Amazon Resource Name (ARN) of the customer
-                          managed KMS key.
+                        description: ARN of the customer managed KMS key.
                         type: string
                       type:
                         description: 'The encryption option specified for the table.

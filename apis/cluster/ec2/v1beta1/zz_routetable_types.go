@@ -104,7 +104,7 @@ type RouteTableRouteObservation_2 struct {
 	// The CIDR block of the route.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
-	// The Amazon Resource Name (ARN) of a core network.
+	// ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
 	// The ID of a managed prefix list destination of the route.
@@ -128,7 +128,7 @@ type RouteTableRouteObservation_2 struct {
 	// Identifier of an EC2 network interface.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an ODB network.
+	// ARN of an ODB network.
 	OdbNetworkArn *string `json:"odbNetworkArn,omitempty" tf:"odb_network_arn,omitempty"`
 
 	// Identifier of an EC2 Transit Gateway.

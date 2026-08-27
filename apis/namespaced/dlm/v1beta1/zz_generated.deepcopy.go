@@ -1970,6 +1970,22 @@ func (in *PolicyDetailsParametersInitParameters) DeepCopyInto(out *PolicyDetails
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ExcludeDataVolumeTags != nil {
+		in, out := &in.ExcludeDataVolumeTags, &out.ExcludeDataVolumeTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.NoReboot != nil {
 		in, out := &in.NoReboot, &out.NoReboot
 		*out = new(bool)
@@ -1995,6 +2011,22 @@ func (in *PolicyDetailsParametersObservation) DeepCopyInto(out *PolicyDetailsPar
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ExcludeDataVolumeTags != nil {
+		in, out := &in.ExcludeDataVolumeTags, &out.ExcludeDataVolumeTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.NoReboot != nil {
 		in, out := &in.NoReboot, &out.NoReboot
 		*out = new(bool)
@@ -2019,6 +2051,22 @@ func (in *PolicyDetailsParametersParameters) DeepCopyInto(out *PolicyDetailsPara
 		in, out := &in.ExcludeBootVolume, &out.ExcludeBootVolume
 		*out = new(bool)
 		**out = **in
+	}
+	if in.ExcludeDataVolumeTags != nil {
+		in, out := &in.ExcludeDataVolumeTags, &out.ExcludeDataVolumeTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.NoReboot != nil {
 		in, out := &in.NoReboot, &out.NoReboot

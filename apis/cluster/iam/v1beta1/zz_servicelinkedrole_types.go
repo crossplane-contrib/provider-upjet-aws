@@ -31,7 +31,7 @@ type ServiceLinkedRoleInitParameters struct {
 
 type ServiceLinkedRoleObservation struct {
 
-	// The Amazon Resource Name (ARN) specifying the role.
+	// ARN specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com. To find the full list of services that support service-linked roles, check the docs.
@@ -46,7 +46,7 @@ type ServiceLinkedRoleObservation struct {
 	// The description of the role.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the role.
+	// ARN of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the role.

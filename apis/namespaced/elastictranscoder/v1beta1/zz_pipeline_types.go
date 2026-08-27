@@ -152,7 +152,7 @@ type NotificationsParameters struct {
 
 type PipelineInitParameters struct {
 
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
+	// KMS key that you want to use with this pipeline.
 	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
 
 	// The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below)
@@ -183,7 +183,7 @@ type PipelineInitParameters struct {
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files.
 	OutputBucket *string `json:"outputBucket,omitempty" tf:"output_bucket,omitempty"`
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
+	// IAM ARN for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -208,7 +208,7 @@ type PipelineObservation struct {
 	// The ARN of the Elastictranscoder pipeline.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
+	// KMS key that you want to use with this pipeline.
 	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
 
 	// The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below)
@@ -236,7 +236,7 @@ type PipelineObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
+	// IAM ARN for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below)
@@ -248,7 +248,7 @@ type PipelineObservation struct {
 
 type PipelineParameters struct {
 
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
+	// KMS key that you want to use with this pipeline.
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
 
@@ -291,7 +291,7 @@ type PipelineParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
+	// IAM ARN for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

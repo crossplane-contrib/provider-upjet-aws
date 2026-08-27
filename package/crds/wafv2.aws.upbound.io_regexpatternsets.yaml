@@ -256,8 +256,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      cluster.
+                    description: ARN that identifies the cluster.
                     type: string
                   description:
                     description: A friendly description of the regular expression

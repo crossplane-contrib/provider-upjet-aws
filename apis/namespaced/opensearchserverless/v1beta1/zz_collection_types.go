@@ -58,7 +58,7 @@ type CollectionInitParameters struct {
 
 type CollectionObservation struct {
 
-	// Amazon Resource Name (ARN) of the collection.
+	// ARN of the collection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.

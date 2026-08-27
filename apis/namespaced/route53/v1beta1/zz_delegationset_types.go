@@ -22,7 +22,7 @@ type DelegationSetInitParameters struct {
 
 type DelegationSetObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Delegation Set.
+	// ARN of the Delegation Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The delegation set ID

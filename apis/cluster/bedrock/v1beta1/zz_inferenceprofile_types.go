@@ -31,7 +31,7 @@ type InferenceProfileInitParameters struct {
 
 type InferenceProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) of the inference profile.
+	// The ARN of the inference profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The time at which the inference profile was created.
@@ -100,19 +100,19 @@ type InferenceProfileParameters struct {
 
 type ModelSourceInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the model.
+	// The ARN of the model.
 	CopyFrom *string `json:"copyFrom,omitempty" tf:"copy_from,omitempty"`
 }
 
 type ModelSourceObservation struct {
 
-	// The Amazon Resource Name (ARN) of the model.
+	// The ARN of the model.
 	CopyFrom *string `json:"copyFrom,omitempty" tf:"copy_from,omitempty"`
 }
 
 type ModelSourceParameters struct {
 
-	// The Amazon Resource Name (ARN) of the model.
+	// The ARN of the model.
 	// +kubebuilder:validation:Optional
 	CopyFrom *string `json:"copyFrom" tf:"copy_from,omitempty"`
 }
@@ -122,7 +122,7 @@ type ModelsInitParameters struct {
 
 type ModelsObservation struct {
 
-	// The Amazon Resource Name (ARN) of the model.
+	// The ARN of the model.
 	ModelArn *string `json:"modelArn,omitempty" tf:"model_arn,omitempty"`
 }
 

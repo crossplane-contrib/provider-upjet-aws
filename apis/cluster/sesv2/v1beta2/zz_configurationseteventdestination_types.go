@@ -15,26 +15,26 @@ import (
 
 type CloudWatchDestinationInitParameters struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
+	// Array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	DimensionConfiguration []DimensionConfigurationInitParameters `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
 }
 
 type CloudWatchDestinationObservation struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
+	// Array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	DimensionConfiguration []DimensionConfigurationObservation `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
 }
 
 type CloudWatchDestinationParameters struct {
 
-	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
+	// Array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration" tf:"dimension_configuration,omitempty"`
 }
 
 type ConfigurationSetEventDestinationInitParameters struct {
 
-	// The name of the configuration set.
+	// Name of the configuration set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sesv2/v1beta2.ConfigurationSet
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
@@ -46,25 +46,25 @@ type ConfigurationSetEventDestinationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// Object that defines the event destination. See event_destination Block for details.
 	EventDestination *EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// A name that identifies the event destination within the configuration set.
+	// Name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 }
 
 type ConfigurationSetEventDestinationObservation struct {
 
-	// The name of the configuration set.
+	// Name of the configuration set.
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// Object that defines the event destination. See event_destination Block for details.
 	EventDestination *EventDestinationObservation `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// A name that identifies the event destination within the configuration set.
+	// Name that identifies the event destination within the configuration set.
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
-	// A pipe-delimited string combining configuration_set_name and event_destination_name.
+	// Pipe-delimited string combining configuration_set_name and event_destination_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
@@ -74,7 +74,7 @@ type ConfigurationSetEventDestinationObservation struct {
 
 type ConfigurationSetEventDestinationParameters struct {
 
-	// The name of the configuration set.
+	// Name of the configuration set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sesv2/v1beta2.ConfigurationSet
 	// +kubebuilder:validation:Optional
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
@@ -87,11 +87,11 @@ type ConfigurationSetEventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSetNameSelector *v2.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
-	// An object that defines the event destination. See event_destination Block for details.
+	// Object that defines the event destination. See event_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventDestination *EventDestinationParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
-	// A name that identifies the event destination within the configuration set.
+	// Name that identifies the event destination within the configuration set.
 	// +kubebuilder:validation:Optional
 	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
@@ -103,115 +103,115 @@ type ConfigurationSetEventDestinationParameters struct {
 
 type DimensionConfigurationInitParameters struct {
 
-	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
+	// Default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
 	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
 
-	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
+	// Name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
-	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
+	// Location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
 	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
 }
 
 type DimensionConfigurationObservation struct {
 
-	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
+	// Default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
 	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
 
-	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
+	// Name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
-	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
+	// Location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
 	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
 }
 
 type DimensionConfigurationParameters struct {
 
-	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
+	// Default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
 	// +kubebuilder:validation:Optional
 	DefaultDimensionValue *string `json:"defaultDimensionValue" tf:"default_dimension_value,omitempty"`
 
-	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
+	// Name of an Amazon CloudWatch dimension associated with an email sending metric.
 	// +kubebuilder:validation:Optional
 	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
 
-	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
+	// Location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
 	// +kubebuilder:validation:Optional
 	DimensionValueSource *string `json:"dimensionValueSource" tf:"dimension_value_source,omitempty"`
 }
 
 type EventBridgeDestinationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	// ARN of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
 	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
 }
 
 type EventBridgeDestinationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	// ARN of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
 	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
 }
 
 type EventBridgeDestinationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	// ARN of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
 	// +kubebuilder:validation:Optional
 	EventBusArn *string `json:"eventBusArn" tf:"event_bus_arn,omitempty"`
 }
 
 type EventDestinationInitParameters struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
+	// Object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	CloudWatchDestination *CloudWatchDestinationInitParameters `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
+	// Object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	EventBridgeDestination *EventBridgeDestinationInitParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
+	// Object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	KinesisFirehoseDestination *KinesisFirehoseDestinationInitParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
+	// Object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationInitParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
+	// Object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	SnsDestination *SnsDestinationInitParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationObservation struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
+	// Object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	CloudWatchDestination *CloudWatchDestinationObservation `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
+	// Object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	EventBridgeDestination *EventBridgeDestinationObservation `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
+	// Object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	KinesisFirehoseDestination *KinesisFirehoseDestinationObservation `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
+	// Object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	PinpointDestination *PinpointDestinationObservation `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
+	// Object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	SnsDestination *SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationParameters struct {
 
-	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
+	// Object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination Block for details.
 	// +kubebuilder:validation:Optional
 	CloudWatchDestination *CloudWatchDestinationParameters `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
 
@@ -219,11 +219,11 @@ type EventDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// An object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
+	// Object that defines an Amazon EventBridge destination for email events. You can use Amazon EventBridge to send notifications when certain email events occur. See event_bridge_destination Block for details.
 	// +kubebuilder:validation:Optional
 	EventBridgeDestination *EventBridgeDestinationParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
+	// Object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination Block for details.
 	// +kubebuilder:validation:Optional
 	KinesisFirehoseDestination *KinesisFirehoseDestinationParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
@@ -232,18 +232,18 @@ type EventDestinationParameters struct {
 	// +listType=set
 	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
 
-	// An object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
+	// Object that defines an AWS End User Messaging project destination for email events. See pinpoint_destination Block for details.
 	// +kubebuilder:validation:Optional
 	PinpointDestination *PinpointDestinationParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
 
-	// An object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
+	// Object that defines an Amazon SNS destination for email events. See sns_destination Block for details.
 	// +kubebuilder:validation:Optional
 	SnsDestination *SnsDestinationParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type KinesisFirehoseDestinationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
+	// ARN of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
@@ -256,7 +256,7 @@ type KinesisFirehoseDestinationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamArnSelector *v2.Selector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
+	// ARN of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -272,16 +272,16 @@ type KinesisFirehoseDestinationInitParameters struct {
 
 type KinesisFirehoseDestinationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
+	// ARN of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
+	// ARN of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 }
 
 type KinesisFirehoseDestinationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
+	// ARN of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
@@ -295,7 +295,7 @@ type KinesisFirehoseDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryStreamArnSelector *v2.Selector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
+	// ARN of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -312,6 +312,7 @@ type KinesisFirehoseDestinationParameters struct {
 
 type PinpointDestinationInitParameters struct {
 
+	// ARN of the AWS End User Messaging project to send email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/pinpoint/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
@@ -326,11 +327,14 @@ type PinpointDestinationInitParameters struct {
 }
 
 type PinpointDestinationObservation struct {
+
+	// ARN of the AWS End User Messaging project to send email events to.
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 }
 
 type PinpointDestinationParameters struct {
 
+	// ARN of the AWS End User Messaging project to send email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/pinpoint/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -347,7 +351,7 @@ type PinpointDestinationParameters struct {
 
 type SnsDestinationInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
+	// ARN of the Amazon SNS topic to publish email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -363,13 +367,13 @@ type SnsDestinationInitParameters struct {
 
 type SnsDestinationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
+	// ARN of the Amazon SNS topic to publish email events to.
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type SnsDestinationParameters struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
+	// ARN of the Amazon SNS topic to publish email events to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

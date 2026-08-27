@@ -34,7 +34,7 @@ type AppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainIDSelector *v2.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
-	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.See Resource Spec below.
+	// Instance type and the ARN of the SageMaker AI image created on the instance. See Resource Spec below.
 	ResourceSpec *ResourceSpecInitParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
 	// The name of the space. At least one of user_profile_name or space_name required.
@@ -66,20 +66,20 @@ type AppObservation struct {
 	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway, TensorBoard, CodeEditor, JupyterLab, DetailedProfiler, and Canvas.
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the app.
+	// ARN of the app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The domain ID.
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the app.
+	// ARN of the app.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.See Resource Spec below.
+	// Instance type and the ARN of the SageMaker AI image created on the instance. See Resource Spec below.
 	ResourceSpec *ResourceSpecObservation `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
 	// The name of the space. At least one of user_profile_name or space_name required.
@@ -126,7 +126,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The instance type and the Amazon Resource Name (ARN) of the SageMaker AI image created on the instance.See Resource Spec below.
+	// Instance type and the ARN of the SageMaker AI image created on the instance. See Resource Spec below.
 	// +kubebuilder:validation:Optional
 	ResourceSpec *ResourceSpecParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
@@ -159,7 +159,7 @@ type ResourceSpecInitParameters struct {
 	// The instance type that the image version runs on. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// ARN of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
 	// The ARN of the SageMaker AI image that the image version belongs to.
@@ -177,7 +177,7 @@ type ResourceSpecObservation struct {
 	// The instance type that the image version runs on. For valid values see SageMaker AI Instance Types.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// ARN of the Lifecycle Configuration attached to the Resource.
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 
 	// The ARN of the SageMaker AI image that the image version belongs to.
@@ -196,7 +196,7 @@ type ResourceSpecParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// ARN of the Lifecycle Configuration attached to the Resource.
 	// +kubebuilder:validation:Optional
 	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
 

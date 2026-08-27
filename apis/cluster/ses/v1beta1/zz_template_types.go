@@ -15,41 +15,41 @@ import (
 
 type TemplateInitParameters struct {
 
-	// The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
+	// HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
 	HTML *string `json:"html,omitempty" tf:"html,omitempty"`
 
-	// The subject line of the email.
+	// Subject line of the email.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
+	// Email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateObservation struct {
 
-	// The ARN of the SES template
+	// ARN of the SES template
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
+	// HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
 	HTML *string `json:"html,omitempty" tf:"html,omitempty"`
 
-	// The name of the SES template
+	// Name of the SES template
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The subject line of the email.
+	// Subject line of the email.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
+	// Email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateParameters struct {
 
-	// The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
+	// HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
 	// +kubebuilder:validation:Optional
 	HTML *string `json:"html,omitempty" tf:"html,omitempty"`
 
@@ -58,11 +58,11 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The subject line of the email.
+	// Subject line of the email.
 	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
+	// Email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }

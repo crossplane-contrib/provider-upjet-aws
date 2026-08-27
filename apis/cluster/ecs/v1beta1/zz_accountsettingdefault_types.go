@@ -28,6 +28,7 @@ type AccountSettingDefaultObservation struct {
 	// Name of the account setting to set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ARN that identifies the account setting.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.

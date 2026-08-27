@@ -59,7 +59,7 @@ type EventSubscriptionInitParameters struct {
 
 type EventSubscriptionObservation struct {
 
-	// The Amazon Resource Name of the RDS event notification subscription
+	// ARN of the RDS event notification subscription
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS customer account associated with the RDS event notification subscription

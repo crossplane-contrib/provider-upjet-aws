@@ -62,7 +62,7 @@ type WorkspaceObservation struct {
 	// The alias of the prometheus workspace. See more in AWS Docs.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
-	// Amazon Resource Name (ARN) of the workspace.
+	// ARN of the workspace.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Identifier of the workspace

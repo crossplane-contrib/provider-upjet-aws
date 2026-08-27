@@ -712,7 +712,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of cluster
+                    description: ARN of cluster
                     type: string
                   clusterIdentifier:
                     description: The cluster identifier.

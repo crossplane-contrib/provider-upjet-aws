@@ -89,11 +89,11 @@ spec:
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
-                        description: Provides information used to select Amazon Machine
-                          Images (AMIs) for EC2 instances in the compute environment.
-                          If Ec2Configuration isn't specified, the default is ECS_AL2.
-                          This parameter isn't applicable to jobs that are running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Provides information used to select AMIs for
+                          EC2 instances in the compute environment. If Ec2Configuration
+                          isn't specified, the default is ECS_AL2. This parameter
+                          isn't applicable to jobs that are running on Fargate resources,
+                          and shouldn't be specified.
                         items:
                           properties:
                             imageIdOverride:
@@ -123,11 +123,10 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       imageId:
-                        description: The Amazon Machine Image (AMI) ID used for instances
-                          launched in the compute environment. This parameter isn't
-                          applicable to jobs running on Fargate resources, and shouldn't
-                          be specified. (Deprecated, use ec2_configuration image_id_override
-                          instead)
+                        description: AMI ID used for instances launched in the compute
+                          environment. This parameter isn't applicable to jobs running
+                          on Fargate resources, and shouldn't be specified. (Deprecated,
+                          use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
                         description: The Amazon ECS instance role applied to Amazon
@@ -434,11 +433,10 @@ spec:
                             type: object
                         type: object
                       spotIamFleetRole:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EC2 Spot Fleet IAM role applied to a SPOT compute environment.
-                          This parameter is required for SPOT compute environments.
-                          This parameter isn't applicable to jobs running on Fargate
-                          resources, and shouldn't be specified.
+                        description: ARN of the Amazon EC2 Spot Fleet IAM role applied
+                          to a SPOT compute environment. This parameter is required
+                          for SPOT compute environments. This parameter isn't applicable
+                          to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
                         description: A list of VPC subnets into which the compute
@@ -550,8 +548,7 @@ spec:
                       the compute environment. See details below.
                     properties:
                       eksClusterArn:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EKS cluster.
+                        description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
                         description: The namespace of the Amazon EKS cluster. AWS
@@ -564,9 +561,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRole:
-                    description: The full Amazon Resource Name (ARN) of the IAM role
-                      that allows AWS Batch to make calls to other AWS services on
-                      your behalf.
+                    description: Full ARN of the IAM role that allows AWS Batch to
+                      make calls to other AWS services on your behalf.
                     type: string
                   serviceRoleRef:
                     description: Reference to a Role in iam to populate serviceRole.
@@ -723,11 +719,11 @@ spec:
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
-                        description: Provides information used to select Amazon Machine
-                          Images (AMIs) for EC2 instances in the compute environment.
-                          If Ec2Configuration isn't specified, the default is ECS_AL2.
-                          This parameter isn't applicable to jobs that are running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Provides information used to select AMIs for
+                          EC2 instances in the compute environment. If Ec2Configuration
+                          isn't specified, the default is ECS_AL2. This parameter
+                          isn't applicable to jobs that are running on Fargate resources,
+                          and shouldn't be specified.
                         items:
                           properties:
                             imageIdOverride:
@@ -757,11 +753,10 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       imageId:
-                        description: The Amazon Machine Image (AMI) ID used for instances
-                          launched in the compute environment. This parameter isn't
-                          applicable to jobs running on Fargate resources, and shouldn't
-                          be specified. (Deprecated, use ec2_configuration image_id_override
-                          instead)
+                        description: AMI ID used for instances launched in the compute
+                          environment. This parameter isn't applicable to jobs running
+                          on Fargate resources, and shouldn't be specified. (Deprecated,
+                          use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
                         description: The Amazon ECS instance role applied to Amazon
@@ -1068,11 +1063,10 @@ spec:
                             type: object
                         type: object
                       spotIamFleetRole:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EC2 Spot Fleet IAM role applied to a SPOT compute environment.
-                          This parameter is required for SPOT compute environments.
-                          This parameter isn't applicable to jobs running on Fargate
-                          resources, and shouldn't be specified.
+                        description: ARN of the Amazon EC2 Spot Fleet IAM role applied
+                          to a SPOT compute environment. This parameter is required
+                          for SPOT compute environments. This parameter isn't applicable
+                          to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
                         description: A list of VPC subnets into which the compute
@@ -1184,8 +1178,7 @@ spec:
                       the compute environment. See details below.
                     properties:
                       eksClusterArn:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EKS cluster.
+                        description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
                         description: The namespace of the Amazon EKS cluster. AWS
@@ -1193,9 +1186,8 @@ spec:
                         type: string
                     type: object
                   serviceRole:
-                    description: The full Amazon Resource Name (ARN) of the IAM role
-                      that allows AWS Batch to make calls to other AWS services on
-                      your behalf.
+                    description: Full ARN of the IAM role that allows AWS Batch to
+                      make calls to other AWS services on your behalf.
                     type: string
                   serviceRoleRef:
                     description: Reference to a Role in iam to populate serviceRole.
@@ -1376,7 +1368,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the compute environment.
+                    description: ARN of the compute environment.
                     type: string
                   computeResources:
                     description: Details of the compute resources managed by the compute
@@ -1408,11 +1400,11 @@ spec:
                           on Fargate resources, and shouldn't be specified.
                         type: number
                       ec2Configuration:
-                        description: Provides information used to select Amazon Machine
-                          Images (AMIs) for EC2 instances in the compute environment.
-                          If Ec2Configuration isn't specified, the default is ECS_AL2.
-                          This parameter isn't applicable to jobs that are running
-                          on Fargate resources, and shouldn't be specified.
+                        description: Provides information used to select AMIs for
+                          EC2 instances in the compute environment. If Ec2Configuration
+                          isn't specified, the default is ECS_AL2. This parameter
+                          isn't applicable to jobs that are running on Fargate resources,
+                          and shouldn't be specified.
                         items:
                           properties:
                             imageIdOverride:
@@ -1442,11 +1434,10 @@ spec:
                           to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       imageId:
-                        description: The Amazon Machine Image (AMI) ID used for instances
-                          launched in the compute environment. This parameter isn't
-                          applicable to jobs running on Fargate resources, and shouldn't
-                          be specified. (Deprecated, use ec2_configuration image_id_override
-                          instead)
+                        description: AMI ID used for instances launched in the compute
+                          environment. This parameter isn't applicable to jobs running
+                          on Fargate resources, and shouldn't be specified. (Deprecated,
+                          use ec2_configuration image_id_override instead)
                         type: string
                       instanceRole:
                         description: The Amazon ECS instance role applied to Amazon
@@ -1504,11 +1495,10 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       spotIamFleetRole:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EC2 Spot Fleet IAM role applied to a SPOT compute environment.
-                          This parameter is required for SPOT compute environments.
-                          This parameter isn't applicable to jobs running on Fargate
-                          resources, and shouldn't be specified.
+                        description: ARN of the Amazon EC2 Spot Fleet IAM role applied
+                          to a SPOT compute environment. This parameter is required
+                          for SPOT compute environments. This parameter isn't applicable
+                          to jobs running on Fargate resources, and shouldn't be specified.
                         type: string
                       subnets:
                         description: A list of VPC subnets into which the compute
@@ -1532,16 +1522,15 @@ spec:
                         type: string
                     type: object
                   ecsClusterArn:
-                    description: The Amazon Resource Name (ARN) of the underlying
-                      Amazon ECS cluster used by the compute environment.
+                    description: ARN of the underlying Amazon ECS cluster used by
+                      the compute environment.
                     type: string
                   eksConfiguration:
                     description: Details for the Amazon EKS cluster that supports
                       the compute environment. See details below.
                     properties:
                       eksClusterArn:
-                        description: The Amazon Resource Name (ARN) of the Amazon
-                          EKS cluster.
+                        description: ARN of the Amazon EKS cluster.
                         type: string
                       kubernetesNamespace:
                         description: The namespace of the Amazon EKS cluster. AWS
@@ -1556,9 +1545,8 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serviceRole:
-                    description: The full Amazon Resource Name (ARN) of the IAM role
-                      that allows AWS Batch to make calls to other AWS services on
-                      your behalf.
+                    description: Full ARN of the IAM role that allows AWS Batch to
+                      make calls to other AWS services on your behalf.
                     type: string
                   state:
                     description: The state of the compute environment. If the state

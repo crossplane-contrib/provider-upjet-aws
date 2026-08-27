@@ -18,7 +18,7 @@ type ResourceInitParameters struct {
 	// JSON string matching the CloudFormation resource type schema with desired configuration.
 	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
+	// ARN of the IAM Role to assume for operations.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -55,7 +55,7 @@ type ResourceObservation struct {
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
+	// ARN of the IAM Role to assume for operations.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// CloudFormation resource type name. For example, AWS::EC2::VPC.
@@ -76,7 +76,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// Amazon Resource Name (ARN) of the IAM Role to assume for operations.
+	// ARN of the IAM Role to assume for operations.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional

@@ -221,8 +221,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN (Amazon Resource Name) of the Amazon Chime Voice
-                      Connector.
+                    description: ARN of the Amazon Chime Voice Connector.
                     type: string
                   awsRegion:
                     description: 'The AWS Region in which the Amazon Chime Voice Connector

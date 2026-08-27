@@ -13,45 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type ConfigurationInitParameters struct {
-
-	// Consolidation configuration for processing and organizing memory content. See consolidation below. Once added, this block cannot be removed without recreating the resource.
-	Consolidation *ConsolidationInitParameters `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
-
-	// Extraction configuration for identifying and extracting relevant information. See extraction below. Cannot be used with type set to SUMMARY_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
-	Extraction *ExtractionInitParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
-
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type ConfigurationObservation struct {
-
-	// Consolidation configuration for processing and organizing memory content. See consolidation below. Once added, this block cannot be removed without recreating the resource.
-	Consolidation *ConsolidationObservation `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
-
-	// Extraction configuration for identifying and extracting relevant information. See extraction below. Cannot be used with type set to SUMMARY_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
-	Extraction *ExtractionObservation `json:"extraction,omitempty" tf:"extraction,omitempty"`
-
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type ConfigurationParameters struct {
-
-	// Consolidation configuration for processing and organizing memory content. See consolidation below. Once added, this block cannot be removed without recreating the resource.
-	// +kubebuilder:validation:Optional
-	Consolidation *ConsolidationParameters `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
-
-	// Extraction configuration for identifying and extracting relevant information. See extraction below. Cannot be used with type set to SUMMARY_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
-	// +kubebuilder:validation:Optional
-	Extraction *ExtractionParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
-
-	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE. Changing this forces a new resource.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type ConsolidationInitParameters struct {
 
 	// Additional text to append to the model prompt for consolidation processing.
@@ -81,43 +42,247 @@ type ConsolidationParameters struct {
 	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
 }
 
+type ExtractionConfigInitParameters struct {
+
+	// Model-based extraction configuration. See llm_extraction_config Block below.
+	LlmExtractionConfig []LlmExtractionConfigInitParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+}
+
+type ExtractionConfigObservation struct {
+
+	// Model-based extraction configuration. See llm_extraction_config Block below.
+	LlmExtractionConfig []LlmExtractionConfigObservation `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+}
+
+type ExtractionConfigParameters struct {
+
+	// Model-based extraction configuration. See llm_extraction_config Block below.
+	// +kubebuilder:validation:Optional
+	LlmExtractionConfig []LlmExtractionConfigParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+}
+
 type ExtractionInitParameters struct {
 
-	// Additional text to append to the model prompt for extraction processing.
+	// Additional text to append to the model prompt for reflection processing.
 	AppendToPrompt *string `json:"appendToPrompt,omitempty" tf:"append_to_prompt,omitempty"`
 
-	// ID of the foundation model to use for extraction processing.
+	// ID of the foundation model to use for reflection processing.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 }
 
 type ExtractionObservation struct {
 
-	// Additional text to append to the model prompt for extraction processing.
+	// Additional text to append to the model prompt for reflection processing.
 	AppendToPrompt *string `json:"appendToPrompt,omitempty" tf:"append_to_prompt,omitempty"`
 
-	// ID of the foundation model to use for extraction processing.
+	// ID of the foundation model to use for reflection processing.
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 }
 
 type ExtractionParameters struct {
 
-	// Additional text to append to the model prompt for extraction processing.
+	// Additional text to append to the model prompt for reflection processing.
 	// +kubebuilder:validation:Optional
 	AppendToPrompt *string `json:"appendToPrompt" tf:"append_to_prompt,omitempty"`
 
-	// ID of the foundation model to use for extraction processing.
+	// ID of the foundation model to use for reflection processing.
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
 }
 
+type InvocationConfigurationInitParameters struct {
+
+	// S3 bucket name for event payload delivery.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
+	PayloadDeliveryBucketName *string `json:"payloadDeliveryBucketName,omitempty" tf:"payload_delivery_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate payloadDeliveryBucketName.
+	// +kubebuilder:validation:Optional
+	PayloadDeliveryBucketNameRef *v2.NamespacedReference `json:"payloadDeliveryBucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate payloadDeliveryBucketName.
+	// +kubebuilder:validation:Optional
+	PayloadDeliveryBucketNameSelector *v2.NamespacedSelector `json:"payloadDeliveryBucketNameSelector,omitempty" tf:"-"`
+
+	// ARN of the SNS topic for job notifications.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+}
+
+type InvocationConfigurationObservation struct {
+
+	// S3 bucket name for event payload delivery.
+	PayloadDeliveryBucketName *string `json:"payloadDeliveryBucketName,omitempty" tf:"payload_delivery_bucket_name,omitempty"`
+
+	// ARN of the SNS topic for job notifications.
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type InvocationConfigurationParameters struct {
+
+	// S3 bucket name for event payload delivery.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/s3/v1beta1.Bucket
+	// +kubebuilder:validation:Optional
+	PayloadDeliveryBucketName *string `json:"payloadDeliveryBucketName,omitempty" tf:"payload_delivery_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate payloadDeliveryBucketName.
+	// +kubebuilder:validation:Optional
+	PayloadDeliveryBucketNameRef *v2.NamespacedReference `json:"payloadDeliveryBucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate payloadDeliveryBucketName.
+	// +kubebuilder:validation:Optional
+	PayloadDeliveryBucketNameSelector *v2.NamespacedSelector `json:"payloadDeliveryBucketNameSelector,omitempty" tf:"-"`
+
+	// ARN of the SNS topic for job notifications.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v2.NamespacedReference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v2.NamespacedSelector `json:"topicArnSelector,omitempty" tf:"-"`
+}
+
+type LlmExtractionConfigInitParameters struct {
+
+	// Description of what this metadata field represents.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// Instructions for extraction. Supports built-in operators like LATEST_VALUE or custom natural-language instructions.
+	LlmExtractionInstruction *string `json:"llmExtractionInstruction,omitempty" tf:"llm_extraction_instruction,omitempty"`
+
+	// Validation rules to constrain extracted values. See validation Block below.
+	Validation []ValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
+}
+
+type LlmExtractionConfigObservation struct {
+
+	// Description of what this metadata field represents.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// Instructions for extraction. Supports built-in operators like LATEST_VALUE or custom natural-language instructions.
+	LlmExtractionInstruction *string `json:"llmExtractionInstruction,omitempty" tf:"llm_extraction_instruction,omitempty"`
+
+	// Validation rules to constrain extracted values. See validation Block below.
+	Validation []ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
+}
+
+type LlmExtractionConfigParameters struct {
+
+	// Description of what this metadata field represents.
+	// +kubebuilder:validation:Optional
+	Definition *string `json:"definition" tf:"definition,omitempty"`
+
+	// Instructions for extraction. Supports built-in operators like LATEST_VALUE or custom natural-language instructions.
+	// +kubebuilder:validation:Optional
+	LlmExtractionInstruction *string `json:"llmExtractionInstruction,omitempty" tf:"llm_extraction_instruction,omitempty"`
+
+	// Validation rules to constrain extracted values. See validation Block below.
+	// +kubebuilder:validation:Optional
+	Validation []ValidationParameters `json:"validation,omitempty" tf:"validation,omitempty"`
+}
+
+type MemoryRecordSchemaInitParameters struct {
+
+	// List of metadata field definitions for records generated by this strategy. See metadata_schema Block below.
+	MetadataSchema []MetadataSchemaInitParameters `json:"metadataSchema,omitempty" tf:"metadata_schema,omitempty"`
+}
+
+type MemoryRecordSchemaObservation struct {
+
+	// List of metadata field definitions for records generated by this strategy. See metadata_schema Block below.
+	MetadataSchema []MetadataSchemaObservation `json:"metadataSchema,omitempty" tf:"metadata_schema,omitempty"`
+}
+
+type MemoryRecordSchemaParameters struct {
+
+	// List of metadata field definitions for records generated by this strategy. See metadata_schema Block below.
+	// +kubebuilder:validation:Optional
+	MetadataSchema []MetadataSchemaParameters `json:"metadataSchema,omitempty" tf:"metadata_schema,omitempty"`
+}
+
+type MemoryStrategyConfigurationInitParameters struct {
+
+	// Consolidation configuration for the memory strategy. See consolidation Block below. Cannot be used with type set to SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	Consolidation *ConsolidationInitParameters `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
+
+	// Extraction configuration for the memory strategy. See extraction Block below. Cannot be used with type set to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	Extraction *ExtractionInitParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
+
+	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
+	Reflection []ReflectionInitParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
+
+	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
+	SelfManagedConfiguration []SelfManagedConfigurationInitParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MemoryStrategyConfigurationObservation struct {
+
+	// Consolidation configuration for the memory strategy. See consolidation Block below. Cannot be used with type set to SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	Consolidation *ConsolidationObservation `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
+
+	// Extraction configuration for the memory strategy. See extraction Block below. Cannot be used with type set to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	Extraction *ExtractionObservation `json:"extraction,omitempty" tf:"extraction,omitempty"`
+
+	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
+	Reflection []ReflectionObservation `json:"reflection,omitempty" tf:"reflection,omitempty"`
+
+	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
+	SelfManagedConfiguration []SelfManagedConfigurationObservation `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MemoryStrategyConfigurationParameters struct {
+
+	// Consolidation configuration for the memory strategy. See consolidation Block below. Cannot be used with type set to SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	// +kubebuilder:validation:Optional
+	Consolidation *ConsolidationParameters `json:"consolidation,omitempty" tf:"consolidation,omitempty"`
+
+	// Extraction configuration for the memory strategy. See extraction Block below. Cannot be used with type set to SUMMARY_OVERRIDE or SELF_MANAGED. Once added, this block cannot be removed without recreating the resource.
+	// +kubebuilder:validation:Optional
+	Extraction *ExtractionParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
+
+	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
+	// +kubebuilder:validation:Optional
+	Reflection []ReflectionParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
+
+	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
+	// +kubebuilder:validation:Optional
+	SelfManagedConfiguration []SelfManagedConfigurationParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+
+	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type MemoryStrategyInitParameters struct {
 
-	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration below.
-	Configuration *ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration Block below.
+	Configuration *MemoryStrategyConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Description of the memory strategy.
+	// Description of the memory strategy. Once set, a description cannot be removed via update because the service API ignores a null description and retains the previously stored value.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ARN of the IAM role that the memory service assumes to perform operations.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	MemoryExecutionRoleArn *string `json:"memoryExecutionRoleArn,omitempty" tf:"memory_execution_role_arn,omitempty"`
@@ -143,12 +308,22 @@ type MemoryStrategyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	MemoryIDSelector *v2.NamespacedSelector `json:"memoryIdSelector,omitempty" tf:"-"`
 
-	// Name of the memory strategy.
+	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
+	MemoryRecordSchema []MemoryRecordSchemaInitParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+
+	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Namespaces help organize and scope memory content.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
+
+	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
+	ReflectionConfiguration []ReflectionConfigurationInitParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -156,28 +331,39 @@ type MemoryStrategyInitParameters struct {
 
 type MemoryStrategyObservation struct {
 
-	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration below.
-	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration Block below.
+	Configuration *MemoryStrategyConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Description of the memory strategy.
+	// Description of the memory strategy. Once set, a description cannot be removed via update because the service API ignores a null description and retains the previously stored value.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ARN of the IAM role that the memory service assumes to perform operations.
 	MemoryExecutionRoleArn *string `json:"memoryExecutionRoleArn,omitempty" tf:"memory_execution_role_arn,omitempty"`
 
 	// ID of the memory to associate with this strategy. Changing this forces a new resource.
 	MemoryID *string `json:"memoryId,omitempty" tf:"memory_id,omitempty"`
 
+	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
+	MemoryRecordSchema []MemoryRecordSchemaObservation `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+
 	// Unique identifier of the Memory Strategy. This corresponds to the service strategyId identifier (AWS API / CloudFormation terminology).
 	MemoryStrategyID *string `json:"memoryStrategyId,omitempty" tf:"memory_strategy_id,omitempty"`
 
-	// Name of the memory strategy.
+	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Namespaces help organize and scope memory content.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
+
+	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
+	ReflectionConfiguration []ReflectionConfigurationObservation `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -189,14 +375,15 @@ type MemoryStrategyObservation struct {
 
 type MemoryStrategyParameters struct {
 
-	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration below.
+	// Custom configuration block. Required when type is CUSTOM, must be omitted for other types. See configuration Block below.
 	// +kubebuilder:validation:Optional
-	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	Configuration *MemoryStrategyConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Description of the memory strategy.
+	// Description of the memory strategy. Once set, a description cannot be removed via update because the service API ignores a null description and retains the previously stored value.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ARN of the IAM role that the memory service assumes to perform operations.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -224,14 +411,27 @@ type MemoryStrategyParameters struct {
 	// +kubebuilder:validation:Optional
 	MemoryIDSelector *v2.NamespacedSelector `json:"memoryIdSelector,omitempty" tf:"-"`
 
-	// Name of the memory strategy.
+	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
+	// +kubebuilder:validation:Optional
+	MemoryRecordSchema []MemoryRecordSchemaParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+
+	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of namespace identifiers where this strategy applies. Namespaces help organize and scope memory content.
+	// Set containing exactly one namespace template where this strategy applies (for example /strategies/{memoryStrategyId}/actors/{actorId}/sessions/{sessionId}). Namespace templates help organize and scope memory content. Exactly one of namespace_templates or namespaces must be configured for all strategies except CUSTOM strategies using SELF_MANAGED configuration.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+
+	// Set of namespace identifiers where this strategy applies. Exactly one of namespaces or namespace_templates must be configured. The API treats this as a legacy parameter; prefer namespace_templates. Since the API mirrors the two fields, switching an existing configuration from namespaces to namespace_templates with the same value is an in-place no-op.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
+
+	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
+	// +kubebuilder:validation:Optional
+	ReflectionConfiguration []ReflectionConfigurationParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -241,6 +441,427 @@ type MemoryStrategyParameters struct {
 	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MessageBasedTriggerInitParameters struct {
+
+	// Number of messages that trigger memory processing. Accepts values from 1 to 50.
+	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
+}
+
+type MessageBasedTriggerObservation struct {
+
+	// Number of messages that trigger memory processing. Accepts values from 1 to 50.
+	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
+}
+
+type MessageBasedTriggerParameters struct {
+
+	// Number of messages that trigger memory processing. Accepts values from 1 to 50.
+	// +kubebuilder:validation:Optional
+	MessageCount *float64 `json:"messageCount" tf:"message_count,omitempty"`
+}
+
+type MetadataSchemaInitParameters struct {
+
+	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
+	ExtractionConfig []ExtractionConfigInitParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+
+	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
+	ExtractionType *string `json:"extractionType,omitempty" tf:"extraction_type,omitempty"`
+
+	// Metadata field name. Must match an indexed key to be queryable via metadata filters.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Metadata value type. Valid values: STRING, STRINGLIST, NUMBER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MetadataSchemaObservation struct {
+
+	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
+	ExtractionConfig []ExtractionConfigObservation `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+
+	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
+	ExtractionType *string `json:"extractionType,omitempty" tf:"extraction_type,omitempty"`
+
+	// Metadata field name. Must match an indexed key to be queryable via metadata filters.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Metadata value type. Valid values: STRING, STRINGLIST, NUMBER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MetadataSchemaParameters struct {
+
+	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
+	// +kubebuilder:validation:Optional
+	ExtractionConfig []ExtractionConfigParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+
+	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
+	// +kubebuilder:validation:Optional
+	ExtractionType *string `json:"extractionType,omitempty" tf:"extraction_type,omitempty"`
+
+	// Metadata field name. Must match an indexed key to be queryable via metadata filters.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Metadata value type. Valid values: STRING, STRINGLIST, NUMBER.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type NumberValidationInitParameters struct {
+
+	// Maximum allowed value.
+	MaxValue *float64 `json:"maxValue,omitempty" tf:"max_value,omitempty"`
+
+	// Minimum allowed value.
+	MinValue *float64 `json:"minValue,omitempty" tf:"min_value,omitempty"`
+}
+
+type NumberValidationObservation struct {
+
+	// Maximum allowed value.
+	MaxValue *float64 `json:"maxValue,omitempty" tf:"max_value,omitempty"`
+
+	// Minimum allowed value.
+	MinValue *float64 `json:"minValue,omitempty" tf:"min_value,omitempty"`
+}
+
+type NumberValidationParameters struct {
+
+	// Maximum allowed value.
+	// +kubebuilder:validation:Optional
+	MaxValue *float64 `json:"maxValue,omitempty" tf:"max_value,omitempty"`
+
+	// Minimum allowed value.
+	// +kubebuilder:validation:Optional
+	MinValue *float64 `json:"minValue,omitempty" tf:"min_value,omitempty"`
+}
+
+type ReflectionConfigurationInitParameters struct {
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+}
+
+type ReflectionConfigurationObservation struct {
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+}
+
+type ReflectionConfigurationParameters struct {
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates" tf:"namespace_templates,omitempty"`
+}
+
+type ReflectionInitParameters struct {
+
+	// Additional text to append to the model prompt for reflection processing.
+	AppendToPrompt *string `json:"appendToPrompt,omitempty" tf:"append_to_prompt,omitempty"`
+
+	// ID of the foundation model to use for reflection processing.
+	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+}
+
+type ReflectionObservation struct {
+
+	// Additional text to append to the model prompt for reflection processing.
+	AppendToPrompt *string `json:"appendToPrompt,omitempty" tf:"append_to_prompt,omitempty"`
+
+	// ID of the foundation model to use for reflection processing.
+	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates,omitempty" tf:"namespace_templates,omitempty"`
+}
+
+type ReflectionParameters struct {
+
+	// Additional text to append to the model prompt for reflection processing.
+	// +kubebuilder:validation:Optional
+	AppendToPrompt *string `json:"appendToPrompt" tf:"append_to_prompt,omitempty"`
+
+	// ID of the foundation model to use for reflection processing.
+	// +kubebuilder:validation:Optional
+	ModelID *string `json:"modelId" tf:"model_id,omitempty"`
+
+	// Namespace templates over which to create reflections. Can be less nested than episode namespaces.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	NamespaceTemplates []*string `json:"namespaceTemplates" tf:"namespace_templates,omitempty"`
+}
+
+type SelfManagedConfigurationInitParameters struct {
+
+	// Number of historical messages to include in processing context. Valid range: 0 to 50. Defaults to 4.
+	HistoricalContextWindowSize *float64 `json:"historicalContextWindowSize,omitempty" tf:"historical_context_window_size,omitempty"`
+
+	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
+	InvocationConfiguration []InvocationConfigurationInitParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+
+	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
+	TriggerConditions []TriggerConditionsInitParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+}
+
+type SelfManagedConfigurationObservation struct {
+
+	// Number of historical messages to include in processing context. Valid range: 0 to 50. Defaults to 4.
+	HistoricalContextWindowSize *float64 `json:"historicalContextWindowSize,omitempty" tf:"historical_context_window_size,omitempty"`
+
+	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
+	InvocationConfiguration []InvocationConfigurationObservation `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+
+	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
+	TriggerConditions []TriggerConditionsObservation `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+
+	// Actual deployed trigger conditions.
+	TriggerConditionsActual []TriggerConditionsActualObservation `json:"triggerConditionsActual,omitempty" tf:"trigger_conditions_actual,omitempty"`
+}
+
+type SelfManagedConfigurationParameters struct {
+
+	// Number of historical messages to include in processing context. Valid range: 0 to 50. Defaults to 4.
+	// +kubebuilder:validation:Optional
+	HistoricalContextWindowSize *float64 `json:"historicalContextWindowSize,omitempty" tf:"historical_context_window_size,omitempty"`
+
+	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
+	// +kubebuilder:validation:Optional
+	InvocationConfiguration []InvocationConfigurationParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+
+	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
+	// +kubebuilder:validation:Optional
+	TriggerConditions []TriggerConditionsParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+}
+
+type StringListValidationInitParameters struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	AllowedValues []*string `json:"allowedValues,omitempty" tf:"allowed_values,omitempty"`
+
+	// Maximum number of items in the string list.
+	MaxItems *float64 `json:"maxItems,omitempty" tf:"max_items,omitempty"`
+}
+
+type StringListValidationObservation struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	AllowedValues []*string `json:"allowedValues,omitempty" tf:"allowed_values,omitempty"`
+
+	// Maximum number of items in the string list.
+	MaxItems *float64 `json:"maxItems,omitempty" tf:"max_items,omitempty"`
+}
+
+type StringListValidationParameters struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	// +kubebuilder:validation:Optional
+	AllowedValues []*string `json:"allowedValues,omitempty" tf:"allowed_values,omitempty"`
+
+	// Maximum number of items in the string list.
+	// +kubebuilder:validation:Optional
+	MaxItems *float64 `json:"maxItems,omitempty" tf:"max_items,omitempty"`
+}
+
+type StringValidationInitParameters struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	AllowedValues []*string `json:"allowedValues,omitempty" tf:"allowed_values,omitempty"`
+}
+
+type StringValidationObservation struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	AllowedValues []*string `json:"allowedValues,omitempty" tf:"allowed_values,omitempty"`
+}
+
+type StringValidationParameters struct {
+
+	// Allowed values for items in this STRINGLIST field.
+	// +kubebuilder:validation:Optional
+	AllowedValues []*string `json:"allowedValues" tf:"allowed_values,omitempty"`
+}
+
+type TimeBasedTriggerInitParameters struct {
+
+	// Idle session timeout (seconds) that triggers memory processing. Accepts values from 10 to 3000.
+	IdleSessionTimeout *float64 `json:"idleSessionTimeout,omitempty" tf:"idle_session_timeout,omitempty"`
+}
+
+type TimeBasedTriggerObservation struct {
+
+	// Idle session timeout (seconds) that triggers memory processing. Accepts values from 10 to 3000.
+	IdleSessionTimeout *float64 `json:"idleSessionTimeout,omitempty" tf:"idle_session_timeout,omitempty"`
+}
+
+type TimeBasedTriggerParameters struct {
+
+	// Idle session timeout (seconds) that triggers memory processing. Accepts values from 10 to 3000.
+	// +kubebuilder:validation:Optional
+	IdleSessionTimeout *float64 `json:"idleSessionTimeout" tf:"idle_session_timeout,omitempty"`
+}
+
+type TokenBasedTriggerInitParameters struct {
+
+	// Number of tokens that trigger memory processing. Accepts values from 100 to 500000.
+	TokenCount *float64 `json:"tokenCount,omitempty" tf:"token_count,omitempty"`
+}
+
+type TokenBasedTriggerObservation struct {
+
+	// Number of tokens that trigger memory processing. Accepts values from 100 to 500000.
+	TokenCount *float64 `json:"tokenCount,omitempty" tf:"token_count,omitempty"`
+}
+
+type TokenBasedTriggerParameters struct {
+
+	// Number of tokens that trigger memory processing. Accepts values from 100 to 500000.
+	// +kubebuilder:validation:Optional
+	TokenCount *float64 `json:"tokenCount" tf:"token_count,omitempty"`
+}
+
+type TriggerConditionsActualInitParameters struct {
+}
+
+type TriggerConditionsActualMessageBasedTriggerInitParameters struct {
+}
+
+type TriggerConditionsActualMessageBasedTriggerObservation struct {
+
+	// Number of messages that trigger memory processing.
+	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
+}
+
+type TriggerConditionsActualMessageBasedTriggerParameters struct {
+}
+
+type TriggerConditionsActualObservation struct {
+
+	// Message-based condition.
+	MessageBasedTrigger []TriggerConditionsActualMessageBasedTriggerObservation `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+
+	// Idle-time condition.
+	TimeBasedTrigger []TriggerConditionsActualTimeBasedTriggerObservation `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+
+	// Token-based condition.
+	TokenBasedTrigger []TriggerConditionsActualTokenBasedTriggerObservation `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+}
+
+type TriggerConditionsActualParameters struct {
+}
+
+type TriggerConditionsActualTimeBasedTriggerInitParameters struct {
+}
+
+type TriggerConditionsActualTimeBasedTriggerObservation struct {
+
+	// Idle session timeout (seconds) that triggers memory processing.
+	IdleSessionTimeout *float64 `json:"idleSessionTimeout,omitempty" tf:"idle_session_timeout,omitempty"`
+}
+
+type TriggerConditionsActualTimeBasedTriggerParameters struct {
+}
+
+type TriggerConditionsActualTokenBasedTriggerInitParameters struct {
+}
+
+type TriggerConditionsActualTokenBasedTriggerObservation struct {
+
+	// Number of tokens that trigger memory processing.
+	TokenCount *float64 `json:"tokenCount,omitempty" tf:"token_count,omitempty"`
+}
+
+type TriggerConditionsActualTokenBasedTriggerParameters struct {
+}
+
+type TriggerConditionsInitParameters struct {
+
+	// Message-based condition. See message_based_trigger Block below.
+	MessageBasedTrigger []MessageBasedTriggerInitParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+
+	// Idle-time condition. See time_based_trigger Block below.
+	TimeBasedTrigger []TimeBasedTriggerInitParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+
+	// Token-based condition. See token_based_trigger Block below.
+	TokenBasedTrigger []TokenBasedTriggerInitParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+}
+
+type TriggerConditionsObservation struct {
+
+	// Message-based condition. See message_based_trigger Block below.
+	MessageBasedTrigger []MessageBasedTriggerObservation `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+
+	// Idle-time condition. See time_based_trigger Block below.
+	TimeBasedTrigger []TimeBasedTriggerObservation `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+
+	// Token-based condition. See token_based_trigger Block below.
+	TokenBasedTrigger []TokenBasedTriggerObservation `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+}
+
+type TriggerConditionsParameters struct {
+
+	// Message-based condition. See message_based_trigger Block below.
+	// +kubebuilder:validation:Optional
+	MessageBasedTrigger []MessageBasedTriggerParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+
+	// Idle-time condition. See time_based_trigger Block below.
+	// +kubebuilder:validation:Optional
+	TimeBasedTrigger []TimeBasedTriggerParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+
+	// Token-based condition. See token_based_trigger Block below.
+	// +kubebuilder:validation:Optional
+	TokenBasedTrigger []TokenBasedTriggerParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+}
+
+type ValidationInitParameters struct {
+
+	// Validation for NUMBER fields. See number_validation Block below.
+	NumberValidation []NumberValidationInitParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+
+	// Validation for STRINGLIST fields. See string_list_validation Block below.
+	StringListValidation []StringListValidationInitParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+
+	// Validation for STRING fields. See string_validation Block below.
+	StringValidation []StringValidationInitParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
+}
+
+type ValidationObservation struct {
+
+	// Validation for NUMBER fields. See number_validation Block below.
+	NumberValidation []NumberValidationObservation `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+
+	// Validation for STRINGLIST fields. See string_list_validation Block below.
+	StringListValidation []StringListValidationObservation `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+
+	// Validation for STRING fields. See string_validation Block below.
+	StringValidation []StringValidationObservation `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
+}
+
+type ValidationParameters struct {
+
+	// Validation for NUMBER fields. See number_validation Block below.
+	// +kubebuilder:validation:Optional
+	NumberValidation []NumberValidationParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+
+	// Validation for STRINGLIST fields. See string_list_validation Block below.
+	// +kubebuilder:validation:Optional
+	StringListValidation []StringListValidationParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+
+	// Validation for STRING fields. See string_validation Block below.
+	// +kubebuilder:validation:Optional
+	StringValidation []StringValidationParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
 }
 
 // MemoryStrategySpec defines the desired state of MemoryStrategy
@@ -280,7 +901,6 @@ type MemoryStrategy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaces) || (has(self.initProvider) && has(self.initProvider.namespaces))",message="spec.forProvider.namespaces is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
 	Spec   MemoryStrategySpec   `json:"spec"`
 	Status MemoryStrategyStatus `json:"status,omitempty"`

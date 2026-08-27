@@ -5594,6 +5594,11 @@ func (in *PodIdentityAssociationInitParameters_2) DeepCopyInto(out *PodIdentityA
 		*out = new(string)
 		**out = **in
 	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -5752,6 +5757,11 @@ func (in *PodIdentityAssociationObservation_2) DeepCopyInto(out *PodIdentityAsso
 		*out = new(string)
 		**out = **in
 	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -5866,6 +5876,11 @@ func (in *PodIdentityAssociationParameters_2) DeepCopyInto(out *PodIdentityAssoc
 	}
 	if in.Namespace != nil {
 		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
 		*out = new(string)
 		**out = **in
 	}

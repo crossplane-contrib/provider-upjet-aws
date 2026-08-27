@@ -103,7 +103,7 @@ type ClusterInstanceObservation struct {
 	// are applied immediately, or during the next maintenance window. Default isfalse.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// Amazon Resource Name (ARN) of neptune instance
+	// ARN of neptune instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Indicates that minor engine upgrades will be applied automatically to the instance during the maintenance window. Default is true.

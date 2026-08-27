@@ -66,7 +66,7 @@ type TrackerObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all AWS.
+	// ARN for the tracker resource. Used when you need to specify a resource across all AWS.
 	TrackerArn *string `json:"trackerArn,omitempty" tf:"tracker_arn,omitempty"`
 
 	// The timestamp for when the tracker resource was last updated in ISO 8601 format.

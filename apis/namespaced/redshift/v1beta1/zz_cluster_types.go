@@ -38,7 +38,7 @@ type ClusterInitParameters struct {
 	// The name of the parameter group to be associated with this cluster.
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
-	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
+	// Name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside VPC.
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
 
 	// The cluster type to use. Either single-node or multi-node.
@@ -52,7 +52,7 @@ type ClusterInitParameters struct {
 	// If you do not provide a name, Amazon Redshift will create a default database called dev.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
+	// ARN for the IAM role that was set as default for the cluster when the cluster was created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
@@ -188,7 +188,7 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
+	// List of VPC security groups to be associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
@@ -227,7 +227,7 @@ type ClusterObservation struct {
 	// Always returns auto.
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
-	// Amazon Resource Name (ARN) of cluster
+	// ARN of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
@@ -239,7 +239,7 @@ type ClusterObservation struct {
 	// If true, the cluster can be relocated to another availabity zone, either automatically by AWS or when requested. Default is false. Available for use on clusters from the RA3 instance family.
 	AvailabilityZoneRelocationEnabled *bool `json:"availabilityZoneRelocationEnabled,omitempty" tf:"availability_zone_relocation_enabled,omitempty"`
 
-	// The namespace Amazon Resource Name (ARN) of the cluster
+	// Namespace ARN of the cluster
 	ClusterNamespaceArn *string `json:"clusterNamespaceArn,omitempty" tf:"cluster_namespace_arn,omitempty"`
 
 	// The nodes in the cluster. Cluster node blocks are documented below
@@ -254,7 +254,7 @@ type ClusterObservation struct {
 	// The specific revision number of the database in the cluster
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
 
-	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
+	// Name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside VPC.
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
 
 	// The cluster type to use. Either single-node or multi-node.
@@ -271,7 +271,7 @@ type ClusterObservation struct {
 	// If you do not provide a name, Amazon Redshift will create a default database called dev.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
+	// ARN for the IAM role that was set as default for the cluster when the cluster was created.
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
 	// The Elastic IP (EIP) address for the cluster.
@@ -372,7 +372,7 @@ type ClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
+	// List of VPC security groups to be associated with the cluster.
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
@@ -409,7 +409,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterParameterGroupName *string `json:"clusterParameterGroupName,omitempty" tf:"cluster_parameter_group_name,omitempty"`
 
-	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
+	// Name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside VPC.
 	// +kubebuilder:validation:Optional
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
 
@@ -427,7 +427,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
+	// ARN for the IAM role that was set as default for the cluster when the cluster was created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/v2/config/cluster/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -595,7 +595,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIDSelector *v2.NamespacedSelector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
+	// List of VPC security groups to be associated with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector

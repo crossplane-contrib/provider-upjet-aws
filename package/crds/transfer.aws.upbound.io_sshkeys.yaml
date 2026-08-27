@@ -74,8 +74,7 @@ spec:
               forProvider:
                 properties:
                   body:
-                    description: (Requirement) The public key portion of an SSH key
-                      pair.
+                    description: Public key portion of an SSH key pair.
                     type: string
                   region:
                     description: |-
@@ -83,8 +82,7 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serverId:
-                    description: (Requirement) The Server ID of the Transfer Server
-                      (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   serverIdRef:
                     description: Reference to a Server in transfer to populate serverId.
@@ -161,8 +159,8 @@ spec:
                         type: object
                     type: object
                   userName:
-                    description: (Requirement) The name of the user account that is
-                      assigned to one or more servers.
+                    description: Name of the user account that is assigned to one
+                      or more servers.
                     type: string
                   userNameRef:
                     description: Reference to a User in transfer to populate userName.
@@ -255,12 +253,10 @@ spec:
                   autoscaler.
                 properties:
                   body:
-                    description: (Requirement) The public key portion of an SSH key
-                      pair.
+                    description: Public key portion of an SSH key pair.
                     type: string
                   serverId:
-                    description: (Requirement) The Server ID of the Transfer Server
-                      (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   serverIdRef:
                     description: Reference to a Server in transfer to populate serverId.
@@ -337,8 +333,8 @@ spec:
                         type: object
                     type: object
                   userName:
-                    description: (Requirement) The name of the user account that is
-                      assigned to one or more servers.
+                    description: Name of the user account that is assigned to one
+                      or more servers.
                     type: string
                   userNameRef:
                     description: Reference to a User in transfer to populate userName.
@@ -512,8 +508,7 @@ spec:
               atProvider:
                 properties:
                   body:
-                    description: (Requirement) The public key portion of an SSH key
-                      pair.
+                    description: Public key portion of an SSH key pair.
                     type: string
                   id:
                     type: string
@@ -523,14 +518,14 @@ spec:
                       Region is the region you'd like your resource to be created in.
                     type: string
                   serverId:
-                    description: (Requirement) The Server ID of the Transfer Server
-                      (e.g., s-12345678)
+                    description: Server ID of the Transfer Server (e.g., s-12345678)
                     type: string
                   sshKeyId:
+                    description: ID of the SSH public key.
                     type: string
                   userName:
-                    description: (Requirement) The name of the user account that is
-                      assigned to one or more servers.
+                    description: Name of the user account that is assigned to one
+                      or more servers.
                     type: string
                 type: object
               conditions:

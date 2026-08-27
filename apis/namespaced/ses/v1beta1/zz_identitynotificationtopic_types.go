@@ -15,7 +15,7 @@ import (
 
 type IdentityNotificationTopicInitParameters struct {
 
-	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
+	// Identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ses/v1beta1.DomainIdentity
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -30,10 +30,10 @@ type IdentityNotificationTopicInitParameters struct {
 	// Whether SES should include original email headers in SNS notifications of this type. false by default.
 	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
 
-	// The type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
+	// Type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
+	// ARN of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -50,26 +50,26 @@ type IdentityNotificationTopicInitParameters struct {
 type IdentityNotificationTopicObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
+	// Identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its ARN.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether SES should include original email headers in SNS notifications of this type. false by default.
 	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
 
-	// The type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
+	// Type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
+	// ARN of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type IdentityNotificationTopicParameters struct {
 
-	// The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN).
+	// Identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/ses/v1beta1.DomainIdentity
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -86,7 +86,7 @@ type IdentityNotificationTopicParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
 
-	// The type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
+	// Type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
 	// +kubebuilder:validation:Optional
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
@@ -95,7 +95,7 @@ type IdentityNotificationTopicParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
+	// ARN of the Amazon SNS topic. Can be set to "" (an empty string) to disable publishing.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/namespaced/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

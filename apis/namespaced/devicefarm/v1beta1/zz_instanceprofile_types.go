@@ -38,7 +38,7 @@ type InstanceProfileInitParameters struct {
 
 type InstanceProfileObservation struct {
 
-	// The Amazon Resource Name of this instance profile.
+	// ARN of this instance profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The description of the instance profile.

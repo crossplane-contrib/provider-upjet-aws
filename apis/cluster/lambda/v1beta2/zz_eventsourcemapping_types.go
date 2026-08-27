@@ -98,7 +98,7 @@ type DocumentDBEventSourceConfigInitParameters struct {
 	// Name of the database to consume within the DocumentDB cluster.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	// DocumentDB behavior during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
 	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
 }
 
@@ -110,7 +110,7 @@ type DocumentDBEventSourceConfigObservation struct {
 	// Name of the database to consume within the DocumentDB cluster.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	// DocumentDB behavior during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
 	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
 }
 
@@ -124,7 +124,7 @@ type DocumentDBEventSourceConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	// DocumentDB behavior during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
 	// +kubebuilder:validation:Optional
 	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
 }
@@ -172,7 +172,7 @@ type EventSourceMappingInitParameters struct {
 	// +listType=set
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
-	// ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's filter criteria.
+	// ARN of the KMS customer managed key that Lambda uses to encrypt your function's filter criteria.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -279,7 +279,7 @@ type EventSourceMappingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's filter criteria.
+	// ARN of the KMS customer managed key that Lambda uses to encrypt your function's filter criteria.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Date this resource was last modified.
@@ -412,7 +412,7 @@ type EventSourceMappingParameters struct {
 	// +listType=set
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
-	// ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's filter criteria.
+	// ARN of the KMS customer managed key that Lambda uses to encrypt your function's filter criteria.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/v2/apis/cluster/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -541,21 +541,21 @@ type FilterParameters struct {
 
 type MetricsConfigInitParameters struct {
 
-	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount, ErrorCount, KafkaMetrics.
 	// +listType=set
 	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 }
 
 type MetricsConfigObservation struct {
 
-	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount, ErrorCount, KafkaMetrics.
 	// +listType=set
 	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
 }
 
 type MetricsConfigParameters struct {
 
-	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// List containing the metrics to be produced by the event source mapping. Valid values: EventCount, ErrorCount, KafkaMetrics.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Metrics []*string `json:"metrics" tf:"metrics,omitempty"`
@@ -608,7 +608,7 @@ type ProvisionedPollerConfigInitParameters struct {
 	// Minimum number of event pollers this event source can scale down to. The range is between 1 and 200.
 	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
 
-	// The name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
+	// Name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
 	PollerGroupName *string `json:"pollerGroupName,omitempty" tf:"poller_group_name,omitempty"`
 }
 
@@ -620,7 +620,7 @@ type ProvisionedPollerConfigObservation struct {
 	// Minimum number of event pollers this event source can scale down to. The range is between 1 and 200.
 	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
 
-	// The name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
+	// Name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
 	PollerGroupName *string `json:"pollerGroupName,omitempty" tf:"poller_group_name,omitempty"`
 }
 
@@ -634,7 +634,7 @@ type ProvisionedPollerConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
 
-	// The name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
+	// Name of the provisioned poller group used to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.
 	// +kubebuilder:validation:Optional
 	PollerGroupName *string `json:"pollerGroupName,omitempty" tf:"poller_group_name,omitempty"`
 }
@@ -689,7 +689,7 @@ type SchemaRegistryConfigAccessConfigParameters struct {
 
 type SchemaRegistryConfigInitParameters struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	AccessConfig []AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Record format that Lambda delivers to the function after schema validation. Valid values: JSON, SOURCE.
@@ -698,13 +698,13 @@ type SchemaRegistryConfigInitParameters struct {
 	// URI of the schema registry. For AWS Glue schema registries, use the ARN of the registry. For Confluent schema registries, use the registry URL.
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	SchemaValidationConfig []SchemaValidationConfigInitParameters `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }
 
 type SchemaRegistryConfigObservation struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	AccessConfig []AccessConfigObservation `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Record format that Lambda delivers to the function after schema validation. Valid values: JSON, SOURCE.
@@ -713,13 +713,13 @@ type SchemaRegistryConfigObservation struct {
 	// URI of the schema registry. For AWS Glue schema registries, use the ARN of the registry. For Confluent schema registries, use the registry URL.
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	SchemaValidationConfig []SchemaValidationConfigObservation `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }
 
 type SchemaRegistryConfigParameters struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	// +kubebuilder:validation:Optional
 	AccessConfig []AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
@@ -731,7 +731,7 @@ type SchemaRegistryConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	// +kubebuilder:validation:Optional
 	SchemaValidationConfig []SchemaValidationConfigParameters `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }
@@ -827,7 +827,7 @@ type SelfManagedKafkaEventSourceConfigParameters struct {
 
 type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigInitParameters struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	AccessConfig []SchemaRegistryConfigAccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Record format that Lambda delivers to the function after schema validation. Valid values: JSON, SOURCE.
@@ -836,13 +836,13 @@ type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigInitParameters struct 
 	// URI of the schema registry. For AWS Glue schema registries, use the ARN of the registry. For Confluent schema registries, use the registry URL.
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	SchemaValidationConfig []SchemaRegistryConfigSchemaValidationConfigInitParameters `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }
 
 type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigObservation struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	AccessConfig []SchemaRegistryConfigAccessConfigObservation `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// Record format that Lambda delivers to the function after schema validation. Valid values: JSON, SOURCE.
@@ -851,13 +851,13 @@ type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigObservation struct {
 	// URI of the schema registry. For AWS Glue schema registries, use the ARN of the registry. For Confluent schema registries, use the registry URL.
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	SchemaValidationConfig []SchemaRegistryConfigSchemaValidationConfigObservation `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }
 
 type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigParameters struct {
 
-	// Configuration block for authentication Lambda uses to access the schema registry.
+	// Configuration block for authentication Lambda uses to access the schema registry. See below.
 	// +kubebuilder:validation:Optional
 	AccessConfig []SchemaRegistryConfigAccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
@@ -869,7 +869,7 @@ type SelfManagedKafkaEventSourceConfigSchemaRegistryConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaRegistryURI *string `json:"schemaRegistryUri,omitempty" tf:"schema_registry_uri,omitempty"`
 
-	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry.
+	// Repeatable block that defines schema validation settings. These specify the message attributes that Lambda should validate and filter using the schema registry. See below.
 	// +kubebuilder:validation:Optional
 	SchemaValidationConfig []SchemaRegistryConfigSchemaValidationConfigParameters `json:"schemaValidationConfig,omitempty" tf:"schema_validation_config,omitempty"`
 }

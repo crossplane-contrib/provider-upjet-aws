@@ -316,9 +316,8 @@ spec:
                       when performing health checks.
                     type: string
                   routingControlArn:
-                    description: The Amazon Resource Name (ARN) for the Route 53 Application
-                      Recovery Controller routing control. This is used when health
-                      check type is RECOVERY_CONTROL
+                    description: ARN for the Route 53 Application Recovery Controller
+                      routing control. This is used when health check type is RECOVERY_CONTROL
                     type: string
                   searchString:
                     description: String searched in the first 5120 bytes of the response
@@ -616,9 +615,8 @@ spec:
                       when performing health checks.
                     type: string
                   routingControlArn:
-                    description: The Amazon Resource Name (ARN) for the Route 53 Application
-                      Recovery Controller routing control. This is used when health
-                      check type is RECOVERY_CONTROL
+                    description: ARN for the Route 53 Application Recovery Controller
+                      routing control. This is used when health check type is RECOVERY_CONTROL
                     type: string
                   searchString:
                     description: String searched in the first 5120 bytes of the response
@@ -715,7 +713,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Health Check.
+                    description: ARN of the Health Check.
                     type: string
                   childHealthThreshold:
                     description: The minimum number of child health checks that must
@@ -810,9 +808,8 @@ spec:
                       when performing health checks.
                     type: string
                   routingControlArn:
-                    description: The Amazon Resource Name (ARN) for the Route 53 Application
-                      Recovery Controller routing control. This is used when health
-                      check type is RECOVERY_CONTROL
+                    description: ARN for the Route 53 Application Recovery Controller
+                      routing control. This is used when health check type is RECOVERY_CONTROL
                     type: string
                   searchString:
                     description: String searched in the first 5120 bytes of the response

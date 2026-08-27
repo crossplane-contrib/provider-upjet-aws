@@ -1669,7 +1669,7 @@ spec:
                       is specified, then organizational_units must also be present.
                     type: string
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Grafana workspace.
+                    description: ARN of the Grafana workspace.
                     type: string
                   authenticationProviders:
                     description: The authentication providers for the workspace. Valid

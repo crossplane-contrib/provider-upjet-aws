@@ -324,7 +324,7 @@ type MatchAttributesInitParameters struct {
 	// Set of configuration blocks describing the destination ports to inspect for. If not specified, this matches with any destination port. See Destination Port below for details.
 	DestinationPort []DestinationPortInitParameters `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
-	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
+	// Set of protocols to inspect for, specified using the protocol's assigned IP number (IANA). If not specified, this matches with any protocol.
 	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -346,7 +346,7 @@ type MatchAttributesObservation struct {
 	// Set of configuration blocks describing the destination ports to inspect for. If not specified, this matches with any destination port. See Destination Port below for details.
 	DestinationPort []DestinationPortObservation `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
-	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
+	// Set of protocols to inspect for, specified using the protocol's assigned IP number (IANA). If not specified, this matches with any protocol.
 	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -370,7 +370,7 @@ type MatchAttributesParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationPort []DestinationPortParameters `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
-	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
+	// Set of protocols to inspect for, specified using the protocol's assigned IP number (IANA). If not specified, this matches with any protocol.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -563,7 +563,7 @@ type RuleGroupInitParameters struct {
 
 type RuleGroupObservation struct {
 
-	// The Amazon Resource Name (ARN) that identifies the rule group.
+	// ARN that identifies the rule group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The maximum number of operating resources that this rule group can use. For a stateless rule group, the capacity required is the sum of the capacity requirements of the individual rules. For a stateful rule group, the minimum capacity required is the number of individual rules.
@@ -575,7 +575,7 @@ type RuleGroupObservation struct {
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration *RuleGroupEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) that identifies the rule group.
+	// ARN that identifies the rule group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A friendly name of the rule group.

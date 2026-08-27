@@ -65,12 +65,11 @@ spec:
                     description: The IAM inline policy to attach to a Permission Set.
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set.
+                    description: ARN of the Permission Set.
                     type: string
                   permissionSetArnRef:
                     description: Reference to a PermissionSet in ssoadmin to populate
@@ -250,19 +249,18 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The Amazon Resource Names (ARNs) of the Permission
-                      Set and SSO Instance, separated by a comma (,).
+                    description: ARNs of the Permission Set and SSO Instance, separated
+                      by a comma (,).
                     type: string
                   inlinePolicy:
                     description: The IAM inline policy to attach to a Permission Set.
                     type: string
                   instanceArn:
-                    description: The Amazon Resource Name (ARN) of the SSO Instance
-                      under which the operation will be executed.
+                    description: ARN of the SSO Instance under which the operation
+                      will be executed.
                     type: string
                   permissionSetArn:
-                    description: The Amazon Resource Name (ARN) of the Permission
-                      Set.
+                    description: ARN of the Permission Set.
                     type: string
                   region:
                     description: |-

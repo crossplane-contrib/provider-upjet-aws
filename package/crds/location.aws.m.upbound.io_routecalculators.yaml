@@ -178,8 +178,8 @@ spec:
               atProvider:
                 properties:
                   calculatorArn:
-                    description: The Amazon Resource Name (ARN) for the Route calculator
-                      resource. Use the ARN when you specify a resource across AWS.
+                    description: ARN for the Route calculator resource. Use the ARN
+                      when you specify a resource across AWS.
                     type: string
                   createTime:
                     description: The timestamp for when the route calculator resource

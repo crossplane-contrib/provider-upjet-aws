@@ -273,7 +273,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the policy.
+                    description: ARN of the policy.
                     type: string
                   content:
                     description: |-

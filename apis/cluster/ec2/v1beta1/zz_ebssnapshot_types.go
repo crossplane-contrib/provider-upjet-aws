@@ -18,7 +18,7 @@ type EBSSnapshotInitParameters struct {
 	// A description of what the snapshot is.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create a local snapshot.
+	// ARN of the Outpost on which to create a local snapshot.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Indicates whether to permanently restore an archived snapshot.
@@ -50,7 +50,7 @@ type EBSSnapshotInitParameters struct {
 
 type EBSSnapshotObservation struct {
 
-	// Amazon Resource Name (ARN) of the EBS Snapshot.
+	// ARN of the EBS Snapshot.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The data encryption key identifier for the snapshot.
@@ -68,7 +68,7 @@ type EBSSnapshotObservation struct {
 	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create a local snapshot.
+	// ARN of the Outpost on which to create a local snapshot.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Value from an Amazon-maintained list (amazon, aws-marketplace, microsoft) of snapshot owners.
@@ -111,7 +111,7 @@ type EBSSnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the Outpost on which to create a local snapshot.
+	// ARN of the Outpost on which to create a local snapshot.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 

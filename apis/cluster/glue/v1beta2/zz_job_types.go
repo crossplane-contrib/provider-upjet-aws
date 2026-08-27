@@ -171,7 +171,7 @@ type JobInitParameters struct {
 
 type JobObservation struct {
 
-	// Amazon Resource Name (ARN) of Glue Job
+	// ARN of Glue Job
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The command of the job. Defined below.

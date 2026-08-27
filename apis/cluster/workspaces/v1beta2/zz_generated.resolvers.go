@@ -108,6 +108,32 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
+	if mg.Spec.ForProvider.WorkspaceAccessProperties != nil {
+		if mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig != nil {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDRef,
+						Selector:     mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID")
+				}
+				mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	if mg.Spec.ForProvider.WorkspaceCreationProperties != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
@@ -212,6 +238,32 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 	mg.Spec.InitProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
+	if mg.Spec.InitProvider.WorkspaceAccessProperties != nil {
+		if mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig != nil {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDRef,
+						Selector:     mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID")
+				}
+				mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.WorkspaceAccessProperties.AccessEndpointConfig.AccessEndpoints[i5].VPCEndpointIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	if mg.Spec.InitProvider.WorkspaceCreationProperties != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
