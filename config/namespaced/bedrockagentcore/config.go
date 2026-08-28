@@ -49,6 +49,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagentcore_api_key_credential_provider", func(r *config.Resource) {
 		r.TerraformResource.Schema["name"].Computed = true
 		r.TerraformResource.Schema["name"].Optional = false
+		r.AddSingletonListConversion("api_key_secret_config", "apiKeySecretConfig")
 	})
 
 	// aws_bedrockagentcore_browser
@@ -143,9 +144,27 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("target_configuration", "targetConfiguration")
 		r.AddSingletonListConversion("target_configuration[*].http", "targetConfiguration[*].http")
 		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime", "targetConfiguration[*].http[*].agentcoreRuntime")
+		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime[*].schema", "targetConfiguration[*].http[*].agentcoreRuntime[*].schema")
+		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime[*].schema[*].source", "targetConfiguration[*].http[*].agentcoreRuntime[*].schema[*].source")
+		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime[*].schema[*].source[*].inline_payload", "targetConfiguration[*].http[*].agentcoreRuntime[*].schema[*].source[*].inlinePayload")
+		r.AddSingletonListConversion("target_configuration[*].http[*].agentcore_runtime[*].schema[*].source[*].s3", "targetConfiguration[*].http[*].agentcoreRuntime[*].schema[*].source[*].s3")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough", "targetConfiguration[*].http[*].passthrough")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough[*].schema", "targetConfiguration[*].http[*].passthrough[*].schema")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough[*].schema[*].source", "targetConfiguration[*].http[*].passthrough[*].schema[*].source")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough[*].schema[*].source[*].inline_payload", "targetConfiguration[*].http[*].passthrough[*].schema[*].source[*].inlinePayload")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough[*].schema[*].source[*].s3", "targetConfiguration[*].http[*].passthrough[*].schema[*].source[*].s3")
+		r.AddSingletonListConversion("target_configuration[*].http[*].passthrough[*].stickiness_configuration", "targetConfiguration[*].http[*].passthrough[*].stickinessConfiguration")
+		r.AddSingletonListConversion("target_configuration[*].inference", "targetConfiguration[*].inference")
+		r.AddSingletonListConversion("target_configuration[*].inference[*].connector", "targetConfiguration[*].inference[*].connector")
+		r.AddSingletonListConversion("target_configuration[*].inference[*].connector[*].source", "targetConfiguration[*].inference[*].connector[*].source")
+		r.AddSingletonListConversion("target_configuration[*].inference[*].provider", "targetConfiguration[*].inference[*].provider")
+		r.AddSingletonListConversion("target_configuration[*].inference[*].provider[*].model_mapping", "targetConfiguration[*].inference[*].provider[*].modelMapping")
+		r.AddSingletonListConversion("target_configuration[*].inference[*].provider[*].model_mapping[*].provider_prefix", "targetConfiguration[*].inference[*].provider[*].modelMapping[*].providerPrefix")
 		r.AddSingletonListConversion("target_configuration[*].mcp", "targetConfiguration[*].mcp")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].api_gateway", "targetConfiguration[*].mcp[*].apiGateway")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].api_gateway[*].api_gateway_tool_configuration", "targetConfiguration[*].mcp[*].apiGateway[*].apiGatewayToolConfiguration")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].connector", "targetConfiguration[*].mcp[*].connector")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].connector[*].source", "targetConfiguration[*].mcp[*].connector[*].source")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda", "targetConfiguration[*].mcp[*].lambda")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema", "targetConfiguration[*].mcp[*].lambda[*].toolSchema")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema[*].inline_payload[*].input_schema", "targetConfiguration[*].mcp[*].lambda[*].toolSchema[*].inlinePayload[*].inputSchema")
@@ -160,6 +179,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema[*].inline_payload[*].output_schema[*].property[*].items[*].items", "targetConfiguration[*].mcp[*].lambda[*].toolSchema[*].inlinePayload[*].outputSchema[*].property[*].items[*].items")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].lambda[*].tool_schema[*].s3", "targetConfiguration[*].mcp[*].lambda[*].toolSchema[*].s3")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].mcp_server", "targetConfiguration[*].mcp[*].mcpServer")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].mcp_server[*].mcp_tool_schema", "targetConfiguration[*].mcp[*].mcpServer[*].mcpToolSchema")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].mcp_server[*].mcp_tool_schema[*].inline_payload", "targetConfiguration[*].mcp[*].mcpServer[*].mcpToolSchema[*].inlinePayload")
+		r.AddSingletonListConversion("target_configuration[*].mcp[*].mcp_server[*].mcp_tool_schema[*].s3", "targetConfiguration[*].mcp[*].mcpServer[*].mcpToolSchema[*].s3")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].open_api_schema", "targetConfiguration[*].mcp[*].openApiSchema")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].open_api_schema[*].inline_payload", "targetConfiguration[*].mcp[*].openApiSchema[*].inlinePayload")
 		r.AddSingletonListConversion("target_configuration[*].mcp[*].open_api_schema[*].s3", "targetConfiguration[*].mcp[*].openApiSchema[*].s3")
@@ -225,11 +247,27 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].private_endpoint_overrides[*].private_endpoint[*].managed_vpc_resource", "authorizerConfiguration[*].customJwtAuthorizer[*].privateEndpointOverrides[*].privateEndpoint[*].managedVpcResource")
 		r.AddSingletonListConversion("authorizer_configuration[*].custom_jwt_authorizer[*].private_endpoint_overrides[*].private_endpoint[*].self_managed_lattice_resource", "authorizerConfiguration[*].customJwtAuthorizer[*].privateEndpointOverrides[*].privateEndpoint[*].selfManagedLatticeResource")
 		r.AddSingletonListConversion("environment", "environment")
+		// note: conversions below are intentionally commented-out.
+		// `environment[*].agentcore_runtime_environment` TF schema changed
+		// from nested list attribute to nested block list with SizeAtMost=1
+		// validation, during TF v6.55 -> v6.62.
+		// We are now eligible for a singleton list conversion, but this
+		// will change the MR API. We opt out to not cause a version bump,
+		// agentcore_runtime_environment stays as a list in CRD schema.
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment", "environment[*].agentcoreRuntimeEnvironment")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].filesystem_configuration[*].efs_access_point", "environment[*].agentcoreRuntimeEnvironment[*].filesystemConfiguration[*].efsAccessPoint")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].filesystem_configuration[*].s3_files_access_point", "environment[*].agentcoreRuntimeEnvironment[*].filesystemConfiguration[*].s3FilesAccessPoint")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].filesystem_configuration[*].session_storage", "environment[*].agentcoreRuntimeEnvironment[*].filesystemConfiguration[*].sessionStorage")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].lifecycle_configuration", "environment[*].agentcoreRuntimeEnvironment[*].lifecycleConfiguration")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].network_configuration", "environment[*].agentcoreRuntimeEnvironment[*].networkConfiguration")
+		// r.AddSingletonListConversion("environment[*].agentcore_runtime_environment[*].network_configuration[*].network_mode_config", "environment[*].agentcoreRuntimeEnvironment[*].networkConfiguration[*].networkModeConfig")
 		r.AddSingletonListConversion("environment_artifact", "environmentArtifact")
 		r.AddSingletonListConversion("environment_artifact[*].container_configuration", "environmentArtifact[*].containerConfiguration")
 		r.AddSingletonListConversion("memory", "memory")
 		r.AddSingletonListConversion("memory[*].agentcore_memory_configuration", "memory[*].agentcoreMemoryConfiguration")
 		r.AddSingletonListConversion("memory[*].agentcore_memory_configuration[*].retrieval_config", "memory[*].agentcoreMemoryConfiguration[*].retrievalConfig")
+		r.AddSingletonListConversion("memory[*].disabled", "memory[*].disabled")
+		r.AddSingletonListConversion("memory[*].managed_memory_configuration", "memory[*].managedMemoryConfiguration")
 		r.AddSingletonListConversion("model", "model")
 		r.AddSingletonListConversion("model[*].bedrock_model_config", "model[*].bedrockModelConfig")
 		r.AddSingletonListConversion("model[*].gemini_model_config", "model[*].geminiModelConfig")
@@ -260,6 +298,21 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.AddSingletonListConversion("configuration", "configuration")
 		r.AddSingletonListConversion("configuration[*].consolidation", "configuration[*].consolidation")
 		r.AddSingletonListConversion("configuration[*].extraction", "configuration[*].extraction")
+		r.AddSingletonListConversion("configuration[*].reflection", "configuration[*].reflection")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration", "configuration[*].selfManagedConfiguration")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration[*].invocation_configuration", "configuration[*].selfManagedConfiguration[*].invocationConfiguration")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration[*].trigger_conditions", "configuration[*].selfManagedConfiguration[*].triggerConditions")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration[*].trigger_conditions[*].message_based_trigger", "configuration[*].selfManagedConfiguration[*].triggerConditions[*].messageBasedTrigger")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration[*].trigger_conditions[*].time_based_trigger", "configuration[*].selfManagedConfiguration[*].triggerConditions[*].timeBasedTrigger")
+		r.AddSingletonListConversion("configuration[*].self_managed_configuration[*].trigger_conditions[*].token_based_trigger", "configuration[*].selfManagedConfiguration[*].triggerConditions[*].tokenBasedTrigger")
+		r.AddSingletonListConversion("memory_record_schema", "memoryRecordSchema")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config", "memoryRecordSchema[*].metadataSchema[*].extractionConfig")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config[*].llm_extraction_config", "memoryRecordSchema[*].metadataSchema[*].extractionConfig[*].llmExtractionConfig")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config[*].llm_extraction_config[*].validation", "memoryRecordSchema[*].metadataSchema[*].extractionConfig[*].llmExtractionConfig[*].validation")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config[*].llm_extraction_config[*].validation[*].number_validation", "memoryRecordSchema[*].metadataSchema[*].extractionConfig[*].llmExtractionConfig[*].validation[*].numberValidation")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config[*].llm_extraction_config[*].validation[*].string_list_validation", "memoryRecordSchema[*].metadataSchema[*].extractionConfig[*].llmExtractionConfig[*].validation[*].stringListValidation")
+		r.AddSingletonListConversion("memory_record_schema[*].metadata_schema[*].extraction_config[*].llm_extraction_config[*].validation[*].string_validation", "memoryRecordSchema[*].metadataSchema[*].extractionConfig[*].llmExtractionConfig[*].validation[*].stringValidation")
+		r.AddSingletonListConversion("reflection_configuration", "reflectionConfiguration")
 	})
 	// aws_bedrockagentcore_oauth2_credential_provider
 	p.AddResourceConfigurator("aws_bedrockagentcore_oauth2_credential_provider", func(r *config.Resource) {
@@ -268,13 +321,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 		r.AddSingletonListConversion("oauth2_provider_config", "oauth2ProviderConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery")
 		r.AddSingletonListConversion("oauth2_provider_config[*].custom_oauth2_provider_config[*].oauth_discovery[*].authorization_server_metadata", "oauth2ProviderConfig[*].customOauth2ProviderConfig[*].oauthDiscovery[*].authorizationServerMetadata")
 		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].github_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].githubOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].google_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].googleOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].microsoft_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].microsoftOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].salesforce_oauth2_provider_config", "oauth2ProviderConfig[*].salesforceOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].salesforce_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].salesforceOauth2ProviderConfig[*].clientSecretConfig")
 		r.AddSingletonListConversion("oauth2_provider_config[*].slack_oauth2_provider_config", "oauth2ProviderConfig[*].slackOauth2ProviderConfig")
+		r.AddSingletonListConversion("oauth2_provider_config[*].slack_oauth2_provider_config[*].client_secret_config", "oauth2ProviderConfig[*].slackOauth2ProviderConfig[*].clientSecretConfig")
 	})
 	// aws_bedrockagentcore_online_evaluation_config
 	p.AddResourceConfigurator("aws_bedrockagentcore_online_evaluation_config", func(r *config.Resource) {

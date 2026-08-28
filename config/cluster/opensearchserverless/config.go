@@ -20,6 +20,8 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// No CRD API change: still an embedded object in CRD,
 		// with runtime TF conversions to list with 1 element.
 		r.AddSingletonListConversion("saml_options", "samlOptions")
+		r.AddSingletonListConversion("iam_federation_options", "iamFederationOptions")
+		r.AddSingletonListConversion("iam_identity_center_options", "iamIdentityCenterOptions")
 	})
 	p.AddResourceConfigurator("aws_opensearchserverless_security_policy", func(r *config.Resource) {
 		r.TerraformConfigurationInjector = config.CanonicalizeJSONParameters("policy")
