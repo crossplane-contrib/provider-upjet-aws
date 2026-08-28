@@ -21,7 +21,6 @@ spec:
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: bedrock-agentcore-role-code
-      namespace: upbound-system
     agentRuntimeArtifact:
       codeConfiguration:
         entryPoint:
