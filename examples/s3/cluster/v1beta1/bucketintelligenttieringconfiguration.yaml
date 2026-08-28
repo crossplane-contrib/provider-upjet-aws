@@ -5,6 +5,8 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketIntelligentTieringConfiguration
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
   name: example
 spec:
   forProvider:

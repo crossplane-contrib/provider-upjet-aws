@@ -12,6 +12,8 @@
 apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
   name: sample-instance
   namespace: upbound-system
 spec:
