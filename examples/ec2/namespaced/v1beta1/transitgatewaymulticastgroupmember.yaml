@@ -6,6 +6,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: TransitGatewayMulticastGroupMember
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: ec2/v1beta1/transitgatewaymulticastgroupmember
   labels:
     testing.upbound.io/example-name: example

@@ -6,6 +6,7 @@ apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketObjectLockConfiguration
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: s3/v1beta1/bucketobjectlockconfiguration
   labels:
     testing.upbound.io/example-name: example
