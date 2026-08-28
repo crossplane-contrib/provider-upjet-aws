@@ -109,7 +109,7 @@ type CustomOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []ClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *ClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -128,7 +128,7 @@ type CustomOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []ClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *ClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -151,7 +151,7 @@ type CustomOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []ClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *ClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional
@@ -201,7 +201,7 @@ type GithubOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []GithubOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -232,7 +232,7 @@ type GithubOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []GithubOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -255,7 +255,7 @@ type GithubOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []GithubOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GithubOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional
@@ -301,7 +301,7 @@ type GoogleOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []GoogleOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -354,7 +354,7 @@ type GoogleOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []GoogleOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -377,7 +377,7 @@ type GoogleOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []GoogleOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *GoogleOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional
@@ -423,7 +423,7 @@ type MicrosoftOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []MicrosoftOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -476,7 +476,7 @@ type MicrosoftOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []MicrosoftOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -499,7 +499,7 @@ type MicrosoftOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []MicrosoftOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *MicrosoftOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional
@@ -731,7 +731,7 @@ type SalesforceOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []SalesforceOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -784,7 +784,7 @@ type SalesforceOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []SalesforceOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -807,7 +807,7 @@ type SalesforceOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []SalesforceOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SalesforceOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional
@@ -853,7 +853,7 @@ type SlackOauth2ProviderConfigInitParameters struct {
 	// Write-only OAuth2 client ID. Cannot be used with client_id. Must be used together with client_secret_wo and client_credentials_wo_version.
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
-	ClientSecretConfig []SlackOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigInitParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
@@ -906,7 +906,7 @@ type SlackOauth2ProviderConfigObservation struct {
 	// Used together with write-only credentials to trigger an update. Increment this value when an update to client_id_wo or client_secret_wo is required.
 	ClientCredentialsWoVersion *float64 `json:"clientCredentialsWoVersion,omitempty" tf:"client_credentials_wo_version,omitempty"`
 
-	ClientSecretConfig []SlackOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigObservation `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	ClientSecretSource *string `json:"clientSecretSource,omitempty" tf:"client_secret_source,omitempty"`
 
@@ -929,7 +929,7 @@ type SlackOauth2ProviderConfigParameters struct {
 	ClientIDWoSecretRef *v2.LocalSecretKeySelector `json:"clientIdWoSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	ClientSecretConfig []SlackOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
+	ClientSecretConfig *SlackOauth2ProviderConfigClientSecretConfigParameters `json:"clientSecretConfig,omitempty" tf:"client_secret_config,omitempty"`
 
 	// OAuth2 client secret. Cannot be used with client_secret_wo. Must be used together with client_id.
 	// +kubebuilder:validation:Optional

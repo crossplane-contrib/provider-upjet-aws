@@ -1976,53 +1976,53 @@ func (mg *MemoryStrategy) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	if mg.Spec.ForProvider.Configuration != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+		if mg.Spec.ForProvider.Configuration.SelfManagedConfiguration != nil {
+			if mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName),
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName),
 						Extract:      reference.ExternalName(),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef,
-						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameSelector,
+						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameRef,
+						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName")
+					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName")
 				}
-				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef = rsp.ResolvedReference
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameRef = rsp.ResolvedReference
 
 			}
 		}
 	}
 	if mg.Spec.ForProvider.Configuration != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+		if mg.Spec.ForProvider.Configuration.SelfManagedConfiguration != nil {
+			if mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn),
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn),
 						Extract:      resource.ExtractParamPath("arn", true),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef,
-						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnSelector,
+						Reference:    mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnRef,
+						Selector:     mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn")
+					return errors.Wrap(err, "mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn")
 				}
-				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef = rsp.ResolvedReference
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnRef = rsp.ResolvedReference
 
 			}
 		}
@@ -2068,53 +2068,53 @@ func (mg *MemoryStrategy) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.MemoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Configuration != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+		if mg.Spec.InitProvider.Configuration.SelfManagedConfiguration != nil {
+			if mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName),
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName),
 						Extract:      reference.ExternalName(),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef,
-						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameSelector,
+						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameRef,
+						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName")
+					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName")
 				}
-				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].PayloadDeliveryBucketNameRef = rsp.ResolvedReference
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.PayloadDeliveryBucketNameRef = rsp.ResolvedReference
 
 			}
 		}
 	}
 	if mg.Spec.InitProvider.Configuration != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration); i5++ {
+		if mg.Spec.InitProvider.Configuration.SelfManagedConfiguration != nil {
+			if mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration != nil {
 				{
 					m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 					if err != nil {
 						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn),
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn),
 						Extract:      resource.ExtractParamPath("arn", true),
 						Namespace:    mg.GetNamespace(),
-						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef,
-						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnSelector,
+						Reference:    mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnRef,
+						Selector:     mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnSelector,
 						To:           reference.To{List: l, Managed: m},
 					})
 				}
 				if err != nil {
-					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn")
+					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn")
 				}
-				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
-				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration[i4].InvocationConfiguration[i5].TopicArnRef = rsp.ResolvedReference
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Configuration.SelfManagedConfiguration.InvocationConfiguration.TopicArnRef = rsp.ResolvedReference
 
 			}
 		}

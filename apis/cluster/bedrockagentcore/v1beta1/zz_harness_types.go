@@ -1861,10 +1861,10 @@ type MemoryInitParameters struct {
 	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationInitParameters `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
 	// Explicitly disable memory for this harness. See disabled Block below.
-	Disabled []DisabledInitParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled *DisabledInitParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
 	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
-	ManagedMemoryConfiguration []ManagedMemoryConfigurationInitParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
+	ManagedMemoryConfiguration *ManagedMemoryConfigurationInitParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
 type MemoryObservation struct {
@@ -1873,10 +1873,10 @@ type MemoryObservation struct {
 	AgentcoreMemoryConfiguration *AgentcoreMemoryConfigurationObservation `json:"agentcoreMemoryConfiguration,omitempty" tf:"agentcore_memory_configuration,omitempty"`
 
 	// Explicitly disable memory for this harness. See disabled Block below.
-	Disabled []DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled *DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
 	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
-	ManagedMemoryConfiguration []ManagedMemoryConfigurationObservation `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
+	ManagedMemoryConfiguration *ManagedMemoryConfigurationObservation `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
 type MemoryParameters struct {
@@ -1887,11 +1887,11 @@ type MemoryParameters struct {
 
 	// Explicitly disable memory for this harness. See disabled Block below.
 	// +kubebuilder:validation:Optional
-	Disabled []DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
+	Disabled *DisabledParameters `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
 	// Managed memory configuration. Creates and manages a memory resource automatically. See managed_memory_configuration Block below.
 	// +kubebuilder:validation:Optional
-	ManagedMemoryConfiguration []ManagedMemoryConfigurationParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
+	ManagedMemoryConfiguration *ManagedMemoryConfigurationParameters `json:"managedMemoryConfiguration,omitempty" tf:"managed_memory_configuration,omitempty"`
 }
 
 type NetworkConfigurationNetworkModeConfigInitParameters struct {

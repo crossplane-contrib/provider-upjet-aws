@@ -164,10 +164,10 @@ type SecurityConfigInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
-	IAMFederationOptions []IAMFederationOptionsInitParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+	IAMFederationOptions *IAMFederationOptionsInitParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
 
 	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
-	IAMIdentityCenterOptions []IAMIdentityCenterOptionsInitParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+	IAMIdentityCenterOptions *IAMIdentityCenterOptionsInitParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
 
 	// Configuration block for SAML options. Required if type is set to saml. See saml_options Block below for details.
 	SAMLOptions *SAMLOptionsInitParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
@@ -184,10 +184,10 @@ type SecurityConfigObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
-	IAMFederationOptions []IAMFederationOptionsObservation `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+	IAMFederationOptions *IAMFederationOptionsObservation `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
 
 	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
-	IAMIdentityCenterOptions []IAMIdentityCenterOptionsObservation `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+	IAMIdentityCenterOptions *IAMIdentityCenterOptionsObservation `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -212,11 +212,11 @@ type SecurityConfigParameters struct {
 
 	// Configuration block for IAM Federation options. Required if type is set to iamfederation. See iam_federation_options Block below for details.
 	// +kubebuilder:validation:Optional
-	IAMFederationOptions []IAMFederationOptionsParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
+	IAMFederationOptions *IAMFederationOptionsParameters `json:"iamFederationOptions,omitempty" tf:"iam_federation_options,omitempty"`
 
 	// Configuration block for IAM Identity Center options. Required if type is set to iamidentitycenter. See iam_identity_center_options Block below for details.
 	// +kubebuilder:validation:Optional
-	IAMIdentityCenterOptions []IAMIdentityCenterOptionsParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
+	IAMIdentityCenterOptions *IAMIdentityCenterOptionsParameters `json:"iamIdentityCenterOptions,omitempty" tf:"iam_identity_center_options,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.

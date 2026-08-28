@@ -881,33 +881,29 @@ spec:
                       disabled:
                         description: Explicitly disable memory for this harness. See
                           disabled Block below.
-                        items:
-                          type: object
-                        type: array
+                        type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
                           a memory resource automatically. See managed_memory_configuration
                           Block below.
-                        items:
-                          properties:
-                            encryptionKeyArn:
-                              description: ARN of a customer-managed KMS key used
-                                to encrypt the memory. Defaults to an AWS-owned key.
-                                Cannot be changed after creation.
+                        properties:
+                          encryptionKeyArn:
+                            description: ARN of a customer-managed KMS key used to
+                              encrypt the memory. Defaults to an AWS-owned key. Cannot
+                              be changed after creation.
+                            type: string
+                          eventExpiryDuration:
+                            description: Event retention in days. Defaults to 30.
+                            type: number
+                          strategies:
+                            description: Set of strategy types to enable. Valid values
+                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
+                              to ["SEMANTIC", "SUMMARIZATION"].
+                            items:
                               type: string
-                            eventExpiryDuration:
-                              description: Event retention in days. Defaults to 30.
-                              type: number
-                            strategies:
-                              description: Set of strategy types to enable. Valid
-                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
-                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
-                              items:
-                                type: string
-                              type: array
-                              x-kubernetes-list-type: set
-                          type: object
-                        type: array
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                     type: object
                   model:
                     description: Model configuration for the harness. See model Block
@@ -2488,33 +2484,29 @@ spec:
                       disabled:
                         description: Explicitly disable memory for this harness. See
                           disabled Block below.
-                        items:
-                          type: object
-                        type: array
+                        type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
                           a memory resource automatically. See managed_memory_configuration
                           Block below.
-                        items:
-                          properties:
-                            encryptionKeyArn:
-                              description: ARN of a customer-managed KMS key used
-                                to encrypt the memory. Defaults to an AWS-owned key.
-                                Cannot be changed after creation.
+                        properties:
+                          encryptionKeyArn:
+                            description: ARN of a customer-managed KMS key used to
+                              encrypt the memory. Defaults to an AWS-owned key. Cannot
+                              be changed after creation.
+                            type: string
+                          eventExpiryDuration:
+                            description: Event retention in days. Defaults to 30.
+                            type: number
+                          strategies:
+                            description: Set of strategy types to enable. Valid values
+                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
+                              to ["SEMANTIC", "SUMMARIZATION"].
+                            items:
                               type: string
-                            eventExpiryDuration:
-                              description: Event retention in days. Defaults to 30.
-                              type: number
-                            strategies:
-                              description: Set of strategy types to enable. Valid
-                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
-                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
-                              items:
-                                type: string
-                              type: array
-                              x-kubernetes-list-type: set
-                          type: object
-                        type: array
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                     type: object
                   model:
                     description: Model configuration for the harness. See model Block
@@ -3946,36 +3938,32 @@ spec:
                       disabled:
                         description: Explicitly disable memory for this harness. See
                           disabled Block below.
-                        items:
-                          type: object
-                        type: array
+                        type: object
                       managedMemoryConfiguration:
                         description: Managed memory configuration. Creates and manages
                           a memory resource automatically. See managed_memory_configuration
                           Block below.
-                        items:
-                          properties:
-                            arn:
-                              description: ARN of the hosting environment.
+                        properties:
+                          arn:
+                            description: ARN of the hosting environment.
+                            type: string
+                          encryptionKeyArn:
+                            description: ARN of a customer-managed KMS key used to
+                              encrypt the memory. Defaults to an AWS-owned key. Cannot
+                              be changed after creation.
+                            type: string
+                          eventExpiryDuration:
+                            description: Event retention in days. Defaults to 30.
+                            type: number
+                          strategies:
+                            description: Set of strategy types to enable. Valid values
+                              are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE. Defaults
+                              to ["SEMANTIC", "SUMMARIZATION"].
+                            items:
                               type: string
-                            encryptionKeyArn:
-                              description: ARN of a customer-managed KMS key used
-                                to encrypt the memory. Defaults to an AWS-owned key.
-                                Cannot be changed after creation.
-                              type: string
-                            eventExpiryDuration:
-                              description: Event retention in days. Defaults to 30.
-                              type: number
-                            strategies:
-                              description: Set of strategy types to enable. Valid
-                                values are SEMANTIC, SUMMARIZATION, and USER_PREFERENCE.
-                                Defaults to ["SEMANTIC", "SUMMARIZATION"].
-                              items:
-                                type: string
-                              type: array
-                              x-kubernetes-list-type: set
-                          type: object
-                        type: array
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                     type: object
                   memoryActual:
                     description: Actual deployed memory configuration.

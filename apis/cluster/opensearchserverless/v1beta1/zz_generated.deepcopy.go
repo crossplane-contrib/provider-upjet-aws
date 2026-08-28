@@ -1594,17 +1594,13 @@ func (in *SecurityConfigInitParameters) DeepCopyInto(out *SecurityConfigInitPara
 	}
 	if in.IAMFederationOptions != nil {
 		in, out := &in.IAMFederationOptions, &out.IAMFederationOptions
-		*out = make([]IAMFederationOptionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMFederationOptionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMIdentityCenterOptions != nil {
 		in, out := &in.IAMIdentityCenterOptions, &out.IAMIdentityCenterOptions
-		*out = make([]IAMIdentityCenterOptionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMIdentityCenterOptionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SAMLOptions != nil {
 		in, out := &in.SAMLOptions, &out.SAMLOptions
@@ -1670,17 +1666,13 @@ func (in *SecurityConfigObservation) DeepCopyInto(out *SecurityConfigObservation
 	}
 	if in.IAMFederationOptions != nil {
 		in, out := &in.IAMFederationOptions, &out.IAMFederationOptions
-		*out = make([]IAMFederationOptionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMFederationOptionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMIdentityCenterOptions != nil {
 		in, out := &in.IAMIdentityCenterOptions, &out.IAMIdentityCenterOptions
-		*out = make([]IAMIdentityCenterOptionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMIdentityCenterOptionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -1724,17 +1716,13 @@ func (in *SecurityConfigParameters) DeepCopyInto(out *SecurityConfigParameters) 
 	}
 	if in.IAMFederationOptions != nil {
 		in, out := &in.IAMFederationOptions, &out.IAMFederationOptions
-		*out = make([]IAMFederationOptionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMFederationOptionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IAMIdentityCenterOptions != nil {
 		in, out := &in.IAMIdentityCenterOptions, &out.IAMIdentityCenterOptions
-		*out = make([]IAMIdentityCenterOptionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IAMIdentityCenterOptionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

@@ -903,249 +903,213 @@ spec:
                                 description: API schema configuration that defines
                                   the structure of the runtime target's API. See schema
                                   Block below.
-                                items:
-                                  properties:
-                                    source:
-                                      description: Configuration for API schema. See
-                                        api_schema_configuration Block below.
-                                      items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    properties:
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
                                         properties:
-                                          inlinePayload:
-                                            description: Inline tool schema payload.
-                                              The inline_payload block requires a
-                                              payload (string) containing the MCP
-                                              tool schema definition.
-                                            items:
-                                              properties:
-                                                payload:
-                                                  description: Inline schema payload
-                                                    content.
-                                                  type: string
-                                              type: object
-                                            type: array
-                                          s3:
-                                            description: S3 location of the tool schema.
-                                              See s3 Block below.
-                                            items:
-                                              properties:
-                                                bucketOwnerAccountId:
-                                                  description: Account ID of the S3
-                                                    bucket owner.
-                                                  type: string
-                                                uri:
-                                                  description: S3 URI where the tool
-                                                    schema is stored.
-                                                  type: string
-                                              type: object
-                                            type: array
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
                                         type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                    type: object
+                                type: object
                             type: object
                           passthrough:
                             description: Passthrough target configuration that forwards
                               requests to an external HTTPS endpoint. See passthrough
                               Block below.
-                            items:
-                              properties:
-                                endpoint:
-                                  description: HTTPS endpoint of the inference provider
-                                    that the gateway forwards requests to.
-                                  type: string
-                                protocolType:
-                                  description: 'Application protocol the passthrough
-                                    target implements. Valid values: MCP, A2A, INFERENCE,
-                                    CUSTOM.'
-                                  type: string
-                                schema:
-                                  description: API schema configuration that defines
-                                    the structure of the runtime target's API. See
-                                    schema Block below.
-                                  items:
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              protocolType:
+                                description: 'Application protocol the passthrough
+                                  target implements. Valid values: MCP, A2A, INFERENCE,
+                                  CUSTOM.'
+                                type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
                                     properties:
-                                      source:
-                                        description: Configuration for API schema.
-                                          See api_schema_configuration Block below.
-                                        items:
-                                          properties:
-                                            inlinePayload:
-                                              description: Inline tool schema payload.
-                                                The inline_payload block requires
-                                                a payload (string) containing the
-                                                MCP tool schema definition.
-                                              items:
-                                                properties:
-                                                  payload:
-                                                    description: Inline schema payload
-                                                      content.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                            s3:
-                                              description: S3 location of the tool
-                                                schema. See s3 Block below.
-                                              items:
-                                                properties:
-                                                  bucketOwnerAccountId:
-                                                    description: Account ID of the
-                                                      S3 bucket owner.
-                                                    type: string
-                                                  uri:
-                                                    description: S3 URI where the
-                                                      tool schema is stored.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
                                     type: object
-                                  type: array
-                                staticQueryParameterConflictResolution:
-                                  description: 'Controls precedence when a client
-                                    request supplies a query parameter whose name
-                                    matches a configured static query parameter. Valid
-                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: object
+                              staticQueryParameterConflictResolution:
+                                description: 'Controls precedence when a client request
+                                  supplies a query parameter whose name matches a
+                                  configured static query parameter. Valid values:
+                                  CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: string
+                              staticQueryParameters:
+                                additionalProperties:
                                   type: string
-                                staticQueryParameters:
-                                  additionalProperties:
+                                description: Map of static query parameters that the
+                                  gateway always appends to the outbound URL when
+                                  forwarding requests to the target.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              stickinessConfiguration:
+                                description: Session stickiness configuration routing
+                                  requests within the same session to the same target.
+                                  See stickiness_configuration below.
+                                properties:
+                                  compositeIdentifier:
+                                    description: Additional headers to include in
+                                      session affinity routing.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  identifier:
+                                    description: Expression identifying where to extract
+                                      the session identifier from the request (for
+                                      example, $context.header.x-session-id).
                                     type: string
-                                  description: Map of static query parameters that
-                                    the gateway always appends to the outbound URL
-                                    when forwarding requests to the target.
-                                  type: object
-                                  x-kubernetes-map-type: granular
-                                stickinessConfiguration:
-                                  description: Session stickiness configuration routing
-                                    requests within the same session to the same target.
-                                    See stickiness_configuration below.
-                                  items:
-                                    properties:
-                                      compositeIdentifier:
-                                        description: Additional headers to include
-                                          in session affinity routing.
-                                        items:
-                                          type: string
-                                        type: array
-                                        x-kubernetes-list-type: set
-                                      identifier:
-                                        description: Expression identifying where
-                                          to extract the session identifier from the
-                                          request (for example, $context.header.x-session-id).
-                                        type: string
-                                      timeout:
-                                        description: Session stickiness timeout, in
-                                          seconds. Valid values range from 1 to 86400.
-                                        type: number
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  timeout:
+                                    description: Session stickiness timeout, in seconds.
+                                      Valid values range from 1 to 86400.
+                                    type: number
+                                type: object
+                            type: object
                         type: object
                       inference:
                         description: Inference target configuration for routing requests
                           to a large language model (LLM) provider, either through
                           a built-in connector or an explicitly configured provider.
                           See inference Block below.
-                        items:
-                          properties:
-                            connector:
-                              description: Connector integration target configuration.
-                                Connectors provide pre-built integrations with AWS
-                                services and third-party tools. See connector Block
-                                below.
-                              items:
+                        properties:
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            properties:
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
                                 properties:
-                                  source:
-                                    description: Configuration for API schema. See
-                                      api_schema_configuration Block below.
-                                    items:
-                                      properties:
-                                        connectorId:
-                                          description: Identifier for the connector
-                                            integration (for example, bedrock-knowledge-bases).
-                                          type: string
-                                      type: object
-                                    type: array
-                                type: object
-                              type: array
-                            provider:
-                              description: Provider-based inference configuration
-                                that explicitly defines the endpoint, model mapping,
-                                and operations used to route requests to an LLM provider.
-                                See provider Block below.
-                              items:
-                                properties:
-                                  endpoint:
-                                    description: HTTPS endpoint of the inference provider
-                                      that the gateway forwards requests to.
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  modelMapping:
-                                    description: Configuration that translates client-facing
-                                      model IDs to the model IDs expected by the provider.
-                                      See model_mapping Block below.
-                                    items:
-                                      properties:
-                                        providerPrefix:
-                                          description: Provider prefix configuration
-                                            used for model ID translation. See provider_prefix
-                                            Block below.
-                                          items:
-                                            properties:
-                                              separator:
-                                                description: Single character that
-                                                  separates the provider prefix from
-                                                  the model name (for example, .).
-                                                  Defaults to ..
-                                                type: string
-                                              strip:
-                                                description: Whether clients can omit
-                                                  the provider prefix from model IDs.
-                                                  If true, the gateway accepts model
-                                                  IDs without the prefix and restores
-                                                  the full prefixed form before forwarding
-                                                  to the provider. Defaults to false.
-                                                type: boolean
-                                            type: object
-                                          type: array
-                                      type: object
-                                    type: array
-                                  operation:
-                                    description: List of per-operation configurations
-                                      that map request paths to the models supported
-                                      for each operation. See operation below.
-                                    items:
-                                      properties:
-                                        model:
-                                          description: List of models supported for
-                                            this operation. See model Block below.
-                                          items:
-                                            properties:
-                                              model:
-                                                description: List of models supported
-                                                  for this operation. See model Block
-                                                  below.
-                                                type: string
-                                            type: object
-                                          type: array
-                                        path:
-                                          description: Resource path in the REST API
-                                            (e.g., /pets). Must explicitly match an
-                                            existing path in the REST API.
-                                          type: string
-                                        providerPath:
-                                          description: Provider path to forward requests
-                                            to, if it differs from the request path.
-                                            For example, /anthropic/v1/messages when
-                                            the provider expects a different path
-                                            than the client-facing /v1/messages.
-                                          type: string
-                                      type: object
-                                    type: array
                                 type: object
-                              type: array
-                          type: object
-                        type: array
+                            type: object
+                          provider:
+                            description: Provider-based inference configuration that
+                              explicitly defines the endpoint, model mapping, and
+                              operations used to route requests to an LLM provider.
+                              See provider Block below.
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              modelMapping:
+                                description: Configuration that translates client-facing
+                                  model IDs to the model IDs expected by the provider.
+                                  See model_mapping Block below.
+                                properties:
+                                  providerPrefix:
+                                    description: Provider prefix configuration used
+                                      for model ID translation. See provider_prefix
+                                      Block below.
+                                    properties:
+                                      separator:
+                                        description: Single character that separates
+                                          the provider prefix from the model name
+                                          (for example, .). Defaults to ..
+                                        type: string
+                                      strip:
+                                        description: Whether clients can omit the
+                                          provider prefix from model IDs. If true,
+                                          the gateway accepts model IDs without the
+                                          prefix and restores the full prefixed form
+                                          before forwarding to the provider. Defaults
+                                          to false.
+                                        type: boolean
+                                    type: object
+                                type: object
+                              operation:
+                                description: List of per-operation configurations
+                                  that map request paths to the models supported for
+                                  each operation. See operation below.
+                                items:
+                                  properties:
+                                    model:
+                                      description: List of models supported for this
+                                        operation. See model Block below.
+                                      items:
+                                        properties:
+                                          model:
+                                            description: List of models supported
+                                              for this operation. See model Block
+                                              below.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Resource path in the REST API (e.g.,
+                                        /pets). Must explicitly match an existing
+                                        path in the REST API.
+                                      type: string
+                                    providerPath:
+                                      description: Provider path to forward requests
+                                        to, if it differs from the request path. For
+                                        example, /anthropic/v1/messages when the provider
+                                        expects a different path than the client-facing
+                                        /v1/messages.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp Block below.
@@ -1300,81 +1264,76 @@ spec:
                             description: Connector integration target configuration.
                               Connectors provide pre-built integrations with AWS services
                               and third-party tools. See connector Block below.
-                            items:
-                              properties:
-                                configuration:
-                                  description: Per-tool configurations for the connector.
-                                    See configuration Block below.
-                                  items:
-                                    properties:
-                                      description:
-                                        description: Description of the tool. Provides
-                                          information about the purpose and usage
-                                          of the tool. If not provided, uses the description
-                                          from the API's OpenAPI specification.
-                                        type: string
-                                      name:
-                                        description: Name of tool. Identifies the
-                                          tool in the Model Context Protocol.
-                                        type: string
-                                      parameterOverride:
-                                        description: Parameter overrides to control
-                                          parameter visibility and descriptions. See
-                                          parameter_override Block below.
-                                        items:
-                                          properties:
-                                            description:
-                                              description: Description of the tool.
-                                                Provides information about the purpose
-                                                and usage of the tool. If not provided,
-                                                uses the description from the API's
-                                                OpenAPI specification.
-                                              type: string
-                                            path:
-                                              description: Resource path in the REST
-                                                API (e.g., /pets). Must explicitly
-                                                match an existing path in the REST
-                                                API.
-                                              type: string
-                                            visible:
-                                              description: Whether this parameter
-                                                is visible to the agent. If not specified,
-                                                uses the service default.
-                                              type: boolean
-                                          type: object
-                                        type: array
-                                      parameterValues:
-                                        description: JSON-encoded parameters to set
-                                          as fixed or default values when provisioning
-                                          this tool. Free-form JSON whose schema is
-                                          defined by the connector.
-                                        type: string
-                                    type: object
-                                  type: array
-                                enabled:
-                                  description: List of tool names to enable from this
-                                    connector. If omitted, all tools provided by the
-                                    connector are enabled.
-                                  items:
+                            properties:
+                              configuration:
+                                description: Per-tool configurations for the connector.
+                                  See configuration Block below.
+                                items:
+                                  properties:
+                                    description:
+                                      description: Description of the tool. Provides
+                                        information about the purpose and usage of
+                                        the tool. If not provided, uses the description
+                                        from the API's OpenAPI specification.
+                                      type: string
+                                    name:
+                                      description: Name of tool. Identifies the tool
+                                        in the Model Context Protocol.
+                                      type: string
+                                    parameterOverride:
+                                      description: Parameter overrides to control
+                                        parameter visibility and descriptions. See
+                                        parameter_override Block below.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: Description of the tool.
+                                              Provides information about the purpose
+                                              and usage of the tool. If not provided,
+                                              uses the description from the API's
+                                              OpenAPI specification.
+                                            type: string
+                                          path:
+                                            description: Resource path in the REST
+                                              API (e.g., /pets). Must explicitly match
+                                              an existing path in the REST API.
+                                            type: string
+                                          visible:
+                                            description: Whether this parameter is
+                                              visible to the agent. If not specified,
+                                              uses the service default.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    parameterValues:
+                                      description: JSON-encoded parameters to set
+                                        as fixed or default values when provisioning
+                                        this tool. Free-form JSON whose schema is
+                                        defined by the connector.
+                                      type: string
+                                  type: object
+                                type: array
+                              enabled:
+                                description: List of tool names to enable from this
+                                  connector. If omitted, all tools provided by the
+                                  connector are enabled.
+                                items:
+                                  type: string
+                                type: array
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
+                                properties:
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  type: array
-                                source:
-                                  description: Configuration for API schema. See api_schema_configuration
-                                    Block below.
-                                  items:
-                                    properties:
-                                      connectorId:
-                                        description: Identifier for the connector
-                                          integration (for example, bedrock-knowledge-bases).
-                                        type: string
-                                      version:
-                                        description: Version of the connector to use
-                                          (for example, 1.2.0).
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  version:
+                                    description: Version of the connector to use (for
+                                      example, 1.2.0).
+                                    type: string
+                                type: object
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda Block below.
@@ -2128,36 +2087,29 @@ spec:
                                   grant type. When set, dynamic tool discovery and
                                   synchronization are disabled. See mcp_tool_schema
                                   Block below.
-                                items:
-                                  properties:
-                                    inlinePayload:
-                                      description: Inline tool schema payload. The
-                                        inline_payload block requires a payload (string)
-                                        containing the MCP tool schema definition.
-                                      items:
-                                        properties:
-                                          payload:
-                                            description: Inline schema payload content.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    s3:
-                                      description: S3 location of the tool schema.
-                                        See s3 Block below.
-                                      items:
-                                        properties:
-                                          bucketOwnerAccountId:
-                                            description: Account ID of the S3 bucket
-                                              owner.
-                                            type: string
-                                          uri:
-                                            description: S3 URI where the tool schema
-                                              is stored.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                properties:
+                                  inlinePayload:
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
+                                    properties:
+                                      payload:
+                                        description: Inline schema payload content.
+                                        type: string
+                                    type: object
+                                  s3:
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
+                                    properties:
+                                      bucketOwnerAccountId:
+                                        description: Account ID of the S3 bucket owner.
+                                        type: string
+                                      uri:
+                                        description: S3 URI where the tool schema
+                                          is stored.
+                                        type: string
+                                    type: object
+                                type: object
                               resourcePriority:
                                 description: Priority for resolving MCP server targets
                                   with shared resource URIs. Lower values take precedence.
@@ -3048,249 +3000,213 @@ spec:
                                 description: API schema configuration that defines
                                   the structure of the runtime target's API. See schema
                                   Block below.
-                                items:
-                                  properties:
-                                    source:
-                                      description: Configuration for API schema. See
-                                        api_schema_configuration Block below.
-                                      items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    properties:
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
                                         properties:
-                                          inlinePayload:
-                                            description: Inline tool schema payload.
-                                              The inline_payload block requires a
-                                              payload (string) containing the MCP
-                                              tool schema definition.
-                                            items:
-                                              properties:
-                                                payload:
-                                                  description: Inline schema payload
-                                                    content.
-                                                  type: string
-                                              type: object
-                                            type: array
-                                          s3:
-                                            description: S3 location of the tool schema.
-                                              See s3 Block below.
-                                            items:
-                                              properties:
-                                                bucketOwnerAccountId:
-                                                  description: Account ID of the S3
-                                                    bucket owner.
-                                                  type: string
-                                                uri:
-                                                  description: S3 URI where the tool
-                                                    schema is stored.
-                                                  type: string
-                                              type: object
-                                            type: array
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
                                         type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                    type: object
+                                type: object
                             type: object
                           passthrough:
                             description: Passthrough target configuration that forwards
                               requests to an external HTTPS endpoint. See passthrough
                               Block below.
-                            items:
-                              properties:
-                                endpoint:
-                                  description: HTTPS endpoint of the inference provider
-                                    that the gateway forwards requests to.
-                                  type: string
-                                protocolType:
-                                  description: 'Application protocol the passthrough
-                                    target implements. Valid values: MCP, A2A, INFERENCE,
-                                    CUSTOM.'
-                                  type: string
-                                schema:
-                                  description: API schema configuration that defines
-                                    the structure of the runtime target's API. See
-                                    schema Block below.
-                                  items:
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              protocolType:
+                                description: 'Application protocol the passthrough
+                                  target implements. Valid values: MCP, A2A, INFERENCE,
+                                  CUSTOM.'
+                                type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
                                     properties:
-                                      source:
-                                        description: Configuration for API schema.
-                                          See api_schema_configuration Block below.
-                                        items:
-                                          properties:
-                                            inlinePayload:
-                                              description: Inline tool schema payload.
-                                                The inline_payload block requires
-                                                a payload (string) containing the
-                                                MCP tool schema definition.
-                                              items:
-                                                properties:
-                                                  payload:
-                                                    description: Inline schema payload
-                                                      content.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                            s3:
-                                              description: S3 location of the tool
-                                                schema. See s3 Block below.
-                                              items:
-                                                properties:
-                                                  bucketOwnerAccountId:
-                                                    description: Account ID of the
-                                                      S3 bucket owner.
-                                                    type: string
-                                                  uri:
-                                                    description: S3 URI where the
-                                                      tool schema is stored.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
                                     type: object
-                                  type: array
-                                staticQueryParameterConflictResolution:
-                                  description: 'Controls precedence when a client
-                                    request supplies a query parameter whose name
-                                    matches a configured static query parameter. Valid
-                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: object
+                              staticQueryParameterConflictResolution:
+                                description: 'Controls precedence when a client request
+                                  supplies a query parameter whose name matches a
+                                  configured static query parameter. Valid values:
+                                  CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: string
+                              staticQueryParameters:
+                                additionalProperties:
                                   type: string
-                                staticQueryParameters:
-                                  additionalProperties:
+                                description: Map of static query parameters that the
+                                  gateway always appends to the outbound URL when
+                                  forwarding requests to the target.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              stickinessConfiguration:
+                                description: Session stickiness configuration routing
+                                  requests within the same session to the same target.
+                                  See stickiness_configuration below.
+                                properties:
+                                  compositeIdentifier:
+                                    description: Additional headers to include in
+                                      session affinity routing.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  identifier:
+                                    description: Expression identifying where to extract
+                                      the session identifier from the request (for
+                                      example, $context.header.x-session-id).
                                     type: string
-                                  description: Map of static query parameters that
-                                    the gateway always appends to the outbound URL
-                                    when forwarding requests to the target.
-                                  type: object
-                                  x-kubernetes-map-type: granular
-                                stickinessConfiguration:
-                                  description: Session stickiness configuration routing
-                                    requests within the same session to the same target.
-                                    See stickiness_configuration below.
-                                  items:
-                                    properties:
-                                      compositeIdentifier:
-                                        description: Additional headers to include
-                                          in session affinity routing.
-                                        items:
-                                          type: string
-                                        type: array
-                                        x-kubernetes-list-type: set
-                                      identifier:
-                                        description: Expression identifying where
-                                          to extract the session identifier from the
-                                          request (for example, $context.header.x-session-id).
-                                        type: string
-                                      timeout:
-                                        description: Session stickiness timeout, in
-                                          seconds. Valid values range from 1 to 86400.
-                                        type: number
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  timeout:
+                                    description: Session stickiness timeout, in seconds.
+                                      Valid values range from 1 to 86400.
+                                    type: number
+                                type: object
+                            type: object
                         type: object
                       inference:
                         description: Inference target configuration for routing requests
                           to a large language model (LLM) provider, either through
                           a built-in connector or an explicitly configured provider.
                           See inference Block below.
-                        items:
-                          properties:
-                            connector:
-                              description: Connector integration target configuration.
-                                Connectors provide pre-built integrations with AWS
-                                services and third-party tools. See connector Block
-                                below.
-                              items:
+                        properties:
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            properties:
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
                                 properties:
-                                  source:
-                                    description: Configuration for API schema. See
-                                      api_schema_configuration Block below.
-                                    items:
-                                      properties:
-                                        connectorId:
-                                          description: Identifier for the connector
-                                            integration (for example, bedrock-knowledge-bases).
-                                          type: string
-                                      type: object
-                                    type: array
-                                type: object
-                              type: array
-                            provider:
-                              description: Provider-based inference configuration
-                                that explicitly defines the endpoint, model mapping,
-                                and operations used to route requests to an LLM provider.
-                                See provider Block below.
-                              items:
-                                properties:
-                                  endpoint:
-                                    description: HTTPS endpoint of the inference provider
-                                      that the gateway forwards requests to.
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  modelMapping:
-                                    description: Configuration that translates client-facing
-                                      model IDs to the model IDs expected by the provider.
-                                      See model_mapping Block below.
-                                    items:
-                                      properties:
-                                        providerPrefix:
-                                          description: Provider prefix configuration
-                                            used for model ID translation. See provider_prefix
-                                            Block below.
-                                          items:
-                                            properties:
-                                              separator:
-                                                description: Single character that
-                                                  separates the provider prefix from
-                                                  the model name (for example, .).
-                                                  Defaults to ..
-                                                type: string
-                                              strip:
-                                                description: Whether clients can omit
-                                                  the provider prefix from model IDs.
-                                                  If true, the gateway accepts model
-                                                  IDs without the prefix and restores
-                                                  the full prefixed form before forwarding
-                                                  to the provider. Defaults to false.
-                                                type: boolean
-                                            type: object
-                                          type: array
-                                      type: object
-                                    type: array
-                                  operation:
-                                    description: List of per-operation configurations
-                                      that map request paths to the models supported
-                                      for each operation. See operation below.
-                                    items:
-                                      properties:
-                                        model:
-                                          description: List of models supported for
-                                            this operation. See model Block below.
-                                          items:
-                                            properties:
-                                              model:
-                                                description: List of models supported
-                                                  for this operation. See model Block
-                                                  below.
-                                                type: string
-                                            type: object
-                                          type: array
-                                        path:
-                                          description: Resource path in the REST API
-                                            (e.g., /pets). Must explicitly match an
-                                            existing path in the REST API.
-                                          type: string
-                                        providerPath:
-                                          description: Provider path to forward requests
-                                            to, if it differs from the request path.
-                                            For example, /anthropic/v1/messages when
-                                            the provider expects a different path
-                                            than the client-facing /v1/messages.
-                                          type: string
-                                      type: object
-                                    type: array
                                 type: object
-                              type: array
-                          type: object
-                        type: array
+                            type: object
+                          provider:
+                            description: Provider-based inference configuration that
+                              explicitly defines the endpoint, model mapping, and
+                              operations used to route requests to an LLM provider.
+                              See provider Block below.
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              modelMapping:
+                                description: Configuration that translates client-facing
+                                  model IDs to the model IDs expected by the provider.
+                                  See model_mapping Block below.
+                                properties:
+                                  providerPrefix:
+                                    description: Provider prefix configuration used
+                                      for model ID translation. See provider_prefix
+                                      Block below.
+                                    properties:
+                                      separator:
+                                        description: Single character that separates
+                                          the provider prefix from the model name
+                                          (for example, .). Defaults to ..
+                                        type: string
+                                      strip:
+                                        description: Whether clients can omit the
+                                          provider prefix from model IDs. If true,
+                                          the gateway accepts model IDs without the
+                                          prefix and restores the full prefixed form
+                                          before forwarding to the provider. Defaults
+                                          to false.
+                                        type: boolean
+                                    type: object
+                                type: object
+                              operation:
+                                description: List of per-operation configurations
+                                  that map request paths to the models supported for
+                                  each operation. See operation below.
+                                items:
+                                  properties:
+                                    model:
+                                      description: List of models supported for this
+                                        operation. See model Block below.
+                                      items:
+                                        properties:
+                                          model:
+                                            description: List of models supported
+                                              for this operation. See model Block
+                                              below.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Resource path in the REST API (e.g.,
+                                        /pets). Must explicitly match an existing
+                                        path in the REST API.
+                                      type: string
+                                    providerPath:
+                                      description: Provider path to forward requests
+                                        to, if it differs from the request path. For
+                                        example, /anthropic/v1/messages when the provider
+                                        expects a different path than the client-facing
+                                        /v1/messages.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp Block below.
@@ -3445,81 +3361,76 @@ spec:
                             description: Connector integration target configuration.
                               Connectors provide pre-built integrations with AWS services
                               and third-party tools. See connector Block below.
-                            items:
-                              properties:
-                                configuration:
-                                  description: Per-tool configurations for the connector.
-                                    See configuration Block below.
-                                  items:
-                                    properties:
-                                      description:
-                                        description: Description of the tool. Provides
-                                          information about the purpose and usage
-                                          of the tool. If not provided, uses the description
-                                          from the API's OpenAPI specification.
-                                        type: string
-                                      name:
-                                        description: Name of tool. Identifies the
-                                          tool in the Model Context Protocol.
-                                        type: string
-                                      parameterOverride:
-                                        description: Parameter overrides to control
-                                          parameter visibility and descriptions. See
-                                          parameter_override Block below.
-                                        items:
-                                          properties:
-                                            description:
-                                              description: Description of the tool.
-                                                Provides information about the purpose
-                                                and usage of the tool. If not provided,
-                                                uses the description from the API's
-                                                OpenAPI specification.
-                                              type: string
-                                            path:
-                                              description: Resource path in the REST
-                                                API (e.g., /pets). Must explicitly
-                                                match an existing path in the REST
-                                                API.
-                                              type: string
-                                            visible:
-                                              description: Whether this parameter
-                                                is visible to the agent. If not specified,
-                                                uses the service default.
-                                              type: boolean
-                                          type: object
-                                        type: array
-                                      parameterValues:
-                                        description: JSON-encoded parameters to set
-                                          as fixed or default values when provisioning
-                                          this tool. Free-form JSON whose schema is
-                                          defined by the connector.
-                                        type: string
-                                    type: object
-                                  type: array
-                                enabled:
-                                  description: List of tool names to enable from this
-                                    connector. If omitted, all tools provided by the
-                                    connector are enabled.
-                                  items:
+                            properties:
+                              configuration:
+                                description: Per-tool configurations for the connector.
+                                  See configuration Block below.
+                                items:
+                                  properties:
+                                    description:
+                                      description: Description of the tool. Provides
+                                        information about the purpose and usage of
+                                        the tool. If not provided, uses the description
+                                        from the API's OpenAPI specification.
+                                      type: string
+                                    name:
+                                      description: Name of tool. Identifies the tool
+                                        in the Model Context Protocol.
+                                      type: string
+                                    parameterOverride:
+                                      description: Parameter overrides to control
+                                        parameter visibility and descriptions. See
+                                        parameter_override Block below.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: Description of the tool.
+                                              Provides information about the purpose
+                                              and usage of the tool. If not provided,
+                                              uses the description from the API's
+                                              OpenAPI specification.
+                                            type: string
+                                          path:
+                                            description: Resource path in the REST
+                                              API (e.g., /pets). Must explicitly match
+                                              an existing path in the REST API.
+                                            type: string
+                                          visible:
+                                            description: Whether this parameter is
+                                              visible to the agent. If not specified,
+                                              uses the service default.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    parameterValues:
+                                      description: JSON-encoded parameters to set
+                                        as fixed or default values when provisioning
+                                        this tool. Free-form JSON whose schema is
+                                        defined by the connector.
+                                      type: string
+                                  type: object
+                                type: array
+                              enabled:
+                                description: List of tool names to enable from this
+                                  connector. If omitted, all tools provided by the
+                                  connector are enabled.
+                                items:
+                                  type: string
+                                type: array
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
+                                properties:
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  type: array
-                                source:
-                                  description: Configuration for API schema. See api_schema_configuration
-                                    Block below.
-                                  items:
-                                    properties:
-                                      connectorId:
-                                        description: Identifier for the connector
-                                          integration (for example, bedrock-knowledge-bases).
-                                        type: string
-                                      version:
-                                        description: Version of the connector to use
-                                          (for example, 1.2.0).
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  version:
+                                    description: Version of the connector to use (for
+                                      example, 1.2.0).
+                                    type: string
+                                type: object
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda Block below.
@@ -4273,36 +4184,29 @@ spec:
                                   grant type. When set, dynamic tool discovery and
                                   synchronization are disabled. See mcp_tool_schema
                                   Block below.
-                                items:
-                                  properties:
-                                    inlinePayload:
-                                      description: Inline tool schema payload. The
-                                        inline_payload block requires a payload (string)
-                                        containing the MCP tool schema definition.
-                                      items:
-                                        properties:
-                                          payload:
-                                            description: Inline schema payload content.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    s3:
-                                      description: S3 location of the tool schema.
-                                        See s3 Block below.
-                                      items:
-                                        properties:
-                                          bucketOwnerAccountId:
-                                            description: Account ID of the S3 bucket
-                                              owner.
-                                            type: string
-                                          uri:
-                                            description: S3 URI where the tool schema
-                                              is stored.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                properties:
+                                  inlinePayload:
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
+                                    properties:
+                                      payload:
+                                        description: Inline schema payload content.
+                                        type: string
+                                    type: object
+                                  s3:
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
+                                    properties:
+                                      bucketOwnerAccountId:
+                                        description: Account ID of the S3 bucket owner.
+                                        type: string
+                                      uri:
+                                        description: S3 URI where the tool schema
+                                          is stored.
+                                        type: string
+                                    type: object
+                                type: object
                               resourcePriority:
                                 description: Priority for resolving MCP server targets
                                   with shared resource URIs. Lower values take precedence.
@@ -4683,249 +4587,213 @@ spec:
                                 description: API schema configuration that defines
                                   the structure of the runtime target's API. See schema
                                   Block below.
-                                items:
-                                  properties:
-                                    source:
-                                      description: Configuration for API schema. See
-                                        api_schema_configuration Block below.
-                                      items:
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
+                                    properties:
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
                                         properties:
-                                          inlinePayload:
-                                            description: Inline tool schema payload.
-                                              The inline_payload block requires a
-                                              payload (string) containing the MCP
-                                              tool schema definition.
-                                            items:
-                                              properties:
-                                                payload:
-                                                  description: Inline schema payload
-                                                    content.
-                                                  type: string
-                                              type: object
-                                            type: array
-                                          s3:
-                                            description: S3 location of the tool schema.
-                                              See s3 Block below.
-                                            items:
-                                              properties:
-                                                bucketOwnerAccountId:
-                                                  description: Account ID of the S3
-                                                    bucket owner.
-                                                  type: string
-                                                uri:
-                                                  description: S3 URI where the tool
-                                                    schema is stored.
-                                                  type: string
-                                              type: object
-                                            type: array
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
                                         type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
+                                    type: object
+                                type: object
                             type: object
                           passthrough:
                             description: Passthrough target configuration that forwards
                               requests to an external HTTPS endpoint. See passthrough
                               Block below.
-                            items:
-                              properties:
-                                endpoint:
-                                  description: HTTPS endpoint of the inference provider
-                                    that the gateway forwards requests to.
-                                  type: string
-                                protocolType:
-                                  description: 'Application protocol the passthrough
-                                    target implements. Valid values: MCP, A2A, INFERENCE,
-                                    CUSTOM.'
-                                  type: string
-                                schema:
-                                  description: API schema configuration that defines
-                                    the structure of the runtime target's API. See
-                                    schema Block below.
-                                  items:
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              protocolType:
+                                description: 'Application protocol the passthrough
+                                  target implements. Valid values: MCP, A2A, INFERENCE,
+                                  CUSTOM.'
+                                type: string
+                              schema:
+                                description: API schema configuration that defines
+                                  the structure of the runtime target's API. See schema
+                                  Block below.
+                                properties:
+                                  source:
+                                    description: Configuration for API schema. See
+                                      api_schema_configuration Block below.
                                     properties:
-                                      source:
-                                        description: Configuration for API schema.
-                                          See api_schema_configuration Block below.
-                                        items:
-                                          properties:
-                                            inlinePayload:
-                                              description: Inline tool schema payload.
-                                                The inline_payload block requires
-                                                a payload (string) containing the
-                                                MCP tool schema definition.
-                                              items:
-                                                properties:
-                                                  payload:
-                                                    description: Inline schema payload
-                                                      content.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                            s3:
-                                              description: S3 location of the tool
-                                                schema. See s3 Block below.
-                                              items:
-                                                properties:
-                                                  bucketOwnerAccountId:
-                                                    description: Account ID of the
-                                                      S3 bucket owner.
-                                                    type: string
-                                                  uri:
-                                                    description: S3 URI where the
-                                                      tool schema is stored.
-                                                    type: string
-                                                type: object
-                                              type: array
-                                          type: object
-                                        type: array
+                                      inlinePayload:
+                                        description: Inline tool schema payload. The
+                                          inline_payload block requires a payload
+                                          (string) containing the MCP tool schema
+                                          definition.
+                                        properties:
+                                          payload:
+                                            description: Inline schema payload content.
+                                            type: string
+                                        type: object
+                                      s3:
+                                        description: S3 location of the tool schema.
+                                          See s3 Block below.
+                                        properties:
+                                          bucketOwnerAccountId:
+                                            description: Account ID of the S3 bucket
+                                              owner.
+                                            type: string
+                                          uri:
+                                            description: S3 URI where the tool schema
+                                              is stored.
+                                            type: string
+                                        type: object
                                     type: object
-                                  type: array
-                                staticQueryParameterConflictResolution:
-                                  description: 'Controls precedence when a client
-                                    request supplies a query parameter whose name
-                                    matches a configured static query parameter. Valid
-                                    values: CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: object
+                              staticQueryParameterConflictResolution:
+                                description: 'Controls precedence when a client request
+                                  supplies a query parameter whose name matches a
+                                  configured static query parameter. Valid values:
+                                  CLIENT_OVERRIDE, STATIC_OVERRIDE.'
+                                type: string
+                              staticQueryParameters:
+                                additionalProperties:
                                   type: string
-                                staticQueryParameters:
-                                  additionalProperties:
+                                description: Map of static query parameters that the
+                                  gateway always appends to the outbound URL when
+                                  forwarding requests to the target.
+                                type: object
+                                x-kubernetes-map-type: granular
+                              stickinessConfiguration:
+                                description: Session stickiness configuration routing
+                                  requests within the same session to the same target.
+                                  See stickiness_configuration below.
+                                properties:
+                                  compositeIdentifier:
+                                    description: Additional headers to include in
+                                      session affinity routing.
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  identifier:
+                                    description: Expression identifying where to extract
+                                      the session identifier from the request (for
+                                      example, $context.header.x-session-id).
                                     type: string
-                                  description: Map of static query parameters that
-                                    the gateway always appends to the outbound URL
-                                    when forwarding requests to the target.
-                                  type: object
-                                  x-kubernetes-map-type: granular
-                                stickinessConfiguration:
-                                  description: Session stickiness configuration routing
-                                    requests within the same session to the same target.
-                                    See stickiness_configuration below.
-                                  items:
-                                    properties:
-                                      compositeIdentifier:
-                                        description: Additional headers to include
-                                          in session affinity routing.
-                                        items:
-                                          type: string
-                                        type: array
-                                        x-kubernetes-list-type: set
-                                      identifier:
-                                        description: Expression identifying where
-                                          to extract the session identifier from the
-                                          request (for example, $context.header.x-session-id).
-                                        type: string
-                                      timeout:
-                                        description: Session stickiness timeout, in
-                                          seconds. Valid values range from 1 to 86400.
-                                        type: number
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  timeout:
+                                    description: Session stickiness timeout, in seconds.
+                                      Valid values range from 1 to 86400.
+                                    type: number
+                                type: object
+                            type: object
                         type: object
                       inference:
                         description: Inference target configuration for routing requests
                           to a large language model (LLM) provider, either through
                           a built-in connector or an explicitly configured provider.
                           See inference Block below.
-                        items:
-                          properties:
-                            connector:
-                              description: Connector integration target configuration.
-                                Connectors provide pre-built integrations with AWS
-                                services and third-party tools. See connector Block
-                                below.
-                              items:
+                        properties:
+                          connector:
+                            description: Connector integration target configuration.
+                              Connectors provide pre-built integrations with AWS services
+                              and third-party tools. See connector Block below.
+                            properties:
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
                                 properties:
-                                  source:
-                                    description: Configuration for API schema. See
-                                      api_schema_configuration Block below.
-                                    items:
-                                      properties:
-                                        connectorId:
-                                          description: Identifier for the connector
-                                            integration (for example, bedrock-knowledge-bases).
-                                          type: string
-                                      type: object
-                                    type: array
-                                type: object
-                              type: array
-                            provider:
-                              description: Provider-based inference configuration
-                                that explicitly defines the endpoint, model mapping,
-                                and operations used to route requests to an LLM provider.
-                                See provider Block below.
-                              items:
-                                properties:
-                                  endpoint:
-                                    description: HTTPS endpoint of the inference provider
-                                      that the gateway forwards requests to.
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  modelMapping:
-                                    description: Configuration that translates client-facing
-                                      model IDs to the model IDs expected by the provider.
-                                      See model_mapping Block below.
-                                    items:
-                                      properties:
-                                        providerPrefix:
-                                          description: Provider prefix configuration
-                                            used for model ID translation. See provider_prefix
-                                            Block below.
-                                          items:
-                                            properties:
-                                              separator:
-                                                description: Single character that
-                                                  separates the provider prefix from
-                                                  the model name (for example, .).
-                                                  Defaults to ..
-                                                type: string
-                                              strip:
-                                                description: Whether clients can omit
-                                                  the provider prefix from model IDs.
-                                                  If true, the gateway accepts model
-                                                  IDs without the prefix and restores
-                                                  the full prefixed form before forwarding
-                                                  to the provider. Defaults to false.
-                                                type: boolean
-                                            type: object
-                                          type: array
-                                      type: object
-                                    type: array
-                                  operation:
-                                    description: List of per-operation configurations
-                                      that map request paths to the models supported
-                                      for each operation. See operation below.
-                                    items:
-                                      properties:
-                                        model:
-                                          description: List of models supported for
-                                            this operation. See model Block below.
-                                          items:
-                                            properties:
-                                              model:
-                                                description: List of models supported
-                                                  for this operation. See model Block
-                                                  below.
-                                                type: string
-                                            type: object
-                                          type: array
-                                        path:
-                                          description: Resource path in the REST API
-                                            (e.g., /pets). Must explicitly match an
-                                            existing path in the REST API.
-                                          type: string
-                                        providerPath:
-                                          description: Provider path to forward requests
-                                            to, if it differs from the request path.
-                                            For example, /anthropic/v1/messages when
-                                            the provider expects a different path
-                                            than the client-facing /v1/messages.
-                                          type: string
-                                      type: object
-                                    type: array
                                 type: object
-                              type: array
-                          type: object
-                        type: array
+                            type: object
+                          provider:
+                            description: Provider-based inference configuration that
+                              explicitly defines the endpoint, model mapping, and
+                              operations used to route requests to an LLM provider.
+                              See provider Block below.
+                            properties:
+                              endpoint:
+                                description: HTTPS endpoint of the inference provider
+                                  that the gateway forwards requests to.
+                                type: string
+                              modelMapping:
+                                description: Configuration that translates client-facing
+                                  model IDs to the model IDs expected by the provider.
+                                  See model_mapping Block below.
+                                properties:
+                                  providerPrefix:
+                                    description: Provider prefix configuration used
+                                      for model ID translation. See provider_prefix
+                                      Block below.
+                                    properties:
+                                      separator:
+                                        description: Single character that separates
+                                          the provider prefix from the model name
+                                          (for example, .). Defaults to ..
+                                        type: string
+                                      strip:
+                                        description: Whether clients can omit the
+                                          provider prefix from model IDs. If true,
+                                          the gateway accepts model IDs without the
+                                          prefix and restores the full prefixed form
+                                          before forwarding to the provider. Defaults
+                                          to false.
+                                        type: boolean
+                                    type: object
+                                type: object
+                              operation:
+                                description: List of per-operation configurations
+                                  that map request paths to the models supported for
+                                  each operation. See operation below.
+                                items:
+                                  properties:
+                                    model:
+                                      description: List of models supported for this
+                                        operation. See model Block below.
+                                      items:
+                                        properties:
+                                          model:
+                                            description: List of models supported
+                                              for this operation. See model Block
+                                              below.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Resource path in the REST API (e.g.,
+                                        /pets). Must explicitly match an existing
+                                        path in the REST API.
+                                      type: string
+                                    providerPath:
+                                      description: Provider path to forward requests
+                                        to, if it differs from the request path. For
+                                        example, /anthropic/v1/messages when the provider
+                                        expects a different path than the client-facing
+                                        /v1/messages.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
                       mcp:
                         description: Model Context Protocol (MCP) configuration. See
                           mcp Block below.
@@ -5004,81 +4872,76 @@ spec:
                             description: Connector integration target configuration.
                               Connectors provide pre-built integrations with AWS services
                               and third-party tools. See connector Block below.
-                            items:
-                              properties:
-                                configuration:
-                                  description: Per-tool configurations for the connector.
-                                    See configuration Block below.
-                                  items:
-                                    properties:
-                                      description:
-                                        description: Description of the tool. Provides
-                                          information about the purpose and usage
-                                          of the tool. If not provided, uses the description
-                                          from the API's OpenAPI specification.
-                                        type: string
-                                      name:
-                                        description: Name of tool. Identifies the
-                                          tool in the Model Context Protocol.
-                                        type: string
-                                      parameterOverride:
-                                        description: Parameter overrides to control
-                                          parameter visibility and descriptions. See
-                                          parameter_override Block below.
-                                        items:
-                                          properties:
-                                            description:
-                                              description: Description of the tool.
-                                                Provides information about the purpose
-                                                and usage of the tool. If not provided,
-                                                uses the description from the API's
-                                                OpenAPI specification.
-                                              type: string
-                                            path:
-                                              description: Resource path in the REST
-                                                API (e.g., /pets). Must explicitly
-                                                match an existing path in the REST
-                                                API.
-                                              type: string
-                                            visible:
-                                              description: Whether this parameter
-                                                is visible to the agent. If not specified,
-                                                uses the service default.
-                                              type: boolean
-                                          type: object
-                                        type: array
-                                      parameterValues:
-                                        description: JSON-encoded parameters to set
-                                          as fixed or default values when provisioning
-                                          this tool. Free-form JSON whose schema is
-                                          defined by the connector.
-                                        type: string
-                                    type: object
-                                  type: array
-                                enabled:
-                                  description: List of tool names to enable from this
-                                    connector. If omitted, all tools provided by the
-                                    connector are enabled.
-                                  items:
+                            properties:
+                              configuration:
+                                description: Per-tool configurations for the connector.
+                                  See configuration Block below.
+                                items:
+                                  properties:
+                                    description:
+                                      description: Description of the tool. Provides
+                                        information about the purpose and usage of
+                                        the tool. If not provided, uses the description
+                                        from the API's OpenAPI specification.
+                                      type: string
+                                    name:
+                                      description: Name of tool. Identifies the tool
+                                        in the Model Context Protocol.
+                                      type: string
+                                    parameterOverride:
+                                      description: Parameter overrides to control
+                                        parameter visibility and descriptions. See
+                                        parameter_override Block below.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: Description of the tool.
+                                              Provides information about the purpose
+                                              and usage of the tool. If not provided,
+                                              uses the description from the API's
+                                              OpenAPI specification.
+                                            type: string
+                                          path:
+                                            description: Resource path in the REST
+                                              API (e.g., /pets). Must explicitly match
+                                              an existing path in the REST API.
+                                            type: string
+                                          visible:
+                                            description: Whether this parameter is
+                                              visible to the agent. If not specified,
+                                              uses the service default.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    parameterValues:
+                                      description: JSON-encoded parameters to set
+                                        as fixed or default values when provisioning
+                                        this tool. Free-form JSON whose schema is
+                                        defined by the connector.
+                                      type: string
+                                  type: object
+                                type: array
+                              enabled:
+                                description: List of tool names to enable from this
+                                  connector. If omitted, all tools provided by the
+                                  connector are enabled.
+                                items:
+                                  type: string
+                                type: array
+                              source:
+                                description: Configuration for API schema. See api_schema_configuration
+                                  Block below.
+                                properties:
+                                  connectorId:
+                                    description: Identifier for the connector integration
+                                      (for example, bedrock-knowledge-bases).
                                     type: string
-                                  type: array
-                                source:
-                                  description: Configuration for API schema. See api_schema_configuration
-                                    Block below.
-                                  items:
-                                    properties:
-                                      connectorId:
-                                        description: Identifier for the connector
-                                          integration (for example, bedrock-knowledge-bases).
-                                        type: string
-                                      version:
-                                        description: Version of the connector to use
-                                          (for example, 1.2.0).
-                                        type: string
-                                    type: object
-                                  type: array
-                              type: object
-                            type: array
+                                  version:
+                                    description: Version of the connector to use (for
+                                      example, 1.2.0).
+                                    type: string
+                                type: object
+                            type: object
                           lambda:
                             description: Lambda function target configuration. See
                               lambda Block below.
@@ -5756,36 +5619,29 @@ spec:
                                   grant type. When set, dynamic tool discovery and
                                   synchronization are disabled. See mcp_tool_schema
                                   Block below.
-                                items:
-                                  properties:
-                                    inlinePayload:
-                                      description: Inline tool schema payload. The
-                                        inline_payload block requires a payload (string)
-                                        containing the MCP tool schema definition.
-                                      items:
-                                        properties:
-                                          payload:
-                                            description: Inline schema payload content.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    s3:
-                                      description: S3 location of the tool schema.
-                                        See s3 Block below.
-                                      items:
-                                        properties:
-                                          bucketOwnerAccountId:
-                                            description: Account ID of the S3 bucket
-                                              owner.
-                                            type: string
-                                          uri:
-                                            description: S3 URI where the tool schema
-                                              is stored.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
+                                properties:
+                                  inlinePayload:
+                                    description: Inline tool schema payload. The inline_payload
+                                      block requires a payload (string) containing
+                                      the MCP tool schema definition.
+                                    properties:
+                                      payload:
+                                        description: Inline schema payload content.
+                                        type: string
+                                    type: object
+                                  s3:
+                                    description: S3 location of the tool schema. See
+                                      s3 Block below.
+                                    properties:
+                                      bucketOwnerAccountId:
+                                        description: Account ID of the S3 bucket owner.
+                                        type: string
+                                      uri:
+                                        description: S3 URI where the tool schema
+                                          is stored.
+                                        type: string
+                                    type: object
+                                type: object
                               resourcePriority:
                                 description: Priority for resolving MCP server targets
                                   with shared resource URIs. Lower values take precedence.

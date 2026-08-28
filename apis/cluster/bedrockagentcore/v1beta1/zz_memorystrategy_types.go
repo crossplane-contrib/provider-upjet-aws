@@ -45,20 +45,20 @@ type ConsolidationParameters struct {
 type ExtractionConfigInitParameters struct {
 
 	// Model-based extraction configuration. See llm_extraction_config Block below.
-	LlmExtractionConfig []LlmExtractionConfigInitParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+	LlmExtractionConfig *LlmExtractionConfigInitParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
 }
 
 type ExtractionConfigObservation struct {
 
 	// Model-based extraction configuration. See llm_extraction_config Block below.
-	LlmExtractionConfig []LlmExtractionConfigObservation `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+	LlmExtractionConfig *LlmExtractionConfigObservation `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
 }
 
 type ExtractionConfigParameters struct {
 
 	// Model-based extraction configuration. See llm_extraction_config Block below.
 	// +kubebuilder:validation:Optional
-	LlmExtractionConfig []LlmExtractionConfigParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
+	LlmExtractionConfig *LlmExtractionConfigParameters `json:"llmExtractionConfig,omitempty" tf:"llm_extraction_config,omitempty"`
 }
 
 type ExtractionInitParameters struct {
@@ -166,7 +166,7 @@ type LlmExtractionConfigInitParameters struct {
 	LlmExtractionInstruction *string `json:"llmExtractionInstruction,omitempty" tf:"llm_extraction_instruction,omitempty"`
 
 	// Validation rules to constrain extracted values. See validation Block below.
-	Validation []ValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
+	Validation *ValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type LlmExtractionConfigObservation struct {
@@ -178,7 +178,7 @@ type LlmExtractionConfigObservation struct {
 	LlmExtractionInstruction *string `json:"llmExtractionInstruction,omitempty" tf:"llm_extraction_instruction,omitempty"`
 
 	// Validation rules to constrain extracted values. See validation Block below.
-	Validation []ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
+	Validation *ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type LlmExtractionConfigParameters struct {
@@ -193,7 +193,7 @@ type LlmExtractionConfigParameters struct {
 
 	// Validation rules to constrain extracted values. See validation Block below.
 	// +kubebuilder:validation:Optional
-	Validation []ValidationParameters `json:"validation,omitempty" tf:"validation,omitempty"`
+	Validation *ValidationParameters `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type MemoryRecordSchemaInitParameters struct {
@@ -224,10 +224,10 @@ type MemoryStrategyConfigurationInitParameters struct {
 	Extraction *ExtractionInitParameters `json:"extraction,omitempty" tf:"extraction,omitempty"`
 
 	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
-	Reflection []ReflectionInitParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
+	Reflection *ReflectionInitParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
 
 	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
-	SelfManagedConfiguration []SelfManagedConfigurationInitParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+	SelfManagedConfiguration *SelfManagedConfigurationInitParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
 
 	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -242,10 +242,10 @@ type MemoryStrategyConfigurationObservation struct {
 	Extraction *ExtractionObservation `json:"extraction,omitempty" tf:"extraction,omitempty"`
 
 	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
-	Reflection []ReflectionObservation `json:"reflection,omitempty" tf:"reflection,omitempty"`
+	Reflection *ReflectionObservation `json:"reflection,omitempty" tf:"reflection,omitempty"`
 
 	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
-	SelfManagedConfiguration []SelfManagedConfigurationObservation `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+	SelfManagedConfiguration *SelfManagedConfigurationObservation `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
 
 	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -263,11 +263,11 @@ type MemoryStrategyConfigurationParameters struct {
 
 	// Reflection configuration for the memory strategy. See reflection Block below. Can only be used, and is required, with type set to EPISODIC_OVERRIDE. Once added, this block cannot be removed without recreating the resource.
 	// +kubebuilder:validation:Optional
-	Reflection []ReflectionParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
+	Reflection *ReflectionParameters `json:"reflection,omitempty" tf:"reflection,omitempty"`
 
 	// Self-managed processing configuration. Required when type is SELF_MANAGED and only valid for that type. See self_managed_configuration Block below.
 	// +kubebuilder:validation:Optional
-	SelfManagedConfiguration []SelfManagedConfigurationParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
+	SelfManagedConfiguration *SelfManagedConfigurationParameters `json:"selfManagedConfiguration,omitempty" tf:"self_managed_configuration,omitempty"`
 
 	// Type of custom override. Valid values: SEMANTIC_OVERRIDE, SUMMARY_OVERRIDE, USER_PREFERENCE_OVERRIDE, EPISODIC_OVERRIDE, SELF_MANAGED. Changing this forces a new resource.
 	// +kubebuilder:validation:Optional
@@ -309,7 +309,7 @@ type MemoryStrategyInitParameters struct {
 	MemoryIDSelector *v2.Selector `json:"memoryIdSelector,omitempty" tf:"-"`
 
 	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
-	MemoryRecordSchema []MemoryRecordSchemaInitParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+	MemoryRecordSchema *MemoryRecordSchemaInitParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
 
 	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -323,7 +323,7 @@ type MemoryStrategyInitParameters struct {
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
 	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
-	ReflectionConfiguration []ReflectionConfigurationInitParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
+	ReflectionConfiguration *ReflectionConfigurationInitParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Type of memory strategy. Valid values: SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC, CUSTOM. Changing this forces a new resource. Note that only one strategy of each built-in type (SEMANTIC, SUMMARIZATION, USER_PREFERENCE, EPISODIC) can exist per memory.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -346,7 +346,7 @@ type MemoryStrategyObservation struct {
 	MemoryID *string `json:"memoryId,omitempty" tf:"memory_id,omitempty"`
 
 	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
-	MemoryRecordSchema []MemoryRecordSchemaObservation `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+	MemoryRecordSchema *MemoryRecordSchemaObservation `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
 
 	// Unique identifier of the Memory Strategy. This corresponds to the service strategyId identifier (AWS API / CloudFormation terminology).
 	MemoryStrategyID *string `json:"memoryStrategyId,omitempty" tf:"memory_strategy_id,omitempty"`
@@ -363,7 +363,7 @@ type MemoryStrategyObservation struct {
 	Namespaces []*string `json:"namespaces,omitempty" tf:"namespaces,omitempty"`
 
 	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
-	ReflectionConfiguration []ReflectionConfigurationObservation `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
+	ReflectionConfiguration *ReflectionConfigurationObservation `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -413,7 +413,7 @@ type MemoryStrategyParameters struct {
 
 	// Schema for metadata fields on records generated by this strategy. Valid for all strategy types. See memory_record_schema Block below.
 	// +kubebuilder:validation:Optional
-	MemoryRecordSchema []MemoryRecordSchemaParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
+	MemoryRecordSchema *MemoryRecordSchemaParameters `json:"memoryRecordSchema,omitempty" tf:"memory_record_schema,omitempty"`
 
 	// Name of the memory strategy. Changing this forces a new resource, because the service API does not support renaming a strategy.
 	// +kubebuilder:validation:Optional
@@ -431,7 +431,7 @@ type MemoryStrategyParameters struct {
 
 	// Configuration for the reflections created with the episodic memory strategy. Valid when type is EPISODIC, must be omitted for other types. See reflection_configuration Block below.
 	// +kubebuilder:validation:Optional
-	ReflectionConfiguration []ReflectionConfigurationParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
+	ReflectionConfiguration *ReflectionConfigurationParameters `json:"reflectionConfiguration,omitempty" tf:"reflection_configuration,omitempty"`
 
 	// Region where this resource will be managed. Defaults to the Region set in the provider configuration.
 	// Region is the region you'd like your resource to be created in.
@@ -465,7 +465,7 @@ type MessageBasedTriggerParameters struct {
 type MetadataSchemaInitParameters struct {
 
 	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
-	ExtractionConfig []ExtractionConfigInitParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+	ExtractionConfig *ExtractionConfigInitParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
 
 	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
 	ExtractionType *string `json:"extractionType,omitempty" tf:"extraction_type,omitempty"`
@@ -480,7 +480,7 @@ type MetadataSchemaInitParameters struct {
 type MetadataSchemaObservation struct {
 
 	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
-	ExtractionConfig []ExtractionConfigObservation `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+	ExtractionConfig *ExtractionConfigObservation `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
 
 	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
 	ExtractionType *string `json:"extractionType,omitempty" tf:"extraction_type,omitempty"`
@@ -496,7 +496,7 @@ type MetadataSchemaParameters struct {
 
 	// Configuration for extracting this metadata value from conversational content. Applicable only when extraction_type is LLM_INFERRED. See extraction_config Block below.
 	// +kubebuilder:validation:Optional
-	ExtractionConfig []ExtractionConfigParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
+	ExtractionConfig *ExtractionConfigParameters `json:"extractionConfig,omitempty" tf:"extraction_config,omitempty"`
 
 	// Whether the metadata value is extracted by the LLM or passed through deterministically from the event. Valid values: LLM_INFERRED, STRICTLY_CONSISTENT.
 	// +kubebuilder:validation:Optional
@@ -610,10 +610,10 @@ type SelfManagedConfigurationInitParameters struct {
 	HistoricalContextWindowSize *float64 `json:"historicalContextWindowSize,omitempty" tf:"historical_context_window_size,omitempty"`
 
 	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
-	InvocationConfiguration []InvocationConfigurationInitParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+	InvocationConfiguration *InvocationConfigurationInitParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
 
 	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
-	TriggerConditions []TriggerConditionsInitParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+	TriggerConditions *TriggerConditionsInitParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
 }
 
 type SelfManagedConfigurationObservation struct {
@@ -622,10 +622,10 @@ type SelfManagedConfigurationObservation struct {
 	HistoricalContextWindowSize *float64 `json:"historicalContextWindowSize,omitempty" tf:"historical_context_window_size,omitempty"`
 
 	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
-	InvocationConfiguration []InvocationConfigurationObservation `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+	InvocationConfiguration *InvocationConfigurationObservation `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
 
 	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
-	TriggerConditions []TriggerConditionsObservation `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+	TriggerConditions *TriggerConditionsObservation `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
 
 	// Actual deployed trigger conditions.
 	TriggerConditionsActual []TriggerConditionsActualObservation `json:"triggerConditionsActual,omitempty" tf:"trigger_conditions_actual,omitempty"`
@@ -639,11 +639,11 @@ type SelfManagedConfigurationParameters struct {
 
 	// Configuration used to invoke the self-managed memory processing pipeline. See invocation_configuration Block below.
 	// +kubebuilder:validation:Optional
-	InvocationConfiguration []InvocationConfigurationParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
+	InvocationConfiguration *InvocationConfigurationParameters `json:"invocationConfiguration,omitempty" tf:"invocation_configuration,omitempty"`
 
 	// Conditions that trigger memory processing. See trigger_conditions Block below. When omitted, the service supplies the documented defaults for all three trigger types.
 	// +kubebuilder:validation:Optional
-	TriggerConditions []TriggerConditionsParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
+	TriggerConditions *TriggerConditionsParameters `json:"triggerConditions,omitempty" tf:"trigger_conditions,omitempty"`
 }
 
 type StringListValidationInitParameters struct {
@@ -789,79 +789,79 @@ type TriggerConditionsActualTokenBasedTriggerParameters struct {
 type TriggerConditionsInitParameters struct {
 
 	// Message-based condition. See message_based_trigger Block below.
-	MessageBasedTrigger []MessageBasedTriggerInitParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+	MessageBasedTrigger *MessageBasedTriggerInitParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
 	// Idle-time condition. See time_based_trigger Block below.
-	TimeBasedTrigger []TimeBasedTriggerInitParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+	TimeBasedTrigger *TimeBasedTriggerInitParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
 	// Token-based condition. See token_based_trigger Block below.
-	TokenBasedTrigger []TokenBasedTriggerInitParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+	TokenBasedTrigger *TokenBasedTriggerInitParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }
 
 type TriggerConditionsObservation struct {
 
 	// Message-based condition. See message_based_trigger Block below.
-	MessageBasedTrigger []MessageBasedTriggerObservation `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+	MessageBasedTrigger *MessageBasedTriggerObservation `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
 	// Idle-time condition. See time_based_trigger Block below.
-	TimeBasedTrigger []TimeBasedTriggerObservation `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+	TimeBasedTrigger *TimeBasedTriggerObservation `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
 	// Token-based condition. See token_based_trigger Block below.
-	TokenBasedTrigger []TokenBasedTriggerObservation `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+	TokenBasedTrigger *TokenBasedTriggerObservation `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }
 
 type TriggerConditionsParameters struct {
 
 	// Message-based condition. See message_based_trigger Block below.
 	// +kubebuilder:validation:Optional
-	MessageBasedTrigger []MessageBasedTriggerParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
+	MessageBasedTrigger *MessageBasedTriggerParameters `json:"messageBasedTrigger,omitempty" tf:"message_based_trigger,omitempty"`
 
 	// Idle-time condition. See time_based_trigger Block below.
 	// +kubebuilder:validation:Optional
-	TimeBasedTrigger []TimeBasedTriggerParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
+	TimeBasedTrigger *TimeBasedTriggerParameters `json:"timeBasedTrigger,omitempty" tf:"time_based_trigger,omitempty"`
 
 	// Token-based condition. See token_based_trigger Block below.
 	// +kubebuilder:validation:Optional
-	TokenBasedTrigger []TokenBasedTriggerParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
+	TokenBasedTrigger *TokenBasedTriggerParameters `json:"tokenBasedTrigger,omitempty" tf:"token_based_trigger,omitempty"`
 }
 
 type ValidationInitParameters struct {
 
 	// Validation for NUMBER fields. See number_validation Block below.
-	NumberValidation []NumberValidationInitParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+	NumberValidation *NumberValidationInitParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
 
 	// Validation for STRINGLIST fields. See string_list_validation Block below.
-	StringListValidation []StringListValidationInitParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+	StringListValidation *StringListValidationInitParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
 
 	// Validation for STRING fields. See string_validation Block below.
-	StringValidation []StringValidationInitParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
+	StringValidation *StringValidationInitParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
 }
 
 type ValidationObservation struct {
 
 	// Validation for NUMBER fields. See number_validation Block below.
-	NumberValidation []NumberValidationObservation `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+	NumberValidation *NumberValidationObservation `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
 
 	// Validation for STRINGLIST fields. See string_list_validation Block below.
-	StringListValidation []StringListValidationObservation `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+	StringListValidation *StringListValidationObservation `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
 
 	// Validation for STRING fields. See string_validation Block below.
-	StringValidation []StringValidationObservation `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
+	StringValidation *StringValidationObservation `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
 }
 
 type ValidationParameters struct {
 
 	// Validation for NUMBER fields. See number_validation Block below.
 	// +kubebuilder:validation:Optional
-	NumberValidation []NumberValidationParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
+	NumberValidation *NumberValidationParameters `json:"numberValidation,omitempty" tf:"number_validation,omitempty"`
 
 	// Validation for STRINGLIST fields. See string_list_validation Block below.
 	// +kubebuilder:validation:Optional
-	StringListValidation []StringListValidationParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
+	StringListValidation *StringListValidationParameters `json:"stringListValidation,omitempty" tf:"string_list_validation,omitempty"`
 
 	// Validation for STRING fields. See string_validation Block below.
 	// +kubebuilder:validation:Optional
-	StringValidation []StringValidationParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
+	StringValidation *StringValidationParameters `json:"stringValidation,omitempty" tf:"string_validation,omitempty"`
 }
 
 // MemoryStrategySpec defines the desired state of MemoryStrategy
