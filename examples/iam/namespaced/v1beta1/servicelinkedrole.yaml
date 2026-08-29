@@ -5,6 +5,8 @@
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: ServiceLinkedRole
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/servicelinkedrole
   name: example
   namespace: upbound-system
 spec:

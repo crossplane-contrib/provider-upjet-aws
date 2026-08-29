@@ -5,6 +5,8 @@
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: NodeGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/nodegroup
   name: sample-eks-ng
 spec:
   forProvider:

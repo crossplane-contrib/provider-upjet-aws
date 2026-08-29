@@ -23,7 +23,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpc-ipampool
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipampool
   name: sample-vpc
 spec:
   forProvider:

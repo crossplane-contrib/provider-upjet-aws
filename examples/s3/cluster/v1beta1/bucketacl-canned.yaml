@@ -6,7 +6,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketACL
 metadata:
   annotations:
-    meta.upbound.io/example-id: s3/v1beta1/bucketacl-canned
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl
   name: example
 spec:
   forProvider:

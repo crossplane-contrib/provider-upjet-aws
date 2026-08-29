@@ -24,6 +24,8 @@ spec:
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroupattachment
   name: test
   labels:
     testing.upbound.io/example-name: elbv2

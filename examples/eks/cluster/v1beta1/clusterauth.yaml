@@ -8,7 +8,7 @@ kind: ClusterAuth
 metadata:
   name: auth
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
     uptest.upbound.io/post-assert-hook: testhooks/check-clusterauth.sh
 spec:
   forProvider:

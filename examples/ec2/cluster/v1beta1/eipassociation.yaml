@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EIPAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/eipassociation
   labels:
     testing.upbound.io/example-name: eip_assoc
   name: eip-assoc

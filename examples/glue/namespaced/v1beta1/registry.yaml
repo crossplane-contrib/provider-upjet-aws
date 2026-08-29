@@ -5,6 +5,8 @@
 apiVersion: glue.aws.m.upbound.io/v1beta1
 kind: Registry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/registry
   name: example
   namespace: upbound-system
 spec:

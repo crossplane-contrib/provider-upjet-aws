@@ -5,6 +5,8 @@
 apiVersion: sfn.aws.m.upbound.io/v1beta1
 kind: Activity
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sfn/v1beta1/activity
   name: my-activity
   namespace: upbound-system
 spec:

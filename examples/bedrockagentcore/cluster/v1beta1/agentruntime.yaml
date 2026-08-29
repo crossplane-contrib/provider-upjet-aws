@@ -9,7 +9,7 @@ apiVersion: bedrockagentcore.aws.upbound.io/v1beta1
 kind: AgentRuntime
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntime-code
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/agentruntime
   labels:
     testing.upbound.io/example-name: agentruntime-code
   name: agentruntime-code

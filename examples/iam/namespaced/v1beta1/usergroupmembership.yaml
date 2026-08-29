@@ -5,6 +5,8 @@
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: UserGroupMembership
 metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/usergroupmembership
   name: example
   labels:
     testing.upbound.io/example-name: group

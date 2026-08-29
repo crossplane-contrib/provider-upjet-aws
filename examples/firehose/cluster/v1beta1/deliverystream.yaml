@@ -6,7 +6,7 @@ apiVersion: firehose.aws.upbound.io/v1beta1
 kind: DeliveryStream
 metadata:
   annotations:
-    meta.upbound.io/example-id: firehose/v1beta1/firehose
+    meta.upbound.io/example-id: firehose/v1beta1/deliverystream
   labels:
     testing.upbound.io/example-name: firehose
   name: example

@@ -5,6 +5,8 @@
 apiVersion: elasticache.aws.m.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/subnetgroup
   labels:
     testing.upbound.io/example-name: bar
   name: bar
