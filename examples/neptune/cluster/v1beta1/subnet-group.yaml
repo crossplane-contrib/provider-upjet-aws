@@ -21,6 +21,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/subnetgroup
   name: sample-neptune-vpc
 spec:
   forProvider:

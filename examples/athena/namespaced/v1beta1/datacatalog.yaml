@@ -5,6 +5,8 @@
 apiVersion: athena.aws.m.upbound.io/v1beta1
 kind: DataCatalog
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/datacatalog
   labels:
     testing.upbound.io/example-name: example
   name: example

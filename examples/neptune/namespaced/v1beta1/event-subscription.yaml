@@ -22,6 +22,7 @@ kind: Topic
 metadata:
   annotations:
     crossplane.io/external-name: "sample-neptune-topic"
+    meta.upbound.io/example-id: neptune/v1beta1/eventsubscription
   name: sample-neptune-topic
   namespace: upbound-system
 spec:

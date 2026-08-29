@@ -6,7 +6,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIPv6CidrBlockAssociation
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam

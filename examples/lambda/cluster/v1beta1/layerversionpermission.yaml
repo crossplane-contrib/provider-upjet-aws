@@ -5,6 +5,8 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: LayerVersionPermission
 metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/layerversionpermission
   name: example
 spec:
   forProvider:

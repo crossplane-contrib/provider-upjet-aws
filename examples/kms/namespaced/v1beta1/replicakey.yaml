@@ -21,6 +21,8 @@ spec:
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/replicakey
   name: sample-replicakey
   namespace: upbound-system
 spec:

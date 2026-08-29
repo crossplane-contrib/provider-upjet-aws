@@ -6,7 +6,7 @@ apiVersion: connect.aws.upbound.io/v1beta2
 kind: Queue
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/queue
+    meta.upbound.io/example-id: connect/v1beta2/queue
   labels:
     testing.upbound.io/example-name: test
   name: test

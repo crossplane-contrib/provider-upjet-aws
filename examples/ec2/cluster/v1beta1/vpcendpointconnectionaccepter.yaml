@@ -3,6 +3,25 @@
 # SPDX-License-Identifier: CC0-1.0
 
 # Service owner side (Provider VPC + NLB)
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointConnectionAccepter
+metadata:
+  name: pl-accept
+  labels:
+    testing.upbound.io/example-name: pl-accept
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
+spec:
+  forProvider:
+    region: us-west-1
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-consumer-endpoint
+    vpcEndpointServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pl-service
+---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -154,23 +173,3 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pl-consumer
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCEndpointConnectionAccepter
-metadata:
-  name: pl-accept
-  labels:
-    testing.upbound.io/example-name: pl-accept
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointconnectionaccepter
-spec:
-  forProvider:
-    region: us-west-1
-    vpcEndpointIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: pl-consumer-endpoint
-    vpcEndpointServiceIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: pl-service

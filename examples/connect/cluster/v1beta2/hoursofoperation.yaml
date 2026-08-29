@@ -6,7 +6,7 @@ apiVersion: connect.aws.upbound.io/v1beta2
 kind: HoursOfOperation
 metadata:
   annotations:
-    meta.upbound.io/example-id: connect/v1beta1/hoursofoperation
+    meta.upbound.io/example-id: connect/v1beta2/hoursofoperation
   labels:
     testing.upbound.io/example-name: test
   name: test
