@@ -7,7 +7,6 @@ kind: SubnetGroup
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs dependent resources"
     meta.upbound.io/example-id: docdb/v1beta1/subnetgroup
 spec:
   forProvider:
@@ -18,3 +17,50 @@ spec:
     - name: sample-subnet2
     tags:
       Name: My docdb subnet group
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/subnetgroup
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-2
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/subnetgroup
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-west-2
+    availabilityZone: us-west-2a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: docdb/v1beta1/subnetgroup
+  name: sample-subnet2
+spec:
+  forProvider:
+    region: us-west-2
+    availabilityZone: us-west-2b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.20.0/24

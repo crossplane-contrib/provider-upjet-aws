@@ -6,7 +6,6 @@ apiVersion: ecs.aws.m.upbound.io/v1beta1
 kind: ClusterCapacityProviders
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: ecs/v1beta1/clustercapacityproviders
   labels:
     testing.upbound.io/example-name: example
@@ -23,4 +22,19 @@ spec:
       - base: 1
         capacityProvider: FARGATE
         weight: 100
+    region: us-west-1
+
+---
+
+apiVersion: ecs.aws.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta1/clustercapacityproviders
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
     region: us-west-1

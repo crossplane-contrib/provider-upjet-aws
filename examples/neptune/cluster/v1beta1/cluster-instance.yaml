@@ -13,7 +13,6 @@ apiVersion: neptune.aws.upbound.io/v1beta1
 kind: ClusterInstance
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: neptune/v1beta1/clusterinstance
   name: sample-instance
 spec:
@@ -24,3 +23,21 @@ spec:
       name: sample-cluster
     engine: neptune
     instanceClass: db.t3.medium
+
+---
+
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/clusterinstance
+  name: sample-cluster
+spec:
+  forProvider:
+    region: eu-central-1
+    applyImmediately: true
+    backupRetentionPeriod: 5
+    engine: neptune
+    iamDatabaseAuthenticationEnabled: true
+    preferredBackupWindow: 07:00-09:00
+    skipFinalSnapshot: true
