@@ -6,7 +6,6 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketObject
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: s3/v1beta1/bucketobject
   labels:
     testing.upbound.io/example-name: object
@@ -19,3 +18,17 @@ spec:
     key: new_object_key
     region: us-west-1
     contentBase64: dGhpcyBpcyBhIHRleHQg
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketobject
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1

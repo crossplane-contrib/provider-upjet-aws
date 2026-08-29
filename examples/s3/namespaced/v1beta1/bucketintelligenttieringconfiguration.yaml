@@ -6,7 +6,6 @@ apiVersion: s3.aws.m.upbound.io/v1beta1
 kind: BucketIntelligentTieringConfiguration
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: s3/v1beta1/bucketintelligenttieringconfiguration
   name: example
   namespace: upbound-system
@@ -22,3 +21,18 @@ spec:
         days: 180
       - accessTier: ARCHIVE_ACCESS
         days: 125
+
+---
+
+apiVersion: s3.aws.m.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketintelligenttieringconfiguration
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-west-1

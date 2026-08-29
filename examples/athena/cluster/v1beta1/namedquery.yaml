@@ -6,7 +6,6 @@ apiVersion: athena.aws.upbound.io/v1beta1
 kind: NamedQuery
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: athena/v1beta1/namedquery
   labels:
     testing.upbound.io/example-name: foo
@@ -22,3 +21,73 @@ spec:
     workgroupSelector:
       matchLabels:
         testing.upbound.io/example-name: test
+
+---
+
+apiVersion: athena.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: upbound-example
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
+  labels:
+    testing.upbound.io/example-name: upbound-example
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    forceDestroy: true
+
+---
+
+apiVersion: athena.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    configuration:
+      - resultConfiguration:
+          - encryptionConfiguration:
+              - encryptionOption: SSE_KMS
+                kmsKeyArnSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: test
+            outputLocation: s3://upbound-example/output/
+    region: us-west-1
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/namedquery
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: Athena KMS Key
+    region: us-west-1

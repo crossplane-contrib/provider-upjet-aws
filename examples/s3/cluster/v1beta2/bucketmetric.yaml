@@ -6,7 +6,6 @@ apiVersion: s3.aws.upbound.io/v1beta2
 kind: BucketMetric
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
     meta.upbound.io/example-id: s3/v1beta2/bucketmetric
   name: example
 spec:
@@ -15,4 +14,18 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: s3
     name: EntireBucket
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/bucketmetric
+  labels:
+    testing.upbound.io/example-name: s3
+  name: s3-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
     region: us-west-1
