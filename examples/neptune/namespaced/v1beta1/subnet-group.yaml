@@ -2,6 +2,23 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+apiVersion: neptune.aws.m.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/subnetgroup
+  name: sample-subnet-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: "Managed by Crossplane"
+    region: eu-central-1
+    subnetIdRefs:
+      - name: sample-neptune-subnet1
+      - name: sample-neptune-subnet2
+    tags:
+      Name: My neptune subnet group
+---
 apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -39,18 +56,3 @@ spec:
     vpcIdRef:
       name: sample-neptune-vpc
     cidrBlock: 172.16.20.0/24
----
-apiVersion: neptune.aws.m.upbound.io/v1beta1
-kind: SubnetGroup
-metadata:
-  name: sample-subnet-group
-  namespace: upbound-system
-spec:
-  forProvider:
-    description: "Managed by Crossplane"
-    region: eu-central-1
-    subnetIdRefs:
-      - name: sample-neptune-subnet1
-      - name: sample-neptune-subnet2
-    tags:
-      Name: My neptune subnet group

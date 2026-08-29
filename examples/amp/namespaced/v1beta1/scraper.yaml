@@ -7,20 +7,6 @@
 # using the monolithic API (amp.aws.m.upbound.io).
 
 apiVersion: amp.aws.m.upbound.io/v1beta1
-kind: Workspace
-metadata:
-  annotations:
-    meta.upbound.io/example-id: amp/v1beta1/scraper
-    uptest.upbound.io/timeout: "7200"
-  labels:
-    testing.upbound.io/example-name: scraper-monolithic-demo
-  name: scraper-monolithic-demo
-  namespace: upbound-system
-spec:
-  forProvider:
-    region: us-east-1
----
-apiVersion: amp.aws.m.upbound.io/v1beta1
 kind: Scraper
 metadata:
   annotations:
@@ -103,6 +89,20 @@ spec:
             target_label: __address__
             regex: (.+?)(\\:\\d+)?
             replacement: $1:10249
+---
+apiVersion: amp.aws.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/scraper
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: scraper-monolithic-demo
+  name: scraper-monolithic-demo
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-1
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role

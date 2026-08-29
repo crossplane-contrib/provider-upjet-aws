@@ -3,6 +3,23 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCIpam
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipam
+  labels:
+    testing.upbound.io/example-name: ipampool
+  name: main
+spec:
+  forProvider:
+    description: My IPAM
+    operatingRegions:
+      - regionName: us-west-1
+    region: us-west-1
+    tags:
+      Test: Main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
@@ -66,20 +83,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: ipampool
     region: us-west-1
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCIpam
-metadata:
-  annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpc-ipampool
-  labels:
-    testing.upbound.io/example-name: ipampool
-  name: main
-spec:
-  forProvider:
-    description: My IPAM
-    operatingRegions:
-    - regionName: us-west-1 
-    region: us-west-1
-    tags:
-      Test: Main

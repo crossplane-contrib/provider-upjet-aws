@@ -1,3 +1,23 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/group
+  labels:
+    testing.upbound.io/example-name: example-with-kms
+  name: example-with-kms
+  namespace: upbound-system
+spec:
+  forProvider:
+    kmsKeyIdRef:
+      name: sample-logs-key
+    region: us-east-1
+    retentionInDays: 5
+---
 apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
@@ -41,17 +61,3 @@ spec:
           }
         ]
       }
----
-apiVersion: cloudwatchlogs.aws.m.upbound.io/v1beta1
-kind: Group
-metadata:
-  labels:
-    testing.upbound.io/example-name: example-with-kms
-  name: example-with-kms
-  namespace: upbound-system
-spec:
-  forProvider:
-    kmsKeyIdRef:
-      name: sample-logs-key
-    region: us-east-1
-    retentionInDays: 5
