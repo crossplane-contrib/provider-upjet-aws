@@ -20,7 +20,7 @@ kind: Table
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: dynamodb/v1beta1/table
+    meta.upbound.io/example-id: dynamodb/v1beta1/contributorinsights
   namespace: upbound-system
 spec:
   forProvider:

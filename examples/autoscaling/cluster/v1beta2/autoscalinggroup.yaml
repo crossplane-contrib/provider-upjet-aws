@@ -30,7 +30,7 @@ apiVersion: autoscaling.aws.upbound.io/v1beta1
 kind: LaunchConfiguration
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta1/autoscalinggroup
+    meta.upbound.io/example-id: autoscaling/v1beta2/autoscalinggroup
   labels:
     testing.upbound.io/example-name: autoscalinggroup-example
   name: autoscalinggroup-example

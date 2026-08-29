@@ -26,7 +26,7 @@ kind: Stream
 metadata:
   name: stream
   annotations:
-    meta.upbound.io/example-id: dynamodb/v1beta1/kinesisstreamingdestination
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta1/destination
   labels:
     testing.upbound.io/example-name: kinesis_for_cloudwatch
   namespace: upbound-system

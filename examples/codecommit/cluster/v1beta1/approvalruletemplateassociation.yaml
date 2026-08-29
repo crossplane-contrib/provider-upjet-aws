@@ -25,7 +25,7 @@ kind: Repository
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/repository
+    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplateassociation
   labels:
     testing.upbound.io/example-name: example
 spec:
@@ -38,7 +38,7 @@ kind: ApprovalRuleTemplate
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplate
+    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplateassociation
   labels:
     testing.upbound.io/example-name: example
 spec:

@@ -108,7 +108,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
+    meta.upbound.io/example-id: imagebuilder/v1beta1/image
   labels:
     testing.upbound.io/example-name: ssm_managed_instance_core
   name: ssm-managed-instance-core
@@ -125,7 +125,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
+    meta.upbound.io/example-id: imagebuilder/v1beta1/image
   labels:
     testing.upbound.io/example-name: ssm_full_access
   name: ssm-full-access
@@ -142,7 +142,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
+    meta.upbound.io/example-id: imagebuilder/v1beta1/image
   labels:
     testing.upbound.io/example-name: ecr_container_builds
   name: ecr-container-builds
@@ -160,7 +160,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
+    meta.upbound.io/example-id: imagebuilder/v1beta1/image
   labels:
     testing.upbound.io/example-name: image_builder
   name: image-builder
@@ -177,7 +177,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: iot/v1beta1/provisioningtemplate
+    meta.upbound.io/example-id: imagebuilder/v1beta1/image
   labels:
     testing.upbound.io/example-name: ssm_managed_instance
   name: ssm-managed-instance

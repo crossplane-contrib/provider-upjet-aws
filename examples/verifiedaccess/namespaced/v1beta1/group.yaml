@@ -25,7 +25,7 @@ apiVersion: verifiedaccess.aws.m.upbound.io/v1beta1
 kind: Instance
 metadata:
   annotations:
-    meta.upbound.io/example-id: verifiedaccess/v1beta1/instance
+    meta.upbound.io/example-id: verifiedaccess/v1beta1/group
   labels:
     testing.upbound.io/example-name: example-group
   name: example-group

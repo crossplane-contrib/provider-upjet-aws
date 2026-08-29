@@ -19,7 +19,7 @@ kind: CodeInterpreter
 metadata:
   annotations:
     uptest.upbound.io/timeout: "3600"
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem
@@ -54,7 +54,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem-exec
@@ -80,7 +80,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem-exec-policy
@@ -113,7 +113,7 @@ apiVersion: s3files.aws.upbound.io/v1beta1
 kind: AccessPoint
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem
@@ -139,7 +139,7 @@ apiVersion: s3files.aws.upbound.io/v1beta1
 kind: FileSystem
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem
@@ -159,7 +159,7 @@ apiVersion: s3files.aws.upbound.io/v1beta1
 kind: MountTarget
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: codeinterpreter-filesystem
@@ -179,7 +179,7 @@ apiVersion: s3.aws.upbound.io/v1beta2
 kind: Bucket
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem
   name: ${Rand.RFC1123Subdomain}
@@ -193,7 +193,7 @@ apiVersion: s3.aws.upbound.io/v1beta2
 kind: BucketVersioning
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem-versioning
   name: codeinterpreter-filesystem-versioning
@@ -212,7 +212,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
   name: codeinterpreter-filesystem-s3files
@@ -239,7 +239,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem-s3files
   name: codeinterpreter-filesystem-s3files-policy
@@ -318,7 +318,7 @@ kind: SecurityGroupRule
 metadata:
   annotations:
     uptest.upbound.io/disable-import: "true"
-    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter-filesystem
+    meta.upbound.io/example-id: bedrockagentcore/v1beta1/codeinterpreter
   labels:
     testing.upbound.io/example-name: codeinterpreter-filesystem-nfs
   name: codeinterpreter-filesystem-nfs

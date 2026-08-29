@@ -26,7 +26,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam-vpc
@@ -40,7 +40,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPCIpamPool
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam-pool
@@ -58,7 +58,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPCIpamPoolCidr
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam-pool-cidr
@@ -75,7 +75,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPCIpamScope
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam-scope
@@ -91,7 +91,7 @@ apiVersion: ec2.aws.m.upbound.io/v1beta1
 kind: VPCIpam
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation-ipam
+    meta.upbound.io/example-id: ec2/v1beta1/vpcipv6cidrblockassociation
   labels:
     testing.upbound.io/example-name: vpcipv6cidrblockassociation-ipam
   name: example-ipam

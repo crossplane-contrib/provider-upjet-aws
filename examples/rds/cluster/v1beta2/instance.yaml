@@ -44,7 +44,7 @@ apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:
-    meta.upbound.io/example-id: rds/v1beta1/instance
+    meta.upbound.io/example-id: rds/v1beta2/instance
   labels:
     testing.upbound.io/example-name: sample-key
   name: sample-key-${Rand.RFC1123Subdomain}
@@ -58,7 +58,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   annotations:
-    meta.upbound.io/example-id: rds/v1beta1/instance
+    meta.upbound.io/example-id: rds/v1beta2/instance
   name: example-dbinstance
   namespace: upbound-system
 type: Opaque
