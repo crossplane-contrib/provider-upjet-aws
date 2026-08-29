@@ -7,6 +7,7 @@ kind: PrivateDNSNamespace
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
+    meta.upbound.io/example-id: servicediscovery/v1beta1/privatednsnamespace
   name: example
 spec:
   forProvider:

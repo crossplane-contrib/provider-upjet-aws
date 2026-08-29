@@ -7,6 +7,7 @@ kind: ClusterSnapshot
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
+    meta.upbound.io/example-id: neptune/v1beta1/clustersnapshot
   name: sample-snapshot
 spec:
   forProvider:

@@ -7,6 +7,7 @@ kind: NetworkInterface
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
+    meta.upbound.io/example-id: ec2/v1beta1/networkinterface
   name: sample-ni
 spec:
   forProvider:

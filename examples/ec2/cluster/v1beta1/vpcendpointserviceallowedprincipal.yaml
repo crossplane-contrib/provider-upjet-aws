@@ -8,6 +8,7 @@ kind: VPCEndpointServiceAllowedPrincipal
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointserviceallowedprincipal
   labels:
     testing.upbound.io/example-name: allow_me_to_foo
   name: allow-me-to-foo
@@ -26,6 +27,7 @@ kind: VPCEndpointService
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "Requires references to replaced manually."
+    meta.upbound.io/example-id: ec2/v1beta1/vpcendpointserviceallowedprincipal
   labels:
     testing.upbound.io/example-name: foo
   name: foo

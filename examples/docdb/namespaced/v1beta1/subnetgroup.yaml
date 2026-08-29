@@ -7,6 +7,7 @@ kind: SubnetGroup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "TODO: needs resource dependencies added"
+    meta.upbound.io/example-id: docdb/v1beta1/subnetgroup
   name: example
   namespace: upbound-system
 spec:
