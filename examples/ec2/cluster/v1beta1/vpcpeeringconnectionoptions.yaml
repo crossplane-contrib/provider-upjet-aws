@@ -27,7 +27,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionaccepter
+    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionoptions
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -42,7 +42,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionaccepter
+    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionoptions
   labels:
     testing.upbound.io/example-name: vpcpeerlabel
   name: vpcpeername
@@ -58,7 +58,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCPeeringConnection
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionaccepter
+    meta.upbound.io/example-id: ec2/v1beta1/vpcpeeringconnectionoptions
   labels:
     testing.upbound.io/example-name: vpcpeerconnectionlabel
   name: peerconnectionname

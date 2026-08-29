@@ -21,7 +21,7 @@ kind: Table
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: dynamodb/v1beta1/table
+    meta.upbound.io/example-id: dynamodb/v1beta1/contributorinsights
 spec:
   forProvider:
     region: us-west-1

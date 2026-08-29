@@ -22,7 +22,7 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigatewayv2/v1beta1/route
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -43,7 +43,7 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigatewayv2/v1beta1/integration
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -63,7 +63,7 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigatewayv2/v1beta1/deployment
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -81,7 +81,7 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Authorizer
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigatewayv2/v1beta1/authorizer
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: test-authorizer
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -105,7 +105,7 @@ apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Stage
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: example-stage
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http

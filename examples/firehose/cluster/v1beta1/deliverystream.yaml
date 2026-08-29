@@ -30,7 +30,7 @@ kind: Bucket
 metadata:
   annotations:
     crossplane.io/external-name: efirehose
-    meta.upbound.io/example-id: firehose/v1beta1/firehose
+    meta.upbound.io/example-id: firehose/v1beta1/deliverystream
   labels:
     testing.upbound.io/example-name: firehose
   name: firehose
@@ -44,7 +44,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: firehose/v1beta1/firehose
+    meta.upbound.io/example-id: firehose/v1beta1/deliverystream
   labels:
     testing.upbound.io/example-name: firehose
   name: sample-role

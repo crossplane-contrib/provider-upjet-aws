@@ -45,7 +45,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: elbv2/v1beta2/lblistenerrule
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtargetgroupattachment
   labels:
     testing.upbound.io/example-name: elbv2
   name: elbv2-vpc

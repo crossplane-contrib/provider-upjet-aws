@@ -38,7 +38,7 @@ apiVersion: sagemaker.aws.m.upbound.io/v1beta1
 kind: ModelPackageGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: sagemaker/v1beta1/modelpackagegroup
+    meta.upbound.io/example-id: sagemaker/v1beta1/modelpackagegrouppolicy
   labels:
     testing.upbound.io/example-name: example
   name: example

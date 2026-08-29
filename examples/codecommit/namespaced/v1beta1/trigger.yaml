@@ -31,7 +31,7 @@ kind: Repository
 metadata:
   name: example-trigger
   annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/repository
+    meta.upbound.io/example-id: codecommit/v1beta1/trigger
     uptest.upbound.io/pre-delete-hook: testhooks/delete-trigger.sh
   labels:
     testing.upbound.io/example-name: example-trigger

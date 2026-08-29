@@ -26,7 +26,7 @@ kind: TaskDefinition
 metadata:
   name: example-service-definition
   annotations:
-    meta.upbound.io/example-id: ecs/v1beta1/service-static-cluster
+    meta.upbound.io/example-id: ecs/v1beta1/service
   labels:
     testing.upbound.io/example-name: example-service-definition
 spec:
@@ -48,7 +48,7 @@ apiVersion: ecs.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    meta.upbound.io/example-id: ecs/v1beta1/service-static-cluster
+    meta.upbound.io/example-id: ecs/v1beta1/service
   labels:
     testing.upbound.io/example-name: example-cluster-service
   name: example-cluster-service

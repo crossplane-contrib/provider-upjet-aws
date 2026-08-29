@@ -26,7 +26,7 @@ apiVersion: eks.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
     uptest.upbound.io/timeout: "2400"
   name: sample-eks-cluster
   labels:
@@ -48,7 +48,7 @@ kind: Role
 metadata:
   name: sample-eks-cluster
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -72,7 +72,7 @@ kind: RolePolicyAttachment
 metadata:
   name: sample-cluster-policy
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
@@ -86,7 +86,7 @@ kind: Subnet
 metadata:
   name: sample-subnet1
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -103,7 +103,7 @@ kind: Subnet
 metadata:
   name: sample-subnet2
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -120,7 +120,7 @@ kind: Subnet
 metadata:
   name: private-subnet
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -136,7 +136,7 @@ kind: RouteTable
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -152,7 +152,7 @@ kind: RouteTableAssociation
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -168,7 +168,7 @@ kind: VPC
 metadata:
   name: sample-vpc
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     enableDnsHostnames: true
@@ -184,7 +184,7 @@ kind: InternetGateway
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     region: us-west-1
@@ -198,7 +198,7 @@ kind: DefaultRouteTable
 metadata:
   name: example
   annotations:
-    meta.upbound.io/example-id: eks/v1beta1/cluster
+    meta.upbound.io/example-id: eks/v1beta1/clusterauth
 spec:
   forProvider:
     defaultRouteTableIdRef:
