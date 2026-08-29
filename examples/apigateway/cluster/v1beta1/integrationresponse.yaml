@@ -3,20 +3,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: apigateway.aws.upbound.io/v1beta1
-kind: RestAPI
-metadata:
-  annotations:
-    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
-  labels:
-    testing.upbound.io/example-name: integration
-  name: mydemoapi
-spec:
-  forProvider:
-    description: This is my API for demonstration purposes
-    name: MyDemoAPI
-    region: us-west-1
----
-apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
   annotations:
@@ -46,6 +32,20 @@ spec:
     statusCodeSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
+  labels:
+    testing.upbound.io/example-name: integration
+  name: mydemoapi
+spec:
+  forProvider:
+    description: This is my API for demonstration purposes
+    name: MyDemoAPI
+    region: us-west-1
 ---
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Integration

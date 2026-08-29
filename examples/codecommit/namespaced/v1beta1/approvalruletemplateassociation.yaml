@@ -3,6 +3,25 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: codecommit.aws.m.upbound.io/v1beta1
+kind: ApprovalRuleTemplateAssociation
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplateassociation
+  labels:
+    testing.upbound.io/example-name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    approvalRuleTemplateNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    repositoryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: codecommit.aws.m.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: example
@@ -39,22 +58,3 @@ spec:
       }
     description: This is an example approval rule template
     region: us-west-1
----
-apiVersion: codecommit.aws.m.upbound.io/v1beta1
-kind: ApprovalRuleTemplateAssociation
-metadata:
-  name: example
-  annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/approvalruletemplateassociation
-  labels:
-    testing.upbound.io/example-name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    approvalRuleTemplateNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    region: us-west-1
-    repositoryNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example

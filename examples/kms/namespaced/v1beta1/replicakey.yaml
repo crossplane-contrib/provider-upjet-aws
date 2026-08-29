@@ -3,6 +3,22 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: kms.aws.m.upbound.io/v1beta1
+kind: ReplicaKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/replicakey
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    region: us-east-2
+    description: "Multi-Region replica key"
+    deletionWindowInDays: 7
+    primaryKeyArnRef:
+      name: sample-replicakey
+
+---
+apiVersion: kms.aws.m.upbound.io/v1beta1
 kind: Key
 metadata:
   name: sample-replicakey
@@ -13,16 +29,4 @@ spec:
     description: Created with Crossplane
     multiRegion: true
     deletionWindowInDays: 7
----
-apiVersion: kms.aws.m.upbound.io/v1beta1
-kind: ReplicaKey
-metadata:
-  name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    region: us-east-2
-    description: "Multi-Region replica key"
-    deletionWindowInDays: 7
-    primaryKeyArnRef:
-      name: sample-replicakey
+

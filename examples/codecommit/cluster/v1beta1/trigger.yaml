@@ -3,6 +3,28 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: codecommit.aws.upbound.io/v1beta1
+kind: Trigger
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: codecommit/v1beta1/trigger
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    repositoryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-trigger
+    trigger:
+      - destinationArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        events:
+          - all
+        name: all
+---
+apiVersion: codecommit.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
   name: example-trigger
@@ -25,25 +47,3 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
----
-apiVersion: codecommit.aws.upbound.io/v1beta1
-kind: Trigger
-metadata:
-  name: example
-  annotations:
-    meta.upbound.io/example-id: codecommit/v1beta1/trigger
-  labels:
-    testing.upbound.io/example-name: example
-spec:
-  forProvider:
-    region: us-west-1
-    repositoryNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-trigger
-    trigger:
-    - destinationArnSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      events:
-      - all
-      name: all
