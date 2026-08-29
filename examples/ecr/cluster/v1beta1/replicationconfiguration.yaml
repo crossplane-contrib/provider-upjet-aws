@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource requires an additional AWS account"
+    meta.upbound.io/example-id: ecr/v1beta1/replicationconfiguration
 spec:
   forProvider:
     region: us-east-1

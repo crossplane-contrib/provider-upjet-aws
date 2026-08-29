@@ -7,6 +7,7 @@ kind: TransitGatewayMulticastGroupSource
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewaymulticastgroupsource
   name: example
   namespace: upbound-system
 spec:

@@ -8,6 +8,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "Requires adding canonical ID of the owner user who created the Bucket."
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl
 spec:
   forProvider:
     region: us-west-1
