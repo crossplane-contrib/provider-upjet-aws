@@ -215,6 +215,35 @@ type CapacityProviderParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type CapacityReservationsInitParameters struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
+type CapacityReservationsObservation struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
+type CapacityReservationsParameters struct {
+
+	// ARN of the Capacity Reservation resource group in which to run instances. Can only be set when reservation_preference is RESERVATIONS_ONLY.
+	// +kubebuilder:validation:Optional
+	ReservationGroupArn *string `json:"reservationGroupArn,omitempty" tf:"reservation_group_arn,omitempty"`
+
+	// Preference for when Capacity Reservations should be used. Valid values are RESERVATIONS_ONLY, RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED. instance_requirements must be provided when set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+	// +kubebuilder:validation:Optional
+	ReservationPreference *string `json:"reservationPreference,omitempty" tf:"reservation_preference,omitempty"`
+}
+
 type InfrastructureOptimizationInitParameters struct {
 
 	// This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are:
@@ -239,11 +268,17 @@ type InstanceLaunchTemplateInitParameters struct {
 	// The purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand or Spot instances. Valid values are ON_DEMAND and SPOT. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	CapacityReservations []CapacityReservationsInitParameters `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn,omitempty" tf:"ec2_instance_profile_arn,omitempty"`
 
 	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	InstanceRequirements []InstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	LocalStorageConfiguration []LocalStorageConfigurationInitParameters `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	Monitoring *string `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
@@ -260,11 +295,17 @@ type InstanceLaunchTemplateObservation struct {
 	// The purchasing option for the EC2 instances used in the capacity provider. Determines whether to use On-Demand or Spot instances. Valid values are ON_DEMAND and SPOT. Defaults to ON_DEMAND when not specified. Changing this value will trigger replacement of the capacity provider. For more information, see Amazon EC2 billing and purchasing options in the Amazon EC2 User Guide.
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	CapacityReservations []CapacityReservationsObservation `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn,omitempty" tf:"ec2_instance_profile_arn,omitempty"`
 
 	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	InstanceRequirements []InstanceRequirementsObservation `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	LocalStorageConfiguration []LocalStorageConfigurationObservation `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	Monitoring *string `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
@@ -282,6 +323,10 @@ type InstanceLaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityOptionType *string `json:"capacityOptionType,omitempty" tf:"capacity_option_type,omitempty"`
 
+	// Capacity Reservation configuration used to launch instances. Required when capacity_option_type is RESERVED. Detailed below.
+	// +kubebuilder:validation:Optional
+	CapacityReservations []CapacityReservationsParameters `json:"capacityReservations,omitempty" tf:"capacity_reservations,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the instance profile that Amazon ECS applies to Amazon ECS Managed Instances. This instance profile must include the necessary permissions for your tasks to access AWS services and resources. For more information, see Amazon ECS instance profile for Managed Instances in the Amazon ECS Developer Guide.
 	// +kubebuilder:validation:Optional
 	EC2InstanceProfileArn *string `json:"ec2InstanceProfileArn" tf:"ec2_instance_profile_arn,omitempty"`
@@ -289,6 +334,10 @@ type InstanceLaunchTemplateParameters struct {
 	// The instance requirements. You can specify the instance types and instance requirements such as vCPU count, memory, network performance, and accelerator specifications. Amazon ECS automatically selects the instances that match the specified criteria. Detailed below.
 	// +kubebuilder:validation:Optional
 	InstanceRequirements []InstanceRequirementsParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// Configuration block for the local storage settings applied to Amazon ECS Managed Instances. Detailed below.
+	// +kubebuilder:validation:Optional
+	LocalStorageConfiguration []LocalStorageConfigurationParameters `json:"localStorageConfiguration,omitempty" tf:"local_storage_configuration,omitempty"`
 
 	// CloudWatch provides two categories of monitoring: basic monitoring and detailed monitoring. By default, your managed instance is configured for basic monitoring. You can optionally enable detailed monitoring to help you more quickly identify and act on operational issues. You can enable or turn off detailed monitoring at launch or when the managed instance is running or stopped. For more information, see Detailed monitoring for Amazon ECS Managed Instances in the Amazon ECS Developer Guide. Valid values are BASIC and DETAILED.
 	// +kubebuilder:validation:Optional
@@ -574,6 +623,25 @@ type InstanceRequirementsParameters struct {
 	// The minimum and maximum number of vCPUs for the instance types. Amazon ECS selects instance types that have vCPU counts within this range.
 	// +kubebuilder:validation:Optional
 	VcpuCount []VcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
+}
+
+type LocalStorageConfigurationInitParameters struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
+}
+
+type LocalStorageConfigurationObservation struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
+}
+
+type LocalStorageConfigurationParameters struct {
+
+	// Whether to use the local storage of the instance for Amazon ECS Managed Instances.
+	// +kubebuilder:validation:Optional
+	UseLocalStorage *bool `json:"useLocalStorage,omitempty" tf:"use_local_storage,omitempty"`
 }
 
 type ManagedInstancesProviderInitParameters struct {
