@@ -880,6 +880,10 @@ spec:
                             use http_header condition instead.
                           items:
                             properties:
+                              ipAddressType:
+                                description: IP address type for Network Load Balancers.
+                                  Valid values are ipv4 and ipv6.
+                                type: string
                               values:
                                 description: 'Query string pairs or values to match.
                                   Query String Value blocks documented below. Multiple
@@ -1882,6 +1886,10 @@ spec:
                             use http_header condition instead.
                           items:
                             properties:
+                              ipAddressType:
+                                description: IP address type for Network Load Balancers.
+                                  Valid values are ipv4 and ipv6.
+                                type: string
                               values:
                                 description: 'Query string pairs or values to match.
                                   Query String Value blocks documented below. Multiple
@@ -2568,6 +2576,10 @@ spec:
                             use http_header condition instead.
                           items:
                             properties:
+                              ipAddressType:
+                                description: IP address type for Network Load Balancers.
+                                  Valid values are ipv4 and ipv6.
+                                type: string
                               values:
                                 description: 'Query string pairs or values to match.
                                   Query String Value blocks documented below. Multiple

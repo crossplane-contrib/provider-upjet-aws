@@ -335,6 +335,13 @@ spec:
                                   volume from snapshots created using CreateSnapshots.
                                   The default is false.
                                 type: boolean
+                              excludeDataVolumeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
                               noReboot:
                                 description: Applies to AMI lifecycle policies only.
                                   Indicates whether targeted instances are rebooted
@@ -1151,6 +1158,13 @@ spec:
                                   volume from snapshots created using CreateSnapshots.
                                   The default is false.
                                 type: boolean
+                              excludeDataVolumeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
                               noReboot:
                                 description: Applies to AMI lifecycle policies only.
                                   Indicates whether targeted instances are rebooted
@@ -1979,6 +1993,13 @@ spec:
                                   volume from snapshots created using CreateSnapshots.
                                   The default is false.
                                 type: boolean
+                              excludeDataVolumeTags:
+                                additionalProperties:
+                                  type: string
+                                description: Map specifies whether to exclude volumes
+                                  that have specific tags.
+                                type: object
+                                x-kubernetes-map-type: granular
                               noReboot:
                                 description: Applies to AMI lifecycle policies only.
                                   Indicates whether targeted instances are rebooted

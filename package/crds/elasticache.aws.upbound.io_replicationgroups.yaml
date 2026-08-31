@@ -105,6 +105,30 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoGenerateAuthToken:
                     description: |-
                       Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
@@ -774,6 +798,30 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoSecretRef:
+                    description: Password used to access a password protected server,
+                      whose value will not be stored in state. Can be specified only
+                      if transit_encryption_enabled = true. Conflicts with auth_token.
+                      Requires auth_token_wo_version.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -1493,6 +1541,10 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  authTokenWoVersion:
+                    description: Integer that, when changed, triggers a re-send of
+                      auth_token_wo to the replication group. Requires auth_token_wo.
+                    type: number
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.

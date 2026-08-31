@@ -625,6 +625,30 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest); i4++ {
 			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleRef,
+					Selector:     mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole")
+			}
+			mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest); i4++ {
+			{
 				m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -667,6 +691,30 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 			}
 			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleRef,
+					Selector:     mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole")
+			}
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRole = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].CatalogEncryptionServiceRoleRef = rsp.ResolvedReference
 
 		}
 	}

@@ -263,6 +263,27 @@ spec:
                                   see Amazon EC2 billing and purchasing options in
                                   the Amazon EC2 User Guide.
                                 type: string
+                              capacityReservations:
+                                description: Capacity Reservation configuration used
+                                  to launch instances. Required when capacity_option_type
+                                  is RESERVED. Detailed below.
+                                items:
+                                  properties:
+                                    reservationGroupArn:
+                                      description: ARN of the Capacity Reservation
+                                        resource group in which to run instances.
+                                        Can only be set when reservation_preference
+                                        is RESERVATIONS_ONLY.
+                                      type: string
+                                    reservationPreference:
+                                      description: Preference for when Capacity Reservations
+                                        should be used. Valid values are RESERVATIONS_ONLY,
+                                        RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED.
+                                        instance_requirements must be provided when
+                                        set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+                                      type: string
+                                  type: object
+                                type: array
                               ec2InstanceProfileArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   instance profile that Amazon ECS applies to Amazon
@@ -531,6 +552,18 @@ spec:
                                             type: number
                                         type: object
                                       type: array
+                                  type: object
+                                type: array
+                              localStorageConfiguration:
+                                description: Configuration block for the local storage
+                                  settings applied to Amazon ECS Managed Instances.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    useLocalStorage:
+                                      description: Whether to use the local storage
+                                        of the instance for Amazon ECS Managed Instances.
+                                      type: boolean
                                   type: object
                                 type: array
                               monitoring:
@@ -811,6 +844,27 @@ spec:
                                   see Amazon EC2 billing and purchasing options in
                                   the Amazon EC2 User Guide.
                                 type: string
+                              capacityReservations:
+                                description: Capacity Reservation configuration used
+                                  to launch instances. Required when capacity_option_type
+                                  is RESERVED. Detailed below.
+                                items:
+                                  properties:
+                                    reservationGroupArn:
+                                      description: ARN of the Capacity Reservation
+                                        resource group in which to run instances.
+                                        Can only be set when reservation_preference
+                                        is RESERVATIONS_ONLY.
+                                      type: string
+                                    reservationPreference:
+                                      description: Preference for when Capacity Reservations
+                                        should be used. Valid values are RESERVATIONS_ONLY,
+                                        RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED.
+                                        instance_requirements must be provided when
+                                        set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+                                      type: string
+                                  type: object
+                                type: array
                               ec2InstanceProfileArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   instance profile that Amazon ECS applies to Amazon
@@ -1079,6 +1133,18 @@ spec:
                                             type: number
                                         type: object
                                       type: array
+                                  type: object
+                                type: array
+                              localStorageConfiguration:
+                                description: Configuration block for the local storage
+                                  settings applied to Amazon ECS Managed Instances.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    useLocalStorage:
+                                      description: Whether to use the local storage
+                                        of the instance for Amazon ECS Managed Instances.
+                                      type: boolean
                                   type: object
                                 type: array
                               monitoring:
@@ -1359,6 +1425,27 @@ spec:
                                   see Amazon EC2 billing and purchasing options in
                                   the Amazon EC2 User Guide.
                                 type: string
+                              capacityReservations:
+                                description: Capacity Reservation configuration used
+                                  to launch instances. Required when capacity_option_type
+                                  is RESERVED. Detailed below.
+                                items:
+                                  properties:
+                                    reservationGroupArn:
+                                      description: ARN of the Capacity Reservation
+                                        resource group in which to run instances.
+                                        Can only be set when reservation_preference
+                                        is RESERVATIONS_ONLY.
+                                      type: string
+                                    reservationPreference:
+                                      description: Preference for when Capacity Reservations
+                                        should be used. Valid values are RESERVATIONS_ONLY,
+                                        RESERVATIONS_FIRST, and RESERVATIONS_EXCLUDED.
+                                        instance_requirements must be provided when
+                                        set to RESERVATIONS_ONLY or RESERVATIONS_FIRST.
+                                      type: string
+                                  type: object
+                                type: array
                               ec2InstanceProfileArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   instance profile that Amazon ECS applies to Amazon
@@ -1627,6 +1714,18 @@ spec:
                                             type: number
                                         type: object
                                       type: array
+                                  type: object
+                                type: array
+                              localStorageConfiguration:
+                                description: Configuration block for the local storage
+                                  settings applied to Amazon ECS Managed Instances.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    useLocalStorage:
+                                      description: Whether to use the local storage
+                                        of the instance for Amazon ECS Managed Instances.
+                                      type: boolean
                                   type: object
                                 type: array
                               monitoring:
