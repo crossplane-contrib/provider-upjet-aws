@@ -12,6 +12,7 @@ import (
 	analyzer "github.com/upbound/provider-aws/v2/internal/controller/namespaced/accessanalyzer/analyzer"
 	archiverule "github.com/upbound/provider-aws/v2/internal/controller/namespaced/accessanalyzer/archiverule"
 	alternatecontact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/alternatecontact"
+	primarycontact "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/primarycontact"
 	region "github.com/upbound/provider-aws/v2/internal/controller/namespaced/account/region"
 	certificate "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/v2/internal/controller/namespaced/acm/certificatevalidation"
@@ -1048,6 +1049,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		analyzer.Setup,
 		archiverule.Setup,
 		alternatecontact.Setup,
+		primarycontact.Setup,
 		region.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
@@ -2090,6 +2092,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		analyzer.SetupGated,
 		archiverule.SetupGated,
 		alternatecontact.SetupGated,
+		primarycontact.SetupGated,
 		region.SetupGated,
 		certificate.SetupGated,
 		certificatevalidation.SetupGated,
@@ -3131,6 +3134,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		analyzer.SetupWebhookWithManager,
 		archiverule.SetupWebhookWithManager,
 		alternatecontact.SetupWebhookWithManager,
+		primarycontact.SetupWebhookWithManager,
 		region.SetupWebhookWithManager,
 		certificate.SetupWebhookWithManager,
 		certificatevalidation.SetupWebhookWithManager,

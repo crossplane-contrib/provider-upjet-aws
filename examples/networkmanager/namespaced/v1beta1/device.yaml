@@ -45,4 +45,4 @@ metadata:
   name: example
   namespace: upbound-system
 spec:
-  forProvider:
+  forProvider: {}

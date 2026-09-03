@@ -31,7 +31,7 @@ metadata:
 spec:
   forProvider:
     appversionLifecycle:
-      - deleteSourceFromS3: true
-        maxCount: 128
-        serviceRole: arn:aws:iam::153891904029:role/aws-elasticbeanstalk-service-role
+      deleteSourceFromS3: true
+      maxCount: 128
+      serviceRole: arn:aws:iam::153891904029:role/aws-elasticbeanstalk-service-role
     region: us-west-1

@@ -10,7 +10,6 @@ metadata:
 spec:
   forProvider:
     region: eu-central-1
-    name: user-updates-topic
 ---
 apiVersion: neptune.aws.m.upbound.io/v1beta1
 kind: EventSubscription

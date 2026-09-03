@@ -13,7 +13,6 @@ metadata:
   name: ssoadmin-customer-managed-policy-attachment
   namespace: upbound-system
 spec:
-  deletionPolicy: Delete
   forProvider:
     customerManagedPolicyReference:
       path: /

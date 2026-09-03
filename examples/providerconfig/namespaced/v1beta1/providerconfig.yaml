@@ -9,7 +9,7 @@ metadata:
   namespace: crossplane-system
 type: Opaque
 data:
-  credentials: <REPLACEME>
+  credentials: dXB0ZXN0 # base64-encoded placeholder; replace with real credentials
 ---
 apiVersion: aws.m.upbound.io/v1beta1
 kind: ProviderConfig

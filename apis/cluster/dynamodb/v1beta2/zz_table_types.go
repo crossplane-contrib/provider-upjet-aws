@@ -497,8 +497,16 @@ type ReplicaObservation struct {
 	// ARN of the Table Stream. Only available when stream_enabled = true
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
+	// Whether Streams are enabled.
+	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
+
 	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
 	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
+
+	// When an item in the table is modified, StreamViewType determines what information is written to the table's stream.
+	// Valid values are KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES.
+	// Only valid when stream_enabled is true.
+	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 }
 
 type ReplicaParameters struct {

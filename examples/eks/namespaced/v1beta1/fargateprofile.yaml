@@ -73,9 +73,9 @@ spec:
     roleArnRef:
       name: sample-eks-cluster
     vpcConfig:
-      - subnetIdRefs:
-          - name: sample-subnet1
-          - name: sample-subnet2
+      subnetIdRefs:
+        - name: sample-subnet1
+        - name: sample-subnet2
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role

@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     region: eu-central-1
-    name: user-updates-topic
 
 ---
 

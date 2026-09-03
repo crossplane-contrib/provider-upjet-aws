@@ -12,7 +12,7 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v2
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 6.55.0
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.2
+export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.3
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
@@ -52,7 +52,7 @@ export GOPRIVATE = github.com/upbound/*
 GO_REQUIRED_VERSION ?= $(shell grep -E '^go ' go.mod | awk '{print $2}')
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
-GOLANGCILINT_VERSION ?= 2.11.4
+GOLANGCILINT_VERSION ?= 2.12.2
 
 RUN_BUILDTAGGER ?= true
 # if RUN_BUILDTAGGER is set to "true", we will use build constraints
@@ -86,6 +86,7 @@ YQ_VERSION = v4.40.5
 CROSSPLANE_VERSION = 2.3.4
 CROSSPLANE_CLI_VERSION = v2.3.4
 CRDDIFF_VERSION = v0.12.1
+KUBECTL_VALIDATE_VERSION ?= v0.0.4
 
 export CROSSPLANE_CLI_VERSION := $(CROSSPLANE_CLI_VERSION)
 
@@ -393,7 +394,45 @@ go.lint.analysiskey:
 print-subpackages:
 	@echo $(SUBPACKAGES)
 
-.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA) print-subpackages
+KUBECTL_VALIDATE := $(TOOLS_HOST_DIR)/kubectl-validate-$(KUBECTL_VALIDATE_VERSION)
+
+$(KUBECTL_VALIDATE):
+	@$(INFO) installing kubectl-validate $(KUBECTL_VALIDATE_VERSION)
+	@mkdir -p $(TOOLS_HOST_DIR)
+	@GOBIN=$(abspath $(TOOLS_HOST_DIR)) go install sigs.k8s.io/kubectl-validate@$(KUBECTL_VALIDATE_VERSION)
+	@mv $(TOOLS_HOST_DIR)/kubectl-validate $@
+	@$(OK) installed kubectl-validate $(KUBECTL_VALIDATE_VERSION)
+
+# example-lint validates example manifests against CRD schemas using kubectl-validate.
+# Key implementation details:
+#   - Operates on a tmpdir copy so source files are never mutated.
+#   - Replaces uptest template variables (e.g. ${Rand.RFC1123Subdomain}) with a valid
+#     placeholder; kubectl-validate rejects those tokens as malformed field values.
+#   - Skips any file that references a non-AWS apiVersion (e.g. protection.crossplane.io
+#     Usage resources embedded in multi-doc files). Covers both the family (aws.upbound.io)
+#     and monolith (aws.m.upbound.io) API groups.
+#   - Captures absolute paths for the binary and CRDs before cd-ing into tmpdir, and runs
+#     kubectl-validate from there so error output shows short relative paths.
+#   - Iterates one API group directory at a time so failures are reported per group.
+example-lint: $(KUBECTL_VALIDATE)
+	@$(INFO) linting example manifests; \
+	failed=0; \
+	tmpdir=$$(mktemp -d); \
+	crdsdir=$$(pwd)/package/crds; \
+	kv=$$(realpath "$(KUBECTL_VALIDATE)"); \
+	cp -r examples/. "$$tmpdir/"; \
+	find "$$tmpdir" -name "*.yaml" | xargs perl -pi -e 's/\$$\{Rand\.[^}]*\}/uptest/g'; \
+	find "$$tmpdir" -name "*.yaml" | while read f; do grep '^apiVersion:' "$$f" | grep -qv 'aws.*upbound\.io' && rm -f "$$f" || true; done; \
+	for dir in examples/*/; do \
+		group=$$(basename "$$dir"); \
+		[ -d "$$tmpdir/$$group" ] || continue; \
+		$(INFO) linting $$dir; \
+		(cd "$$tmpdir" && "$$kv" "$$group" --local-crds "$$crdsdir") && $(OK) linted $$dir || { $(WARN) failed to lint $$dir; failed=1; }; \
+	done; \
+	rm -rf "$$tmpdir"; \
+	[ "$$failed" -eq 0 ] && $(OK) linted example manifests || $(FAIL)
+
+.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA) print-subpackages example-lint
 
 build.init: kustomize-crds
 

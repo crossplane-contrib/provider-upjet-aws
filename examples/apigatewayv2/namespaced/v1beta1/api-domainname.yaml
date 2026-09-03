@@ -29,11 +29,11 @@ spec:
   forProvider:
     region: us-west-1
     domainNameConfiguration:
-      - certificateArnSelector:
-          matchLabels:
-            upjet.upbound.io/test-group: apigatewayv2-domainname
-        endpointType: REGIONAL
-        securityPolicy: TLS_1_2
+      certificateArnSelector:
+        matchLabels:
+          upjet.upbound.io/test-group: apigatewayv2-domainname
+      endpointType: REGIONAL
+      securityPolicy: TLS_1_2
 ---
 apiVersion: acm.aws.m.upbound.io/v1beta1
 kind: Certificate

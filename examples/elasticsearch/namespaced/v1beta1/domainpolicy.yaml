@@ -46,9 +46,9 @@ metadata:
 spec:
   forProvider:
     clusterConfig:
-      - instanceType: r4.large.elasticsearch
+      instanceType: r4.large.elasticsearch
     ebsOptions:
-      - ebsEnabled: true
-        volumeSize: 30
+      ebsEnabled: true
+      volumeSize: 30
     elasticsearchVersion: "5.3"
     region: us-west-1

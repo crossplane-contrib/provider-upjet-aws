@@ -42,7 +42,6 @@ spec:
           }
         ]
       }
-    region: us-east-1
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: RolePolicy
@@ -71,4 +70,3 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example-bedrockagent-model
-    region: us-east-1

@@ -10,7 +10,6 @@ import (
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/crossplane/upjet/v2/pkg/apitesting/roundtrip"
 	"github.com/google/go-cmp/cmp"
-	"k8s.io/utils/ptr"
 	"sigs.k8s.io/randfill"
 
 	autoscalingv1beta1 "github.com/upbound/provider-aws/v2/apis/cluster/autoscaling/v1beta1"
@@ -52,11 +51,11 @@ func keepFirstNonNil(fields ...any) int {
 
 	for i, f := range fields {
 		v := reflect.ValueOf(f)
-		if !v.IsValid() || v.Kind() != reflect.Ptr {
+		if !v.IsValid() || v.Kind() != reflect.Pointer {
 			continue
 		}
 		elem := v.Elem()
-		if elem.Kind() != reflect.Ptr && elem.Kind() != reflect.Slice {
+		if elem.Kind() != reflect.Pointer && elem.Kind() != reflect.Slice {
 			// Expecting pointer-to-pointer (**T) or pointer-to-slice
 			continue
 		}
@@ -123,9 +122,9 @@ func fuzzRDSInstanceV1Beta1(s *rdsv1beta1.Instance, c randfill.Continue) {
 func fuzzRedshiftClusterV1Beta1(s *redshiftv1beta1.Cluster, c randfill.Continue) {
 	c.Fill(s)
 	if s.Spec.ForProvider.Encrypted != nil {
-		s.Spec.ForProvider.Encrypted = ptr.To("false")
+		s.Spec.ForProvider.Encrypted = new("false")
 		if c.Bool() {
-			s.Spec.ForProvider.Encrypted = ptr.To("true")
+			s.Spec.ForProvider.Encrypted = new("true")
 		}
 	}
 }

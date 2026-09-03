@@ -73,17 +73,17 @@ metadata:
 spec:
   forProvider:
     configuration:
-      - supportingAccessPointSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-        transformationConfiguration:
-          - actions:
-              - GetObject
-            contentTransformation:
-              - awsLambda:
-                  - functionArnSelector:
-                      matchLabels:
-                        testing.upbound.io/example-name: example
+      supportingAccessPointSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      transformationConfiguration:
+        - actions:
+            - GetObject
+          contentTransformation:
+            awsLambda:
+              functionArnSelector:
+                matchLabels:
+                  testing.upbound.io/example-name: example
     region: us-east-1
     name: example
 ---
@@ -100,8 +100,8 @@ spec:
   forProvider:
     region: us-east-1
     environment:
-      - variables:
-          foo: bar
+      variables:
+        foo: bar
     s3Bucket: upbound-provider-test-data
     s3Key: hello-python.zip
     handler: index.py

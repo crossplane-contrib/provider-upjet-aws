@@ -53,4 +53,3 @@ spec:
     region: us-west-2
     name: example_policy_engine
     description: Policy engine for policy example
----
