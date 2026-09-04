@@ -23,6 +23,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
 	"github.com/pkg/errors"
+	"golang.org/x/sync/singleflight"
 
 	"github.com/upbound/provider-aws/v2/apis/namespaced/v1beta1"
 )
@@ -32,7 +33,7 @@ const (
 
 	// defaultCacheMaxSize is the default maximum number of entries in the
 	// AWS credentials provider cache.
-	defaultCacheMaxSize = 1000
+	defaultCacheMaxSize = 2000
 
 	// Reasons for which a credential provider is not cached. They are logged
 	// as the "reason" of a "Not caching the credential provider" debug line,
@@ -55,7 +56,11 @@ func WithCacheMaxSize(n int) AWSCredentialsProviderCacheOption {
 }
 
 // WithCacheStore lets you bootstrap AWS CredentialsProvider Cache with
-// your own cache.
+// your own cache. It must be keyed the way RetrieveCredentials keys it, i.e.
+// by the ProviderConfig's UID and the region, and the supplied entries must
+// carry everything RetrieveCredentials serves from one, i.e. an account ID, an
+// access time and the version of the credential material, as the cache only
+// ever holds fully initialized entries.
 func WithCacheStore(cache map[string]*awsCredentialsProviderCacheEntry) AWSCredentialsProviderCacheOption {
 	return func(c *AWSCredentialsProviderCache) {
 		c.cache = cache
@@ -74,11 +79,13 @@ func WithCacheLogger(l logging.Logger) AWSCredentialsProviderCacheOption {
 func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *AWSCredentialsProviderCache {
 	c := &AWSCredentialsProviderCache{
 		cache: map[string]*awsCredentialsProviderCacheEntry{},
-		// entries are keyed by, among others, the region and the credential
-		// material, so their count scales with the number of provider configs
-		// times the number of regions in use, plus the rotated-out entries of
-		// both. Evicting an entry means paying for its STS calls again, and the
-		// entries are small, so keep the ceiling generous.
+		// entries are keyed by the provider config and the region, and a
+		// rotation of the credentials replaces an entry instead of adding one,
+		// so the count is bounded by the number of provider configs times the
+		// number of regions in use. Only the entries of the provider configs
+		// that are gone, or of the regions that stopped being reconciled, are
+		// left for this ceiling to reclaim. Evicting an entry means paying for
+		// its STS calls again, and the entries are small, so keep it generous.
 		maxSize: defaultCacheMaxSize,
 		mu:      &sync.RWMutex{},
 		logger:  logging.NewNopLogger(),
@@ -96,22 +103,41 @@ func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *
 //	that has the oldest access time will be removed from the cache,
 //	i.e. FIFO on last access time.
 //
-// Note that there is no need to invalidate the values in the cache because
-// they never change, so we don't need concurrency-safety to prevent access
-// to an invalidated entry.
+// The credentials an entry holds never change, so a served entry never needs
+// to be invalidated. A ProviderConfig does however produce a new version of
+// them whenever it is edited or its credential material rotates, and the cache
+// holds a single entry per ProviderConfig and region, so the new version
+// replaces the old one in place. Replacing swaps in a whole new entry rather
+// than mutating the stored one, hence it does not invalidate the entry for
+// whoever is already holding it.
 type AWSCredentialsProviderCache struct {
-	// cache holds the AWS Config with a unique cache key per
-	// provider configuration. Key content includes the ProviderConfig's UUID
-	// and Generation and additional fields depending on the auth method
-	// (currently IRSA, WebIdentity, and static credentials with an assume role
-	// chain, are supported. See cacheableSource).
+	// cache holds one entry per ProviderConfig and region, keyed by the
+	// ProviderConfig's UID and the region. Everything else that the resulting
+	// credentials depend on, i.e. the ProviderConfig's generation, its
+	// credential source and a fingerprint of the credential material, is
+	// carried in the entry instead of in the key: those designate the version
+	// of the credentials, of which only one can ever be current, so a new
+	// version replaces its predecessor rather than accumulating next to it.
+	// Finding an entry is therefore not enough to serve it, see
+	// awsCredentialsProviderCacheEntry.matches.
+	//
+	// Which credential sources are cached at all is decided by
+	// cacheableSource.
 	cache map[string]*awsCredentialsProviderCacheEntry
 
 	// maxSize is the maximum number of elements this cache can ever have.
 	maxSize int
 
-	// mu is used to make sure the cache map is concurrency-safe.
+	// mu is used to make sure the cache map is concurrency-safe. It is never
+	// held across an AWS API call, see RetrieveCredentials.
 	mu *sync.RWMutex
+
+	// inflight collapses the concurrent initializations of one version of the
+	// credentials into a single one, so that a rotation observed by many
+	// reconciliations at once costs one set of AWS API calls instead of one
+	// per reconciliation. It is keyed per version rather than per cache slot,
+	// see RetrieveCredentials.
+	inflight singleflight.Group
 
 	// logger is the logger for cache operations.
 	logger logging.Logger
@@ -121,6 +147,27 @@ type awsCredentialsProviderCacheEntry struct {
 	awsCredCache *aws.CredentialsCache
 	accessedAt   atomic.Value
 	accountID    atomic.Value
+
+	// generation, source and credsFingerprint designate the version of the
+	// credential material this entry was built from. They are immutable for
+	// the lifetime of the entry: a new version replaces the whole entry
+	// instead of mutating this one, so that the readers holding it, which do
+	// so without the cache's lock, always observe a consistent version.
+	generation       int64
+	source           string
+	credsFingerprint string
+}
+
+// matches reports whether the entry was built from the credential material
+// that the supplied ProviderConfig and provenance designate. The cache holds a
+// single entry per ProviderConfig and region, so finding one is not enough to
+// serve it: it may belong to a superseded generation, credential source or
+// credential material. Every read of a stored entry must go through here, the
+// lookups in RetrieveCredentials included.
+func (e *awsCredentialsProviderCacheEntry) matches(pc *v1beta1.ClusterProviderConfig, cfgMeta awsConfigProvenanceMeta) bool {
+	return e.generation == pc.Generation &&
+		e.source == string(pc.Spec.Credentials.Source) &&
+		e.credsFingerprint == cfgMeta.credsFingerprint
 }
 
 // AccountIDFn is a function for retrieving the account ID.
@@ -228,36 +275,37 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		// TODO: Replace the identity cache with this cache.
 		return newCredentials(ctx, credsProvider, nil)
 	}
-	// cache key calculation tries to capture any parameter that
-	// could cause changes in the resulting AWS credentials,
-	// to ensure unique keys.
+	// Every parameter that could change the resulting AWS credentials has to
+	// be accounted for, either by the slot key or by the version carried in
+	// the entry:
 	//
-	// Parameters that are directly available in the provider config will
-	// generate unique cache keys through UUID and Generation of
-	// the ProviderConfig's k8s object, as they change when the provider
-	// config is modified.
+	//   - the parameters that live in the ProviderConfig spec are covered by
+	//     its generation, which changes whenever the spec does;
+	//   - the parameters that live outside of it, e.g. in a Secret or in a
+	//     projected token file, produce the same generation with different
+	//     credentials, so they are covered by cfgMeta.credsFingerprint;
+	//   - the region and the identity of the ProviderConfig itself make up
+	//     the slot key.
 	//
-	// Any other external parameter that have an effect on the resulting
-	// credentials and does not appear in the ProviderConfig directly
-	// (i.e. the same provider config content produces a different config),
-	// should be included in the cache key via `cfgMeta.credsFingerprint`
-	cacheKeyParams := []string{ // nolint:prealloc
-		string(pc.UID),
-		strconv.FormatInt(pc.Generation, 10),
-		region,
-		string(pc.Spec.Credentials.Source),
-		cfgMeta.credsFingerprint, // empty fingerprints are rejected above
-	}
-	cacheKey := strings.Join(cacheKeyParams, ":")
-	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
+	// The cache holds a single entry per ProviderConfig and region, hence only
+	// the latter is in the key. The rest designates the version of the
+	// credentials, of which only one can ever be current, so it is checked
+	// against the stored entry with matches and a new version takes the slot
+	// of the one it supersedes instead of accumulating next to it.
+	slotKey := string(pc.UID) + ":" + region
+	c.logger.Debug("Checking cache entry", "cacheKey", slotKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
 	c.mu.RLock()
-	cacheEntry, ok := c.cache[cacheKey]
+	cacheEntry, ok := c.cache[slotKey]
+	// snapshot the size for the miss log below: it must not be read outside of
+	// this critical section, as the initializations running concurrently write
+	// to the map, and a concurrent map read is fatal rather than merely torn.
+	cacheSize := len(c.cache)
 	c.mu.RUnlock()
 
 	// TODO: consider implementing a TTL even though the cached entry is valid
 	// cache hit
-	if ok {
-		c.logger.Debug("Cache hit", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
+	if ok && cacheEntry.matches(pc, cfgMeta) {
+		c.logger.Debug("Cache hit", "cacheKey", slotKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID))
 		// since this is a hot-path in the execution, do not always update
 		// the last access times, it is fine to evict the LRU entry on a less
 		// granular precision.
@@ -267,25 +315,90 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		return newCredentials(ctx, cacheEntry.awsCredCache, accountIDFromCacheEntry(cacheEntry))
 	}
 
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	// we need to recheck the cache because it might have already been
-	// populated.
-	cacheEntry, ok = c.cache[cacheKey]
-	if !ok {
-		// cache miss
-		c.logger.Debug("Cache miss", "cacheKey", cacheKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID), "cacheSize", len(c.cache))
-		c.makeRoom()
-		cacheEntry = &awsCredentialsProviderCacheEntry{
-			awsCredCache: awsCredsCache,
+	// cache miss, i.e. the slot is empty or holds a superseded version.
+	// Initializing an entry costs an sts:GetCallerIdentity plus, on the first
+	// retrieval, an sts:AssumeRole*, so it must not happen while holding the
+	// global lock: that would serialize the reconciliations of every other
+	// ProviderConfig, the cache hits included, since a pending writer also
+	// locks the readers out.
+	//
+	// The initializations are deduplicated per version of the credentials and
+	// not per slot, as two versions can legitimately be initialized at the
+	// same time while a rotation is in progress, and a reconciliation must
+	// never join a flight that is minting a version other than the one it
+	// asked for. Note that a flight runs on a goroutine of its own and
+	// captures the context, the account ID lookup and the credentials provider
+	// of whichever reconciliation won the race for the version. The
+	// reconciliations that join one therefore observe its outcome, including
+	// its failures, rather than making the same calls themselves.
+	flightKey := strings.Join([]string{
+		slotKey,
+		strconv.FormatInt(pc.Generation, 10),
+		string(pc.Spec.Credentials.Source),
+		cfgMeta.credsFingerprint, // empty fingerprints are rejected above
+	}, ":")
+	c.logger.Debug("Cache miss", "cacheKey", slotKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID), "cacheSize", cacheSize)
+	inflight := c.inflight.DoChan(flightKey, func() (any, error) {
+		// another reconciliation may have populated the slot with this very
+		// version between our lookup above and our turn here.
+		c.mu.RLock()
+		entry, ok := c.cache[slotKey]
+		c.mu.RUnlock()
+		if ok && entry.matches(pc, cfgMeta) {
+			return entry, nil
 		}
 		id, err := accountIDFn(ctx)
 		if err != nil {
-			return Credentials{}, errors.Wrap(err, errGetAccountID)
+			// nothing is cached, hence the next reconciliation retries.
+			return nil, errors.Wrap(err, errGetAccountID)
 		}
-		cacheEntry.accountID.Store(id)
-		cacheEntry.accessedAt.Store(time.Now())
-		c.cache[cacheKey] = cacheEntry
+		entry = &awsCredentialsProviderCacheEntry{
+			awsCredCache:     awsCredsCache,
+			generation:       pc.Generation,
+			source:           string(pc.Spec.Credentials.Source),
+			credsFingerprint: cfgMeta.credsFingerprint,
+		}
+		entry.accountID.Store(id)
+		// accessedAt must be populated before the entry is published, as
+		// makeRoom loads it from every entry in the map.
+		entry.accessedAt.Store(time.Now())
+
+		c.mu.Lock()
+		defer c.mu.Unlock()
+		existing, occupied := c.cache[slotKey]
+		switch {
+		case occupied && existing.generation > pc.Generation:
+			// a straggling reconciliation of an older generation must not
+			// replace the entry of a newer one: the generation only ever moves
+			// forward, so the stored entry is the current one and ours is
+			// already obsolete. Serve this reconciliation, but leave the cache
+			// alone, or the two generations would evict each other for as long
+			// as the stragglers keep arriving.
+			c.logger.Debug("Not caching the credentials of a superseded ProviderConfig generation",
+				"cacheKey", slotKey, "providerConfigName", pc.Name, "providerConfigUID", string(pc.UID),
+				"generation", pc.Generation, "cachedGeneration", existing.generation)
+		case occupied:
+			// replacing a superseded version does not grow the cache, hence no
+			// room needs to be made for it.
+			c.cache[slotKey] = entry
+		default:
+			c.makeRoom()
+			c.cache[slotKey] = entry
+		}
+		return entry, nil
+	})
+	select {
+	case res := <-inflight:
+		if res.Err != nil {
+			return Credentials{}, res.Err
+		}
+		cacheEntry = res.Val.(*awsCredentialsProviderCacheEntry)
+	case <-ctx.Done():
+		// only this reconciliation gives up waiting. The initialization keeps
+		// running and still populates the cache, unless the context it
+		// captured is the one that was cancelled, in which case it fails and
+		// leaves nothing behind.
+		return Credentials{}, errors.Wrap(ctx.Err(), "cannot wait for the AWS credentials provider to be initialized")
 	}
 	return newCredentials(ctx, cacheEntry.awsCredCache, accountIDFromCacheEntry(cacheEntry))
 }

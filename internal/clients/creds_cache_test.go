@@ -8,6 +8,9 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"sort"
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -47,6 +50,36 @@ func (p *countingCredentialsProvider) Retrieve(context.Context) (aws.Credentials
 func newCountingCredsCache(creds aws.Credentials) (*aws.CredentialsCache, *countingCredentialsProvider) {
 	p := &countingCredentialsProvider{creds: creds}
 	return aws.NewCredentialsCache(p), p
+}
+
+// cacheKeys returns the keys the supplied cache currently holds, sorted so
+// that they are comparable.
+func cacheKeys(c *AWSCredentialsProviderCache) []string {
+	keys := make([]string, 0, len(c.cache))
+	for k := range c.cache {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
+// entryVersion is the version of the credential material a cache entry was
+// built from, i.e. everything that keys an entry but does not appear in its
+// slot key.
+type entryVersion struct {
+	Generation  int64
+	Source      string
+	Fingerprint string
+}
+
+// versionAt returns the version of the entry occupying the supplied slot.
+func versionAt(t *testing.T, c *AWSCredentialsProviderCache, slotKey string) entryVersion {
+	t.Helper()
+	e, ok := c.cache[slotKey]
+	if !ok {
+		t.Fatalf("cache: want an entry at the slot %q, got the slots %v", slotKey, cacheKeys(c))
+	}
+	return entryVersion{Generation: e.generation, Source: e.source, Fingerprint: e.credsFingerprint}
 }
 
 func staticCredsProviderConfig(uid string, generation int64, chain bool) *v1beta1.ClusterProviderConfig {
@@ -227,8 +260,14 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
-		if diff := cmp.Diff(2, len(c.cache)); diff != "" {
-			t.Errorf("cache size: -want, +got:\n%s", diff)
+		// the rotated material takes the slot of the material it supersedes,
+		// which can never be hit again, instead of accumulating next to it.
+		if diff := cmp.Diff([]string{"uid:us-east-1"}, cacheKeys(c)); diff != "" {
+			t.Errorf("cache slots: -want, +got:\n%s", diff)
+		}
+		want := entryVersion{Generation: 1, Source: string(xpv2.CredentialsSourceSecret), Fingerprint: "rotated-fingerprint"}
+		if diff := cmp.Diff(want, versionAt(t, c, "uid:us-east-1")); diff != "" {
+			t.Errorf("cached version: -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, rotatedCounter.calls); diff != "" {
 			t.Errorf("rotated provider Retrieve calls: -want, +got:\n%s", diff)
@@ -252,8 +291,60 @@ func TestRetrieveCredentialsStaticWithRoleChain(t *testing.T) {
 				t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 			}
 		}
-		if diff := cmp.Diff(4, len(c.cache)); diff != "" {
-			t.Errorf("cache size: -want, +got:\n%s", diff)
+		// the region and the ProviderConfig make up the slot, so those get an
+		// entry each. The second generation of "uid" is not a slot of its own:
+		// it supersedes the first one and takes over its slot.
+		if diff := cmp.Diff([]string{"other-uid:us-east-1", "uid:eu-west-1", "uid:us-east-1"}, cacheKeys(c)); diff != "" {
+			t.Errorf("cache slots: -want, +got:\n%s", diff)
+		}
+		want := entryVersion{Generation: 2, Source: string(xpv2.CredentialsSourceSecret), Fingerprint: "fingerprint"}
+		if diff := cmp.Diff(want, versionAt(t, c, "uid:us-east-1")); diff != "" {
+			t.Errorf("cached version: -want, +got:\n%s", diff)
+		}
+	})
+
+	t.Run("AStragglingOlderGenerationDoesNotTakeTheSlot", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		accountIDFn := func(context.Context) (string, error) { return "123456789012", nil }
+
+		// the ProviderConfig was edited, so the entry of the new generation
+		// holds the slot.
+		edited := staticCredsProviderConfig("uid", 2, true)
+		editedProvider, _ := newCountingCredsCache(creds)
+		if _, err := c.RetrieveCredentials(context.Background(), edited, "us-east-1", editedProvider, meta, accountIDFn); err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+
+		// a reconciliation that still carries the pre-edit ProviderConfig, e.g.
+		// one that read it before the edit landed, must be served from its own
+		// provider, but must not put the cache back on the superseded
+		// generation: the two would otherwise evict each other for as long as
+		// the stragglers keep arriving.
+		straggler := staticCredsProviderConfig("uid", 1, true)
+		stragglerCreds := aws.Credentials{AccessKeyID: "pre-edit"}
+		stragglerProvider, stragglerCounter := newCountingCredsCache(stragglerCreds)
+		got, err := c.RetrieveCredentials(context.Background(), straggler, "us-east-1", stragglerProvider, meta, accountIDFn)
+		if err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(Credentials{creds: stragglerCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, stragglerCounter.calls); diff != "" {
+			t.Errorf("straggling provider Retrieve calls: -want, +got:\n%s", diff)
+		}
+		want := entryVersion{Generation: 2, Source: string(xpv2.CredentialsSourceSecret), Fingerprint: "fingerprint"}
+		if diff := cmp.Diff(want, versionAt(t, c, "uid:us-east-1")); diff != "" {
+			t.Errorf("the superseded generation must not take the slot: -want, +got:\n%s", diff)
+		}
+
+		// and the current generation is still served from the cache.
+		fresh, freshCounter := newCountingCredsCache(aws.Credentials{AccessKeyID: "should-not-be-used"})
+		if _, err := c.RetrieveCredentials(context.Background(), edited, "us-east-1", fresh, meta, accountIDFn); err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(0, freshCounter.calls); diff != "" {
+			t.Errorf("freshly built provider Retrieve calls: -want, +got:\n%s", diff)
 		}
 	})
 
@@ -422,8 +513,14 @@ func TestRetrieveCredentialsIRSA(t *testing.T) {
 	if _, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", rotated, awsConfigProvenanceMeta{credsFingerprint: rotatedFingerprint}, accountIDFn); err != nil {
 		t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
 	}
-	if diff := cmp.Diff(2, len(c.cache)); diff != "" {
-		t.Errorf("cache size: -want, +got:\n%s", diff)
+	// the pre-rotation token can never be hit again, so its entry must not be
+	// left behind: the projected token rotates on the kubelet's schedule,
+	// which would otherwise grow the cache with no bound other than maxSize.
+	if diff := cmp.Diff([]string{"uid:us-east-1"}, cacheKeys(c)); diff != "" {
+		t.Errorf("cache slots: -want, +got:\n%s", diff)
+	}
+	if diff := cmp.Diff(entryVersion{Generation: 1, Source: authKeyIRSA, Fingerprint: rotatedFingerprint}, versionAt(t, c, "uid:us-east-1")); diff != "" {
+		t.Errorf("cached version: -want, +got:\n%s", diff)
 	}
 }
 
@@ -514,8 +611,13 @@ func TestRetrieveCredentialsWebIdentity(t *testing.T) {
 		if diff := cmp.Diff(Credentials{creds: rotatedCreds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
-		if diff := cmp.Diff(2, len(c.cache)); diff != "" {
-			t.Errorf("cache size: -want, +got:\n%s", diff)
+		// the rotated token takes the slot of the one it supersedes, which can
+		// never be hit again, instead of accumulating next to it.
+		if diff := cmp.Diff([]string{"uid:us-east-1"}, cacheKeys(c)); diff != "" {
+			t.Errorf("cache slots: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(entryVersion{Generation: 1, Source: authKeyWebIdentity, Fingerprint: rotatedFingerprint}, versionAt(t, c, "uid:us-east-1")); diff != "" {
+			t.Errorf("cached version: -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(1, rotatedCounter.calls); diff != "" {
 			t.Errorf("rotated provider Retrieve calls: -want, +got:\n%s", diff)
@@ -535,6 +637,165 @@ func TestRetrieveCredentialsWebIdentity(t *testing.T) {
 			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
 		}
 		if diff := cmp.Diff(0, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+	})
+}
+
+func TestRetrieveCredentialsConcurrency(t *testing.T) {
+	creds := aws.Credentials{AccessKeyID: "assumed", SecretAccessKey: "secret"}
+	meta := awsConfigProvenanceMeta{credsFingerprint: "fingerprint"}
+
+	// blockingAccountIDFn returns an AccountIDFn that signals when it has been
+	// entered and then blocks until the returned release function is called,
+	// standing in for an sts:GetCallerIdentity that is being throttled.
+	blockingAccountIDFn := func() (fn AccountIDFn, entered <-chan struct{}, release func()) {
+		in, out := make(chan struct{}), make(chan struct{})
+		var once sync.Once
+		return func(context.Context) (string, error) {
+			close(in)
+			<-out
+			return "123456789012", nil
+		}, in, func() { once.Do(func() { close(out) }) }
+	}
+
+	t.Run("AnInitializingEntryDoesNotBlockTheOtherKeys", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		slowAccountIDFn, entered, release := blockingAccountIDFn()
+		defer release()
+
+		slowProvider, _ := newCountingCredsCache(creds)
+		go func() {
+			_, _ = c.RetrieveCredentials(context.Background(), staticCredsProviderConfig("uid-slow", 1, true), "us-east-1", slowProvider, meta, slowAccountIDFn)
+		}()
+		<-entered
+
+		// the reconciliations of the other ProviderConfigs must not queue
+		// behind it: no lock is held across the AWS calls that initialize an
+		// entry. Otherwise a single throttled credential source would
+		// serialize the whole provider, cache hits included, as a pending
+		// writer also locks the readers out.
+		otherProvider, _ := newCountingCredsCache(creds)
+		done := make(chan error, 1)
+		go func() {
+			_, err := c.RetrieveCredentials(context.Background(), staticCredsProviderConfig("uid-other", 1, true), "us-east-1", otherProvider, meta, func(context.Context) (string, error) {
+				return "123456789012", nil
+			})
+			done <- err
+		}()
+		select {
+		case err := <-done:
+			if err != nil {
+				t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+			}
+		case <-time.After(30 * time.Second):
+			t.Fatal("RetrieveCredentials(...): an entry that is being initialized blocks the reconciliations of the other ProviderConfigs")
+		}
+	})
+
+	t.Run("ConcurrentMissesOfAKeyShareOneInitialization", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		pc := staticCredsProviderConfig("uid", 1, true)
+		provider, counter := newCountingCredsCache(creds)
+		var accountIDCalls atomic.Int32
+		accountIDFn := func(context.Context) (string, error) {
+			accountIDCalls.Add(1)
+			return "123456789012", nil
+		}
+
+		const reconciliations = 8
+		var wg sync.WaitGroup
+		got := make([]Credentials, reconciliations)
+		errs := make([]error, reconciliations)
+		start := make(chan struct{})
+		for i := 0; i < reconciliations; i++ {
+			wg.Add(1)
+			go func(i int) {
+				defer wg.Done()
+				<-start
+				got[i], errs[i] = c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, accountIDFn)
+			}(i)
+		}
+		close(start)
+		wg.Wait()
+
+		want := Credentials{creds: creds, accountID: "123456789012"}
+		for i := 0; i < reconciliations; i++ {
+			if errs[i] != nil {
+				t.Fatalf("RetrieveCredentials(...): unexpected error: %v", errs[i])
+			}
+			if diff := cmp.Diff(want, got[i], cmp.AllowUnexported(Credentials{})); diff != "" {
+				t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+			}
+		}
+		// exactly one of them initializes the entry while the others wait for
+		// it, instead of each making the same AWS calls.
+		if diff := cmp.Diff(int32(1), accountIDCalls.Load()); diff != "" {
+			t.Errorf("AccountIDFn calls: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, counter.calls); diff != "" {
+			t.Errorf("downstream Retrieve calls: -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+	})
+
+	t.Run("AWaitingReconciliationObservesItsOwnContext", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		pc := staticCredsProviderConfig("uid", 1, true)
+		provider, _ := newCountingCredsCache(creds)
+		slowAccountIDFn, entered, release := blockingAccountIDFn()
+		defer release()
+
+		go func() {
+			_, _ = c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, slowAccountIDFn)
+		}()
+		<-entered
+
+		// an entry is published before it is initialized, so a reconciliation
+		// can find one that is not usable yet. Waiting for it must observe the
+		// reconciliation's own context instead of outliving it.
+		ctx, cancel := context.WithCancel(context.Background())
+		cancel()
+		_, err := c.RetrieveCredentials(ctx, pc, "us-east-1", provider, meta, func(context.Context) (string, error) {
+			t.Error("AccountIDFn: a reconciliation waiting for an entry must not initialize it itself")
+			return "", nil
+		})
+		if !errors.Is(err, context.Canceled) {
+			t.Errorf("RetrieveCredentials(...): want an error wrapping context.Canceled, got %v", err)
+		}
+	})
+
+	t.Run("AFailedInitializationIsNotCached", func(t *testing.T) {
+		c := NewAWSCredentialsProviderCache()
+		pc := staticCredsProviderConfig("uid", 1, true)
+		provider, _ := newCountingCredsCache(creds)
+		errBoom := errors.New("Throttling: Rate exceeded")
+
+		_, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, func(context.Context) (string, error) {
+			return "", errBoom
+		})
+		if !errors.Is(err, errBoom) {
+			t.Fatalf("RetrieveCredentials(...): want an error wrapping %v, got %v", errBoom, err)
+		}
+		// an entry that failed to initialize must not be left behind, or it
+		// would be served to everyone else and the failure would never be
+		// retried.
+		if diff := cmp.Diff(0, len(c.cache)); diff != "" {
+			t.Errorf("cache size: -want, +got:\n%s", diff)
+		}
+
+		got, err := c.RetrieveCredentials(context.Background(), pc, "us-east-1", provider, meta, func(context.Context) (string, error) {
+			return "123456789012", nil
+		})
+		if err != nil {
+			t.Fatalf("RetrieveCredentials(...): unexpected error: %v", err)
+		}
+		if diff := cmp.Diff(Credentials{creds: creds, accountID: "123456789012"}, got, cmp.AllowUnexported(Credentials{})); diff != "" {
+			t.Errorf("RetrieveCredentials(...): -want, +got:\n%s", diff)
+		}
+		if diff := cmp.Diff(1, len(c.cache)); diff != "" {
 			t.Errorf("cache size: -want, +got:\n%s", diff)
 		}
 	})

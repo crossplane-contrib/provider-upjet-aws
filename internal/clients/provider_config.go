@@ -415,11 +415,21 @@ func GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx context.Context, cf
 }
 
 // UseDefault loads the default AWS config with the specified region.
+//
+// The credentials cache options carry credsExpiryWindow because the SDK
+// applies no expiry window of its own to the credential providers it resolves
+// here: the IRSA web identity provider is wrapped in an aws.CredentialsCache
+// with the options coming solely from the loader, which would otherwise leave
+// the window at zero. The credentials resolved here are handed to the
+// Terraform provider as static values and are kept alive across
+// reconciliations by the credential cache, hence they need the same validity
+// margin as the ones minted by the explicit assume role flows.
 func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 	if region == GlobalRegion {
 		cfg, err := config.LoadDefaultConfig(
 			ctx,
 			userAgentV2,
+			config.WithCredentialsCacheOptions(withCredsExpiryWindow),
 		)
 		return &cfg, errors.Wrap(err, "failed to load default AWS config")
 	}
@@ -427,6 +437,7 @@ func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 		ctx,
 		userAgentV2,
 		config.WithRegion(region),
+		config.WithCredentialsCacheOptions(withCredsExpiryWindow),
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, fmt.Sprintf("failed to load default AWS config with region %s", region))
